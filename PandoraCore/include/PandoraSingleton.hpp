@@ -1,5 +1,5 @@
 /*
- * ############################################################################
+ * ----------------------------------------------------------------------------
  * This source file is part of Pandora3D. For information, see 
  * http://Pandora3D.sourceforge.net.
  *
@@ -17,5 +17,17 @@
  * Place - Suite 330, Boston MA 02111-1307, USA, or go to:
  *
  * http://www.gnu.org/licenses/#GPL
- * ############################################################################
+ * ----------------------------------------------------------------------------
  */
+
+#ifndef _SINGLETON_HPP_
+#define _SINGLETON_HPP_
+
+namespace Pandora
+{
+    template<class T>
+    class Singleton
+    {
+        T* m_singleton;
+    };
+}
