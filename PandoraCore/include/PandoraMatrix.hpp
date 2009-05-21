@@ -215,9 +215,63 @@ namespace Pandora
             //Returns the inverse of the matrix
             inline Matrix inverse()
             {
-                Matrix tmp;
-                //Calculate inverse here
-                return tmp;
+                Matrix tmp(*this);
+                Matrix inv;
+
+                for(int i = 0; i < 4; i++) {
+                    //If tmp[i][i] is zero, we have to switch this with the
+                    //first row where column i is non-zero
+                    if(tmp[i][i] == 0) {
+                        int j = i + 1;
+                        while(tmp[j][i] == 0 && j < 4)
+                            j++;
+                        assert(j != 4);
+                        //Now we know we have to switch row i and j
+                        for(int k = 0; k < 4; k++) {
+                            //switching tmp
+                            tmpvar = tmp[i][k];
+                            tmp[i][k] = tmp[j][k];
+                            tmp[j][k] = tmp[i][k];
+                            //switching inverse
+                            tmpvar = inv[i][k];
+                            inv[i][k] = inv[j][k];
+                            inv[j][k] = tmpvar;
+                        }
+                    }
+
+                    //Now scale the row so tmp[i][i] == 1
+                    float scale = 1.0 / tmp[i][i];
+                    for(int j = 0; j < 4; j++) {
+                        tmp[i][j] *= scale;
+                        inv[i][j] *= scale;
+                    }
+
+                    //Then we have to make everything under i in the i-th column
+                    //zero
+                    for(int j = i+1; j < 4; j++) {
+                        float scale = tmp[j][i];
+                        for(int k = 0; k < 4; k++) {
+                            tmp[j][k] -= tmp[i][k];
+                            inv[j][k] -= inv[i][k];
+                        }
+                    }
+                }
+                //Now we have an upper, triangular matrix:
+                //|  1   (0,1) (0,2) (0,3)|
+                //|  0     1   (1,2) (1,3)|
+                //|  0     0     1   (2,3)|
+                //|  0     0     0     1  |
+    
+                for(int i = 3; i >= 0; i--) {
+                    for(int j = i - 1; j >= 0; j--) {
+                        float scale = tmp[j][i];
+                        for(int k = 0; k < 4; k++) {
+                            tmp[j][k] -= tmp[i][k];
+                            inv[j][k] -= tmp[i][k];
+                        }
+                    }
+                }
+                return inv;
             }
 
             //Prints out the Matrix. For testing purposes only
