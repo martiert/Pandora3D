@@ -23,6 +23,8 @@
 #ifndef _SINGLETON_HPP_
 #define _SINGLETON_HPP_
 
+#include <assert.h>
+
 namespace Pandora
 {
     template<class T>
@@ -30,18 +32,29 @@ namespace Pandora
     {
         protected:
             static T* m_singleton;
-
-            Singleton();
-            ~Singleton();
         public:
-            T* getSingleton()
+            Singleton()
+            {
+                assert(!m_singleton);
+                m_singleton = static_cast<T*>(this);
+            }
+
+            ~Singleton()
+            {
+                assert(m_singleton);
+                m_singleton = NULL;
+            }
+
+            static T* getSingletonPtr()
             {
                 return m_singleton;
             }
 
-            T& getSingleton()
+            static T& getSingleton()
             {
+                assert(m_singleton);
                 return (*m_singleton);
             }
     };
 }
+#endif
