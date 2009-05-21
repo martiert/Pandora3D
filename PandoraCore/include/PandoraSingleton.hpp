@@ -28,6 +28,20 @@ namespace Pandora
     template<class T>
     class Singleton
     {
-        T* m_singleton;
+        protected:
+            static T* m_singleton;
+
+            Singleton();
+            ~Singleton();
+        public:
+            T* getSingleton()
+            {
+                return m_singleton;
+            }
+
+            T& getSingleton()
+            {
+                return (*m_singleton);
+            }
     };
 }
