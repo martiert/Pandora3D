@@ -40,7 +40,8 @@ namespace Pandora
         public:
             Quaternion()
             {
-                x = y = z = w = 0.0f;
+                x = y = z = 0.0f;
+                w = 1.0f;
             }
 
             Quaternion(float w, float x, float y, float z)
@@ -52,6 +53,15 @@ namespace Pandora
             }
 
             ~Quaternion() { }
+
+            Quaternion operator*(Quaternion quat)
+            {
+                float wtmp = w*quat.w - x*quat.x - y*quat.y - z*quat.z;
+                float xtmp = w*quat.w + x*quat.w + y*quat.z - z*quat.y;
+                float ytmp = w*quat.y + y*quat.w + z*quat.x - x*quat.z;
+                float ztmp = w*quat.z + z*quat.w + x*quat.y - y*quat.x;
+                return Quaternion(w,x,y,z);
+            }
 
             float length()
             {
