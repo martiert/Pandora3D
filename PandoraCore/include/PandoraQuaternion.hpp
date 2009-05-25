@@ -19,3 +19,24 @@
  * http://www.gnu.org/licenses/#GPL
  * ----------------------------------------------------------------------------
  */
+
+#ifndef _QUATERNION_HPP_
+#define _QUATERNION_HPP_
+
+#include <cmath>
+#include "PandoraMatrix.hpp"
+#include "PandoraVector3.hpp"
+#include "PandoraVector4.hpp"
+
+namespace Pandora
+{
+    class Quaternion
+    {
+        public:
+            float x, y, z, w;
+        public:
+            Quaternion();
+            ~Quaternion();
+    };
+}
+#endif
