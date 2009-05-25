@@ -23,7 +23,9 @@
 #ifndef _QUATERNION_HPP_
 #define _QUATERNION_HPP_
 
-#include <cmath>
+#include <math.h>
+#include <assert.h>
+
 #include "PandoraMatrix.hpp"
 #include "PandoraVector3.hpp"
 #include "PandoraVector4.hpp"
@@ -33,10 +35,59 @@ namespace Pandora
     class Quaternion
     {
         public:
-            float x, y, z, w;
+            //Representation of the quaternion. w is the real valued part
+            float w, x, y, z;
         public:
-            Quaternion();
-            ~Quaternion();
+            Quaternion()
+            {
+                x = y = z = w = 0.0f;
+            }
+
+            Quaternion(float w, float x, float y, float z)
+            {
+                this->w = w;
+                this->x = x;
+                this->y = y;
+                this->z = z;
+            }
+
+            ~Quaternion() { }
+
+            float length()
+            {
+                return sqrt(w*w + x*x + y*y + z*z);
+            }
+
+            void normalize()
+            {
+                float len = length();
+                assert(len != 0);
+                w /= len;
+                x /= len;
+                y /= len;
+                z /= len;
+            }
+
+            Matrix toMatrix()
+            {
+                normalize();
+                Matrix tmp;
+                tmp[0][0] = 1 - 2*y*y - 2*z*z;
+                tmp[0][1] = 2*x*y - 2*w*z;
+                tmp[0][2] = 2*x*z + 2*w*y;
+                tmp[1][0] = 2*x*y + 2*w*z;
+                tmp[1][1] = 1 - 2*x*x - 2*z*z;
+                tmp[1][2] = 2*y*z - 2*w*x;
+                tmp[2][0] = 2*x*z - 2*w*y;
+                tmp[2][1] = 2*y*z + 2*w*x;
+                tmp[2][2] = 1 - 2*x*x - 2*y*y;
+                return tmp;
+            }
+
+            Quaternion conjugate()
+            {
+                return Quaternion(w, -x, -y, -z);
+            }
     };
 }
 #endif
