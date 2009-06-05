@@ -24,7 +24,7 @@
 #define _VECTOR2_HPP_
 
 #include <cmath>
-#include <assert.h>
+#include <cassert>
 
 //For testing, maybe use and #ifdef DEBUG
 #include <iostream>

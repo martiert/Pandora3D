@@ -23,7 +23,7 @@
 #ifndef _SINGLETON_HPP_
 #define _SINGLETON_HPP_
 
-#include <assert.h>
+#include <cassert>
 
 namespace Pandora
 {

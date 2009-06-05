@@ -23,8 +23,8 @@
 #ifndef _QUATERNION_HPP_
 #define _QUATERNION_HPP_
 
-#include <math.h>
-#include <assert.h>
+#include <cmath>
+#include <cassert>
 
 #include "PandoraMatrix.hpp"
 #include "PandoraVector3.hpp"

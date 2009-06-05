@@ -23,8 +23,8 @@
 #ifndef _LOGGER_HPP_
 #define _LOGGER_HPP_
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
 #include "PandoraSingleton.hpp"
 

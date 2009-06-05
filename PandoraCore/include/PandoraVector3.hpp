@@ -23,7 +23,7 @@
 #ifndef _VECTOR3_HPP_
 #define _VECTOR3_HPP_
 
-#include <assert.h>
+#include <cassert>
 #include <cmath>
 
 #include <iostream>

@@ -23,7 +23,7 @@
 #ifndef _MATRIX_HPP_
 #define _MATRIX_HPP_
 
-#include <assert.h>
+#include <cassert>
 #include <cmath>
 
 #include "PandoraVector4.hpp"
