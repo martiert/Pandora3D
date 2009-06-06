@@ -33,16 +33,14 @@ namespace Pandora
     class Vector
     {
         public:
-            //Default constructor. Makes an array of size one, and tells us to
-            //increase the array with one for each time we need to allocate a 
-            //larger array.
-            Vector();
+            //Default constructor. Takes two arguments, which defaults to one
+            //if they are not passed. The arguments are the size of the array
+            //we are to make at startup, and the number of elements to extend
+            //the array with if needed
+            Vector(uint size = 1, uint increment = 1);
 
-            //Constructor that takes two arguments, and makes the size of the
-            //array be the first argument, and the second tells us what we 
-            //should increase the array with each time we need to allocate a
-            //larger array.
-            Vector(uint size, uint inc);
+            //Copy constructor. Copies the vector
+            Vector(const Vector& vec);
 
             //Destructor. Destroys the array (freeing it from memory).
             ~Vector();
@@ -64,6 +62,9 @@ namespace Pandora
             //read/write operations.
             const T& operator[](const uint idx) const;
 
+            //Copy operator. Copies the vector.
+            Vector& operator=(const Vector& vec);
+
             //Appends an element to the end of the array, allocates a larger
             //array if necessary.
             void append(const T& element);
@@ -73,30 +74,30 @@ namespace Pandora
             void setElement(const uint idx, const T& element);
 
             //Removes element number idx from the array.
-            void remove(const uint i);
+            void remove(const uint idx);
 
             //Sets all the elements in the array to a default constructed 
             //element
             void removeAll();
 
-            //Sets the new max quantity. The copy boolean tells us if we should
+            //Sets the new max size. The copy boolean tells us if we should
             //copy the old elements to the new array if the new Max is larger
             //than the old one.
-            void setMaxQuantity(uint newMax, bool copy);
+            void setMaxSize(const uint newMax, const bool copy);
 
-            //Returns the max quantity of this array.
-            int getMaxQuantity() const;
+            //Returns the max size of this array.
+            const uint getMaxSize() const;
 
             //Changes the number of elements to grow by if needed.
             void setGrow(uint growBy);
 
             //Get the number of elements we increment the array with when needed.
-            uint getGrow() const;
+            const uint getGrow() const;
         protected:
             T* m_array;
             uint m_size;
             uint m_maxSize;
-            uint m_increase;
+            uint m_increment;
     };
 }
 #endif
