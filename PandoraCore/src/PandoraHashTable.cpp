@@ -57,7 +57,7 @@ namespace Pandora
         HashItem* item = m_table[n];
 
         while(item) {
-            it(key == item->key)
+            if(key == item->key)
                 return false;
             item = item->next;
         }
@@ -108,7 +108,7 @@ namespace Pandora
     void HashTable<KEY,VALUE>::removeAll()
     {
         if(m_size != 0) {
-            for(int i = 0; i < m_tableSize; ++i) {
+            for(int i = 0; i < m_tablesize; ++i) {
                 HashItem* item = m_table[i];
 
                 while(item) {
@@ -126,14 +126,14 @@ namespace Pandora
 //#############################################################################
 
     template<class KEY, class VALUE>
-    VALUE& HashTable<KEY,VALUE>::get(const KEY& key) const
+    VALUE* HashTable<KEY,VALUE>::get(const KEY& key) const
     {
         int n = hashFunction(key);
         HashItem* item = m_table[n];
 
         while(item) {
             if(item->key == key)
-                return item->value;
+                return &(item->value);
             item = item->next;
         }
 
@@ -143,7 +143,7 @@ namespace Pandora
 //#############################################################################
 
     template<class KEY, class VALUE>
-    int& HashTable<KEY,VALUE>::hashFunction(const KEY& key) const
+    int HashTable<KEY,VALUE>::hashFunction(const KEY& key) const
     {
         static double multiplier = 0.5*(sqrt(5.0) - 1.0);
         unsigned int uikey;

@@ -20,7 +20,7 @@
  * ----------------------------------------------------------------------------
  */
 
-#include "../PandoraHashSet.hpp"
+#include "../include/PandoraHashSet.hpp"
 
 namespace Pandora
 {
@@ -179,12 +179,12 @@ namespace Pandora
 //#############################################################################
 
     template<class KEY>
-    KEY* HashSet<KEY>::next() const
+    KEY* HashSet<KEY>::next()
     {
         m_item = m_item->next;
 
         while(!m_item && m_index < m_tablesize) {
-            m_index++;
+            ++m_index;
             m_item = m_table[m_index];
         }
 

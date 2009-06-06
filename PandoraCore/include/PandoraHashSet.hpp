@@ -60,14 +60,14 @@ namespace Pandora
 
             //Gets the next item from the iterator, returns NULL if there is no
             //more items.
-            KEY* getNext() const;
+            KEY* next();
         protected:
             class HashItem
             {
                 public:
                     KEY key;
                     HashItem* next;
-            }
+            };
 
             int hashFunction(const KEY& key) const;
 

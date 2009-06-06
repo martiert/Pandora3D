@@ -20,7 +20,7 @@
  * ----------------------------------------------------------------------------
  */
 
-#include "../PandoraSet.hpp"
+#include "../include/PandoraSet.hpp"
 
 namespace Pandora
 {
@@ -149,7 +149,7 @@ namespace Pandora
 //#############################################################################
 
     template<class T>
-    T& operator[](const int idx)
+    T& Set<T>::operator[](const int idx)
     {
         assert(idx >= 0 && idx < m_size);
 
@@ -162,11 +162,11 @@ namespace Pandora
 //#############################################################################
 
     template<class T>
-    const T& operator[](const int idx) const
+    const T& Set<T>::operator[](const int idx) const
     {
         assert(idx >= 0 && idx < idx);
 
-        if(idx < 0 && idx >= m_size),
+        if(idx < 0 && idx >= m_size)
             return NULL;
 
         return m_data[idx];

@@ -20,7 +20,7 @@
  * ----------------------------------------------------------------------------
  */
 
-include "../PandoraVector.hpp"
+#include "../include/PandoraVector.hpp"
 
 namespace Pandora
 {
@@ -110,7 +110,7 @@ namespace Pandora
 //#############################################################################
 
     template<class T>
-    Vector<T> Vector<T>::operator=(const Vector<T>& vec)
+    Vector<T>& Vector<T>::operator=(const Vector<T>& vec)
     {
         m_size = vec.m_size;
         m_maxSize = vec.m_maxSize;
@@ -146,7 +146,7 @@ namespace Pandora
 
 //#############################################################################
 
-    template<class t>
+    template<class T>
     void Vector<T>::setElement(const int idx, const T& element)
     {
         assert(idx >= 0);
@@ -155,7 +155,7 @@ namespace Pandora
             return;
 
         if(idx >= m_maxSize) {
-            int inc = (int) (0.5f + (i+1-m_maxSize)/(float) m_increment);
+            int inc = (int) (0.5f + (idx+1-m_maxSize)/(float) m_increment);
             ++inc;
             setMaxSize(m_maxSize + inc*m_increment, true);
         }

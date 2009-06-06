@@ -66,14 +66,14 @@ namespace Pandora
                 public:
                     KEY key;
                     VALUE value;
-                    SmallList* next;
-            }
+                    HashItem* next;
+            };
 
             //The default hash function.
             int hashFunction(const KEY& key) const;
 
             //HashTable
-            int m_tableSize;
+            int m_tablesize;
             int m_size;
             HashItem** m_table;
 
