@@ -29,6 +29,36 @@
 #include <cmath>
 #include <cstdio>
 #include <cstdlib>
+#include <ctime>
 #include <string>
+#include <fstream>
 
+#include "PandoraHashSet.hpp"
+#include "PandoraHashTable.hpp"
+#include "PandoraSet.hpp"
+#include "PandoraVector.hpp"
+#include "PandoraStack.hpp"
+
+namespace Pandora
+{
+    //A wrapper class for functions that I have to make platform independent.
+    class System
+    {
+        public:
+            //For getting the time of day.
+            static double getTime();
+
+            //For file I/O.
+            static bool load(const char* filename, char*& buffer, int& size);
+            static bool save(const char* filename, const char* buffer, 
+                    int size);
+            static bool append(const char* filename, char* buffer, int size);
+
+            static void swapBytes(int size, void* value);
+            static void swpaBytes(int size, int quantity, void* value);
+            static void endianCopy(int size, const void* from, void* to);
+            static void endianCopy(int size, int quantity, const void* from, 
+                    void* to);
+    };
+}
 #endif
