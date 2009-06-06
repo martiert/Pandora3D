@@ -23,11 +23,11 @@
 #ifndef _VECTOR3_HPP_
 #define _VECTOR3_HPP_
 
-#include <cassert>
-#include <cmath>
+#ifdef DEBUG
+    #include <iostream>
+#endif
 
-#include <iostream>
-
+#include "PandoraSystem.hpp"
 #include "PandoraVector2.hpp"
 
 namespace Pandora
@@ -72,14 +72,10 @@ namespace Pandora
             ~Vector3() { }
 
             //Operator for indexing the vector
-            inline float& operator[](const unsigned int i)
+            inline float& operator[](const uint idx)
             {
-                assert(i < 3);
-                if(i == 0)
-                    return x;
-                if(i == 1)
-                    return y;
-                return z;
+                assert(idx < 3);
+                return (&x + idx);
             }
 
             //Returns a negated vector
@@ -172,6 +168,7 @@ namespace Pandora
                 return tmp;
             }
 
+#ifdef DEBUG
             //For testing purposes only. Prints the vector as a row vector
             inline friend std::ostream& operator<<(std::ostream& os, 
                     Vector3 vec)
@@ -179,6 +176,7 @@ namespace Pandora
                 os << "[" << vec.x << " " << vec.y << " " << vec.z << "]";
                 return os;
             }
+#endif
     };
 }
 #endif

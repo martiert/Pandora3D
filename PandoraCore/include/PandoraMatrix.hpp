@@ -23,9 +23,11 @@
 #ifndef _MATRIX_HPP_
 #define _MATRIX_HPP_
 
-#include <cassert>
-#include <cmath>
+#ifdef DEBUG
+    #include <iostream>
+#endif
 
+#include "PandoraSystem.hpp"
 #include "PandoraVector4.hpp"
 #include "PandoraVector3.hpp"
 
@@ -274,6 +276,7 @@ namespace Pandora
                 return inv;
             }
 
+#ifdef DEBUG
             //Prints out the Matrix. For testing purposes only
             inline friend std::ostream& operator<<(std::ostream& os, Matrix& m)
             {
@@ -288,6 +291,7 @@ namespace Pandora
                 }
                 return os;
             }
+#endif
     };
 }
 #endif

@@ -23,11 +23,11 @@
 #ifndef _VECTOR4_HPP_
 #define _VECTOR4_HPP_
 
-#include <cassert>
-#include <cmath>
+#ifdef DEBUG
+    #include <iostream>
+#endif
 
-#include <iostream>
-
+#include "PandoraSystem.hpp"
 #include "PandoraVector2.hpp"
 #include "PandoraVector3.hpp"
 
@@ -90,6 +90,13 @@ namespace Pandora
                 y = vec.y;
                 z = vec.z;
                 w = vec.w;
+            }
+
+            //Acces element number idx
+            inline float& operator[](const uint idx)
+            {
+                assert(idx < 4);
+                return (&x + idx);
             }
 
             //Negates a vector
@@ -166,6 +173,7 @@ namespace Pandora
                 (*this) *= 1.0f / length;
             }
 
+#ifdef DEBUG
             //For testing purposes only. Prints the vector as a row vector
             inline friend std::ostream& operator<<(std::ostream& os,
                     Vector4 vec)
@@ -174,6 +182,7 @@ namespace Pandora
                     << vec.w << "]";
                 return os;
             }
+#endif
     };
 }
 #endif

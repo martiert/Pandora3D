@@ -23,11 +23,11 @@
 #ifndef _VECTOR2_HPP_
 #define _VECTOR2_HPP_
 
-#include <cmath>
-#include <cassert>
+#ifdef DEBUG
+    #include <iostream>
+#endif
 
-//For testing, maybe use and #ifdef DEBUG
-#include <iostream>
+#include "PandoraSystem.hpp"
 
 namespace Pandora
 {
@@ -45,7 +45,7 @@ namespace Pandora
 
             //Constructor which takes 2 arguments, which will be the x and y
             //values of the vector
-            Vector2(float x1, flot y1)
+            Vector2(float x1, float y1)
             {
                 x = x1;
                 y = y1;
@@ -65,6 +65,13 @@ namespace Pandora
             inline Vector2 operator-()
             {
                 return Vector2(-x, -y);
+            }
+
+            //Operator for accessing the vector
+            inline float& operator[](const uint idx)
+            {
+                assert(idx < 2);
+                return (&x + i);
             }
 
             //Operator for setting this vector equal to another vector
@@ -138,6 +145,7 @@ namespace Pandora
                 (*this) *= 1.0 / length;
             }
 
+#ifdef DEBUG
             //For testing purposes only. Prints the vector as a row vector
             inline friend std::ostream& operator<<(std::ostream& os,
                     Vector2& vec)
@@ -145,6 +153,7 @@ namespace Pandora
                 os << "[" << vec.x << " " << vec.y << "]";
                 return os;
             }
+#endif
     };
 }
 #endif

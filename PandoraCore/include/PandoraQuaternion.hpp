@@ -23,9 +23,7 @@
 #ifndef _QUATERNION_HPP_
 #define _QUATERNION_HPP_
 
-#include <cmath>
-#include <cassert>
-
+#include "PandoraSystem.hpp"
 #include "PandoraMatrix.hpp"
 #include "PandoraVector3.hpp"
 #include "PandoraVector4.hpp"
