@@ -93,7 +93,7 @@ namespace Pandora
             }
 
             //Acces element number idx
-            inline float& operator[](const uint idx)
+            inline float& operator[](const int idx)
             {
                 assert(idx < 4);
                 return (&x + idx);

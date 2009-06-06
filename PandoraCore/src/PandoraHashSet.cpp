@@ -20,14 +20,14 @@
  * ----------------------------------------------------------------------------
  */
 
-#include "../include/PandoraHashTable.hpp"
+#include "../PandoraHashSet.hpp"
 
 namespace Pandora
 {
 //#############################################################################
 
-    template<class KEY, class VALUE>
-    HashTable<KEY, VALUE>::HashTable(const int tablesize)
+    template<class KEY>
+    HashSet<KEY>::HashSet(const int& tablesize)
     {
         assert(tablesize >= 0);
 
@@ -41,8 +41,8 @@ namespace Pandora
 
 //#############################################################################
 
-    template<class KEY, class VALUE>
-    HashTable<KEY,VALUE>::~HashTable()
+    template<class KEY>
+    HashSet<KEY>::~HashSet()
     {
         removeAll();
         delete[] m_table;
@@ -50,100 +50,106 @@ namespace Pandora
 
 //#############################################################################
 
-    template<class KEY, class VALUE>
-    bool HashTable<KEY,VALUE>::add(const KEY& key, const VALUE& value)
+    template<class KEY>
+    int HashSet<KEY>::size()
+    {
+        return m_size;
+    }
+
+//#############################################################################
+
+    template<class KEY>
+    KEY* HashSet<KEY>::add(const KEY& key)
     {
         int n = hashFunction(key);
+        
+        if(!m_table[n]) {
+            m_table[n] = new HashItem;
+            m_table[n]->key = key;
+            return &(m_table[n]->key);
+        }
+ 
         HashItem* item = m_table[n];
-
         while(item) {
-            it(key == item->key)
-                return false;
+            if(item->key == key)
+                return &(item->key);
             item = item->next;
         }
 
-        item = new HashItem;
-        item->key = key;
-        item->value = value;
-        item->next = m_table[n];
-        m_table[n] = item;
-        ++m_size;
-        return true;
+        item = m_table[n];
+        m_table[n] = new HashItem;
+        m_table[n]->key = key;
+        m_table[n]->next = item;
+        return &(m_table[n]->key);
     }
 
 //#############################################################################
 
-    template<class KEY, class VALUE>
-    bool HashTable<KEY,VALUE>::remove(const KEY& key)
-    {
-        int n = hashFunction(key);
-        HashItem* item = m_table[n];
-
-        if(!item)
-            return false;
-
-        if(item->key == key) {
-            m_table[n] = item->next;
-            delete item;
-            --m_size;
-            return true;
-        }
-
-        while(item->next && item->next->key != key)
-            item = item->next;
-
-        if(!item->next)
-            return false;
-
-        HashItem* tmp = item->next;
-        item->next = item->next->next;
-        delete tmp;
-        --m_size;
-        return true;
-    }
-
-//#############################################################################
-
-    template<class KEY, class VALUE>
-    void HashTable<KEY,VALUE>::removeAll()
-    {
-        if(m_size != 0) {
-            for(int i = 0; i < m_tableSize; ++i) {
-                HashItem* item = m_table[i];
-
-                while(item) {
-                    HashItem* tmp = item;
-                    item = item->next;
-                    delete tmp;
-                
-                    if(--m_size == 0)
-                        return;
-                }
-            }
-        }   
-    }
-
-//#############################################################################
-
-    template<class KEY, class VALUE>
-    VALUE& HashTable<KEY,VALUE>::get(const KEY& key) const
+    template<class KEY>
+    KEY* HashSet<KEY>::get(const KEY& key) const
     {
         int n = hashFunction(key);
         HashItem* item = m_table[n];
 
         while(item) {
             if(item->key == key)
-                return item->value;
+                return &(item->key);
             item = item->next;
         }
 
         return NULL;
-    }   
+    }
 
 //#############################################################################
 
-    template<class KEY, class VALUE>
-    int& HashTable<KEY,VALUE>::hashFunction(const KEY& key) const
+    template<class KEY>
+    bool HashSet<KEY>::remove(const KEY& key)
+    {
+        int n = hashFunction(key);
+        HashItem* item = m_table[n];
+        HashItem* last = NULL;
+
+        while(item) {
+            if(item->key == key) {
+                if(last) {
+                    last->next = item->next;
+                    delete item;
+                } else {
+                    m_table[n] = item->next;
+                    delete item;
+                }
+                return true;
+            }
+            last = item;
+            item = item->next;
+        }
+
+        return false;
+    }
+
+//#############################################################################
+
+    template<class KEY>
+    void HashSet<KEY>::removeAll()
+    {
+        for(int i = 0; i < m_tablesize; ++i) {
+            HashItem* item = m_table[i];
+
+            while(item) {
+                HashItem* tmp = item;
+                item = item->next;
+                delete tmp;
+
+                if(--m_size == 0)
+                    return;
+            }
+        }
+    }
+
+//#############################################################################
+
+    template<class KEY>
+    int HashSet<KEY>::hashFunction(const KEY& key) const
     {
         static double multiplier = 0.5*(sqrt(5.0) - 1.0);
         unsigned int uikey;
@@ -155,38 +161,36 @@ namespace Pandora
 
 //#############################################################################
 
-    template<class KEY, class VALUE>
-    VALUE* HashTable<KEY,VALUE>::getFirst(KEY* key) const
+    template<class KEY>
+    KEY* HashSet<KEY>::getFirst() const
     {
         if(m_size == 0)
             return NULL;
 
         int i = 0;
         while(!m_table[i] && i < m_tablesize)
-            ++i;
+            i++;
 
-        m_item = m_table[i];
         m_index = i;
-        key = &(m_item->key);
-        return &(m_item->value);
+        m_item = m_table[i];
+        return &(m_item->key);
     }
 
 //#############################################################################
 
-    template<class KEY, class VALUE>
-    VALUE* HashTable<KEY,VALUE>::next(KEY* key) const
+    template<class KEY>
+    KEY* HashSet<KEY>::next() const
     {
-        if(m_item->next) {
-            m_item = m_item->next;
-        } else {
-            int i = m_index + 1;
-            while(i < m_tablesize && !m_table[i])
-                ++i;
-            m_item = m_table[i];
-            m_index = i;
+        m_item = m_item->next;
+
+        while(!m_item && m_index < m_tablesize) {
+            m_index++;
+            m_item = m_table[m_index];
         }
-        key = &(m_item->key);
-        return &(m_item->value);
+
+        if(!m_item)
+            return NULL;
+        return &(m_item->next);
     }
 
 //#############################################################################

@@ -72,7 +72,7 @@ namespace Pandora
             ~Vector3() { }
 
             //Operator for indexing the vector
-            inline float& operator[](const uint idx)
+            inline float& operator[](const int idx)
             {
                 assert(idx < 3);
                 return (&x + idx);

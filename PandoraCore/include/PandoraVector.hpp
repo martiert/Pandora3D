@@ -37,7 +37,7 @@ namespace Pandora
             //if they are not passed. The arguments are the size of the array
             //we are to make at startup, and the number of elements to extend
             //the array with if needed
-            Vector(uint size = 1, uint increment = 1);
+            Vector(int size = 1, int increment = 1);
 
             //Copy constructor. Copies the vector
             Vector(const Vector& vec);
@@ -46,7 +46,7 @@ namespace Pandora
             ~Vector();
 
             //Returns the size of the vector, that is the number of elements.
-            uint size() const;
+            int size() const;
 
             //Returns a pointer to the array.
             T* getArray();
@@ -56,11 +56,11 @@ namespace Pandora
 
             //Returns a reference to element idx in the array for read/write
             //operations.
-            T& operator[](const uint idx);
+            T& operator[](const int idx);
 
             //Returns a constant reference to element idx in the array for
             //read/write operations.
-            const T& operator[](const uint idx) const;
+            const T& operator[](const int idx) const;
 
             //Copy operator. Copies the vector.
             Vector& operator=(const Vector& vec);
@@ -71,10 +71,10 @@ namespace Pandora
 
             //Sets element number idx to the element, allocates a larger array
             //if necessary.
-            void setElement(const uint idx, const T& element);
+            void setElement(const int idx, const T& element);
 
             //Removes element number idx from the array.
-            void remove(const uint idx);
+            void remove(const int idx);
 
             //Sets all the elements in the array to a default constructed 
             //element
@@ -83,21 +83,21 @@ namespace Pandora
             //Sets the new max size. The copy boolean tells us if we should
             //copy the old elements to the new array if the new Max is larger
             //than the old one.
-            void setMaxSize(const uint newMax, const bool copy);
+            void setMaxSize(const int newMax, const bool copy);
 
             //Returns the max size of this array.
-            const uint getMaxSize() const;
+            const int getMaxSize() const;
 
             //Changes the number of elements to grow by if needed.
-            void setGrow(uint growBy);
+            void setGrow(int growBy);
 
             //Get the number of elements we increment the array with when needed.
-            const uint getGrow() const;
+            const int getGrow() const;
         protected:
             T* m_array;
-            uint m_size;
-            uint m_maxSize;
-            uint m_increment;
+            int m_size;
+            int m_maxSize;
+            int m_increment;
     };
 }
 #endif

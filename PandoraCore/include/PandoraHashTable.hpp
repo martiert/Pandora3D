@@ -50,6 +50,16 @@ namespace Pandora
             //Finds the value associated with key, returns NULL if the element
             //is not in the table.
             VALUE* get(const KEY& key) const;
+
+            //Returns the number of items in the table
+            int size();
+
+            //Get the first element, and key, in the table.
+            VALUE* getFirst(KEY* key) const;
+
+            //Get the next element, and key, from the table. If there are no more
+            //elements we return NULL:
+            VALUE* next(KEY* key) const;
         protected:
             class HashItem
             {
@@ -66,6 +76,10 @@ namespace Pandora
             int m_tableSize;
             int m_size;
             HashItem** m_table;
+
+            //Iterator data
+            int m_index;
+            HashItem* m_item;
     };
 }
 

@@ -68,7 +68,7 @@ namespace Pandora
             }
 
             //Operator for accessing the vector
-            inline float& operator[](const uint idx)
+            inline float& operator[](const int idx)
             {
                 assert(idx < 2);
                 return (&x + i);

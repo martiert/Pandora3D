@@ -31,6 +31,4 @@
 #include <cstdlib>
 #include <string>
 
-#define uint unsigned int
-
 #endif
