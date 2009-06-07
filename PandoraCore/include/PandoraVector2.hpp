@@ -73,6 +73,10 @@ namespace Pandora
             Real length() const;
             Real squaredLength() const;
             Real normalize();
+            Vector2 perp() const;
+            Vector2 unitPerp() const;
+            Real dotPerp(const Vector2& vector) const;
+            static void orthonormalize(Vector2& V1, Vector2& V2);
 
             static const Vector2 ZERO;
             static const Vector2 UNIT_X;

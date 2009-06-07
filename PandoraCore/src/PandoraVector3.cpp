@@ -281,7 +281,31 @@ namespace Pandora
         Real x = m_data[1]*vector[2] - m_data[2]*vector[1];
         Real y = m_data[0]*vector[2] - m_data[2]*vector[0];
         Real z = m_data[0]*vector[1] - m_data[1]*vector[0];
-        return Vector3(x, y, z);
+        return Vector3(x, -y, z);
+    }
+
+//#############################################################################
+
+    template<class Real>
+    Vector3<Real> Vector3<Real>::unitCross(const Vector3<Real>& vector) const
+    {
+        Real x = m_data[1]*vector[2] - m_data[2]*vector[1];
+        Real y = m_data[0]*vector[2] - m_data[2]*vector[0];
+        Real z = m_data[0]*vector[1] - m_data[1]*vector[0];
+        return Vector3<Real>(x, -y, z).normalize();
+    }
+
+//#############################################################################
+
+    template<class Real>
+    void Vector3<Real>::orthonormalize(Vector3<Real>& v1, Vector3<Real>& v2,
+            Vector3<Real>& v3)
+    {
+        v1 = v1.normalize();
+        v2 = v2 - (v1 * v2)*v1;
+        v2 = v2.normalize();
+        v3 = v3 - (v1 * v3)*v1 - (v2 * v3)*v2;
+        v3 = v3.normalize();
     }
 
 //#############################################################################

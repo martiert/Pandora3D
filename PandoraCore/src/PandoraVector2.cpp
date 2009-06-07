@@ -264,4 +264,38 @@ namespace Pandora
     }
 
 //#############################################################################
+
+    template<class Real>
+    Vector2<Real> Vector2<Real>::perp() const
+    {
+        return Vector2<Real>(m_data[1], -m_data[0]);
+    }
+
+//#############################################################################
+
+    template<class Real>
+    Vector2<Real> Vector2<Real>::unitPerp() const
+    {
+        return (Vector2<Real>(m_data[1], -m_data[0]).normalize());
+    }
+
+//#############################################################################
+
+    template<class Real>
+    Real Vector2<Real>::dotPerp(const Vector2<Real>& vector) const
+    {
+        return m_data[0] * vector[1] - m_data[1] * vector[0];
+    }
+
+//#############################################################################
+
+    template<class Real>
+    void Vector2<Real>::orthonormalize(Vector2<Real>& v1, Vector2<Real>& v2)
+    {
+        v1 = v1.normalize();
+        v2 = (v2 - (v1 * v2) * v1);
+        v2 = v2.normalize();
+    }
+
+//#############################################################################
 }
