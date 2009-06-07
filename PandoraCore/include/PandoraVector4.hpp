@@ -41,8 +41,8 @@ namespace Pandora
             //Operators for accessing the data.
             operator const Real*() const;
             operator Real*();
-            Real operator[](const int i) const;
-            Real& operator[](const int i);
+            const Real& operator[](const int& i) const;
+            Real& operator[](const int& i);
 
             //Comparison operators.
             bool operator==(const Vector4& vector) const;
@@ -76,6 +76,7 @@ namespace Pandora
             static const Vector4 UNIT_X;
             static const Vector4 UNIT_Y;
             static const Vector4 UNIT_Z;
+            static const Vector4 UNIT_W;
         protected:
             Real m_data[4];
             int compareVectors(const Vector4& vector) const;
