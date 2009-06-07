@@ -31,6 +31,7 @@ namespace Pandora
     class Math
     {
         public:
+            //Wrappers around normal mathematical functions.
             static Real Sqrt(Real s);
             static Real InvSqrt(Real s);
             static Real Pow(Real base, Real exp);
@@ -58,6 +59,25 @@ namespace Pandora
             static const Real INV_TWO_PI;
             static const Real DEG_TO_RAD;
             static const Real RAD_TO_DEG;
+
+            //Fast functions. The trigonometric functions comes in two
+            //variants. 0 and 1. 0 is faster, but less accurate. 1 is slower,
+            //but more accurate.
+            static Real FastSin0(Real angle);
+            static Real FastSin1(Real angle);
+            static Real FastCos0(Real angle);
+            static Real FastCos1(Real angle);
+            static Real FastTan0(Real angle);
+            static Real FastTan1(Real angle);
+            static Real FastAsin0(Real angle);
+            static Real FastAsin1(Real angle);
+            static Real FastAcos0(Real angle);
+            static Real FastAcos1(Real angle);
+            static Real FastAtan0(Real angle);
+            static Real FastAtan1(Real angle);
+
+            //Inverse square root
+            static Real FastInvSqrt(Real value);
     };
 }
 #endif

@@ -180,4 +180,226 @@ namespace Pandora
     }
 
 //#############################################################################
+
+    template<class Real>
+    Real Math<Real>::FastSin0(Real angle)
+    {
+        Real ans = (Real) 7.61e-3;
+        ans *= angle * angle;;
+        ans -= (Real) 0.16605;
+        ans *= angle * angle;
+        ans += (Real) 1.0;
+        return ans * angle;
+    }
+
+//#############################################################################
+
+    template<class Real>
+    Real Math<Real>::FastSin1(Real angle)
+    {
+        Real angleSqr = angle * angle;
+        Real ans = -(Real) 2.39e-8;
+        ans *= angleSqr;
+        ans += (Real) 2.7526e-6;
+        ans *= angleSqr;
+        ans -= (Real) 1.984090e-4;
+        ans *= angleSqr;
+        ans += (Real) 8.3333315e-3;
+        ans *= angleSqr;
+        ans -= (Real) 0.1666666664;
+        ans *= angleSqr;
+        ans += (Real) 1.0;
+        return ans * angle;
+    }
+
+//#############################################################################
+
+    template<class Real>
+    Real Math<Real>::FastCos0(Real angle)
+    {
+        Real ans = (Real) 3.705e-2 * angle * angle;
+        ans -= (Real) 0.4967;
+        ans *= angle * angle;
+        ans += (Real) 1.0;
+        return ans;
+    }
+
+//#############################################################################
+
+    template<class Real>
+    Real Math<Real>::FastCos1(Real angle)
+    {
+        Real angleSqr = angle * angle;
+        Real ans = - (Real) 2.605e-7;
+        ans *= angleSqr;
+        ans += (Real)2.47609e-5;
+        ans *= angleSqr;
+        ans -= (Real)1.3888397e-3;
+        ans *= angleSqr;
+        ans += (Real) 4.16666418e-2;
+        ans *= angleSqr;
+        ans -= (Real) 0.4999999963;
+        ans *= angleSqr;
+        ans += (Real) 1.0;
+        return ans;
+    }
+
+//#############################################################################
+
+    template<class Real>
+    Real Math<Real>::FastTan0(Real angle)
+    {
+        Real ans = (Real) 0.20330 * angle * angle;
+        ans += (Real) 0.31755;
+        ans *= angle * angle;
+        ans += (Real) 1.0;
+        return ans * angle;
+    }
+
+//#############################################################################
+
+    template<class Real>
+    Real Math<Real>::FastTan1(Real angle)
+    {
+        Real angleSqr = angle * angle;
+        Real ans = (Real) 9.5168091e-3;
+        ans *= angleSqr;
+        ans += (Real) 2.9005250e-3;
+        ans *= angleSqr;
+        ans += (Real) 2.45650893e-2;
+        ans *= angleSqr;
+        ans += (Real) 5.33740603e-2;
+        ans *= angleSqr;
+        ans += (Real) 0.1333923995;
+        ans *= angleSqr;
+        ans += (Real) 0.3333314036;
+        ans *= angleSqr;
+        ans += (Real) 1.0;
+        return ans * angle;
+    }
+
+//#############################################################################
+
+    template<class Real>
+    Real Math<Real>::FastAsin0(Real angle)
+    {
+        Real ans = - ((Real) 1.87293e-2 * angle * angle * angle);
+        ans += (Real) 7.42610e-2 * angle * angle;
+        ans -= (Real) 0.2121144 * angle;
+        ans += (Real) 1.5707288;
+        ans *= Sqrt((Real) 1.0 - angle);
+        return HALF_PI - ans;
+    }
+
+//#############################################################################
+
+    template<class Real>
+    Real Math<Real>::FastAsin1(Real angle)
+    {
+        Real ans = -(Real) 1.2624911e-3;
+        ans *= angle;
+        ans += (Real) 6.6700901e-3;
+        ans *= angle;
+        ans -= (Real) 1.708812556e-2;
+        ans *= angle;
+        ans += (Real) 3.0891881e-2;
+        ans *= angle;
+        ans -= (Real) 5.01743046e-2;
+        ans *= angle;
+        ans += (Real) 8.89789874e-2;
+        ans *= angle;
+        ans -= (Real) 0.2145988016;
+        ans *= angle;
+        ans += (Real) 1.5707963050;
+        ans *= Sqrt((Real) 1.0 - angle);
+        return HALF_PI - ans;
+    }
+
+//#############################################################################
+
+    template<class Real>
+    Real Math<Real>::FastAcos0(Real angle)
+    {
+        return HALF_PI - FastAsin0(angle);
+    }
+
+//#############################################################################
+
+    template<class Real>
+    Real Math<Real>::FastAcos1(Real angle)
+    {
+        return HALF_PI - FastAsin1(angle);
+    }
+
+//#############################################################################
+
+    template<class Real>
+    Real Math<Real>::FastAtan0(Real angle)
+    {
+        Real angleSqr = angle * angle;
+        Real ans = (Real) 2.08351e-2;
+        ans *= angleSqr;
+        ans -= (Real) 8.51330e-2;
+        ans *= angleSqr;
+        ans += (Real) 0.1801410;
+        ans *= angleSqr;
+        ans -= (Real) 0.3302995;
+        ans *= angleSqr;
+        ans += (Real) 0.9998660;
+        return ans * angle;
+    }
+
+//#############################################################################
+
+    template<class Real>
+    Real Math<Real>::FastAtan1(Real angle)
+    {
+        Real angleSqr = angle * angle;
+        Real ans = (Real) 2.8662257e-3;
+        ans *= angleSqr;
+        ans -= (Real) 1.61657367e-2;
+        ans *= angleSqr;
+        ans += (Real) 4.29096138e-2;
+        ans *= angleSqr;
+        ans -= (Real) 7.528964e-2;
+        ans *= angleSqr;
+        ans += (Real) 0.1065626393;
+        ans *= angleSqr;
+        ans -= (Real) 0.1420889944;
+        ans *= angleSqr;
+        ans += (Real) 0.1999355085;
+        ans *= angleSqr;
+        ans -= (Real) 0.3333314528;
+        ans *= angleSqr;
+        ans += (Real) 1.0;
+        return ans * angle;
+    }
+
+//#############################################################################
+
+    template<>
+    float Math<float>::FastInvSqrt(float value)
+    {
+        float half = 0.5f * value;
+        int i = *(int*)&value;
+        i = 0x5f3759df - (i >> 1);
+        value = *(float*)&i;
+        value *= (1.5f - half*value*value);
+        return value;
+    }
+
+//#############################################################################
+
+    template<>
+    double Math<double>::FastInvsqrt(double value)
+    {
+        double half = 0.5 * value;
+        long long i = *(long long*)&value;
+        i = 0x5fe6ec85e7de30da - (i >> 1);
+        value = *(double)&i;
+        value *= (1.5 - half*value*value);
+        return value;
+    }
+
+//#############################################################################
 }
