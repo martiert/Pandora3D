@@ -24,6 +24,7 @@
 #define _VECTOR2_HPP_
 
 #include "PandoraSystem.hpp"
+#include "PandoraMath.hpp"
 
 namespace Pandora
 {
@@ -31,47 +32,54 @@ namespace Pandora
     class Vector2
     {
         public:
-            Real x, y;
-
-            //Constructor. Makes a vector with the m_x as x and m_y as y.
-            Vector2(Real m_x = 1, Real m_y = 0);
+            //Constructor.
+            Vector2(Real x = 1, Real y = 0);
 
             //Copy constructor
-            Vector2(Vector2& vec);
+            Vector2(const Vector2& vec);
+
+            ~Vector2();
 
             //Operators for accessing the data.
             operator const Real*() const;
             operator Real*();
-            Real operator[](const int i) const;
+            const Real& operator[](const int i) const;
             Real& operator[](const int i);
 
             //Comparison operators.
-            bool operator==(Vector2& vector) const;
-            bool operator!=(Vector2& vector) const;
-            bool operator<(Vector2& vector) const;
-            bool operator>(Vector2& vector) const;
-            bool operator<=(Vector2& vector) const;
-            bool operator>=(Vector2& vector) const;
+            bool operator==(const Vector2& vector) const;
+            bool operator!=(const Vector2& vector) const;
+            bool operator<(const Vector2& vector) const;
+            bool operator>(const Vector2& vector) const;
+            bool operator<=(const Vector2& vector) const;
+            bool operator>=(const Vector2& vector) const;
 
             //Mathematical operators.
-            Vector2 operator+(Vector2& vector) const;
-            Vector2 operator-(Vector2& vector) const;
-            Vector2 operator*(Real& scalar) const;
-            Vector2 operator/(Real& scalar) const;
+            Vector2 operator+(const Vector2& vector) const;
+            Vector2 operator-(const Vector2& vector) const;
+            Vector2 operator*(const Real& scalar) const;
+            Vector2 operator/(const Real& scalar) const;
             Vector2 operator-() const;
 
-            void operator+=(Vector2& vector);
-            void operator-=(Vector2& vector);
-            void operator*=(Real& scalar);
-            void operator/=(Real& scalar);
+            void operator+=(const Vector2& vector);
+            void operator-=(const Vector2& vector);
+            void operator*=(const Real& scalar);
+            void operator/=(const Real& scalar);
 
             //Dot product.
-            Real operator*(Vector2& vector) const;
+            Real operator*(const Vector2& vector) const;
 
             //Geometrical operations.
             Real length() const;
             Real squaredLength() const;
             Real normalize();
+
+            static const Vector2 ZERO;
+            static const Vector2 UNIT_X;
+            static const Vector2 UNIT_Y;
+        protected:
+            Real m_data[2];
+            int compareVectors(const Vector2& vector);
     };
     typedef Vector2<float> Vector2f;
     typedef Vector2<double> Vector2d;

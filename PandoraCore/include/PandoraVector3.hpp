@@ -24,6 +24,7 @@
 #define _VECTOR3_HPP_
 
 #include "PandoraSystem.hpp"
+#include "PandoraMath.hpp"
 
 namespace Pandora
 {
@@ -31,48 +32,54 @@ namespace Pandora
     class Vector3
     {
         public:
-            Real x, y, z;
-
-            //Constructor. Makes a vector with the m_x as x and m_y as y.
-            Vector3(Real m_x = 1, Real m_y = 0, Real m_z = 0);
+            //Constructor.
+            Vector3(Real x = 1, Real y = 0, Real z = 0);
 
             //Copy constructor
-            Vector3(Vector3& vec);
+            Vector3(const Vector3& vec);
 
             //Operators for accessing the data.
             operator const Real*() const;
             operator Real*();
-            Real operator[](const int i) const;
+            const Real& operator[](const int i) const;
             Real& operator[](const int i);
 
             //Comparison operators.
-            bool operator==(Vector3& vector) const;
-            bool operator!=(Vector3& vector) const;
-            bool operator<(Vector3& vector) const;
-            bool operator>(Vector3& vector) const;
-            bool operator<=(Vector3& vector) const;
-            bool operator>=(Vector3& vector) const;
+            bool operator==(const Vector3& vector) const;
+            bool operator!=(const Vector3& vector) const;
+            bool operator<(const Vector3& vector) const;
+            bool operator>(const Vector3& vector) const;
+            bool operator<=(const Vector3& vector) const;
+            bool operator>=(const Vector3& vector) const;
 
             //Mathematical operators.
-            Vector3 operator+(Vector3& vector) const;
-            Vector3 operator-(Vector3& vector) const;
-            Vector3 operator*(Real& scalar) const;
-            Vector3 operator/(Real& scalar) const;
+            Vector3 operator+(const Vector3& vector) const;
+            Vector3 operator-(const Vector3& vector) const;
+            Vector3 operator*(const Real& scalar) const;
+            Vector3 operator/(const Real& scalar) const;
             Vector3 operator-() const;
 
-            void operator+=(Vector3& vector);
-            void operator-=(Vector3& vector);
-            void operator*=(Real& scalar);
-            void operator/=(Real& scalar);
+            void operator+=(const Vector3& vector);
+            void operator-=(const Vector3& vector);
+            void operator*=(const Real& scalar);
+            void operator/=(const Real& scalar);
 
             //dot product.
-            Real operator*(Vector3& vector) const;
+            Real operator*(const Vector3& vector) const;
 
             //Geometrical operations.
             Real length() const;
             Real squaredLength() const;
             Real normalize();
-            Vector3 cross(Vector3& vector) const;
+            Vector3 cross(const Vector3& vector) const;
+
+            static const Vector3 ZERO;
+            static const Vector3 UNIT_X;
+            static const Vector3 UNIT_Y;
+            static const Vector3 UNIT_Z;
+        protected:
+            Real m_data[3];
+            int compareVectors(const Vector3& vector) const;
     };
     typedef Vector3<float> Vector3f;
     typedef Vector3<double> Vector3d;
