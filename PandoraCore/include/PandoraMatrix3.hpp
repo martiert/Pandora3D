@@ -32,7 +32,7 @@ namespace Pandora
     {
         public:
             //Constructors
-            Matrix3();
+            Matrix3(bool zero);
             Matrix3(Matrix3& matrix);
             Matrix3(Real data[9]);
             ~Matrix3();
@@ -76,9 +76,28 @@ namespace Pandora
             void operator/=(const Real& scalar);
 
             //Geometrical operations
+            Real determinant() const;
             Matrix3 transpose() const;
             Matrix3 adj() const;
             Matrix3 inverse() const;
+
+            void toAxisAngle(Vector3<Real>& axis, Real& angle) const;
+            void fromAxisAngle(const Vector3<Real>& acis, Real& angle);
+            
+            void fromEulerAngleXYZ(Real yaw, Real pitch, Real roll);
+            void fromEulerAngleXZY(Real yaw, Real pitch, Real roll);
+            void fromEulerAngleYXZ(Real yaw, Real pitch, Real roll);
+            void fromEulerAngleYZX(Real yaw, Real pitch, Real roll);
+            void fromEulerAngleZXY(Real yaw, Real pitch, Real roll);
+            void fromEulerAngleZYX(Real yaw, Real pitch, Real roll);
+            bool toEulerAngleXYZ(Real& yaw, Real& pitch, Real& roll) const;
+            bool toEulerAngleXZY(Real& yaw, Real& pitch, Real& roll) const;
+            bool toEulerAngleYXZ(Real& yaw, Real& pitch, Real& roll) const;
+            bool toEulerAngleYZX(Real& yaw, Real& pitch, Real& roll) const;
+            bool toEulerAngleZXY(Real& yaw, Real& pitch, Real& roll) const;
+            bool toEulerAngleZYX(Real& yaw, Real& pitch, Real& roll) const;
+
+            static Matrix3 slerp(Real t, const Matrix3& r0, const Matrix3& r1);
 
             static const Matrix3 ZERO;
             static const Matrix3 IDENTITY;
