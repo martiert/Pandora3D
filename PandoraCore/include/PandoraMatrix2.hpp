@@ -33,7 +33,7 @@ namespace Pandora
     {
         public:
             //Constructors
-            Matrix2();
+            Matrix2(bool zeroMatrix);
             Matrix2(Matrix2& matrix);
             Matrix2(Real data[4]);
             ~Matrix2();
@@ -77,9 +77,14 @@ namespace Pandora
             void operator/=(const Real& scalar);
 
             //Geometrical operations
+            Real determinant() const;
             Matrix2 transpose() const;
-            Matrix2 adj() const;
+            Matrix2 transposeTimes(const Matrix2& matrix) const;
+            Matrix2 timesTranspose(const Matrix2& matrix) const;
+            Matrix2 adjugate() const;
             Matrix2 inverse() const;
+
+            Real toAngle() const;
 
             static const Matrix2 ZERO;
             static const Matrix2 IDENTITY;

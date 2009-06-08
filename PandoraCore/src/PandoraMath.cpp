@@ -182,6 +182,14 @@ namespace Pandora
 //#############################################################################
 
     template<class Real>
+    Real Math<Real>::Atan2(Real x, Real y)
+    {
+        return (Real) atan2((double) x, (double) y);
+    }
+
+//#############################################################################
+
+    template<class Real>
     Real Math<Real>::FastSin0(Real angle)
     {
         Real ans = (Real) 7.61e-3;
@@ -391,12 +399,12 @@ namespace Pandora
 //#############################################################################
 
     template<>
-    double Math<double>::FastInvsqrt(double value)
+    double Math<double>::FastInvSqrt(double value)
     {
         double half = 0.5 * value;
         long long i = *(long long*)&value;
         i = 0x5fe6ec85e7de30da - (i >> 1);
-        value = *(double)&i;
+        value = *(double*)&i;
         value *= (1.5 - half*value*value);
         return value;
     }

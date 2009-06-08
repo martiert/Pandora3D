@@ -48,6 +48,7 @@ namespace Pandora
             static Real Asin(Real s);
             static Real Acos(Real s);
             static Real Atan(Real s);
+            static Real Atan2(Real x, Real y);
 
             //Constants to be used
             static const Real EPSILON;
