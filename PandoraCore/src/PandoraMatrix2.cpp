@@ -269,6 +269,7 @@ namespace Pandora
     template<class Real>
     Matrix2<Real> Matrix2<Real>::operator/(const Real& scalar) const
     {
+        assert(scalar > Math<Real>::EPSILON || scalar < -Math<Real>::EPSILON);
         Matrix2<Real> tmp(true);
         tmp[0] = m_data[0] / scalar;
         tmp[1] = m_data[1] / scalar;
@@ -315,7 +316,7 @@ namespace Pandora
     template<class Real>
     void Matrix2<Real>::operator/=(const Real& scalar)
     {
-        assert(scalar != 0);
+        assert(scalar > Math<Real>::EPSILON || scalar < -Math<Real>::EPSILON);
         m_data[0] /= scalar;
         m_data[1] /= scalar;
         m_data[2] /= scalar;
@@ -381,7 +382,8 @@ namespace Pandora
     {
         Matrix2<Real> tmp(true);
         Real det = determinant();
-        assert(det < Math<Real>::EPSILON && det > -Math<Real>::EPSILON);
+
+        assert(det > Math<Real>::EPSILON || det < -Math<Real>::EPSILON);
         
         if(det < Math<Real>::EPSILON && det > -Math<Real>::EPSILON)
             return tmp;
@@ -397,6 +399,67 @@ namespace Pandora
     Real Matrix2<Real>::toAngle() const
     {
         return atan2(m_data[2], m_data[0]);
+    }
+
+//#############################################################################
+
+    template<class Real>
+    void Matrix2<Real>::orthonormalize()
+    {
+        Real scale = Math<Real>::Sqrt(m_data[0]*m_data[0] +
+                m_data[2]*m_data[2]);
+        m_data[0] /= scale;
+        m_data[2] /= scale;
+
+        scale = (m_data[0]*m_data[1] + m_data[2]*m_data[3]) / (scale * scale);
+        m_data[1] -= scale * m_data[0];
+        m_data[3] -= scale * m_data[2];
+
+        scale = Math<Real>::Sqrt(m_data[1]*m_data[1] + m_data[3]*m_data[3]);
+        m_data[1] /= scale;
+        m_data[3] /= scale;
+    }
+
+//#############################################################################
+
+    template<class Real>
+    void Matrix2<Real>::eigenDecomposition(Matrix2& rot, Matrix2& diag) const
+    {
+        Real a = (Real) 1.0;
+        Real b = -(m_data[0] + m_data[3]);
+        Real c = m_data[0]*m_data[3] - m_data[1]*m_data[2];
+
+        assert((4 * c) <= (Real) 0.0 || b*b >= 4*c);
+
+        if((4*c) > 0 || b*b < 4*c) {
+            rot = ZERO;
+            diag = ZERO;
+            return;
+        }
+
+        diag[1] = diag[2] = (Real) 0.0;
+        diag[0] = (-b - Math<Real>::Sqrt(b*b - 4*c)) / (Real) 2.0;
+        diag[3] = (-b + Math<Real>::Sqrt(b*b - 4*c)) / (Real) 2.0;
+
+        Real diff = m_data[0] - m_data[3];
+        Real cos, sin;
+
+        if(diff >= (Real) 0.0) {
+            cos = m_data[1];
+            sin = diff[0] - m_data[0];
+        } else {
+            cos = diff[0] - m_data[3];
+            sin = m_data[1];
+        }
+
+        Real tmp = Math<Real>::Sqrt(cos*cos + sin*sin);
+        cos /= tmp;
+        sin /= tmp;
+
+        rot[0] = cos;
+        rot[1] = -sin;
+        rot[2] = cos;
+        rot[3] = sin;
     }
 
 //#############################################################################

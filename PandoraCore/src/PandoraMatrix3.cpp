@@ -321,6 +321,7 @@ namespace Pandora
     template<class Real>
     Matrix3<Real> Matrix3<Real>::operator/(const Real& scalar) const
     {
+        assert(scalar > Math<Real>::EPSILON || scalar < -Math<Real>::EPSILON);
         Real s = 1 / scalar;
         Matrix3<Real> tmp(true);
         tmp[0] = m_data[0] * s;
@@ -406,6 +407,7 @@ namespace Pandora
     template<class Real>
     void Matrix3<Real>::operator/=(const Real& scalar)
     {
+        assert(scalar > Math<Real>::EPSILON || scalar < -Math<Real>::EPSILON);
         Real s = 1 / scalar;
         m_data[0] *= s;
         m_data[1] *= s;
@@ -471,7 +473,13 @@ namespace Pandora
     template<class Real>
     Matrix3<Real> Matrix3<Real>::inverse() const
     {
-        return adjugate() / determinant();
+        Real det = determinant();
+        assert(det > Math<Real>::EPSILON || det < -Math<Real>::EPSILON);
+
+        if(det < Math<Real>::EOPSILON && det > -Math<Real>::EPSILON)
+            return ZERO;
+
+        return adjugate() / det;
     }
 
 //#############################################################################

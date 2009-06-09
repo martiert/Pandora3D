@@ -174,6 +174,7 @@ namespace Pandora
     template<class Real>
     Vector2<Real> Vector2<Real>::operator/(const Real& scalar) const
     {
+        assert(scalar > Math<Real>::EPSILON || scalar < -Math<Real>::EPSILON);
         return Vector2<Real>(m_data[0] / scalar, m_data[1] / scalar);
     }
 
@@ -217,6 +218,7 @@ namespace Pandora
     template<class Real>
     void Vector2<Real>::operator/=(const Real& scalar)
     {
+        assert(scalar > Math<Real>::EPSILON || scalar < -Math<Real>::EPSILON);
         m_data[0] /= scalar;
         m_data[1] /= scalar;
     }
@@ -295,6 +297,15 @@ namespace Pandora
         v1 = v1.normalize();
         v2 = (v2 - (v1 * v2) * v1);
         v2 = v2.normalize();
+    }
+
+//#############################################################################
+
+    template<class Real>
+    void Vector2<Real>::orthonormalBasis(Vector2<Real>& v1, Vector2<Real>& v2)
+    {
+        v1 = v1.normalize();
+        v2 = v1.perp();
     }
 
 //#############################################################################

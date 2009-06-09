@@ -85,6 +85,8 @@ namespace Pandora
             Matrix2 inverse() const;
 
             Real toAngle() const;
+            void orthonormalize();
+            void eigenDecomposition(Matrix2& rot, Matrix2& diag) const;
 
             static const Matrix2 ZERO;
             static const Matrix2 IDENTITY;

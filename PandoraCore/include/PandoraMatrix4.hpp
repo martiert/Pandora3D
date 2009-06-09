@@ -23,6 +23,7 @@
 #ifndef _MATRIX4_HPP_
 #define _MATRIX4_HPP_
 
+#include "PandoraSystem.hpp"
 #include "PandoraVector4.hpp"
 
 namespace Pandora
@@ -31,10 +32,10 @@ namespace Pandora
     class Matrix4
     {
         public:
-            Matrix4();
+            Matrix4(bool zero);
             Matrix4(Matrix4& matrix);
-            Matrix(Real data[16]);
-            ~Matrix();
+            Matrix4(Real data[16]);
+            ~Matrix4();
 
             //Assignment operators
             operator const Real*() const;
@@ -59,14 +60,14 @@ namespace Pandora
             Matrix4 operator-(const Matrix4& matrix) const;
             Matrix4 operator*(const Matrix4& matrix) const;
 
-            Matrix4 operator-();
+            Matrix4 operator-() const;
 
             //Matrix-Vector
             Vector4<Real> operator*(const Vector4<Real>& vector) const;
 
             //Matrix-Scalar
             Matrix4 operator*(const Real& scalar) const;
-            Matrix4 operator/(cosnt Real& scalar) const;
+            Matrix4 operator/(const Real& scalar) const;
 
             //Operators on this matrix
             void operator+=(const Matrix4& matrix);
@@ -75,9 +76,15 @@ namespace Pandora
             void operator/=(const Real& scalar);
 
             //Geometrical operations
+            Real determinant() const;
             Matrix4 transpose() const;
-            Matrix4 adj() const;
+            Matrix4 transposeTimes(const Matrix4& matrix) const;
+            Matrix4 timesTranspose(const Matrix4& matrix) const;
+            Matrix4 adjugate() const;
             Matrix4 inverse() const;
+
+            static const Matrix4 ZERO;
+            static const Matrix4 IDENTITY;
         protected:
             Real m_data[16];
             int compareMatrix(const Matrix4& matrix) const;

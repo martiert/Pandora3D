@@ -73,7 +73,10 @@ namespace Pandora
             Real normalize();
             Vector3 cross(const Vector3& vector) const;
             Vector3 unitCross(const Vector3& vector) const;
-            static void orthonormalize(Vector3& V1, Vector3& V2, Vector3& V3);
+
+            static void orthonormalize(Vector3& v1, Vector3& v2, Vector3& v3);
+            static void orthonormalBasis(Vector3& v1, Vector3& v2,
+                    Vector3& v3);
 
             static const Vector3 ZERO;
             static const Vector3 UNIT_X;

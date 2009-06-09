@@ -189,6 +189,8 @@ namespace Pandora
     template<class Real>
     Vector4<Real> Vector4<Real>::operator/(const Real& scalar) const
     {
+        assert(scalar > Math<Real>::EPSILON || scalar < -Math<Real>::EPSILON);
+        
         return Vector4<Real>(m_data[0] / scalar, m_data[1] / scalar,
                 m_data[2] / scalar, m_data[3] / scalar);
     }
@@ -238,6 +240,7 @@ namespace Pandora
     template<class Real>
     void Vector4<Real>::operator/=(const Real& scalar)
     {
+        assert(scalar > Math<Real>::EPSILON || scalar < -Math<Real>::EPSILON);
         m_data[0] /= scalar;
         m_data[1] /= scalar;
         m_data[2] /= scalar;
