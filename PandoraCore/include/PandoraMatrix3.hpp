@@ -70,6 +70,9 @@ namespace Pandora
             Matrix3 operator*(const Real& scalar) const;
             Matrix3 operator/(const Real& scalar) const;
 
+            Matrix3 transposeTimes(const Matrix3& matrix) const;
+            Matrix3 timesTranspose(const Matrix3& matrix) const;
+
             //Operators on this matrix
             void operator+=(const Matrix3& matrix);
             void operator-=(const Matrix3& matrix);
@@ -86,20 +89,13 @@ namespace Pandora
             void toAxisAngle(Vector3<Real>& axis, Real& angle) const;
             void fromAxisAngle(const Vector3<Real>& axis, const Real& angle);
             
-            void fromEulerAngleXYZ(Real yaw, Real pitch, Real roll);
-            void fromEulerAngleXZY(Real yaw, Real pitch, Real roll);
-            void fromEulerAngleYXZ(Real yaw, Real pitch, Real roll);
-            void fromEulerAngleYZX(Real yaw, Real pitch, Real roll);
-            void fromEulerAngleZXY(Real yaw, Real pitch, Real roll);
-            void fromEulerAngleZYX(Real yaw, Real pitch, Real roll);
-            bool toEulerAngleXYZ(Real& yaw, Real& pitch, Real& roll) const;
-            bool toEulerAngleXZY(Real& yaw, Real& pitch, Real& roll) const;
-            bool toEulerAngleYXZ(Real& yaw, Real& pitch, Real& roll) const;
-            bool toEulerAngleYZX(Real& yaw, Real& pitch, Real& roll) const;
-            bool toEulerAngleZXY(Real& yaw, Real& pitch, Real& roll) const;
-            bool toEulerAngleZYX(Real& yaw, Real& pitch, Real& roll) const;
+            //Using the angles: E(h,p,r) = Rz(r)Rx(p)Ry(h)
+            void fromEulerAngle(const Real head, const Real pitch, 
+                    const Real roll);
+            bool toEulerAngle(Real& head, Real& pitch, Real& roll) const;
 
-            static Matrix3 slerp(Real t, const Matrix3& r0, const Matrix3& r1);
+            static Matrix3 slerp(const Real t, const Matrix3& r0, 
+                    const Matrix3& r1);
 
             static const Matrix3 ZERO;
             static const Matrix3 IDENTITY;

@@ -338,6 +338,24 @@ namespace Pandora
 //#############################################################################
 
     template<class Real>
+    Matrix3<Real> Matrix3<Real>::transposeTimes(const Matrix3<Real>& matrix) 
+    const
+    {
+        return transpose() * matrix;
+    }
+
+//#############################################################################
+
+    template<class Real>
+    Matrix3<Real> Matrix3<Real>::timesTranspose(const Matrix3<Real>& matrix)
+    const
+    {
+        return *this * matrix.transpose();
+    }
+
+//#############################################################################
+
+    template<class Real>
     void Matrix3<Real>::operator+=(const Matrix3<Real>& matrix)
     {
         m_data[0] += matrix[0];
@@ -495,6 +513,50 @@ namespace Pandora
         skew[6] = -skew[2];
         skew[7] = -skew[5];
         *this = IDENTITY + Sin(angle)*skew + (1 - Cos(angle))*skew*skew;
+    }
+
+//#############################################################################
+
+    template<class Real>
+    void Matrix3<Real>::fromEulerAngle(const Real head, const Real pitch, 
+            const Real roll)
+    {
+        Matrix3<Real> rx(true);
+        rx.fromAxisAngle(Vector3<Real>::UNIT_X, pitch);
+        Matrix3<Real> ry(true);
+        ry.fromAxisAngle(Vector3<Real>::UNIT_Y, head);
+        Matrix3<Real> rz(true);
+        rz.fromAxisAngle(Vector3<Real>::UNIT_Z, roll);
+        *this = rz * rx * ry;
+    }
+
+//#############################################################################
+
+    template<class Real>
+    bool Matrix3<Real>::toEulerAngle(Real& head, Real& pitch, Real& roll) const
+    {
+        if(m_data[1] < Math<Real>::EPSILON && m_data[1] > -Math<Real>::EPSILON)
+            return false;
+
+        head = Atan2(-m_data[6], m_data[8]);
+        pitch = Asin(m_data[7]);
+        roll = Atan2(-m_data[1], m_data[4]);
+        return true;
+    }
+
+//#############################################################################
+
+    template<class Real>
+    Matrix3<Real> Matrix3<Real>::slerp(const Real t, const Matrix3<Real>& r0,
+            const Matrix3<Real>& r1)
+    {
+        Matrix3<Real> tmp = r0.transposeTimes(r1);
+        Vector3<Real> axis;
+        Real angle;
+        tmp.toAxisAngle(&axis, &angle);
+        angle *= t;
+        tmp.fromAxisAngle(axis, angle);
+        return tmp * r0;
     }
 
 //#############################################################################
