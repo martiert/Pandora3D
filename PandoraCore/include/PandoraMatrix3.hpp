@@ -23,6 +23,7 @@
 #ifndef _MATRIX3_HPP_
 #define _MATRIX3_HPP_
 
+#include "PandoraSystem.hpp"
 #include "PandoraVector3.hpp"
 
 namespace Pandora
@@ -42,7 +43,7 @@ namespace Pandora
             operator Real*();
             const Real& operator[](const int i) const;
             Real& operator[](const int i);
-            const Real& operator()(const int row, const int column) const;
+            const Real& operator()(const int row, const int col) const;
             Real& operator()(const int row, const int column);
             void operator=(const Matrix3& matrix);
 
@@ -78,11 +79,12 @@ namespace Pandora
             //Geometrical operations
             Real determinant() const;
             Matrix3 transpose() const;
-            Matrix3 adj() const;
+            Matrix3 adjugate() const;
             Matrix3 inverse() const;
+            Real trace() const;
 
             void toAxisAngle(Vector3<Real>& axis, Real& angle) const;
-            void fromAxisAngle(const Vector3<Real>& acis, Real& angle);
+            void fromAxisAngle(const Vector3<Real>& axis, const Real& angle);
             
             void fromEulerAngleXYZ(Real yaw, Real pitch, Real roll);
             void fromEulerAngleXZY(Real yaw, Real pitch, Real roll);
