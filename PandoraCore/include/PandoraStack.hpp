@@ -59,6 +59,88 @@ namespace Pandora
             int m_index;
             int m_size;
     };
+
+//#############################################################################
+
+    template<class T>
+    Stack<T>::Stack(const int n)
+    {
+        m_index = -1;
+        m_size = n;
+        m_data = new T[n];
+    }
+
+//#############################################################################
+
+    template<class T>
+    Stack<T>::~Stack()
+    {
+        delete[] m_data;
+    }
+
+//#############################################################################
+
+    template<class T>
+    bool Stack<T>::isEmpty() const
+    {
+        return m_index == -1;
+    }
+
+//#############################################################################
+
+    template<class T>
+    bool Stack<T>::isFull() const
+    {
+        return m_index + 1 == m_size;
+    }
+
+//#############################################################################
+
+    template<class T>
+    void Stack<T>::push(const T& element)
+    {
+        if(m_index + 1 < m_size) {
+            ++m_index;
+            m_data[m_index] = element;
+        } else {
+            assert(false);
+        }
+    }
+
+//#############################################################################
+
+    template<class T>
+    void Stack<T>::pop(T& element)
+    {
+        if(m_index > -1) {
+            element = m_data[m_index];
+            --m_index;
+        } else {
+            assert(false);
+        }
+    }
+
+//#############################################################################
+
+    template<class T>
+    void Stack<T>::clear()
+    {
+        m_index = -1;
+    }
+
+//#############################################################################
+
+    template<class T>
+    bool Stack<T>::getTop(T& element) const
+    {
+        if(m_index == -1)
+            return false;
+
+        element = m_data[m_index];
+        return true;
+    }
+
+//#############################################################################
 }
 
 #endif
