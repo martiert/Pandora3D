@@ -28,6 +28,13 @@
 
 namespace Pandora
 {
+    //A class representing a 4x4 Matrix. The matrix is saved in row-major
+    //order, that is:
+    //
+    //|0 4 8  12|
+    //|1 5 9  13|
+    //|2 6 10 14|
+    //|3 7 11 15|
     template<class Real>
     class Matrix4
     {
@@ -97,6 +104,9 @@ namespace Pandora
 
 //#############################################################################
 
+
+    //Makes a zero matrix if the bool sent in is true, makes an identity matrix
+    //if it's false.
     template<class Real>
     Matrix4<Real>::Matrix4(bool zero)
     {
@@ -106,11 +116,12 @@ namespace Pandora
             (Real) 0.0;
 
         if(!zero)
-            m_data[0] = m_data[5] = m_data[10] = m_data[15];
+            m_data[0] = m_data[5] = m_data[10] = m_data[15] = (Real) 1.0;
     }
 
 //#############################################################################
 
+    //Copy the data from the incomming matrix to this new matrix.
     template<class Real>
     Matrix4<Real>::Matrix4(Matrix4<Real>& matrix)
     {
@@ -134,6 +145,7 @@ namespace Pandora
 
 //#############################################################################
 
+    //Copy the data from 
     template<class Real>
     Matrix4<Real>::Matrix4(Real data[16])
     {
