@@ -1,0 +1,6 @@
+#Main CmakeLists.txt file
+
+ADD_SUBDIRECTORY(include)
+ADD_SUBDIRECTORY(src)
+ADD_SUBDIRECTORY(obj)
+ADD_SUBDIRECTORY(testing)
