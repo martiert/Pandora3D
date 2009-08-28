@@ -20,31 +20,58 @@
  * ----------------------------------------------------------------------------
  */
 
+#include "PandoraMath.hpp"
+
 namespace Pandora
 {
     template<class Real>
     class Vector2
     {
         public:
-            Vector2(Real tx, Real ty);
+            Vector2(Real tx = 1, Real ty = 0);
 
+            //Comparsion operators
             bool operator==(const Vector2<Real>& vec);
+            bool operator!=(const Vector2<Real>& vec);
+
+            //Aritmethic operators
+            Vector2<Real> operator+(const Vector2<Real>& vec);
+            Vector2<Real> operator-(const Vector2<Real>& vec);
+            Vector2<Real> operator+=(const Vector2<Real>& vec);
+            Vector2<Real> operator-=(const Vector2<Real>& vec);
+            Real operator*(const Vector2<Real>& vec);
         public:
             Real x, y;
     };
-}
 
-template<class Real>
-Pandora::Vector2<Real>::Vector2(Real tx, Real ty)
-{
-    x = tx;
-    y = ty;
-}
+    template<class Real>
+    Vector2<Real>::Vector2(Real tx, Real ty)
+    {
+        x = tx;
+        y = ty;
+    }
 
 //#############################################################################
 
-template<class Real>
-bool Pandora::Vector2<Real>::operator==(const Vector2<Real>& vec)
-{
-    return true;
+    template<class Real>
+    bool Vector2<Real>::operator==(const Vector2<Real>& vec)
+    {
+        return x == vec.x && y == vec.y;
+    }
+
+//#############################################################################
+
+    template<class Real>
+    bool Vector2<Real>::operator!=(const Vector2<Real>& vec)
+    {
+        return !operator==(vec);
+    }
+
+//#############################################################################
+
+    template<class Real>
+    Vector2<Real> Vector2<Real>::operator+(const Vector2<Real>& vec)
+    {
+        return Vector2<Real>(x+vec.x,y+vec.y);
+    }
 }
