@@ -1,5 +1,5 @@
 #include <cppunit/TestFixture.h>
-#include <cppunit/Asserter.h>
+#include <cppunit/TestAssert.h>
 #include <string>
 
 #include "../include/PandoraVector2.hpp"
