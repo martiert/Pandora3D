@@ -56,7 +56,10 @@ class Vector2Test : public CppUnit::TestFixture
             CPPUNIT_ASSERT( m_1_0 / 2 == Pandora::Vector2<float>(0.5, 0) );
             CPPUNIT_ASSERT( m_0_1 / 2 == Pandora::Vector2<float>(0, 0.5) );
             CPPUNIT_ASSERT( m_1_1 / 4 == Pandora::Vector2<float>(0.25, 0.25) );
-        
+        }
+
+        void testAssign()
+        {        
             //Test of operator[]
             CPPUNIT_ASSERT( m_1_0[0] == 1 );
             CPPUNIT_ASSERT( m_1_0[1] == 0 );
@@ -113,6 +116,11 @@ class Vector2Test : public CppUnit::TestFixture
             suite->addTest( new CppUnit::TestCaller<Vector2Test>(
                         "testArithmetic",
                         &Vector2Test::testArithmetic));
+
+            suite->addTest( new CppUnit::TestCaller<Vector2Test>(
+                        "testAssignment",
+                        &Vector2Test::testAssign));
+
 
             suite->addTest( new CppUnit::TestCaller<Vector2Test>(
                         "testGeometric",

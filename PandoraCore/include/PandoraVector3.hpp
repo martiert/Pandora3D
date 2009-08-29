@@ -25,386 +25,83 @@
 namespace Pandora
 {
     template<class Real>
-    class Vector2
+    class Vector3
     {
         public:
-            //Constructor. Default constructor makes an identity vector.
-            Vector2(Real tx = 1, Real ty = 0);
-            Vector2(const Vector2<Real>& vec);
-            ~Vector2();
+            //Constructors and destructors
+            Vector3(Real mx = 1, Real my = 0, Real mz = 0);
+            Vector3(const Vector3<Real>& vec);
+            ~Vector3();
 
-            //Assignment operators
-            void operator=(const Vector2<Real>& vec);
-
-            //Comparsion operators
-            bool operator==(const Vector2<Real>& vec) const;
-            bool operator!=(const Vector2<Real>& vec) const;
-
-            //Aritmethic operators
-            Vector2<Real> operator+(const Vector2<Real>& vec) const;
-            Vector2<Real> operator-(const Vector2<Real>& vec) const;
-            Vector2<Real> operator*(const Real& scalar) const;
-            Vector2<Real> operator/(const Real& scalar) const;
-            Vector2<Real> operator-() const;
-
-            void operator+=(const Vector2<Real>& vec);
-            void operator-=(const Vector2<Real>& vec);
-            void operator*=(const Real& scalar);
-            void operator/=(const Real& scalar);
-
-            Real operator*(const Vector2<Real>& vec) const;
+            //Equality operators
+            bool operator==(const Vector3<Real>& vec) const;
+            bool operator!=(const Vector3<Real>& vec) const;
 
             //Data assignment
-            Real operator[](int i) const;
-            Real& operator[](int i);
-            operator const Real* () const;
-            operator Real* ();
 
-            //Geometric operations
-            Real length() const;
-            Real squaredLength() const;
-            Real dot(const Vector2<Real>& vec) const;
-            Real normalize();
-            Vector2<Real> perp() const;
-            Vector2<Real> unitPerp() const;
-            Real dotPerp(const Vector2<Real>& vec) const;
         public:
-            Real x, y;
+            Real x, y, z;
     };
 
 //#############################################################################
 //
-//                   Constructor. Sets x = tx and y = ty.
+//                              Default constructor.
 //
 //#############################################################################
 
     template<class Real>
-    Vector2<Real>::Vector2(Real tx, Real ty)
+    Vector3<Real>::Vector3(Real mx, Real my, Real mz)
     {
-        x = tx;
-        y = ty;
+        x = mx;
+        y = my;
+        z = mz;
     }
 
 //#############################################################################
 //
-//           Copy constructor. Copies the vector sent as argument.
+//                              Copy constructor.
 //
 //#############################################################################
 
     template<class Real>
-    Vector2<Real>::Vector2(const Vector2<Real>& vec)
-    {
-        x = vec.x;
-        y = vec.y;
-    }
-
-//#############################################################################
-//
-//                       Destructor. Does nothing.
-//
-//#############################################################################
-
-    template<class Real>
-    Vector2<Real>::~Vector2() { }
-
-//#############################################################################
-//
-//      Assignment operator. Sets this vector equal to the other.
-//
-//#############################################################################
-
-    template<class Real>
-    void Vector2<Real>::operator=(const Vector2<Real>& vec)
+    Vector3<Real>::Vector3(const Vector3<Real>& vec)
     {
         x = vec.x;
         y = vec.y;
+        z = vec.z;
     }
 
 //#############################################################################
 //
-//  Comparison operator. Checks if the two values in the vectors are equal.
+//                          Destructor. Does nothing.
 //
 //#############################################################################
 
+    template<class Real> 
+    Vector3<Real>::~Vector3() 
+    { }
+
+//#############################################################################
+//
+//                              Checks equality.
+//
+//#############################################################################
 
     template<class Real>
-    bool Vector2<Real>::operator==(const Vector2<Real>& vec) const
+    bool Vector3<Real>::operator==(const Vector3<Real>& vec) const
     {
-        return x == vec.x && y == vec.y;
+        return x == vec.x && y == vec.y && z == vec.z;
     }
 
 //#############################################################################
 //
-// Comparison operator, checks if this vector is different from the other.
+//                              Checks inequality.
 //
 //#############################################################################
 
     template<class Real>
-    bool Vector2<Real>::operator!=(const Vector2<Real>& vec) const
+    bool Vector3<Real>::operator!=(const Vector3<Real>& vec) const
     {
         return !operator==(vec);
     }
-
-//#############################################################################
-//
-//    Adds two vector. Element x are added together and element y are added 
-//                                  together
-//
-//#############################################################################
-
-
-    template<class Real>
-    Vector2<Real> Vector2<Real>::operator+(const Vector2<Real>& vec) const
-    {
-        return Vector2<Real>(x+vec.x,y+vec.y);
-    }
-
-//#############################################################################
-//
-//                              Subtracts two vector.
-//
-//#############################################################################
-
-    template<class Real>
-    Vector2<Real> Vector2<Real>::operator-(const Vector2<Real>& vec) const
-    {
-        return Vector2<Real>(x - vec.x,y - vec.y);
-    }
-
-//#############################################################################
-//
-//   Multiplies a scalar to a vector. Multiplies each element of the vector
-//                                with the scalar
-//
-//#############################################################################
-
-    template<class Real>
-    Vector2<Real> Vector2<Real>::operator*(const Real& scalar) const
-    {
-        return Vector2<Real>(x*scalar, y*scalar);
-    }
-
-//#############################################################################
-//
-//  Divides a vector with a scalar, the same manner as the multiplication.
-//                   Fails in debug mode if scalar is zero.
-//
-//#############################################################################
-
-    template<class Real>
-    Vector2<Real> Vector2<Real>::operator/(const Real& scalar) const
-    {
-        assert(scalar != (Real) 0.0);
-        return Vector2<Real>(x / scalar, y / scalar);
-    }
-
-//#############################################################################
-//
-//                  Returns a negated vector of this vector.
-//
-//#############################################################################
-
-    template<class Real>
-    Vector2<Real> Vector2<Real>::operator-() const
-    {
-        return Vector2<Real>(-x, -y);
-    }
-
-//#############################################################################
-//
-//                      Adds a vector to this vector.
-//
-//#############################################################################
-
-    template<class Real>
-    void Vector2<Real>::operator+=(const Vector2<Real>& vec)
-    {
-        *this = *this + vec;
-    }
-
-//#############################################################################
-//
-//                      Subtracts a vector from this vector.
-//
-//#############################################################################
-
-    template<class Real>
-    void Vector2<Real>::operator-=(const Vector2<Real>& vec)
-    {
-        *this = *this - vec;
-    }
-
-//#############################################################################
-//
-//                   Multiplies this vector with a scalar.
-//
-//#############################################################################
-
-    template<class Real>
-    void Vector2<Real>::operator*=(const Real& scalar)
-    {
-        *this = *this * scalar;
-    }
-
-//#############################################################################
-//
-//                          Divides this vector with a scalar.
-//
-//#############################################################################
-
-    template<class Real>
-    void Vector2<Real>::operator/=(const Real& scalar)
-    {
-        *this = *this / scalar;
-    }
-
-//#############################################################################
-//
-// Multiplies two vectors. If vec1 = (x1,y1) and vec2 = (x2,y2). The result is:
-//                                  x1*x2 + y1*y2
-//
-//#############################################################################
-
-    template<class Real>
-    Real Vector2<Real>::operator*(const Vector2<Real>& vec) const
-    {
-        return vec.x*x + vec.y*y;
-    }
-
-//#############################################################################
-//
-//              Get element number i from the vector.
-//
-//#############################################################################
-
-    template<class Real>
-    Real Vector2<Real>::operator[](int i) const
-    {
-        return *(&x+i);
-    }
-
-//#############################################################################
-//
-//              Get refference to element number i from the vector.
-//
-//#############################################################################
-
-    template<class Real>
-    Real& Vector2<Real>::operator[](int i)
-    {
-        return *(&x + i);
-    }
-
-//#############################################################################
-//
-//                      Returns the data as a constant pointer.
-//
-//#############################################################################
-
-    template<class Real>
-    Vector2<Real>::operator const Real* () const
-    {
-        return &x;
-    }
-
-//#############################################################################
-//
-//                          Returns the data as a pointer.
-//
-//#############################################################################
-
-    template<class Real>
-    Vector2<Real>::operator Real*()
-    {
-        return &x;
-    }
-
-//#############################################################################
-//
-//                      Returns the length of the vector.
-//
-//#############################################################################
-
-    template<class Real>
-    Real Vector2<Real>::length() const
-    {
-        return Math<Real>::Sqrt(x*x + y*y);
-    }
-
-//#############################################################################
-//
-//                  Returns the squared length of the vector.
-//
-//#############################################################################
-
-    template<class Real>
-    Real Vector2<Real>::squaredLength() const
-    {
-        return x*x + y*y;
-    }
-
-//#############################################################################
-//
-//               Computes the dot product of two vectors.
-//
-//#############################################################################
-
-    template<class Real>
-    Real Vector2<Real>::dot(const Vector2<Real>& vec) const
-    {
-        return (*this) * vec;
-    }
-
-//#############################################################################
-//
-//      Normalizes the vector, and returns the length of the old vector.
-//
-//#############################################################################
-
-    template<class Real>
-    Real Vector2<Real>::normalize()
-    {
-        Real len = length();
-        x /= len;
-        y /= len;
-        return len;
-    }
-
-//#############################################################################
-//
-//                      Returns the perpendicular vector.
-//
-//#############################################################################
-
-    template<class Real>
-    Vector2<Real> Vector2<Real>::perp() const
-    {
-        return Vector2<Real>(y,-x);
-    }
-
-//#############################################################################
-//
-//               Returns the normalized perpendicular vector.
-//
-//#############################################################################
-
-    template<class Real>
-    Vector2<Real> Vector2<Real>::unitPerp() const
-    {
-        return (*this).perp().normalize();
-    }
-
-//#############################################################################
-//
-//              Multiplies the perpendicular vector with a vector.
-//
-//#############################################################################
-
-    template<class Real>
-    Real Vector2<Real>::dotPerp(const Vector2<Real>& vec) const
-    {
-        return perp() * vec;
-    }
-
-//#############################################################################
 }
