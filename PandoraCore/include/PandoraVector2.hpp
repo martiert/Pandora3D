@@ -65,6 +65,9 @@ namespace Pandora
             Real squaredLength() const;
             Real dot(const Vector2<Real>& vec) const;
             Real normalize();
+            Vector2<Real> perp() const;
+            Vector2<Real> unitPerp() const;
+            Real dotPerp(const Vector2<Real>& vec) const;
         public:
             Real x, y;
     };
@@ -366,4 +369,42 @@ namespace Pandora
         y /= len;
         return len;
     }
+
+//#############################################################################
+//
+//                      Returns the perpendicular vector.
+//
+//#############################################################################
+
+    template<class Real>
+    Vector2<Real> Vector2<Real>::perp() const
+    {
+        return Vector2<Real>(y,-x);
+    }
+
+//#############################################################################
+//
+//               Returns the normalized perpendicular vector.
+//
+//#############################################################################
+
+    template<class Real>
+    Vector2<Real> Vector2<Real>::unitPerp() const
+    {
+        return (*this).perp().normalize();
+    }
+
+//#############################################################################
+//
+//              Multiplies the perpendicular vector with a vector.
+//
+//#############################################################################
+
+    template<class Real>
+    Real Vector2<Real>::dotPerp(const Vector2<Real>& vec) const
+    {
+        return perp() * vec;
+    }
+
+//#############################################################################
 }
