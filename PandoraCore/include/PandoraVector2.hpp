@@ -280,6 +280,7 @@ namespace Pandora
     template<class Real>
     Real Vector2<Real>::operator[](int i) const
     {
+        assert(i < 2);
         return *(&x+i);
     }
 
@@ -292,6 +293,7 @@ namespace Pandora
     template<class Real>
     Real& Vector2<Real>::operator[](int i)
     {
+        assert(i < 2);
         return *(&x + i);
     }
 

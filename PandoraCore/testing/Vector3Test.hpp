@@ -30,6 +30,19 @@ class Vector3Test : public CppUnit::TestFixture
 
         void testAssign()
         {
+            CPPUNIT_ASSERT( m_1_0_0[0] == 1 );
+            CPPUNIT_ASSERT( m_1_0_0[1] == 0 );
+            CPPUNIT_ASSERT( m_1_0_0[2] == 0 );
+
+            /*
+            float* m = (float*) m_1_0_0;
+            CPPUNIT_ASSERT( m[0] == 1 );
+            CPPUNIT_ASSERT( m[1] == 0 );
+            CPPUNIT_ASSERT( m[2] == 0 );
+
+            m[1] = 3;
+            CPPUNIT_ASSERT( m_1_0_0[1] == 3 );
+            m[1] = 0;*/
         }
 
         void testGeometric()

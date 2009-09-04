@@ -27,7 +27,7 @@ namespace Pandora
     template<class Real>
     class Vector3
     {
-        public:
+       public:
             //Constructors and destructors
             Vector3(Real mx = 1, Real my = 0, Real mz = 0);
             Vector3(const Vector3<Real>& vec);
@@ -38,7 +38,10 @@ namespace Pandora
             bool operator!=(const Vector3<Real>& vec) const;
 
             //Data assignment
-
+            Real& operator[](const int i);
+            Real operator[](int i) const;
+            operator const Real* () const;
+            operator Real* ();
         public:
             Real x, y, z;
     };
@@ -103,5 +106,34 @@ namespace Pandora
     bool Vector3<Real>::operator!=(const Vector3<Real>& vec) const
     {
         return !operator==(vec);
+    }
+
+//#############################################################################
+//#############################################################################
+
+    template<class Real>
+    Real& Vector3<Real>::operator[](const int i)
+    {
+        assert(i < 3);
+        return *(&x + i);
+    }
+
+//#############################################################################
+//#############################################################################
+
+    template<class Real>
+    Real Vector3<Real>::operator[](const int i) const
+    {
+        assert(i < 3);
+        return *(&x + i);
+    }
+
+//#############################################################################
+//#############################################################################
+
+    template<class Real>
+    operator const Real* () const
+    {
+        return &x;
     }
 }

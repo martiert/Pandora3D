@@ -454,18 +454,5 @@ namespace Pandora
     }
 
 //#############################################################################
-
-    template<>
-    double Math<double>::FastInvSqrt(double value)
-    {
-        double half = 0.5 * value;
-        long long i = *(long long*)&value;
-        i = 0x5fe6ec85e7de30da - (i >> 1);
-        value = *(double*)&i;
-        value *= (1.5 - half*value*value);
-        return value;
-    }
-
-//#############################################################################
 }
 #endif
