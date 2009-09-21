@@ -1,0 +1,213 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Acos	PandoraMath.hpp	/^    Real Math<Real>::Acos(Real s)$/;"	f	class:Pandora::Math
+Asin	PandoraMath.hpp	/^    Real Math<Real>::Asin(Real s)$/;"	f	class:Pandora::Math
+Atan	PandoraMath.hpp	/^    Real Math<Real>::Atan(Real s)$/;"	f	class:Pandora::Math
+Atan2	PandoraMath.hpp	/^    Real Math<Real>::Atan2(Real x, Real y)$/;"	f	class:Pandora::Math
+Ceil	PandoraMath.hpp	/^    Real Math<Real>::Ceil(Real s)$/;"	f	class:Pandora::Math
+Cos	PandoraMath.hpp	/^    Real Math<Real>::Cos(Real s)$/;"	f	class:Pandora::Math
+DEG_TO_RAD	PandoraMath.hpp	/^            static const Real DEG_TO_RAD;$/;"	m	class:Pandora::Math
+DEG_TO_RAD	PandoraMath.hpp	/^    template<> const double Math<double>::DEG_TO_RAD = Math<double>::PI\/180.0;$/;"	m	class:Pandora::Math
+DEG_TO_RAD	PandoraMath.hpp	/^    template<> const float Math<float>::DEG_TO_RAD = Math<float>::PI\/180.0f;$/;"	m	class:Pandora::Math
+EPSILON	PandoraMath.hpp	/^            static const Real EPSILON;$/;"	m	class:Pandora::Math
+EPSILON	PandoraMath.hpp	/^    template<> const double Math<double>::EPSILON = DBL_EPSILON;$/;"	m	class:Pandora::Math
+EPSILON	PandoraMath.hpp	/^    template<> const float Math<float>::EPSILON = FLT_EPSILON;$/;"	m	class:Pandora::Math
+Exp	PandoraMath.hpp	/^    Real Math<Real>::Exp(Real s)$/;"	f	class:Pandora::Math
+Fabs	PandoraMath.hpp	/^    Real Math<Real>::Fabs(Real s)$/;"	f	class:Pandora::Math
+FastAcos0	PandoraMath.hpp	/^    Real Math<Real>::FastAcos0(Real angle)$/;"	f	class:Pandora::Math
+FastAcos1	PandoraMath.hpp	/^    Real Math<Real>::FastAcos1(Real angle)$/;"	f	class:Pandora::Math
+FastAsin0	PandoraMath.hpp	/^    Real Math<Real>::FastAsin0(Real angle)$/;"	f	class:Pandora::Math
+FastAsin1	PandoraMath.hpp	/^    Real Math<Real>::FastAsin1(Real angle)$/;"	f	class:Pandora::Math
+FastAtan0	PandoraMath.hpp	/^    Real Math<Real>::FastAtan0(Real angle)$/;"	f	class:Pandora::Math
+FastAtan1	PandoraMath.hpp	/^    Real Math<Real>::FastAtan1(Real angle)$/;"	f	class:Pandora::Math
+FastCos0	PandoraMath.hpp	/^    Real Math<Real>::FastCos0(Real angle)$/;"	f	class:Pandora::Math
+FastCos1	PandoraMath.hpp	/^    Real Math<Real>::FastCos1(Real angle)$/;"	f	class:Pandora::Math
+FastInvSqrt	PandoraMath.hpp	/^    float Math<float>::FastInvSqrt(float value)$/;"	f	class:Pandora::Math
+FastSin0	PandoraMath.hpp	/^    Real Math<Real>::FastSin0(Real angle)$/;"	f	class:Pandora::Math
+FastSin1	PandoraMath.hpp	/^    Real Math<Real>::FastSin1(Real angle)$/;"	f	class:Pandora::Math
+FastTan0	PandoraMath.hpp	/^    Real Math<Real>::FastTan0(Real angle)$/;"	f	class:Pandora::Math
+FastTan1	PandoraMath.hpp	/^    Real Math<Real>::FastTan1(Real angle)$/;"	f	class:Pandora::Math
+Floor	PandoraMath.hpp	/^    Real Math<Real>::Floor(Real s)$/;"	f	class:Pandora::Math
+Fmod	PandoraMath.hpp	/^    Real Math<Real>::Fmod(Real a, Real b)$/;"	f	class:Pandora::Math
+HALF_PI	PandoraMath.hpp	/^            static const Real HALF_PI;$/;"	m	class:Pandora::Math
+HALF_PI	PandoraMath.hpp	/^    template<> const double Math<double>::HALF_PI = Math<double>::PI*0.5;$/;"	m	class:Pandora::Math
+HALF_PI	PandoraMath.hpp	/^    template<> const float Math<float>::HALF_PI = Math<float>::PI*0.5f;$/;"	m	class:Pandora::Math
+HashItem	PandoraHashSet.hpp	/^            class HashItem$/;"	c	class:Pandora::HashSet
+HashItem	PandoraHashTable.hpp	/^            class HashItem$/;"	c	class:Pandora::HashTable
+HashSet	PandoraHashSet.hpp	/^    HashSet<KEY>::HashSet(const int& tablesize)$/;"	f	class:Pandora::HashSet
+HashSet	PandoraHashSet.hpp	/^    class HashSet$/;"	c	namespace:Pandora
+HashTable	PandoraHashTable.hpp	/^    HashTable<KEY, VALUE>::HashTable(const int tablesize)$/;"	f	class:Pandora::HashTable
+HashTable	PandoraHashTable.hpp	/^    class HashTable$/;"	c	namespace:Pandora
+INV_PI	PandoraMath.hpp	/^            static const Real INV_PI;$/;"	m	class:Pandora::Math
+INV_PI	PandoraMath.hpp	/^    template<> const double Math<double>::INV_PI = 1.0\/Math<double>::PI;$/;"	m	class:Pandora::Math
+INV_PI	PandoraMath.hpp	/^    template<> const float Math<float>::INV_PI = 1.0f\/Math<float>::PI;$/;"	m	class:Pandora::Math
+INV_TWO_PI	PandoraMath.hpp	/^            static const Real INV_TWO_PI;$/;"	m	class:Pandora::Math
+INV_TWO_PI	PandoraMath.hpp	/^    template<> const double Math<double>::INV_TWO_PI = 1.0\/Math<double>::TWO_PI;$/;"	m	class:Pandora::Math
+INV_TWO_PI	PandoraMath.hpp	/^    template<> const float Math<float>::INV_TWO_PI = 1.0f\/Math<float>::TWO_PI;$/;"	m	class:Pandora::Math
+InvSqrt	PandoraMath.hpp	/^    Real Math<Real>::InvSqrt(Real s)$/;"	f	class:Pandora::Math
+Log	PandoraMath.hpp	/^    Real Math<Real>::Log(Real s)$/;"	f	class:Pandora::Math
+MAX_REAL	PandoraMath.hpp	/^            static const Real MAX_REAL;$/;"	m	class:Pandora::Math
+MAX_REAL	PandoraMath.hpp	/^    template<> const double Math<double>::MAX_REAL = DBL_MAX;$/;"	m	class:Pandora::Math
+MAX_REAL	PandoraMath.hpp	/^    template<> const float Math<float>::MAX_REAL = FLT_MAX;$/;"	m	class:Pandora::Math
+Math	PandoraMath.hpp	/^    class Math$/;"	c	namespace:Pandora
+PI	PandoraMath.hpp	/^            static const Real PI;$/;"	m	class:Pandora::Math
+PI	PandoraMath.hpp	/^    template<> const double Math<double>::PI = 4.0*atan(1.0);$/;"	m	class:Pandora::Math
+PI	PandoraMath.hpp	/^    template<> const float Math<float>::PI = (float)(4.0f*atan(1.0f));$/;"	m	class:Pandora::Math
+Pandora	PandoraHashSet.hpp	/^namespace Pandora$/;"	n
+Pandora	PandoraHashTable.hpp	/^namespace Pandora$/;"	n
+Pandora	PandoraMath.hpp	/^namespace Pandora$/;"	n
+Pandora	PandoraSet.hpp	/^namespace Pandora$/;"	n
+Pandora	PandoraStack.hpp	/^namespace Pandora$/;"	n
+Pandora	PandoraSystem.hpp	/^namespace Pandora$/;"	n
+Pandora	PandoraVector.hpp	/^namespace Pandora$/;"	n
+Pandora	PandoraVector2.hpp	/^namespace Pandora$/;"	n
+Pandora	PandoraVector3.hpp	/^namespace Pandora$/;"	n
+Pow	PandoraMath.hpp	/^    Real Math<Real>::Pow(Real base, Real exp)$/;"	f	class:Pandora::Math
+RAD_TO_DEG	PandoraMath.hpp	/^            static const Real RAD_TO_DEG;$/;"	m	class:Pandora::Math
+RAD_TO_DEG	PandoraMath.hpp	/^    template<> const double Math<double>::RAD_TO_DEG = 180.0\/Math<double>::PI;$/;"	m	class:Pandora::Math
+RAD_TO_DEG	PandoraMath.hpp	/^    template<> const float Math<float>::RAD_TO_DEG = 180.0f\/Math<float>::PI;$/;"	m	class:Pandora::Math
+Set	PandoraSet.hpp	/^    Set<T>::Set(int size, int increment)$/;"	f	class:Pandora::Set
+Set	PandoraSet.hpp	/^    class Set$/;"	c	namespace:Pandora
+Sin	PandoraMath.hpp	/^    Real Math<Real>::Sin(Real s)$/;"	f	class:Pandora::Math
+Sqrt	PandoraMath.hpp	/^    Real Math<Real>::Sqrt(Real s)$/;"	f	class:Pandora::Math
+Stack	PandoraStack.hpp	/^    Stack<T>::Stack(const int n)$/;"	f	class:Pandora::Stack
+Stack	PandoraStack.hpp	/^    class Stack$/;"	c	namespace:Pandora
+System	PandoraSystem.hpp	/^    class System$/;"	c	namespace:Pandora
+TWO_PI	PandoraMath.hpp	/^            static const Real TWO_PI;$/;"	m	class:Pandora::Math
+TWO_PI	PandoraMath.hpp	/^    template<> const double Math<double>::TWO_PI = Math<double>::PI*2;$/;"	m	class:Pandora::Math
+TWO_PI	PandoraMath.hpp	/^    template<> const float Math<float>::TWO_PI = Math<float>::PI*2;$/;"	m	class:Pandora::Math
+Tan	PandoraMath.hpp	/^    Real Math<Real>::Tan(Real s)$/;"	f	class:Pandora::Math
+Vector	PandoraVector.hpp	/^    Vector<T>::Vector(const Vector<T>& vec)$/;"	f	class:Pandora::Vector
+Vector	PandoraVector.hpp	/^    Vector<T>::Vector(int size, int increment)$/;"	f	class:Pandora::Vector
+Vector	PandoraVector.hpp	/^    class Vector$/;"	c	namespace:Pandora
+Vector2	PandoraVector2.hpp	/^    Vector2<Real>::Vector2(Real tx, Real ty)$/;"	f	class:Pandora::Vector2
+Vector2	PandoraVector2.hpp	/^    Vector2<Real>::Vector2(const Vector2<Real>& vec)$/;"	f	class:Pandora::Vector2
+Vector2	PandoraVector2.hpp	/^    class Vector2$/;"	c	namespace:Pandora
+Vector3	PandoraVector3.hpp	/^    Vector3<Real>::Vector3(Real mx, Real my, Real mz)$/;"	f	class:Pandora::Vector3
+Vector3	PandoraVector3.hpp	/^    Vector3<Real>::Vector3(const Vector3<Real>& vec)$/;"	f	class:Pandora::Vector3
+Vector3	PandoraVector3.hpp	/^    class Vector3$/;"	c	namespace:Pandora
+_HASHSET_HPP_	PandoraHashSet.hpp	24;"	d
+_HASHTABLE_HPP_	PandoraHashTable.hpp	24;"	d
+_MATH_HPP_	PandoraMath.hpp	24;"	d
+_SET_HPP_	PandoraSet.hpp	24;"	d
+_STACK_HPP_	PandoraStack.hpp	24;"	d
+_SYSTEM_HPP_	PandoraSystem.hpp	26;"	d
+_VECTOR_HPP_	PandoraVector.hpp	24;"	d
+add	PandoraHashSet.hpp	/^    KEY* HashSet<KEY>::add(const KEY& key)$/;"	f	class:Pandora::HashSet
+add	PandoraHashTable.hpp	/^    bool HashTable<KEY,VALUE>::add(const KEY& key, const VALUE& value)$/;"	f	class:Pandora::HashTable
+add	PandoraSet.hpp	/^    bool Set<T>::add(const T& element)$/;"	f	class:Pandora::Set
+append	PandoraVector.hpp	/^    void Vector<T>::append(const T& element)$/;"	f	class:Pandora::Vector
+changeInc	PandoraSet.hpp	/^    void Set<T>::changeInc(const int increment)$/;"	f	class:Pandora::Set
+clear	PandoraSet.hpp	/^    void Set<T>::clear()$/;"	f	class:Pandora::Set
+clear	PandoraSet.hpp	/^    void Set<T>::clear(int maxsize, int increment)$/;"	f	class:Pandora::Set
+clear	PandoraStack.hpp	/^    void Stack<T>::clear()$/;"	f	class:Pandora::Stack
+dot	PandoraVector2.hpp	/^    Real Vector2<Real>::dot(const Vector2<Real>& vec) const$/;"	f	class:Pandora::Vector2
+dotPerp	PandoraVector2.hpp	/^    Real Vector2<Real>::dotPerp(const Vector2<Real>& vec) const$/;"	f	class:Pandora::Vector2
+exists	PandoraSet.hpp	/^    bool Set<T>::exists(const T& element)$/;"	f	class:Pandora::Set
+get	PandoraHashSet.hpp	/^    KEY* HashSet<KEY>::get(const KEY& key) const$/;"	f	class:Pandora::HashSet
+get	PandoraHashTable.hpp	/^    VALUE* HashTable<KEY,VALUE>::get(const KEY& key) const$/;"	f	class:Pandora::HashTable
+getArray	PandoraVector.hpp	/^    T* Vector<T>::getArray()$/;"	f	class:Pandora::Vector
+getArray	PandoraVector.hpp	/^    const T* Vector<T>::getArray() const$/;"	f	class:Pandora::Vector
+getElements	PandoraSet.hpp	/^    T* Set<T>::getElements()$/;"	f	class:Pandora::Set
+getElements	PandoraSet.hpp	/^    const T* Set<T>::getElements() const$/;"	f	class:Pandora::Set
+getFirst	PandoraHashSet.hpp	/^    KEY* HashSet<KEY>::getFirst() const$/;"	f	class:Pandora::HashSet
+getFirst	PandoraHashTable.hpp	/^    VALUE* HashTable<KEY,VALUE>::getFirst(KEY* key) const$/;"	f	class:Pandora::HashTable
+getGrow	PandoraVector.hpp	/^    const int Vector<T>::getGrow() const$/;"	f	class:Pandora::Vector
+getMaxSize	PandoraVector.hpp	/^    const int Vector<T>::getMaxSize() const$/;"	f	class:Pandora::Vector
+getTop	PandoraStack.hpp	/^    bool Stack<T>::getTop(T& element) const$/;"	f	class:Pandora::Stack
+hashFunction	PandoraHashSet.hpp	/^    int HashSet<KEY>::hashFunction(const KEY& key) const$/;"	f	class:Pandora::HashSet
+hashFunction	PandoraHashTable.hpp	/^    int HashTable<KEY,VALUE>::hashFunction(const KEY& key) const$/;"	f	class:Pandora::HashTable
+incrementSet	PandoraSet.hpp	/^    void Set<T>::incrementSet()$/;"	f	class:Pandora::Set
+isEmpty	PandoraStack.hpp	/^    bool Stack<T>::isEmpty() const$/;"	f	class:Pandora::Stack
+isFull	PandoraStack.hpp	/^    bool Stack<T>::isFull() const$/;"	f	class:Pandora::Stack
+key	PandoraHashSet.hpp	/^                    KEY key;$/;"	m	class:Pandora::HashSet::HashItem
+key	PandoraHashTable.hpp	/^                    KEY key;$/;"	m	class:Pandora::HashTable::HashItem
+length	PandoraVector2.hpp	/^    Real Vector2<Real>::length() const$/;"	f	class:Pandora::Vector2
+m_array	PandoraVector.hpp	/^            T* m_array;$/;"	m	class:Pandora::Vector
+m_data	PandoraSet.hpp	/^            T* m_data;$/;"	m	class:Pandora::Set
+m_data	PandoraStack.hpp	/^            T* m_data;$/;"	m	class:Pandora::Stack
+m_increment	PandoraSet.hpp	/^            int m_increment;$/;"	m	class:Pandora::Set
+m_increment	PandoraVector.hpp	/^            int m_increment;$/;"	m	class:Pandora::Vector
+m_index	PandoraHashSet.hpp	/^            int m_index;$/;"	m	class:Pandora::HashSet
+m_index	PandoraHashTable.hpp	/^            int m_index;$/;"	m	class:Pandora::HashTable
+m_index	PandoraStack.hpp	/^            int m_index;$/;"	m	class:Pandora::Stack
+m_item	PandoraHashSet.hpp	/^            HashItem* m_item;$/;"	m	class:Pandora::HashSet
+m_item	PandoraHashTable.hpp	/^            HashItem* m_item;$/;"	m	class:Pandora::HashTable
+m_maxSize	PandoraVector.hpp	/^            int m_maxSize;$/;"	m	class:Pandora::Vector
+m_setsize	PandoraSet.hpp	/^            int m_setsize;$/;"	m	class:Pandora::Set
+m_size	PandoraHashSet.hpp	/^            int m_size;$/;"	m	class:Pandora::HashSet
+m_size	PandoraHashTable.hpp	/^            int m_size;$/;"	m	class:Pandora::HashTable
+m_size	PandoraSet.hpp	/^            int m_size;$/;"	m	class:Pandora::Set
+m_size	PandoraStack.hpp	/^            int m_size;$/;"	m	class:Pandora::Stack
+m_size	PandoraVector.hpp	/^            int m_size;$/;"	m	class:Pandora::Vector
+m_table	PandoraHashSet.hpp	/^            HashItem** m_table;$/;"	m	class:Pandora::HashSet
+m_table	PandoraHashTable.hpp	/^            HashItem** m_table;$/;"	m	class:Pandora::HashTable
+m_tablesize	PandoraHashSet.hpp	/^            int m_tablesize;$/;"	m	class:Pandora::HashSet
+m_tablesize	PandoraHashTable.hpp	/^            int m_tablesize;$/;"	m	class:Pandora::HashTable
+next	PandoraHashSet.hpp	/^                    HashItem* next;$/;"	m	class:Pandora::HashSet::HashItem
+next	PandoraHashSet.hpp	/^    KEY* HashSet<KEY>::next()$/;"	f	class:Pandora::HashSet
+next	PandoraHashTable.hpp	/^                    HashItem* next;$/;"	m	class:Pandora::HashTable::HashItem
+next	PandoraHashTable.hpp	/^    VALUE* HashTable<KEY,VALUE>::next(KEY* key) const$/;"	f	class:Pandora::HashTable
+normalize	PandoraVector2.hpp	/^    Real Vector2<Real>::normalize()$/;"	f	class:Pandora::Vector2
+operator !=	PandoraVector2.hpp	/^    bool Vector2<Real>::operator!=(const Vector2<Real>& vec) const$/;"	f	class:Pandora::Vector2
+operator !=	PandoraVector3.hpp	/^    bool Vector3<Real>::operator!=(const Vector3<Real>& vec) const$/;"	f	class:Pandora::Vector3
+operator *	PandoraVector2.hpp	/^    Real Vector2<Real>::operator*(const Vector2<Real>& vec) const$/;"	f	class:Pandora::Vector2
+operator *	PandoraVector2.hpp	/^    Vector2<Real> Vector2<Real>::operator*(const Real& scalar) const$/;"	f	class:Pandora::Vector2
+operator *=	PandoraVector2.hpp	/^    void Vector2<Real>::operator*=(const Real& scalar)$/;"	f	class:Pandora::Vector2
+operator +	PandoraVector2.hpp	/^    Vector2<Real> Vector2<Real>::operator+(const Vector2<Real>& vec) const$/;"	f	class:Pandora::Vector2
+operator +=	PandoraVector2.hpp	/^    void Vector2<Real>::operator+=(const Vector2<Real>& vec)$/;"	f	class:Pandora::Vector2
+operator -	PandoraVector2.hpp	/^    Vector2<Real> Vector2<Real>::operator-() const$/;"	f	class:Pandora::Vector2
+operator -	PandoraVector2.hpp	/^    Vector2<Real> Vector2<Real>::operator-(const Vector2<Real>& vec) const$/;"	f	class:Pandora::Vector2
+operator -=	PandoraVector2.hpp	/^    void Vector2<Real>::operator-=(const Vector2<Real>& vec)$/;"	f	class:Pandora::Vector2
+operator /	PandoraVector2.hpp	/^    Vector2<Real> Vector2<Real>::operator\/(const Real& scalar) const$/;"	f	class:Pandora::Vector2
+operator /=	PandoraVector2.hpp	/^    void Vector2<Real>::operator\/=(const Real& scalar)$/;"	f	class:Pandora::Vector2
+operator =	PandoraVector.hpp	/^    Vector<T>& Vector<T>::operator=(const Vector<T>& vec)$/;"	f	class:Pandora::Vector
+operator =	PandoraVector2.hpp	/^    void Vector2<Real>::operator=(const Vector2<Real>& vec)$/;"	f	class:Pandora::Vector2
+operator ==	PandoraVector2.hpp	/^    bool Vector2<Real>::operator==(const Vector2<Real>& vec) const$/;"	f	class:Pandora::Vector2
+operator ==	PandoraVector3.hpp	/^    bool Vector3<Real>::operator==(const Vector3<Real>& vec) const$/;"	f	class:Pandora::Vector3
+operator Real*	PandoraVector2.hpp	/^    Vector2<Real>::operator Real*()$/;"	f	class:Pandora::Vector2
+operator []	PandoraSet.hpp	/^    T& Set<T>::operator[](const int idx)$/;"	f	class:Pandora::Set
+operator []	PandoraSet.hpp	/^    const T& Set<T>::operator[](const int idx) const$/;"	f	class:Pandora::Set
+operator []	PandoraVector.hpp	/^    T& Vector<T>::operator[](const int idx)$/;"	f	class:Pandora::Vector
+operator []	PandoraVector.hpp	/^    const T& Vector<T>::operator[](const int idx) const$/;"	f	class:Pandora::Vector
+operator []	PandoraVector2.hpp	/^    Real Vector2<Real>::operator[](int i) const$/;"	f	class:Pandora::Vector2
+operator []	PandoraVector2.hpp	/^    Real& Vector2<Real>::operator[](int i)$/;"	f	class:Pandora::Vector2
+operator []	PandoraVector3.hpp	/^    Real Vector3<Real>::operator[](const int i) const$/;"	f	class:Pandora::Vector3
+operator []	PandoraVector3.hpp	/^    Real& Vector3<Real>::operator[](const int i)$/;"	f	class:Pandora::Vector3
+operator const Real*	PandoraVector2.hpp	/^    Vector2<Real>::operator const Real* () const$/;"	f	class:Pandora::Vector2
+operator const Real*	PandoraVector3.hpp	/^    operator const Real* () const$/;"	f	namespace:Pandora
+perp	PandoraVector2.hpp	/^    Vector2<Real> Vector2<Real>::perp() const$/;"	f	class:Pandora::Vector2
+pop	PandoraStack.hpp	/^    void Stack<T>::pop(T& element)$/;"	f	class:Pandora::Stack
+push	PandoraStack.hpp	/^    void Stack<T>::push(const T& element)$/;"	f	class:Pandora::Stack
+remove	PandoraHashSet.hpp	/^    bool HashSet<KEY>::remove(const KEY& key)$/;"	f	class:Pandora::HashSet
+remove	PandoraHashTable.hpp	/^    bool HashTable<KEY,VALUE>::remove(const KEY& key)$/;"	f	class:Pandora::HashTable
+remove	PandoraSet.hpp	/^    bool Set<T>::remove(const T& element)$/;"	f	class:Pandora::Set
+remove	PandoraVector.hpp	/^    void Vector<T>::remove(const int idx)$/;"	f	class:Pandora::Vector
+removeAll	PandoraHashSet.hpp	/^    void HashSet<KEY>::removeAll()$/;"	f	class:Pandora::HashSet
+removeAll	PandoraHashTable.hpp	/^    void HashTable<KEY,VALUE>::removeAll()$/;"	f	class:Pandora::HashTable
+removeAll	PandoraVector.hpp	/^    void Vector<T>::removeAll()$/;"	f	class:Pandora::Vector
+setElement	PandoraVector.hpp	/^    void Vector<T>::setElement(const int idx, const T& element)$/;"	f	class:Pandora::Vector
+setGrow	PandoraVector.hpp	/^    void Vector<T>::setGrow(const int growBy)$/;"	f	class:Pandora::Vector
+setMaxSize	PandoraVector.hpp	/^    void Vector<T>::setMaxSize(const int newMax, const bool copy)$/;"	f	class:Pandora::Vector
+size	PandoraHashSet.hpp	/^    int HashSet<KEY>::size()$/;"	f	class:Pandora::HashSet
+size	PandoraSet.hpp	/^    int Set<T>::size()$/;"	f	class:Pandora::Set
+size	PandoraVector.hpp	/^    int Vector<T>::size() const$/;"	f	class:Pandora::Vector
+squaredLength	PandoraVector2.hpp	/^    Real Vector2<Real>::squaredLength() const$/;"	f	class:Pandora::Vector2
+unitPerp	PandoraVector2.hpp	/^    Vector2<Real> Vector2<Real>::unitPerp() const$/;"	f	class:Pandora::Vector2
+value	PandoraHashTable.hpp	/^                    VALUE value;$/;"	m	class:Pandora::HashTable::HashItem
+x	PandoraVector2.hpp	/^            Real x, y;$/;"	m	class:Pandora::Vector2
+x	PandoraVector3.hpp	/^            Real x, y, z;$/;"	m	class:Pandora::Vector3
+y	PandoraVector2.hpp	/^            Real x, y;$/;"	m	class:Pandora::Vector2
+y	PandoraVector3.hpp	/^            Real x, y, z;$/;"	m	class:Pandora::Vector3
+z	PandoraVector3.hpp	/^            Real x, y, z;$/;"	m	class:Pandora::Vector3
+~HashSet	PandoraHashSet.hpp	/^    HashSet<KEY>::~HashSet()$/;"	f	class:Pandora::HashSet
+~HashTable	PandoraHashTable.hpp	/^    HashTable<KEY,VALUE>::~HashTable()$/;"	f	class:Pandora::HashTable
+~Set	PandoraSet.hpp	/^    Set<T>::~Set()$/;"	f	class:Pandora::Set
+~Stack	PandoraStack.hpp	/^    Stack<T>::~Stack()$/;"	f	class:Pandora::Stack
+~Vector	PandoraVector.hpp	/^    Vector<T>::~Vector()$/;"	f	class:Pandora::Vector
+~Vector2	PandoraVector2.hpp	/^    Vector2<Real>::~Vector2() { }$/;"	f	class:Pandora::Vector2
+~Vector3	PandoraVector3.hpp	/^    Vector3<Real>::~Vector3() $/;"	f	class:Pandora::Vector3
