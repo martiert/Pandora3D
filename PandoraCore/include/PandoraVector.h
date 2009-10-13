@@ -13,9 +13,6 @@ namespace Pandora
             Vector(const size_t size = 1, const size_t inc = 1);
             ~Vector();
 
-            //Get the number of elements in the vector
-            size_t getElements() const;
-
             //Get a pointer to the data
             T* c_ptr();
             const T* c_ptr() const;
@@ -31,6 +28,16 @@ namespace Pandora
             //Remove elements, do not delete.
             T& remove(const size_t i);
             void removeAll();
+
+            //Get the number of elements, the maximum number of elements in 
+            //the vector and the number to increase the array with.
+            size_t getElements() const;
+            size_t getSize() const;
+            size_t getIncrement() const;
+
+            //Change the size or the number to increase with.
+            void setSize(const size_t size);
+            void setIncrement(const size_t inc);
         protected:
             T *m_data;
             size_t m_elements;
@@ -57,15 +64,6 @@ namespace Pandora
     Vector<T>::~Vector()
     {
         delete[] m_data;
-    }
-
-    //-------------------------------------------------------------------------
-    // Get the number of elements in the set
-    //-------------------------------------------------------------------------
-    template<class T>
-    size_t Vector<T>::getElements() const
-    {
-        return m_elements;
     }
 
     //-------------------------------------------------------------------------
@@ -118,7 +116,7 @@ namespace Pandora
     template<class T>
     void Vector<T>::append(const T& element)
     {
-        if(m_elements < m_size && !m_data[m_elements]) {
+        if(m_elements < m_size) {
             m_data[m_elements++] = m_elements;
         } else {
             assert(m_increment != 0 && "Can't increment the vector");
@@ -126,7 +124,7 @@ namespace Pandora
             T *tmp = new T[m_size + m_increment];
 
             //Move data to the temporary array
-            for(int i = 0; i < m_size; ++i) {
+            for(size_t i = 0; i < m_size; ++i) {
                 tmp[i] = m_data[i];
             }
 
@@ -159,7 +157,7 @@ namespace Pandora
             times = (int) (((float)times / m_increment) + 0.5f);
             T *tmp = new T[m_size + m_increment*times];
 
-            for(int j = 0; j < m_size; ++j) {
+            for(size_t j = 0; j < m_size; ++j) {
                 tmp[j] = m_data[j];
             }
 
@@ -177,10 +175,15 @@ namespace Pandora
     template<class T>
     T& Vector<T>::remove(const size_t i)
     {
-        assert(i < m_size && "Index out of bounds");
+        assert(i < m_size && i >= 0 && "Index out of bounds");
 
         T tmp = m_data[i];
-        m_data[i] = NULL;
+        for(size_t j = i; j < m_elements; ++j) {
+            m_data[j] = m_data[j + 1];
+        }
+
+        m_data[m_elements--] = T();
+
         return tmp;
     }
 
@@ -190,10 +193,65 @@ namespace Pandora
     template<class T>
     void Vector<T>::removeAll()
     {
-        for(int i = 0; i < m_size; ++i) {
-            m_data[i] = NULL;
+        for(size_t i = 0; i < m_elements; ++i) {
+            m_data[i] = T();
         }
     }
-}
 
+    //-------------------------------------------------------------------------
+    // Return the number of elements in the vector.
+    //-------------------------------------------------------------------------
+    template<class T>
+    size_t Vector<T>::getElements() const
+    {
+        return m_elements;
+    }
+
+    //-------------------------------------------------------------------------
+    // Return the size of the vector.
+    //-------------------------------------------------------------------------
+    template<class T>
+    size_t Vector<T>::getSize() const
+    {
+        return m_size;
+    }
+
+    //-------------------------------------------------------------------------
+    // Returns the number we are to increase the vector with.
+    //-------------------------------------------------------------------------
+    template<class T>
+    size_t Vector<T>::getIncrement() const
+    {
+        return m_increment;
+    }
+
+    //-------------------------------------------------------------------------
+    // Set new size of the vector.
+    //-------------------------------------------------------------------------
+    template<class T>
+    void Vector<T>::setSize(const size_t size)
+    {
+        T *tmp = new T[size];
+
+        for(size_t i = 0; i < m_size && i < size; ++i) {
+            tmp[i] = m_data[i];
+        }
+
+        delete[] m_data;
+        m_data = tmp;
+        m_size = size;
+
+        if(size < m_elements)
+            m_elements = size;
+    }
+
+    //-------------------------------------------------------------------------
+    // Set new number of element to increase by.
+    //-------------------------------------------------------------------------
+    template<class T>
+    void Vector<T>::setIncrement(const size_t inc)
+    {
+        m_increment = inc;
+    }
+}
 #endif
