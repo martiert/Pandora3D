@@ -5,35 +5,30 @@
 
 namespace PandoraUtils
 {
+    //A simple Set class. We can append, remove, get the number of elements, 
+    //get a raw pointer from the set and remove all the elements in the set.
     template<class T>
     class Set
     {
         public:
             //Constructor and destructor
-            Set(const unsigned int size = 4, const unsigned int increment = 4);
+            Set(const unsigned int size = 6, const unsigned int increment = 4);
             ~Set();
 
             //Append an element to the end of the array.
-            void append(const T& in);
+            void insert(const T& in);
+
+            //Remove the element given from the set
+            void remove(const T& elem);
 
             //Get the number of elements in the set
             unsigned int getSize() const;
 
-            //Get the maximum number of elements in the set
-            unsigned int getMaxSize() const;
-
-            //Get element number i from the set.
-            T& operator[](const unsigned int i);
-            const T& operator[](const unsigned int i) const;
-
             //Get a pointer to the data
             T* getPointer();
 
-            //Remove element number i from the set
-            void remove(const unsigned int i);
-
             //Remove all the elements in the set
-            void removeAll(const unsigned int i);
+            void removeAll();
         private:
             T *m_data;
             unsigned int m_elements; //The number of elements in the set
@@ -67,19 +62,11 @@ namespace PandoraUtils
     // we have to resize the array.
     //-------------------------------------------------------------------------
     template<class T>
-    void Set<T>::append(const T& in)
+    void Set<T>::insert(const T& in)
     {
         //If we have room for the element, no rearranging have to be done.
         if(m_elements < m_size) {
-            int i = 0;
-
-            while(m_data[i]) {
-                ++i;
-            }
-
-            m_data[i] = in;
-
-            ++m_elements;
+            m_data[m_elements++] = in;
         } else {
             //In debug mode, tell if we are not allowed to increment the array.
             assert(m_increment != 0 && 
@@ -99,15 +86,8 @@ namespace PandoraUtils
             m_data = tmp;
             m_size += m_increment;
 
-            //Set the data in the set.
-            int i = 0;
-
-            while(m_data[i]) {
-                ++i;
-            }
-
-            m_data[i] = in;
-            ++m_elements;
+            //Set the data in the set
+            m_data[m_elements++] = in;
         }
     }
 
@@ -119,37 +99,7 @@ namespace PandoraUtils
     {
         return m_elements;
     }
-
-    //-------------------------------------------------------------------------
-    // Get the maximum number of elements in the set
-    //-------------------------------------------------------------------------
-    template<class T>
-    unsigned int Set<T>::getMaxSize() const
-    {
-        return m_size;
-    }
-
-    //-------------------------------------------------------------------------
-    // Get element number i from the set
-    //-------------------------------------------------------------------------
-    template<class T>
-    T& Set<T>::operator[](const unsigned int i)
-    {
-        assert(i < m_size && "Trying to access element outside of array");
-        return m_data[i];
-    }
-
-    //-------------------------------------------------------------------------
-    // Get constant element number i from the set
-    //-------------------------------------------------------------------------
-    template<class T>
-    const T& Set<T>::operator[](const unsigned int i) const
-    {
-        assert(i < m_size && "Trying to access element outside of array");
-        return m_data[i];
-    }
-
-    //-------------------------------------------------------------------------
+ 
     // Get the array itself
     //-------------------------------------------------------------------------
     template<class T>
@@ -159,16 +109,27 @@ namespace PandoraUtils
     }
 
     //-------------------------------------------------------------------------
-    // Remove element number i from the set
+    // Remove an element from the set. Returns true if the element is removed,
+    // returns false otherwise
     //-------------------------------------------------------------------------
     template<class T>
-    void Set<T>::remove(const unsigned int i)
+    bool Set<T>::remove(const T& elem)
     {
-        assert(i < m_size && "Outside scope of the set");
-        
-        if(m_data[i])
-            --m_elements;
-        delete m_data[i];
+        int i = 0;
+
+        while(m_data[i] != elem && i < m_elements) {
+            ++i;
+        }
+
+        if(i < m_elements)
+            return false;
+
+        //Shuffle all the remaining data
+        for(;i < m_size - 1; ++i)
+            m_data[i] = m_data[i + 1];
+        m_data[i] = NULL;
+
+        return true;
     }
 
     //-------------------------------------------------------------------------
