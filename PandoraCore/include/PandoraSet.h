@@ -12,7 +12,7 @@ namespace PandoraUtils
     {
         public:
             //Constructor and destructor
-            Set(const unsigned int size = 6, const unsigned int increment = 4);
+            Set(const size_t size = 6, const size_t increment = 4);
             ~Set();
 
             //Append an element to the end of the array.
@@ -29,18 +29,18 @@ namespace PandoraUtils
 
             //Remove all the elements in the set
             void removeAll();
-        private:
+        protected:
             T *m_data;
-            unsigned int m_elements; //The number of elements in the set
-            unsigned int m_size; //The size of the array
-            unsigned int m_increment; //What to increment the array size with
+            size_t m_elements; //The number of elements in the set
+            size_t m_size; //The size of the array
+            size_t m_increment; //What to increment the array size with
     };
 
     //-------------------------------------------------------------------------
     // Constructor
     //-------------------------------------------------------------------------
     template<class T>
-    Set<T>::Set(unsigned int size, unsigned int increment)
+    Set<T>::Set(size_t size, size_t increment)
     {
         m_data = new T[size];
         m_size = size;
@@ -115,7 +115,7 @@ namespace PandoraUtils
     template<class T>
     bool Set<T>::remove(const T& elem)
     {
-        int i = 0;
+        size_t i = 0;
 
         while(m_data[i] != elem && i < m_elements) {
             ++i;
@@ -136,7 +136,7 @@ namespace PandoraUtils
     // Removes all the data from the set
     //-------------------------------------------------------------------------
     template<class T>
-    void Set<T>::removeAll(const unsigned int i)
+    void Set<T>::removeAll()
     {
         m_elements = 0;
         delete[] m_data;
