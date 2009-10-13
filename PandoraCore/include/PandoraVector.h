@@ -5,6 +5,7 @@
 
 namespace Pandora
 {
+    //A simple vector class.
     template<class T>
     class Vector
     {
@@ -27,8 +28,8 @@ namespace Pandora
             void append(const T& element);
             void insert(const size_t i, const T& element);
 
-            //Remove elements
-            void remove(const size_t i);
+            //Remove elements, do not delete.
+            T& remove(const size_t i);
             void removeAll();
         protected:
             T *m_data;
@@ -117,14 +118,8 @@ namespace Pandora
     template<class T>
     void Vector<T>::append(const T& element)
     {
-        if(m_elements < m_size) {
-            int i = 0;
-
-            while(m_data[i])
-                ++i;
-
-            m_data[i] = element;
-            ++m_elements;
+        if(m_elements < m_size && !m_data[m_elements]) {
+            m_data[m_elements++] = m_elements;
         } else {
             assert(m_increment != 0 && "Can't increment the vector");
 
@@ -140,6 +135,63 @@ namespace Pandora
             m_data = tmp;
             m_data[m_elements++] = element;
             m_size += m_increment;
+        }
+    }
+
+    //-------------------------------------------------------------------------
+    // Inserts the element into the given place. If the place is unused, or we
+    // are accessing an element outside of the data, we increment the unmber of
+    // elements we have.
+    //
+    // If we have to resize the array, we do that by first finding out how many
+    // more elements we need, and then copying the data over to a new array.
+    //
+    // At the end, we set the given place to be the element we sent in.
+    //-------------------------------------------------------------------------
+    template<class T>
+    void Vector<T>::insert(const size_t i, const T& element)
+    {
+        if(i > m_size || m_data[i])
+            ++m_elements;
+        
+        if(i > m_size) {
+            size_t times = i - m_size;
+            times = (int) (((float)times / m_increment) + 0.5f);
+            T *tmp = new T[m_size + m_increment*times];
+
+            for(int j = 0; j < m_size; ++j) {
+                tmp[j] = m_data[j];
+            }
+
+            delete[] m_data;
+            m_data = tmp;
+            m_size += m_increment * times;
+        }
+
+        m_data[i] = element;
+    }
+
+    //-------------------------------------------------------------------------
+    // Remove the element in the selected place, and return it.
+    //-------------------------------------------------------------------------
+    template<class T>
+    T& Vector<T>::remove(const size_t i)
+    {
+        assert(i < m_size && "Index out of bounds");
+
+        T tmp = m_data[i];
+        m_data[i] = NULL;
+        return tmp;
+    }
+
+    //-------------------------------------------------------------------------
+    // Remove all the data from this vector
+    //-------------------------------------------------------------------------
+    template<class T>
+    void Vector<T>::removeAll()
+    {
+        for(int i = 0; i < m_size; ++i) {
+            m_data[i] = NULL;
         }
     }
 }
