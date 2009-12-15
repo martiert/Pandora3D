@@ -1,0 +1,128 @@
+\hypertarget{classPandora_1_1Utils_1_1Set}{
+\section{Pandora::Utils::Set$<$ T $>$ Class Template Reference}
+\label{classPandora_1_1Utils_1_1Set}\index{Pandora::Utils::Set@{Pandora::Utils::Set}}
+}
+
+
+A simple \hyperlink{classPandora_1_1Utils_1_1Set}{Set} class.  
+
+
+{\ttfamily \#include $<$PandoraSet.h$>$}\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPandora_1_1Utils_1_1Set_ad0e4e02f649fcefffe61115758e1261c}{Set} (const size\_\-t size=6, const size\_\-t increment=4)
+\begin{DoxyCompactList}\small\item\em Default constructor. \item\end{DoxyCompactList}\item 
+\hyperlink{classPandora_1_1Utils_1_1Set_a51d05d5d31cb8c16b510262737969f0e}{$\sim$Set} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \item\end{DoxyCompactList}\item 
+bool \hyperlink{classPandora_1_1Utils_1_1Set_a2c43d731fac0319a5be8c055aae33c8b}{insert} (const T \&in)
+\begin{DoxyCompactList}\small\item\em Append an element at the end of the \hyperlink{classPandora_1_1Utils_1_1Set}{Set}. \item\end{DoxyCompactList}\item 
+bool \hyperlink{classPandora_1_1Utils_1_1Set_a5094548bb7e9ac74ebc29ae0c4f426a5}{remove} (const T \&elem)
+\begin{DoxyCompactList}\small\item\em Remove an element from the \hyperlink{classPandora_1_1Utils_1_1Set}{Set}. \item\end{DoxyCompactList}\item 
+size\_\-t \hyperlink{classPandora_1_1Utils_1_1Set_a80998fcb33af9bcd8ef6549f107ee1f6}{getSize} () const 
+\begin{DoxyCompactList}\small\item\em Get the number of elements in the \hyperlink{classPandora_1_1Utils_1_1Set}{Set}. \item\end{DoxyCompactList}\item 
+T $\ast$ \hyperlink{classPandora_1_1Utils_1_1Set_a57d191182540ce79e9a0db1cf52ddd10}{getPointer} ()
+\begin{DoxyCompactList}\small\item\em Get pointer to the data. \item\end{DoxyCompactList}\item 
+void \hyperlink{classPandora_1_1Utils_1_1Set_aa134d362ed2baacc3ca0864cb6f10cb7}{removeAll} ()
+\begin{DoxyCompactList}\small\item\em Remove all the elements in the \hyperlink{classPandora_1_1Utils_1_1Set}{Set}. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class T$>$ class Pandora::Utils::Set$<$ T $>$}
+
+A simple \hyperlink{classPandora_1_1Utils_1_1Set}{Set} class. We can append, remove, get the number of elements, get a raw pointer from the set and remove all the elements in the set. 
+
+Definition at line 33 of file PandoraSet.h.
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classPandora_1_1Utils_1_1Set_ad0e4e02f649fcefffe61115758e1261c}{
+\index{Pandora::Utils::Set@{Pandora::Utils::Set}!Set@{Set}}
+\index{Set@{Set}!Pandora::Utils::Set@{Pandora::Utils::Set}}
+\subsubsection[{Set}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf Pandora::Utils::Set}$<$ T $>$::{\bf Set} (const size\_\-t {\em size} = {\ttfamily 6}, \/  const size\_\-t {\em increment} = {\ttfamily 4})}}
+\label{classPandora_1_1Utils_1_1Set_ad0e4e02f649fcefffe61115758e1261c}
+
+
+Default constructor. 
+\begin{DoxyParams}{Parameters}
+\item[{\em size}]-\/ The starting size of the set. Defaults to 6. increment -\/ The number of elements to increase the set with when needed, default to 4. \end{DoxyParams}
+
+
+Definition at line 89 of file PandoraSet.h.\hypertarget{classPandora_1_1Utils_1_1Set_a51d05d5d31cb8c16b510262737969f0e}{
+\index{Pandora::Utils::Set@{Pandora::Utils::Set}!$\sim$Set@{$\sim$Set}}
+\index{$\sim$Set@{$\sim$Set}!Pandora::Utils::Set@{Pandora::Utils::Set}}
+\subsubsection[{$\sim$Set}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf Pandora::Utils::Set}$<$ T $>$::$\sim${\bf Set} ()}}
+\label{classPandora_1_1Utils_1_1Set_a51d05d5d31cb8c16b510262737969f0e}
+
+
+Destructor. 
+
+Definition at line 101 of file PandoraSet.h.
+
+\subsection{Member Function Documentation}
+\hypertarget{classPandora_1_1Utils_1_1Set_a57d191182540ce79e9a0db1cf52ddd10}{
+\index{Pandora::Utils::Set@{Pandora::Utils::Set}!getPointer@{getPointer}}
+\index{getPointer@{getPointer}!Pandora::Utils::Set@{Pandora::Utils::Set}}
+\subsubsection[{getPointer}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ T $\ast$ {\bf Pandora::Utils::Set}$<$ T $>$::getPointer ()}}
+\label{classPandora_1_1Utils_1_1Set_a57d191182540ce79e9a0db1cf52ddd10}
+
+
+Get pointer to the data. \begin{DoxyReturn}{Returns}
+A pointer to the data. 
+\end{DoxyReturn}
+
+
+Definition at line 152 of file PandoraSet.h.\hypertarget{classPandora_1_1Utils_1_1Set_a80998fcb33af9bcd8ef6549f107ee1f6}{
+\index{Pandora::Utils::Set@{Pandora::Utils::Set}!getSize@{getSize}}
+\index{getSize@{getSize}!Pandora::Utils::Set@{Pandora::Utils::Set}}
+\subsubsection[{getSize}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ size\_\-t {\bf Pandora::Utils::Set}$<$ T $>$::getSize () const}}
+\label{classPandora_1_1Utils_1_1Set_a80998fcb33af9bcd8ef6549f107ee1f6}
+
+
+Get the number of elements in the \hyperlink{classPandora_1_1Utils_1_1Set}{Set}. \begin{DoxyReturn}{Returns}
+The number of elements in the \hyperlink{classPandora_1_1Utils_1_1Set}{Set}. 
+\end{DoxyReturn}
+
+
+Definition at line 144 of file PandoraSet.h.\hypertarget{classPandora_1_1Utils_1_1Set_a2c43d731fac0319a5be8c055aae33c8b}{
+\index{Pandora::Utils::Set@{Pandora::Utils::Set}!insert@{insert}}
+\index{insert@{insert}!Pandora::Utils::Set@{Pandora::Utils::Set}}
+\subsubsection[{insert}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ void {\bf Pandora::Utils::Set}$<$ T $>$::insert (const T \& {\em in})}}
+\label{classPandora_1_1Utils_1_1Set_a2c43d731fac0319a5be8c055aae33c8b}
+
+
+Append an element at the end of the \hyperlink{classPandora_1_1Utils_1_1Set}{Set}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em in}]-\/ The element we are inserting. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the item is inserted, false if the \hyperlink{classPandora_1_1Utils_1_1Set}{Set} is full and we can't increment the size. 
+\end{DoxyReturn}
+
+
+Definition at line 111 of file PandoraSet.h.\hypertarget{classPandora_1_1Utils_1_1Set_a5094548bb7e9ac74ebc29ae0c4f426a5}{
+\index{Pandora::Utils::Set@{Pandora::Utils::Set}!remove@{remove}}
+\index{remove@{remove}!Pandora::Utils::Set@{Pandora::Utils::Set}}
+\subsubsection[{remove}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ bool {\bf Pandora::Utils::Set}$<$ T $>$::remove (const T \& {\em elem})}}
+\label{classPandora_1_1Utils_1_1Set_a5094548bb7e9ac74ebc29ae0c4f426a5}
+
+
+Remove an element from the \hyperlink{classPandora_1_1Utils_1_1Set}{Set}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em elem}]-\/ The element we are removing. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+False if the item is not present in the set. True otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 162 of file PandoraSet.h.\hypertarget{classPandora_1_1Utils_1_1Set_aa134d362ed2baacc3ca0864cb6f10cb7}{
+\index{Pandora::Utils::Set@{Pandora::Utils::Set}!removeAll@{removeAll}}
+\index{removeAll@{removeAll}!Pandora::Utils::Set@{Pandora::Utils::Set}}
+\subsubsection[{removeAll}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ void {\bf Pandora::Utils::Set}$<$ T $>$::removeAll ()}}
+\label{classPandora_1_1Utils_1_1Set_aa134d362ed2baacc3ca0864cb6f10cb7}
+
+
+Remove all the elements in the \hyperlink{classPandora_1_1Utils_1_1Set}{Set}. 
+
+Definition at line 187 of file PandoraSet.h.
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+PandoraSet.h\end{DoxyCompactItemize}
