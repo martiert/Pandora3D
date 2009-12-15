@@ -1,0 +1,10 @@
+digraph G {
+  compound=true
+  node [ fontsize="10", fontname="FreeSans"];
+  edge [ labelfontsize="10", labelfontname="FreeSans"];
+  subgraph clusterdir_5e8682a0a53dfcdd08ccd965531dd463 {
+    graph [ bgcolor="#eeeeff", pencolor="black", label="" URL="dir_5e8682a0a53dfcdd08ccd965531dd463.html"];
+    dir_5e8682a0a53dfcdd08ccd965531dd463 [shape=plaintext label="PandoraCore"];
+    dir_c3ef76038dbc5da506617eed4e196400 [shape=box label="include" color="black" fillcolor="white" style="filled" URL="dir_c3ef76038dbc5da506617eed4e196400.html"];
+  }
+}

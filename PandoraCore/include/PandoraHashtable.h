@@ -1,10 +1,44 @@
+/*
+-------------------------------------------------------------------------------
+This source file is part of Pandora3D.
+
+This program is free software: you can redistribute it and/or modify it under 
+the terms of the GNU General Public License as published by the Free Software 
+Foundation. Either version 2 of the License, or (at your option) any later 
+version.
+
+This program comes without any warranty whatsoever, but under the hope that it
+will be useful. See the GNU General Public License for more information.
+
+You should have received a copy of the GNU Lesser General Public License along 
+with this program; if not, write to the Free Software Foundation, Inc., 59 
+Temple Place - Suite 330, Boston, MA 02111-1307, USA, or go to
+http://www.gnu.org/copyleft/lesser.txt.
+-------------------------------------------------------------------------------
+*/
+
 #ifndef HASHTABLE_H
 #define HASHTABLE_H
 
-#include "PandoraSystem.h"
+#include <stdlib.h>
 
-namespace Pandora
+//TODO: Make an iterator!
+namespace PandoraUtils
 {
+    namespace
+    {
+        //One node in the table.
+        template<class Key, class Value>
+        struct Node
+        {
+            Key key;
+            Value *value;
+        };
+    } //Anon namespace
+
+    /**
+     * A HashTable class.
+     */
     template<class Key, class Value>
     class HashTable
     {
@@ -13,143 +47,89 @@ namespace Pandora
             HashTable(const size_t& size);
             ~HashTable();
 
-            void insert(Key key, Value value);
-            Value& remove(Key key);
+            bool insert(const Key& key, const Value& value);
+            Value& remove(const Key& key);
+            void removeAll();
 
-            bool exists(Key key);
-
-            int (*userHashFunction)(const Key&);
+            bool exists(const Key& key) const;
+            Value& find(const Key& key) const;
         protected:
-            class Node
-            {
-                public:
-                    Key key;
-                    Value value;
-                    Node *next;
-
-                    Node(Key k, Value val)
-                    {
-                        key = k;
-                        value = val;
-                    }
-
-                    ~Node()
-                    {
-                        if(next)
-                            delete next;
-                    }
-            };
-
             size_t m_size;
-            Node **m_values;
-            
-            int m_hashFunction(const Key&);
+            size_t m_elements;
+            Node<Key, Value> *m_values;
     };
 
     //-------------------------------------------------------------------------
-    //
+    //                              Constructor.
     //-------------------------------------------------------------------------
     template<class Key, class Value>
-    HashTable<Key, Value>::HashTable(const size_t& size)
+    HashTable<Key,Value>::HashTable(const size_t& size)
     {
         m_size = size;
-        m_values = new Node[size];
-        userHashFunction = NULL;
+        m_elements = 0;
+        m_values = new Node<Key,Value>[size];
     }
 
     //-------------------------------------------------------------------------
-    //
+    //                              Destructor.
     //-------------------------------------------------------------------------
     template<class Key, class Value>
-    HashTable<Key, Value>::~HashTable()
+    HashTable<Key,Value>::~HashTable()
     {
-        //Go through the whole array
         for(int i = 0; i < m_size; ++i) {
-            if(m_values[i])
-                delete m_values[i];
+            free(m_values[i]);
         }
-
         delete[] m_values;
     }
 
     //-------------------------------------------------------------------------
-    //
+    // Insert a value into the HashTable. Returns false if the table is full or
+    //          if it hashes to the same value as another element.
     //-------------------------------------------------------------------------
     template<class Key, class Value>
-    void HashTable<Key, Value>::insert(Key key, Value value)
+    bool HashTable<Key,Value>::insert(const Key& key, const Value& value)
     {
-        int i = m_hashFunction(key);
-
-        if(m_values[i]) {
-            Node tmp = m_values[i];
-
-            while(tmp->next) {
-                tmp = tmp->next;
-            }
-
-            tmp->next = new Node(key, value);
-            return;
+        //No spaces free.
+        if(m_elements == m_size) {
+            return false;
         }
 
-        m_values[i] = new Node(key, value);
+        //Get the index for this element.
+        int index = key.hashFunction();
+
+        //Crashes with other element
+        if(m_values[index]) {
+            return false;
+        }
+
+        //Successful insertion.
+        m_values[index] = malloc(sizeof(Node<Key,Value>));
+        m_values[index]->key = key;
+        m_values[index]->value = value;
+        return true;
     }
 
     //-------------------------------------------------------------------------
-    //
+    //  Remove element from the set, and return the value of the element.
     //-------------------------------------------------------------------------
     template<class Key, class Value>
-    Value& HashTable<Key, Value>::remove(Key key)
+    Value& HashTable<Key,Value>::remove(const Key& key)
     {
-        int i = m_hashFunction(key);
+        int index = key.hashFunction();
 
-        Node tmp = m_values[i];
-
-        if(tmp->key == key) {
-            m_values[i] = tmp->next;
-            Value val = tmp->value;
-            tmp->next = NULL;
-            delete tmp;
-            return val;
+        //If the key doesn't hash to anything we have, or the keys mismatch, we
+        //return a NULL object.
+        if(!m_values[index] || m_values[index]->key != key) {
+            return NULL;
         }
 
-        if(tmp) {
-            Node next = tmp->next;
+        //Found the right element, removing it.
+        Value tmp = m_values[index]->value;
+        free(m_values[index]);
+        m_values[index] = NULL;
 
-            while(next) {
-                if(next->key == key) {
-                    tmp->next = next->next;
-                    next->next = NULL;
-                    Value val = next->value;
-                    delete next;
-                    return val;
-                }
-
-                tmp = next;
-                next = tmp->next;
-            }
-        }
-
-        return 0;
-    }
-
-
-    //-------------------------------------------------------------------------
-    //
-    //-------------------------------------------------------------------------
-    template<class Key, class Value>
-    bool HashTable<Key, Value>::exists(Key key)
-    {
-        int i = m_hashFunction(key);
-
-        Node tmp = m_values[i];
-
-        while(tmp) {
-            if(tmp->key == key)
-                return true;
-            tmp = tmp->next;
-        }
-
-        return false;
+        //Return the element we found.
+        return tmp;
     }
 }
 #endif

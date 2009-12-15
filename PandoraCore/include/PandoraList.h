@@ -1,9 +1,9 @@
 #ifndef PANDORALIST_H
 #define PANDORALIST_H
 
-#include "PandoraSystem.h"
+#include <stdlib.h>
 
-namespace Pandora
+namespace PandoraUtils
 {
     namespace {
         template<class T>
@@ -115,7 +115,7 @@ namespace Pandora
     }
 
     //-------------------------------------------------------------------------
-    // See if an element exsits in the List.
+    // See if an element exsits in the List. O(n)
     //-------------------------------------------------------------------------
     template<class T>
     bool List<T>::exists(const T& data)
@@ -125,6 +125,7 @@ namespace Pandora
         while(tmp && tmp->data != data)
             tmp = tmp->next;
 
+        //Found it, hurray!
         if(tmp)
             return true;
 
@@ -148,5 +149,4 @@ namespace Pandora
         m_size = 0;
     }
 }
-
 #endif

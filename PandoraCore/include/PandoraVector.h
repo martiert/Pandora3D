@@ -1,9 +1,10 @@
 #ifndef PANDORAVECTOR_H
 #define PANDORAVECTOR_H
 
-#include "PandoraSystem.h"
+#include <stdlib.h>
+#include <assert.h>
 
-namespace Pandora
+namespace PandoraUtils
 {
     //A simple vector class.
     template<class T>

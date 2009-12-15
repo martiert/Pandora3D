@@ -1,7 +1,8 @@
 #ifndef PANDORASET_H
 #define PANDORASET_H
 
-#include "PandoraSystem.h"
+#include <stdlib.h>
+#include <assert.h>
 
 namespace PandoraUtils
 {
@@ -18,8 +19,9 @@ namespace PandoraUtils
             //Append an element to the end of the array.
             void insert(const T& in);
 
-            //Remove the element given from the set
-            void remove(const T& elem);
+            //Remove the element given from the set. Returns false if the set
+            //doesn't contain the element.
+            bool remove(const T& elem);
 
             //Get the number of elements in the set
             unsigned int getSize() const;
@@ -68,7 +70,7 @@ namespace PandoraUtils
         if(m_elements < m_size) {
             m_data[m_elements++] = in;
         } else {
-            //In debug mode, tell if we are not allowed to increment the array.
+            //Checks if we are allowed to resize the set.
             assert(m_increment != 0 && 
                     "Not allowed to resize this set, but resize needed");
 
@@ -117,11 +119,13 @@ namespace PandoraUtils
     {
         size_t i = 0;
 
-        while(m_data[i] != elem && i < m_elements) {
+        //Search for the element.
+        while(i < m_elements && m_data[i] != elem) {
             ++i;
         }
 
-        if(i < m_elements)
+        //The element doesn't exist.
+        if(i == m_elements)
             return false;
 
         //Shuffle all the remaining data
