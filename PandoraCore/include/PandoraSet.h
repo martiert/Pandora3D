@@ -24,6 +24,8 @@ http://www.gnu.org/copyleft/lesser.txt.
 
 namespace Pandora
 {
+    /** Namespace for the util classes of the engine.
+     */
     namespace Utils
     {
         /**A simple Set class. We can append, remove, get the number of elements, 
