@@ -31,6 +31,8 @@ namespace Pandora
          * The Math class. Holds all the normal mathematical functions, like
          * trigonometric functions, logarithm, power, square roots, etc. Also
          * holds mathematical constant like PI, e, etc.
+         * \todo
+         *      Make the constant, and add some fast functions.
          */
         class Math
         {
@@ -50,7 +52,7 @@ namespace Pandora
                  *  \return
                  *      The cosine value.
                  */
-                static Real cos(Real value);
+                static Real Cos(Real value);
 
                 /**
                  * Calculate the sinus value.
@@ -59,7 +61,7 @@ namespace Pandora
                  *  \return
                  *      The sinus value.
                  */
-                static Real sin(Real value);
+                static Real Sin(Real value);
 
                 /**
                  * Calculate the tangent value.
@@ -68,7 +70,7 @@ namespace Pandora
                  *  \return
                  *      The tangent value.
                  */
-                static Real tan(Real value);
+                static Real Tan(Real value);
 
                 /**
                  * Calculates the inverse sinus.
@@ -76,8 +78,11 @@ namespace Pandora
                  *      value - The sinus value.
                  *  \return
                  *      The number of radians in the interval [-pi/2,pi/2].
+                 *  \note
+                 *      If the value is less then -1 we return PI, and if the
+                 *      value us larger then 1, we return 0.
                  */
-                static Real asin(Real value);
+                static Real Asin(Real value);
 
                 /**
                  * Calculates the inverse cosine.
@@ -85,8 +90,11 @@ namespace Pandora
                  *      value - The cosine value.
                  *  \return
                  *      The number of radians in the interval [0,pi].
+                 *  \note
+                 *      If the value is less then -1 we return -PI/2, if the
+                 *      value is larger then 1, we return PI/2.
                  */
-                static Real acos(Real value);
+                static Real Acos(Real value);
 
                 /**
                  * Calculates the inverse tangent.
@@ -95,7 +103,7 @@ namespace Pandora
                  *  \return
                  *      The number of radians in the interval [-pi/2,pi/2].
                  */
-                static Real atan(Real value);
+                static Real Atan(Real value);
 
                 /**
                  * Calculates the inverse tangent of y/x.
@@ -105,7 +113,7 @@ namespace Pandora
                  *  \return
                  *      The number of radians in the interval [-pi,pi].
                  */
-                static Real atan2(Real x, Real y);
+                static Real Atan2(Real x, Real y);
 
                 /**
                  * Calculates the absolute value of a number.
@@ -114,7 +122,7 @@ namespace Pandora
                  * \return
                  *      The absolute value of the number.
                  */
-                static Real abs(Real value);
+                static Real Abs(Real value);
 
                 /**
                  * Rounds the number to the nearest integer.
@@ -123,7 +131,7 @@ namespace Pandora
                  *  \return
                  *      The nearest integer.
                  */
-                static int round(Real value);
+                static int Round(Real value);
 
                 /**
                  * Round the number to the nearest integer upwards.
@@ -132,7 +140,7 @@ namespace Pandora
                  *  \return
                  *      The nearest integer upwards.
                  */
-                static int ceil(Real value);
+                static int Ceil(Real value);
 
                 /**
                  * Round the number to the nearest integers downwards.
@@ -141,7 +149,7 @@ namespace Pandora
                  *  \return
                  *      The nearest integer downwards.
                  */
-                static int floor(Real value);
+                static int Floor(Real value);
 
                 /**
                  * Find e to the power value.
@@ -150,7 +158,7 @@ namespace Pandora
                  *  \return
                  *      e^value.
                  */
-                static Real exp(Real value);
+                static Real Exp(Real value);
 
                 /**
                  * Find the logarithm of the number. Uses base e.
@@ -159,7 +167,7 @@ namespace Pandora
                  *  \return
                  *      log(value).
                  */
-                static Real log(Real value);
+                static Real Log(Real value);
 
                 /**
                  * Find the logarithm of the number. Uses base 10.
@@ -168,7 +176,7 @@ namespace Pandora
                  *  \return
                  *      log(value) with base 10.
                  */
-                static Real log10(Real value);
+                static Real Log10(Real value);
 
                 /**
                  * Find the base to the power exponent.
@@ -178,7 +186,7 @@ namespace Pandora
                  *  \return
                  *      base to the power exponent.
                  */
-                static Real pow(Real base, Real exponent);
+                static Real Pow(Real base, Real exponent);
 
                 /**
                  * Find the modulo of x by y.
@@ -188,7 +196,7 @@ namespace Pandora
                  *  \return
                  *      x mod y.
                  */
-                static Real mod(Real x, Real y);
+                static Real Mod(Real x, Real y);
 
                 /**
                  * Find the square root of a number.
@@ -199,7 +207,7 @@ namespace Pandora
                  *  \note
                  *      Only non-negative numbers.
                  */
-                static Real sqrt(Real value);
+                static Real Sqrt(Real value);
 
                 /**
                  * Find the inverse square root of a number.
@@ -210,13 +218,184 @@ namespace Pandora
                  *  \note
                  *      Only strict positive numbers.
                  */
-                static Real isqrt(Real value);
+                static Real Isqrt(Real value);
         };
 
+        //---------------------------------------------------------------------
+        // Find the sinus of the value.
+        //---------------------------------------------------------------------
         template<class Real>
-        Real Math<Real>::sin(Real value)
+        Real Math<Real>::Sin(Real value)
         {
-            return (Real)sin(value);
+            return (Real) sin(value);
+        }
+
+        //---------------------------------------------------------------------
+        // Find the cosine of the value.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::Cos(Real value)
+        {
+            return (Real) cos(value);
+        }
+
+        //---------------------------------------------------------------------
+        // Find the tangent of the value.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::Tan(Real value)
+        {
+            return (Real) tan(value);
+        }
+
+        //---------------------------------------------------------------------
+        // Find the arcus sinus of the value.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::Asin(Real value)
+        {
+            if(value < (Real) 1.0) {
+                if(value > (Real) -1.0) {
+                    return (Real) asin(value);
+                } else {
+                    return -HALF_PI;
+                }
+            }
+            return HALF_PI;
+        }
+
+        //---------------------------------------------------------------------
+        // Find the arcus cosine of the value.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::Acos(Real value)
+        {
+            if(value < (Real) 1.0) {
+                if(value > (Real) -1.0) {
+                    return (Real) acos(value);
+                } else {
+                    return PI;
+                }
+            }
+
+            return (Real) 0.0;
+        }
+
+        //---------------------------------------------------------------------
+        // Find the arcus tangent of the value.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::Atan(Real value)
+        {
+            return (Real) atan(value);
+        }
+
+        //---------------------------------------------------------------------
+        // Find the arcus tangent of y/x.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::Atan2(Real y, Real x)
+        {
+            return (Real) atan2(y, x);
+        }
+
+        //---------------------------------------------------------------------
+        // Find the absolute value.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::Abs(Real value)
+        {
+            return (value < (Real) 0.0 ? -value : value);
+        }
+
+        //---------------------------------------------------------------------
+        // Round to the nearest integer.
+        //---------------------------------------------------------------------
+        template<class Real>
+        int Math<Real>::Round(Real value)
+        {
+            return (Real) round(value);
+        }
+
+        //---------------------------------------------------------------------
+        // Round to the nearest integer upwards.
+        //---------------------------------------------------------------------
+        template<class Real>
+        int Math<Real>::Ceil(Real value)
+        {
+            return (Real) ceil(value);
+        }
+
+        //---------------------------------------------------------------------
+        // Round to the nearest integer downwards.
+        //---------------------------------------------------------------------
+        template<class Real>
+        int Math<Real>::Floor(Real value)
+        {
+            return (Real) floor(value);
+        }
+
+        //---------------------------------------------------------------------
+        // Calculate the exponential.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::Exp(Real value)
+        {
+            return (Real) exp(value);
+        }
+
+        //---------------------------------------------------------------------
+        // Find the natural logarithm of the value.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::Log(Real value)
+        {
+            return (Real) log(value);
+        }
+
+        //---------------------------------------------------------------------
+        // Find the logarithm of the value with base 10.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::Log10(Real value)
+        {
+            return (Real) log10(value);
+        }
+
+        //---------------------------------------------------------------------
+        // Find the power of the base in the exponent.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::Pow(Real base, Real exponent)
+        {
+            return (Real) pow(base, exponent);
+        }
+
+        //---------------------------------------------------------------------
+        // Find the modulo of the x by y.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::Mod(Real x, Real y)
+        {
+            return (Real) fmod(x, y);
+        }
+
+        //---------------------------------------------------------------------
+        // Find the square root of the value.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::Sqrt(Real value)
+        {
+            return (Real) sqrt(value);
+        }
+
+        //---------------------------------------------------------------------
+        // Find the inverse square root of the value.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::Isqrt(Real value)
+        {
+            return (Real) (1.0/sqrt(value));
         }
     }
 }
