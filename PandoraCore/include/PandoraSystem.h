@@ -28,6 +28,10 @@ http://www.gnu.org/copyleft/lesser.txt.
  */
 namespace Pandora
 {
+    /**
+     * The System class. Holds all the functions which wrapps platform
+     * dependent functions.
+     */
     class System
     {
         public:

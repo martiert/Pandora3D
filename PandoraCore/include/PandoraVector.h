@@ -26,7 +26,7 @@ namespace Pandora
 {
     namespace Utils
     {
-        /** A simple vector class. */
+        /** A simple Vector class. Can be compared to the std::vector. */
         template<class T>
         class Vector
         {
