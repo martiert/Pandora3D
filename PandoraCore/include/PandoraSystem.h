@@ -19,11 +19,10 @@ http://www.gnu.org/copyleft/lesser.txt.
 #ifndef PANDORASYSTEM_H
 #define PANDORASYSTEM_H
 
-#include <assert.h>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#define NULL 0x0
+
+#include <sys/time.h>
+#include <time.h>
 
 /** The main namespace of the engine.
  */
@@ -31,6 +30,22 @@ namespace Pandora
 {
     class System
     {
+        public:
+        /**
+         * Get the current time in seconds.
+         * \return
+         *      The current time in seconds.
+         */
+        static double getTime()
+        {
+            double time;
+
+            struct timeval tv;
+            gettimeofday(&tv, NULL);
+            time = tv.tv_sec + tv.tv_usec/1000000.0;
+            return time;
+        }
+
         /**
          * Load a binary file into memory.
          * \param
@@ -41,8 +56,9 @@ namespace Pandora
          *      False if the file don't exist, the file can't be opened for
          *      reading or if the size of the file is different from the size
          *      parameter.
+         * \todo write the function.
          */
-        static bool load(const char *filename, char*& buffer, size_t size);
+        static bool load(const char *filename, char*& buffer, int size);
 
         /**
          * Save data to a file.
@@ -53,8 +69,9 @@ namespace Pandora
          *  \return
          *      False if the buffer is NULL, the file can not be opened or the
          *      number of bytes written differs from the size parameter.
+         *  \todo write the function.
          */
-        static bool save(const char *filename, const char *buffer, size_t size);
+        static bool save(const char *filename, const char *buffer, int size);
 
         /**
          * Append data to a file.
@@ -65,9 +82,10 @@ namespace Pandora
          *  \return
          *      False if the buffer is NULL, the file can not be opened or the
          *      number of bytes written differs from the size parameter.
+         *  \todo write the function.
          */
         static bool append(const char *filename, const char *buffer, 
-                size_t size);
+                int size);
 
         /**
          * Allocates a 2D array. This uses only two allocation, regardless of
@@ -79,8 +97,15 @@ namespace Pandora
          *  \note
          *      Does not set the elements to anything because of speed.
          */
-        template<class T> static void allocate2D(size_t cols, size_t rows,
-                T**& array);
+        template<class T> static void allocate2D(int cols, int rows,
+                T**& array)
+        {
+            array = new T*[rows];
+            array[0] = new T[rows*cols];
+
+            for(int i = 0; i < rows; ++i)
+                array[i] = array[0][i*cols];
+        }
 
         /**
          * Frees up the memory of a 2D array. Have to have used allocate2D to
@@ -91,7 +116,12 @@ namespace Pandora
          *      The behaviour is undefined if you use an array that is not 
          *      allocate with allocate2D.
          */
-        template<class T> static void deallocate2D(T**& array);
+        template<class T> static void deallocate2D(T**& array)
+        {
+            delete[] array[0];
+            delete[] array;
+            array = NULL;
+        }
 
         /**
          * Allocates a 3D array. This uses only three allocations, regardless
@@ -104,8 +134,20 @@ namespace Pandora
          *  \note
          *      Does not set the elements to anything because of speed.
          */
-        template<class T> static void allocate3D(size_t cols, size_t rows,
-                size_t slices, T***& array);
+        template<class T> static void allocate3D(int cols, int rows,
+                int slices, T***& array)
+        {
+            array = new T**[slices];
+            array[0] = new T*[slices*rows];
+            array[0][0] = new T*[cols*slices*rows];
+
+            for(int i = 0; i < slices; ++i) {
+                array[i] = array[0][i*rows];
+                for(int j = 0; j < rows; ++j) {
+                    array[i][j] = array[0][i][j*cols];
+                }
+            }
+        }
 
         /**
          * Frees up memory allocated by allocate3D. Uses only three 
@@ -116,88 +158,13 @@ namespace Pandora
          *      The behaviour is undefined if you use an array that is not
          *      allocated with allocate3D.
          */
-        template<class T> static void deallocate3D(T***& array);
-    };
-
-    //-------------------------------------------------------------------------
-    // Load a file from memory.
-    //-------------------------------------------------------------------------
-    static bool System::load(const char *filename, char*& buffer, size_t size)
-    {
-        return true;
-    }
-
-    //-------------------------------------------------------------------------
-    // Save to disk.
-    //-------------------------------------------------------------------------
-    static bool system::save(const char *filename, const char *buffer, 
-            size_t size)
-    {
-        return true;
-    }
-
-    //-------------------------------------------------------------------------
-    // Append to file.
-    //-------------------------------------------------------------------------
-    static bool System::append(const char *filename, const char *buffer, 
-            size_t size)
-    {
-        return true;
-    }
-
-    //-------------------------------------------------------------------------
-    // Allocate a 2D array.
-    //-------------------------------------------------------------------------
-    template<class T>
-    static void System::allocate2D(size_t cols, size_t rows, T**& array)
-    {
-        int elements = rows * cols;
-        array = new T*[rows];
-        array[0] = new T[elements];
-
-        for(int i = 0; i < rows; ++i)
-            array[i] = array[0][i*cols];
-    }
-
-    //-------------------------------------------------------------------------
-    // Deallocate a 2D array.
-    //-------------------------------------------------------------------------
-    template<class T>
-    static void System::deallocate2D(T**& array)
-    {
-        delete[] array[0];
-        delete[] array;
-        array = NULL;
-    }
-
-    //-------------------------------------------------------------------------
-    // Allocate a 3D array.
-    //-------------------------------------------------------------------------
-    template<class T>
-    static void System::allocate3D(size_t cols, size_t rows, size_t slices,
-            T***& array)
-    {
-        array = new T**[slices];
-        array[0] = new T*[rows*slices];
-        array[0][0] = new T[rows*slices*cols];
-
-        for(int i = 0; i < slices; ++i) {
-            for(int j = 0; j < rows; ++j) {
-                array[i][j] = array[0][0][i*j*rows];
-            }
+        template<class T> static void deallocate3D(T***& array)
+        {
+            delete[] array[0][0];
+            delete[] array[0];
+            delete[] array;
+            array = NULL;
         }
-    }
-
-    //-------------------------------------------------------------------------
-    // Deallocates a 3D array.
-    //-------------------------------------------------------------------------
-    template<class T>
-    static void System::deallocate3D(T***& array)
-    {
-        delete[] array[0][0];
-        delete[] array[0];
-        delete[] array;
-        array = NULL;
-    }
+    };
 }
 #endif
