@@ -17,6 +17,9 @@ http://www.gnu.org/copyleft/lesser.txt.
 -------------------------------------------------------------------------------
 */
 
+#ifndef PANDORAMATH_H
+#define PANDORAMATH_H
+
 #include <math.h>
 
 namespace Pandora
@@ -399,3 +402,4 @@ namespace Pandora
         }
     }
 }
+#endif
