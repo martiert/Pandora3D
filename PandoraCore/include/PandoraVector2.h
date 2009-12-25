@@ -36,6 +36,7 @@ namespace Pandora
                  * Default constructor. Sets the elements.
                  * \param
                  *      x - Element one. Defaults to one.
+                 *  \param
                  *      y - Element two. Defaults to zero.
                  */
                 Vec2(const Real x = 1.0, const Real y = 0.0);

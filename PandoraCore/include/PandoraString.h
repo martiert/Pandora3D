@@ -26,57 +26,70 @@ namespace Pandora
 {
     namespace Utils
     {
-        /** A simple String class. */
+        /** 
+         *  A simple String class. 
+         */
         class String
         {
             public:
-                /** Default Constructor.
+                /** 
+                 *  Default Constructor.
                  *  \param
                  *      text - The characters to form a string.
                  */
                 String(const char *text);
                 
-                /** Constructor.
+                /** 
+                 *  Constructor.
                  *  \param
                  *      length - The length of the text.
+                 *  \param
                  *      text - The text to form a string.
                  */
                 String(size_t length, const char *text);
 
-                /** Copy constructor.
+                /** 
+                 *  Copy constructor.
                  *  \param
                  *      text - The string to copy.
                  */
                 String(const String& text);
 
-                /** Destructor */
+                /** 
+                 *  Destructor 
+                 */
                 ~String();
 
-                /** Get the length of the string.
+                /** 
+                 *  Get the length of the string.
                  *  \return
                  *      The length of the string.
                  */
                 int getLength() const;
 
-                /** Get a pointer to the string.
+                /** 
+                 *  Get a pointer to the string.
                  *  \return
                  *      A pointer to the char array.
                  */
                 operator const char* () const;
 
-                /** Assignment operator.
+                /** 
+                 *  Assignment operator.
                  *  \param
                  *      text - The string to copy.
                  */
                 void operator=(const char* text);
 
-                /** Assignment operator.
+                /** 
+                 *  Assignment operator.
                  *  \param
                  *      text - The string to copy.
                  */
                 void operator=(const String& text);
 
-                /** Equality operator.
+                /** 
+                 *  Equality operator.
                  *  \param
                  *      text - The string to check for equality on.
                  *  \return
@@ -84,7 +97,8 @@ namespace Pandora
                  */
                 bool operator==(const String& text) const;
 
-                /** Inequality operator.
+                /** 
+                 *  Inequality operator.
                  *  \param
                  *      text - The string were checking if is equal.
                  *  \return
@@ -92,7 +106,8 @@ namespace Pandora
                  */
                 bool operator!=(const String& text) const;
 
-                /** Integer conversion.
+                /** 
+                 *  Integer conversion.
                  *  \return
                  *      The string as an unsigned int.
                  */

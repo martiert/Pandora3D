@@ -26,35 +26,44 @@ namespace Pandora
 {
     namespace Utils
     {
-        /** A simple Vector class. Can be compared to the std::vector. */
+        /** 
+         *  A simple Vector class. Can be compared to the std::vector. 
+         */ 
         template<class T>
         class Vector
         {
             public:
-                /** Default constructor.
+                /** 
+                 *  Default constructor.
                  *  \param
                  *      size - The starting size of the vector. Defaults to 4.
+                 *  \param
                  *      inc - The number of elements to increase the vector by.
                  *          Defaults to 4.
                  */
                 Vector(const size_t size = 4, const size_t inc = 4);
 
-                /** Destructor */
+                /** 
+                 *  Destructor 
+                 */
                 ~Vector();
 
-                /** Get a pointer to the data.
+                /** 
+                 *  Get a pointer to the data.
                  *  \return
                  *      A pointer to the data.
                  */
                 T* c_ptr();
 
-                /** Get a constant pointer to the data.
+                /** 
+                 *  Get a constant pointer to the data.
                  *  \return
                  *      A constant pointer to the data.
                  */
                 const T* c_ptr() const;
 
-                /** Get element in vector.
+                /** 
+                 *  Get element in vector.
                  *  \param
                  *      i - The index we need the element from.
                  *  \return
@@ -65,7 +74,8 @@ namespace Pandora
                  */
                 T& operator[](const size_t i);
 
-                /** Get constant element in vector.
+                /** 
+                 *  Get constant element in vector.
                  *  \param
                  *      i - The index we need the element from.
                  *  \return
@@ -76,7 +86,8 @@ namespace Pandora
                  */
                 const T& operator[](const size_t i) const;
 
-                /** Append data to the vector.
+                /** 
+                 *  Append data to the vector.
                  *  \param
                  *      element - The element to append at the end of the vector.
                  *  \note
@@ -84,16 +95,19 @@ namespace Pandora
                  */
                 void append(const T& element);
 
-                /** Insert data in the vector.
+                /** 
+                 *  Insert data in the vector.
                  *  \param
                  *      i - The index we're inserting into.
+                 *  \param
                  *      element - The element to insert.
                  *  \note
                  *      Increases the size of the vector if needed.
                  */
                 void insert(const size_t i, const T& element);
 
-                /** Remove an element from the vector.
+                /** 
+                 *  Remove an element from the vector.
                  *  \param
                  *      i - The index to remove.
                  *  \return
@@ -101,35 +115,41 @@ namespace Pandora
                  */
                 T& remove(const size_t i);
 
-                /** Remove all elements from the vector.
+                /** 
+                 *  Remove all elements from the vector.
                  */
                 void removeAll();
 
-                /** Get the number of elements in the vector.
+                /** 
+                 *  Get the number of elements in the vector.
                  *  \return
                  *      The number of elements in the vector.
                  */
                 size_t getElements() const;
 
-                /** Get the size of the vector.
+                /** 
+                 *  Get the size of the vector.
                  *  \return
                  *      the number of places in the vector.
                  */
                 size_t getSize() const;
 
-                /** Get the number of elements to increment by.
+                /** 
+                 *  Get the number of elements to increment by.
                  *  \return
                  *      The number of elements to increase the vector by.
                  */
                 size_t getIncrement() const;
 
-                /** Set the size of the vector
+                /** 
+                 *  Set the size of the vector
                  *  \param
                  *      size - The new number of elements in the vector.
                  */
                 void setSize(const size_t size);
 
-                /** Set the number of elements to increment with.
+                /** 
+                 *  Set the number of elements to increment with.
                  *  \param
                  *      inc - The new number of element to increment the vector
                  *          by.

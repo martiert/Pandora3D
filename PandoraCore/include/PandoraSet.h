@@ -28,25 +28,31 @@ namespace Pandora
      */
     namespace Utils
     {
-        /**A simple Set class. We can append, remove, get the number of elements, 
+        /**
+         * A simple Set class. We can append, remove, get the number of elements, 
          * get a raw pointer from the set and remove all the elements in the set.
         */
         template<class T>
         class Set
         {
             public:
-                /** Default constructor
+                /** 
+                 *  Default constructor
                  *  \param
                  *      size - The starting size of the set. Defaults to 6.
+                 *  \param
                  *      increment - The number of elements to increase the set
                  *          with when needed, default to 4.
                  */
                 Set(const size_t size = 6, const size_t increment = 4);
 
-                /** Destructor */
+                /** 
+                 *  Destructor 
+                 */
                 ~Set();
 
-                /** Append an element at the end of the Set 
+                /** 
+                 *  Append an element at the end of the Set 
                  *  \param
                  *      in - The element we are inserting.
                  *  \return
@@ -55,7 +61,8 @@ namespace Pandora
                  */
                 bool insert(const T& in);
 
-                /** Remove an element from the Set.
+                /** 
+                 *  Remove an element from the Set.
                  *  \param
                  *      elem - The element we are removing.
                  *  \return
@@ -63,19 +70,23 @@ namespace Pandora
                  */
                 bool remove(const T& elem);
 
-                /** Get the number of elements in the Set.
+                /** 
+                 *  Get the number of elements in the Set.
                  *  \return
                  *      The number of elements in the Set.
                  */
                 size_t getSize() const;
 
-                /** Get pointer to the data.
+                /** 
+                 *  Get pointer to the data.
                  *  \return
                  *      A pointer to the data.
                  */
                 T* getPointer();
 
-                /** Remove all the elements in the Set */
+                /** 
+                 *  Remove all the elements in the Set 
+                 */
                 void removeAll();
             private:
                 T *m_data;

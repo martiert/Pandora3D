@@ -19,12 +19,11 @@ http://www.gnu.org/copyleft/lesser.txt.
 #ifndef PANDORASYSTEM_H
 #define PANDORASYSTEM_H
 
-#define NULL 0x0
-
 #include <sys/time.h>
 #include <time.h>
 
-/** The main namespace of the engine.
+/** 
+ * The main namespace of the engine.
  */
 namespace Pandora
 {
@@ -54,7 +53,9 @@ namespace Pandora
          * Load a binary file into memory.
          * \param
          *      filename - The name of the file to read.
+         *  \param
          *      buffer - The buffer to write to.
+         *  \param
          *      size - the number of bytes in the file.
          * \return
          *      False if the file don't exist, the file can't be opened for
@@ -68,7 +69,9 @@ namespace Pandora
          * Save data to a file.
          * \param
          *      filename - The file to write to.
+         *  \param
          *      buffer - The buffer to read from.
+         *  \param
          *      size - The size of the buffer.
          *  \return
          *      False if the buffer is NULL, the file can not be opened or the
@@ -81,7 +84,9 @@ namespace Pandora
          * Append data to a file.
          * \param
          *      filename - The file to append to.
+         *  \param
          *      buffer - The buffer to read from.
+         *  \param
          *      size - The size of the buffer.
          *  \return
          *      False if the buffer is NULL, the file can not be opened or the
@@ -96,7 +101,9 @@ namespace Pandora
          * the size.
          * \param
          *      cols - The number of columns to allocate.
+         *  \param
          *      rows - The number of rows to allocate.
+         *  \param
          *      array - The array to allocate to.
          *  \note
          *      Does not set the elements to anything because of speed.
@@ -132,8 +139,11 @@ namespace Pandora
          * of the size.
          * \param
          *      cols - The number of columns to allocate.
+         *  \param
          *      rows - The number of rows to allocate.
+         *  \param
          *      slices - The number of slices to allocate.
+         *  \param
          *      array - The array to allocate.
          *  \note
          *      Does not set the elements to anything because of speed.

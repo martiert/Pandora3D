@@ -34,29 +34,35 @@ namespace Pandora
             };
         } //Anon namespace
 
-        /** A List class. Very minimalistic.
+        /** 
+         * A List class. Very minimalistic.
          */
         template<class T>
         class List
         {
             public:
-                /** Default constructor
+                /** 
+                 *  Default constructor
                  *  \param
                  *      data - Optional argument. If present it's the root
                  *      node of the List.
                  */
                 List(const T& data = NULL);
 
-                /** Destructor */
+                /** 
+                 *  Destructor 
+                 */
                 ~List();
 
-                /** Inserts an item into the List.
+                /** 
+                 *  Inserts an item into the List.
                  *  \param
                  *      data - The data to be inserted.
                  */
                 void insert(const T& data);
 
-                /** Removes an item from the List.
+                /** 
+                 *  Removes an item from the List.
                  *  \param
                  *      data - The data to be removed.
                  *  \return
@@ -65,7 +71,8 @@ namespace Pandora
                  */
                 bool remove(const T& data);
 
-                /** Checks if an item exists in the List
+                /** 
+                 *  Checks if an item exists in the List
                  *  \param
                  *      data - The element we are looking for.
                  *  \return
@@ -73,7 +80,8 @@ namespace Pandora
                  */
                 bool exists(const T& data);
 
-                /** Removes all the data in the List.
+                /** 
+                 * Removes all the data in the List.
                 */
                 void removeAll();
             private:

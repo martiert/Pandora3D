@@ -21,6 +21,9 @@ http://www.gnu.org/copyleft/lesser.txt.
 #define PANDORAMATH_H
 
 #include <math.h>
+#include <time.h>
+#include <stdlib.h>
+#include <float.h>
 
 namespace Pandora
 {
@@ -29,7 +32,6 @@ namespace Pandora
      */
     namespace Math
     {
-        template<class Real>
         /**
          * The Math class. Holds all the normal mathematical functions, like
          * trigonometric functions, logarithm, power, square roots, etc. Also
@@ -37,6 +39,7 @@ namespace Pandora
          * \todo
          *      Make the constant, and add some fast functions.
          */
+        template<class Real>
         class Math
         {
             public:
@@ -45,6 +48,8 @@ namespace Pandora
                 static const Real PI;
                 static const Real TWO_PI;
                 static const Real HALF_PI;
+                static const Real INV_PI;
+                static const Real INV_TWO_PI;
                 static const Real DEG_TO_RAD;
                 static const Real RAD_TO_DEG;
 
@@ -80,10 +85,12 @@ namespace Pandora
                  * \param
                  *      value - The sinus value.
                  *  \return
-                 *      The number of radians in the interval [-pi/2,pi/2].
+                 *      The number of radians in the interval \f$
+                 *      [-\frac{\pi}{2},\frac{\pi}{2}]\f$.
                  *  \note
-                 *      If the value is less then -1 we return PI, and if the
-                 *      value us larger then 1, we return 0.
+                 *      If the value is less then -1 we return \f$ 
+                 *      -\frac{\pi}{2}\f$, and if the value us larger then 1, 
+                 *      we return \f$\frac{\pi}{2}\f$.
                  */
                 static Real Asin(Real value);
 
@@ -92,10 +99,10 @@ namespace Pandora
                  * \param
                  *      value - The cosine value.
                  *  \return
-                 *      The number of radians in the interval [0,pi].
+                 *      The number of radians in the interval [0,\f$\pi\f$].
                  *  \note
-                 *      If the value is less then -1 we return -PI/2, if the
-                 *      value is larger then 1, we return PI/2.
+                 *      If the value is less then -1 we return \f$ \pi \f$, if 
+                 *      the value is larger then 1, we return 0.
                  */
                 static Real Acos(Real value);
 
@@ -104,17 +111,20 @@ namespace Pandora
                  * \param
                  *      value - The tangent value.
                  *  \return
-                 *      The number of radians in the interval [-pi/2,pi/2].
+                 *      The number of radians in the interval \f$ 
+                 *      [-\frac{\pi}{2},\frac{\pi}{2}] \f$.
                  */
                 static Real Atan(Real value);
 
                 /**
-                 * Calculates the inverse tangent of y/x.
+                 * Calculates the inverse tangent of \f$ \frac{y}{x} \f$.
+                 *
+                 * \param
+                 *      x - A value representing an x-coordinate.
                  * \param
                  *      y - A value representing an y-coordinate.
-                 *      x - A value representing an x-coordinate.
                  *  \return
-                 *      The number of radians in the interval [-pi,pi].
+                 *      The number of radians in the interval \f$ [-\pi,\pi] \f$.
                  */
                 static Real Atan2(Real x, Real y);
 
@@ -185,6 +195,7 @@ namespace Pandora
                  * Find the base to the power exponent.
                  * \param
                  *      base - The base to use.
+                 *  \param
                  *      exponent - The exponent to use.
                  *  \return
                  *      base to the power exponent.
@@ -195,6 +206,7 @@ namespace Pandora
                  * Find the modulo of x by y.
                  * \param
                  *      x - The number to take modulo by.
+                 *  \param
                  *      y - The number to use as divisor.
                  *  \return
                  *      x mod y.
@@ -222,7 +234,327 @@ namespace Pandora
                  *      Only strict positive numbers.
                  */
                 static Real Isqrt(Real value);
+
+                /**
+                 * Find the sign of an integer.
+                 * \param
+                 *      value - The integer to check for the sign of.
+                 *  \return
+                 *      -1 if negative, 0 if 0 and 1 if positive.
+                 */
+                static int Sign(int value);
+
+                /**
+                 * Find the sign of a number.
+                 * \param
+                 *      value - The number to check for the sign of.
+                 *  return
+                 *      -1 if negative, 0 if 0 and 1 if positive.
+                 */
+                static int Sign(Real value);
+
+                /**
+                 * Find a random number between 0 and 1.
+                 * \param
+                 *      seed - The seed to use. Optional. Defaults to 0.
+                 *  \return
+                 *      A random number in [0,1). Including 0, excluding 1.
+                 */
+                static Real UnitRandom(unsigned int seed = 0);
+
+                /**
+                 * Find a random number between -1,1.
+                 * \param
+                 *      seed - The seed to use. Optional. Defaults to 0.
+                 *  \return
+                 *      A random number in [-1,1). Including -1, excluding 1.
+                 */
+                static Real SymmetricRandom(unsigned int seed = 0);
+
+                /**
+                 * Find a random number between min and max.
+                 * \param
+                 *      min - The minimum number.
+                 *  \param
+                 *      max - The maximum number.
+                 *  \param
+                 *      seed - The seed to use. Optional. Defaults to 0.
+                 *  \return
+                 *      A random number between [min,max). Including min, 
+                 *      excluding max.
+                 */
+                static Real IntervalRandom(Real min, Real max, 
+                        unsigned int seed = 0);
+
+                /**
+                 * A fast sinus function. Uses the approximation
+                 * \f[
+                 * \frac{\sin(x)}{x}=1 - 0.16605x^2 + 0.00761x^4+\epsilon(x)
+                 * \f]
+                 *
+                 * \param
+                 *      value - The number to find the sinus of. Must be
+                 *      between \f$ -\frac{\pi}{2} \f$ and \f$ \frac{\pi}{2} \f$.
+                 *  \return
+                 *      An approximation to the sinus function. 
+                 *      Returns 1 if \f$x > \frac{\pi}{2}\f$ and -1 if h
+                 *      \f$x < -\frac{\pi}{2}\f$.
+                 *  \todo
+                 *      Check the speed and the error.
+                 */
+                static Real FastSin0(Real value);
+
+                /**
+                 * A fast sinus function. Uses the approximation
+                 * \f[
+                 * \frac{\sin(x)}{x} = 1 - 0.1666666664x^2 + 0.0083333315x^4
+                 * - 0.0001984090x^6 + 0.0000027526x^8 - 0.0000000236x^10 + 
+                 *   \epsilon(x).
+                 * \f]
+                 *
+                 *   \param
+                 *      value - The number to find the sinus of.
+                 *  \return
+                 *      An approximation to the sinus function.
+                 *      Returns 1 if \f$x > \frac{\pi}{2}\f$ and -1 if h
+                 *      \f$x < -\frac{\pi}{2}\f$.
+                 *  \todo
+                 *      Check the speed and the error.
+                 */
+                static Real FastSin1(Real value);
+
+                /**
+                 * A fast cosine function. Uses the approximation
+                 * \f[
+                 * \cos(x) = 1 - 0.49670x^2 + 0.03705x^4 + \epsilon(x).
+                 * \f]
+                 *
+                 * \param
+                 *      value - The number to find the cosine of.
+                 *  \return
+                 *      An approximation to the cosine function.
+                 *      Returns 1 if \f$x < 0\f$ and -1 if \f$x > \pi\f$.
+                 *  \todo
+                 *      Check the speed and the error.
+                 */
+                static Real FastCos0(Real value);
+
+                /**
+                 * A fast cosine function. Uses the approximation
+                 * \f[
+                 * \cos(x) = 1 - 0.4999999963x^2 + 0.0416666418x^4 - 
+                 * 0.0013888397x^6 + 0.0000247609x^8 - 0.0000002605x^10 + 
+                 * \epsilon(x)
+                 * \f]
+                 *
+                 * \param
+                 *      value - The number to find the cosine of. Must be
+                 *      between 0 and \f$ \pi \f$.
+                 *  \return
+                 *      An approximation to the cosine function.
+                 *      Returns 1 if \f$x < 0\f$ and -1 if \f$x > \pi\f$.
+                 *  \todo
+                 *      Check the speed and the error.
+                 */
+                static Real FastCos1(Real value);
+
+                /**
+                 * A fast tangent function. Uses the approximation
+                 * \f[
+                 * \frac{\tan(x)}{x} = 1 + 0.31755x^2 + 0.20330x^4 + 
+                 * \epsilon(x)
+                 * \f]
+                 *
+                 * \param
+                 *      value - The number to find the tangent of.
+                 *  \return
+                 *      An approximation to the tangent.
+                 *      Returns 1 if \f$x > \frac{\pi}{4}\f$, returns -1 if 
+                 *      \f$x < -\frac{\pi}{4}\f$.
+                 *  \todo
+                 *      Check the speed and the error.
+                 */
+                static Real FastTan0(Real value);
+
+                /**
+                 * A fast tangent function. Uses the approximation
+                 * \f[
+                 * \frac{\tan(x)}{x} = 1 + 0.3333314036x^2 + 0.1333923995x^4 +
+                 * 0.0533740603x^6 + 0.0245650893x^8 + 0.0029005250x^{10} +
+                 * 0.0095168091x^{12} + \epsilon(x)
+                 * \f]
+                 *
+                 * \param
+                 *      value - The number to find the tangent of.
+                 *  \return
+                 *      An approximation to the tangent.
+                 *      Returns 1 if \f$x > \frac{\pi}{4}\f$, returns -1 if 
+                 *      \f$x < -\frac{\pi}{4}\f$.
+                 *  \todo
+                 *      Check the speed and the error.
+                 */
+                static Real FastTan1(Real value);
+
+                /**
+                 * A fast arcus sinus function. Uses the approximation
+                 * \f[
+                 * \arcsin(x) = \frac{\pi}{2} - \sqrt{1-x}(1.5707288 - 
+                 * 0.2121144x + 0.0742610x^2 - 0.0187293x^3) + \epsilon(x)
+                 * \f]
+                 *
+                 * \param
+                 *      value - The number to find the arcus sinus of. Must be
+                 *      between [-1,1].
+                 *  \return
+                 *      An approximation to the arcus sinus function.
+                 *  \todo
+                 *      Check the speed and the error.
+                 */
+                static Real FastAsin0(Real value);
+
+                /**
+                 * A fast arcus sinus function. Uses the approximation
+                 * \f[
+                 * \arcsin(x) = \frac{\pi}{2} - \sqrt{1-x}(1.5707963050 -
+                 * 0.2145988016x + 0.0889789874x^2 - 0.0501743046x^3 +
+                 * 0.0308918810x^4 - 0.01708812556x^5 + 0.0066700901x^6
+                 * - 0.0012624911x^7) + \epsilon(x)
+                 * \f]
+                 *
+                 * \param
+                 *      value - The number to find the arcus sinus of. Must be
+                 *      between [-1,1].
+                 *  \return
+                 *      An approximation to the arcus sinus function.
+                 *  \todo
+                 *      Check the speed and the error.
+                 */
+                static Real FastAsin1(Real value);
+
+                /**
+                 *  A fast arcus cosine function. Uses the approximation
+                 *  \f[
+                 *  \arccos(x) = \frac{\pi}{2} - \arcsin(x)
+                 *  \f]
+                 *
+                 *  Uses the FastAsin0 to find \f$\arcsin(x)\f$.
+                 *
+                 *  \param
+                 *      value - The number to find the arcus cosine of. Must be
+                 *      between [-1, 1].
+                 *  \return
+                 *      An approximation to the arcus cosine function.
+                 *  \todo
+                 *      Check the speed and the error.
+                 */
+                static Real FastAcos0(Real value);
+
+                /**
+                 *  A fast arcus cosine function. Uses the approximation
+                 *  \f[
+                 *  \arccos(x) = \frac{\pi}{2} - \arcsin(x)
+                 *  \f]
+                 *
+                 *  Uses the FastAsin1 to find \f$\arcsin(x)\f$.
+                 *
+                 *  \param
+                 *      value - The number to find the arcus cosine of. Must be
+                 *      between -1 and 1.
+                 *  \return
+                 *      An approximation to the arcus cosine function.
+                 *  \note
+                 *      Returns 0 if \f$x > \f$ and \f$\pi\f$ if \f$x < -1\f$.
+                 *  \todo
+                 *      Check the speed and the error.
+                 */
+                static Real FastAcos1(Real value);
+
+                /**
+                 *  A fast arcus tangent function. Uses the approximation
+                 *  \f[
+                 *  \arctan(x) = 0.9998660x - 0.3302995x^3 + 0.1801410x^5 -
+                 *  0.0851330x^7 + 0.0208351x^9 + \epsilon(x)
+                 *  \f].
+                 *
+                 *  \param
+                 *      value - The number to find the arcus tangent of. Must
+                 *      be between -1 and 1.
+                 *  \return
+                 *      An approximation to the arcus tangent function.
+                 *  \todo
+                 *      Check the speed and the error.
+                 */
+                static Real FastAtan0(Real value);
+
+                /**
+                 *  A fast arcus tangent function. Uses the approximation
+                 *  \f[
+                 *  \frac{\arctan(x)}{x} = 1 - 0.3333314528x^2 + 
+                 *  0.1999355085x^4 - 0.1420889944x^6 + 0.1065626393x^8 -
+                 *  0.0752896400x^{10} + 0.0429096138x^{12} - 
+                 *  0.0161657367x^{14} + 0.0028662257x^{16} + \epsilon(x)
+                 *  \f]
+                 *
+                 *  \param
+                 *      value - The number to find the arcus tangent of. Must
+                 *      be between -1 and 1.
+                 *  \return
+                 *      An approximation to the arcus tangent function.
+                 *  \todo
+                 *      Check the speed and the error.
+                 */
+                static Real FastAtan1(Real value);
+
+                /**
+                 *  A fast inverse square root function. Uses Newton's method.
+                 *  \param
+                 *      value - The number to find the square root of. Must be
+                 *      non-negative.
+                 *  \return
+                 *      An approximation to the inverse square root of the 
+                 *      number.
+                 *  \todo
+                 *      Check the speed and the error.
+                 *  \note
+                 *      This is borrowed from the fast inverse square root
+                 *      function from the quake gaming engine. The initial
+                 *      guess is however borrowed form Wild Magic.
+                 */
+                static Real FastInvSqrt(Real value);
+
+                /**
+                 *  A fast square root function. Uses the FastInvSqrt method
+                 *  for calculation.
+                 *  \param
+                 *      value - The number to find the square root of. Must be
+                 *      non-negative.
+                 *  \return
+                 *      An approximation to the square root of the number.
+                 *  \todo
+                 *      Check the speed and the error.
+                 */
+                static Real FastSqrt(Real value);
         };
+
+        template<> const float Math<float>::EPSILON = FLT_EPSILON;
+        template<> const float Math<float>::MAX_REAL = FLT_MAX;
+        template<> const float Math<float>::PI = (float)(4.0*atan(1.0));
+        template<> const float Math<float>::TWO_PI = (float)(8.0*atan(1.0));
+        template<> const float Math<float>::HALF_PI = (float)(2.0*atan(1.0));
+        template<> const float Math<float>::INV_PI = (float)(1.0/(4.0*atan(1.0)));
+        template<> const float Math<float>::INV_TWO_PI = (float)(1.0/(8.0*atan(1.0)));
+        template<> const float Math<float>::DEG_TO_RAD = (float)(4.0*atan(1.0)/180);
+        template<> const float Math<float>::RAD_TO_DEG = (float)(180/(4.0*atan(1.0)));
+
+        template<> const double Math<double>::EPSILON = DBL_EPSILON;
+        template<> const double Math<double>::MAX_REAL = DBL_MAX;
+        template<> const double Math<double>::PI = 4.0*atan(1.0);
+        template<> const double Math<double>::TWO_PI = 8.0*atan(1.0);
+        template<> const double Math<double>::HALF_PI = 2.0*atan(1.0);
+        template<> const double Math<double>::INV_PI = 1.0/(4.0*atan(1.0));
+        template<> const double Math<double>::INV_TWO_PI = 1.0/(8.0*atan(1.0));
+        template<> const double Math<double>::DEG_TO_RAD = 4.0*atan(1.0)/180;
+        template<> const double Math<double>::RAD_TO_DEG = 180/(4.0*atan(1.0));
 
         //---------------------------------------------------------------------
         // Find the sinus of the value.
@@ -266,6 +598,7 @@ namespace Pandora
             }
             return HALF_PI;
         }
+
 
         //---------------------------------------------------------------------
         // Find the arcus cosine of the value.
@@ -399,6 +732,320 @@ namespace Pandora
         Real Math<Real>::Isqrt(Real value)
         {
             return (Real) (1.0/sqrt(value));
+        }
+
+        //---------------------------------------------------------------------
+        // Find the sign of an integer.
+        //---------------------------------------------------------------------
+        template<class Real>
+        int Math<Real>::Sign(int value)
+        {
+            if(value < 0)
+                return -1;
+            if(value > 0)
+                return 1;
+            return 0;
+        }
+
+        //---------------------------------------------------------------------
+        // Find the sign of a number.
+        //---------------------------------------------------------------------
+        template<class Real>
+        int Math<Real>::Sign(Real value)
+        {
+            if(value < 0)
+                return -1;
+            if(value > 0)
+                return 1;
+            return 0;
+        }
+
+        //---------------------------------------------------------------------
+        // Find a random number between 0,1.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::UnitRandom(unsigned int seed)
+        {
+            if(seed == 0)
+                srand( time(NULL) );
+            else
+                srand(seed);
+
+            return ((Real) rand()) / RAND_MAX;
+        }
+
+        //---------------------------------------------------------------------
+        // Find a random number between -1,1
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::SymmetricRandom(unsigned int seed)
+        {
+            if(seed == 0)
+                srand( time(NULL) );
+            else
+                srand(seed);
+
+            return Mod((Real) rand(), 2) - 1;
+        }
+
+        //---------------------------------------------------------------------
+        // Find a random number between min and max.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::IntervalRandom(Real min, Real max, unsigned int seed)
+        {
+            if(seed == 0)
+                srand( time(NULL) );
+            else
+                srand(seed);
+
+            Real diff = max - min;
+
+            return Mod((Real) rand(), diff) + min;
+        }
+
+        //---------------------------------------------------------------------
+        // Find a fast approximation to the sinus function.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::FastSin0(Real x)
+        {
+            if(x < -HALF_PI)
+                return -1;
+            if(x > HALF_PI)
+                return 1;
+
+            Real res = 1 - 0.16605*x*x + 0.00761*x*x*x*x;
+            return res*x;
+        }
+
+        //---------------------------------------------------------------------
+        // Find a fast approximation to the sinus function.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::FastSin1(Real x)
+        {
+            if(x < -HALF_PI)
+                return -1;
+            if(x > HALF_PI)
+                return 1;
+
+            Real res = 1 - 0.1666666664*x*x + 0.0083333315*x*x*x*x -
+                    0.0001984090*x*x*x*x*x*x + 0.0000027526*x*x*x*x*x*x*x*x - 
+                    0.0000000239*x*x*x*x*x*x*x*x*x*x;
+            return res*x;
+        }
+
+        //---------------------------------------------------------------------
+        // Find a fast approximation to the cosine function.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::FastCos0(Real value)
+        {
+            if(value < 0)
+                return 1;
+            if(value > PI)
+                return -1;
+
+            Real x = value;
+
+            if(x > HALF_PI)
+                x -= HALF_PI;
+
+            Real res = 1 - 0.49670*x*x + 0.03704*x*x*x*x;
+
+            if(x != value)
+                return -res;
+            return res;
+        }
+
+        //---------------------------------------------------------------------
+        // Find a fast approximation to the cosine function.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::FastCos1(Real value)
+        {
+            if(value < 0)
+                return 1;
+            if(value > PI)
+                return -1;
+
+            Real x = value;
+            if(x > HALF_PI)
+                x -= HALF_PI;
+
+            Real res = 1 - 0.4999999964*x*x + 0.0416666418*x*x*x*x -
+                0.0013888397*x*x*x*x*x*x + 0.0000247609*x*x*x*x*x*x*x*x - 
+                0.0000002605*x*x*x*x*x*x*x*x*x*x;
+
+            if(x != value)
+                return -res;
+            return res;
+        }
+
+        //---------------------------------------------------------------------
+        // Find a fast approximation to the tangent function.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::FastTan0(Real value)
+        {
+            if(value > HALF_PI/2)
+                return 1;
+            if(value < -HALF_PI/2)
+                return -1;
+
+            Real x = Abs(value);
+
+            Real res = 1 + 0.31755*Pow(x,2) + 0.20330*Pow(x,4);
+            return res*value;
+        }
+
+        //---------------------------------------------------------------------
+        // Find a fast approximation to the tangent function.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::FastTan1(Real value)
+        {
+            if(value > HALF_PI/2)
+                return 1;
+            if(value < -HALF_PI/2)
+                return -1;
+
+            Real x = Abs(value);
+
+            Real res = 1 + 0.3333314036*Pow(x,2) + 0.1333923995*Pow(x,4) +
+                0.0533740603*Pow(x,6) + 0.0245650893*Pow(x,8) + 
+                0.0029005250*Pow(x,10) + 0.0095168091*Pow(x,12);
+            return res*value;
+        }
+
+        //---------------------------------------------------------------------
+        // Find a fast approximation to the arcsin function.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::FastAsin0(Real value)
+        {
+            Real x = Abs(value);
+            assert(x <= (Real)1.0 && "x must be between -1 and 1. FastAsin0.");
+
+            Real res = HALF_PI - Sqrt(1-x)*(1.5707288 - 0.2121144*x + 
+                    0.0742610*Pow(x,2) - 0.0187293*Pow(x,3));
+            if(x != value)
+                return -res;
+            return res;
+        }
+
+        //---------------------------------------------------------------------
+        // Find a fast approximation to the arcsin function.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::FastAsin1(Real value)
+        {
+            Real x = Abs(value);
+            assert(x <= (Real)1.0 && "x must be between -1 and 1. FastAsin1.");
+
+            Real res = HALF_PI - Sqrt(1-x)*(1.5707963050 - 0.2145988016*x +
+                    0.0889789874*Pow(x,2) - 0.0501743046*Pow(x,3) + 
+                    0.030891881*Pow(x,4) - 0.01708812556*Pow(x,5) +
+                    0.0066700901*Pow(x,6) - 0.0012624911*Pow(x,7));
+
+            if(x != value)
+                return -res;
+            return res;
+        }
+
+        //---------------------------------------------------------------------
+        // Find a fast approximation to the arccos function.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::FastAcos0(Real value)
+        {
+            Real x = Abs(value);
+            assert(x <= (Real)1.0 && "x must be between -1 and 1. FastAcos0.");
+
+            Real res = HALF_PI - FastAsin0(x);
+            if(x != value)
+                return res + HALF_PI;
+            return res;
+        }
+
+        //---------------------------------------------------------------------
+        // Find a fast approximation to the arccos function.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::FastAcos1(Real value)
+        {
+            Real x = Abs(value);
+            assert(x <= (Real)1.0 && "x must be between -1 and 1. FastAcos1.");
+
+            Real res = HALF_PI - FastAsin1(x);
+            if(x != value)
+                return res + HALF_PI;
+            return res;
+        }
+
+        //---------------------------------------------------------------------
+        // Find a fast approximation to the arctan function.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::FastAtan0(Real value)
+        {
+            Real x = value;
+            assert(Abs(x) <= (Real)1.0 &&
+                    "x must be between -1 and 1. FastAtan0");
+
+            return (0.999866*x - 0.3302995*Pow(x,3) + 0.180141*Pow(x,5) -
+                0.085133*Pow(x,7) + 0.0208351*Pow(x,9));
+        }
+
+        //---------------------------------------------------------------------
+        // Find a fast approximation to the arctan function.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real Math<Real>::FastAtan1(Real value)
+        {
+            Real x = value;
+            assert(Abs(x) <= (Real) 1.0 && 
+                    "x must be between -1 and 1. FastAtan1");
+
+            Real res = 1 - 0.3333314528*Pow(x,2) + 0.1999355085*Pow(x,4) -
+                0.1420889944*Pow(x,6) + 0.1065626393*Pow(x,6) - 
+                0.07528964*Pow(x,10) + 0.0429096138*Pow(x,12) -
+                0.0161657367*Pow(x,14) + 0.0028662257*Pow(x,16);
+            return res*x;
+        }
+
+        //---------------------------------------------------------------------
+        // Find the fast inverse square root.
+        //---------------------------------------------------------------------
+        //Single precision.
+        template<>
+        float Math<float>::FastInvSqrt(float value)
+        {
+            float half = 0.5f*value;
+            int i = *(int*)&value;
+            i = 0x5f3759df - (i >> 1);
+            value = *(float*)&i;
+            value = value*(1.5f - half*value*value);
+            return value;
+        }
+
+        //Double precision.
+        template<>
+        double Math<double>::FastInvSqrt(double value)
+        {
+            double half = 0.5*value;
+            long long i = *(long long*)&value;
+            i = 0x5fe6ec85e7de30da - (i >> 1);
+            value = *(double*)&i;
+            value = value*(1.5 - half*value*value);
+            return value;
+        }
+
+        template<class Real>
+        Real Math<Real>::FastSqrt(Real value)
+        {
+            return (Real) 1.0/FastInvSqrt(value);
         }
     }
 }

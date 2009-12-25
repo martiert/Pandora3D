@@ -26,7 +26,8 @@ namespace Pandora
 {
     namespace Utils
     {
-        /** A simple Stack.
+        /** 
+         *  A simple Stack.
          *  \note
          *      The stack is not resizable.
          */
@@ -34,29 +35,35 @@ namespace Pandora
         class Stack
         {
             public:
-                /** Default constructor.
+                /** 
+                 *  Default constructor.
                  *  \param
                  *      size - The number of elements in the stack. This number
                  *      is final.
                  */
                 Stack(size_t size);
 
-                /** Destructor. */
+                /** 
+                 *  Destructor. 
+                 */
                 ~Stack();
 
-                /** Checks if the stack is empty.
+                /** 
+                 *  Checks if the stack is empty.
                  *  \return
                  *      True if the stack is empty, false otherwise.
                  */
                 bool isEmpty() const;
 
-                /** Checks if the stack is full.
+                /** 
+                 *  Checks if the stack is full.
                  *  \return
                  *      True if the stack is full, false otherwise.
                  */
                 bool isFull() const;
 
-                /** Pushes an item on to the stack.
+                /** 
+                 *  Pushes an item on to the stack.
                  *  \param
                  *      item - The element to push on the stack.
                  *  \note
@@ -64,16 +71,20 @@ namespace Pandora
                  */
                 void push(const T& item);
 
-                /** Pops the first item from the stack.
+                /** 
+                 *  Pops the first item from the stack.
                  *  \return
                  *      The first item on the stack. NULL if stack is empty.
                  */
                 T& pop();
 
-                /** Clears the stack. */
+                /** 
+                 *  Clears the stack. 
+                 */
                 void clear();
 
-                /** Get the top item in the stack without popping.
+                /** 
+                 *  Get the top item in the stack without popping.
                  *  \return
                  *      NULL if the stack is empty. The top item otherwise.
                  */
