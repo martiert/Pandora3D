@@ -36,8 +36,10 @@ namespace Pandora
          * The Math class. Holds all the normal mathematical functions, like
          * trigonometric functions, logarithm, power, square roots, etc. Also
          * holds mathematical constant like PI, e, etc.
-         * \todo
-         *      Make the constant, and add some fast functions.
+         *
+         * \note
+         *      The fast functions is supposed to be used with slow hardware.
+         *      You will gain little/nothing using modern architecture.
          */
         template<class Real>
         class Math
@@ -233,7 +235,7 @@ namespace Pandora
                  *  \note
                  *      Only strict positive numbers.
                  */
-                static Real Isqrt(Real value);
+                static Real ISqrt(Real value);
 
                 /**
                  * Find the sign of an integer.
@@ -520,10 +522,10 @@ namespace Pandora
                  *      function from the quake gaming engine. The initial
                  *      guess is however borrowed form Wild Magic.
                  */
-                static Real FastInvSqrt(Real value);
+                static Real FastISqrt(Real value);
 
                 /**
-                 *  A fast square root function. Uses the FastInvSqrt method
+                 *  A fast square root function. Uses the FastISqrt method
                  *  for calculation.
                  *  \param
                  *      value - The number to find the square root of. Must be
@@ -729,7 +731,7 @@ namespace Pandora
         // Find the inverse square root of the value.
         //---------------------------------------------------------------------
         template<class Real>
-        Real Math<Real>::Isqrt(Real value)
+        Real Math<Real>::ISqrt(Real value)
         {
             return (Real) (1.0/sqrt(value));
         }
@@ -810,12 +812,10 @@ namespace Pandora
         template<class Real>
         Real Math<Real>::FastSin0(Real x)
         {
-            if(x < -HALF_PI)
-                return -1;
-            if(x > HALF_PI)
-                return 1;
-
-            Real res = 1 - 0.16605*x*x + 0.00761*x*x*x*x;
+            Real sqr = x*x;
+            Real res = 1;
+            res -= (Real)0.16605*sqr;
+            res += (Real) 0.00761*sqr*sqr;
             return res*x;
         }
 
@@ -825,14 +825,14 @@ namespace Pandora
         template<class Real>
         Real Math<Real>::FastSin1(Real x)
         {
-            if(x < -HALF_PI)
-                return -1;
-            if(x > HALF_PI)
-                return 1;
-
-            Real res = 1 - 0.1666666664*x*x + 0.0083333315*x*x*x*x -
-                    0.0001984090*x*x*x*x*x*x + 0.0000027526*x*x*x*x*x*x*x*x - 
-                    0.0000000239*x*x*x*x*x*x*x*x*x*x;
+            Real sqr = x*x;
+            Real d4 = sqr*sqr;
+            Real res = 1;
+            res -= 0.1666666664*sqr;
+            res += 0.0083333315*d4;
+            res -= 0.000198409*sqr*d4;
+            res += 0.0000027526*d4*d4;
+            res -= 0.0000000239*d4*d4*sqr;
             return res*x;
         }
 
@@ -842,17 +842,13 @@ namespace Pandora
         template<class Real>
         Real Math<Real>::FastCos0(Real value)
         {
-            if(value < 0)
-                return 1;
-            if(value > PI)
-                return -1;
-
             Real x = value;
 
             if(x > HALF_PI)
-                x -= HALF_PI;
+                x = PI - x;
 
-            Real res = 1 - 0.49670*x*x + 0.03704*x*x*x*x;
+            Real sqr = x*x;
+            Real res = 1 - 0.49670*sqr + 0.03704*sqr*sqr;
 
             if(x != value)
                 return -res;
@@ -865,18 +861,19 @@ namespace Pandora
         template<class Real>
         Real Math<Real>::FastCos1(Real value)
         {
-            if(value < 0)
-                return 1;
-            if(value > PI)
-                return -1;
-
             Real x = value;
             if(x > HALF_PI)
-                x -= HALF_PI;
+                x = PI - x;
 
-            Real res = 1 - 0.4999999964*x*x + 0.0416666418*x*x*x*x -
-                0.0013888397*x*x*x*x*x*x + 0.0000247609*x*x*x*x*x*x*x*x - 
-                0.0000002605*x*x*x*x*x*x*x*x*x*x;
+            Real sqr = x*x;
+            Real d4 = sqr*sqr;
+
+            Real res = 1;
+            res -= 0.4999999963*sqr;
+            res += 0.0416666418*d4;
+            res -= 0.0013888397*d4*sqr;
+            res += 0.0000247609*d4*d4;
+            res -= 0.0000002605*d4*d4*sqr;
 
             if(x != value)
                 return -res;
@@ -926,7 +923,6 @@ namespace Pandora
         Real Math<Real>::FastAsin0(Real value)
         {
             Real x = Abs(value);
-            assert(x <= (Real)1.0 && "x must be between -1 and 1. FastAsin0.");
 
             Real res = HALF_PI - Sqrt(1-x)*(1.5707288 - 0.2121144*x + 
                     0.0742610*Pow(x,2) - 0.0187293*Pow(x,3));
@@ -942,7 +938,6 @@ namespace Pandora
         Real Math<Real>::FastAsin1(Real value)
         {
             Real x = Abs(value);
-            assert(x <= (Real)1.0 && "x must be between -1 and 1. FastAsin1.");
 
             Real res = HALF_PI - Sqrt(1-x)*(1.5707963050 - 0.2145988016*x +
                     0.0889789874*Pow(x,2) - 0.0501743046*Pow(x,3) + 
@@ -961,7 +956,6 @@ namespace Pandora
         Real Math<Real>::FastAcos0(Real value)
         {
             Real x = Abs(value);
-            assert(x <= (Real)1.0 && "x must be between -1 and 1. FastAcos0.");
 
             Real res = HALF_PI - FastAsin0(x);
             if(x != value)
@@ -1020,23 +1014,23 @@ namespace Pandora
         //---------------------------------------------------------------------
         //Single precision.
         template<>
-        float Math<float>::FastInvSqrt(float value)
+        float Math<float>::FastISqrt(float value)
         {
-            float half = 0.5f*value;
-            int i = *(int*)&value;
-            i = 0x5f3759df - (i >> 1);
-            value = *(float*)&i;
-            value = value*(1.5f - half*value*value);
-            return value;
+            float x = value;
+            float xhalf = 0.5f*x;
+            int i = *(int*)&x;
+            i = 0x5f375a86 - (i>>1);
+            x = *(float*)&i;
+            return x*(1.5f - xhalf*x*x);
         }
 
         //Double precision.
         template<>
-        double Math<double>::FastInvSqrt(double value)
+        double Math<double>::FastISqrt(double value)
         {
             double half = 0.5*value;
             long long i = *(long long*)&value;
-            i = 0x5fe6ec85e7de30da - (i >> 1);
+            i = 0x5fe6ec85e7de30daLL - (i >> 1);
             value = *(double*)&i;
             value = value*(1.5 - half*value*value);
             return value;
@@ -1045,7 +1039,7 @@ namespace Pandora
         template<class Real>
         Real Math<Real>::FastSqrt(Real value)
         {
-            return (Real) 1.0/FastInvSqrt(value);
+            return (Real) 1.0/FastISqrt(value);
         }
     }
 }
