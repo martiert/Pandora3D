@@ -123,37 +123,54 @@ namespace Pandora
                 printf("\tMax error is: %e\n\n", max1Err);
             }
 
-            void sqrtTest()
+            void tanTest()
             {
-                /*
-                double sqrtTime;
-                double fstsqrtTime;
-                float error = 0.0;
+                double time;
+                double time0;
+                double time1;
+                double err0 = 0.0;
+                double err1 = 0.0;
+                double PI_FOURTH = Math::Math<double>::HALF_PI*0.5;
+                int iter = 0;
 
-                for(int i = 0; i < 1000000; ++i) {
-                    float ans = Math::Math<float>::ISqrt(i);
-                    float approx = Math::Math<float>::FastISqrt(i);
-                    float err = Math::Math<float>::Abs(ans - approx);
-                    error = (error < err) ? err : error;
+                for(double i = -PI_FOURTH; i < PI_FOURTH; i += 0.0000001) {
+                    iter++;
+                    double exact = Math::Math<double>::Tan(i);
+                    double approx0 = Math::Math<double>::FastTan0(i);
+                    double approx1 = Math::Math<double>::FastTan1(i);
+
+                    double error0 = Math::Math<double>::Abs(exact - approx0);
+                    double error1 = Math::Math<double>::Abs(exact - approx1);
+
+                    err0 = (error0 > err0) ? error0 : err0;
+                    err1 = (error1 > err1) ? error1 : err1;
                 }
 
                 double start = System::getTime();
-                for(int i = 0; i < 1000000; ++i) {
-                    Math::Math<float>::ISqrt(i);
+                for(double i = -PI_FOURTH; i < PI_FOURTH; i += 0.0000001) {
+                    Math::Math<double>::Tan(i);
                 }
-                sqrtTime = System::getTime() - start;
+                time = System::getTime() - start;
 
                 start = System::getTime();
-                for(int i = 0; i < 1000000; ++i) {
-                    Math::Math<float>::FastISqrt(i);
+                for(double i = -PI_FOURTH; i < PI_FOURTH; i += 0.0000001) {
+                    Math::Math<double>::FastTan0(i);
                 }
-                fstsqrtTime = System::getTime() - start;
+                time0 = System::getTime() - start;
+                
+                start = System::getTime();
+                for(double i = -PI_FOURTH; i < PI_FOURTH; i += 0.0000001) {
+                    Math::Math<double>::FastTan1(i);
+                }
+                time1 = System::getTime() - start;
 
-                printf("Time for normal sqrt function is: %e seconds\n", sqrtTime/1000000);
-                printf("Time for fast sqrt function is: %e seconds\n", fstsqrtTime/1000000);
-                printf("\tSpeedup is: %.8f\n", sqrtTime/fstsqrtTime);
-                printf("\tMax error is: %e\n\n", error);*/
-                printf("%.4f\n%.4f\n%.4f\n\n", Math::Math<float>
+                printf("Time for normal tan function: %e seconds\n", time/iter);
+                printf("Time for first fast tan function: %e seconds\n", time0/iter);
+                printf("\tSpeedup: %.8f\n", time/time0);
+                printf("\tError: %e\n", err0);
+                printf("Time for second fast tan function: %e seconds\n", time1/iter);
+                printf("\tSpeedup: %.8f\n", time/time1);
+                printf("\tError: %e\n", err1);
             }
     };
 }
@@ -163,6 +180,6 @@ int main()
     Pandora::MathTest test;
     //test.sinusTest();
     //test.cosTest();
-    test.sqrtTest();
+    //test.tanTest();
     return 0;
 }

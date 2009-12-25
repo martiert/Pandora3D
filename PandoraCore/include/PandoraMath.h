@@ -376,7 +376,7 @@ namespace Pandora
                  *  \todo
                  *      Check the speed and the error.
                  */
-                static Real FastTan0(Real value);
+                static Real FastTan0(Real x);
 
                 /**
                  * A fast tangent function. Uses the approximation
@@ -395,7 +395,7 @@ namespace Pandora
                  *  \todo
                  *      Check the speed and the error.
                  */
-                static Real FastTan1(Real value);
+                static Real FastTan1(Real x);
 
                 /**
                  * A fast arcus sinus function. Uses the approximation
@@ -521,21 +521,14 @@ namespace Pandora
                  *      This is borrowed from the fast inverse square root
                  *      function from the quake gaming engine. The initial
                  *      guess is however borrowed form Wild Magic.
+                 *
+                 *      Speedup for float is about 175000, and the error
+                 *      is bounded by \f$1.69*10^{-3}\f$.
+                 *
+                 *      Speedup for double is about 90000, and the error is
+                 *      bounded by \f$1.67*10^{-3}\f$.
                  */
                 static Real FastISqrt(Real value);
-
-                /**
-                 *  A fast square root function. Uses the FastISqrt method
-                 *  for calculation.
-                 *  \param
-                 *      value - The number to find the square root of. Must be
-                 *      non-negative.
-                 *  \return
-                 *      An approximation to the square root of the number.
-                 *  \todo
-                 *      Check the speed and the error.
-                 */
-                static Real FastSqrt(Real value);
         };
 
         template<> const float Math<float>::EPSILON = FLT_EPSILON;
@@ -884,36 +877,32 @@ namespace Pandora
         // Find a fast approximation to the tangent function.
         //---------------------------------------------------------------------
         template<class Real>
-        Real Math<Real>::FastTan0(Real value)
+        Real Math<Real>::FastTan0(Real x)
         {
-            if(value > HALF_PI/2)
-                return 1;
-            if(value < -HALF_PI/2)
-                return -1;
-
-            Real x = Abs(value);
-
-            Real res = 1 + 0.31755*Pow(x,2) + 0.20330*Pow(x,4);
-            return res*value;
+            Real sqr = x*x;
+            Real res = 1;
+            res += 0.31755*sqr;
+            res += 0.2033*sqr*sqr;
+            return res*x;
         }
 
         //---------------------------------------------------------------------
         // Find a fast approximation to the tangent function.
         //---------------------------------------------------------------------
         template<class Real>
-        Real Math<Real>::FastTan1(Real value)
+        Real Math<Real>::FastTan1(Real x)
         {
-            if(value > HALF_PI/2)
-                return 1;
-            if(value < -HALF_PI/2)
-                return -1;
-
-            Real x = Abs(value);
-
-            Real res = 1 + 0.3333314036*Pow(x,2) + 0.1333923995*Pow(x,4) +
-                0.0533740603*Pow(x,6) + 0.0245650893*Pow(x,8) + 
-                0.0029005250*Pow(x,10) + 0.0095168091*Pow(x,12);
-            return res*value;
+            Real sqr = x*x;
+            Real d4 = sqr*sqr;
+            Real d8 = d4*d4;
+            Real res = 1;
+            res += 0.3333314036*sqr;
+            res += 0.1333923995*d4;
+            res += 0.0533740603*d4*sqr;
+            res += 0.0245650893*d8;
+            res += 0.0029005250*d8*sqr;
+            res += 0.0095168091*d8*d4;
+            return res*x;
         }
 
         //---------------------------------------------------------------------
@@ -1034,12 +1023,6 @@ namespace Pandora
             value = *(double*)&i;
             value = value*(1.5 - half*value*value);
             return value;
-        }
-
-        template<class Real>
-        Real Math<Real>::FastSqrt(Real value)
-        {
-            return (Real) 1.0/FastISqrt(value);
         }
     }
 }
