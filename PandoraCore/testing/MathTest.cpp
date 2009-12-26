@@ -170,7 +170,56 @@ namespace Pandora
                 printf("\tError: %e\n", err0);
                 printf("Time for second fast tan function: %e seconds\n", time1/iter);
                 printf("\tSpeedup: %.8f\n", time/time1);
-                printf("\tError: %e\n", err1);
+                printf("\tError: %e\n\n", err1);
+            }
+
+            void asinTest()
+            {
+                double time;
+                double time0;
+                double time1;
+                double err0 = 0.0;
+                double err1 = 0.0;
+                int iter = 0;
+
+                for(double i = -1.0; i < 1.0; i += 0.0000001) {
+                    iter++;
+                    double exact = Math::Math<double>::Asin(i);
+                    double approx0 = Math::Math<double>::FastAsin0(i);
+                    double approx1 = Math::Math<double>::FastAsin1(i);
+
+                    double error = Math::Math<double>::Abs(exact - approx0);
+                    err0 = (err0 < error) ? error : err0;
+                    
+                    error = Math::Math<double>::Abs(exact - approx1);
+                    err1 = (err1 < error) ? error : err1;
+                }
+
+                double start = System::getTime();
+                for(double i = -1.0; i < 1.0; i += 0.0000001) {
+                    Math::Math<double>::Asin(i);
+                }
+                time = System::getTime() - start;
+
+                start = System::getTime();
+                for(double i = -1.0; i < 1.0; i += 0.0000001) {
+                    Math::Math<double>::FastAsin0(i);
+                }
+                time0 = System::getTime() - start;
+
+                start = System::getTime();
+                for(double i = -1.0; i < 1.0; i += 0.0000001) {
+                    Math::Math<double>::FastAsin1(i);
+                }
+                time1 = System::getTime() - start;
+
+                printf("Time used for normal asin function: %e seconds\n", time/iter);
+                printf("Time used for first fast function: %e seconds\n", time0/iter);
+                printf("\tSpeedup: %.8f\n", time/time0);
+                printf("\tError: %e\n", err0);
+                printf("Time used for second fast function: %e seconds\n", time1/iter);
+                printf("\tSpeedup: %.8f\n", time/time1);
+                printf("\tError: %e\n\n", err1);
             }
     };
 }
@@ -181,5 +230,6 @@ int main()
     //test.sinusTest();
     //test.cosTest();
     //test.tanTest();
+    //test.asinTest();
     return 0;
 }

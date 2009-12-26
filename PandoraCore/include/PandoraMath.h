@@ -913,8 +913,9 @@ namespace Pandora
         {
             Real x = Abs(value);
 
+            Real sqr = x*x;
             Real res = HALF_PI - Sqrt(1-x)*(1.5707288 - 0.2121144*x + 
-                    0.0742610*Pow(x,2) - 0.0187293*Pow(x,3));
+                    0.0742610*sqr - 0.0187293*sqr*x);
             if(x != value)
                 return -res;
             return res;
@@ -928,10 +929,12 @@ namespace Pandora
         {
             Real x = Abs(value);
 
+            Real sqr = x*x;
+            Real d4 = sqr*sqr;
             Real res = HALF_PI - Sqrt(1-x)*(1.5707963050 - 0.2145988016*x +
-                    0.0889789874*Pow(x,2) - 0.0501743046*Pow(x,3) + 
-                    0.030891881*Pow(x,4) - 0.01708812556*Pow(x,5) +
-                    0.0066700901*Pow(x,6) - 0.0012624911*Pow(x,7));
+                    0.0889789874*sqr - 0.0501743046*sqr*x + 
+                    0.030891881*d4 - 0.01708812556*d4*x +
+                    0.0066700901*d4*sqr - 0.0012624911*d4*sqr*x);
 
             if(x != value)
                 return -res;
