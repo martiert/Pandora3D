@@ -47,7 +47,7 @@ namespace Pandora
                  * \param
                  *      vec - The vector to copy.
                  */
-                Vec2(const Vec2<Real>& vec);
+                Vec2(const Vec2& vec);
 
                 /**
                  * Copy constructor for arrays.
@@ -69,7 +69,7 @@ namespace Pandora
                  * \param
                  *      vec - The vector to copy.
                  */
-                void operator=(const Vec2<Real>& vec);
+                void operator=(const Vec2& vec);
 
                 /**
                  * Copy an array to this vector.
@@ -106,7 +106,7 @@ namespace Pandora
                  *  \return
                  *      This vector added with vec.
                  */
-                Vec2 operator+(const Vec2<Real>& vec) const;
+                Vec2 operator+(const Vec2& vec) const;
 
                 /**
                  * Subtract two vectors.
@@ -115,28 +115,16 @@ namespace Pandora
                  *  \return
                  *      this vector subtracted with vec.
                  */
-                Vec2 operator-(const Vec2<Real>& vec) const;
+                Vec2 operator-(const Vec2& vec) const;
 
                 /**
                  * Multiply two vectors.
                  * \param
                  *      vec - The vector to multiply with.
                  *  \return
-                 *      A new vector where each component is the two 
-                 *      corresponding components multiplied.
+                 *      The two vectors multiplied. A scalar.
                  */
-                Vec2<Real> operator*(const Vec2<Real>& vec) const;
-
-                /**
-                 * Divide each element of this vector, with the elements of 
-                 * another vector.
-                 * \param
-                 *      vec - The vector to divide with.
-                 *  \return
-                 *      A vector where each of this vectors elements are
-                 *      divided with the corresponding element of vec.
-                 */
-                Vec2 operator/(const Vec2<Real>& vec) const;
+                Real operator*(const Vec2& vec) const;
 
                 /**
                  * Multiply this vector with a scalar.
@@ -161,18 +149,28 @@ namespace Pandora
                 Vec2 operator/(const Real scalar) const;
 
                 /**
+                 * Dot multiply this vector with another.
+                 * \param
+                 *      vec - The vector to multiply with.
+                 * \return
+                 *      A new vector which components is the components from
+                 *      this vector multiplied with vec.
+                 */
+                Vec2 dot(const Vec2 scalar) const;
+
+                /**
                  *  Add a vector to this vector.
                  *  \param
                  *      vec - The vector to add to this vector.
                  */
-                void operator+=(const Vec2<Real>& vec);
+                void operator+=(const Vec2& vec);
 
                 /**
                  *  Subtract a vector from this vector.
                  *  \param
                  *      vec - The vector to subtract with.
                  */
-                void operator-=(const Vec2<Real>& vec);
+                void operator-=(const Vec2& vec);
 
                 /**
                  *  Multiply this vector with a scalar.
@@ -187,7 +185,7 @@ namespace Pandora
                  *  \param
                  *      vec - The vector to multiply with.
                  */
-                void operator*=(const Vec2<Real>& vec);
+                void operator*=(const Vec2& vec);
 
                 /**
                  *  Checks if two vectors are equal.
@@ -196,7 +194,16 @@ namespace Pandora
                  *  \return
                  *      True if all the components are equal. False otherwise.
                  */
-                bool operator==(const Vec2<Real>& vec);
+                bool operator==(const Vec2& vec);
+
+                /**
+                 * Checks if this vector is different from another.
+                 * \param
+                 *      vec - The vector to compare to.
+                 * \return
+                 *      False if all the components are equal. False otherwise.
+                 */
+                bool operator!=(const Vec2& vec);
 
                 /**
                  *  Checks if this vector is larger then another.
@@ -206,7 +213,7 @@ namespace Pandora
                  *      True if all the components of this vector is larger
                  *      then the corresponding components of vec.
                  */
-                bool operator>(const Vec2<Real>& vec);
+                bool operator>(const Vec2& vec);
 
                 /**
                  *  Checks if this vector is larger then or equal to another 
@@ -217,7 +224,7 @@ namespace Pandora
                  *      True if all the components of this vector is larger 
                  *      then or equal to the corresponding component of vec.
                  */
-                bool operator>=(const Vec2<Real>& vec);
+                bool operator>=(const Vec2& vec);
 
                 /**
                  *  Checks if this vector is smaller then another.
@@ -227,7 +234,7 @@ namespace Pandora
                  *      True if all the components of this vector is smaller
                  *      then the corresponding component of vec.
                  */
-                bool operator<(const Vec2<Real>& vec);
+                bool operator<(const Vec2& vec);
 
                 /**
                  *  Checks if this vector is smaller then or equal to another.
@@ -237,7 +244,7 @@ namespace Pandora
                  *      True if all the components of this vector is smaller
                  *      then or equal to the corresponding component of vec.
                  */
-                bool operator<=(const Vec2<Real>& vec);
+                bool operator<=(const Vec2& vec);
 
 
                 /**
@@ -247,7 +254,7 @@ namespace Pandora
                  *  \return
                  *      The two vectors dot multiplied.
                  */
-                Real dot(const Vec2<Real>& vec);
+                Real dot(const Vec2& vec);
 
                 /**
                  * Find the length of the vector.
@@ -280,90 +287,8 @@ namespace Pandora
                 Real x, y;
         };
 
-        typedef Vec2<float> Vec2f;
-        typedef Vec2<double> Vec2d;
-        typedef Vec2<int> Vec2i;
-        typedef Vec2<unsigned int> Vec2u;
+#include "PandoraVector2.inl"
 
-        //---------------------------------------------------------------------
-        // Constructor.
-        //---------------------------------------------------------------------
-        template<class Real>
-        Vec2<Real>::Vec2(const Real x, const Real y)
-        {
-            this->x = x;
-            this->y = y;
-        }
-
-        //---------------------------------------------------------------------
-        // Constructor.
-        //---------------------------------------------------------------------
-        template<class Real>
-        Vec2<Real>::Vec2(const Vec2<Real>& vec)
-        {
-            x = vec[0];
-            y = vec[1];
-        }
-
-        //---------------------------------------------------------------------
-        // Constructor.
-        //---------------------------------------------------------------------
-        template<class Real>
-        Vec2<Real>::Vec2(const Real *vec)
-        {
-            x = vec[0];
-            y = vec[1];
-        }
-
-        //---------------------------------------------------------------------
-        // Destructor
-        //---------------------------------------------------------------------
-        template<class Real>
-        Vec2<Real>::~Vec2()
-        {
-        }
-
-        //---------------------------------------------------------------------
-        // Assignment operator.
-        //---------------------------------------------------------------------
-        template<class Real>
-        void Vec2<Real>::operator=(const Vec2<Real>& vec)
-        {
-            x = vec[0];
-            y = vec[1];
-        }
-
-        //---------------------------------------------------------------------
-        // Assignment operator.
-        //---------------------------------------------------------------------
-        template<class Real>
-        void Vec2<Real>::operator=(const Real *vec)
-        {
-            x = vec[0];
-            y = vec[1];
-        }
-
-        //---------------------------------------------------------------------
-        // Access operator.
-        //---------------------------------------------------------------------
-        template<class Real>
-        Real& Vec2<Real>::operator[](const unsigned int i)
-        {
-            assert(i < 2);
-
-            if(i == 0)
-                return x;
-            return y;
-        }
-
-        //---------------------------------------------------------------------
-        // Implicit conversion operator.
-        //---------------------------------------------------------------------
-        template<class Real>
-        Vec2<Real>::operator Real*()
-        {
-            return &x;
-        }
-    }
+   }
 }
 #endif

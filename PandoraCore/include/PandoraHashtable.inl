@@ -18,11 +18,14 @@ http://www.gnu.org/copyleft/lesser.txt.
 */
 
 //-----------------------------------------------------------------------------
-// This file contains the definition of the HashTable that belongs to Pandora3D
+// This file contains the implementation of the HashTable class from Pandora3D.
+// See PandoraHashtable.h for detailed explanation.
 //-----------------------------------------------------------------------------
-//-------------------------------------------------------------------------
-//                              Constructor.
-//-------------------------------------------------------------------------
+
+
+//-----------------------------------------------------------------------------
+// Constructor.
+//-----------------------------------------------------------------------------
 template<class Key, class Value>
 HashTable<Key,Value>::HashTable(const size_t& size)
 {
@@ -31,9 +34,9 @@ HashTable<Key,Value>::HashTable(const size_t& size)
     m_values = new Node<Key,Value>[size];
 }
 
-//-------------------------------------------------------------------------
-//                              Destructor.
-//-------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+// Destructor.
+//-----------------------------------------------------------------------------
 template<class Key, class Value>
 HashTable<Key,Value>::~HashTable()
 {
@@ -44,10 +47,10 @@ HashTable<Key,Value>::~HashTable()
     delete[] m_values;
 }
 
-//-------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Insert a value into the HashTable. Returns false if the table is full or
-//          if it hashes to the same value as another element.
-//-------------------------------------------------------------------------
+// if it hashes to the same value as another element.
+//-----------------------------------------------------------------------------
 template<class Key, class Value>
 bool HashTable<Key,Value>::insert(const Key& key, const Value& value)
 {
@@ -72,9 +75,9 @@ bool HashTable<Key,Value>::insert(const Key& key, const Value& value)
     return true;
 }
 
-//-------------------------------------------------------------------------
-//  Remove element from the table, and return the value of the element.
-//-------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+// Remove element from the table, and return the value of the element.
+//-----------------------------------------------------------------------------
 template<class Key, class Value>
 Value& HashTable<Key,Value>::remove(const Key& key)
 {
@@ -96,9 +99,9 @@ Value& HashTable<Key,Value>::remove(const Key& key)
     return tmp;
 }
 
-//---------------------------------------------------------------------
-//                  Remove all elements from the table.
-//---------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+// Remove all elements from the table.
+//-----------------------------------------------------------------------------
 template<class Key, class Value>
 void HashTable<Key,Value>::removeAll()
 {
@@ -113,9 +116,9 @@ void HashTable<Key,Value>::removeAll()
     }
 }
 
-//---------------------------------------------------------------------
-//          Checks if the key is present in the table.
-//---------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+// Checks if the key is present in the table.
+//-----------------------------------------------------------------------------
 template<class Key, class Value>
 bool HashTable<Key,Value>::exists(const Key& key) const
 {
@@ -128,10 +131,10 @@ bool HashTable<Key,Value>::exists(const Key& key) const
     return false;
 }
 
-//---------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Checks if the key is present in the table and, if it is, returns the
-//                                  element.
-//---------------------------------------------------------------------
+// element.
+//-----------------------------------------------------------------------------
 template<class Key,class Value>
 Value& HashTable<Key,Value>::find(const Key& key) const
 {
@@ -144,9 +147,9 @@ Value& HashTable<Key,Value>::find(const Key& key) const
     return NULL;
 }
 
-//---------------------------------------------------------------------
-//                      The Hash function.
-//---------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+// The Hash function.
+//-----------------------------------------------------------------------------
 template<class Key, class Value>
 int HashTable<Key,Value>::hashFunction(const Key& key) const
 {
