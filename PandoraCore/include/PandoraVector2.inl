@@ -31,7 +31,7 @@ typedef Vec2<unsigned int> Vec2u;
 // Constructor.
 //-----------------------------------------------------------------------------
 template<class Real>
-Vec2<Real>::Vec2(const Real x, const Real y)
+Vec2<Real>::Vec2(const Real& x, const Real& y)
 {
     this->x = x;
     this->y = y;
@@ -89,7 +89,7 @@ void Vec2<Real>::operator=(const Real *vec)
 // Access operator.
 //-----------------------------------------------------------------------------
 template<class Real>
-Real& Vec2<Real>::operator[](const unsigned int i)
+Real& Vec2<Real>::operator[](const unsigned int& i)
 {
     assert(i < 2 && "Index out of bounds.");
 
@@ -138,7 +138,7 @@ Real Vec2<Real>::operator*(const Vec2<Real>& vec) const
 // Multiply vector with a scalar.
 //-----------------------------------------------------------------------------
 template<class Real>
-Vec2<Real> Vec2<Real>::operator*(const Real scalar) const
+Vec2<Real> Vec2<Real>::operator*(const Real& scalar) const
 {
     return Vec2<Real>(x*scalar, y*scalar);
 }
@@ -147,7 +147,7 @@ Vec2<Real> Vec2<Real>::operator*(const Real scalar) const
 // Dot multiply two vectors.
 //-----------------------------------------------------------------------------
 template<class Real>
-Vec2<Real> Vec2<Real>::dot(const Vec2<Real>& vec) const
+Vec2<Real> Vec2<Real>::dot(const Vec2<Real>& vec)
 {
     return Vec2<Real>(x*vec.x, y*vec.y);
 }
@@ -176,7 +176,7 @@ void Vec2<Real>::operator-=(const Vec2<Real>& vec)
 // Multiplication with scalar.
 //-----------------------------------------------------------------------------
 template<class Real>
-void Vec2<Real>::operator*=(const Real scalar)
+void Vec2<Real>::operator*=(const Real& scalar)
 {
     x *= scalar;
     y *= scalar;
@@ -208,4 +208,31 @@ template<class Real>
 bool Vec2<Real>::operator!=(const Vec2<Real>& vec) const
 {
     return !(*this == vec);
+}
+
+//-----------------------------------------------------------------------------
+// Check if this vector is larger then another.
+//-----------------------------------------------------------------------------
+template<class Real>
+bool Vec2<Real>::operator>(const Vec2<Real>& vec) const
+{
+    return (x > vec.x && y > vec.y);
+}
+
+//-----------------------------------------------------------------------------
+// Check if this vector is larger then or equal to another.
+//-----------------------------------------------------------------------------
+template<class Real>
+bool Vec2<Real>::operator>=(const Vec2<Real>& vec) const
+{
+    return (*this == vec || *this > vec);
+}
+
+//-----------------------------------------------------------------------------
+// Check if this vector is smaller then another.
+//-----------------------------------------------------------------------------
+template<class Real>
+bool Vec2<Real>::operator<(const Vec2<Real>& vec) const
+{
+    return (x < vec.x && y < vec.y);
 }

@@ -40,7 +40,7 @@ namespace Pandora
                  *  \param
                  *      y - Element two. Defaults to zero.
                  */
-                Vec2(const Real x = 1.0, const Real y = 0.0);
+                Vec2(const Real& x = 1.0, const Real& y = 0.0);
 
                 /**
                  * Copy constructor.
@@ -81,7 +81,7 @@ namespace Pandora
                  *      If size is larger then two, only the two first elements
                  *      will be used.
                  */
-                void operator=(const Real* vec);
+                void operator=(const Real *vec);
 
                 /**
                  *  Access operator. Get element number i from the vector.
@@ -90,7 +90,7 @@ namespace Pandora
                  *  \return
                  *      Element number i.
                  */
-                Real& operator[](const unsigned int i);
+                Real& operator[](const unsigned int& i);
 
                 /**
                  *  Get the vector as a c-pointer.
@@ -134,7 +134,7 @@ namespace Pandora
                  *      A vector where each of it's elements is this vectors
                  *      elements multiplied with the scalar.
                  */
-                Vec2 operator*(const Real scalar) const;
+                Vec2 operator*(const Real& scalar) const;
 
                 /**
                  * Divide this vector with a scalar.
@@ -146,7 +146,7 @@ namespace Pandora
                  *  \note
                  *      The scalar can not be zero.
                  */
-                Vec2 operator/(const Real scalar) const;
+                Vec2 operator/(const Real& scalar) const;
 
                 /**
                  * Dot multiply this vector with another.
@@ -156,7 +156,7 @@ namespace Pandora
                  *      A new vector which components is the components from
                  *      this vector multiplied with vec.
                  */
-                Vec2 dot(const Vec2 scalar) const;
+                Vec2 dot(const Vec2& vec) const;
 
                 /**
                  *  Add a vector to this vector.
@@ -194,7 +194,7 @@ namespace Pandora
                  *  \return
                  *      True if all the components are equal. False otherwise.
                  */
-                bool operator==(const Vec2& vec);
+                bool operator==(const Vec2& vec) const;
 
                 /**
                  * Checks if this vector is different from another.
@@ -203,7 +203,7 @@ namespace Pandora
                  * \return
                  *      False if all the components are equal. False otherwise.
                  */
-                bool operator!=(const Vec2& vec);
+                bool operator!=(const Vec2& vec) const;
 
                 /**
                  *  Checks if this vector is larger then another.
@@ -213,7 +213,7 @@ namespace Pandora
                  *      True if all the components of this vector is larger
                  *      then the corresponding components of vec.
                  */
-                bool operator>(const Vec2& vec);
+                bool operator>(const Vec2& vec) const;
 
                 /**
                  *  Checks if this vector is larger then or equal to another 
@@ -224,7 +224,7 @@ namespace Pandora
                  *      True if all the components of this vector is larger 
                  *      then or equal to the corresponding component of vec.
                  */
-                bool operator>=(const Vec2& vec);
+                bool operator>=(const Vec2& vec) const;
 
                 /**
                  *  Checks if this vector is smaller then another.
@@ -234,7 +234,7 @@ namespace Pandora
                  *      True if all the components of this vector is smaller
                  *      then the corresponding component of vec.
                  */
-                bool operator<(const Vec2& vec);
+                bool operator<(const Vec2& vec) const;
 
                 /**
                  *  Checks if this vector is smaller then or equal to another.
@@ -244,7 +244,7 @@ namespace Pandora
                  *      True if all the components of this vector is smaller
                  *      then or equal to the corresponding component of vec.
                  */
-                bool operator<=(const Vec2& vec);
+                bool operator<=(const Vec2& vec) const;
 
 
                 /**
@@ -254,7 +254,7 @@ namespace Pandora
                  *  \return
                  *      The two vectors dot multiplied.
                  */
-                Real dot(const Vec2& vec);
+                Vec2 dot(const Vec2& vec);
 
                 /**
                  * Find the length of the vector.
