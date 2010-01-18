@@ -94,85 +94,8 @@ namespace Pandora
                 int m_size, m_stackAt;
         };
 
-        //---------------------------------------------------------------------
-        // Constructor.
-        //---------------------------------------------------------------------
-        template<class T>
-        Stack<T>::Stack(size_t size)
-        {
-            m_size = size;
-            m_stackAt = -1;
-            m_stack = new T[size];
-        }
+#include "PandoraStack.inl"
 
-        //---------------------------------------------------------------------
-        // Destructor.
-        //---------------------------------------------------------------------
-        template<class T>
-        Stack<T>::~Stack()
-        {
-            delete[] m_stack;
-        }
-
-        //---------------------------------------------------------------------
-        // Check if the stack is empty.
-        //---------------------------------------------------------------------
-        template<class T>
-        bool Stack<T>::isEmpty() const
-        {
-            return m_stackAt == -1;
-        }
-
-        //---------------------------------------------------------------------
-        // Check if the stack is full.
-        //---------------------------------------------------------------------
-        template<class T>
-        bool Stack<T>::isFull() const
-        {
-            return m_stackAt == (m_size - 1);
-        }
-
-        //---------------------------------------------------------------------
-        // Push an item on the stack.
-        //---------------------------------------------------------------------
-        template<class T>
-        void Stack<T>::push(const T& item)
-        {
-            assert(m_stackAt < (m_size - 1) && "Stack is full");
-            m_stack[++m_stackAt] = item;
-        }
-
-        //---------------------------------------------------------------------
-        // Pop the first item.
-        //---------------------------------------------------------------------
-        template<class T>
-        T& Stack<T>::pop() 
-        {
-            if(m_stackAt == -1)
-                return NULL;
-
-            return m_stack[m_stackAt--];
-        }
-
-        //---------------------------------------------------------------------
-        // Clear the Stack.
-        //---------------------------------------------------------------------
-        template<class T>
-        void Stack<T>::clear()
-        {
-            m_stackAt = -1;
-        }
-
-        //---------------------------------------------------------------------
-        // Get the top of the stack without popping.
-        //---------------------------------------------------------------------
-        template<class T>
-        T& Stack<T>::getTop() const
-        {
-            if(m_stackAt == -1)
-                return NULL;
-            return m_stack[m_stackAt];
-        }
     }
 }
 #endif

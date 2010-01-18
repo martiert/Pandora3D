@@ -20,6 +20,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 #define PANDORAVECTOR2_H
 
 #include "PandoraMath.h"
+#include <assert.h>
 
 namespace Pandora
 {
@@ -48,6 +49,18 @@ namespace Pandora
                  */
                 Vec2(const Vec2<Real>& vec);
 
+                /**
+                 * Copy constructor for arrays.
+                 * \param
+                 *      vec - The array to copy.
+                 *  \note
+                 *      The array must be of size at least two. Behaviour if
+                 *      size is less then two is dependent of the compiler.
+                 *      If size is larger then two, only the two first elements
+                 *      will be used.
+                 */
+                Vec2(const Real *vec);
+
                 /** Destructor */
                 ~Vec2();
 
@@ -59,6 +72,18 @@ namespace Pandora
                 void operator=(const Vec2<Real>& vec);
 
                 /**
+                 * Copy an array to this vector.
+                 * \param
+                 *      vec - The array to copy.
+                 * \note
+                 *      The array must be of size at least two. Behaviour if
+                 *      size is less then two is dependent of the compiler.
+                 *      If size is larger then two, only the two first elements
+                 *      will be used.
+                 */
+                void operator=(const Real* vec);
+
+                /**
                  *  Access operator. Get element number i from the vector.
                  *  \param
                  *      i - The index to return.
@@ -66,20 +91,6 @@ namespace Pandora
                  *      Element number i.
                  */
                 Real& operator[](const unsigned int i);
-
-                /**
-                 *  Get element x from the vector.
-                 *  \return
-                 *      Element x.
-                 */
-                Real& x();
-
-                /**
-                 *  Get element y from the vector.
-                 *  \return
-                 *      Element y.
-                 */
-                Real& y();
 
                 /**
                  *  Get the vector as a c-pointer.
@@ -265,8 +276,8 @@ namespace Pandora
                  *      otherwise.
                  */
                 void normalizeChecked();
-            private:
-                Real m_data[2];
+            public:
+                Real x, y;
         };
 
         typedef Vec2<float> Vec2f;
@@ -280,8 +291,8 @@ namespace Pandora
         template<class Real>
         Vec2<Real>::Vec2(const Real x, const Real y)
         {
-            m_data[0] = x;
-            m_data[1] = y;
+            this->x = x;
+            this->y = y;
         }
 
         //---------------------------------------------------------------------
@@ -290,8 +301,18 @@ namespace Pandora
         template<class Real>
         Vec2<Real>::Vec2(const Vec2<Real>& vec)
         {
-            m_data[0] = vec[0];
-            m_data[1] = vec[1];
+            x = vec[0];
+            y = vec[1];
+        }
+
+        //---------------------------------------------------------------------
+        // Constructor.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Vec2<Real>::Vec2(const Real *vec)
+        {
+            x = vec[0];
+            y = vec[1];
         }
 
         //---------------------------------------------------------------------
@@ -300,6 +321,48 @@ namespace Pandora
         template<class Real>
         Vec2<Real>::~Vec2()
         {
+        }
+
+        //---------------------------------------------------------------------
+        // Assignment operator.
+        //---------------------------------------------------------------------
+        template<class Real>
+        void Vec2<Real>::operator=(const Vec2<Real>& vec)
+        {
+            x = vec[0];
+            y = vec[1];
+        }
+
+        //---------------------------------------------------------------------
+        // Assignment operator.
+        //---------------------------------------------------------------------
+        template<class Real>
+        void Vec2<Real>::operator=(const Real *vec)
+        {
+            x = vec[0];
+            y = vec[1];
+        }
+
+        //---------------------------------------------------------------------
+        // Access operator.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Real& Vec2<Real>::operator[](const unsigned int i)
+        {
+            assert(i < 2);
+
+            if(i == 0)
+                return x;
+            return y;
+        }
+
+        //---------------------------------------------------------------------
+        // Implicit conversion operator.
+        //---------------------------------------------------------------------
+        template<class Real>
+        Vec2<Real>::operator Real*()
+        {
+            return &x;
         }
     }
 }
