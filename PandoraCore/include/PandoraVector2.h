@@ -254,7 +254,7 @@ namespace Pandora
                  *  \return
                  *      The two vectors dot multiplied.
                  */
-                Vec2 dot(const Vec2& vec);
+                Vec2 dotprod(const Vec2& vec) const;
 
                 /**
                  * Find the length of the vector.
@@ -279,10 +279,10 @@ namespace Pandora
                  *  Normalize the vector. Check if possible first (length is 
                  *  not zero).
                  *  \return
-                 *      False if the length of the vector is zero. True 
-                 *      otherwise.
+                 *      False if the length of the vector is zero, and thus the
+                 *      vector is not normalized. True otherwise.
                  */
-                void normalizeChecked();
+                bool normalizeChecked();
             public:
                 Real x, y;
         };

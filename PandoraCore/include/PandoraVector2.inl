@@ -144,15 +144,6 @@ Vec2<Real> Vec2<Real>::operator*(const Real& scalar) const
 }
 
 //-----------------------------------------------------------------------------
-// Dot multiply two vectors.
-//-----------------------------------------------------------------------------
-template<class Real>
-Vec2<Real> Vec2<Real>::dot(const Vec2<Real>& vec)
-{
-    return Vec2<Real>(x*vec.x, y*vec.y);
-}
-
-//-----------------------------------------------------------------------------
 // Addition operator.
 //-----------------------------------------------------------------------------
 template<class Real>
@@ -225,7 +216,7 @@ bool Vec2<Real>::operator>(const Vec2<Real>& vec) const
 template<class Real>
 bool Vec2<Real>::operator>=(const Vec2<Real>& vec) const
 {
-    return (*this == vec || *this > vec);
+    return (*this > vec || *this == vec);
 }
 
 //-----------------------------------------------------------------------------
@@ -235,4 +226,64 @@ template<class Real>
 bool Vec2<Real>::operator<(const Vec2<Real>& vec) const
 {
     return (x < vec.x && y < vec.y);
+}
+
+//-----------------------------------------------------------------------------
+// Check if this vector is smaller then or equal to another.
+//-----------------------------------------------------------------------------
+template<class Real>
+bool Vec2<Real>::operator<=(const Vec2<Real>& vec) const
+{
+    return (*this < vec || *this == vec);
+}
+
+//-----------------------------------------------------------------------------
+// Dot product between two vectors.
+//-----------------------------------------------------------------------------
+template<class Real>
+Vec2<Real> Vec2<Real>::dotprod(const Vec2<Real>& vec) const
+{
+    return Vec2<Real>(x * vec.x, y * vec.y);
+}
+
+//-----------------------------------------------------------------------------
+// Return length of the vector.
+//-----------------------------------------------------------------------------
+template<class Real>
+Real Vec2<Real>::length() const
+{
+    return Math<Real>::Sqrt(x*x + y*y);
+}
+
+//-----------------------------------------------------------------------------
+// Return squared length of the vector.
+//-----------------------------------------------------------------------------
+template<class Real>
+Real Vec2<Real>::lengthSquared() const
+{
+    return (x*x + y*y);
+}
+
+//-----------------------------------------------------------------------------
+// Normalize the vector.
+//-----------------------------------------------------------------------------
+template<class Real>
+void Vec2<Real>::normalize()
+{
+    Real scale = length();
+    *this /= scale;
+}
+
+//-----------------------------------------------------------------------------
+// Normalize the vector. Check if the scaling value is zero.
+//-----------------------------------------------------------------------------
+template<class Real>
+bool Vec2<Real>::normalizeChecked()
+{
+    Real scale = length();
+    if(scale == 0)
+        return false;
+
+    *this /= scale;
+    return true;
 }
