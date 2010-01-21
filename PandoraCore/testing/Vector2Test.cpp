@@ -35,13 +35,15 @@ void Vector2Test::testArritmetic()
     Vec2f identity;
     Vec2f zero;
     Vec2f ones(1.0f, 1.0f);
-    Vec2f rand(4.3f, 8.5f);
-    Vec2f rand2(3.3f, 7.5f);
+    Vec2f rand(4.5f, 8.5f);
+    Vec2f rand2(3.5f, 7.5f);
 
     Vec2f tmp = ones + rand2;
     ones += rand2;
     CPPUNIT_ASSERT( tmp.x == rand.x && tmp.y == rand.y );
     CPPUNIT_ASSERT( ones.x == rand.x && ones.y == rand.y );
+    ones -= rand2;
+    CPPUNIT_ASSERT( ones == Vec2f(1.0f, 1.0f) );
 }
 
 void Vector2Test::testComparsion()

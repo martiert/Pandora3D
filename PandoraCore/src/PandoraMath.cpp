@@ -19,6 +19,7 @@ template<> const double Pandora::Math::Math<double>::INV_PI = 1.0/(4.0*atan(1.0)
 template<> const double Pandora::Math::Math<double>::INV_TWO_PI = 1.0/(8.0*atan(1.0));
 template<> const double Pandora::Math::Math<double>::DEG_TO_RAD = 4.0*atan(1.0)/180;
 template<> const double Pandora::Math::Math<double>::RAD_TO_DEG = 180/(4.0*atan(1.0));
+
 /*
 template<>
 float Pandora::Math::Math<float>::FastISqrt(float value)
