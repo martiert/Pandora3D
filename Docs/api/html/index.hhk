@@ -4,24 +4,60 @@
 <param name="FrameName" value="right">
 </OBJECT>
 <UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Vector.html#a6c1c963c1d58b1e371a07c048c33cdca"><param name="Name" value="append"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#ab1749b87efff208e231f922554999107"><param name="Name" value="Abs"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#ac3dcadaee24008dab0068d127ae1e7b0"><param name="Name" value="Acos"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1System.html#ada09e513d8ed1157102514012514cccf"><param name="Name" value="allocate2D"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1System.html#a69bfe56077b8351fc9bab9f98d81c23f"><param name="Name" value="allocate3D"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1System.html#a921cec353704d9e7842be61d81102634"><param name="Name" value="append"></OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1System.html#a921cec353704d9e7842be61d81102634"><param name="Name" value="Pandora::System"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Vector.html#a6c1c963c1d58b1e371a07c048c33cdca"><param name="Name" value="Pandora::Utils::Vector"></OBJECT>
+  </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#aaea6112ed7a02e5f34d9c79e90d442fe"><param name="Name" value="Asin"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a0b716811db2a16802d60017013ef412e"><param name="Name" value="Atan2"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a6bba77e8cdfd22e003e5a66c8f7454cc"><param name="Name" value="Atan"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Vector.html#a9760f625847909ad7dc45a71742bbcc9"><param name="Name" value="c_ptr"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a93b4ec48bfab8724dd3e1f4efc5e2cdd"><param name="Name" value="Ceil"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Stack.html#acbedc5107a2e03fe9a53d044efdcbabf"><param name="Name" value="clear"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#aa9d807c35e80deff09f81de0669636fd"><param name="Name" value="Cos"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1System.html#a09639e97fee980de5a6f897deae15819"><param name="Name" value="deallocate2D"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1System.html#a36155ca9d7863c6434daa9d250f4ad52"><param name="Name" value="deallocate3D"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a125d0a36795d699313ba2f1e5ca7fbec"><param name="Name" value="DEG_TO_RAD"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a2c440bc3032c042b918f9c7df9255b9f"><param name="Name" value="EPSILON"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1HashTable.html#a61bb5ce54f3380c10edebb59cac114cd"><param name="Name" value="exists"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1HashTable.html#a61bb5ce54f3380c10edebb59cac114cd"><param name="Name" value="Pandora::Utils::HashTable"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1List.html#ad15fe96a79420346c975e96eb23f35ea"><param name="Name" value="Pandora::Utils::List"></OBJECT>
   </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#aa57af2f2cc7e74c2ec588d57335713bb"><param name="Name" value="Exp"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a428a54882f4254504eea76555109aabc"><param name="Name" value="FastAcos0"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a863711b77e1f0f6ec345f22026adafca"><param name="Name" value="FastAcos1"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a8e3c2fe3a1fe816f3a3e4014caa99a9d"><param name="Name" value="FastAsin0"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a5e8f6cfa30c76a7e94203d0f39cac750"><param name="Name" value="FastAsin1"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a8884f2f961596c8f6f242f069e5f5233"><param name="Name" value="FastAtan0"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#ae15bff51bef6ad225efcca9d92a2a884"><param name="Name" value="FastAtan1"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a5f09555e2f513841e81d0bbad9bddc2f"><param name="Name" value="FastCos0"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#aa1db0aa6ca02d1267787ae3dbd4cd94f"><param name="Name" value="FastCos1"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a53d660cff181390c8885b439cd9bf141"><param name="Name" value="FastISqrt"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a3b0c341f70d8e0fab62a5964552cc23c"><param name="Name" value="FastSin0"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a83fed7b29a99e003033cb11e8c798f1b"><param name="Name" value="FastSin1"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a24f24bdbb89763bb8c569517de3c42eb"><param name="Name" value="FastSqrt"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a4181fcb30e6f5517fa0b6997a5364c52"><param name="Name" value="FastTan0"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a7fe803cde60af5123f67a3a0afb933d3"><param name="Name" value="FastTan1"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1HashTable.html#ab1aae3564898a1de7870930f7e678de0"><param name="Name" value="find"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a8eb4e9fa213fe52f260e8d12bf480845"><param name="Name" value="Floor"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Vector.html#a4d21fd9aff673df56471a9724b36fe2c"><param name="Name" value="getElements"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Vector.html#aee155c4f9a304e540e359af6d3fec3d8"><param name="Name" value="getIncrement"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1String.html#a86a20d1855c1747ac7090eee6575fcda"><param name="Name" value="getLength"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Set.html#a57d191182540ce79e9a0db1cf52ddd10"><param name="Name" value="getPointer"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Set.html#a80998fcb33af9bcd8ef6549f107ee1f6"><param name="Name" value="getSize"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Set.html#a80998fcb33af9bcd8ef6549f107ee1f6"><param name="Name" value="Pandora::Utils::Set"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Vector.html#a8df1cb3c4cc21dca4b093eed28c62b9a"><param name="Name" value="Pandora::Utils::Vector"></OBJECT>
   </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1System.html#a09210f4b636a57dcaedfb272de6f2c5a"><param name="Name" value="getTime"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Stack.html#a9bdcdee9e004ce12b8dcfc36663d0eac"><param name="Name" value="getTop"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#ac0c944cd69243a88ff0e9ea367321dfb"><param name="Name" value="HALF_PI"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1HashTable.html#a3650951a9de3e61dd2deade67636a0cf"><param name="Name" value="HashTable"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1HashTable.html#a57a06b0dde67656b86fd91c04e9a4fbf"><param name="Name" value="insert"></OBJECT>
   <UL>
@@ -30,10 +66,107 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Set.html#a2c43d731fac0319a5be8c055aae33c8b"><param name="Name" value="Pandora::Utils::Set"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Vector.html#a8757e06ea29132d0b8873a13b6c1d956"><param name="Name" value="Pandora::Utils::Vector"></OBJECT>
   </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#aba2a11a01012fe037a135bc995152656"><param name="Name" value="IntervalRandom"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a0fda539de1e18c6dbbcfc2779a82e5d6"><param name="Name" value="INV_PI"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a3f5a87612361bc721b6ae7bc608a8fc7"><param name="Name" value="INV_TWO_PI"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Stack.html#a163441b950b324b28db471e793e20c62"><param name="Name" value="isEmpty"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Stack.html#aceefd2e5cbc10a11bcbaa3d73cd78bbc"><param name="Name" value="isFull"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#afeafad569b1a3b2410a6c6df2a8909f4"><param name="Name" value="ISqrt"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Vec2.html#a22b8f1e250d0dd2e2430a554ed3d6c72"><param name="Name" value="length"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Vec2.html#ad9475692b03cad79b1708dea60741655"><param name="Name" value="lengthSquared"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1List.html#aca19ef1d1d19775a487e1fa55a1aeb40"><param name="Name" value="List"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1System.html#a05d52d2dfca56254ab034e275ba7b52d"><param name="Name" value="load"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#af424fd15a36facdd1823489438cb3c52"><param name="Name" value="Log10"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#ab9da334373f9a06ad9966fc3e46bbebe"><param name="Name" value="Log"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#ab27154bc08c8800d080e488e91b373af"><param name="Name" value="MAX_REAL"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a462b823286c0c5ab943f77199eec580c"><param name="Name" value="Mod"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1String.html#ad38ba8b1d46a2240a37d4e722cc49002"><param name="Name" value="operator const char *"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1String.html#a5967d518f63d66a93e830a94064df3c5"><param name="Name" value="operator unsigned int"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1String.html#ac3a01db098901485d45c98dcda8ebf44"><param name="Name" value="operator!="></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Vec2.html#a95f62b5547774159309cb3fa897fb53f"><param name="Name" value="operator*"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Vec2.html#aaaaebbabbb13de463785ffeef556791e"><param name="Name" value="operator+"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Vec2.html#a348c2591c3996fb84f7b3ff464dc5ca7"><param name="Name" value="operator-"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Vec2.html#a8ea53c4b187d31aa1e41b33f0ab60678"><param name="Name" value="operator/"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1String.html#a7239251fc92d3e666020863f56ee4be3"><param name="Name" value="operator=="></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Vec2.html#ae28ae918cf497fc254d1369ef07c4a63"><param name="Name" value="operator="></OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Vec2.html#ae28ae918cf497fc254d1369ef07c4a63"><param name="Name" value="Pandora::Math::Vec2"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1String.html#a2c80c3079f8d419320922c56f69a3e3d"><param name="Name" value="Pandora::Utils::String"></OBJECT>
+  </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Vector.html#adef2d8c160a9f9c2398f3c92f7874f4e"><param name="Name" value="operator[]"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html"><param name="Name" value="Pandora::Math::Math"></OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#ab1749b87efff208e231f922554999107"><param name="Name" value="Abs"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#ac3dcadaee24008dab0068d127ae1e7b0"><param name="Name" value="Acos"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#aaea6112ed7a02e5f34d9c79e90d442fe"><param name="Name" value="Asin"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a6bba77e8cdfd22e003e5a66c8f7454cc"><param name="Name" value="Atan"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a0b716811db2a16802d60017013ef412e"><param name="Name" value="Atan2"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a93b4ec48bfab8724dd3e1f4efc5e2cdd"><param name="Name" value="Ceil"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#aa9d807c35e80deff09f81de0669636fd"><param name="Name" value="Cos"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a125d0a36795d699313ba2f1e5ca7fbec"><param name="Name" value="DEG_TO_RAD"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a2c440bc3032c042b918f9c7df9255b9f"><param name="Name" value="EPSILON"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#aa57af2f2cc7e74c2ec588d57335713bb"><param name="Name" value="Exp"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a428a54882f4254504eea76555109aabc"><param name="Name" value="FastAcos0"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a863711b77e1f0f6ec345f22026adafca"><param name="Name" value="FastAcos1"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a8e3c2fe3a1fe816f3a3e4014caa99a9d"><param name="Name" value="FastAsin0"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a5e8f6cfa30c76a7e94203d0f39cac750"><param name="Name" value="FastAsin1"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a8884f2f961596c8f6f242f069e5f5233"><param name="Name" value="FastAtan0"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#ae15bff51bef6ad225efcca9d92a2a884"><param name="Name" value="FastAtan1"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a5f09555e2f513841e81d0bbad9bddc2f"><param name="Name" value="FastCos0"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#aa1db0aa6ca02d1267787ae3dbd4cd94f"><param name="Name" value="FastCos1"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a53d660cff181390c8885b439cd9bf141"><param name="Name" value="FastISqrt"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a3b0c341f70d8e0fab62a5964552cc23c"><param name="Name" value="FastSin0"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a83fed7b29a99e003033cb11e8c798f1b"><param name="Name" value="FastSin1"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a24f24bdbb89763bb8c569517de3c42eb"><param name="Name" value="FastSqrt"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a4181fcb30e6f5517fa0b6997a5364c52"><param name="Name" value="FastTan0"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a7fe803cde60af5123f67a3a0afb933d3"><param name="Name" value="FastTan1"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a8eb4e9fa213fe52f260e8d12bf480845"><param name="Name" value="Floor"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#ac0c944cd69243a88ff0e9ea367321dfb"><param name="Name" value="HALF_PI"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#aba2a11a01012fe037a135bc995152656"><param name="Name" value="IntervalRandom"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a0fda539de1e18c6dbbcfc2779a82e5d6"><param name="Name" value="INV_PI"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a3f5a87612361bc721b6ae7bc608a8fc7"><param name="Name" value="INV_TWO_PI"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#afeafad569b1a3b2410a6c6df2a8909f4"><param name="Name" value="ISqrt"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#ab9da334373f9a06ad9966fc3e46bbebe"><param name="Name" value="Log"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#af424fd15a36facdd1823489438cb3c52"><param name="Name" value="Log10"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#ab27154bc08c8800d080e488e91b373af"><param name="Name" value="MAX_REAL"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a462b823286c0c5ab943f77199eec580c"><param name="Name" value="Mod"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#af7d39bdb20277177d95c0fda956bc219"><param name="Name" value="PI"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a3a82d13009d514249de78621f34b7f56"><param name="Name" value="Pow"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a57d1aa509b9acc076adc269158f29e56"><param name="Name" value="RAD_TO_DEG"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a1fde48d8187a807b13e0731ca3f7c0eb"><param name="Name" value="Round"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#ab2fcbd106a114f343bf048d6463f2476"><param name="Name" value="Sign"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a53730f2ada3242abe2039e1841d60dea"><param name="Name" value="Sin"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a222e2f1156a602b9292606b45c7592ac"><param name="Name" value="Sqrt"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#aeb8611ebfee85d3380f8df42a39a87f2"><param name="Name" value="SymmetricRandom"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a146aec6335509c7eed8cf4a1172911e7"><param name="Name" value="Tan"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a4d9b8a6f3c85bc4bd8e3a71d7db6ffce"><param name="Name" value="TWO_PI"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a013ec03c28f0e7ea402b52c22e0d3ff4"><param name="Name" value="UnitRandom"></OBJECT>
+  </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Vec2.html"><param name="Name" value="Pandora::Math::Vec2"></OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Vec2.html#a22b8f1e250d0dd2e2430a554ed3d6c72"><param name="Name" value="length"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Vec2.html#ad9475692b03cad79b1708dea60741655"><param name="Name" value="lengthSquared"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Vec2.html#a95f62b5547774159309cb3fa897fb53f"><param name="Name" value="operator*"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Vec2.html#aaaaebbabbb13de463785ffeef556791e"><param name="Name" value="operator+"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Vec2.html#a348c2591c3996fb84f7b3ff464dc5ca7"><param name="Name" value="operator-"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Vec2.html#a8ea53c4b187d31aa1e41b33f0ab60678"><param name="Name" value="operator/"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Vec2.html#ae28ae918cf497fc254d1369ef07c4a63"><param name="Name" value="operator="></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Vec2.html#a4a623062c1591abfdefc458f7d562e42"><param name="Name" value="Vec2"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Vec2.html#a9ed73eb2d5ba79a7befa9c950c9db59a"><param name="Name" value="x"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Vec2.html#ae35316b67c75c04343354a7b9c73e9f7"><param name="Name" value="y"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Vec2.html#a4703ae6de0d69f7a28596b5652116c88"><param name="Name" value="~Vec2"></OBJECT>
+  </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1System.html"><param name="Name" value="Pandora::System"></OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1System.html#ada09e513d8ed1157102514012514cccf"><param name="Name" value="allocate2D"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1System.html#a69bfe56077b8351fc9bab9f98d81c23f"><param name="Name" value="allocate3D"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1System.html#a921cec353704d9e7842be61d81102634"><param name="Name" value="append"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1System.html#a09639e97fee980de5a6f897deae15819"><param name="Name" value="deallocate2D"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1System.html#a36155ca9d7863c6434daa9d250f4ad52"><param name="Name" value="deallocate3D"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1System.html#a09210f4b636a57dcaedfb272de6f2c5a"><param name="Name" value="getTime"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1System.html#a05d52d2dfca56254ab034e275ba7b52d"><param name="Name" value="load"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1System.html#a7d654ed04e6b405822ccaf9e23aa277a"><param name="Name" value="save"></OBJECT>
+  </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1HashTable.html"><param name="Name" value="Pandora::Utils::HashTable"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1HashTable.html#a61bb5ce54f3380c10edebb59cac114cd"><param name="Name" value="exists"></OBJECT>
@@ -75,6 +208,17 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Stack.html#aeebc274daaf6ba9da141e53dcd818352"><param name="Name" value="Stack"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Stack.html#a57c562706664edfabf43169405d5c247"><param name="Name" value="~Stack"></OBJECT>
   </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1String.html"><param name="Name" value="Pandora::Utils::String"></OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1String.html#a86a20d1855c1747ac7090eee6575fcda"><param name="Name" value="getLength"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1String.html#ad38ba8b1d46a2240a37d4e722cc49002"><param name="Name" value="operator const char *"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1String.html#a5967d518f63d66a93e830a94064df3c5"><param name="Name" value="operator unsigned int"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1String.html#ac3a01db098901485d45c98dcda8ebf44"><param name="Name" value="operator!="></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1String.html#a2c80c3079f8d419320922c56f69a3e3d"><param name="Name" value="operator="></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1String.html#a7239251fc92d3e666020863f56ee4be3"><param name="Name" value="operator=="></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1String.html#aba4ee0e8c70df3a2ae7ef28b914ddc78"><param name="Name" value="String"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1String.html#a446751af04d7207cffeed7a821d1726c"><param name="Name" value="~String"></OBJECT>
+  </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Vector.html"><param name="Name" value="Pandora::Utils::Vector"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Vector.html#a6c1c963c1d58b1e371a07c048c33cdca"><param name="Name" value="append"></OBJECT>
@@ -91,8 +235,11 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Vector.html#a08c4f102c57e56cabbca1c15e8c17122"><param name="Name" value="Vector"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Vector.html#ab2688a6e46b857ad4756d21adadb0a20"><param name="Name" value="~Vector"></OBJECT>
   </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#af7d39bdb20277177d95c0fda956bc219"><param name="Name" value="PI"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Stack.html#a2ef38d630c91e48b425799887621433f"><param name="Name" value="pop"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a3a82d13009d514249de78621f34b7f56"><param name="Name" value="Pow"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Stack.html#a910af8de7eaaa2200515e7efb8251571"><param name="Name" value="push"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a57d1aa509b9acc076adc269158f29e56"><param name="Name" value="RAD_TO_DEG"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1HashTable.html#ad5c2861d3938bb8e6e4b21bbf7fde6df"><param name="Name" value="remove"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1HashTable.html#ad5c2861d3938bb8e6e4b21bbf7fde6df"><param name="Name" value="Pandora::Utils::HashTable"></OBJECT>
@@ -107,16 +254,31 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Set.html#aa134d362ed2baacc3ca0864cb6f10cb7"><param name="Name" value="Pandora::Utils::Set"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Vector.html#ab9f631b7ca468cba7f358ee14043b0a6"><param name="Name" value="Pandora::Utils::Vector"></OBJECT>
   </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a1fde48d8187a807b13e0731ca3f7c0eb"><param name="Name" value="Round"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1System.html#a7d654ed04e6b405822ccaf9e23aa277a"><param name="Name" value="save"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Set.html#ad0e4e02f649fcefffe61115758e1261c"><param name="Name" value="Set"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Vector.html#a7712e06b6660e77796a6d4093d949e8e"><param name="Name" value="setIncrement"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Vector.html#adc9658f8a19f67e7e92b43c5bd4206c7"><param name="Name" value="setSize"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#ab2fcbd106a114f343bf048d6463f2476"><param name="Name" value="Sign"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a53730f2ada3242abe2039e1841d60dea"><param name="Name" value="Sin"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a222e2f1156a602b9292606b45c7592ac"><param name="Name" value="Sqrt"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Stack.html#aeebc274daaf6ba9da141e53dcd818352"><param name="Name" value="Stack"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1String.html#aba4ee0e8c70df3a2ae7ef28b914ddc78"><param name="Name" value="String"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#aeb8611ebfee85d3380f8df42a39a87f2"><param name="Name" value="SymmetricRandom"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a146aec6335509c7eed8cf4a1172911e7"><param name="Name" value="Tan"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a4d9b8a6f3c85bc4bd8e3a71d7db6ffce"><param name="Name" value="TWO_PI"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Math.html#a013ec03c28f0e7ea402b52c22e0d3ff4"><param name="Name" value="UnitRandom"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1HashTable.html#a88e480f18940fcecb6d1f8b034986c6d"><param name="Name" value="userHashFunction"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Vec2.html#a4a623062c1591abfdefc458f7d562e42"><param name="Name" value="Vec2"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Vector.html#a08c4f102c57e56cabbca1c15e8c17122"><param name="Name" value="Vector"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Vec2.html#a9ed73eb2d5ba79a7befa9c950c9db59a"><param name="Name" value="x"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Vec2.html#ae35316b67c75c04343354a7b9c73e9f7"><param name="Name" value="y"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1HashTable.html#adfb815eb2cfe21eca1beffa61be7726d"><param name="Name" value="~HashTable"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1List.html#a4014a2867a09df28421939d4732a7907"><param name="Name" value="~List"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Set.html#a51d05d5d31cb8c16b510262737969f0e"><param name="Name" value="~Set"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Stack.html#a57c562706664edfabf43169405d5c247"><param name="Name" value="~Stack"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1String.html#a446751af04d7207cffeed7a821d1726c"><param name="Name" value="~String"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Math_1_1Vec2.html#a4703ae6de0d69f7a28596b5652116c88"><param name="Name" value="~Vec2"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPandora_1_1Utils_1_1Vector.html#ab2688a6e46b857ad4756d21adadb0a20"><param name="Name" value="~Vector"></OBJECT>
 </UL>
 </BODY>

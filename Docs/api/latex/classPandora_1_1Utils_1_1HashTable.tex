@@ -27,11 +27,8 @@ Value \& \hyperlink{classPandora_1_1Utils_1_1HashTable_ab1aae3564898a1de7870930f
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classPandora_1_1Utils_1_1HashTable_a88e480f18940fcecb6d1f8b034986c6d}{
-int($\ast$ {\bfseries userHashFunction} )(const Key \&key)}
-\label{classPandora_1_1Utils_1_1HashTable_a88e480f18940fcecb6d1f8b034986c6d}
-
-\end{DoxyCompactItemize}
+int($\ast$ \hyperlink{classPandora_1_1Utils_1_1HashTable_a88e480f18940fcecb6d1f8b034986c6d}{userHashFunction} )(const Key \&key)
+\begin{DoxyCompactList}\small\item\em A user defined hash function. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -44,7 +41,7 @@ This class has a standard {\itshape hashFunction\/} function, but it can, and sh
 \item[\hyperlink{todo__todo000001}{Todo}]Make an iterator Make the hashFunction function. \end{Desc}
 
 
-Definition at line 50 of file PandoraHashtable.h.
+Definition at line 51 of file PandoraHashtable.h.
 
 \subsection{Constructor \& Destructor Documentation}
 \hypertarget{classPandora_1_1Utils_1_1HashTable_a3650951a9de3e61dd2deade67636a0cf}{
@@ -59,7 +56,7 @@ Default constructor.
 \item[{\em size}]-\/ The size of the hashTable. It is not possible to change this at a later time. \end{DoxyParams}
 
 
-Definition at line 106 of file PandoraHashtable.h.\hypertarget{classPandora_1_1Utils_1_1HashTable_adfb815eb2cfe21eca1beffa61be7726d}{
+Definition at line 134 of file PandoraHashtable.h.\hypertarget{classPandora_1_1Utils_1_1HashTable_adfb815eb2cfe21eca1beffa61be7726d}{
 \index{Pandora::Utils::HashTable@{Pandora::Utils::HashTable}!$\sim$HashTable@{$\sim$HashTable}}
 \index{$\sim$HashTable@{$\sim$HashTable}!Pandora::Utils::HashTable@{Pandora::Utils::HashTable}}
 \subsubsection[{$\sim$HashTable}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Key , class Value $>$ {\bf Pandora::Utils::HashTable}$<$ Key, Value $>$::$\sim${\bf HashTable} ()}}
@@ -68,7 +65,7 @@ Definition at line 106 of file PandoraHashtable.h.\hypertarget{classPandora_1_1U
 
 Destructor. 
 
-Definition at line 117 of file PandoraHashtable.h.
+Definition at line 145 of file PandoraHashtable.h.
 
 \subsection{Member Function Documentation}
 \hypertarget{classPandora_1_1Utils_1_1HashTable_a61bb5ce54f3380c10edebb59cac114cd}{
@@ -79,8 +76,14 @@ Definition at line 117 of file PandoraHashtable.h.
 
 
 Checks if a key exists in the \hyperlink{classPandora_1_1Utils_1_1HashTable}{HashTable}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em key}]-\/ The key to search for. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the key exists. False otherwise. 
+\end{DoxyReturn}
 
-Definition at line 199 of file PandoraHashtable.h.\hypertarget{classPandora_1_1Utils_1_1HashTable_ab1aae3564898a1de7870930f7e678de0}{
+
+Definition at line 227 of file PandoraHashtable.h.\hypertarget{classPandora_1_1Utils_1_1HashTable_ab1aae3564898a1de7870930f7e678de0}{
 \index{Pandora::Utils::HashTable@{Pandora::Utils::HashTable}!find@{find}}
 \index{find@{find}!Pandora::Utils::HashTable@{Pandora::Utils::HashTable}}
 \subsubsection[{find}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Key , class Value $>$ Value \& {\bf Pandora::Utils::HashTable}$<$ Key, Value $>$::find (const Key \& {\em key}) const}}
@@ -88,8 +91,14 @@ Definition at line 199 of file PandoraHashtable.h.\hypertarget{classPandora_1_1U
 
 
 Finds an element in the \hyperlink{classPandora_1_1Utils_1_1HashTable}{HashTable} and returns it. 
+\begin{DoxyParams}{Parameters}
+\item[{\em key}]-\/ The key to search for. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The element itself if the key is found. NULL otherwise. 
+\end{DoxyReturn}
 
-Definition at line 215 of file PandoraHashtable.h.\hypertarget{classPandora_1_1Utils_1_1HashTable_a57a06b0dde67656b86fd91c04e9a4fbf}{
+
+Definition at line 243 of file PandoraHashtable.h.\hypertarget{classPandora_1_1Utils_1_1HashTable_a57a06b0dde67656b86fd91c04e9a4fbf}{
 \index{Pandora::Utils::HashTable@{Pandora::Utils::HashTable}!insert@{insert}}
 \index{insert@{insert}!Pandora::Utils::HashTable@{Pandora::Utils::HashTable}}
 \subsubsection[{insert}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Key , class Value $>$ bool {\bf Pandora::Utils::HashTable}$<$ Key, Value $>$::insert (const Key \& {\em key}, \/  const Value \& {\em value})}}
@@ -98,13 +107,13 @@ Definition at line 215 of file PandoraHashtable.h.\hypertarget{classPandora_1_1U
 
 Insert an element into the \hyperlink{classPandora_1_1Utils_1_1HashTable}{HashTable}. 
 \begin{DoxyParams}{Parameters}
-\item[{\em key}]-\/ The key to be associated with this element. value -\/ The value of the element. \end{DoxyParams}
+\item[{\em key}]-\/ The key to be associated with this element. \item[{\em value}]-\/ The value of the element. \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 False if the table is full, or we get a collision. True else. 
 \end{DoxyReturn}
 
 
-Definition at line 131 of file PandoraHashtable.h.\hypertarget{classPandora_1_1Utils_1_1HashTable_ad5c2861d3938bb8e6e4b21bbf7fde6df}{
+Definition at line 159 of file PandoraHashtable.h.\hypertarget{classPandora_1_1Utils_1_1HashTable_ad5c2861d3938bb8e6e4b21bbf7fde6df}{
 \index{Pandora::Utils::HashTable@{Pandora::Utils::HashTable}!remove@{remove}}
 \index{remove@{remove}!Pandora::Utils::HashTable@{Pandora::Utils::HashTable}}
 \subsubsection[{remove}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Key , class Value $>$ Value \& {\bf Pandora::Utils::HashTable}$<$ Key, Value $>$::remove (const Key \& {\em key})}}
@@ -119,7 +128,7 @@ The value if we found the element. NULL else.
 \end{DoxyReturn}
 
 
-Definition at line 158 of file PandoraHashtable.h.\hypertarget{classPandora_1_1Utils_1_1HashTable_af541b0c8a7ababea86db5cfda3da0a2e}{
+Definition at line 186 of file PandoraHashtable.h.\hypertarget{classPandora_1_1Utils_1_1HashTable_af541b0c8a7ababea86db5cfda3da0a2e}{
 \index{Pandora::Utils::HashTable@{Pandora::Utils::HashTable}!removeAll@{removeAll}}
 \index{removeAll@{removeAll}!Pandora::Utils::HashTable@{Pandora::Utils::HashTable}}
 \subsubsection[{removeAll}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Key , class Value $>$ void {\bf Pandora::Utils::HashTable}$<$ Key, Value $>$::removeAll ()}}
@@ -128,7 +137,26 @@ Definition at line 158 of file PandoraHashtable.h.\hypertarget{classPandora_1_1U
 
 Removes everything in the \hyperlink{classPandora_1_1Utils_1_1HashTable}{HashTable}. 
 
-Definition at line 182 of file PandoraHashtable.h.
+Definition at line 210 of file PandoraHashtable.h.
+
+\subsection{Member Data Documentation}
+\hypertarget{classPandora_1_1Utils_1_1HashTable_a88e480f18940fcecb6d1f8b034986c6d}{
+\index{Pandora::Utils::HashTable@{Pandora::Utils::HashTable}!userHashFunction@{userHashFunction}}
+\index{userHashFunction@{userHashFunction}!Pandora::Utils::HashTable@{Pandora::Utils::HashTable}}
+\subsubsection[{userHashFunction}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Key , class Value $>$ int($\ast$ {\bf Pandora::Utils::HashTable}$<$ Key, Value $>$::{\bf userHashFunction})(const Key \&key)}}
+\label{classPandora_1_1Utils_1_1HashTable_a88e480f18940fcecb6d1f8b034986c6d}
+
+
+A user defined hash function. 
+\begin{DoxyParams}{Parameters}
+\item[{\em key}]-\/ The key to hash. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The key as an integer between 0 and m\_\-size. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+The user is responsible for making a good hashfunction without collisions, since collisions will be ignored. 
+\end{DoxyNote}
+
 
 The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
 \item 

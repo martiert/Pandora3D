@@ -41,7 +41,7 @@ Vec2<Real>::Vec2(const Real& x, const Real& y)
 // Constructor.
 //-----------------------------------------------------------------------------
 template<class Real>
-Vec2<Real>::Vec2(const Vec2<Real>& vec)
+Vec2<Real>::Vec2(Vec2<Real>& vec)
 {
     x = vec[0];
     y = vec[1];
@@ -51,7 +51,7 @@ Vec2<Real>::Vec2(const Vec2<Real>& vec)
 // Constructor.
 //-----------------------------------------------------------------------------
 template<class Real>
-Vec2<Real>::Vec2(const Real *vec)
+Vec2<Real>::Vec2(Real *vec)
 {
     x = vec[0];
     y = vec[1];
@@ -69,7 +69,7 @@ Vec2<Real>::~Vec2()
 // Assignment operator.
 //-----------------------------------------------------------------------------
 template<class Real>
-void Vec2<Real>::operator=(const Vec2<Real>& vec)
+void Vec2<Real>::operator=(Vec2<Real>& vec)
 {
     x = vec[0];
     y = vec[1];
@@ -79,7 +79,7 @@ void Vec2<Real>::operator=(const Vec2<Real>& vec)
 // Assignment operator.
 //-----------------------------------------------------------------------------
 template<class Real>
-void Vec2<Real>::operator=(const Real *vec)
+void Vec2<Real>::operator=(Real *vec)
 {
     x = vec[0];
     y = vec[1];

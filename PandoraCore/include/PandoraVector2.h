@@ -47,7 +47,7 @@ namespace Pandora
                  * \param
                  *      vec - The vector to copy.
                  */
-                Vec2(const Vec2& vec);
+                Vec2(Vec2& vec);
 
                 /**
                  * Copy constructor for arrays.
@@ -59,7 +59,7 @@ namespace Pandora
                  *      If size is larger then two, only the two first elements
                  *      will be used.
                  */
-                Vec2(const Real *vec);
+                Vec2(Real *vec);
 
                 /** Destructor */
                 ~Vec2();
@@ -69,7 +69,7 @@ namespace Pandora
                  * \param
                  *      vec - The vector to copy.
                  */
-                void operator=(const Vec2& vec);
+                void operator=(Vec2& vec);
 
                 /**
                  * Copy an array to this vector.
@@ -81,7 +81,7 @@ namespace Pandora
                  *      If size is larger then two, only the two first elements
                  *      will be used.
                  */
-                void operator=(const Real *vec);
+                void operator=(Real *vec);
 
                 /**
                  *  Access operator. Get element number i from the vector.

@@ -16,6 +16,7 @@
     <ul>
       <li><a href="index.html"><span>Main&nbsp;Page</span></a></li>
       <li><a href="pages.html"><span>Related&nbsp;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li><a href="dirs.html"><span>Directories</span></a></li>
@@ -51,15 +52,171 @@
 <a name="l00019"></a>00019 <span class="preprocessor">#ifndef PANDORASYSTEM_H</span>
 <a name="l00020"></a>00020 <span class="preprocessor"></span><span class="preprocessor">#define PANDORASYSTEM_H</span>
 <a name="l00021"></a>00021 <span class="preprocessor"></span>
-<a name="l00022"></a>00022 <span class="preprocessor">#include &lt;assert.h&gt;</span>
-<a name="l00023"></a>00023 <span class="preprocessor">#include &lt;math.h&gt;</span>
-<a name="l00024"></a>00024 <span class="preprocessor">#include &lt;stdio.h&gt;</span>
-<a name="l00025"></a>00025 <span class="preprocessor">#include &lt;stdlib.h&gt;</span>
-<a name="l00026"></a>00026 <span class="preprocessor">#include &lt;string.h&gt;</span>
-<a name="l00027"></a>00027 
-<a name="l00028"></a>00028 <span class="preprocessor">#endif</span>
+<a name="l00022"></a>00022 <span class="preprocessor">#include &lt;sys/time.h&gt;</span>
+<a name="l00023"></a>00023 <span class="preprocessor">#include &lt;time.h&gt;</span>
+<a name="l00024"></a>00024 <span class="comment"></span>
+<a name="l00025"></a>00025 <span class="comment">/** </span>
+<a name="l00026"></a>00026 <span class="comment"> * The main namespace of the engine.</span>
+<a name="l00027"></a>00027 <span class="comment"> */</span>
+<a name="l00028"></a>00028 <span class="keyword">namespace </span>Pandora
+<a name="l00029"></a>00029 {<span class="comment"></span>
+<a name="l00030"></a>00030 <span class="comment">    /**</span>
+<a name="l00031"></a>00031 <span class="comment">     * The System class. Holds all the functions which wrapps platform</span>
+<a name="l00032"></a>00032 <span class="comment">     * dependent functions.</span>
+<a name="l00033"></a>00033 <span class="comment">     */</span>
+<a name="l00034"></a><a class="code" href="classPandora_1_1System.html">00034</a>     <span class="keyword">class </span><a class="code" href="classPandora_1_1System.html" title="The System class.">System</a>
+<a name="l00035"></a>00035     {
+<a name="l00036"></a>00036         <span class="keyword">public</span>:<span class="comment"></span>
+<a name="l00037"></a>00037 <span class="comment">        /**</span>
+<a name="l00038"></a>00038 <span class="comment">         * Get the current time in seconds.</span>
+<a name="l00039"></a>00039 <span class="comment">         * \return</span>
+<a name="l00040"></a>00040 <span class="comment">         *      The current time in seconds.</span>
+<a name="l00041"></a>00041 <span class="comment">         */</span>
+<a name="l00042"></a><a class="code" href="classPandora_1_1System.html#a09210f4b636a57dcaedfb272de6f2c5a">00042</a>         <span class="keyword">static</span> <span class="keywordtype">double</span> <a class="code" href="classPandora_1_1System.html#a09210f4b636a57dcaedfb272de6f2c5a" title="Get the current time in seconds.">getTime</a>()
+<a name="l00043"></a>00043         {
+<a name="l00044"></a>00044             <span class="keywordtype">double</span> time;
+<a name="l00045"></a>00045 
+<a name="l00046"></a>00046             <span class="keyword">struct </span>timeval tv;
+<a name="l00047"></a>00047             gettimeofday(&amp;tv, NULL);
+<a name="l00048"></a>00048             time = tv.tv_sec + tv.tv_usec/1000000.0;
+<a name="l00049"></a>00049             <span class="keywordflow">return</span> time;
+<a name="l00050"></a>00050         }
+<a name="l00051"></a>00051 <span class="comment"></span>
+<a name="l00052"></a>00052 <span class="comment">        /**</span>
+<a name="l00053"></a>00053 <span class="comment">         * Load a binary file into memory.</span>
+<a name="l00054"></a>00054 <span class="comment">         * \param</span>
+<a name="l00055"></a>00055 <span class="comment">         *      filename - The name of the file to read.</span>
+<a name="l00056"></a>00056 <span class="comment">         *  \param</span>
+<a name="l00057"></a>00057 <span class="comment">         *      buffer - The buffer to write to.</span>
+<a name="l00058"></a>00058 <span class="comment">         *  \param</span>
+<a name="l00059"></a>00059 <span class="comment">         *      size - the number of bytes in the file.</span>
+<a name="l00060"></a>00060 <span class="comment">         * \return</span>
+<a name="l00061"></a>00061 <span class="comment">         *      False if the file don&apos;t exist, the file can&apos;t be opened for</span>
+<a name="l00062"></a>00062 <span class="comment">         *      reading or if the size of the file is different from the size</span>
+<a name="l00063"></a>00063 <span class="comment">         *      parameter.</span>
+<a name="l00064"></a>00064 <span class="comment">         * \todo write the function.</span>
+<a name="l00065"></a>00065 <span class="comment">         */</span>
+<a name="l00066"></a>00066         <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="classPandora_1_1System.html#a05d52d2dfca56254ab034e275ba7b52d" title="Load a binary file into memory.">load</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *filename, <span class="keywordtype">char</span>*&amp; buffer, <span class="keywordtype">int</span> size);
+<a name="l00067"></a>00067 <span class="comment"></span>
+<a name="l00068"></a>00068 <span class="comment">        /**</span>
+<a name="l00069"></a>00069 <span class="comment">         * Save data to a file.</span>
+<a name="l00070"></a>00070 <span class="comment">         * \param</span>
+<a name="l00071"></a>00071 <span class="comment">         *      filename - The file to write to.</span>
+<a name="l00072"></a>00072 <span class="comment">         *  \param</span>
+<a name="l00073"></a>00073 <span class="comment">         *      buffer - The buffer to read from.</span>
+<a name="l00074"></a>00074 <span class="comment">         *  \param</span>
+<a name="l00075"></a>00075 <span class="comment">         *      size - The size of the buffer.</span>
+<a name="l00076"></a>00076 <span class="comment">         *  \return</span>
+<a name="l00077"></a>00077 <span class="comment">         *      False if the buffer is NULL, the file can not be opened or the</span>
+<a name="l00078"></a>00078 <span class="comment">         *      number of bytes written differs from the size parameter.</span>
+<a name="l00079"></a>00079 <span class="comment">         *  \todo write the function.</span>
+<a name="l00080"></a>00080 <span class="comment">         */</span>
+<a name="l00081"></a>00081         <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="classPandora_1_1System.html#a7d654ed04e6b405822ccaf9e23aa277a" title="Save data to a file.">save</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *filename, <span class="keyword">const</span> <span class="keywordtype">char</span> *buffer, <span class="keywordtype">int</span> size);
+<a name="l00082"></a>00082 <span class="comment"></span>
+<a name="l00083"></a>00083 <span class="comment">        /**</span>
+<a name="l00084"></a>00084 <span class="comment">         * Append data to a file.</span>
+<a name="l00085"></a>00085 <span class="comment">         * \param</span>
+<a name="l00086"></a>00086 <span class="comment">         *      filename - The file to append to.</span>
+<a name="l00087"></a>00087 <span class="comment">         *  \param</span>
+<a name="l00088"></a>00088 <span class="comment">         *      buffer - The buffer to read from.</span>
+<a name="l00089"></a>00089 <span class="comment">         *  \param</span>
+<a name="l00090"></a>00090 <span class="comment">         *      size - The size of the buffer.</span>
+<a name="l00091"></a>00091 <span class="comment">         *  \return</span>
+<a name="l00092"></a>00092 <span class="comment">         *      False if the buffer is NULL, the file can not be opened or the</span>
+<a name="l00093"></a>00093 <span class="comment">         *      number of bytes written differs from the size parameter.</span>
+<a name="l00094"></a>00094 <span class="comment">         *  \todo write the function.</span>
+<a name="l00095"></a>00095 <span class="comment">         */</span>
+<a name="l00096"></a>00096         <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="classPandora_1_1System.html#a921cec353704d9e7842be61d81102634" title="Append data to a file.">append</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *filename, <span class="keyword">const</span> <span class="keywordtype">char</span> *buffer, 
+<a name="l00097"></a>00097                 <span class="keywordtype">int</span> size);
+<a name="l00098"></a>00098 <span class="comment"></span>
+<a name="l00099"></a>00099 <span class="comment">        /**</span>
+<a name="l00100"></a>00100 <span class="comment">         * Allocates a 2D array. This uses only two allocation, regardless of</span>
+<a name="l00101"></a>00101 <span class="comment">         * the size.</span>
+<a name="l00102"></a>00102 <span class="comment">         * \param</span>
+<a name="l00103"></a>00103 <span class="comment">         *      cols - The number of columns to allocate.</span>
+<a name="l00104"></a>00104 <span class="comment">         *  \param</span>
+<a name="l00105"></a>00105 <span class="comment">         *      rows - The number of rows to allocate.</span>
+<a name="l00106"></a>00106 <span class="comment">         *  \param</span>
+<a name="l00107"></a>00107 <span class="comment">         *      array - The array to allocate to.</span>
+<a name="l00108"></a>00108 <span class="comment">         *  \note</span>
+<a name="l00109"></a>00109 <span class="comment">         *      Does not set the elements to anything because of speed.</span>
+<a name="l00110"></a>00110 <span class="comment">         */</span>
+<a name="l00111"></a><a class="code" href="classPandora_1_1System.html#ada09e513d8ed1157102514012514cccf">00111</a>         <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classPandora_1_1System.html#ada09e513d8ed1157102514012514cccf" title="Allocates a 2D array.">allocate2D</a>(<span class="keywordtype">int</span> cols, <span class="keywordtype">int</span> rows,
+<a name="l00112"></a>00112                 T**&amp; array)
+<a name="l00113"></a>00113         {
+<a name="l00114"></a>00114             array = <span class="keyword">new</span> T*[rows];
+<a name="l00115"></a>00115             array[0] = <span class="keyword">new</span> T[rows*cols];
+<a name="l00116"></a>00116 
+<a name="l00117"></a>00117             <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; rows; ++i)
+<a name="l00118"></a>00118                 array[i] = array[0][i*cols];
+<a name="l00119"></a>00119         }
+<a name="l00120"></a>00120 <span class="comment"></span>
+<a name="l00121"></a>00121 <span class="comment">        /**</span>
+<a name="l00122"></a>00122 <span class="comment">         * Frees up the memory of a 2D array. Have to have used allocate2D to</span>
+<a name="l00123"></a>00123 <span class="comment">         * free with this function. Uses only two deallocation calls.</span>
+<a name="l00124"></a>00124 <span class="comment">         * \param</span>
+<a name="l00125"></a>00125 <span class="comment">         *      array - The array to deallocate.</span>
+<a name="l00126"></a>00126 <span class="comment">         * \note</span>
+<a name="l00127"></a>00127 <span class="comment">         *      The behaviour is undefined if you use an array that is not </span>
+<a name="l00128"></a>00128 <span class="comment">         *      allocate with allocate2D.</span>
+<a name="l00129"></a>00129 <span class="comment">         */</span>
+<a name="l00130"></a><a class="code" href="classPandora_1_1System.html#a09639e97fee980de5a6f897deae15819">00130</a>         <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classPandora_1_1System.html#a09639e97fee980de5a6f897deae15819" title="Frees up the memory of a 2D array.">deallocate2D</a>(T**&amp; array)
+<a name="l00131"></a>00131         {
+<a name="l00132"></a>00132             <span class="keyword">delete</span>[] array[0];
+<a name="l00133"></a>00133             <span class="keyword">delete</span>[] array;
+<a name="l00134"></a>00134             array = NULL;
+<a name="l00135"></a>00135         }
+<a name="l00136"></a>00136 <span class="comment"></span>
+<a name="l00137"></a>00137 <span class="comment">        /**</span>
+<a name="l00138"></a>00138 <span class="comment">         * Allocates a 3D array. This uses only three allocations, regardless</span>
+<a name="l00139"></a>00139 <span class="comment">         * of the size.</span>
+<a name="l00140"></a>00140 <span class="comment">         * \param</span>
+<a name="l00141"></a>00141 <span class="comment">         *      cols - The number of columns to allocate.</span>
+<a name="l00142"></a>00142 <span class="comment">         *  \param</span>
+<a name="l00143"></a>00143 <span class="comment">         *      rows - The number of rows to allocate.</span>
+<a name="l00144"></a>00144 <span class="comment">         *  \param</span>
+<a name="l00145"></a>00145 <span class="comment">         *      slices - The number of slices to allocate.</span>
+<a name="l00146"></a>00146 <span class="comment">         *  \param</span>
+<a name="l00147"></a>00147 <span class="comment">         *      array - The array to allocate.</span>
+<a name="l00148"></a>00148 <span class="comment">         *  \note</span>
+<a name="l00149"></a>00149 <span class="comment">         *      Does not set the elements to anything because of speed.</span>
+<a name="l00150"></a>00150 <span class="comment">         */</span>
+<a name="l00151"></a><a class="code" href="classPandora_1_1System.html#a69bfe56077b8351fc9bab9f98d81c23f">00151</a>         <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classPandora_1_1System.html#a69bfe56077b8351fc9bab9f98d81c23f" title="Allocates a 3D array.">allocate3D</a>(<span class="keywordtype">int</span> cols, <span class="keywordtype">int</span> rows,
+<a name="l00152"></a>00152                 <span class="keywordtype">int</span> slices, T***&amp; array)
+<a name="l00153"></a>00153         {
+<a name="l00154"></a>00154             array = <span class="keyword">new</span> T**[slices];
+<a name="l00155"></a>00155             array[0] = <span class="keyword">new</span> T*[slices*rows];
+<a name="l00156"></a>00156             array[0][0] = <span class="keyword">new</span> T*[cols*slices*rows];
+<a name="l00157"></a>00157 
+<a name="l00158"></a>00158             <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; slices; ++i) {
+<a name="l00159"></a>00159                 array[i] = array[0][i*rows];
+<a name="l00160"></a>00160                 <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j = 0; j &lt; rows; ++j) {
+<a name="l00161"></a>00161                     array[i][j] = array[0][i][j*cols];
+<a name="l00162"></a>00162                 }
+<a name="l00163"></a>00163             }
+<a name="l00164"></a>00164         }
+<a name="l00165"></a>00165 <span class="comment"></span>
+<a name="l00166"></a>00166 <span class="comment">        /**</span>
+<a name="l00167"></a>00167 <span class="comment">         * Frees up memory allocated by allocate3D. Uses only three </span>
+<a name="l00168"></a>00168 <span class="comment">         * deallocation calls.</span>
+<a name="l00169"></a>00169 <span class="comment">         * \param</span>
+<a name="l00170"></a>00170 <span class="comment">         *      array - The array to deallocate.</span>
+<a name="l00171"></a>00171 <span class="comment">         * \note</span>
+<a name="l00172"></a>00172 <span class="comment">         *      The behaviour is undefined if you use an array that is not</span>
+<a name="l00173"></a>00173 <span class="comment">         *      allocated with allocate3D.</span>
+<a name="l00174"></a>00174 <span class="comment">         */</span>
+<a name="l00175"></a><a class="code" href="classPandora_1_1System.html#a36155ca9d7863c6434daa9d250f4ad52">00175</a>         <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classPandora_1_1System.html#a36155ca9d7863c6434daa9d250f4ad52" title="Frees up memory allocated by allocate3D.">deallocate3D</a>(T***&amp; array)
+<a name="l00176"></a>00176         {
+<a name="l00177"></a>00177             <span class="keyword">delete</span>[] array[0][0];
+<a name="l00178"></a>00178             <span class="keyword">delete</span>[] array[0];
+<a name="l00179"></a>00179             <span class="keyword">delete</span>[] array;
+<a name="l00180"></a>00180             array = NULL;
+<a name="l00181"></a>00181         }
+<a name="l00182"></a>00182     };
+<a name="l00183"></a>00183 }
+<a name="l00184"></a>00184 <span class="preprocessor">#endif</span>
 </pre></div></div>
 <hr size="1"/><address style="text-align: right;"><small>
-Generated on Tue Dec 15 23:28:01 2009 for Pandora by&nbsp;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1</small></address>
+Generated on Fri Dec 25 21:04:28 2009 for Pandora by&nbsp;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1</small></address>
 </body>
 </html>
