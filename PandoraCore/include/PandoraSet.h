@@ -96,6 +96,7 @@ namespace Pandora
         };
 
 #include "PandoraSet.inl"
+
     }
 }
 #endif
