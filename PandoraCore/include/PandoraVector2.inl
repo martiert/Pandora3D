@@ -252,7 +252,8 @@ Vec2<Real> Vec2<Real>::dotprod(const Vec2<Real>& vec) const
 template<class Real>
 Real Vec2<Real>::length() const
 {
-    return Math<Real>::Sqrt(x*x + y*y);
+    Real length = x*x + y*y;
+    return Math<Real>::Sqrt(length);
 }
 
 //-----------------------------------------------------------------------------
