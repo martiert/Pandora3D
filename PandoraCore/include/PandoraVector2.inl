@@ -1,27 +1,20 @@
 /*
 -------------------------------------------------------------------------------
-This source file is part of Pandora3D.
+File Name : PandoraVector2.inl
 
-This program is free software: you can redistribute it and/or modify it under 
-the terms of the GNU General Public License as published by the Free Software 
-Foundation. Either version 2 of the License, or (at your option) any later 
-version.
+Purpose : Implementation of the Vector2 class used in Pandora3D
 
-This program comes without any warranty whatsoever, but under the hope that it
-will be useful. See the GNU General Public License for more information.
+Creation Date : 2010-01-24
 
-You should have received a copy of the GNU Lesser General Public License along 
-with this program; if not, write to the Free Software Foundation, Inc., 59 
-Temple Place - Suite 330, Boston, MA 02111-1307, USA, or go to
-http://www.gnu.org/copyleft/lesser.txt.
+Last Modified : sø. 24. jan. 2010 kl. 20.13 +0100
+
+Created By : Martin Ertsås
 -------------------------------------------------------------------------------
 */
 
 //-----------------------------------------------------------------------------
-// This file contains the implementation of the Vector2 class from Pandora3D.
-// See PandoraVector2.h for more detailed explanation.
+// Typedefs.
 //-----------------------------------------------------------------------------
-
 typedef Vec2<float> Vec2f;
 typedef Vec2<double> Vec2d;
 typedef Vec2<int> Vec2i;
