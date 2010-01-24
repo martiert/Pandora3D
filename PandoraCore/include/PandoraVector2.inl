@@ -6,7 +6,7 @@ Purpose : Implementation of the Vector2 class used in Pandora3D
 
 Creation Date : 2010-01-24
 
-Last Modified : sø. 24. jan. 2010 kl. 20.13 +0100
+Last Modified : sø. 24. jan. 2010 kl. 21.21 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------
@@ -137,6 +137,16 @@ Vec2<Real> Vec2<Real>::operator*(const Real& scalar) const
 }
 
 //-----------------------------------------------------------------------------
+// Divide vector with a scalar.
+//-----------------------------------------------------------------------------
+template<class Real>
+Vec2<Real> Vec2<Real>::operator/(const Real& scalar) const
+{
+    assert( scalar != (Real) 0.0 );
+    return Vec2<Real>(x/scalar, y/scalar);
+}
+
+//-----------------------------------------------------------------------------
 // Addition operator.
 //-----------------------------------------------------------------------------
 template<class Real>
@@ -174,6 +184,17 @@ void Vec2<Real>::operator*=(const Vec2<Real>& vec)
 {
     x *= vec.x;
     y *= vec.y;
+}
+
+//-----------------------------------------------------------------------------
+// Division with scalar.
+//-----------------------------------------------------------------------------
+template<class Real>
+void Vec2<Real>::operator/=(const Real& scalar)
+{
+    assert( scalar != (Real) 0.0 );
+    x /= scalar;
+    y /= scalar;
 }
 
 //-----------------------------------------------------------------------------

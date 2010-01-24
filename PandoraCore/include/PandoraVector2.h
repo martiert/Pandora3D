@@ -148,17 +148,7 @@ namespace Pandora
                  */
                 Vec2 operator/(const Real& scalar) const;
 
-                /**
-                 * Dot multiply this vector with another.
-                 * \param
-                 *      vec - The vector to multiply with.
-                 * \return
-                 *      A new vector which components is the components from
-                 *      this vector multiplied with vec.
-                 */
-                Vec2 dot(const Vec2& vec) const;
-
-                /**
+                 /**
                  *  Add a vector to this vector.
                  *  \param
                  *      vec - The vector to add to this vector.
@@ -186,6 +176,13 @@ namespace Pandora
                  *      vec - The vector to multiply with.
                  */
                 void operator*=(const Vec2& vec);
+
+                /**
+                 * Divide this vector with a scalar.
+                 * \param
+                 *      scalar - The scalar to divide with.
+                 */
+                void operator/=(const Real& scalar);
 
                 /**
                  *  Checks if two vectors are equal.
