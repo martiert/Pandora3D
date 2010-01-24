@@ -6,7 +6,7 @@ Purpose : Unit testing of the Pandora::Math::Vec2 implementation.
 
 Creation Date : 2010-01-19
 
-Last Modified : sø. 24. jan. 2010 kl. 22.56 +0100
+Last Modified : ma. 25. jan. 2010 kl. 01.30 +0100
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -16,8 +16,15 @@ Created By :  Martin Ertsås
 
 using Pandora::Math::Vec2f;
 
+void Vector2Test::init()
+{
+    printf("Starting Vector2Test\n");
+}
+
 void Vector2Test::testConstructor()
 {
+    printf("\tTesting constructors\n");
+
     CPPUNIT_ASSERT( m_1_0.x == 1.0f );
     CPPUNIT_ASSERT( m_1_0.y == 0.0f );
     CPPUNIT_ASSERT( m_0_0.x == 0.0f );
@@ -37,6 +44,8 @@ void Vector2Test::testConstructor()
 
 void Vector2Test::testAddition()
 {
+    printf("\tTesting addition\n");
+
     Vec2f tmp = m_1_0 + m_0_0;
     CPPUNIT_ASSERT( tmp.x == m_1_0.x );
     CPPUNIT_ASSERT( tmp.y == m_1_0.y );
@@ -52,6 +61,8 @@ void Vector2Test::testAddition()
 
 void Vector2Test::testSubtraction()
 {
+    printf("\tTesting subtraction\n");
+
     Vec2f tmp = m_4_2 - m_1_1;
     CPPUNIT_ASSERT( tmp.x == 3.0f );
     CPPUNIT_ASSERT( tmp.y == 1.0f );
@@ -63,6 +74,8 @@ void Vector2Test::testSubtraction()
 
 void Vector2Test::testMultiplication()
 {
+    printf("\tTesting multiplication\n");
+
     float tmp = m_4_2 * m_1_1;
     CPPUNIT_ASSERT( tmp == 6.0f );
 
@@ -85,28 +98,54 @@ void Vector2Test::testMultiplication()
     tmp2 *= m_1_0;
     CPPUNIT_ASSERT( tmp2.x == 4.0f );
     CPPUNIT_ASSERT( tmp2.y == 0.0f );
-
-    tmp2 = m_4_2.dotprod(m_0_1);
-    CPPUNIT_ASSERT( tmp2.x == 0.0f );
-    CPPUNIT_ASSERT( tmp2.y == 2.0f );
 }
 
-void Vector2Test::testArritmetic()
+void Vector2Test::testArithmetic()
 {
+    printf("\tTesting other arithmetics\n");
 
+    //Dot product
+    Vec2f tmp = m_4_2.dotprod(m_4_2);
+    CPPUNIT_ASSERT( tmp.x == 16.0f );
+    CPPUNIT_ASSERT( tmp.y == 4.0f );
+
+    //length
+    float length = m_4_2.length();
+    CPPUNIT_ASSERT( length == Pandora::Math::Math<float>::Sqrt(20.0f) );
+    length = tmp.length();
+    CPPUNIT_ASSERT( length == Pandora::Math::Math<float>::Sqrt(272.0f) );
+
+    //normalize
+    tmp.normalize();
+    CPPUNIT_ASSERT( tmp.length() == 1.0f );
+    m_0_0.normalizeChecked();
+    CPPUNIT_ASSERT( m_0_0.length() != 1.0f );
 }
 
-void Vector2Test::testComparsion()
+void Vector2Test::testComparison()
 {
+    printf("\tTesting comparison\n");
+
+    CPPUNIT_ASSERT( m_4_2 > m_1_1 );
+    CPPUNIT_ASSERT( m_1_1 == m_1_1 );
+    CPPUNIT_ASSERT( m_1_0 != m_0_1 );
+    CPPUNIT_ASSERT( m_1_0 >= m_0_0 );
+    CPPUNIT_ASSERT( m_0_0 < m_1_1 );
+    CPPUNIT_ASSERT( m_1_0 <= m_1_1 );
 }
 
 void Vector2Test::testAssignment()
 {
+    printf("\tTesting assignment\n");
+
 }
 
 CppUnit::Test *Vector2Test::suite()
 {
     CppUnit::TestSuite *testSuite = new CppUnit::TestSuite("Vector2Test");
+    testSuite->addTest( new CppUnit::TestCaller<Vector2Test>(
+                "Vector2Test::init",
+                &Vector2Test::init ));
     testSuite->addTest( new CppUnit::TestCaller<Vector2Test>(
                 "Vector2Test::testConstructor", 
                 &Vector2Test::testConstructor ));
@@ -120,14 +159,14 @@ CppUnit::Test *Vector2Test::suite()
                 "Vector2Test::testMultiplication",
                 &Vector2Test::testMultiplication ));
     testSuite->addTest( new CppUnit::TestCaller<Vector2Test>(
-                "Vector2Test::testArritmetic", 
-                &Vector2Test::testArritmetic ));
+                "Vector2Test::testArithmetic", 
+                &Vector2Test::testArithmetic ));
     testSuite->addTest( new CppUnit::TestCaller<Vector2Test>(
-                "Vector2Test::testComparsion", 
-                &Vector2Test::testComparsion ));
+                "Vector2Test::testComparison", 
+                &Vector2Test::testComparison ));
     testSuite->addTest( new CppUnit::TestCaller<Vector2Test>(
                 "Vector2Test::testAssignment", 
-                &Vector2Test::testComparsion ));
+                &Vector2Test::testAssignment ));
     return testSuite;
 }
 

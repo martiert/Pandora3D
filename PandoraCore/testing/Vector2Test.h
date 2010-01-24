@@ -14,12 +14,13 @@ class Vector2Test : public CppUnit::TestCase
     public:
         Vector2Test() : TestCase("Vector2Test") {}
 
+        void init();
         void testConstructor();
         void testAddition();
         void testSubtraction();
         void testMultiplication();
-        void testArritmetic();
-        void testComparsion();
+        void testArithmetic();
+        void testComparison();
         void testAssignment();
 
         static CppUnit::Test *suite();
