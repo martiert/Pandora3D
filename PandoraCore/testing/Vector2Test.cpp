@@ -4,9 +4,9 @@ File Name : Vector2Test.cpp
 
 Purpose : Unit testing of the Pandora::Math::Vec2 implementation.
 
-Creation Date : 2010-01-19
+Creation Date : 2010-01-25
 
-Last Modified : ma. 25. jan. 2010 kl. 01.30 +0100
+Last Modified : ma. 25. jan. 2010 kl. 15.21 +0100
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -138,6 +138,19 @@ void Vector2Test::testAssignment()
 {
     printf("\tTesting assignment\n");
 
+    CPPUNIT_ASSERT( m_1_1[0] == m_1_1.x );
+    CPPUNIT_ASSERT( m_1_1[1] == m_1_1.y );
+    CPPUNIT_ASSERT( m_4_2[1] == 2.0f );
+
+    Vec2f tmp;
+    float test[2] = {1.0f, 4.0f};
+    tmp = &test[0];
+    CPPUNIT_ASSERT( tmp[0] == 1.0f );
+    CPPUNIT_ASSERT( tmp[1] == 4.0f );
+
+    float *test2 = (float*) tmp;
+    CPPUNIT_ASSERT( test2[0] == tmp[0] );
+    CPPUNIT_ASSERT( test2[1] == tmp[1] );
 }
 
 CppUnit::Test *Vector2Test::suite()
