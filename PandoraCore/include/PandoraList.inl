@@ -4,9 +4,9 @@ File Name : PandoraList.inl
 
 Purpose : Implementation of the List class used in Pandora3D
 
-Creation Date : 2010-01-24
+Creation Date : 2010-01-25
 
-Last Modified : ma. 25. jan. 2010 kl. 20.12 +0100
+Last Modified : ma. 25. jan. 2010 kl. 20.13 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------
