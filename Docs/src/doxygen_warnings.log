@@ -1,23 +1,8 @@
-/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraMath.h:541: Warning: Member EPSILON (function) of class Pandora::Math::Math is not documented.
-/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraMath.h:542: Warning: Member MAX_REAL (function) of class Pandora::Math::Math is not documented.
-/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraMath.h:543: Warning: Member PI (function) of class Pandora::Math::Math is not documented.
-/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraMath.h:544: Warning: Member TWO_PI (function) of class Pandora::Math::Math is not documented.
-/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraMath.h:545: Warning: Member HALF_PI (function) of class Pandora::Math::Math is not documented.
-/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraMath.h:546: Warning: Member INV_PI (function) of class Pandora::Math::Math is not documented.
-/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraMath.h:547: Warning: Member INV_TWO_PI (function) of class Pandora::Math::Math is not documented.
-/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraMath.h:548: Warning: Member DEG_TO_RAD (function) of class Pandora::Math::Math is not documented.
-/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraMath.h:549: Warning: Member RAD_TO_DEG (function) of class Pandora::Math::Math is not documented.
-/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraMath.h:551: Warning: Member EPSILON (function) of class Pandora::Math::Math is not documented.
-/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraMath.h:552: Warning: Member MAX_REAL (function) of class Pandora::Math::Math is not documented.
-/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraMath.h:553: Warning: Member PI (function) of class Pandora::Math::Math is not documented.
-/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraMath.h:554: Warning: Member TWO_PI (function) of class Pandora::Math::Math is not documented.
-/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraMath.h:555: Warning: Member HALF_PI (function) of class Pandora::Math::Math is not documented.
-/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraMath.h:556: Warning: Member INV_PI (function) of class Pandora::Math::Math is not documented.
-/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraMath.h:557: Warning: Member INV_TWO_PI (function) of class Pandora::Math::Math is not documented.
-/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraMath.h:558: Warning: Member DEG_TO_RAD (function) of class Pandora::Math::Math is not documented.
-/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraMath.h:559: Warning: Member RAD_TO_DEG (function) of class Pandora::Math::Math is not documented.
-/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraMath.h:1018: Warning: Member FastISqrt(float value) (function) of class Pandora::Math::Math is not documented.
-/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraMath.h:1030: Warning: Member FastISqrt(double value) (function) of class Pandora::Math::Math is not documented.
+/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraVector.h:165: Warning: include file PanoraVector.inl not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraVector2.inl:19: Warning: Member Vec2f (typedef) of namespace Pandora::Math is not documented.
+/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraVector2.inl:20: Warning: Member Vec2d (typedef) of namespace Pandora::Math is not documented.
+/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraVector2.inl:21: Warning: Member Vec2i (typedef) of namespace Pandora::Math is not documented.
+/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraVector2.inl:22: Warning: Member Vec2u (typedef) of namespace Pandora::Math is not documented.
 /home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraMath.h:48: Warning: Member EPSILON (variable) of class Pandora::Math::Math is not documented.
 /home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraMath.h:49: Warning: Member MAX_REAL (variable) of class Pandora::Math::Math is not documented.
 /home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraMath.h:50: Warning: Member PI (variable) of class Pandora::Math::Math is not documented.
@@ -27,5 +12,5 @@
 /home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraMath.h:54: Warning: Member INV_TWO_PI (variable) of class Pandora::Math::Math is not documented.
 /home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraMath.h:55: Warning: Member DEG_TO_RAD (variable) of class Pandora::Math::Math is not documented.
 /home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraMath.h:56: Warning: Member RAD_TO_DEG (variable) of class Pandora::Math::Math is not documented.
-/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraVector2.h:135: Warning: Member x (variable) of class Pandora::Math::Vec2 is not documented.
-/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraVector2.h:135: Warning: Member y (variable) of class Pandora::Math::Vec2 is not documented.
+/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraVector2.h:273: Warning: Member x (variable) of class Pandora::Math::Vec2 is not documented.
+/home/martin/Programmering/Pandora3D/trunk/PandoraCore/include/PandoraVector2.h:273: Warning: Member y (variable) of class Pandora::Math::Vec2 is not documented.

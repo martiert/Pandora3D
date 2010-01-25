@@ -1,3 +1,5 @@
+//A unit test for the list class in Pandora3D.
+
 #ifndef LISTTEST_H
 #define LISTTEST_H
 

@@ -14,19 +14,19 @@ A simple \hyperlink{classPandora_1_1Utils_1_1Vector}{Vector} class.
 \begin{DoxyCompactList}\small\item\em Default constructor. \item\end{DoxyCompactList}\item 
 \hyperlink{classPandora_1_1Utils_1_1Vector_ab2688a6e46b857ad4756d21adadb0a20}{$\sim$Vector} ()
 \begin{DoxyCompactList}\small\item\em Destructor. \item\end{DoxyCompactList}\item 
-T $\ast$ \hyperlink{classPandora_1_1Utils_1_1Vector_a9760f625847909ad7dc45a71742bbcc9}{c\_\-ptr} ()
+T $\ast$ \hyperlink{classPandora_1_1Utils_1_1Vector_a6392a54fb8c8e1dc9e6f1128f7b8cb03}{c\_\-ptr} ()
 \begin{DoxyCompactList}\small\item\em Get a pointer to the data. \item\end{DoxyCompactList}\item 
-const T $\ast$ \hyperlink{classPandora_1_1Utils_1_1Vector_a8ee2539ddb6b94eff47b6453143b2b83}{c\_\-ptr} () const 
+const T $\ast$ \hyperlink{classPandora_1_1Utils_1_1Vector_ac3306d38479a1ae6e28eadd9f346f8fa}{c\_\-ptr} () const 
 \begin{DoxyCompactList}\small\item\em Get a constant pointer to the data. \item\end{DoxyCompactList}\item 
-T \& \hyperlink{classPandora_1_1Utils_1_1Vector_adef2d8c160a9f9c2398f3c92f7874f4e}{operator\mbox{[}$\,$\mbox{]}} (const size\_\-t i)
+T \& \hyperlink{classPandora_1_1Utils_1_1Vector_a00d84e3e6da7b22d5324e47e903f9e93}{operator\mbox{[}$\,$\mbox{]}} (const size\_\-t i)
 \begin{DoxyCompactList}\small\item\em Get element in vector. \item\end{DoxyCompactList}\item 
-const T \& \hyperlink{classPandora_1_1Utils_1_1Vector_a9841fe5df9567810a8be69891e5bf5cf}{operator\mbox{[}$\,$\mbox{]}} (const size\_\-t i) const 
+const T \& \hyperlink{classPandora_1_1Utils_1_1Vector_a36afe1f7fbe55eedfe0aa9a14ed75cfd}{operator\mbox{[}$\,$\mbox{]}} (const size\_\-t i) const 
 \begin{DoxyCompactList}\small\item\em Get constant element in vector. \item\end{DoxyCompactList}\item 
 void \hyperlink{classPandora_1_1Utils_1_1Vector_a6c1c963c1d58b1e371a07c048c33cdca}{append} (const T \&element)
 \begin{DoxyCompactList}\small\item\em Append data to the vector. \item\end{DoxyCompactList}\item 
 void \hyperlink{classPandora_1_1Utils_1_1Vector_a8757e06ea29132d0b8873a13b6c1d956}{insert} (const size\_\-t i, const T \&element)
 \begin{DoxyCompactList}\small\item\em Insert data in the vector. \item\end{DoxyCompactList}\item 
-T \& \hyperlink{classPandora_1_1Utils_1_1Vector_a321442d5b814dd8709319ad109af1700}{remove} (const size\_\-t i)
+T \& \hyperlink{classPandora_1_1Utils_1_1Vector_a37cd40a897817d586431d390aaa1345b}{remove} (const size\_\-t i)
 \begin{DoxyCompactList}\small\item\em Remove an element from the vector. \item\end{DoxyCompactList}\item 
 void \hyperlink{classPandora_1_1Utils_1_1Vector_ab9f631b7ca468cba7f358ee14043b0a6}{removeAll} ()
 \begin{DoxyCompactList}\small\item\em Remove all elements from the vector. \item\end{DoxyCompactList}\item 
@@ -60,9 +60,7 @@ Definition at line 33 of file PandoraVector.h.
 Default constructor. 
 \begin{DoxyParams}{Parameters}
 \item[{\em size}]-\/ The starting size of the vector. Defaults to 4. \item[{\em inc}]-\/ The number of elements to increase the vector by. Defaults to 4. \end{DoxyParams}
-
-
-Definition at line 169 of file PandoraVector.h.\hypertarget{classPandora_1_1Utils_1_1Vector_ab2688a6e46b857ad4756d21adadb0a20}{
+\hypertarget{classPandora_1_1Utils_1_1Vector_ab2688a6e46b857ad4756d21adadb0a20}{
 \index{Pandora::Utils::Vector@{Pandora::Utils::Vector}!$\sim$Vector@{$\sim$Vector}}
 \index{$\sim$Vector@{$\sim$Vector}!Pandora::Utils::Vector@{Pandora::Utils::Vector}}
 \subsubsection[{$\sim$Vector}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf Pandora::Utils::Vector}$<$ T $>$::$\sim${\bf Vector} ()}}
@@ -70,8 +68,6 @@ Definition at line 169 of file PandoraVector.h.\hypertarget{classPandora_1_1Util
 
 
 Destructor. 
-
-Definition at line 181 of file PandoraVector.h.
 
 \subsection{Member Function Documentation}
 \hypertarget{classPandora_1_1Utils_1_1Vector_a6c1c963c1d58b1e371a07c048c33cdca}{
@@ -87,33 +83,27 @@ Append data to the vector.
 \begin{DoxyNote}{Note}
 Increases the size of the vector if needed. 
 \end{DoxyNote}
-
-
-Definition at line 234 of file PandoraVector.h.\hypertarget{classPandora_1_1Utils_1_1Vector_a8ee2539ddb6b94eff47b6453143b2b83}{
+\hypertarget{classPandora_1_1Utils_1_1Vector_ac3306d38479a1ae6e28eadd9f346f8fa}{
 \index{Pandora::Utils::Vector@{Pandora::Utils::Vector}!c\_\-ptr@{c\_\-ptr}}
 \index{c\_\-ptr@{c\_\-ptr}!Pandora::Utils::Vector@{Pandora::Utils::Vector}}
-\subsubsection[{c\_\-ptr}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ const T $\ast$ {\bf Pandora::Utils::Vector}$<$ T $>$::c\_\-ptr () const}}
-\label{classPandora_1_1Utils_1_1Vector_a8ee2539ddb6b94eff47b6453143b2b83}
+\subsubsection[{c\_\-ptr}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ const T$\ast$ {\bf Pandora::Utils::Vector}$<$ T $>$::c\_\-ptr () const}}
+\label{classPandora_1_1Utils_1_1Vector_ac3306d38479a1ae6e28eadd9f346f8fa}
 
 
 Get a constant pointer to the data. \begin{DoxyReturn}{Returns}
 A constant pointer to the data. 
 \end{DoxyReturn}
-
-
-Definition at line 199 of file PandoraVector.h.\hypertarget{classPandora_1_1Utils_1_1Vector_a9760f625847909ad7dc45a71742bbcc9}{
+\hypertarget{classPandora_1_1Utils_1_1Vector_a6392a54fb8c8e1dc9e6f1128f7b8cb03}{
 \index{Pandora::Utils::Vector@{Pandora::Utils::Vector}!c\_\-ptr@{c\_\-ptr}}
 \index{c\_\-ptr@{c\_\-ptr}!Pandora::Utils::Vector@{Pandora::Utils::Vector}}
-\subsubsection[{c\_\-ptr}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ T $\ast$ {\bf Pandora::Utils::Vector}$<$ T $>$::c\_\-ptr ()}}
-\label{classPandora_1_1Utils_1_1Vector_a9760f625847909ad7dc45a71742bbcc9}
+\subsubsection[{c\_\-ptr}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ T$\ast$ {\bf Pandora::Utils::Vector}$<$ T $>$::c\_\-ptr ()}}
+\label{classPandora_1_1Utils_1_1Vector_a6392a54fb8c8e1dc9e6f1128f7b8cb03}
 
 
 Get a pointer to the data. \begin{DoxyReturn}{Returns}
 A pointer to the data. 
 \end{DoxyReturn}
-
-
-Definition at line 190 of file PandoraVector.h.\hypertarget{classPandora_1_1Utils_1_1Vector_a4d21fd9aff673df56471a9724b36fe2c}{
+\hypertarget{classPandora_1_1Utils_1_1Vector_a4d21fd9aff673df56471a9724b36fe2c}{
 \index{Pandora::Utils::Vector@{Pandora::Utils::Vector}!getElements@{getElements}}
 \index{getElements@{getElements}!Pandora::Utils::Vector@{Pandora::Utils::Vector}}
 \subsubsection[{getElements}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ size\_\-t {\bf Pandora::Utils::Vector}$<$ T $>$::getElements () const}}
@@ -123,9 +113,7 @@ Definition at line 190 of file PandoraVector.h.\hypertarget{classPandora_1_1Util
 Get the number of elements in the vector. \begin{DoxyReturn}{Returns}
 The number of elements in the vector. 
 \end{DoxyReturn}
-
-
-Definition at line 323 of file PandoraVector.h.\hypertarget{classPandora_1_1Utils_1_1Vector_aee155c4f9a304e540e359af6d3fec3d8}{
+\hypertarget{classPandora_1_1Utils_1_1Vector_aee155c4f9a304e540e359af6d3fec3d8}{
 \index{Pandora::Utils::Vector@{Pandora::Utils::Vector}!getIncrement@{getIncrement}}
 \index{getIncrement@{getIncrement}!Pandora::Utils::Vector@{Pandora::Utils::Vector}}
 \subsubsection[{getIncrement}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ size\_\-t {\bf Pandora::Utils::Vector}$<$ T $>$::getIncrement () const}}
@@ -135,9 +123,7 @@ Definition at line 323 of file PandoraVector.h.\hypertarget{classPandora_1_1Util
 Get the number of elements to increment by. \begin{DoxyReturn}{Returns}
 The number of elements to increase the vector by. 
 \end{DoxyReturn}
-
-
-Definition at line 341 of file PandoraVector.h.\hypertarget{classPandora_1_1Utils_1_1Vector_a8df1cb3c4cc21dca4b093eed28c62b9a}{
+\hypertarget{classPandora_1_1Utils_1_1Vector_a8df1cb3c4cc21dca4b093eed28c62b9a}{
 \index{Pandora::Utils::Vector@{Pandora::Utils::Vector}!getSize@{getSize}}
 \index{getSize@{getSize}!Pandora::Utils::Vector@{Pandora::Utils::Vector}}
 \subsubsection[{getSize}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ size\_\-t {\bf Pandora::Utils::Vector}$<$ T $>$::getSize () const}}
@@ -147,9 +133,7 @@ Definition at line 341 of file PandoraVector.h.\hypertarget{classPandora_1_1Util
 Get the size of the vector. \begin{DoxyReturn}{Returns}
 the number of places in the vector. 
 \end{DoxyReturn}
-
-
-Definition at line 332 of file PandoraVector.h.\hypertarget{classPandora_1_1Utils_1_1Vector_a8757e06ea29132d0b8873a13b6c1d956}{
+\hypertarget{classPandora_1_1Utils_1_1Vector_a8757e06ea29132d0b8873a13b6c1d956}{
 \index{Pandora::Utils::Vector@{Pandora::Utils::Vector}!insert@{insert}}
 \index{insert@{insert}!Pandora::Utils::Vector@{Pandora::Utils::Vector}}
 \subsubsection[{insert}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ void {\bf Pandora::Utils::Vector}$<$ T $>$::insert (const size\_\-t {\em i}, \/  const T \& {\em element})}}
@@ -162,13 +146,11 @@ Insert data in the vector.
 \begin{DoxyNote}{Note}
 Increases the size of the vector if needed. 
 \end{DoxyNote}
-
-
-Definition at line 267 of file PandoraVector.h.\hypertarget{classPandora_1_1Utils_1_1Vector_a9841fe5df9567810a8be69891e5bf5cf}{
+\hypertarget{classPandora_1_1Utils_1_1Vector_a36afe1f7fbe55eedfe0aa9a14ed75cfd}{
 \index{Pandora::Utils::Vector@{Pandora::Utils::Vector}!operator\mbox{[}\mbox{]}@{operator[]}}
 \index{operator\mbox{[}\mbox{]}@{operator[]}!Pandora::Utils::Vector@{Pandora::Utils::Vector}}
-\subsubsection[{operator[]}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ const T \& {\bf Pandora::Utils::Vector}$<$ T $>$::operator\mbox{[}$\,$\mbox{]} (const size\_\-t {\em i}) const}}
-\label{classPandora_1_1Utils_1_1Vector_a9841fe5df9567810a8be69891e5bf5cf}
+\subsubsection[{operator[]}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ const T\& {\bf Pandora::Utils::Vector}$<$ T $>$::operator\mbox{[}$\,$\mbox{]} (const size\_\-t {\em i}) const}}
+\label{classPandora_1_1Utils_1_1Vector_a36afe1f7fbe55eedfe0aa9a14ed75cfd}
 
 
 Get constant element in vector. 
@@ -180,13 +162,11 @@ The element from index i.
 \begin{DoxyNote}{Note}
 No resizing is done. Error occurs if you try to access element outside of the vector. 
 \end{DoxyNote}
-
-
-Definition at line 219 of file PandoraVector.h.\hypertarget{classPandora_1_1Utils_1_1Vector_adef2d8c160a9f9c2398f3c92f7874f4e}{
+\hypertarget{classPandora_1_1Utils_1_1Vector_a00d84e3e6da7b22d5324e47e903f9e93}{
 \index{Pandora::Utils::Vector@{Pandora::Utils::Vector}!operator\mbox{[}\mbox{]}@{operator[]}}
 \index{operator\mbox{[}\mbox{]}@{operator[]}!Pandora::Utils::Vector@{Pandora::Utils::Vector}}
-\subsubsection[{operator[]}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ T \& {\bf Pandora::Utils::Vector}$<$ T $>$::operator\mbox{[}$\,$\mbox{]} (const size\_\-t {\em i})}}
-\label{classPandora_1_1Utils_1_1Vector_adef2d8c160a9f9c2398f3c92f7874f4e}
+\subsubsection[{operator[]}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ T\& {\bf Pandora::Utils::Vector}$<$ T $>$::operator\mbox{[}$\,$\mbox{]} (const size\_\-t {\em i})}}
+\label{classPandora_1_1Utils_1_1Vector_a00d84e3e6da7b22d5324e47e903f9e93}
 
 
 Get element in vector. 
@@ -198,13 +178,11 @@ The element from index i.
 \begin{DoxyNote}{Note}
 No resizing is done. Error occurs if you try to access element outside of the vector. 
 \end{DoxyNote}
-
-
-Definition at line 208 of file PandoraVector.h.\hypertarget{classPandora_1_1Utils_1_1Vector_a321442d5b814dd8709319ad109af1700}{
+\hypertarget{classPandora_1_1Utils_1_1Vector_a37cd40a897817d586431d390aaa1345b}{
 \index{Pandora::Utils::Vector@{Pandora::Utils::Vector}!remove@{remove}}
 \index{remove@{remove}!Pandora::Utils::Vector@{Pandora::Utils::Vector}}
-\subsubsection[{remove}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ T \& {\bf Pandora::Utils::Vector}$<$ T $>$::remove (const size\_\-t {\em i})}}
-\label{classPandora_1_1Utils_1_1Vector_a321442d5b814dd8709319ad109af1700}
+\subsubsection[{remove}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ T\& {\bf Pandora::Utils::Vector}$<$ T $>$::remove (const size\_\-t {\em i})}}
+\label{classPandora_1_1Utils_1_1Vector_a37cd40a897817d586431d390aaa1345b}
 
 
 Remove an element from the vector. 
@@ -213,18 +191,14 @@ Remove an element from the vector.
 \begin{DoxyReturn}{Returns}
 The old element. 
 \end{DoxyReturn}
-
-
-Definition at line 293 of file PandoraVector.h.\hypertarget{classPandora_1_1Utils_1_1Vector_ab9f631b7ca468cba7f358ee14043b0a6}{
+\hypertarget{classPandora_1_1Utils_1_1Vector_ab9f631b7ca468cba7f358ee14043b0a6}{
 \index{Pandora::Utils::Vector@{Pandora::Utils::Vector}!removeAll@{removeAll}}
 \index{removeAll@{removeAll}!Pandora::Utils::Vector@{Pandora::Utils::Vector}}
 \subsubsection[{removeAll}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ void {\bf Pandora::Utils::Vector}$<$ T $>$::removeAll ()}}
 \label{classPandora_1_1Utils_1_1Vector_ab9f631b7ca468cba7f358ee14043b0a6}
 
 
-Remove all elements from the vector. 
-
-Definition at line 311 of file PandoraVector.h.\hypertarget{classPandora_1_1Utils_1_1Vector_a7712e06b6660e77796a6d4093d949e8e}{
+Remove all elements from the vector. \hypertarget{classPandora_1_1Utils_1_1Vector_a7712e06b6660e77796a6d4093d949e8e}{
 \index{Pandora::Utils::Vector@{Pandora::Utils::Vector}!setIncrement@{setIncrement}}
 \index{setIncrement@{setIncrement}!Pandora::Utils::Vector@{Pandora::Utils::Vector}}
 \subsubsection[{setIncrement}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ void {\bf Pandora::Utils::Vector}$<$ T $>$::setIncrement (const size\_\-t {\em inc})}}
@@ -234,9 +208,7 @@ Definition at line 311 of file PandoraVector.h.\hypertarget{classPandora_1_1Util
 \hyperlink{classPandora_1_1Utils_1_1Set}{Set} the number of elements to increment with. 
 \begin{DoxyParams}{Parameters}
 \item[{\em inc}]-\/ The new number of element to increment the vector by. \end{DoxyParams}
-
-
-Definition at line 371 of file PandoraVector.h.\hypertarget{classPandora_1_1Utils_1_1Vector_adc9658f8a19f67e7e92b43c5bd4206c7}{
+\hypertarget{classPandora_1_1Utils_1_1Vector_adc9658f8a19f67e7e92b43c5bd4206c7}{
 \index{Pandora::Utils::Vector@{Pandora::Utils::Vector}!setSize@{setSize}}
 \index{setSize@{setSize}!Pandora::Utils::Vector@{Pandora::Utils::Vector}}
 \subsubsection[{setSize}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ void {\bf Pandora::Utils::Vector}$<$ T $>$::setSize (const size\_\-t {\em size})}}
@@ -247,8 +219,6 @@ Definition at line 371 of file PandoraVector.h.\hypertarget{classPandora_1_1Util
 \begin{DoxyParams}{Parameters}
 \item[{\em size}]-\/ The new number of elements in the vector. \end{DoxyParams}
 
-
-Definition at line 350 of file PandoraVector.h.
 
 The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
 \item 

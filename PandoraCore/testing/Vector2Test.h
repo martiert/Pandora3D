@@ -1,3 +1,5 @@
+//A unit test for the Vec2 class of Pandora3D.
+
 #ifndef VECTOR2TEST_H
 #define VECTOR2TEST_H
 
