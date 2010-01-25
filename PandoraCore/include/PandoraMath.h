@@ -83,20 +83,6 @@ namespace Pandora
                 static Real Tan(Real value);
 
                 /**
-                 * Calculates the inverse sinus.
-                 * \param
-                 *      value - The sinus value.
-                 *  \return
-                 *      The number of radians in the interval \f$
-                 *      [-\frac{\pi}{2},\frac{\pi}{2}]\f$.
-                 *  \note
-                 *      If the value is less then -1 we return \f$ 
-                 *      -\frac{\pi}{2}\f$, and if the value us larger then 1, 
-                 *      we return \f$\frac{\pi}{2}\f$.
-                 */
-                static Real Asin(Real value);
-
-                /**
                  * Calculates the inverse cosine.
                  * \param
                  *      value - The cosine value.
@@ -107,6 +93,20 @@ namespace Pandora
                  *      the value is larger then 1, we return 0.
                  */
                 static Real Acos(Real value);
+
+                /**
+                 * Calculates the inverse sinus.
+                 * \param
+                 *      value - The sinus value.
+                 *  \return
+                 *      The number of radians in the interval \f$
+                 *      [-\frac{\pi}{2},\frac{\pi}{2}]\f$.
+                 *  \note
+                 *      If the value is less then -1 we return \f$ 
+                 *      -\frac{\pi}{2}\f$, and if the value is larger then 1, 
+                 *      we return \f$\frac{\pi}{2}\f$.
+                 */
+                static Real Asin(Real value);
 
                 /**
                  * Calculates the inverse tangent.
