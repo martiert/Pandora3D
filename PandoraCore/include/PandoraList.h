@@ -84,9 +84,14 @@ namespace Pandora
                  * Removes all the data in the List.
                 */
                 void removeAll();
+
+                /**
+                 * Get the length of the list
+                 */
+                unsigned int length();
             private:
                 Node<T> *m_root;
-                size_t m_size;
+                unsigned int m_size;
         };
 
 #include "PandoraList.inl"

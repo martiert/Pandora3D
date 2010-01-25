@@ -6,7 +6,7 @@ Purpose : Implementation of the List class used in Pandora3D
 
 Creation Date : 2010-01-24
 
-Last Modified : sø. 24. jan. 2010 kl. 20.07 +0100
+Last Modified : ma. 25. jan. 2010 kl. 20.12 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------
@@ -18,13 +18,15 @@ Created By : Martin Ertsås
 template<class T>
 List<T>::List(const T& data)
 {
-    if(data == NULL) {
+    if(!data) {
         m_size = 0;
+        m_root = NULL;
         return;
     }
 
-    m_root = malloc(sizeof(Node<T>));
+    m_root = (Node<T>*) malloc(sizeof(Node<T>));
     m_root->data = data;
+    m_root->next = NULL;
     m_size = 1;
 }
 
@@ -48,10 +50,11 @@ List<T>::~List()
 template<class T>
 void List<T>::insert(const T& data)
 {
-    Node<T> *tmp = malloc(sizeof(Node<T>));
+    Node<T> *tmp = (Node<T>*) malloc(sizeof(Node<T>));
     tmp->data = data;
     tmp->next = m_root;
     m_root = tmp;
+    m_size++;
 }
 
 //-----------------------------------------------------------------------------
@@ -70,6 +73,8 @@ bool List<T>::remove(const T& data)
         m_root = tmp->next;
         free(tmp);
         --m_size;
+        if(m_size == 0)
+            m_root = NULL;
         return true;
     }
 
@@ -90,6 +95,10 @@ bool List<T>::remove(const T& data)
     last->next = now->next;
     free(now);
     --m_size;
+    if(m_size == 0)
+        m_root = NULL;
+
+    return true;
 }
 
 //-----------------------------------------------------------------------------
@@ -125,4 +134,13 @@ void List<T>::removeAll()
     }
 
     m_size = 0;
+}
+
+//-----------------------------------------------------------------------------
+// Get the length of the list.
+//-----------------------------------------------------------------------------
+template<class T>
+unsigned int List<T>::length()
+{
+    return m_size;
 }

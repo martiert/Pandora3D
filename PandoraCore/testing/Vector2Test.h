@@ -1,7 +1,6 @@
 #ifndef VECTOR2TEST_H
 #define VECTOR2TEST_H
 
-#include <iostream>
 #include <cppunit/TestCase.h>
 #include <cppunit/TestSuite.h>
 #include <cppunit/TestCaller.h>
