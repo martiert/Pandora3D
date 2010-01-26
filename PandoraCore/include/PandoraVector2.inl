@@ -6,7 +6,7 @@ Purpose : Implementation of the Vector2 class used in Pandora3D
 
 Creation Date : 2010-01-26
 
-Last Modified : ti. 26. jan. 2010 kl. 12.33 +0100
+Last Modified : ti. 26. jan. 2010 kl. 13.09 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------
@@ -203,7 +203,8 @@ void Vec2<Real>::operator/=(const Real& scalar)
 template<class Real>
 bool Vec2<Real>::operator==(const Vec2<Real>& vec) const
 {
-    return (x == vec.x && y == vec.y);
+    return (Math<Real>::Abs(x - vec.x) < Math<Real>::EPSILON && 
+            Math<Real>::Abs(y - vec.y) < Math<Real>::EPSILON);
 }
 
 //-----------------------------------------------------------------------------
