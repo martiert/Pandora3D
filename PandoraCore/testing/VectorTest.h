@@ -13,7 +13,7 @@ class VectorTest : public CppUnit::TestCase
     public:
         VectorTest() : TestCase("VectorTest") { }
         void init();
-        void testConstructor();
+        void testGetter();
 
         static CppUnit::Test *suite();
         void setUp();

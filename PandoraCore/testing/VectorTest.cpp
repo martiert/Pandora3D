@@ -6,7 +6,7 @@ Purpose :
 
 Creation Date : 2010-01-26
 
-Last Modified : ti. 26. jan. 2010 kl. 13.59 +0100
+Last Modified : on. 27. jan. 2010 kl. 00.01 +0100
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -25,7 +25,22 @@ void VectorTest::testGetter()
 {
     printf("\tTesting Getters\n");
 
+    CPPUNIT_ASSERT( intVec->getElements() == 0 );
+    CPPUNIT_ASSERT( intVec->getSize() == 4 );
+    CPPUNIT_ASSERT( intVec->getIncrement() == 4 );
 
+    CPPUNIT_ASSERT( floatVec->getElements() == 0 );
+    CPPUNIT_ASSERT( floatVec->getSize() == 2 );
+    CPPUNIT_ASSERT( floatVec->getIncrement() == 1 );
+
+    CPPUNIT_ASSERT( noincVec->getElements() == 1 );
+    CPPUNIT_ASSERT( noincVec->getSize() == 2 );
+    CPPUNIT_ASSERT( noincVec->getIncrement() == 0 );
+
+    intVec->setSize(12);
+    intVec->setIncrement(1);
+    CPPUNIT_ASSERT( intVec->getSize() == 12 );
+    CPPUNIT_ASSERT( intVec->getIncrement() == 1 );
 }
 
 CppUnit::Test *VectorTest::suite()
@@ -35,8 +50,8 @@ CppUnit::Test *VectorTest::suite()
                 "VectorTest::init",
                 &VectorTest::init ));
     testSuite->addTest( new CppUnit::TestCaller<VectorTest>(
-                "VectorTest::init",
-                &VectorTest::testConstructor ));
+                "VectorTest::testGetter",
+                &VectorTest::testGetter ));
     return testSuite;
 }
 
@@ -45,6 +60,7 @@ void VectorTest::setUp()
     intVec = new Vector<int>();
     floatVec = new Vector<float>(2,1);
     noincVec = new Vector<char>(2,0);
+    noincVec->append('c');
 }
 
 void VectorTest::tearDown()

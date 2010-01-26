@@ -70,7 +70,7 @@ make.dep:
 include make.dep
 
 clean:
-	rm -f *.o *.a *~ core
+	rm -f $(OBJECTS) *.a *~ core
 
 distclean: clean
 	rm -f make.dep *.bak $(APP)

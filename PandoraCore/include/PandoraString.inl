@@ -6,7 +6,7 @@ Purpose : Implementation of the String class used in Pandora3D
 
 Creation Date : 2010-01-24
 
-Last Modified : ti. 26. jan. 2010 kl. 11.25 +0100
+Last Modified : ti. 26. jan. 2010 kl. 23.37 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------
