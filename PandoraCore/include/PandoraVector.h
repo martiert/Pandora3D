@@ -41,7 +41,7 @@ namespace Pandora
                  *      inc - The number of elements to increase the vector by.
                  *          Defaults to 4.
                  */
-                Vector(const size_t size = 4, const size_t inc = 4);
+                Vector(const unsigned int size = 4, const unsigned int inc = 4);
 
                 /** 
                  *  Destructor 
@@ -72,7 +72,7 @@ namespace Pandora
                  *      No resizing is done. Error occurs if you try to access
                  *      element outside of the vector.
                  */
-                T& operator[](const size_t i);
+                T& operator[](const unsigned int i);
 
                 /** 
                  *  Get constant element in vector.
@@ -84,7 +84,7 @@ namespace Pandora
                  *      No resizing is done. Error occurs if you try to access
                  *      element outside of the vector.
                  */
-                const T& operator[](const size_t i) const;
+                const T& operator[](const unsigned int i) const;
 
                 /** 
                  *  Append data to the vector.
@@ -104,7 +104,7 @@ namespace Pandora
                  *  \note
                  *      Increases the size of the vector if needed.
                  */
-                void insert(const size_t i, const T& element);
+                void insert(const unsigned int i, const T& element);
 
                 /** 
                  *  Remove an element from the vector.
@@ -113,7 +113,7 @@ namespace Pandora
                  *  \return
                  *      The old element.
                  */
-                T& remove(const size_t i);
+                T& remove(const unsigned int i);
 
                 /** 
                  *  Remove all elements from the vector.
@@ -125,28 +125,28 @@ namespace Pandora
                  *  \return
                  *      The number of elements in the vector.
                  */
-                size_t getElements() const;
+                unsigned int getElements() const;
 
                 /** 
                  *  Get the size of the vector.
                  *  \return
                  *      the number of places in the vector.
                  */
-                size_t getSize() const;
+                unsigned int getSize() const;
 
                 /** 
                  *  Get the number of elements to increment by.
                  *  \return
                  *      The number of elements to increase the vector by.
                  */
-                size_t getIncrement() const;
+                unsigned int getIncrement() const;
 
                 /** 
                  *  Set the size of the vector
                  *  \param
                  *      size - The new number of elements in the vector.
                  */
-                void setSize(const size_t size);
+                void setSize(const unsigned int size);
 
                 /** 
                  *  Set the number of elements to increment with.
@@ -154,12 +154,12 @@ namespace Pandora
                  *      inc - The new number of element to increment the vector
                  *          by.
                  */
-                void setIncrement(const size_t inc);
+                void setIncrement(const unsigned int inc);
             private:
                 T *m_data;
-                size_t m_elements;
-                size_t m_size;
-                size_t m_increment;
+                unsigned int m_elements;
+                unsigned int m_size;
+                unsigned int m_increment;
         };
 
 #include "PanoraVector.inl"

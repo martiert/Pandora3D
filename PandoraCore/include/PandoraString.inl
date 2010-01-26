@@ -6,7 +6,7 @@ Purpose : Implementation of the String class used in Pandora3D
 
 Creation Date : 2010-01-24
 
-Last Modified : sø. 24. jan. 2010 kl. 20.13 +0100
+Last Modified : ti. 26. jan. 2010 kl. 11.25 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ String::String(const char *text)
 //-----------------------------------------------------------------------------
 // Constructor.
 //-----------------------------------------------------------------------------
-String::String(size_t length, const char *text)
+String::String(unsigned int length, const char *text)
 {
     m_length = length;
     m_string = new char[m_length + 1];

@@ -41,7 +41,7 @@ namespace Pandora
                  *      size - The number of elements in the stack. This number
                  *      is final.
                  */
-                Stack(size_t size);
+                Stack(unsigned int size);
 
                 /** 
                  *  Destructor. 

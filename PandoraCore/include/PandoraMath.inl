@@ -4,9 +4,9 @@ File Name : PandoraMath.inl
 
 Purpose : Implementation of the Math class used in Pandora3D
 
-Creation Date : 2010-01-25
+Creation Date : 2010-01-26
 
-Last Modified : ti. 26. jan. 2010 kl. 10.58 +0100
+Last Modified : ti. 26. jan. 2010 kl. 11.24 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------

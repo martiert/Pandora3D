@@ -46,7 +46,7 @@ namespace Pandora
                  *  \param
                  *      text - The text to form a string.
                  */
-                String(size_t length, const char *text);
+                String(unsigned int length, const char *text);
 
                 /** 
                  *  Copy constructor.

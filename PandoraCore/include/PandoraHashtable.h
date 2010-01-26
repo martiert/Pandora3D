@@ -58,7 +58,7 @@ namespace Pandora
                  *      size - The size of the hashTable. It is not possible to
                  *          change this at a later time.
                  */
-                HashTable(const size_t& size);
+                HashTable(const unsigned int& size);
 
                 /** 
                  * Destructor 
@@ -121,8 +121,8 @@ namespace Pandora
                  */
                 int (*userHashFunction)(const Key& key);
             private:
-                size_t m_size;
-                size_t m_elements;
+                unsigned int m_size;
+                unsigned int m_elements;
                 Node<Key, Value> *m_values;
 
                 int hashFunction(const Key& key) const;

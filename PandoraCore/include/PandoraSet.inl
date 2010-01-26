@@ -4,9 +4,9 @@ File Name : PandoraSet.inl
 
 Purpose : Implementation of the Set class used in Pandora3D
 
-Creation Date : 2010-01-24
+Creation Date : 2010-01-26
 
-Last Modified : ti. 26. jan. 2010 kl. 11.48 +0100
+Last Modified : ti. 26. jan. 2010 kl. 11.25 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------

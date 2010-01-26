@@ -6,7 +6,7 @@ Purpose : Implementation of the Hashtable class used in Pandora3D
  
 Creation Date : 2010-01-24
 
-Last Modified : sø. 24. jan. 2010 kl. 20.08 +0100
+Last Modified : ti. 26. jan. 2010 kl. 11.24 +0100
  
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------
@@ -16,7 +16,7 @@ Created By : Martin Ertsås
 // Constructor.
 //-----------------------------------------------------------------------------
 template<class Key, class Value>
-HashTable<Key,Value>::HashTable(const size_t& size)
+HashTable<Key,Value>::HashTable(const unsigned int& size)
 {
     m_size = size;
     m_elements = 0;
@@ -146,8 +146,8 @@ int HashTable<Key,Value>::hashFunction(const Key& key) const
         return (*userHashFunction)(key);
 
     static double multiply = 0.5*(sqrt(5.0) - 1.0);
-    size_t hashKey;
-    memcpy(&hashKey, &key, sizeof(size_t));
+    unsigned int hashKey;
+    memcpy(&hashKey, &key, sizeof(unsigned int));
     hashKey %= m_size;
     double fraction = fmod(multiply * hashKey, 1.0);
     return floor(fraction * m_size);
