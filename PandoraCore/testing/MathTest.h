@@ -16,7 +16,7 @@ class MathTest : public CppUnit::TestCase
     public:
         MathTest() : TestCase("MathTest") {}
         void init();
-        void testTrigonometrics();
+        void testTrigonometries();
         void testRound();
         void testPow();
 

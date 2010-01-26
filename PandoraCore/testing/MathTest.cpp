@@ -21,9 +21,9 @@ void MathTest::init()
     printf("Starting Math class\n");
 }
 
-void MathTest::testTrigonometrics()
+void MathTest::testTrigonometries()
 {
-    printf("\tTesting trigonometrics\n");
+    printf("\tTesting trigonometries\n");
     CPPUNIT_ASSERT( Math<double>::Cos(4.0) == cos(4.0) );
     CPPUNIT_ASSERT( Math<double>::Sin(4.0) == sin(4.0) );
     CPPUNIT_ASSERT( Math<double>::Tan(4.0) == tan(4.0) );
@@ -85,8 +85,8 @@ CppUnit::Test *MathTest::suite()
                 "MathTest::init",
                 &MathTest::init ));
     testSuite->addTest( new CppUnit::TestCaller<MathTest>(
-                "MathTest::testTrigonometrics",
-                &MathTest::testTrigonometrics ));
+                "MathTest::testTrigonometries",
+                &MathTest::testTrigonometries ));
     testSuite->addTest( new CppUnit::TestCaller<MathTest>(
                 "MathTest::testRound",
                 &MathTest::testRound ));
