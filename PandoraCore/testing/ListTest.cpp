@@ -2,11 +2,11 @@
 -------------------------------------------------------------------------------
 File Name : ListTest.cpp
 
-Purpose :
+Purpose : Testing the List class of Pandora3D.
 
-Creation Date : 2010-01-25
+Creation Date : 2010-01-26
 
-Last Modified : ma. 25. jan. 2010 kl. 20.11 +0100
+Last Modified : ti. 26. jan. 2010 kl. 11.23 +0100
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------

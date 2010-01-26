@@ -2,11 +2,11 @@
 -------------------------------------------------------------------------------
 File Name : SetTest.cpp
 
-Purpose :
+Purpose : Testing the Set class of Pandora3D.
 
 Creation Date : 2010-01-26
 
-Last Modified : ti. 26. jan. 2010 kl. 11.57 +0100
+Last Modified : ti. 26. jan. 2010 kl. 11.23 +0100
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------

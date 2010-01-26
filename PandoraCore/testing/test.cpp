@@ -4,9 +4,9 @@ File Name : test.cpp
 
 Purpose : Running all the test from Pandora3D.
 
-Creation Date : 2010-01-19
+Creation Date : 2010-01-25
 
-Last Modified : ti. 26. jan. 2010 kl. 11.12 +0100
+Last Modified : ti. 26. jan. 2010 kl. 11.23 +0100
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
