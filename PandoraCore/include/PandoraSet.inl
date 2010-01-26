@@ -6,7 +6,7 @@ Purpose : Implementation of the Set class used in Pandora3D
 
 Creation Date : 2010-01-26
 
-Last Modified : ti. 26. jan. 2010 kl. 11.25 +0100
+Last Modified : ti. 26. jan. 2010 kl. 12.36 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------
@@ -53,7 +53,7 @@ bool Set<T>::insert(const T& in)
         T *tmp = new T[m_size + m_increment];
 
         //Copy the data to the new array
-        for(int i = 0; i < m_size; ++i)
+        for(unsigned int i = 0; i < m_size; ++i)
             tmp[i] = m_data[i];
 
         //Delete the old array, copy the new large array to the data 
@@ -79,7 +79,7 @@ bool Set<T>::exists(const T& search) const
         return false;
     }
 
-    for(int i = 0; i < m_elements; ++i) {
+    for(unsigned int i = 0; i < m_elements; ++i) {
         if(m_data[i] == search) {
             return true;
         }

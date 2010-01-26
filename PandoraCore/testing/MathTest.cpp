@@ -6,7 +6,7 @@ Purpose : Testing the Math class in Pandora3D
 
 Creation Date : 2010-01-26
 
-Last Modified : ti. 26. jan. 2010 kl. 11.23 +0100
+Last Modified : ti. 26. jan. 2010 kl. 12.41 +0100
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ using Pandora::Math::Math;
 
 void MathTest::init()
 {
-    printf("Starting Math class\n");
+    printf("Starting MathTest\n");
 }
 
 void MathTest::testTrigonometries()

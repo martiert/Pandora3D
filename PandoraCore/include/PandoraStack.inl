@@ -6,7 +6,7 @@ Purpose : Implementation of the Stack class used in Pandora3D
 
 Creation Date : 2010-01-24
 
-Last Modified : ti. 26. jan. 2010 kl. 11.25 +0100
+Last Modified : ti. 26. jan. 2010 kl. 13.14 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------
@@ -64,12 +64,14 @@ void Stack<T>::push(const T& item)
 // Pop the first item.
 //-----------------------------------------------------------------------------
 template<class T>
-T& Stack<T>::pop() 
+bool Stack<T>::pop(T& item) 
 {
-    if(m_stackAt == -1)
-        return NULL;
+    if(m_stackAt == -1) {
+        return false;
+    }
 
-    return m_stack[m_stackAt--];
+    item = m_stack[m_stackAt--];
+    return true;
 }
 
 //-----------------------------------------------------------------------------
@@ -85,9 +87,11 @@ void Stack<T>::clear()
 // Get the top of the stack without popping.
 //-----------------------------------------------------------------------------
 template<class T>
-T& Stack<T>::getTop() const
+bool Stack<T>::getTop(T& item)
 {
-    if(m_stackAt == -1)
-        return NULL;
-    return m_stack[m_stackAt];
+    if(m_stackAt == -1) {
+        return false;
+    }
+    item = m_stack[m_stackAt];
+    return true;
 }

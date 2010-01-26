@@ -73,10 +73,12 @@ namespace Pandora
 
                 /** 
                  *  Pops the first item from the stack.
+                 *  \param
+                 *      item - The place to store the item.
                  *  \return
-                 *      The first item on the stack. NULL if stack is empty.
+                 *      false if the stack is empty. True otherwise.
                  */
-                T& pop();
+                bool pop(T& item);
 
                 /** 
                  *  Clears the stack. 
@@ -85,10 +87,12 @@ namespace Pandora
 
                 /** 
                  *  Get the top item in the stack without popping.
+                 *  \param
+                 *      item - The place to store the item.
                  *  \return
-                 *      NULL if the stack is empty. The top item otherwise.
+                 *      false if the stack is empty. True otherwise.
                  */
-                T& getTop() const;
+                bool getTop(T& item);
             private:
                 T* m_stack;
                 int m_size, m_stackAt;

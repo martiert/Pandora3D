@@ -1,0 +1,794 @@
+ListTest.o: ListTest.cpp ListTest.h /usr/include/cppunit/TestCase.h \
+  /usr/include/cppunit/Portability.h /usr/include/cppunit/config-auto.h \
+  /usr/include/cppunit/config/CppUnitApi.h \
+  /usr/include/cppunit/config/SelectDllLoader.h \
+  /usr/include/cppunit/TestLeaf.h /usr/include/cppunit/Test.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/string \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/c++config.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/os_defines.h \
+  /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+  /usr/include/gnu/stubs-64.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/cpu_defines.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stringfwd.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/char_traits.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_algobase.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cstddef \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/stddef.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/functexcept.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/exception_defines.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/cpp_type_traits.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ext/type_traits.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ext/numeric_traits.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_pair.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_move.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/concept_check.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_iterator_base_types.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_iterator_base_funcs.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_iterator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/debug/debug.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/postypes.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cwchar \
+  /usr/include/wchar.h /usr/include/stdio.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/stdarg.h \
+  /usr/include/bits/wchar.h /usr/include/xlocale.h /usr/include/stdint.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cstdio \
+  /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+  /usr/include/libio.h /usr/include/_G_config.h \
+  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+  /usr/include/bits/stdio.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/allocator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/c++allocator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ext/new_allocator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/new \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/exception \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/localefwd.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/c++locale.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/clocale \
+  /usr/include/locale.h /usr/include/bits/locale.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/iosfwd \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cctype \
+  /usr/include/ctype.h /usr/include/endian.h /usr/include/bits/endian.h \
+  /usr/include/bits/byteswap.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/ostream_insert.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cxxabi-forced.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_function.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/backward/binders.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/basic_string.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ext/atomicity.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/gthr.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/gthr-default.h \
+  /usr/include/pthread.h /usr/include/sched.h /usr/include/time.h \
+  /usr/include/bits/sched.h /usr/include/bits/time.h \
+  /usr/include/signal.h /usr/include/bits/sigset.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/setjmp.h \
+  /usr/include/unistd.h /usr/include/bits/posix_opt.h \
+  /usr/include/bits/environments.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/atomic_word.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/basic_string.tcc \
+  /usr/include/cppunit/TestAssert.h /usr/include/cppunit/Exception.h \
+  /usr/include/cppunit/Message.h \
+  /usr/include/cppunit/portability/CppUnitDeque.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/deque \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_construct.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_uninitialized.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_deque.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/deque.tcc \
+  /usr/include/cppunit/SourceLine.h /usr/include/cppunit/Asserter.h \
+  /usr/include/cppunit/AdditionalMessage.h \
+  /usr/include/cppunit/portability/Stream.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/sstream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/istream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ios \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/ios_base.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/locale_classes.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/locale_classes.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/streambuf \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/streambuf.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/basic_ios.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/locale_facets.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cwctype \
+  /usr/include/wctype.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/ctype_base.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/streambuf_iterator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/ctype_inline.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/locale_facets.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/basic_ios.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ostream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/ostream.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/istream.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/sstream.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/fstream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/codecvt.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/basic_file.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/c++io.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/fstream.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/iostream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/float.h \
+  /usr/include/cppunit/TestFixture.h /usr/include/cppunit/TestSuite.h \
+  /usr/include/cppunit/TestComposite.h \
+  /usr/include/cppunit/portability/CppUnitVector.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/vector \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_vector.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_bvector.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/vector.tcc \
+  /usr/include/cppunit/TestCaller.h \
+  /usr/include/cppunit/extensions/TypeInfoHelper.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/typeinfo \
+  /usr/include/cppunit/ui/text/TestRunner.h \
+  /usr/include/cppunit/ui/text/TextTestRunner.h \
+  /usr/include/cppunit/TestRunner.h ../include/PandoraList.h \
+  /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+  /usr/include/bits/waitstatus.h /usr/include/sys/types.h \
+  /usr/include/sys/select.h /usr/include/bits/select.h \
+  /usr/include/sys/sysmacros.h /usr/include/alloca.h \
+  ../include/PandoraList.inl
+MathTest.o: MathTest.cpp MathTest.h /usr/include/cppunit/TestCase.h \
+  /usr/include/cppunit/Portability.h /usr/include/cppunit/config-auto.h \
+  /usr/include/cppunit/config/CppUnitApi.h \
+  /usr/include/cppunit/config/SelectDllLoader.h \
+  /usr/include/cppunit/TestLeaf.h /usr/include/cppunit/Test.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/string \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/c++config.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/os_defines.h \
+  /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+  /usr/include/gnu/stubs-64.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/cpu_defines.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stringfwd.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/char_traits.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_algobase.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cstddef \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/stddef.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/functexcept.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/exception_defines.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/cpp_type_traits.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ext/type_traits.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ext/numeric_traits.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_pair.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_move.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/concept_check.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_iterator_base_types.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_iterator_base_funcs.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_iterator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/debug/debug.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/postypes.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cwchar \
+  /usr/include/wchar.h /usr/include/stdio.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/stdarg.h \
+  /usr/include/bits/wchar.h /usr/include/xlocale.h /usr/include/stdint.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cstdio \
+  /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+  /usr/include/libio.h /usr/include/_G_config.h \
+  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+  /usr/include/bits/stdio.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/allocator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/c++allocator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ext/new_allocator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/new \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/exception \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/localefwd.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/c++locale.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/clocale \
+  /usr/include/locale.h /usr/include/bits/locale.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/iosfwd \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cctype \
+  /usr/include/ctype.h /usr/include/endian.h /usr/include/bits/endian.h \
+  /usr/include/bits/byteswap.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/ostream_insert.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cxxabi-forced.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_function.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/backward/binders.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/basic_string.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ext/atomicity.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/gthr.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/gthr-default.h \
+  /usr/include/pthread.h /usr/include/sched.h /usr/include/time.h \
+  /usr/include/bits/sched.h /usr/include/bits/time.h \
+  /usr/include/signal.h /usr/include/bits/sigset.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/setjmp.h \
+  /usr/include/unistd.h /usr/include/bits/posix_opt.h \
+  /usr/include/bits/environments.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/atomic_word.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/basic_string.tcc \
+  /usr/include/cppunit/TestAssert.h /usr/include/cppunit/Exception.h \
+  /usr/include/cppunit/Message.h \
+  /usr/include/cppunit/portability/CppUnitDeque.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/deque \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_construct.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_uninitialized.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_deque.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/deque.tcc \
+  /usr/include/cppunit/SourceLine.h /usr/include/cppunit/Asserter.h \
+  /usr/include/cppunit/AdditionalMessage.h \
+  /usr/include/cppunit/portability/Stream.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/sstream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/istream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ios \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/ios_base.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/locale_classes.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/locale_classes.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/streambuf \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/streambuf.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/basic_ios.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/locale_facets.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cwctype \
+  /usr/include/wctype.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/ctype_base.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/streambuf_iterator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/ctype_inline.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/locale_facets.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/basic_ios.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ostream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/ostream.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/istream.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/sstream.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/fstream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/codecvt.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/basic_file.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/c++io.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/fstream.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/iostream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/float.h \
+  /usr/include/cppunit/TestFixture.h /usr/include/cppunit/TestSuite.h \
+  /usr/include/cppunit/TestComposite.h \
+  /usr/include/cppunit/portability/CppUnitVector.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/vector \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_vector.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_bvector.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/vector.tcc \
+  /usr/include/cppunit/TestCaller.h \
+  /usr/include/cppunit/extensions/TypeInfoHelper.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/typeinfo \
+  /usr/include/cppunit/ui/text/TestRunner.h \
+  /usr/include/cppunit/ui/text/TextTestRunner.h \
+  /usr/include/cppunit/TestRunner.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+  /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+  /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
+  ../include/PandoraMath.h /usr/include/stdlib.h \
+  /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+  /usr/include/sys/types.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/sys/sysmacros.h \
+  /usr/include/alloca.h ../include/PandoraMath.inl
+SetTest.o: SetTest.cpp SetTest.h /usr/include/cppunit/TestCase.h \
+  /usr/include/cppunit/Portability.h /usr/include/cppunit/config-auto.h \
+  /usr/include/cppunit/config/CppUnitApi.h \
+  /usr/include/cppunit/config/SelectDllLoader.h \
+  /usr/include/cppunit/TestLeaf.h /usr/include/cppunit/Test.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/string \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/c++config.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/os_defines.h \
+  /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+  /usr/include/gnu/stubs-64.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/cpu_defines.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stringfwd.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/char_traits.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_algobase.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cstddef \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/stddef.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/functexcept.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/exception_defines.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/cpp_type_traits.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ext/type_traits.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ext/numeric_traits.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_pair.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_move.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/concept_check.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_iterator_base_types.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_iterator_base_funcs.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_iterator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/debug/debug.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/postypes.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cwchar \
+  /usr/include/wchar.h /usr/include/stdio.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/stdarg.h \
+  /usr/include/bits/wchar.h /usr/include/xlocale.h /usr/include/stdint.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cstdio \
+  /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+  /usr/include/libio.h /usr/include/_G_config.h \
+  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+  /usr/include/bits/stdio.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/allocator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/c++allocator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ext/new_allocator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/new \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/exception \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/localefwd.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/c++locale.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/clocale \
+  /usr/include/locale.h /usr/include/bits/locale.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/iosfwd \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cctype \
+  /usr/include/ctype.h /usr/include/endian.h /usr/include/bits/endian.h \
+  /usr/include/bits/byteswap.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/ostream_insert.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cxxabi-forced.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_function.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/backward/binders.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/basic_string.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ext/atomicity.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/gthr.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/gthr-default.h \
+  /usr/include/pthread.h /usr/include/sched.h /usr/include/time.h \
+  /usr/include/bits/sched.h /usr/include/bits/time.h \
+  /usr/include/signal.h /usr/include/bits/sigset.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/setjmp.h \
+  /usr/include/unistd.h /usr/include/bits/posix_opt.h \
+  /usr/include/bits/environments.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/atomic_word.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/basic_string.tcc \
+  /usr/include/cppunit/TestAssert.h /usr/include/cppunit/Exception.h \
+  /usr/include/cppunit/Message.h \
+  /usr/include/cppunit/portability/CppUnitDeque.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/deque \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_construct.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_uninitialized.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_deque.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/deque.tcc \
+  /usr/include/cppunit/SourceLine.h /usr/include/cppunit/Asserter.h \
+  /usr/include/cppunit/AdditionalMessage.h \
+  /usr/include/cppunit/portability/Stream.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/sstream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/istream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ios \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/ios_base.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/locale_classes.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/locale_classes.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/streambuf \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/streambuf.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/basic_ios.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/locale_facets.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cwctype \
+  /usr/include/wctype.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/ctype_base.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/streambuf_iterator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/ctype_inline.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/locale_facets.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/basic_ios.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ostream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/ostream.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/istream.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/sstream.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/fstream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/codecvt.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/basic_file.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/c++io.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/fstream.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/iostream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/float.h \
+  /usr/include/cppunit/TestFixture.h /usr/include/cppunit/TestSuite.h \
+  /usr/include/cppunit/TestComposite.h \
+  /usr/include/cppunit/portability/CppUnitVector.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/vector \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_vector.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_bvector.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/vector.tcc \
+  /usr/include/cppunit/TestCaller.h \
+  /usr/include/cppunit/extensions/TypeInfoHelper.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/typeinfo \
+  /usr/include/cppunit/ui/text/TestRunner.h \
+  /usr/include/cppunit/ui/text/TextTestRunner.h \
+  /usr/include/cppunit/TestRunner.h ../include/PandoraSet.h \
+  /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+  /usr/include/bits/waitstatus.h /usr/include/sys/types.h \
+  /usr/include/sys/select.h /usr/include/bits/select.h \
+  /usr/include/sys/sysmacros.h /usr/include/alloca.h \
+  /usr/include/assert.h ../include/PandoraSet.inl
+StackTest.o: StackTest.cpp StackTest.h /usr/include/cppunit/TestCase.h \
+  /usr/include/cppunit/Portability.h /usr/include/cppunit/config-auto.h \
+  /usr/include/cppunit/config/CppUnitApi.h \
+  /usr/include/cppunit/config/SelectDllLoader.h \
+  /usr/include/cppunit/TestLeaf.h /usr/include/cppunit/Test.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/string \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/c++config.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/os_defines.h \
+  /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+  /usr/include/gnu/stubs-64.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/cpu_defines.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stringfwd.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/char_traits.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_algobase.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cstddef \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/stddef.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/functexcept.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/exception_defines.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/cpp_type_traits.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ext/type_traits.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ext/numeric_traits.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_pair.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_move.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/concept_check.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_iterator_base_types.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_iterator_base_funcs.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_iterator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/debug/debug.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/postypes.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cwchar \
+  /usr/include/wchar.h /usr/include/stdio.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/stdarg.h \
+  /usr/include/bits/wchar.h /usr/include/xlocale.h /usr/include/stdint.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cstdio \
+  /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+  /usr/include/libio.h /usr/include/_G_config.h \
+  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+  /usr/include/bits/stdio.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/allocator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/c++allocator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ext/new_allocator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/new \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/exception \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/localefwd.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/c++locale.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/clocale \
+  /usr/include/locale.h /usr/include/bits/locale.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/iosfwd \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cctype \
+  /usr/include/ctype.h /usr/include/endian.h /usr/include/bits/endian.h \
+  /usr/include/bits/byteswap.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/ostream_insert.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cxxabi-forced.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_function.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/backward/binders.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/basic_string.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ext/atomicity.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/gthr.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/gthr-default.h \
+  /usr/include/pthread.h /usr/include/sched.h /usr/include/time.h \
+  /usr/include/bits/sched.h /usr/include/bits/time.h \
+  /usr/include/signal.h /usr/include/bits/sigset.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/setjmp.h \
+  /usr/include/unistd.h /usr/include/bits/posix_opt.h \
+  /usr/include/bits/environments.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/atomic_word.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/basic_string.tcc \
+  /usr/include/cppunit/TestAssert.h /usr/include/cppunit/Exception.h \
+  /usr/include/cppunit/Message.h \
+  /usr/include/cppunit/portability/CppUnitDeque.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/deque \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_construct.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_uninitialized.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_deque.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/deque.tcc \
+  /usr/include/cppunit/SourceLine.h /usr/include/cppunit/Asserter.h \
+  /usr/include/cppunit/AdditionalMessage.h \
+  /usr/include/cppunit/portability/Stream.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/sstream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/istream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ios \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/ios_base.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/locale_classes.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/locale_classes.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/streambuf \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/streambuf.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/basic_ios.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/locale_facets.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cwctype \
+  /usr/include/wctype.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/ctype_base.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/streambuf_iterator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/ctype_inline.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/locale_facets.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/basic_ios.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ostream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/ostream.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/istream.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/sstream.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/fstream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/codecvt.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/basic_file.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/c++io.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/fstream.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/iostream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/float.h \
+  /usr/include/cppunit/TestFixture.h /usr/include/cppunit/TestSuite.h \
+  /usr/include/cppunit/TestComposite.h \
+  /usr/include/cppunit/portability/CppUnitVector.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/vector \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_vector.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_bvector.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/vector.tcc \
+  /usr/include/cppunit/TestCaller.h \
+  /usr/include/cppunit/extensions/TypeInfoHelper.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/typeinfo \
+  /usr/include/cppunit/ui/text/TestRunner.h \
+  /usr/include/cppunit/ui/text/TextTestRunner.h \
+  /usr/include/cppunit/TestRunner.h ../include/PandoraStack.h \
+  /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+  /usr/include/bits/waitstatus.h /usr/include/sys/types.h \
+  /usr/include/sys/select.h /usr/include/bits/select.h \
+  /usr/include/sys/sysmacros.h /usr/include/alloca.h \
+  /usr/include/assert.h ../include/PandoraStack.inl
+test.o: test.cpp /usr/include/cppunit/ui/text/TestRunner.h \
+  /usr/include/cppunit/ui/text/TextTestRunner.h \
+  /usr/include/cppunit/Portability.h /usr/include/cppunit/config-auto.h \
+  /usr/include/cppunit/config/CppUnitApi.h \
+  /usr/include/cppunit/config/SelectDllLoader.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/string \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/c++config.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/os_defines.h \
+  /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+  /usr/include/gnu/stubs-64.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/cpu_defines.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stringfwd.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/char_traits.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_algobase.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cstddef \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/stddef.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/functexcept.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/exception_defines.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/cpp_type_traits.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ext/type_traits.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ext/numeric_traits.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_pair.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_move.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/concept_check.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_iterator_base_types.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_iterator_base_funcs.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_iterator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/debug/debug.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/postypes.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cwchar \
+  /usr/include/wchar.h /usr/include/stdio.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/stdarg.h \
+  /usr/include/bits/wchar.h /usr/include/xlocale.h /usr/include/stdint.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cstdio \
+  /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+  /usr/include/libio.h /usr/include/_G_config.h \
+  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+  /usr/include/bits/stdio.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/allocator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/c++allocator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ext/new_allocator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/new \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/exception \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/localefwd.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/c++locale.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/clocale \
+  /usr/include/locale.h /usr/include/bits/locale.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/iosfwd \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cctype \
+  /usr/include/ctype.h /usr/include/endian.h /usr/include/bits/endian.h \
+  /usr/include/bits/byteswap.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/ostream_insert.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cxxabi-forced.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_function.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/backward/binders.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/basic_string.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ext/atomicity.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/gthr.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/gthr-default.h \
+  /usr/include/pthread.h /usr/include/sched.h /usr/include/time.h \
+  /usr/include/bits/sched.h /usr/include/bits/time.h \
+  /usr/include/signal.h /usr/include/bits/sigset.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/setjmp.h \
+  /usr/include/unistd.h /usr/include/bits/posix_opt.h \
+  /usr/include/bits/environments.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/atomic_word.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/basic_string.tcc \
+  /usr/include/cppunit/TestRunner.h /usr/include/cppunit/TestSuite.h \
+  /usr/include/cppunit/TestComposite.h /usr/include/cppunit/Test.h \
+  /usr/include/cppunit/portability/CppUnitVector.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/vector \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_construct.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_uninitialized.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_vector.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_bvector.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/vector.tcc \
+  Vector2Test.h /usr/include/cppunit/TestCase.h \
+  /usr/include/cppunit/TestLeaf.h /usr/include/cppunit/TestAssert.h \
+  /usr/include/cppunit/Exception.h /usr/include/cppunit/Message.h \
+  /usr/include/cppunit/portability/CppUnitDeque.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/deque \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_deque.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/deque.tcc \
+  /usr/include/cppunit/SourceLine.h /usr/include/cppunit/Asserter.h \
+  /usr/include/cppunit/AdditionalMessage.h \
+  /usr/include/cppunit/portability/Stream.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/sstream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/istream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ios \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/ios_base.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/locale_classes.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/locale_classes.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/streambuf \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/streambuf.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/basic_ios.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/locale_facets.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cwctype \
+  /usr/include/wctype.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/ctype_base.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/streambuf_iterator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/ctype_inline.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/locale_facets.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/basic_ios.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ostream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/ostream.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/istream.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/sstream.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/fstream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/codecvt.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/basic_file.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/c++io.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/fstream.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/iostream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/float.h \
+  /usr/include/cppunit/TestFixture.h /usr/include/cppunit/TestCaller.h \
+  /usr/include/cppunit/extensions/TypeInfoHelper.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/typeinfo \
+  ../include/PandoraVector2.h ../include/PandoraMath.h \
+  /usr/include/math.h /usr/include/bits/huge_val.h \
+  /usr/include/bits/huge_valf.h /usr/include/bits/huge_vall.h \
+  /usr/include/bits/inf.h /usr/include/bits/nan.h \
+  /usr/include/bits/mathdef.h /usr/include/bits/mathcalls.h \
+  /usr/include/bits/mathinline.h /usr/include/stdlib.h \
+  /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+  /usr/include/sys/types.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/sys/sysmacros.h \
+  /usr/include/alloca.h ../include/PandoraMath.inl /usr/include/assert.h \
+  ../include/PandoraVector2.inl ListTest.h ../include/PandoraList.h \
+  ../include/PandoraList.inl MathTest.h ../include/PandoraMath.h \
+  SetTest.h ../include/PandoraSet.h ../include/PandoraSet.inl StackTest.h \
+  ../include/PandoraStack.h ../include/PandoraStack.inl
+Vector2Test.o: Vector2Test.cpp Vector2Test.h \
+  /usr/include/cppunit/TestCase.h /usr/include/cppunit/Portability.h \
+  /usr/include/cppunit/config-auto.h \
+  /usr/include/cppunit/config/CppUnitApi.h \
+  /usr/include/cppunit/config/SelectDllLoader.h \
+  /usr/include/cppunit/TestLeaf.h /usr/include/cppunit/Test.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/string \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/c++config.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/os_defines.h \
+  /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+  /usr/include/gnu/stubs-64.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/cpu_defines.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stringfwd.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/char_traits.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_algobase.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cstddef \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/stddef.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/functexcept.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/exception_defines.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/cpp_type_traits.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ext/type_traits.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ext/numeric_traits.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_pair.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_move.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/concept_check.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_iterator_base_types.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_iterator_base_funcs.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_iterator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/debug/debug.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/postypes.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cwchar \
+  /usr/include/wchar.h /usr/include/stdio.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/stdarg.h \
+  /usr/include/bits/wchar.h /usr/include/xlocale.h /usr/include/stdint.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cstdio \
+  /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+  /usr/include/libio.h /usr/include/_G_config.h \
+  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+  /usr/include/bits/stdio.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/allocator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/c++allocator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ext/new_allocator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/new \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/exception \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/localefwd.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/c++locale.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/clocale \
+  /usr/include/locale.h /usr/include/bits/locale.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/iosfwd \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cctype \
+  /usr/include/ctype.h /usr/include/endian.h /usr/include/bits/endian.h \
+  /usr/include/bits/byteswap.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/ostream_insert.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cxxabi-forced.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_function.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/backward/binders.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/basic_string.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ext/atomicity.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/gthr.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/gthr-default.h \
+  /usr/include/pthread.h /usr/include/sched.h /usr/include/time.h \
+  /usr/include/bits/sched.h /usr/include/bits/time.h \
+  /usr/include/signal.h /usr/include/bits/sigset.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/setjmp.h \
+  /usr/include/unistd.h /usr/include/bits/posix_opt.h \
+  /usr/include/bits/environments.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/atomic_word.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/basic_string.tcc \
+  /usr/include/cppunit/TestAssert.h /usr/include/cppunit/Exception.h \
+  /usr/include/cppunit/Message.h \
+  /usr/include/cppunit/portability/CppUnitDeque.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/deque \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_construct.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_uninitialized.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_deque.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/deque.tcc \
+  /usr/include/cppunit/SourceLine.h /usr/include/cppunit/Asserter.h \
+  /usr/include/cppunit/AdditionalMessage.h \
+  /usr/include/cppunit/portability/Stream.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/sstream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/istream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ios \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/ios_base.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/locale_classes.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/locale_classes.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/streambuf \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/streambuf.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/basic_ios.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/locale_facets.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/cwctype \
+  /usr/include/wctype.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/ctype_base.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/streambuf_iterator.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/ctype_inline.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/locale_facets.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/basic_ios.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/ostream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/ostream.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/istream.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/sstream.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/fstream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/codecvt.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/basic_file.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/x86_64-unknown-linux-gnu/bits/c++io.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/fstream.tcc \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/iostream \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/float.h \
+  /usr/include/cppunit/TestFixture.h /usr/include/cppunit/TestSuite.h \
+  /usr/include/cppunit/TestComposite.h \
+  /usr/include/cppunit/portability/CppUnitVector.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/vector \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_vector.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/stl_bvector.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/bits/vector.tcc \
+  /usr/include/cppunit/TestCaller.h \
+  /usr/include/cppunit/extensions/TypeInfoHelper.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/c++/typeinfo \
+  /usr/include/cppunit/ui/text/TestRunner.h \
+  /usr/include/cppunit/ui/text/TextTestRunner.h \
+  /usr/include/cppunit/TestRunner.h ../include/PandoraVector2.h \
+  ../include/PandoraMath.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+  /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+  /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
+  /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+  /usr/include/bits/waitstatus.h /usr/include/sys/types.h \
+  /usr/include/sys/select.h /usr/include/bits/select.h \
+  /usr/include/sys/sysmacros.h /usr/include/alloca.h \
+  ../include/PandoraMath.inl /usr/include/assert.h \
+  ../include/PandoraVector2.inl
+PandoraMath.o: ../src/PandoraMath.cpp ../src/../include/PandoraMath.h \
+  /usr/include/math.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+  /usr/include/gnu/stubs-64.h /usr/include/bits/huge_val.h \
+  /usr/include/bits/huge_valf.h /usr/include/bits/huge_vall.h \
+  /usr/include/bits/inf.h /usr/include/bits/nan.h \
+  /usr/include/bits/mathdef.h /usr/include/bits/mathcalls.h \
+  /usr/include/bits/mathinline.h /usr/include/time.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/stddef.h \
+  /usr/include/bits/time.h /usr/include/bits/types.h \
+  /usr/include/bits/typesizes.h /usr/include/xlocale.h \
+  /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+  /usr/include/bits/waitstatus.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+  /usr/include/sys/types.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+  /usr/include/alloca.h \
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.3.3/include/float.h \
+  ../src/../include/PandoraMath.inl
