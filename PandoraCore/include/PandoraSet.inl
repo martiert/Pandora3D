@@ -6,7 +6,7 @@ Purpose : Implementation of the Set class used in Pandora3D
 
 Creation Date : 2010-01-24
 
-Last Modified : sø. 24. jan. 2010 kl. 20.10 +0100
+Last Modified : ti. 26. jan. 2010 kl. 11.48 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------
@@ -16,7 +16,7 @@ Created By : Martin Ertsås
 // Constructor
 //-----------------------------------------------------------------------------
 template<class T>
-Set<T>::Set(size_t size, size_t increment)
+Set<T>::Set(const unsigned int size, const unsigned int increment)
 {
     m_data = new T[size];
     m_size = size;
@@ -38,15 +38,16 @@ Set<T>::~Set()
 // we have to resize the array.
 //-----------------------------------------------------------------------------
 template<class T>
-void Set<T>::insert(const T& in)
+bool Set<T>::insert(const T& in)
 {
     //If we have room for the element, no rearranging have to be done.
     if(m_elements < m_size) {
         m_data[m_elements++] = in;
+        return true;
     } else {
         //Checks if we are allowed to resize the set.
-        assert(m_increment != 0 && 
-                "Not allowed to resize this set, but resize needed");
+        if(m_increment == 0)
+            return false;
 
         //Resize the array
         T *tmp = new T[m_size + m_increment];
@@ -64,16 +65,54 @@ void Set<T>::insert(const T& in)
 
         //Set the data in the set
         m_data[m_elements++] = in;
+        return true;
     }
 }
 
 //-----------------------------------------------------------------------------
-// Get the number of elements in the set
+// Search for an element in the set.
 //-----------------------------------------------------------------------------
 template<class T>
-size_t Set<T>::getSize() const
+bool Set<T>::exists(const T& search) const
+{
+    if(m_elements == 0) {
+        return false;
+    }
+
+    for(int i = 0; i < m_elements; ++i) {
+        if(m_data[i] == search) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+//-----------------------------------------------------------------------------
+// Get the number of elements in the set.
+//-----------------------------------------------------------------------------
+template<class T>
+unsigned int Set<T>::getElements() const
 {
     return m_elements;
+}
+
+//-----------------------------------------------------------------------------
+// Get the number of places in the set
+//-----------------------------------------------------------------------------
+template<class T>
+unsigned int Set<T>::getSize() const
+{
+    return m_size;
+}
+
+//-----------------------------------------------------------------------------
+// Get the number of elements to increment the set by.
+//-----------------------------------------------------------------------------
+template<class T>
+unsigned int Set<T>::getIncrement() const
+{
+    return m_increment;
 }
 
 //-----------------------------------------------------------------------------
@@ -92,7 +131,7 @@ T* Set<T>::getPointer()
 template<class T>
 bool Set<T>::remove(const T& elem)
 {
-    size_t i = 0;
+    unsigned int i = 0;
 
     //Search for the element.
     while(i < m_elements && m_data[i] != elem) {
@@ -107,6 +146,7 @@ bool Set<T>::remove(const T& elem)
     for(;i < m_size - 1; ++i)
         m_data[i] = m_data[i + 1];
     m_data[i] = NULL;
+    m_elements--;
 
     return true;
 }

@@ -6,7 +6,7 @@ Purpose : Running all the test from Pandora3D.
 
 Creation Date : 2010-01-19
 
-Last Modified : ma. 25. jan. 2010 kl. 21.05 +0100
+Last Modified : ti. 26. jan. 2010 kl. 11.12 +0100
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -16,6 +16,7 @@ Created By :  Martin Ertsås
 #include "Vector2Test.h"
 #include "ListTest.h"
 #include "MathTest.h"
+#include "SetTest.h"
 
 int main(int argc, char **argv)
 {
@@ -24,6 +25,7 @@ int main(int argc, char **argv)
     runner.addTest( Vector2Test::suite() );
     runner.addTest( ListTest::suite() );
     runner.addTest( MathTest::suite() );
+    runner.addTest( SetTest::suite() );
 
     runner.run();
     return 0;

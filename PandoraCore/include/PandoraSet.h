@@ -44,7 +44,8 @@ namespace Pandora
                  *      increment - The number of elements to increase the set
                  *          with when needed, default to 4.
                  */
-                Set(const size_t size = 6, const size_t increment = 4);
+                Set(const unsigned int size = 6, 
+                        const unsigned int increment = 4);
 
                 /** 
                  *  Destructor 
@@ -61,6 +62,15 @@ namespace Pandora
                  */
                 bool insert(const T& in);
 
+                /**
+                 * Checks if an element exists in the Set without removing it.
+                 * \param
+                 *      in - The element to look for.
+                 *  \return
+                 *      True if the item exists in the set, false otherwise.
+                 */
+                bool exists(const T& search) const;
+
                 /** 
                  *  Remove an element from the Set.
                  *  \param
@@ -70,12 +80,26 @@ namespace Pandora
                  */
                 bool remove(const T& elem);
 
-                /** 
-                 *  Get the number of elements in the Set.
-                 *  \return
+                /**
+                 * Get the number of elements in the Set.
+                 * \return
                  *      The number of elements in the Set.
                  */
-                size_t getSize() const;
+                unsigned int getElements() const;
+
+                /** 
+                 *  Get the number of places in the Set.
+                 *  \return
+                 *      The number of places in the Set.
+                 */
+                unsigned int getSize() const;
+
+                /**
+                 * Get the number of elements to increment the Set by.
+                 * \return
+                 *      The number of elements to increment the set by.
+                 */
+                unsigned int getIncrement() const;
 
                 /** 
                  *  Get pointer to the data.
@@ -90,9 +114,9 @@ namespace Pandora
                 void removeAll();
             private:
                 T *m_data;
-                size_t m_elements; //The number of elements in the set
-                size_t m_size; //The size of the array
-                size_t m_increment; //What to increment the array size with
+                unsigned int m_elements; //The number of elements in the set
+                unsigned int m_size; //The size of the array
+                unsigned int m_increment; //What to increment the array size with
         };
 
 #include "PandoraSet.inl"

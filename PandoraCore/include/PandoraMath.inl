@@ -6,7 +6,7 @@ Purpose : Implementation of the Math class used in Pandora3D
 
 Creation Date : 2010-01-25
 
-Last Modified : ma. 25. jan. 2010 kl. 21.41 +0100
+Last Modified : ti. 26. jan. 2010 kl. 10.58 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------
@@ -164,7 +164,7 @@ Real Math<Real>::Pow(Real base, Real exponent)
 }
 
 //-----------------------------------------------------------------------------
-// Find the modulo of the x by y.
+// Find the modulo of x by y.
 //-----------------------------------------------------------------------------
 template<class Real>
 Real Math<Real>::Mod(Real x, Real y)

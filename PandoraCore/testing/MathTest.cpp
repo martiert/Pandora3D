@@ -6,7 +6,7 @@ Purpose :
 
 Creation Date : 2010-01-25
 
-Last Modified : ma. 25. jan. 2010 kl. 22.16 +0100
+Last Modified : ti. 26. jan. 2010 kl. 10.56 +0100
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -76,6 +76,21 @@ void MathTest::testPow()
     CPPUNIT_ASSERT( Math<double>::Exp(4.0) == exp(4.0) );
     CPPUNIT_ASSERT( Math<double>::Exp(-4.0) == exp(-4.0) );
     CPPUNIT_ASSERT( Math<double>::Exp(0.0) == exp(0.0) );
+
+    CPPUNIT_ASSERT( Math<double>::Log(1.0) == 0.0 );
+    CPPUNIT_ASSERT( Math<double>::Log(0.1) == log(0.1) );
+    CPPUNIT_ASSERT( Math<double>::Log(0.0) == log(0.0) );
+    CPPUNIT_ASSERT( Math<double>::Log(8.0) < log(9.5) );
+
+    CPPUNIT_ASSERT( Math<double>::Log10(1.0) == log10(1.0) );
+    CPPUNIT_ASSERT( Math<double>::Log10(0.0) == log10(0.0) );
+    CPPUNIT_ASSERT( Math<double>::Log10(0.1) == log10(0.1) );
+    CPPUNIT_ASSERT( Math<double>::Log10(50.0) < Math<double>::Log10(50.1) );
+
+    CPPUNIT_ASSERT( Math<double>::Pow(4.0,3.0) == pow(4.0,3.0) );
+    CPPUNIT_ASSERT( Math<double>::Pow(-1.9,8.0) == pow(-1.9,8.0) );
+    CPPUNIT_ASSERT( Math<double>::Pow(0.0, 100.0) == 0.0 );
+    CPPUNIT_ASSERT( Math<double>::Pow(8.1, 0.0) == 1.0 );
 }
 
 CppUnit::Test *MathTest::suite()
