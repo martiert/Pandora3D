@@ -21,6 +21,9 @@ class MathTest : public CppUnit::TestCase
         void testPow();
 
         static CppUnit::Test *suite();
+        void setUp();
+        void tearDown();
     private:
+        double eps;
 };
 #endif

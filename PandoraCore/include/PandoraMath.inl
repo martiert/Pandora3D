@@ -6,7 +6,7 @@ Purpose : Implementation of the Math class used in Pandora3D
 
 Creation Date : 2010-01-26
 
-Last Modified : ti. 26. jan. 2010 kl. 11.24 +0100
+Last Modified : ti. 26. jan. 2010 kl. 12.50 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------

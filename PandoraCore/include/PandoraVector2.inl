@@ -6,7 +6,7 @@ Purpose : Implementation of the Vector2 class used in Pandora3D
 
 Creation Date : 2010-01-26
 
-Last Modified : ti. 26. jan. 2010 kl. 11.25 +0100
+Last Modified : ti. 26. jan. 2010 kl. 12.33 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------
@@ -82,7 +82,7 @@ void Vec2<Real>::operator=(Real *vec)
 // Access operator.
 //-----------------------------------------------------------------------------
 template<class Real>
-Real& Vec2<Real>::operator[](const unsigned int& i)
+Real& Vec2<Real>::operator[](const ptrdiff_t i)
 {
     assert(i < 2 && "Index out of bounds.");
 

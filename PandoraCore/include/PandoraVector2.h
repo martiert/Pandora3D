@@ -21,6 +21,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 
 #include "PandoraMath.h"
 #include <assert.h>
+#include <cstddef>
 
 namespace Pandora
 {
@@ -90,7 +91,7 @@ namespace Pandora
                  *  \return
                  *      Element number i.
                  */
-                Real& operator[](const unsigned int& i);
+                Real& operator[](const ptrdiff_t i);
 
                 /**
                  *  Get the vector as a c-pointer.

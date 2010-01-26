@@ -21,6 +21,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 
 #include <stdlib.h>
 #include <assert.h>
+#include <cstddef>
 
 namespace Pandora
 {
@@ -72,7 +73,7 @@ namespace Pandora
                  *      No resizing is done. Error occurs if you try to access
                  *      element outside of the vector.
                  */
-                T& operator[](const unsigned int i);
+                T& operator[](const ptrdiff_t i);
 
                 /** 
                  *  Get constant element in vector.
@@ -84,7 +85,7 @@ namespace Pandora
                  *      No resizing is done. Error occurs if you try to access
                  *      element outside of the vector.
                  */
-                const T& operator[](const unsigned int i) const;
+                const T& operator[](const ptrdiff_t i) const;
 
                 /** 
                  *  Append data to the vector.
