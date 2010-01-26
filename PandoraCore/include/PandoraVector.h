@@ -163,7 +163,7 @@ namespace Pandora
                 unsigned int m_increment;
         };
 
-#include "PanoraVector.inl"
+#include "PandoraVector.inl"
 
     }
 }

@@ -6,7 +6,7 @@ Purpose : Implementation of the Math class used in Pandora3D
 
 Creation Date : 2010-01-26
 
-Last Modified : ti. 26. jan. 2010 kl. 12.50 +0100
+Last Modified : ti. 26. jan. 2010 kl. 13.35 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------
@@ -241,7 +241,7 @@ Real Math<Real>::SymmetricRandom(unsigned int seed)
     else
         srand(seed);
 
-    return Mod((Real) rand(), 2) - 1;
+    return ((Real) rand()) / (RAND_MAX/2) - 1;
 }
 
 //-----------------------------------------------------------------------------
@@ -257,5 +257,5 @@ Real Math<Real>::IntervalRandom(Real min, Real max, unsigned int seed)
 
     Real diff = max - min;
 
-    return Mod((Real) rand(), diff) + min;
+    return ((Real) rand()) / (RAND_MAX/diff) + min;
 }
