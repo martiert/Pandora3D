@@ -6,7 +6,7 @@ Purpose : Implementation of the Vector class used in Pandora3D
 
 Creation Date : 2010-01-24
 
-Last Modified : ti. 26. jan. 2010 kl. 13.42 +0100
+Last Modified : on. 27. jan. 2010 kl. 11.36 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------
@@ -39,7 +39,7 @@ Vector<T>::~Vector()
 template<class T>
 T* Vector<T>::c_ptr()
 {
-    return m_data[0];
+    return &m_data[0];
 }
 
 //-----------------------------------------------------------------------------
@@ -84,7 +84,7 @@ template<class T>
 void Vector<T>::append(const T& element)
 {
     if(m_elements < m_size) {
-        m_data[m_elements++] = m_elements;
+        m_data[m_elements++] = element;
     } else {
         assert(m_increment != 0 && "Can't increment the vector");
 
