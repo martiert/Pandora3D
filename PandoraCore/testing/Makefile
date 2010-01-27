@@ -59,7 +59,6 @@ all: depend $(APP)
 
 $(APP): $(OBJECTS)
 	$(LD) -o $(APP) $(LDFLAGS) $(OBJECTS)
-	mv $(OBJECTS) ./bin/
 
 depend: make.dep
 
