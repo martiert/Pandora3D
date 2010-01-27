@@ -59,6 +59,7 @@ all: depend $(APP)
 
 $(APP): $(OBJECTS)
 	$(LD) -o $(APP) $(LDFLAGS) $(OBJECTS)
+	mv $(OBJECTS) ./bin/
 
 depend: make.dep
 
@@ -70,7 +71,7 @@ make.dep:
 include make.dep
 
 clean:
-	rm -f $(OBJECTS) *.a *~ core
+	rm -f ./bin/*.o *.a *~ core
 
 distclean: clean
 	rm -f make.dep *.bak $(APP)

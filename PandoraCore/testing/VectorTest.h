@@ -14,6 +14,7 @@ class VectorTest : public CppUnit::TestCase
         VectorTest() : TestCase("VectorTest") { }
         void init();
         void testGetter();
+        void testIndexing();
 
         static CppUnit::Test *suite();
         void setUp();

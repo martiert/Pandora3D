@@ -6,7 +6,7 @@ Purpose :
 
 Creation Date : 2010-01-26
 
-Last Modified : on. 27. jan. 2010 kl. 00.01 +0100
+Last Modified : on. 27. jan. 2010 kl. 11.29 +0100
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -43,6 +43,11 @@ void VectorTest::testGetter()
     CPPUNIT_ASSERT( intVec->getIncrement() == 1 );
 }
 
+void VectorTest::testIndexing()
+{
+    printf("\tTesting indexing\n");
+}
+
 CppUnit::Test *VectorTest::suite()
 {
     CppUnit::TestSuite *testSuite = new CppUnit::TestSuite("VectorTest");
@@ -52,6 +57,9 @@ CppUnit::Test *VectorTest::suite()
     testSuite->addTest( new CppUnit::TestCaller<VectorTest>(
                 "VectorTest::testGetter",
                 &VectorTest::testGetter ));
+    testSuite->addTest( new CppUnit::TestCaller<VectorTest>(
+                "VectorTest::testIndexing",
+                &VectorTest::testIndexing ));
     return testSuite;
 }
 
