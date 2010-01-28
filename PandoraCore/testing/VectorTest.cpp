@@ -6,7 +6,7 @@ Purpose :
 
 Creation Date : 2010-01-26
 
-Last Modified : on. 27. jan. 2010 kl. 11.36 +0100
+Last Modified : to. 28. jan. 2010 kl. 22.27 +0100
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -48,6 +48,7 @@ void VectorTest::testIndexing()
     printf("\tTesting indexing\n");
     char *tmp = noincVec->c_ptr();
     CPPUNIT_ASSERT( tmp[0] == 'c' );
+    CPPUNIT_ASSERT( (*noincVec)[0] == tmp[0] );
 }
 
 CppUnit::Test *VectorTest::suite()

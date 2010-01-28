@@ -6,7 +6,7 @@ Purpose : Implementation of the Vector2 class used in Pandora3D
 
 Creation Date : 2010-01-26
 
-Last Modified : ti. 26. jan. 2010 kl. 13.09 +0100
+Last Modified : to. 28. jan. 2010 kl. 23.48 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------
@@ -92,10 +92,32 @@ Real& Vec2<Real>::operator[](const ptrdiff_t i)
 }
 
 //-----------------------------------------------------------------------------
+// Get a copy of element number i from the vector.
+//-----------------------------------------------------------------------------
+template<class Real>
+Real Vec2<Real>::operator[](const ptrdiff_t i) const
+{
+    assert(i < 2 && "Index out of bounds.");
+
+    if(i == 0)
+        return x;
+    return y;
+}
+
+//-----------------------------------------------------------------------------
 // Implicit conversion operator.
 //-----------------------------------------------------------------------------
 template<class Real>
 Vec2<Real>::operator Real*()
+{
+    return &x;
+}
+
+//-----------------------------------------------------------------------------
+// Get a constant copy of the vector.
+//-----------------------------------------------------------------------------
+template<class Real>
+Vec2<Real>::operator const Real* () const
 {
     return &x;
 }
@@ -177,16 +199,6 @@ void Vec2<Real>::operator*=(const Real& scalar)
 }
 
 //-----------------------------------------------------------------------------
-// Dot multiplication.
-//-----------------------------------------------------------------------------
-template<class Real>
-void Vec2<Real>::operator*=(const Vec2<Real>& vec)
-{
-    x *= vec.x;
-    y *= vec.y;
-}
-
-//-----------------------------------------------------------------------------
 // Division with scalar.
 //-----------------------------------------------------------------------------
 template<class Real>
@@ -250,6 +262,15 @@ template<class Real>
 bool Vec2<Real>::operator<=(const Vec2<Real>& vec) const
 {
     return (x <= vec.x && y <= vec.y);
+}
+
+//-----------------------------------------------------------------------------
+// Negate a vector.
+//-----------------------------------------------------------------------------
+template<class Real>
+Vec2<Real> Vec2<Real>::operator-() const
+{
+    return Vec2<Real>(-x, -y);
 }
 
 //-----------------------------------------------------------------------------

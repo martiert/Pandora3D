@@ -94,11 +94,28 @@ namespace Pandora
                 Real& operator[](const ptrdiff_t i);
 
                 /**
+                 *  Access operator. Get value of element number i from the 
+                 *  vector.
+                 *  \param
+                 *      i - The index of the element.
+                 *  \return
+                 *      The value in element number i.
+                 */
+                Real operator[](const ptrdiff_t i) const;
+
+                /**
                  *  Get the vector as a c-pointer.
                  *  \return
                  *      The vector as a c-pointer.
                  */
                 operator Real *();
+
+                /**
+                 *  Get an array of values of the array.
+                 *  \return
+                 *      The values of the vector.
+                 */
+                operator const Real* () const;
 
                 /**
                  * Adds two vectors.
@@ -117,16 +134,7 @@ namespace Pandora
                  *      this vector subtracted with vec.
                  */
                 Vec2 operator-(const Vec2& vec) const;
-
-                /**
-                 * Multiply two vectors.
-                 * \param
-                 *      vec - The vector to multiply with.
-                 *  \return
-                 *      The two vectors multiplied. A scalar.
-                 */
-                Real operator*(const Vec2& vec) const;
-
+                
                 /**
                  * Multiply this vector with a scalar.
                  * \param
@@ -136,6 +144,18 @@ namespace Pandora
                  *      elements multiplied with the scalar.
                  */
                 Vec2 operator*(const Real& scalar) const;
+
+                /**
+                 *  Multiply each element from this vector with the 
+                 *  corresponding element from the other vector, and adding
+                 *  them together.
+                 *  \param
+                 *      vec - The vector to multiply with.
+                 *  \return
+                 *      A scalar being the vector-to-vector multiplication of
+                 *      this vector and vec.
+                 */
+                Real operator*(const Vec2& vec) const;
 
                 /**
                  * Divide this vector with a scalar.
@@ -169,14 +189,6 @@ namespace Pandora
                  *      scalar - The scalar to multiply with.
                  */
                 void operator*=(const Real& scalar);
-
-                /**
-                 *  Multiply each component with the corresponding component of
-                 *  vec.
-                 *  \param
-                 *      vec - The vector to multiply with.
-                 */
-                void operator*=(const Vec2& vec);
 
                 /**
                  * Divide this vector with a scalar.
@@ -243,6 +255,13 @@ namespace Pandora
                  *      then or equal to the corresponding component of vec.
                  */
                 bool operator<=(const Vec2& vec) const;
+
+                /**
+                 * Negate the vector.
+                 * \return
+                 *      The vector negated.
+                 */
+                Vec2 operator-() const;
 
 
                 /**
