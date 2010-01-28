@@ -285,9 +285,12 @@ namespace Pandora
                  *      The two vectors crossed.
                  */
                 Vec3 cross(const Vec3& vec) const;
+
+            public:
+                Real x, y, z;
         };
 
-#include "Pandoravector3.inl"
+#include "PandoraVector3.inl"
 
     }
 }

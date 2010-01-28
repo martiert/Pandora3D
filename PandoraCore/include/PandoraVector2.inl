@@ -6,7 +6,7 @@ Purpose : Implementation of the Vector2 class used in Pandora3D
 
 Creation Date : 2010-01-26
 
-Last Modified : to. 28. jan. 2010 kl. 23.48 +0100
+Last Modified : fr. 29. jan. 2010 kl. 00.14 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------
@@ -323,4 +323,13 @@ bool Vec2<Real>::normalizeChecked()
 
     *this /= scale;
     return true;
+}
+
+//-----------------------------------------------------------------------------
+// Allows one to write scalar * vector.
+//-----------------------------------------------------------------------------
+template<class Real>
+Vec2<Real> operator*(const Real& scalar, const Vec2<Real>& vec)
+{
+    return Vec2<Real>(vec.x * scalar, vec.y * scalar);
 }
