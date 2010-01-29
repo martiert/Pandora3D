@@ -35,7 +35,7 @@ namespace Pandora
         } //Anon namespace
 
         /** 
-         * A List class. Very minimalistic.
+         *  A List class. Very minimalistic.
          */
         template<class T>
         class List
@@ -81,12 +81,12 @@ namespace Pandora
                 bool exists(const T& data);
 
                 /** 
-                 * Removes all the data in the List.
-                */
+                 *  Removes all the data in the List.
+                 */
                 void removeAll();
 
                 /**
-                 * Get the length of the list
+                 *  Get the length of the list
                  */
                 unsigned int length();
             private:

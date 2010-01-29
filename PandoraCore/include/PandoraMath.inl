@@ -6,14 +6,14 @@ Purpose : Implementation of the Math class used in Pandora3D
 
 Creation Date : 2010-01-26
 
-Last Modified : ti. 26. jan. 2010 kl. 13.35 +0100
+Last Modified : fr. 29. jan. 2010 kl. 16.56 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------
 */
 
 //-----------------------------------------------------------------------------
-// Find the sinus of the value.
+//  Find the sinus of the value.
 //-----------------------------------------------------------------------------
 template<class Real>
 Real Math<Real>::Sin(Real value)
@@ -22,7 +22,7 @@ Real Math<Real>::Sin(Real value)
 }
 
 //-----------------------------------------------------------------------------
-// Find the cosine of the value.
+//  Find the cosine of the value.
 //-----------------------------------------------------------------------------
 template<class Real>
 Real Math<Real>::Cos(Real value)
@@ -31,7 +31,7 @@ Real Math<Real>::Cos(Real value)
 }
 
 //-----------------------------------------------------------------------------
-// Find the tangent of the value.
+//  Find the tangent of the value.
 //-----------------------------------------------------------------------------
 template<class Real>
 Real Math<Real>::Tan(Real value)
@@ -40,7 +40,7 @@ Real Math<Real>::Tan(Real value)
 }
 
 //-----------------------------------------------------------------------------
-// Find the arcus sinus of the value.
+//  Find the arcus sinus of the value.
 //-----------------------------------------------------------------------------
 template<class Real>
 Real Math<Real>::Asin(Real value)
@@ -57,7 +57,7 @@ Real Math<Real>::Asin(Real value)
 
 
 //-----------------------------------------------------------------------------
-// Find the arcus cosine of the value.
+//  Find the arcus cosine of the value.
 //-----------------------------------------------------------------------------
 template<class Real>
 Real Math<Real>::Acos(Real value)
@@ -74,7 +74,7 @@ Real Math<Real>::Acos(Real value)
 }
 
 //-----------------------------------------------------------------------------
-// Find the arcus tangent of the value.
+//  Find the arcus tangent of the value.
 //-----------------------------------------------------------------------------
 template<class Real>
 Real Math<Real>::Atan(Real value)
@@ -83,7 +83,7 @@ Real Math<Real>::Atan(Real value)
 }
 
 //-----------------------------------------------------------------------------
-// Find the arcus tangent of y/x.
+//  Find the arcus tangent of y/x.
 //-----------------------------------------------------------------------------
 template<class Real>
 Real Math<Real>::Atan2(Real y, Real x)
@@ -92,7 +92,7 @@ Real Math<Real>::Atan2(Real y, Real x)
 }
 
 //-----------------------------------------------------------------------------
-// Find the absolute value.
+//  Find the absolute value.
 //-----------------------------------------------------------------------------
 template<class Real>
 Real Math<Real>::Abs(Real value)
@@ -101,7 +101,7 @@ Real Math<Real>::Abs(Real value)
 }
 
 //-----------------------------------------------------------------------------
-// Round to the nearest integer.
+//  Round to the nearest integer.
 //-----------------------------------------------------------------------------
 template<class Real>
 int Math<Real>::Round(Real value)
@@ -110,7 +110,7 @@ int Math<Real>::Round(Real value)
 }
 
 //-----------------------------------------------------------------------------
-// Round to the nearest integer upwards.
+//  Round to the nearest integer upwards.
 //-----------------------------------------------------------------------------
 template<class Real>
 int Math<Real>::Ceil(Real value)
@@ -119,7 +119,7 @@ int Math<Real>::Ceil(Real value)
 }
 
 //-----------------------------------------------------------------------------
-// Round to the nearest integer downwards.
+//  Round to the nearest integer downwards.
 //-----------------------------------------------------------------------------
 template<class Real>
 int Math<Real>::Floor(Real value)
@@ -128,7 +128,7 @@ int Math<Real>::Floor(Real value)
 }
 
 //-----------------------------------------------------------------------------
-// Calculate the exponential.
+//  Calculate the exponential.
 //-----------------------------------------------------------------------------
 template<class Real>
 Real Math<Real>::Exp(Real value)
@@ -137,7 +137,7 @@ Real Math<Real>::Exp(Real value)
 }
 
 //-----------------------------------------------------------------------------
-// Find the natural logarithm of the value.
+//  Find the natural logarithm of the value.
 //-----------------------------------------------------------------------------
 template<class Real>
 Real Math<Real>::Log(Real value)
@@ -146,7 +146,7 @@ Real Math<Real>::Log(Real value)
 }
 
 //-----------------------------------------------------------------------------
-// Find the logarithm of the value with base 10.
+//  Find the logarithm of the value with base 10.
 //-----------------------------------------------------------------------------
 template<class Real>
 Real Math<Real>::Log10(Real value)
@@ -155,7 +155,7 @@ Real Math<Real>::Log10(Real value)
 }
 
 //-----------------------------------------------------------------------------
-// Find the power of the base in the exponent.
+//  Find the power of the base in the exponent.
 //-----------------------------------------------------------------------------
 template<class Real>
 Real Math<Real>::Pow(Real base, Real exponent)
@@ -164,7 +164,7 @@ Real Math<Real>::Pow(Real base, Real exponent)
 }
 
 //-----------------------------------------------------------------------------
-// Find the modulo of x by y.
+//  Find the modulo of x by y.
 //-----------------------------------------------------------------------------
 template<class Real>
 Real Math<Real>::Mod(Real x, Real y)
@@ -173,7 +173,7 @@ Real Math<Real>::Mod(Real x, Real y)
 }
 
 //-----------------------------------------------------------------------------
-// Find the square root of the value.
+//  Find the square root of the value.
 //-----------------------------------------------------------------------------
 template<class Real>
 Real Math<Real>::Sqrt(Real value)
@@ -182,7 +182,7 @@ Real Math<Real>::Sqrt(Real value)
 }
 
 //-----------------------------------------------------------------------------
-// Find the inverse square root of the value.
+//  Find the inverse square root of the value.
 //-----------------------------------------------------------------------------
 template<class Real>
 Real Math<Real>::ISqrt(Real value)
@@ -191,7 +191,7 @@ Real Math<Real>::ISqrt(Real value)
 }
 
 //-----------------------------------------------------------------------------
-// Find the sign of an integer.
+//  Find the sign of an integer.
 //-----------------------------------------------------------------------------
 template<class Real>
 int Math<Real>::Sign(int value)
@@ -204,7 +204,7 @@ int Math<Real>::Sign(int value)
 }
 
 //-----------------------------------------------------------------------------
-// Find the sign of a number.
+//  Find the sign of a number.
 //-----------------------------------------------------------------------------
 template<class Real>
 int Math<Real>::Sign(Real value)
@@ -217,7 +217,7 @@ int Math<Real>::Sign(Real value)
 }
 
 //-----------------------------------------------------------------------------
-// Find a random number between 0,1.
+//  Find a random number between 0,1.
 //-----------------------------------------------------------------------------
 template<class Real>
 Real Math<Real>::UnitRandom(unsigned int seed)
@@ -231,7 +231,7 @@ Real Math<Real>::UnitRandom(unsigned int seed)
 }
 
 //-----------------------------------------------------------------------------
-// Find a random number between -1,1
+//  Find a random number between -1,1
 //-----------------------------------------------------------------------------
 template<class Real>
 Real Math<Real>::SymmetricRandom(unsigned int seed)
@@ -245,7 +245,7 @@ Real Math<Real>::SymmetricRandom(unsigned int seed)
 }
 
 //-----------------------------------------------------------------------------
-// Find a random number between min and max.
+//  Find a random number between min and max.
 //-----------------------------------------------------------------------------
 template<class Real>
 Real Math<Real>::IntervalRandom(Real min, Real max, unsigned int seed)

@@ -6,14 +6,14 @@ Purpose : Implementation of the Stack class used in Pandora3D
 
 Creation Date : 2010-01-24
 
-Last Modified : ti. 26. jan. 2010 kl. 13.14 +0100
+Last Modified : fr. 29. jan. 2010 kl. 16.57 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------
 */
 
 //-----------------------------------------------------------------------------
-// Constructor.
+//  Constructor.
 //-----------------------------------------------------------------------------
 template<class T>
 Stack<T>::Stack(unsigned int size)
@@ -24,7 +24,7 @@ Stack<T>::Stack(unsigned int size)
 }
 
 //-----------------------------------------------------------------------------
-// Destructor.
+//  Destructor.
 //-----------------------------------------------------------------------------
 template<class T>
 Stack<T>::~Stack()
@@ -33,7 +33,7 @@ Stack<T>::~Stack()
 }
 
 //-----------------------------------------------------------------------------
-// Check if the stack is empty.
+//  Check if the stack is empty.
 //-----------------------------------------------------------------------------
 template<class T>
 bool Stack<T>::isEmpty() const
@@ -42,7 +42,7 @@ bool Stack<T>::isEmpty() const
 }
 
 //-----------------------------------------------------------------------------
-// Check if the stack is full.
+//  Check if the stack is full.
 //-----------------------------------------------------------------------------
 template<class T>
 bool Stack<T>::isFull() const
@@ -51,7 +51,7 @@ bool Stack<T>::isFull() const
 }
 
 //-----------------------------------------------------------------------------
-// Push an item on the stack.
+//  Push an item on the stack.
 //-----------------------------------------------------------------------------
 template<class T>
 void Stack<T>::push(const T& item)
@@ -61,7 +61,7 @@ void Stack<T>::push(const T& item)
 }
 
 //-----------------------------------------------------------------------------
-// Pop the first item.
+//  Pop the first item.
 //-----------------------------------------------------------------------------
 template<class T>
 bool Stack<T>::pop(T& item) 
@@ -75,7 +75,7 @@ bool Stack<T>::pop(T& item)
 }
 
 //-----------------------------------------------------------------------------
-// Clear the Stack.
+//  Clear the Stack.
 //-----------------------------------------------------------------------------
 template<class T>
 void Stack<T>::clear()
@@ -84,7 +84,7 @@ void Stack<T>::clear()
 }
 
 //-----------------------------------------------------------------------------
-// Get the top of the stack without popping.
+//  Get the top of the stack without popping.
 //-----------------------------------------------------------------------------
 template<class T>
 bool Stack<T>::getTop(T& item)

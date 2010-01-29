@@ -28,20 +28,23 @@ namespace Pandora
 {
     namespace Math
     {
+        /**
+         *  A mathematical 3D vector class.
+         */
         template<class Real>
-        class Vec3
+        class Vector3
         {
             public:
                 /**
-                 * Default constructor. Sets the elements.
-                 * \param
+                 *  Default constructor. Sets the elements.
+                 *  \param
                  *      x - The first value of the vector.
                  *  \param
                  *      y - The second value of the vector.
                  *  \param
                  *      z - The third value of the vector.
                  */
-                Vec3(const Real& x = 1.0, const Real& y = 0.0, 
+                Vector3(const Real& x = 1.0, const Real& y = 0.0, 
                         const Real& z = 0.0);
 
                 /**
@@ -49,7 +52,7 @@ namespace Pandora
                  *  \param
                  *      vec - The vector we wish to copy.
                  */
-                Vec3(const Vec3& vec);
+                Vector3(const Vector3& vec);
 
                 /**
                  *  Copy constructor. Copies an array to this vector. Only uses
@@ -59,23 +62,23 @@ namespace Pandora
                  *  \param
                  *      vec - The array.
                  */
-                Vec3(const Real *vec);
+                Vector3(const Real *vec);
 
                 /**
-                 * Destructor. Destroys the vector
+                 *  Destructor. Destroys the vector
                  */
-                ~Vec3();
+                ~Vector3();
 
                 /**
-                 * Get the elements of the vector as a constant array.
-                 * \return
+                 *  Get the elements of the vector as a constant array.
+                 *  \return
                  *      A constant pointer to the data elements.
                  */
                 operator const Real* () const;
 
                 /**
-                 * Get a pointer to the elements of the vector.
-                 * \return
+                 *  Get a pointer to the elements of the vector.
+                 *  \return
                  *      A pointer to the elements of the vector.
                  */
                 operator Real* ();
@@ -106,7 +109,7 @@ namespace Pandora
                  *  \return
                  *      true if all the elements are equal, false else.
                  */
-                bool operator==(const Vec3& vec) const;
+                bool operator==(const Vector3& vec) const;
 
                 /**
                  *  Check if two vectors are unequal.
@@ -116,7 +119,7 @@ namespace Pandora
                  *      true if at least one of the elements are unequal to the
                  *      elements of this vector, false otherwise.
                  */
-                bool operator!=(const Vec3& vec) const;
+                bool operator!=(const Vector3& vec) const;
 
                 /**
                  *  Checks if this vector is smaller then another vector.
@@ -126,7 +129,7 @@ namespace Pandora
                  *      true if all the elements are smaller then the elements
                  *      of vec, false otherwise.
                  */
-                bool operator<(const Vec3& vec) const;
+                bool operator<(const Vector3& vec) const;
 
                 /**
                  *  Checks if this vector is smaller then or equal to another
@@ -137,7 +140,7 @@ namespace Pandora
                  *      true if all the elements are smaller then or equal to
                  *      the elements of vec, false otherwise.
                  */
-                bool operator<=(const Vec3& vec) const;
+                bool operator<=(const Vector3& vec) const;
 
                 /**
                  *  Checks if this vector is larger then another vector.
@@ -147,7 +150,7 @@ namespace Pandora
                  *      true if all the elements are larger then the elements
                  *      of vec, false otherwise.
                  */
-                bool operator>(const Vec3& vec) const;
+                bool operator>(const Vector3& vec) const;
 
                 /**
                  *  Checks if this vector is larger then or equal to another
@@ -158,7 +161,7 @@ namespace Pandora
                  *      true if all the elements are larger then or equal to
                  *      the elements of vec, false otherwise.
                  */
-                bool operator>=(const Vec3& vec) const;
+                bool operator>=(const Vector3& vec) const;
 
                 /**
                  *  Add this vector with another.
@@ -167,7 +170,7 @@ namespace Pandora
                  *  \return
                  *      A new vector which is this vector added with vec.
                  */
-                Vec3 operator+(const Vec3& vec) const;
+                Vector3 operator+(const Vector3& vec) const;
 
                 /**
                  *  Subtract a vector from this vector.
@@ -176,7 +179,7 @@ namespace Pandora
                  *  \return
                  *      This vector subtracted with vec.
                  */
-                Vec3 operator-(const Vec3& vec) const;
+                Vector3 operator-(const Vector3& vec) const;
 
                 /**
                  *  Multiply two vectors together the normal way.
@@ -186,7 +189,7 @@ namespace Pandora
                  *      A scalar which is the vector-to-vector multiplication
                  *      between this vector and vec.
                  */
-                Real operator*(const Vec3& vec) const;
+                Real operator*(const Vector3& vec) const;
 
                 /**
                  *  Multiply this vector with a scalar.
@@ -195,7 +198,7 @@ namespace Pandora
                  *  \return
                  *      This vector multiplied with a scalar.
                  */
-                Vec3 operator*(const Real& scalar) const;
+                Vector3 operator*(const Real& scalar) const;
 
                 /**
                  *  Divide this vector with a scalar.
@@ -206,28 +209,28 @@ namespace Pandora
                  *  \note
                  *      Will crash if the scalar is equal to zero.
                  */
-                Vec3 operator/(const Real& scalar) const;
+                Vector3 operator/(const Real& scalar) const;
 
                 /**
                  *  Make this vector negated.
                  *  \return
                  *      This vector negated.
                  */
-                Vec3 operator-() const;
+                Vector3 operator-() const;
 
                 /**
                  *  Add a vector to this vector.
                  *  \param
                  *      vec - The vector to add to this vector.
                  */
-                void operator+=(const Vec3& vec);
+                void operator+=(const Vector3& vec);
 
                 /**
                  *  Subtract a vector from this vector.
                  *  \param
                  *      vec - The vector to subtract with.
                  */
-                void operator-=(const Vec3& vec);
+                void operator-=(const Vector3& vec);
 
                 /**
                  *  Multiply this vector with a scalar.
@@ -284,8 +287,7 @@ namespace Pandora
                  *  \return
                  *      The two vectors crossed.
                  */
-                Vec3 cross(const Vec3& vec) const;
-
+                Vector3 cross(const Vector3& vec) const;
             public:
                 Real x, y, z;
         };

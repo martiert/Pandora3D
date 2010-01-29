@@ -6,83 +6,83 @@ Purpose : Implementation of the Vector2 class used in Pandora3D
 
 Creation Date : 2010-01-26
 
-Last Modified : fr. 29. jan. 2010 kl. 00.14 +0100
+Last Modified : fr. 29. jan. 2010 kl. 17.00 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------
 */
 
 //-----------------------------------------------------------------------------
-// Typedefs.
+//  Typedefs.
 //-----------------------------------------------------------------------------
-typedef Vec2<float> Vec2f;
-typedef Vec2<double> Vec2d;
-typedef Vec2<int> Vec2i;
-typedef Vec2<unsigned int> Vec2u;
+typedef Vector2<float> Vec2f;
+typedef Vector2<double> Vec2d;
+typedef Vector2<int> Vec2i;
+typedef Vector2<unsigned int> Vec2u;
 
 //-----------------------------------------------------------------------------
-// Constructor.
+//  Constructor.
 //-----------------------------------------------------------------------------
 template<class Real>
-Vec2<Real>::Vec2(const Real& x, const Real& y)
+Vector2<Real>::Vector2(const Real& x, const Real& y)
 {
     this->x = x;
     this->y = y;
 }
 
 //-----------------------------------------------------------------------------
-// Constructor.
+//  Constructor.
 //-----------------------------------------------------------------------------
 template<class Real>
-Vec2<Real>::Vec2(Vec2<Real>& vec)
+Vector2<Real>::Vector2(Vector2<Real>& vec)
 {
     x = vec[0];
     y = vec[1];
 }
 
 //-----------------------------------------------------------------------------
-// Constructor.
+//  Constructor.
 //-----------------------------------------------------------------------------
 template<class Real>
-Vec2<Real>::Vec2(Real *vec)
+Vector2<Real>::Vector2(Real *vec)
 {
     x = vec[0];
     y = vec[1];
 }
 
 //-----------------------------------------------------------------------------
-// Destructor
+//  Destructor
 //-----------------------------------------------------------------------------
 template<class Real>
-Vec2<Real>::~Vec2()
+Vector2<Real>::~Vector2()
 {
 }
 
 //-----------------------------------------------------------------------------
-// Assignment operator.
+//  Assignment operator.
 //-----------------------------------------------------------------------------
 template<class Real>
-void Vec2<Real>::operator=(Vec2<Real>& vec)
-{
-    x = vec[0];
-    y = vec[1];
-}
-
-//-----------------------------------------------------------------------------
-// Assignment operator.
-//-----------------------------------------------------------------------------
-template<class Real>
-void Vec2<Real>::operator=(Real *vec)
+void Vector2<Real>::operator=(Vector2<Real>& vec)
 {
     x = vec[0];
     y = vec[1];
 }
 
 //-----------------------------------------------------------------------------
-// Access operator.
+//  Assignment operator.
 //-----------------------------------------------------------------------------
 template<class Real>
-Real& Vec2<Real>::operator[](const ptrdiff_t i)
+void Vector2<Real>::operator=(Real *vec)
+{
+    x = vec[0];
+    y = vec[1];
+}
+
+//-----------------------------------------------------------------------------
+//  Access operator.
+//-----------------------------------------------------------------------------
+template<class Real>
+Real& Vector2<Real>::operator[](const ptrdiff_t i)
 {
     assert(i < 2 && "Index out of bounds.");
 
@@ -92,10 +92,10 @@ Real& Vec2<Real>::operator[](const ptrdiff_t i)
 }
 
 //-----------------------------------------------------------------------------
-// Get a copy of element number i from the vector.
+//  Get a copy of element number i from the vector.
 //-----------------------------------------------------------------------------
 template<class Real>
-Real Vec2<Real>::operator[](const ptrdiff_t i) const
+Real Vector2<Real>::operator[](const ptrdiff_t i) const
 {
     assert(i < 2 && "Index out of bounds.");
 
@@ -105,104 +105,104 @@ Real Vec2<Real>::operator[](const ptrdiff_t i) const
 }
 
 //-----------------------------------------------------------------------------
-// Implicit conversion operator.
+//  Implicit conversion operator.
 //-----------------------------------------------------------------------------
 template<class Real>
-Vec2<Real>::operator Real*()
+Vector2<Real>::operator Real*()
 {
     return &x;
 }
 
 //-----------------------------------------------------------------------------
-// Get a constant copy of the vector.
+//  Get a constant copy of the vector.
 //-----------------------------------------------------------------------------
 template<class Real>
-Vec2<Real>::operator const Real* () const
+Vector2<Real>::operator const Real* () const
 {
     return &x;
 }
 
 //-----------------------------------------------------------------------------
-// Addition operator.
+//  Addition operator.
 //-----------------------------------------------------------------------------
 template<class Real>
-Vec2<Real> Vec2<Real>::operator+(const Vec2<Real>& vec) const
+Vector2<Real> Vector2<Real>::operator+(const Vector2<Real>& vec) const
 {
-    return Vec2<Real>(x + vec.x, y + vec.y);
+    return Vector2<Real>(x + vec.x, y + vec.y);
 }
 
 //-----------------------------------------------------------------------------
-// Subtraction operator.
+//  Subtraction operator.
 //-----------------------------------------------------------------------------
 template<class Real>
-Vec2<Real> Vec2<Real>::operator-(const Vec2<Real>& vec) const
+Vector2<Real> Vector2<Real>::operator-(const Vector2<Real>& vec) const
 {
-    return Vec2<Real>(x - vec.x, y - vec.y);
+    return Vector2<Real>(x - vec.x, y - vec.y);
 }
 
 //-----------------------------------------------------------------------------
-// Normal vector multiplication.
+//  Normal vector multiplication.
 //-----------------------------------------------------------------------------
 template<class Real>
-Real Vec2<Real>::operator*(const Vec2<Real>& vec) const
+Real Vector2<Real>::operator*(const Vector2<Real>& vec) const
 {
     return x*vec.x + y*vec.y;
 }
 
 //-----------------------------------------------------------------------------
-// Multiply vector with a scalar.
+//  Multiply vector with a scalar.
 //-----------------------------------------------------------------------------
 template<class Real>
-Vec2<Real> Vec2<Real>::operator*(const Real& scalar) const
+Vector2<Real> Vector2<Real>::operator*(const Real& scalar) const
 {
-    return Vec2<Real>(x*scalar, y*scalar);
+    return Vector2<Real>(x*scalar, y*scalar);
 }
 
 //-----------------------------------------------------------------------------
-// Divide vector with a scalar.
+//  Divide vector with a scalar.
 //-----------------------------------------------------------------------------
 template<class Real>
-Vec2<Real> Vec2<Real>::operator/(const Real& scalar) const
+Vector2<Real> Vector2<Real>::operator/(const Real& scalar) const
 {
     assert( scalar != (Real) 0.0 );
-    return Vec2<Real>(x/scalar, y/scalar);
+    return Vector2<Real>(x/scalar, y/scalar);
 }
 
 //-----------------------------------------------------------------------------
-// Addition operator.
+//  Addition operator.
 //-----------------------------------------------------------------------------
 template<class Real>
-void Vec2<Real>::operator+=(const Vec2<Real>& vec)
+void Vector2<Real>::operator+=(const Vector2<Real>& vec)
 {
     x += vec.x;
     y += vec.y;
 }
 
 //-----------------------------------------------------------------------------
-// Subtraction operator.
+//  Subtraction operator.
 //-----------------------------------------------------------------------------
 template<class Real>
-void Vec2<Real>::operator-=(const Vec2<Real>& vec)
+void Vector2<Real>::operator-=(const Vector2<Real>& vec)
 {
     x -= vec.x;
     y -= vec.y;
 }
 
 //-----------------------------------------------------------------------------
-// Multiplication with scalar.
+//  Multiplication with scalar.
 //-----------------------------------------------------------------------------
 template<class Real>
-void Vec2<Real>::operator*=(const Real& scalar)
+void Vector2<Real>::operator*=(const Real& scalar)
 {
     x *= scalar;
     y *= scalar;
 }
 
 //-----------------------------------------------------------------------------
-// Division with scalar.
+//  Division with scalar.
 //-----------------------------------------------------------------------------
 template<class Real>
-void Vec2<Real>::operator/=(const Real& scalar)
+void Vector2<Real>::operator/=(const Real& scalar)
 {
     assert( scalar != (Real) 0.0 );
     x /= scalar;
@@ -210,112 +210,112 @@ void Vec2<Real>::operator/=(const Real& scalar)
 }
 
 //-----------------------------------------------------------------------------
-// Equality operator.
+//  Equality operator.
 //-----------------------------------------------------------------------------
 template<class Real>
-bool Vec2<Real>::operator==(const Vec2<Real>& vec) const
+bool Vector2<Real>::operator==(const Vector2<Real>& vec) const
 {
     return (Math<Real>::Abs(x - vec.x) < Math<Real>::EPSILON && 
             Math<Real>::Abs(y - vec.y) < Math<Real>::EPSILON);
 }
 
 //-----------------------------------------------------------------------------
-// Non equality operator.
+//  Non equality operator.
 //-----------------------------------------------------------------------------
 template<class Real>
-bool Vec2<Real>::operator!=(const Vec2<Real>& vec) const
+bool Vector2<Real>::operator!=(const Vector2<Real>& vec) const
 {
     return !(*this == vec);
 }
 
 //-----------------------------------------------------------------------------
-// Check if this vector is larger then another.
+//  Check if this vector is larger then another.
 //-----------------------------------------------------------------------------
 template<class Real>
-bool Vec2<Real>::operator>(const Vec2<Real>& vec) const
+bool Vector2<Real>::operator>(const Vector2<Real>& vec) const
 {
     return (x > vec.x && y > vec.y);
 }
 
 //-----------------------------------------------------------------------------
-// Check if this vector is larger then or equal to another.
+//  Check if this vector is larger then or equal to another.
 //-----------------------------------------------------------------------------
 template<class Real>
-bool Vec2<Real>::operator>=(const Vec2<Real>& vec) const
+bool Vector2<Real>::operator>=(const Vector2<Real>& vec) const
 {
     return (x >= vec.x && y >= vec.y);
 }
 
 //-----------------------------------------------------------------------------
-// Check if this vector is smaller then another.
+//  Check if this vector is smaller then another.
 //-----------------------------------------------------------------------------
 template<class Real>
-bool Vec2<Real>::operator<(const Vec2<Real>& vec) const
+bool Vector2<Real>::operator<(const Vector2<Real>& vec) const
 {
     return (x < vec.x && y < vec.y);
 }
 
 //-----------------------------------------------------------------------------
-// Check if this vector is smaller then or equal to another.
+//  Check if this vector is smaller then or equal to another.
 //-----------------------------------------------------------------------------
 template<class Real>
-bool Vec2<Real>::operator<=(const Vec2<Real>& vec) const
+bool Vector2<Real>::operator<=(const Vector2<Real>& vec) const
 {
     return (x <= vec.x && y <= vec.y);
 }
 
 //-----------------------------------------------------------------------------
-// Negate a vector.
+//  Negate a vector.
 //-----------------------------------------------------------------------------
 template<class Real>
-Vec2<Real> Vec2<Real>::operator-() const
+Vector2<Real> Vector2<Real>::operator-() const
 {
-    return Vec2<Real>(-x, -y);
+    return Vector2<Real>(-x, -y);
 }
 
 //-----------------------------------------------------------------------------
-// Dot product between two vectors.
+//  Dot product between two vectors.
 //-----------------------------------------------------------------------------
 template<class Real>
-Vec2<Real> Vec2<Real>::dotprod(const Vec2<Real>& vec) const
+Vector2<Real> Vector2<Real>::dotprod(const Vector2<Real>& vec) const
 {
-    return Vec2<Real>(x * vec.x, y * vec.y);
+    return Vector2<Real>(x * vec.x, y * vec.y);
 }
 
 //-----------------------------------------------------------------------------
-// Return length of the vector.
+//  Return length of the vector.
 //-----------------------------------------------------------------------------
 template<class Real>
-Real Vec2<Real>::length() const
+Real Vector2<Real>::length() const
 {
     Real length = x*x + y*y;
     return Math<Real>::Sqrt(length);
 }
 
 //-----------------------------------------------------------------------------
-// Return squared length of the vector.
+//  Return squared length of the vector.
 //-----------------------------------------------------------------------------
 template<class Real>
-Real Vec2<Real>::lengthSquared() const
+Real Vector2<Real>::lengthSquared() const
 {
     return (x*x + y*y);
 }
 
 //-----------------------------------------------------------------------------
-// Normalize the vector.
+//  Normalize the vector.
 //-----------------------------------------------------------------------------
 template<class Real>
-void Vec2<Real>::normalize()
+void Vector2<Real>::normalize()
 {
     Real scale = length();
     *this /= scale;
 }
 
 //-----------------------------------------------------------------------------
-// Normalize the vector. Check if the scaling value is zero.
+//  Normalize the vector. Check if the scaling value is zero.
 //-----------------------------------------------------------------------------
 template<class Real>
-bool Vec2<Real>::normalizeChecked()
+bool Vector2<Real>::normalizeChecked()
 {
     Real scale = length();
     if(scale == 0)
@@ -326,10 +326,10 @@ bool Vec2<Real>::normalizeChecked()
 }
 
 //-----------------------------------------------------------------------------
-// Allows one to write scalar * vector.
+//  Allows one to write scalar * vector.
 //-----------------------------------------------------------------------------
 template<class Real>
-Vec2<Real> operator*(const Real& scalar, const Vec2<Real>& vec)
+Vector2<Real> operator*(const Real& scalar, const Vector2<Real>& vec)
 {
-    return Vec2<Real>(vec.x * scalar, vec.y * scalar);
+    return Vector2<Real>(vec.x * scalar, vec.y * scalar);
 }

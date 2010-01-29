@@ -28,18 +28,14 @@ http://www.gnu.org/copyleft/lesser.txt.
 namespace Pandora
 {
     /**
-     * This namespace is for all the mathematical functions.
+     *  This namespace is for all the mathematical functions.
      */
     namespace Math
     {
         /**
-         * The Math class. Holds all the normal mathematical functions, like
-         * trigonometric functions, logarithm, power, square roots, etc. Also
-         * holds mathematical constant like PI, e, etc.
-         *
-         * \note
-         *      The fast functions is supposed to be used with slow hardware.
-         *      You will gain little/nothing using modern architecture.
+         *  The Math class. Holds all the normal mathematical functions, like
+         *  trigonometric functions, logarithm, power, square roots, etc. Also
+         *  holds mathematical constant like PI, e, etc.
          */
         template<class Real>
         class Math
@@ -56,8 +52,8 @@ namespace Pandora
                 static const Real RAD_TO_DEG;
 
                 /**
-                 * Calculate the cosine value.
-                 * \param
+                 *  Calculate the cosine value.
+                 *  \param
                  *      value - The number of radians.
                  *  \return
                  *      The cosine value.
@@ -65,8 +61,8 @@ namespace Pandora
                 static Real Cos(Real value);
 
                 /**
-                 * Calculate the sinus value.
-                 * \param
+                 *  Calculate the sinus value.
+                 *  \param
                  *      value - The number of radians.
                  *  \return
                  *      The sinus value.
@@ -74,8 +70,8 @@ namespace Pandora
                 static Real Sin(Real value);
 
                 /**
-                 * Calculate the tangent value.
-                 * \param
+                 *  Calculate the tangent value.
+                 *  \param
                  *      value - The number of radians.
                  *  \return
                  *      The tangent value.
@@ -83,8 +79,8 @@ namespace Pandora
                 static Real Tan(Real value);
 
                 /**
-                 * Calculates the inverse cosine.
-                 * \param
+                 *  Calculates the inverse cosine.
+                 *  \param
                  *      value - The cosine value.
                  *  \return
                  *      The number of radians in the interval [0,\f$\pi\f$].
@@ -95,8 +91,8 @@ namespace Pandora
                 static Real Acos(Real value);
 
                 /**
-                 * Calculates the inverse sinus.
-                 * \param
+                 *  Calculates the inverse sinus.
+                 *  \param
                  *      value - The sinus value.
                  *  \return
                  *      The number of radians in the interval \f$
@@ -109,8 +105,8 @@ namespace Pandora
                 static Real Asin(Real value);
 
                 /**
-                 * Calculates the inverse tangent.
-                 * \param
+                 *  Calculates the inverse tangent.
+                 *  \param
                  *      value - The tangent value.
                  *  \return
                  *      The number of radians in the interval \f$ 
@@ -119,11 +115,11 @@ namespace Pandora
                 static Real Atan(Real value);
 
                 /**
-                 * Calculates the inverse tangent of \f$ \frac{y}{x} \f$.
+                 *  Calculates the inverse tangent of \f$ \frac{y}{x} \f$.
                  *
-                 * \param
+                 *  \param
                  *      x - A value representing an x-coordinate.
-                 * \param
+                 *  \param
                  *      y - A value representing an y-coordinate.
                  *  \return
                  *      The number of radians in the interval \f$ [-\pi,\pi] \f$.
@@ -131,17 +127,17 @@ namespace Pandora
                 static Real Atan2(Real x, Real y);
 
                 /**
-                 * Calculates the absolute value of a number.
-                 * \param
+                 *  Calculates the absolute value of a number.
+                 *  \param
                  *      value - The number.
-                 * \return
+                 *  \return
                  *      The absolute value of the number.
                  */
                 static Real Abs(Real value);
 
                 /**
-                 * Rounds the number to the nearest integer.
-                 * \param
+                 *  Rounds the number to the nearest integer.
+                 *  \param
                  *      value - The number.
                  *  \return
                  *      The nearest integer.
@@ -149,8 +145,8 @@ namespace Pandora
                 static int Round(Real value);
 
                 /**
-                 * Round the number to the nearest integer upwards.
-                 * \param
+                 *  Round the number to the nearest integer upwards.
+                 *  \param
                  *      value - The number.
                  *  \return
                  *      The nearest integer upwards.
@@ -158,8 +154,8 @@ namespace Pandora
                 static int Ceil(Real value);
 
                 /**
-                 * Round the number to the nearest integers downwards.
-                 * \param
+                 *  Round the number to the nearest integers downwards.
+                 *  \param
                  *      value - The number.
                  *  \return
                  *      The nearest integer downwards.
@@ -167,8 +163,8 @@ namespace Pandora
                 static int Floor(Real value);
 
                 /**
-                 * Find e to the power value.
-                 * \param
+                 *  Find e to the power value.
+                 *  \param
                  *      value - The power to use.
                  *  \return
                  *      e^value.
@@ -176,8 +172,8 @@ namespace Pandora
                 static Real Exp(Real value);
 
                 /**
-                 * Find the logarithm of the number. Uses base e.
-                 * \param
+                 *  Find the logarithm of the number. Uses base e.
+                 *  \param
                  *      value - The number to take the logarithm of.
                  *  \return
                  *      log(value).
@@ -185,8 +181,8 @@ namespace Pandora
                 static Real Log(Real value);
 
                 /**
-                 * Find the logarithm of the number. Uses base 10.
-                 * \param
+                 *  Find the logarithm of the number. Uses base 10.
+                 *  \param
                  *      value - The number to take the logarithm of.
                  *  \return
                  *      log(value) with base 10.
@@ -194,8 +190,8 @@ namespace Pandora
                 static Real Log10(Real value);
 
                 /**
-                 * Find the base to the power exponent.
-                 * \param
+                 *  Find the base to the power exponent.
+                 *  \param
                  *      base - The base to use.
                  *  \param
                  *      exponent - The exponent to use.
@@ -205,8 +201,8 @@ namespace Pandora
                 static Real Pow(Real base, Real exponent);
 
                 /**
-                 * Find the modulo of x by y.
-                 * \param
+                 *  Find the modulo of x by y.
+                 *  \param
                  *      x - The number to take modulo by.
                  *  \param
                  *      y - The number to use as divisor.
@@ -216,8 +212,8 @@ namespace Pandora
                 static Real Mod(Real x, Real y);
 
                 /**
-                 * Find the square root of a number.
-                 * \param
+                 *  Find the square root of a number.
+                 *  \param
                  *      value - The number to find the square root of.
                  *  \return
                  *      The square root of value.
@@ -227,8 +223,8 @@ namespace Pandora
                 static Real Sqrt(Real value);
 
                 /**
-                 * Find the inverse square root of a number.
-                 * \param
+                 *  Find the inverse square root of a number.
+                 *  \param
                  *      value - The number to find the inverse square root of.
                  *  \return
                  *      The inverse square root of value.
@@ -238,8 +234,8 @@ namespace Pandora
                 static Real ISqrt(Real value);
 
                 /**
-                 * Find the sign of an integer.
-                 * \param
+                 *  Find the sign of an integer.
+                 *  \param
                  *      value - The integer to check for the sign of.
                  *  \return
                  *      -1 if negative, 0 if 0 and 1 if positive.
@@ -247,8 +243,8 @@ namespace Pandora
                 static int Sign(int value);
 
                 /**
-                 * Find the sign of a number.
-                 * \param
+                 *  Find the sign of a number.
+                 *  \param
                  *      value - The number to check for the sign of.
                  *  return
                  *      -1 if negative, 0 if 0 and 1 if positive.
@@ -256,8 +252,8 @@ namespace Pandora
                 static int Sign(Real value);
 
                 /**
-                 * Find a random number between 0 and 1.
-                 * \param
+                 *  Find a random number between 0 and 1.
+                 *  \param
                  *      seed - The seed to use. Optional. Defaults to 0.
                  *  \return
                  *      A random number in [0,1). Including 0, excluding 1.
@@ -265,8 +261,8 @@ namespace Pandora
                 static Real UnitRandom(unsigned int seed = 0);
 
                 /**
-                 * Find a random number between -1,1.
-                 * \param
+                 *  Find a random number between -1,1.
+                 *  \param
                  *      seed - The seed to use. Optional. Defaults to 0.
                  *  \return
                  *      A random number in [-1,1). Including -1, excluding 1.
@@ -274,8 +270,8 @@ namespace Pandora
                 static Real SymmetricRandom(unsigned int seed = 0);
 
                 /**
-                 * Find a random number between min and max.
-                 * \param
+                 *  Find a random number between min and max.
+                 *  \param
                  *      min - The minimum number.
                  *  \param
                  *      max - The maximum number.

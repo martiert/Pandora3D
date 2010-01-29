@@ -61,7 +61,7 @@ namespace Pandora
                 HashTable(const unsigned int& size);
 
                 /** 
-                 * Destructor 
+                 *  Destructor 
                  */
                 ~HashTable();
 
@@ -87,13 +87,13 @@ namespace Pandora
                 Value& remove(const Key& key);
 
                 /** 
-                 * Removes everything in the HashTable.
+                 *  Removes everything in the HashTable.
                  */
                 void removeAll();
 
                 /** 
-                 * Checks if a key exists in the HashTable.
-                 * \param
+                 *  Checks if a key exists in the HashTable.
+                 *  \param
                  *      key - The key to search for.
                  *  \return
                  *      True if the key exists. False otherwise.
@@ -101,8 +101,8 @@ namespace Pandora
                 bool exists(const Key& key) const;
 
                 /** 
-                 * Finds an element in the HashTable and returns it.
-                 * \param
+                 *  Finds an element in the HashTable and returns it.
+                 *  \param
                  *      key - The key to search for.
                  *  \return
                  *      The element itself if the key is found. NULL otherwise.
@@ -110,8 +110,8 @@ namespace Pandora
                 Value& find(const Key& key) const;
 
                 /**
-                 * A user defined hash function.
-                 * \param
+                 *  A user defined hash function.
+                 *  \param
                  *      key - The key to hash.
                  *  \return
                  *      The key as an integer between 0 and m_size.

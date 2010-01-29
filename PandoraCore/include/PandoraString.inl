@@ -6,14 +6,14 @@ Purpose : Implementation of the String class used in Pandora3D
 
 Creation Date : 2010-01-24
 
-Last Modified : ti. 26. jan. 2010 kl. 23.37 +0100
+Last Modified : fr. 29. jan. 2010 kl. 16.58 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------
 */
 
 //-----------------------------------------------------------------------------
-// Constructor.
+//  Constructor.
 //-----------------------------------------------------------------------------
 String::String(const char *text)
 {
@@ -23,7 +23,7 @@ String::String(const char *text)
 }
 
 //-----------------------------------------------------------------------------
-// Constructor.
+//  Constructor.
 //-----------------------------------------------------------------------------
 String::String(unsigned int length, const char *text)
 {
@@ -33,7 +33,7 @@ String::String(unsigned int length, const char *text)
 }
 
 //-----------------------------------------------------------------------------
-// Copy constructor.
+//  Copy constructor.
 //-----------------------------------------------------------------------------
 String::String(const String& text)
 {
@@ -43,7 +43,7 @@ String::String(const String& text)
 }
 
 //-----------------------------------------------------------------------------
-// Destructor.
+//  Destructor.
 //-----------------------------------------------------------------------------
 String::~String()
 {
@@ -51,7 +51,7 @@ String::~String()
 }
 
 //-----------------------------------------------------------------------------
-// Get length of string.
+//  Get length of string.
 //-----------------------------------------------------------------------------
 int String::getLength() const
 {
@@ -59,7 +59,7 @@ int String::getLength() const
 }
 
 //-----------------------------------------------------------------------------
-// Get the char array.
+//  Get the char array.
 //-----------------------------------------------------------------------------
 String::operator const char* () const
 {
@@ -67,7 +67,7 @@ String::operator const char* () const
 }
 
 //-----------------------------------------------------------------------------
-// Assign a String to this String.
+//  Assign a String to this String.
 //-----------------------------------------------------------------------------
 void String::operator=(const String& text)
 {
@@ -76,7 +76,7 @@ void String::operator=(const String& text)
 }
 
 //-----------------------------------------------------------------------------
-// Check for equality.
+//  Check for equality.
 //-----------------------------------------------------------------------------
 bool String::operator==(const String& text) const
 {
@@ -91,7 +91,7 @@ bool String::operator==(const String& text) const
 }
 
 //-----------------------------------------------------------------------------
-// Checks if the strings are different.
+//  Checks if the strings are different.
 //-----------------------------------------------------------------------------
 bool String::operator!=(const String& text) const
 {
@@ -99,7 +99,7 @@ bool String::operator!=(const String& text) const
 }
 
 //-----------------------------------------------------------------------------
-// Returns a hashed numerical representation of the string.
+//  Returns a hashed numerical representation of the string.
 //-----------------------------------------------------------------------------
 String::operator unsigned int () const
 {

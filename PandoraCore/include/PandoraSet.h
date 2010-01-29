@@ -24,13 +24,14 @@ http://www.gnu.org/copyleft/lesser.txt.
 
 namespace Pandora
 {
-    /** Namespace for the util classes of the engine.
+    /** 
+     *  Namespace for the util classes of the engine.
      */
     namespace Utils
     {
         /**
-         * A simple Set class. We can append, remove, get the number of elements, 
-         * get a raw pointer from the set and remove all the elements in the set.
+         *  A simple Set class. We can append, remove, get the number of elements, 
+         *  get a raw pointer from the set and remove all the elements in the set.
         */
         template<class T>
         class Set
@@ -63,8 +64,8 @@ namespace Pandora
                 bool insert(const T& in);
 
                 /**
-                 * Checks if an element exists in the Set without removing it.
-                 * \param
+                 *  Checks if an element exists in the Set without removing it.
+                 *  \param
                  *      in - The element to look for.
                  *  \return
                  *      True if the item exists in the set, false otherwise.
@@ -81,8 +82,8 @@ namespace Pandora
                 bool remove(const T& elem);
 
                 /**
-                 * Get the number of elements in the Set.
-                 * \return
+                 *  Get the number of elements in the Set.
+                 *  \return
                  *      The number of elements in the Set.
                  */
                 unsigned int getElements() const;
@@ -95,8 +96,8 @@ namespace Pandora
                 unsigned int getSize() const;
 
                 /**
-                 * Get the number of elements to increment the Set by.
-                 * \return
+                 *  Get the number of elements to increment the Set by.
+                 *  \return
                  *      The number of elements to increment the set by.
                  */
                 unsigned int getIncrement() const;
@@ -116,7 +117,7 @@ namespace Pandora
                 T *m_data;
                 unsigned int m_elements; //The number of elements in the set
                 unsigned int m_size; //The size of the array
-                unsigned int m_increment; //What to increment the array size with
+                unsigned int m_increment; //What to increment the array size by
         };
 
 #include "PandoraSet.inl"

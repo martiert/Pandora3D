@@ -23,20 +23,20 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include <time.h>
 
 /** 
- * The main namespace of the engine.
+ *  The main namespace of the engine.
  */
 namespace Pandora
 {
     /**
-     * The System class. Holds all the functions which wrapps platform
-     * dependent functions.
+     *  The System class. Holds all the functions which wrapps platform
+     *  dependent functions.
      */
     class System
     {
         public:
         /**
-         * Get the current time in seconds.
-         * \return
+         *  Get the current time in seconds.
+         *  \return
          *      The current time in seconds.
          */
         static double getTime()
@@ -50,24 +50,24 @@ namespace Pandora
         }
 
         /**
-         * Load a binary file into memory.
-         * \param
+         *  Load a binary file into memory.
+         *  \param
          *      filename - The name of the file to read.
          *  \param
          *      buffer - The buffer to write to.
          *  \param
          *      size - the number of bytes in the file.
-         * \return
+         *  \return
          *      False if the file don't exist, the file can't be opened for
          *      reading or if the size of the file is different from the size
          *      parameter.
-         * \todo write the function.
+         *  \todo write the function.
          */
         static bool load(const char *filename, char*& buffer, int size);
 
         /**
-         * Save data to a file.
-         * \param
+         *  Save data to a file.
+         *  \param
          *      filename - The file to write to.
          *  \param
          *      buffer - The buffer to read from.
@@ -81,8 +81,8 @@ namespace Pandora
         static bool save(const char *filename, const char *buffer, int size);
 
         /**
-         * Append data to a file.
-         * \param
+         *  Append data to a file.
+         *  \param
          *      filename - The file to append to.
          *  \param
          *      buffer - The buffer to read from.
@@ -97,9 +97,9 @@ namespace Pandora
                 int size);
 
         /**
-         * Allocates a 2D array. This uses only two allocation, regardless of
-         * the size.
-         * \param
+         *  Allocates a 2D array. This uses only two allocation, regardless of
+         *  the size.
+         *  \param
          *      cols - The number of columns to allocate.
          *  \param
          *      rows - The number of rows to allocate.
@@ -119,11 +119,11 @@ namespace Pandora
         }
 
         /**
-         * Frees up the memory of a 2D array. Have to have used allocate2D to
-         * free with this function. Uses only two deallocation calls.
-         * \param
+         *  Frees up the memory of a 2D array. Have to have used allocate2D to
+         *  free with this function. Uses only two deallocation calls.
+         *  \param
          *      array - The array to deallocate.
-         * \note
+         *  \note
          *      The behaviour is undefined if you use an array that is not 
          *      allocate with allocate2D.
          */
@@ -135,9 +135,9 @@ namespace Pandora
         }
 
         /**
-         * Allocates a 3D array. This uses only three allocations, regardless
-         * of the size.
-         * \param
+         *  Allocates a 3D array. This uses only three allocations, regardless
+         *  of the size.
+         *  \param
          *      cols - The number of columns to allocate.
          *  \param
          *      rows - The number of rows to allocate.
@@ -164,11 +164,11 @@ namespace Pandora
         }
 
         /**
-         * Frees up memory allocated by allocate3D. Uses only three 
-         * deallocation calls.
-         * \param
+         *  Frees up memory allocated by allocate3D. Uses only three 
+         *  deallocation calls.
+         *  \param
          *      array - The array to deallocate.
-         * \note
+         *  \note
          *      The behaviour is undefined if you use an array that is not
          *      allocated with allocate3D.
          */

@@ -6,14 +6,14 @@ Purpose : Implementation of the List class used in Pandora3D
 
 Creation Date : 2010-01-25
 
-Last Modified : ti. 26. jan. 2010 kl. 11.24 +0100
+Last Modified : fr. 29. jan. 2010 kl. 16.55 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------
 */
 
 //-----------------------------------------------------------------------------
-// Makes the List itself
+//  Makes the List itself
 //-----------------------------------------------------------------------------
 template<class T>
 List<T>::List(const T& data)
@@ -31,7 +31,7 @@ List<T>::List(const T& data)
 }
 
 //-----------------------------------------------------------------------------
-// Delete the List
+//  Delete the List
 //-----------------------------------------------------------------------------
 template<class T>
 List<T>::~List()
@@ -45,7 +45,7 @@ List<T>::~List()
 }
 
 //-----------------------------------------------------------------------------
-// Insert an element at the start of the List. O(1)
+//  Insert an element at the start of the List. O(1)
 //-----------------------------------------------------------------------------
 template<class T>
 void List<T>::insert(const T& data)
@@ -58,7 +58,7 @@ void List<T>::insert(const T& data)
 }
 
 //-----------------------------------------------------------------------------
-// Remove an element from the List. O(n)
+//  Remove an element from the List. O(n)
 //-----------------------------------------------------------------------------
 template<class T>
 bool List<T>::remove(const T& data)
@@ -102,7 +102,7 @@ bool List<T>::remove(const T& data)
 }
 
 //-----------------------------------------------------------------------------
-// See if an element exists in the List. O(n)
+//  See if an element exists in the List. O(n)
 //-----------------------------------------------------------------------------
 template<class T>
 bool List<T>::exists(const T& data)
@@ -120,7 +120,7 @@ bool List<T>::exists(const T& data)
 }
 
 //-----------------------------------------------------------------------------
-// Remove all elements from the List.
+//  Remove all elements from the List.
 //-----------------------------------------------------------------------------
 template<class T>
 void List<T>::removeAll()
@@ -137,7 +137,7 @@ void List<T>::removeAll()
 }
 
 //-----------------------------------------------------------------------------
-// Get the length of the list.
+//  Get the length of the list.
 //-----------------------------------------------------------------------------
 template<class T>
 unsigned int List<T>::length()

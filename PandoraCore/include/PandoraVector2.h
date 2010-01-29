@@ -28,31 +28,31 @@ namespace Pandora
     namespace Math
     {
         /**
-         * A mathematical 2D vector class.
+         *  A mathematical 2D vector class.
          */
         template<class Real>
-        class Vec2
+        class Vector2
         {
             public:
                 /**
-                 * Default constructor. Sets the elements.
-                 * \param
+                 *  Default constructor. Sets the elements.
+                 *  \param
                  *      x - Element one. Defaults to one.
                  *  \param
                  *      y - Element two. Defaults to zero.
                  */
-                Vec2(const Real& x = 1.0, const Real& y = 0.0);
+                Vector2(const Real& x = 1.0, const Real& y = 0.0);
 
                 /**
-                 * Copy constructor.
-                 * \param
+                 *  Copy constructor.
+                 *  \param
                  *      vec - The vector to copy.
                  */
-                Vec2(Vec2& vec);
+                Vector2(Vector2& vec);
 
                 /**
-                 * Copy constructor for arrays.
-                 * \param
+                 *  Copy constructor for arrays.
+                 *  \param
                  *      vec - The array to copy.
                  *  \note
                  *      The array must be of size at least two. Behaviour if
@@ -60,23 +60,25 @@ namespace Pandora
                  *      If size is larger then two, only the two first elements
                  *      will be used.
                  */
-                Vec2(Real *vec);
+                Vector2(Real *vec);
 
-                /** Destructor */
-                ~Vec2();
+                /** 
+                 *  Destructor 
+                 */
+                ~Vector2();
 
                 /**
-                 * Copy a vector to this vector.
-                 * \param
+                 *  Copy a vector to this vector.
+                 *  \param
                  *      vec - The vector to copy.
                  */
-                void operator=(Vec2& vec);
+                void operator=(Vector2& vec);
 
                 /**
-                 * Copy an array to this vector.
-                 * \param
+                 *  Copy an array to this vector.
+                 *  \param
                  *      vec - The array to copy.
-                 * \note
+                 *  \note
                  *      The array must be of size at least two. Behaviour if
                  *      size is less then two is dependent of the compiler.
                  *      If size is larger then two, only the two first elements
@@ -118,32 +120,32 @@ namespace Pandora
                 operator const Real* () const;
 
                 /**
-                 * Adds two vectors.
-                 * \param
+                 *  Adds two vectors.
+                 *  \param
                  *      vec - The vector to add to this vector.
                  *  \return
                  *      This vector added with vec.
                  */
-                Vec2 operator+(const Vec2& vec) const;
+                Vector2 operator+(const Vector2& vec) const;
 
                 /**
-                 * Subtract two vectors.
-                 * \param
+                 *  Subtract two vectors.
+                 *  \param
                  *      vec - The vector to subtract from this vector.
                  *  \return
                  *      this vector subtracted with vec.
                  */
-                Vec2 operator-(const Vec2& vec) const;
+                Vector2 operator-(const Vector2& vec) const;
                 
                 /**
-                 * Multiply this vector with a scalar.
-                 * \param
+                 *  Multiply this vector with a scalar.
+                 *  \param
                  *      scalar - The scalar to multiply with.
                  *  \return
                  *      A vector where each of it's elements is this vectors
                  *      elements multiplied with the scalar.
                  */
-                Vec2 operator*(const Real& scalar) const;
+                Vector2 operator*(const Real& scalar) const;
 
                 /**
                  *  Multiply each element from this vector with the 
@@ -155,11 +157,11 @@ namespace Pandora
                  *      A scalar being the vector-to-vector multiplication of
                  *      this vector and vec.
                  */
-                Real operator*(const Vec2& vec) const;
+                Real operator*(const Vector2& vec) const;
 
                 /**
-                 * Divide this vector with a scalar.
-                 * \param
+                 *  Divide this vector with a scalar.
+                 *  \param
                  *      scalar - The scalar to divide with.
                  *  \return
                  *      A vector where each of it's elements is this vectors
@@ -167,21 +169,21 @@ namespace Pandora
                  *  \note
                  *      The scalar can not be zero.
                  */
-                Vec2 operator/(const Real& scalar) const;
+                Vector2 operator/(const Real& scalar) const;
 
                  /**
                  *  Add a vector to this vector.
                  *  \param
                  *      vec - The vector to add to this vector.
                  */
-                void operator+=(const Vec2& vec);
+                void operator+=(const Vector2& vec);
 
                 /**
                  *  Subtract a vector from this vector.
                  *  \param
                  *      vec - The vector to subtract with.
                  */
-                void operator-=(const Vec2& vec);
+                void operator-=(const Vector2& vec);
 
                 /**
                  *  Multiply this vector with a scalar.
@@ -191,8 +193,8 @@ namespace Pandora
                 void operator*=(const Real& scalar);
 
                 /**
-                 * Divide this vector with a scalar.
-                 * \param
+                 *  Divide this vector with a scalar.
+                 *  \param
                  *      scalar - The scalar to divide with.
                  */
                 void operator/=(const Real& scalar);
@@ -204,16 +206,16 @@ namespace Pandora
                  *  \return
                  *      True if all the components are equal. False otherwise.
                  */
-                bool operator==(const Vec2& vec) const;
+                bool operator==(const Vector2& vec) const;
 
                 /**
-                 * Checks if this vector is different from another.
-                 * \param
+                 *  Checks if this vector is different from another.
+                 *  \param
                  *      vec - The vector to compare to.
-                 * \return
+                 *  \return
                  *      False if all the components are equal. False otherwise.
                  */
-                bool operator!=(const Vec2& vec) const;
+                bool operator!=(const Vector2& vec) const;
 
                 /**
                  *  Checks if this vector is larger then another.
@@ -223,18 +225,18 @@ namespace Pandora
                  *      True if all the components of this vector is larger
                  *      then the corresponding components of vec.
                  */
-                bool operator>(const Vec2& vec) const;
+                bool operator>(const Vector2& vec) const;
 
                 /**
                  *  Checks if this vector is larger then or equal to another 
                  *  vector.
                  *  \param
                  *      vec - The vector to compare with.
-                 * \return
+                 *  \return
                  *      True if all the components of this vector is larger 
                  *      then or equal to the corresponding component of vec.
                  */
-                bool operator>=(const Vec2& vec) const;
+                bool operator>=(const Vector2& vec) const;
 
                 /**
                  *  Checks if this vector is smaller then another.
@@ -244,7 +246,7 @@ namespace Pandora
                  *      True if all the components of this vector is smaller
                  *      then the corresponding component of vec.
                  */
-                bool operator<(const Vec2& vec) const;
+                bool operator<(const Vector2& vec) const;
 
                 /**
                  *  Checks if this vector is smaller then or equal to another.
@@ -254,14 +256,14 @@ namespace Pandora
                  *      True if all the components of this vector is smaller
                  *      then or equal to the corresponding component of vec.
                  */
-                bool operator<=(const Vec2& vec) const;
+                bool operator<=(const Vector2& vec) const;
 
                 /**
-                 * Negate the vector.
-                 * \return
+                 *  Negate the vector.
+                 *  \return
                  *      The vector negated.
                  */
-                Vec2 operator-() const;
+                Vector2 operator-() const;
 
 
                 /**
@@ -271,7 +273,7 @@ namespace Pandora
                  *  \return
                  *      The two vectors dot multiplied.
                  */
-                Vec2 dotprod(const Vec2& vec) const;
+                Vector2 dotprod(const Vector2& vec) const;
 
                 /**
                  * Find the length of the vector.
@@ -281,8 +283,8 @@ namespace Pandora
                 Real length() const;
 
                 /**
-                 * Find the squared length of the vector.
-                 * \return
+                 *  Find the squared length of the vector.
+                 *  \return
                  *      The squared length of the vector.
                  */
                 Real lengthSquared() const;

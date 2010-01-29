@@ -6,14 +6,14 @@ Purpose : Implementation of the Set class used in Pandora3D
 
 Creation Date : 2010-01-26
 
-Last Modified : ti. 26. jan. 2010 kl. 12.36 +0100
+Last Modified : fr. 29. jan. 2010 kl. 16.57 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------
 */
 
 //-----------------------------------------------------------------------------
-// Constructor
+//  Constructor
 //-----------------------------------------------------------------------------
 template<class T>
 Set<T>::Set(const unsigned int size, const unsigned int increment)
@@ -25,7 +25,7 @@ Set<T>::Set(const unsigned int size, const unsigned int increment)
 }
 
 //-----------------------------------------------------------------------------
-// Destructor
+//  Destructor
 //-----------------------------------------------------------------------------
 template<class T>
 Set<T>::~Set()
@@ -34,8 +34,8 @@ Set<T>::~Set()
 }
 
 //-----------------------------------------------------------------------------
-// Appends an element to the first free place in the set. If no free spots,
-// we have to resize the array.
+//  Appends an element to the first free place in the set. If no free spots,
+//  we have to resize the array.
 //-----------------------------------------------------------------------------
 template<class T>
 bool Set<T>::insert(const T& in)
@@ -70,7 +70,7 @@ bool Set<T>::insert(const T& in)
 }
 
 //-----------------------------------------------------------------------------
-// Search for an element in the set.
+//  Search for an element in the set.
 //-----------------------------------------------------------------------------
 template<class T>
 bool Set<T>::exists(const T& search) const
@@ -89,7 +89,7 @@ bool Set<T>::exists(const T& search) const
 }
 
 //-----------------------------------------------------------------------------
-// Get the number of elements in the set.
+//  Get the number of elements in the set.
 //-----------------------------------------------------------------------------
 template<class T>
 unsigned int Set<T>::getElements() const
@@ -98,7 +98,7 @@ unsigned int Set<T>::getElements() const
 }
 
 //-----------------------------------------------------------------------------
-// Get the number of places in the set
+//  Get the number of places in the set
 //-----------------------------------------------------------------------------
 template<class T>
 unsigned int Set<T>::getSize() const
@@ -107,7 +107,7 @@ unsigned int Set<T>::getSize() const
 }
 
 //-----------------------------------------------------------------------------
-// Get the number of elements to increment the set by.
+//  Get the number of elements to increment the set by.
 //-----------------------------------------------------------------------------
 template<class T>
 unsigned int Set<T>::getIncrement() const
@@ -116,7 +116,7 @@ unsigned int Set<T>::getIncrement() const
 }
 
 //-----------------------------------------------------------------------------
-// Get the array itself
+//  Get the array itself
 //-----------------------------------------------------------------------------
 template<class T>
 T* Set<T>::getPointer()
@@ -125,8 +125,8 @@ T* Set<T>::getPointer()
 }
 
 //-----------------------------------------------------------------------------
-// Remove an element from the set. Returns true if the element is removed,
-// returns false otherwise
+//  Remove an element from the set. Returns true if the element is removed,
+//  returns false otherwise
 //-----------------------------------------------------------------------------
 template<class T>
 bool Set<T>::remove(const T& elem)
@@ -152,7 +152,7 @@ bool Set<T>::remove(const T& elem)
 }
 
 //-----------------------------------------------------------------------------
-// Removes all the data from the set
+//  Removes all the data from the set
 //-----------------------------------------------------------------------------
 template<class T>
 void Set<T>::removeAll()

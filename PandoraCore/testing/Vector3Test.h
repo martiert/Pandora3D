@@ -14,13 +14,17 @@ class Vector3Test : public CppUnit::TestCase
         Vector3Test() : TestCase("Vector3Test") {}
         void init();
         void testConstructor();
+        void testAssignment();
+        void testEquality();
+        void testArithmetic();
+        void testGeometry();
 
         static CppUnit::Test *suite();
         void setUp();
         void tearDown();
     private:
-        Pandora::Math::Vec3<float> *m_1_1_1;
-        Pandora::Math::Vec3<float> *m_2_4_1;
-        Pandora::Math::Vec3<float> *m_1_0_0;
+        Pandora::Math::Vector3<float> m_1_1_1;
+        Pandora::Math::Vector3<float> m_2_4_1;
+        Pandora::Math::Vector3<float> m_1_0_0;
 };
 #endif
