@@ -6,7 +6,7 @@ Purpose : Implementation of the Vector class used in Pandora3D
 
 Creation Date : 2010-01-24
 
-Last Modified : on. 27. jan. 2010 kl. 11.36 +0100
+Last Modified : lø. 30. jan. 2010 kl. 01.01 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------
@@ -57,7 +57,7 @@ const T* Vector<T>::c_ptr() const
 template<class T>
 T& Vector<T>::operator[](const ptrdiff_t i)
 {
-    assert(i < m_size && "Index out of bounds");
+    assert(i < (ptrdiff_t) m_size && "Index out of bounds");
 
     return m_data[i];
 }
