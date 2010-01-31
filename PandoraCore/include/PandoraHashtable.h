@@ -45,8 +45,6 @@ namespace Pandora
          *      function.
          *  \todo 
          *      Make an iterator
-         *  \todo
-         *      Make the hashFunction function.
          */
         template<class Key, class Value>
         class HashTable
