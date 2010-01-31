@@ -110,7 +110,7 @@ namespace Pandora
                  *  \return
                  *      The vector as a c-pointer.
                  */
-                operator Real *();
+                operator Real* ();
 
                 /**
                  *  Get an array of values of the array.
