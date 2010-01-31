@@ -6,7 +6,7 @@ Purpose : The implementation of the 3D vector class.
 
 Creation Date : 2010-01-28
 
-Last Modified : fr. 29. jan. 2010 kl. 17.00 +0100
+Last Modified : sø. 31. jan. 2010 kl. 11.17 +0100
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -319,4 +319,13 @@ Vector3<Real> Vector3<Real>::cross(const Vector3<Real>& vec) const
     return Vector3<Real>(y*vec.z - z*vec.y,
             vec.x*z - x*vec.z,
             x*vec.y - y*vec.x);
+}
+
+//-----------------------------------------------------------------------------
+//  Allows for scalar*vec multiplication.
+//-----------------------------------------------------------------------------
+template<class Real>
+Vector3<Real> operator*(const Real& scalar, const Vector3<Real>& vec)
+{
+    return vec * scalar;
 }

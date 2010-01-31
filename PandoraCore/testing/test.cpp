@@ -6,7 +6,7 @@ Purpose : Running all the test from Pandora3D.
 
 Creation Date : 2010-01-25
 
-Last Modified : fr. 29. jan. 2010 kl. 16.15 +0100
+Last Modified : sø. 31. jan. 2010 kl. 12.04 +0100
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------

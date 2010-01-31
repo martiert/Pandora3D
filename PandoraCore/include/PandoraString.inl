@@ -6,7 +6,7 @@ Purpose : Implementation of the String class used in Pandora3D
 
 Creation Date : 2010-01-24
 
-Last Modified : fr. 29. jan. 2010 kl. 16.58 +0100
+Last Modified : sø. 31. jan. 2010 kl. 11.57 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------
@@ -17,9 +17,17 @@ Created By : Martin Ertsås
 //-----------------------------------------------------------------------------
 String::String(const char *text)
 {
-    m_length = strlen(text);
+    m_length = 0;
+    while(text[m_length] != '\0') {
+        m_length++;
+    }
+
     m_string = new char[m_length + 1];
-    strcpy(m_string, text);
+
+    for(int i = 0; i < m_length; i++) {
+        m_string[i] = text[i];
+    }
+    m_string[m_length] = '\0';
 }
 
 //-----------------------------------------------------------------------------
@@ -29,7 +37,11 @@ String::String(unsigned int length, const char *text)
 {
     m_length = length;
     m_string = new char[m_length + 1];
-    strcpy(m_string, text);
+
+    for(int i = 0; i < m_length; i++) {
+        m_string[i] = text[i];
+    }
+    m_string[m_length] = '\0';
 }
 
 //-----------------------------------------------------------------------------
@@ -39,7 +51,11 @@ String::String(const String& text)
 {
     m_length = text.m_length;
     m_string = new char[m_length + 1];
-    strcpy(m_string, text.m_string);
+
+    for(int i = 0; i < m_length; i++) {
+        m_string[i] = text.m_string[i];
+    }
+    m_string[m_length] = '\0';
 }
 
 //-----------------------------------------------------------------------------
@@ -53,7 +69,7 @@ String::~String()
 //-----------------------------------------------------------------------------
 //  Get length of string.
 //-----------------------------------------------------------------------------
-int String::getLength() const
+int String::length() const
 {
     return m_length;
 }

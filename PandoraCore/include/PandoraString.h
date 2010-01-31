@@ -17,11 +17,10 @@ http://www.gnu.org/copyleft/lesser.txt.
 -------------------------------------------------------------------------------
 */
 
-#ifndef STRING_H
-#define STRING_H
+#ifndef PANDORASTRING_H
+#define PANDORASTRING_H
 
 #include <stdlib.h>
-#include <string.h>
 
 namespace Pandora
 {
@@ -37,6 +36,9 @@ namespace Pandora
                  *  Default Constructor.
                  *  \param
                  *      text - The characters to form a string.
+                 *  \note
+                 *      Only handles zero terminated strings. Will copy the
+                 *      whole string from start untill it finds a \0 character.
                  */
                 String(const char *text);
                 
@@ -66,7 +68,7 @@ namespace Pandora
                  *  \return
                  *      The length of the string.
                  */
-                int getLength() const;
+                int length() const;
 
                 /** 
                  *  Get a pointer to the string.
@@ -74,13 +76,6 @@ namespace Pandora
                  *      A pointer to the char array.
                  */
                 operator const char* () const;
-
-                /** 
-                 *  Assignment operator.
-                 *  \param
-                 *      text - The string to copy.
-                 */
-                void operator=(const char* text);
 
                 /** 
                  *  Assignment operator.
@@ -117,9 +112,6 @@ namespace Pandora
                 int m_length;
                 char *m_string;
         };
-
-#include "PandoraString.inl"
-
    }
 }
 #endif
