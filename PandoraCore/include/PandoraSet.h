@@ -113,7 +113,7 @@ namespace Pandora
                  *  Remove all the elements in the Set 
                  */
                 void removeAll();
-            private:
+            protected:
                 T *m_data;
                 unsigned int m_elements; //The number of elements in the set
                 unsigned int m_size; //The size of the array

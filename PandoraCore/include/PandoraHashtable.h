@@ -118,7 +118,7 @@ namespace Pandora
                  *      without collisions, since collisions will be ignored.
                  */
                 int (*userHashFunction)(const Key& key);
-            private:
+            protected:
                 unsigned int m_size;
                 unsigned int m_elements;
                 Node<Key, Value> *m_values;

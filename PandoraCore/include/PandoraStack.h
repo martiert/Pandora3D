@@ -93,7 +93,7 @@ namespace Pandora
                  *      false if the stack is empty. True otherwise.
                  */
                 bool getTop(T& item);
-            private:
+            protected:
                 T* m_stack;
                 int m_size, m_stackAt;
         };

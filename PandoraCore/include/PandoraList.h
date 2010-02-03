@@ -89,7 +89,7 @@ namespace Pandora
                  *  Get the length of the list
                  */
                 unsigned int length();
-            private:
+            protected:
                 Node<T> *m_root;
                 unsigned int m_size;
         };

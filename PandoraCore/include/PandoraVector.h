@@ -156,7 +156,7 @@ namespace Pandora
                  *          by.
                  */
                 void setIncrement(const unsigned int inc);
-            private:
+            protected:
                 T *m_data;
                 unsigned int m_elements;
                 unsigned int m_size;
