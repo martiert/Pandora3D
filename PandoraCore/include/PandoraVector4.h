@@ -35,6 +35,8 @@ namespace Pandora
         class Vector4
         {
             public:
+                Real x, y, z, w;
+            public:
                 /**
                  *  Default constructor. Takes four arguments, if no arguments
                  *  are given we make the identity vector.
@@ -128,6 +130,13 @@ namespace Pandora
                  *      The vector as a constant array.
                  */
                 operator const Real *() const;
+
+                /**
+                 *  Negate a vector.
+                 *  \return
+                 *      The vector negated.
+                 */
+                Vector4 operator-() const;
 
                 /**
                  *  Add two vectors.
@@ -267,6 +276,32 @@ namespace Pandora
                  *      False otherwise.
                  */
                 bool operator>=(const Vector4& vec) const;
+
+                /**
+                 *  Get the length of the vector: Sqrt(x*x+y*y+z*z+w*w).
+                 *  \return
+                 *      The length of the vector.
+                 */
+                Real length() const;
+
+                /**
+                 *  Get the squared length of the vector.
+                 *  \return 
+                 *      The squared length of the vector.
+                 */
+                Real lengthSquared() const;
+
+                /**
+                 *  Normalize the vector. No error checking is done.
+                 */
+                void normalize();
+
+                /**
+                 *  Normalize the vector if the length is different from zero.
+                 *  \return
+                 *      true if the vector is normalized. False otherwise.
+                 */
+                bool normalizeChecked();
         };
 
 #include "PandoraVector4.inl"

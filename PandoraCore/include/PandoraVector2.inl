@@ -6,7 +6,7 @@ Purpose : Implementation of the Vector2 class used in Pandora3D
 
 Creation Date : 2010-01-26
 
-Last Modified : sø. 31. jan. 2010 kl. 11.18 +0100
+Last Modified : to. 04. feb. 2010 kl. 12.57 +0100
 
 Created By : Martin Ertsås
 -------------------------------------------------------------------------------
@@ -165,7 +165,8 @@ template<class Real>
 Vector2<Real> Vector2<Real>::operator/(const Real& scalar) const
 {
     assert( scalar != (Real) 0.0 );
-    return Vector2<Real>(x/scalar, y/scalar);
+    Real s = ((Real) 1.0)/scalar;
+    return (*this) * s;
 }
 
 //-----------------------------------------------------------------------------
@@ -205,8 +206,8 @@ template<class Real>
 void Vector2<Real>::operator/=(const Real& scalar)
 {
     assert( scalar != (Real) 0.0 );
-    x /= scalar;
-    y /= scalar;
+    Real s = ((Real) 1.0)/scalar;
+    (*this) *= s;
 }
 
 //-----------------------------------------------------------------------------
@@ -288,8 +289,7 @@ Vector2<Real> Vector2<Real>::dotprod(const Vector2<Real>& vec) const
 template<class Real>
 Real Vector2<Real>::length() const
 {
-    Real length = x*x + y*y;
-    return Math<Real>::Sqrt(length);
+    return Math<Real>::Sqrt(x*x + y*y);
 }
 
 //-----------------------------------------------------------------------------
