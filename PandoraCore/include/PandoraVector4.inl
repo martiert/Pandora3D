@@ -6,7 +6,7 @@ Purpose : Implementation of the Vector4 class.
 
 Creation Date : 2010-01-31
 
-Last Modified : to. 04. feb. 2010 kl. 13.01 +0100
+Last Modified : to. 04. feb. 2010 kl. 14.31 +0100
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -16,7 +16,7 @@ Created By :  Martin Ertsås
 //  Default constructor.
 //-----------------------------------------------------------------------------
 template<class Real>
-Vector4<Real>::Vector4(Real& x, Real& y, Real& z, Real& w)
+Vector4<Real>::Vector4(Real x, Real y, Real z, Real w)
 {
     this->x = x;
     this->y = y;
@@ -261,7 +261,7 @@ bool Vector4<Real>::operator<=(const Vector4<Real>& vec) const
 //-----------------------------------------------------------------------------
 //  Check if this vector is larger then another.
 //-----------------------------------------------------------------------------
-template<clss Real>
+template<class Real>
 bool Vector4<Real>::operator>(const Vector4<Real>& vec) const
 {
     return (x > vec.x && y > vec.y && z > vec.z && w > vec.w);
@@ -282,7 +282,7 @@ bool Vector4<Real>::operator>=(const Vector4<Real>& vec) const
 template<class Real>
 Real Vector4<Real>::length() const
 {
-    return Math<Sqrt>(x*x + y*y + z*z + w*w);
+    return Math<Real>::Sqrt(x*x + y*y + z*z + w*w);
 }
 
 //-----------------------------------------------------------------------------

@@ -22,7 +22,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 
 #include "PandoraMath.h"
 #include <assert.h>
-#include <cstddef.h>
+#include <stddef.h>
 
 namespace Pandora
 {
@@ -49,8 +49,8 @@ namespace Pandora
                  *  \param
                  *      w - The value of the fourth parameter.
                  */
-                Vector4(Real& x = (Real) 1.0, Real& y = (Real) 0.0, 
-                        Real& z = (Real) 0.0, Real& w = (Real) 0.0);
+                Vector4(Real x = (Real) 1.0, Real y = (Real) 0.0, 
+                        Real z = (Real) 0.0, Real w = (Real) 0.0);
 
                 /**
                  *  Copy constructor. Copies a vector to this vector.

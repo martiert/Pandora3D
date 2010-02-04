@@ -21,7 +21,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 
 #include <stdlib.h>
 #include <assert.h>
-#include <cstddef>
+#include <stddef.h>
 
 namespace Pandora
 {

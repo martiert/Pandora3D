@@ -22,7 +22,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 
 #include "PandoraMath.h"
 #include <assert.h>
-#include <cstddef>
+#include <stddef.h>
 
 namespace Pandora
 {
