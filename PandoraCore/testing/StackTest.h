@@ -6,7 +6,7 @@
 #include <cppunit/TestCaller.h>
 #include <cppunit/ui/text/TestRunner.h>
 
-#include "../include/PandoraStack.h"
+#include "../System/PandoraStack.h"
 
 class StackTest : public CppUnit::TestCase
 {

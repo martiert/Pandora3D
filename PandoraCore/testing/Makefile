@@ -47,7 +47,7 @@
 APP      := test
 CXX      := g++
 LD       := g++
-SOURCES  := $(wildcard *.cpp ../src/*.cpp)
+SOURCES  := $(wildcard *.cpp ../System/*.cpp ../Math/*.cpp)
 OBJECTS  := $(patsubst %.cpp, %.o, $(SOURCES))
 
 CXXFLAGS := $(CXXFLAGS) -Wall -pedantic -g2 -DDEBUG

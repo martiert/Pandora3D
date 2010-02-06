@@ -6,13 +6,13 @@ Purpose : Definitions for the Math class in Pandora.
 
 Creation Date : 2010-01-30
 
-Last Modified : lø. 30. jan. 2010 kl. 00.59 +0100
+Last Modified : lø. 06. feb. 2010 kl. 19.18 +0100
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
 */
 
-#include "../include/PandoraMath.h"
+#include "PandoraMath.h"
 
 using Pandora::Math::Math;
 

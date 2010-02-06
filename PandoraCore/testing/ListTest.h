@@ -8,7 +8,7 @@
 #include <cppunit/TestCaller.h>
 #include <cppunit/ui/text/TestRunner.h>
 
-#include "../include/PandoraList.h"
+#include "../System/PandoraList.h"
 
 class ListTest : public CppUnit::TestCase
 {
