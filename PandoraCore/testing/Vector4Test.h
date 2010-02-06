@@ -16,6 +16,8 @@ class Vector4Test : public CppUnit::TestCase
         void testConstructor();
         void testAssignment();
         void testArithmetic();
+        void testComparison();
+        void testGeometry();
         
         static CppUnit::Test *suite();
         void setUp();
