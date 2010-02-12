@@ -63,12 +63,8 @@ namespace Pandora
                  *  Copy an array to this vector.
                  *  \param
                  *      vec - The array.
-                 *  \note
-                 *      If the length of vec is less then four, unexpected
-                 *      behaviour will occur. The behaviour will depend on the
-                 *      compiler used.
                  */
-                Vector4(Real *vec);
+                Vector4(Real vec[4]);
 
                 /**
                  *  Destructor.
@@ -86,12 +82,8 @@ namespace Pandora
                  *  Copy an array to this vector.
                  *  \param
                  *      vec - The array to copy from.
-                 *  \note
-                 *      If the length of vec is less then four, unexpected
-                 *      behaviour will occur. The behaviour will depend on the
-                 *      compiler used.
                  */
-                void operator=(const Real *vec);
+                void operator=(const Real vec[4]);
 
                 /**
                  *  Get element number i from the vector.

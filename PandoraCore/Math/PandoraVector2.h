@@ -54,13 +54,8 @@ namespace Pandora
                  *  Copy constructor for arrays.
                  *  \param
                  *      vec - The array to copy.
-                 *  \note
-                 *      The array must be of size at least two. Behaviour if
-                 *      size is less then two is dependent of the compiler.
-                 *      If size is larger then two, only the two first elements
-                 *      will be used.
                  */
-                Vector2(Real *vec);
+                Vector2(Real vec[2]);
 
                 /** 
                  *  Destructor 
@@ -78,13 +73,8 @@ namespace Pandora
                  *  Copy an array to this vector.
                  *  \param
                  *      vec - The array to copy.
-                 *  \note
-                 *      The array must be of size at least two. Behaviour if
-                 *      size is less then two is dependent of the compiler.
-                 *      If size is larger then two, only the two first elements
-                 *      will be used.
                  */
-                void operator=(Real *vec);
+                void operator=(Real vec[2]);
 
                 /**
                  *  Access operator. Get element number i from the vector.

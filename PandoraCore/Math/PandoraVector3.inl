@@ -6,7 +6,7 @@ Purpose : The implementation of the 3D vector class.
 
 Creation Date : 2010-01-28
 
-Last Modified : to. 04. feb. 2010 kl. 12.59 +0100
+Last Modified : fr. 12. feb. 2010 kl. 17.07 +0100
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -46,7 +46,7 @@ Vector3<Real>::Vector3(const Vector3<Real>& vec)
 //  Copy an array to this vector.
 //-----------------------------------------------------------------------------
 template<class Real>
-Vector3<Real>::Vector3(const Real *vec)
+Vector3<Real>::Vector3(const Real vec[3])
 {
     x = vec[0];
     y = vec[1];

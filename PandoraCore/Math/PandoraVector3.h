@@ -55,14 +55,11 @@ namespace Pandora
                 Vector3(const Vector3& vec);
 
                 /**
-                 *  Copy constructor. Copies an array to this vector. Only uses
-                 *  the first three elements from the array. If the size of the
-                 *  array is smaller then three, compiler defined behaviour 
-                 *  will occur. 
+                 *  Copy constructor. Copies an array to this vector.
                  *  \param
                  *      vec - The array.
                  */
-                Vector3(const Real *vec);
+                Vector3(const Real vec[3]);
 
                 /**
                  *  Destructor. Destroys the vector

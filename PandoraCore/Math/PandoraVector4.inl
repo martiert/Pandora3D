@@ -6,11 +6,19 @@ Purpose : Implementation of the Vector4 class.
 
 Creation Date : 2010-01-31
 
-Last Modified : to. 04. feb. 2010 kl. 14.31 +0100
+Last Modified : fr. 12. feb. 2010 kl. 17.08 +0100
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
 */
+
+//-----------------------------------------------------------------------------
+// Typedefs
+//-----------------------------------------------------------------------------
+typedef Vector4<float> Vec4f;
+typedef Vector4<double> Vec4d;
+typedef Vector4<int> Vec4i;
+typedef Vector4<unsigned int> Vec4u;
 
 //-----------------------------------------------------------------------------
 //  Default constructor.
@@ -40,7 +48,7 @@ Vector4<Real>::Vector4(Vector4<Real>& vec)
 //  Copy an array to this vector.
 //-----------------------------------------------------------------------------
 template<class Real>
-Vector4<Real>::Vector4(Real *vec)
+Vector4<Real>::Vector4(Real vec[4])
 {
     x = vec[0];
     y = vec[1];
@@ -71,7 +79,7 @@ void Vector4<Real>::operator=(const Vector4<Real>& vec)
 //  Assign an array to this vector.
 //-----------------------------------------------------------------------------
 template<class Real>
-void Vector4<Real>::operator=(const Real *vec)
+void Vector4<Real>::operator=(const Real vec[4])
 {
     x = vec[0];
     y = vec[1];
