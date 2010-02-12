@@ -18,6 +18,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 */
 
 #include "PandoraMath.h"
+#include <stddef.h>
 
 namespace Pandora
 {
@@ -48,7 +49,7 @@ namespace Pandora
                  *      identity matrix is constructed.
                  */
                 Matrix2(const Real& a = (Real) 1.0, const Real& b = (Real) 0.0, 
-                        const Real& c = (Real) 0.0, const Real& d = (Real) 1,0);
+                        const Real& c = (Real) 0.0, const Real& d = (Real) 1.0);
 
                 /**
                  *  Constructor. Copies an array to this vector.
@@ -63,6 +64,60 @@ namespace Pandora
                  *      mat - The matrix to copy from
                  */
                 Matrix2(Matrix2& mat);
+
+                /**
+                 *  Implicit conversion.
+                 *  \return
+                 *      The matrix as an array.
+                 */
+                operator Real *();
+
+                /**
+                 *  Implicit conversion.
+                 *  \return
+                 *      The matrix as a constant array.
+                 */
+                operator const Real *() const;
+
+                /**
+                 *  Get index number i.
+                 *  \param
+                 *      i - The index we are looking into.
+                 *  \return
+                 *      The element in index i.
+                 */
+                Real& operator[](const ptrdiff_t i);
+
+                /**
+                 *  Get value in index number i.
+                 *  \param
+                 *      i - The index we are looking into.
+                 *  \return
+                 *      Value of the element in index i.
+                 */
+                const Real operator[](const ptrdiff_t i) const;
+
+                /**
+                 *  Get element from (row,col).
+                 *  \param
+                 *      row - The row we are searching for.
+                 *  \param
+                 *      col - The column we are searching for.
+                 *  \return
+                 *      The element in (row,col)
+                 */
+                Real& operator()(const int row, const int col);
+
+                /**
+                 *  Get value in element (row,col).
+                 *  \param
+                 *      row - The row we are searching for.
+                 *  \param
+                 *      col - The column we are searching for.
+                 *  \return
+                 *      The value in element (row,col).
+                 */
+                const Real operator()(const int row, const int col) const;
             protected:
                 Real m_data[4];
         };
