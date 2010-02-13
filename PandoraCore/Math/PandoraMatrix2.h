@@ -18,6 +18,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 */
 
 #include "PandoraMath.h"
+#include "PandoraVector2.h"
 #include <stddef.h>
 
 namespace Pandora
@@ -118,6 +119,85 @@ namespace Pandora
                  *      The value in element (row,col).
                  */
                 const Real operator()(const int row, const int col) const;
+
+                /**
+                 *  Set a row in our matrix from a vector.
+                 *  \param
+                 *      row - The row to change.
+                 *  \param  
+                 *      vec - The vector to change it with.
+                 */
+                void setRow(const int row, const Vector2& vec);
+
+                /**
+                 *  Get a row from our matrix as a vector.
+                 *  \param
+                 *      row - The row we want.
+                 *  \return
+                 *      row number row as a vector.
+                 */
+                Vector2 getRow(const int row) const;
+
+                /**
+                 *  Set a column in our matrix from a vector.
+                 *  \param
+                 *      col - The column to change.
+                 *  \param
+                 *      vec - The vector to change it with.
+                 */
+                void setColumn(const int col, const Vector2& vec);
+
+                /**
+                 *  Get a column from out matrix.
+                 *  \param
+                 *      col - The colum we want.
+                 *  \return
+                 *      Columns number col as a vector.
+                 */
+                Vector2 getColumn(const int col) const; 
+
+                /**
+                 *  Assignment. Matrix to matrix.
+                 *  \param
+                 *      matrix - The matrix to assign it to.
+                 */
+                void operator=(const Matrix2& matrix);
+
+                /**
+                 *  Add two matrices.
+                 *  \param
+                 *      matrix - The matrix to add with.
+                 *  \return
+                 *      This matrix added with another.
+                 */
+                Matrix2 operator+(const Matrix2& matrix) const;
+
+                /**
+                 *  Subtract two matrices.
+                 *  \param
+                 *      matrix - The matrix to subtract with.
+                 *  \return
+                 *      This matrix subtracted by matrix.
+                 */
+                Matrix2 operator-(const Matrix2& matrix) const;
+
+                /**
+                 *  Matrix to matrix multiplication.
+                 *  \param
+                 *      matrix - The matrix to multiply this matrix with from the right.
+                 *  \return
+                 *      This matrix multiplied with matrix.
+                 */
+                Matrix2 operator*(const Matrix2& matrix) const;
+
+                /**
+                 *  Multiply a matrix with a scalar.
+                 *  \param
+                 *      scalar - The scalar to multiply with.
+                 *  \return
+                 *      This matrix multiplied with a scalar.
+                 */
+                Matrix2 operator*(const Real& scalar) const;
             protected:
                 Real m_data[4];
         };
