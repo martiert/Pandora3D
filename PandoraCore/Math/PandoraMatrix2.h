@@ -184,7 +184,8 @@ namespace Pandora
                 /**
                  *  Matrix to matrix multiplication.
                  *  \param
-                 *      matrix - The matrix to multiply this matrix with from the right.
+                 *      matrix - The matrix to multiply this matrix with from 
+                 *      the right.
                  *  \return
                  *      This matrix multiplied with matrix.
                  */
@@ -198,6 +199,66 @@ namespace Pandora
                  *      This matrix multiplied with a scalar.
                  */
                 Matrix2 operator*(const Real& scalar) const;
+
+                /**
+                 *  Divide a matrix with a scalar.
+                 *  \param
+                 *      scalar - The scalar to divide with.
+                 *  \return
+                 *      The matrix divided with a scalar.
+                 */
+                Matrix2 operator/(const Real& scalar) const;
+
+                /**
+                 *  Add a matrix to this matrix.
+                 *  \param
+                 *      matrix - The matrix to add with.
+                 */
+                void operator+=(const Matrix2& matrix);
+
+                /**
+                 *  Subtract a matrix from this matrix.
+                 *  \param
+                 *      matrix - The matrix to subtract with.
+                 */
+                void operator-=(const Matrix2& matrix);
+
+                /**
+                 *  Multiply this matrix with a scalar.
+                 *  \param
+                 *      scalar - The scalar to multiply with.
+                 */
+                void operator*=(const Real& scalar);
+
+                /**
+                 *  Divide this matrix with a scalar.
+                 *  \param
+                 *      scalar - The scalar to divide with.
+                 */
+                void operator/=(const Real& scalar);
+
+                /**
+                 *  Multiply a matrix with a vector.
+                 *  \param
+                 *      vec - The vector to multiply with.
+                 *  \return
+                 *      A matrix multiplied with a scalar.
+                 */
+                Vector2 operator*(const Vector2& vec) const;
+
+                /**
+                 *  Make a transpose of this matrix.
+                 *  \return
+                 *      This matrix transposed.
+                 */
+                Matrix2 transpose() const;
+
+                /**
+                 *  Find this matrix inverted.
+                 *  \return
+                 *      This matrix inverted.
+                 */
+                Matrix2 inv() const;
             protected:
                 Real m_data[4];
         };
