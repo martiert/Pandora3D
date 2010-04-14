@@ -1,20 +1,20 @@
 /*
--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 File Name : PandoraVector.inl
 
 Purpose : Implementation of the Vector class used in Pandora3D
 
 Creation Date : 2010-01-24
 
-Last Modified : lø. 30. jan. 2010 kl. 01.01 +0100
+Last Modified : on. 14. april 2010 kl. 19.19 +0200
 
 Created By : Martin Ertsås
--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 */
 
-//-----------------------------------------------------------------------------
-// Constructor
-//-----------------------------------------------------------------------------
+/********************************************************************************
+ * Constructor.                                                                 *
+ *******************************************************************************/
 template<class T>
 Vector<T>::Vector(const unsigned int size, const unsigned int inc)
 {
@@ -24,36 +24,36 @@ Vector<T>::Vector(const unsigned int size, const unsigned int inc)
     m_data = new T[m_size];
 }
 
-//-----------------------------------------------------------------------------
-// Destructor
-//-----------------------------------------------------------------------------
+/********************************************************************************
+ * Destructor.                                                                  *
+ *******************************************************************************/
 template<class T>
 Vector<T>::~Vector()
 {
     delete[] m_data;
 }
 
-//-----------------------------------------------------------------------------
-// Get a c-pointer
-//-----------------------------------------------------------------------------
+/********************************************************************************
+ * Get a c-pointer.                                                             *
+ *******************************************************************************/
 template<class T>
 T* Vector<T>::c_ptr()
 {
     return &m_data[0];
 }
 
-//-----------------------------------------------------------------------------
-// Get a constant c-pointer
-//-----------------------------------------------------------------------------
+/********************************************************************************
+ * Get a constant c-pointer.                                                    *
+ *******************************************************************************/
 template<class T>
 const T* Vector<T>::c_ptr() const
 {
     return m_data[0];
 }
 
-//-----------------------------------------------------------------------------
-// Access element number i
-//-----------------------------------------------------------------------------
+/********************************************************************************
+ * Access element number i.                                                     *
+ *******************************************************************************/
 template<class T>
 T& Vector<T>::operator[](const ptrdiff_t i)
 {
@@ -62,9 +62,9 @@ T& Vector<T>::operator[](const ptrdiff_t i)
     return m_data[i];
 }
 
-//-----------------------------------------------------------------------------
-// Access constant element number i.
-//-----------------------------------------------------------------------------
+/********************************************************************************
+ * Access constant element number i.                                            *
+ *******************************************************************************/
 template<class T>
 const T& Vector<T>::operator[](const ptrdiff_t i) const
 {
@@ -72,14 +72,14 @@ const T& Vector<T>::operator[](const ptrdiff_t i) const
     return m_data[i];
 }
 
-//-----------------------------------------------------------------------------
-// Set this element to the first free element in the vector.
-//
-// If we have free places, we add to the first free place we find. If we 
-// have a full array, we make a new array which is size + increment large. 
-// then we move all the data to the new vector, and add the new element to 
-// the end of the vector.
-//-----------------------------------------------------------------------------
+/********************************************************************************
+ * Set this element to the first free element in the vector.                    *
+ *                                                                              *
+ * If we have free places, we add to the first free place we find. If we have a *
+ * full array, we make a new array which is size + increment large. Then we     *
+ * move all the data to the new vector, and add the new element to the end of   *
+ * the vector.                                                                  *
+ *******************************************************************************/
 template<class T>
 void Vector<T>::append(const T& element)
 {
@@ -103,16 +103,16 @@ void Vector<T>::append(const T& element)
     }
 }
 
-//-----------------------------------------------------------------------------
-// Inserts the element into the given place. If the place is unused, or we
-// are accessing an element outside of the data, we increment the unmber of
-// elements we have.
-//
-// If we have to resize the array, we do that by first finding out how many
-// more elements we need, and then copying the data over to a new array.
-//
-// At the end, we set the given place to be the element we sent in.
-//-----------------------------------------------------------------------------
+/********************************************************************************
+ * Inserts the element into the given place. If the place is unused, or we are  *
+ * accessing an element outside of the data, we increment the unmber of elements*
+ * we have.                                                                     *
+ *                                                                              *
+ * If we have to resize the array, we do that by first finding out how many     *
+ * more elements we need, and then copying the data over to a new array.        *
+ *                                                                              *
+ * At the end, we set the given place to be the element we sent in.             *
+ *******************************************************************************/
 template<class T>
 void Vector<T>::insert(const unsigned int i, const T& element)
 {
@@ -136,9 +136,9 @@ void Vector<T>::insert(const unsigned int i, const T& element)
     m_data[i] = element;
 }
 
-//-----------------------------------------------------------------------------
-// Remove the element in the selected place, and return it.
-//-----------------------------------------------------------------------------
+/********************************************************************************
+ * Remove the element in the selected place, and return it.                     *
+ *******************************************************************************/
 template<class T>
 T& Vector<T>::remove(const unsigned int i)
 {
@@ -154,9 +154,9 @@ T& Vector<T>::remove(const unsigned int i)
     return tmp;
 }
 
-//-----------------------------------------------------------------------------
-// Remove all the data from this vector
-//-----------------------------------------------------------------------------
+/********************************************************************************
+ * Remove all the data from this vector.                                        *
+ *******************************************************************************/
 template<class T>
 void Vector<T>::removeAll()
 {
@@ -166,36 +166,36 @@ void Vector<T>::removeAll()
     m_elements = 0;
 }
 
-//-----------------------------------------------------------------------------
-// Return the number of elements in the vector.
-//-----------------------------------------------------------------------------
+/********************************************************************************
+ * Return the number of elements in the vector.                                 *
+ *******************************************************************************/
 template<class T>
 unsigned int Vector<T>::getElements() const
 {
     return m_elements;
 }
 
-//-----------------------------------------------------------------------------
-// Return the size of the vector.
-//-----------------------------------------------------------------------------
+/********************************************************************************
+ * Return the size of the vector.                                               *
+ *******************************************************************************/
 template<class T>
 unsigned int Vector<T>::getSize() const
 {
     return m_size;
 }
 
-//-----------------------------------------------------------------------------
-// Returns the number we are to increase the vector with.
-//-----------------------------------------------------------------------------
+/********************************************************************************
+ * Returns the number we are to increase the vector with.                       *
+ *******************************************************************************/
 template<class T>
 unsigned int Vector<T>::getIncrement() const
 {
     return m_increment;
 }
 
-//-----------------------------------------------------------------------------
-// Set new size of the vector.
-//-----------------------------------------------------------------------------
+/********************************************************************************
+ * Set new size of the vector.                                                  *
+ *******************************************************************************/
 template<class T>
 void Vector<T>::setSize(const unsigned int size)
 {
@@ -214,9 +214,9 @@ void Vector<T>::setSize(const unsigned int size)
         m_elements = size;
 }
 
-//-----------------------------------------------------------------------------
-// Set new number of element to increase by.
-//-----------------------------------------------------------------------------
+/********************************************************************************
+ * Set new number of element to increase by.                                    *
+ *******************************************************************************/
 template<class T>
 void Vector<T>::setIncrement(const unsigned int inc)
 {
