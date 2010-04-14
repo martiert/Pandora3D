@@ -1,0 +1,101 @@
+%------------------------------------------------------------------------------
+% File Name : test.tex
+%
+% Purpose : Define coding standards for Pandora3D.
+%
+% Creation Date : 2010-04-14
+%
+% Last Modified : on. 14. april 2010 kl. 14.52 +0200
+%
+% Created By :  Martin Ertsås
+%------------------------------------------------------------------------------
+\documentclass[a4paper,12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{enumerate}
+
+\title{Coding style for Pandora3D}
+\author{Martin Ertsås\\ martiert@ifi.uio.no}
+
+\begin{document}
+\maketitle
+
+\section{File endings}
+
+\begin{enumerate}[(i)]
+\item All header files should have the file ending .h.
+\item If the implementation of a header file is to be in the header
+file, this implementation should be in a .inl file which is included in
+the header file.
+\item All files which should be compiled, is to be in a .cpp file.
+\end{enumerate}
+
+\section{Header files}
+
+\begin{enumerate}[(i)]
+\item All header files have to define the name PANDORA<FILENAME> in
+capital letters.
+\item All header files have to use the Pandora namespace, possibly along
+with other namespaces that tells what kind of purpose it has. Like all
+math headers should use the Pandora::Math namespace.
+\item All header files have to be documented well using doxygen. All
+functions is to be documented, along with all classes and structs. See
+the section about doxygen style to see the documentation style used.
+\item All header files should start with the header PandoraHeader.txt
+from the Headers folder.
+\item All typedefs you wish to put in a header, should be written in a
+.inl file with the same name as the header file, and included before the
+end of the innermost namespace.
+\item Headers can \textbf{NOT} use the using keyword.
+\end{enumerate}
+
+\section{Inline files}
+
+\begin{enumerate}[(i)]
+\item All inline files should use the author.txt header from the Headers
+folder, which is to be updated when any changes are done to the file
+before commiting the changes.
+\item Inline files should be written without use of any Pandora
+namespaces.
+\item Inline files can \textbf{NOT} use the using keyword.
+\item All typedefs is to go at the top of the file, right under the
+header.
+\end{enumerate}
+
+\section{Cpp files}
+
+\begin{enumerate}[(i)]
+\item cpp files should use the author.txt header from the Headers
+folder, which is to be updated when any changes are done to the file
+before commiting the changes.
+\item All includes should be done at the top of the file.
+\item One should not use the using keyword for whole namespaces, but
+specify which functions/classes/structs to use. Using keywords should
+also go at the top of the file.
+\end{enumerate}
+
+\section{Documentation}
+
+\begin{enumerate}[(i)]
+\item All header files are documented using doxygen.
+\item The documentation comments starts with /** and ends with */.
+\item One uses \textit{\textbackslash param} for parameters to the function. One
+for each parameter. After the name of the parameter there should be a
+space, then a -, then another space before the description.
+\item One uses \textit{\textbackslash return} for return values from the
+function.
+\item One uses \textit{\textbackslash note} for notes about the function.
+\end{enumerate}
+
+\section{Git}
+
+\begin{enumerate}[(i)]
+\item All commits to the master branch should compile and run without
+problems.
+\item All commits should have a descriptive message containing changes
+done in this commit.
+\item Everything in the master branch should pass the tests made for
+Pandora3D.
+\end{enumerate}
+
+\end{document}

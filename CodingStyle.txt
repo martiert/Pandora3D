@@ -1,3 +1,0 @@
-All header files should have the file ending .h
-
-The .h files should be commented for doxygen, and should use the style /** */, as well as \param, \return etc.
