@@ -245,6 +245,13 @@ namespace Pandora
                  *      A matrix multiplied with a scalar.
                  */
                 Vector2 operator*(const Vector2& vec) const;
+    
+                /**
+                 *  Get the determinant of this matrix.
+                 *  \return
+                 *      A scalar which is the matrix' determinant.
+                 */
+                Real det() const;
 
                 /**
                  *  Make a transpose of this matrix.
@@ -258,7 +265,7 @@ namespace Pandora
                  *  \return
                  *      This matrix inverted.
                  */
-                Matrix2 inv() const;
+                Matrix2 inverse() const;
             protected:
                 Real m_data[4];
         };

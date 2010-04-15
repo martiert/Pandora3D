@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix class from Pandora3D
 
 Creation Date : 2010-04-14
 
-Last Modified : to. 15. april 2010 kl. 11.43 +0200
+Last Modified : to. 15. april 2010 kl. 15.07 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -163,4 +163,147 @@ Vector2<Real> Matrix2<Real>::getColumn(const int col) const
     assert(col < 2 && "Index out of bounds");
 
     return Vector2<Real>(m_data[col], m_data[2+col]);
+}
+
+/********************************************************************************
+ * Assignment operator.                                                         *
+ *******************************************************************************/
+template<class Real>
+void Matrix2<Real>::operator=(const Matrix2<Real>& matrix)
+{
+    m_data[0] = matrix[0];
+    m_data[1] = matrix[1];
+    m_data[2] = matrix[2];
+    m_data[3] = matrix[3];
+}
+
+/********************************************************************************
+ * Add two matrices.                                                            *
+ *******************************************************************************/
+template<class Real>
+Matrix2<Real> Matrix2<Real>::operator+(const Matrix2<Real>& matrix) const
+{
+    return Matrix2<Real>(m_data[0]+matrix[0], m_data[1]+matrix[1], 
+            m_data[2]+matrix[2], m_data[3]+matrix[3]);
+}
+
+/********************************************************************************
+ * Subtract two matrices.                                                       *
+ *******************************************************************************/
+template<class Real>
+Matrix2<Real> Matrix2<Real>::operator-(const Matrix2<Real>& matrix) const
+{
+    return Matrix2<Real>(m_data[0]-matrix[0], m_data[1]-matrix[1],
+            m_data[2]-matrix[2], m_data[3]-matrix[3]);
+}
+
+/********************************************************************************
+ * Multiply two matrices.                                                       *
+ *******************************************************************************/
+template<class Real>
+Matrix2<Real> Matrix2<Real>::operator*(const Matrix2<Real>& matrix) const
+{
+    return Matrix2<Real>(m_data[0]*matrix[0] + m_data[1]*matrix[2],
+            m_data[0]*matrix[1] + m_data[1]*matrix[3],
+            m_data[2]*matrix[0] + m_data[3]*matrix[2],
+            m_data[2]*matrix[1] + m_data[2]*matrix[3]);
+}
+
+/********************************************************************************
+ * Multiply a matrix with a scalar.                                             *
+ *******************************************************************************/
+template<class Real>
+Matrix2<Real> Matrix2<Real>::operator*(const Real& scalar) const
+{
+    return Matrix2<Real>(m_data[0]*scalar, m_data[1]*scalar,
+            m_data[2]*scalar, m_data[3]*scalar);
+}
+
+/********************************************************************************
+ * Divide a matrix with a scalar.                                               *
+ *******************************************************************************/
+template<class Real>
+Matrix2<Real> Matrix2<Real>::operator/(const Real& scalar) const
+{
+    assert(Real != 0 && "Division by zero");
+
+    Real scale = 1.0/scalar;
+    return Matrix2<Real>(m_data[0]*scale, m_data[1]*scale,
+            m_data[2]*scale, m_data[3]*scale);
+}
+
+/********************************************************************************
+ * Add a matrix to this matrix.                                                 *
+ *******************************************************************************/
+template<class Real>
+void Matrix2<Real>::operator+=(const Matrix2<Real>& matrix)
+{
+    *this = *this + matrix;
+}
+
+/********************************************************************************
+ * Subtract a matrix from this matrix.                                          *
+ *******************************************************************************/
+template<class Real>
+void Matrix2<Real>::operator-=(const Matrix2<Real>& matrix)
+{
+    *this = *this - matrix;
+}
+
+/********************************************************************************
+ * Multiply this matrix with a scalar.                                          *
+ *******************************************************************************/
+template<class Real>
+void Matrix2<Real>::operator*=(const Real& scalar)
+{
+    *this = *this * scalar;
+}
+
+/********************************************************************************
+ * Divide this matrix with a scalar.                                            *
+ *******************************************************************************/
+template<class Real>
+void Matrix2<Real>::operator/=(const Real& scalar)
+{
+    *this = *this / scalar;
+}
+
+/********************************************************************************
+ * Multiply this matrix with a vector.                                          *
+ *******************************************************************************/
+template<class Real>
+Vector2<Real> Matrix2<Real>::operator*(const Vector2<Real>& vec) const
+{
+    return Vector2<Real>(m_data[0]*vec[0] + m_data[1]*vec[1],
+            m_data[2]*vec[0] + m_data[3]*vec[1]);
+}
+
+/********************************************************************************
+ * Get the determinant of the matrix.                                           *
+ *******************************************************************************/
+template<class Real>
+Real Matrix2<Real>::det() const
+{
+    return m_data[0]*m_data[3] - m_data[1]*m_data[2];
+}
+
+/********************************************************************************
+ * Get the transposed matrix.                                                   *
+ *******************************************************************************/
+template<class Real>
+Matrix2<Real> Matrix2<Real>::transpose() const
+{
+    return Matrix2<Real>(m_data[0], m_data[2], m_data[1], m_data[3]);
+}
+
+/********************************************************************************
+ * Get the inverse matrix.                                                      *
+ *******************************************************************************/
+template<class Real>
+Matrix2<Real> Matrix2<Real>::inverse() const
+{
+    assert(det() != 0.0 && "Singular matrix");
+
+    Real scale = 1.0/det();
+    return (Matrix2<Real>(m_data[3], -m_data[1], -m_data[2], m_data[0]) * scale);
 }
