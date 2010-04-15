@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix class from Pandora3D
 
 Creation Date : 2010-04-14
 
-Last Modified : on. 14. april 2010 kl. 17.22 +0200
+Last Modified : to. 15. april 2010 kl. 11.43 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -111,3 +111,56 @@ Real& Matrix2<Real>::operator()(const int row, const int col)
 /********************************************************************************
  * Get constant refference to element (row,col) in the matrix.                  * 
  *******************************************************************************/ 
+template<class Real>
+const Real Matrix2<Real>::operator()(const int row, const int col) const
+{
+    assert(row < 2 && col  2 && "Index out of bounds");
+
+    return m_data[row*2 + col];
+}
+
+/********************************************************************************
+ * Set a row to the given vector.                                               *
+ *******************************************************************************/
+template<class Real>
+void Matrix2<Real>::setRow(const int row, const Vector2<Real>& vec)
+{
+    assert(row < 2 && "Index out of bounds");
+
+    m_data[row*2] = vec[0];
+    m_data[row*2+1] = vec[1];
+}
+
+/********************************************************************************
+ * Get the row asked for as a vector.                                           *
+ *******************************************************************************/
+template<class Real>
+Vector2<Real> Matrix2<Real>::getRow(const int row) const
+{
+    assert(row < 2 && "Index out of bounds");
+
+    return Vector2<Real>(m_data[row*2], m_data[row*2 + 1]);
+}
+
+/********************************************************************************
+ * Set given column to the given vector.                                        *
+ *******************************************************************************/
+template<class Real>
+void Matrix2<Real>::setColumn(const int col, const Vector2<Real>& vec)
+{
+    assert(col < 2 && "Index out of bounds");
+
+    m_data[col] = vec[0];
+    m_data[2+col] = vec[1];
+}
+
+/********************************************************************************
+ * Get column number col as a vector.                                           *
+ *******************************************************************************/
+template<class Real>
+Vector2<Real> Matrix2<Real>::getColumn(const int col) const
+{
+    assert(col < 2 && "Index out of bounds");
+
+    return Vector2<Real>(m_data[col], m_data[2+col]);
+}
