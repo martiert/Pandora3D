@@ -26,7 +26,7 @@ namespace Pandora
     namespace Math
     {
         /**
-         *  A 2x2 Matrix class. Keeps the data in rowvise order. Like:
+         *  A 2x2 Matrix class. Keeps the data in row vise order. Like:
          *
          *  |0 1|
          *  |2 3|
@@ -164,6 +164,13 @@ namespace Pandora
                 void operator=(const Matrix2& matrix);
 
                 /**
+                 *  Negate this matrix.
+                 *  \return
+                 *      This matrix negated.
+                 */
+                Matrix2 operator-() const;
+
+                /**
                  *  Add two matrices.
                  *  \param
                  *      matrix - The matrix to add with.
@@ -266,6 +273,69 @@ namespace Pandora
                  *      This matrix inverted.
                  */
                 Matrix2 inverse() const;
+
+                /**
+                 *  Check if this matrix is equal to another matrix. That is,
+                 *  all elements have to be equal.
+                 *  \param
+                 *      mat - The matrix to compare to.
+                 *  \return
+                 *      True if all elements are equal, false otherwise.
+                 */
+                bool operator==(const Matrix3& mat) const;
+
+                /**
+                 *  Check if two matrices differ.
+                 *  \param
+                 *      mat - The matrix to compare to.
+                 *  \return
+                 *      False if all elements are equal, true otherwise.
+                 */
+                bool operator!=(const Matrix3& mat) const;
+
+                /**
+                 *  Check if this matrix is larger then or equal to another 
+                 *  matrix. That is, all element have to be larger then or 
+                 *  equal.
+                 *  \param
+                 *      mat - The matrix to compare to.
+                 *  \return
+                 *      True if all elements are larger then or equal. False
+                 *      otherwise.
+                 */
+                bool operator>=(const Matrix3& mat) const;
+
+                /**
+                 *  Check if this matrix is larger then another matrix. That is
+                 *  all elements have to be larger.
+                 *  \param
+                 *      mat - The matrix to compare to.
+                 *  \return
+                 *      True if all elements are larger, false otherwise.
+                 */
+                bool operator>(const Matrix3& mat) const;
+
+                /**
+                 *  Check if this matrix is smaller then or equal to another
+                 *  matrix. That is, all elements have to be smaller then or
+                 *  equal.
+                 *  \param
+                 *      mat - The matrix to compare to.
+                 *  \return
+                 *      True if all elements are smaller then or equal. False
+                 *      otherwise.
+                 */
+                bool operator<=(const Matrix3& mat) const;
+
+                /**
+                 *  Check if this matrix is smaller then another matrix. That
+                 *  is, all elements have to be smaller.
+                 *  \param
+                 *      mat - The matrix to compare to.
+                 *  \return
+                 *      True if all elements are smaller, false otherwise.
+                 */
+                bool operator<(const Matrix3& mat) const;
             protected:
                 Real m_data[4];
         };
