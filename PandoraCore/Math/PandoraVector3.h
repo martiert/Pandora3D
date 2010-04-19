@@ -285,6 +285,14 @@ namespace Pandora
                  *      The two vectors crossed.
                  */
                 Vector3 cross(const Vector3& vec) const;
+
+#ifdef DEBUG
+#include<stdio.h>
+                /**
+                 *  Print out the vector. Only available in DEBUG mode.
+                 */
+                void print() const;
+#endif
             public:
                 Real x, y, z;
         };

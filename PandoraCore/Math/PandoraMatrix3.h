@@ -29,21 +29,43 @@ namespace Pandora
 {
     namespace Math 
     {
+        /**
+         *  The matrix class. The matrix is stored in the OpenGL way, that is
+         *  in row-wise order.
+         *
+         *  |0 1 2|
+         *  |3 4 5|
+         *  |6 7 8|
+         */
         template<class Real>
         class Matrix3
         {
             public:
                 /**
-                 *  Default constructor. Does nothing at all, so the initial
-                 *  matrix is random.
-                 *
-                 *  The matrix is stored in the OpenGL way, row vise order:
-                 *  
-                 *  |0 1 2|
-                 *  |3 4 5|
-                 *  |6 7 8|
+                 *  Default constructor. Makes the matrix. Takes 9 optional
+                 *  arguments. If none is given, it makes the identity matrix.
+                 *  \param
+                 *      a0 - The (0,0) element.
+                 *  \param
+                 *      a1 - The (0,1) element.
+                 *  \param
+                 *      a2 - The (0,2) element.
+                 *  \param
+                 *      a3 - The (1,0) element.
+                 *  \param
+                 *      a4 - The (1,1) element.
+                 *  \param
+                 *      a5 - The (1,2) element.
+                 *  \param
+                 *      a6 - The (2,0) element.
+                 *  \param
+                 *      a7 - The (2,1) element.
+                 *  \param
+                 *      a8 - The (2,2) element.
                  */
-                Matrix3();
+                Matrix3(Real a0 = 1.0, Real a1 = 0.0, Real a2 = 0.0,
+                        Real a3 = 0.0, Real a4 = 1.0, Real a5 = 0.0, 
+                        Real a6 = 0.0, Real a7 = 0.0, Real a8 = 1.0);
 
                 /**
                  *  Initialize the matrix with an array.
@@ -336,6 +358,14 @@ namespace Pandora
                  *      True if all elements are less, false otherwise.
                  */
                 bool operator<(const Matrix3& mat) const;
+
+#ifdef DEBUG
+#include<stdio.h>
+                /**
+                 *  Print out the matrix. Only available in DEBUG mode.
+                 */
+                void print() const;
+#endif
             private:
                 Real m_data[9];
         };

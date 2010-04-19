@@ -36,7 +36,7 @@ namespace Pandora
         {
             public:
                 /**
-                 *  Constructor. Takes four elements.
+                 *  Constructor. Takes four optional elements.
                  *  \param
                  *      a - Element in row one, column one.
                  *  \param
@@ -282,7 +282,7 @@ namespace Pandora
                  *  \return
                  *      True if all elements are equal, false otherwise.
                  */
-                bool operator==(const Matrix3& mat) const;
+                bool operator==(const Matrix2& mat) const;
 
                 /**
                  *  Check if two matrices differ.
@@ -291,7 +291,7 @@ namespace Pandora
                  *  \return
                  *      False if all elements are equal, true otherwise.
                  */
-                bool operator!=(const Matrix3& mat) const;
+                bool operator!=(const Matrix2& mat) const;
 
                 /**
                  *  Check if this matrix is larger then or equal to another 
@@ -303,7 +303,7 @@ namespace Pandora
                  *      True if all elements are larger then or equal. False
                  *      otherwise.
                  */
-                bool operator>=(const Matrix3& mat) const;
+                bool operator>=(const Matrix2& mat) const;
 
                 /**
                  *  Check if this matrix is larger then another matrix. That is
@@ -313,7 +313,7 @@ namespace Pandora
                  *  \return
                  *      True if all elements are larger, false otherwise.
                  */
-                bool operator>(const Matrix3& mat) const;
+                bool operator>(const Matrix2& mat) const;
 
                 /**
                  *  Check if this matrix is smaller then or equal to another
@@ -325,7 +325,7 @@ namespace Pandora
                  *      True if all elements are smaller then or equal. False
                  *      otherwise.
                  */
-                bool operator<=(const Matrix3& mat) const;
+                bool operator<=(const Matrix2& mat) const;
 
                 /**
                  *  Check if this matrix is smaller then another matrix. That
@@ -335,7 +335,18 @@ namespace Pandora
                  *  \return
                  *      True if all elements are smaller, false otherwise.
                  */
-                bool operator<(const Matrix3& mat) const;
+                bool operator<(const Matrix2& mat) const;
+
+#ifdef DEBUG
+#include<stdio.h>
+                /**
+                 *  Print put the matrix. Available only in DEBUG mode.
+                 */
+                void print() const;
+#endif
+
+                static const Matrix2 ZERO;
+                static const Matrix2 IDENTITY
             protected:
                 Real m_data[4];
         };

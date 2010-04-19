@@ -34,9 +34,7 @@ namespace Pandora
         template<class Real>
         class Vector4
         {
-            public:
-                Real x, y, z, w;
-            public:
+           public:
                 /**
                  *  Default constructor. Takes four arguments, if no arguments
                  *  are given we make the identity vector.
@@ -294,6 +292,16 @@ namespace Pandora
                  *      true if the vector is normalized. False otherwise.
                  */
                 bool normalizeChecked();
+
+#ifdef DEBUG
+#include<stdio.h>
+                /**
+                 * Print the vector. Only available in DEBUG mode.
+                 */
+                void print() const;
+#endif
+           public:
+                Real x, y, z, w;
         };
 
 #include "PandoraVector4.inl"

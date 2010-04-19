@@ -6,7 +6,7 @@ Purpose : The implementation of the 3D vector class.
 
 Creation Date : 2010-01-28
 
-Last Modified : on. 14. april 2010 kl. 17.51 +0200
+Last Modified : ma. 19. april 2010 kl. 13.36 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -325,3 +325,14 @@ Vector3<Real> operator*(const Real& scalar, const Vector3<Real>& vec)
 {
     return vec * scalar;
 }   
+
+#ifdef DEBUG
+/********************************************************************************
+ * Print out the matrix.
+ *******************************************************************************/
+template<class Real>
+void Vector3<Real>::print() const
+{
+    printf("\n[%g %g %g]\n\n", x, y, z);
+}
+#endif

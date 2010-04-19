@@ -292,6 +292,14 @@ namespace Pandora
                  *      vector is not normalized. True otherwise.
                  */
                 bool normalizeChecked();
+
+#ifdef DEBUG
+#include<stdio.h>
+                /**
+                 *  Print out the vector. Available only in debug mode.
+                 */
+                void print() const;
+#endif
             public:
                 Real x, y;
         };

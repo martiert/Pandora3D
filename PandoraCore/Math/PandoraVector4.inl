@@ -6,7 +6,7 @@ Purpose : Implementation of the Vector4 class.
 
 Creation Date : 2010-01-31
 
-Last Modified : on. 14. april 2010 kl. 18.15 +0200
+Last Modified : ma. 19. april 2010 kl. 13.38 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -334,3 +334,14 @@ Vector4<Real> operator*(const Real& scalar, const Vector4<Real>& vec)
 {
     return vec*scalar;
 }
+
+#ifdef DEBUG
+/********************************************************************************
+ * Print out the vector.                                                        *
+ *******************************************************************************/
+template<class Real>
+void Vector4<Real>::print() const
+{
+    printf("\n[%g %g %g %g]\n\n", x, y, z, w);
+}
+#endif

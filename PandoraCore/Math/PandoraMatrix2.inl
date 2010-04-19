@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix class from Pandora3D
 
 Creation Date : 2010-04-14
 
-Last Modified : to. 15. april 2010 kl. 15.07 +0200
+Last Modified : ma. 19. april 2010 kl. 13.47 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -178,6 +178,15 @@ void Matrix2<Real>::operator=(const Matrix2<Real>& matrix)
 }
 
 /********************************************************************************
+ * Negation operator.                                                           *
+ *******************************************************************************/
+template<class Real>
+Matrix2<Real> Matrix2<Real>::operator-() const
+{
+    return Matrix2<Real>(-m_data[0], -m_data[1], -m_data[2], -m_data[3]);
+}
+
+/********************************************************************************
  * Add two matrices.                                                            *
  *******************************************************************************/
 template<class Real>
@@ -307,3 +316,74 @@ Matrix2<Real> Matrix2<Real>::inverse() const
     Real scale = 1.0/det();
     return (Matrix2<Real>(m_data[3], -m_data[1], -m_data[2], m_data[0]) * scale);
 }
+
+/********************************************************************************
+ * Equality operator.                                                           *
+ *******************************************************************************/
+template<class Real>
+bool Matrix2<Real>::operator==(const Matrix2<Real>& mat) const
+{
+    return (m_data[0] == mat[0] && m_data[1] == mat[1] &&
+            m_data[2] == mat[2] && m_data[3] == mat[3]);
+}
+
+/********************************************************************************
+ * Inequality operator.                                                         *
+ *******************************************************************************/
+template<class Real>
+bool Matrix2<Real>::operator!=(const Matrix2<Real>& mat) const
+{
+    return !(*this == mat);
+}
+
+/********************************************************************************
+ * Larger-than-or-equal-to operator.                                            *
+ *******************************************************************************/
+template<class Real>
+bool Matrix2<Real>::operator>=(const Matrix2<Real>& mat) const
+{
+    return (m_data[0] >= mat[0] && m_data[1] >= mat[1] &&
+            m_data[2] >= mat[2] && m_data[3] >= mat[3]);
+}
+
+/********************************************************************************
+ * Larger-than operator.                                                        *
+ *******************************************************************************/
+template<class Real>
+bool Matrix2<Real>::operator>(const Matrix2<Real>& mat) const
+{
+    return (m_data[0] > mat[0] && m_data[1] > mat[1] &&
+            m_data[2] > mat[2] && m_data[3] > mat[3]);
+}
+
+/********************************************************************************
+ * Smaller-than-or-equal-to operator.                                           *
+ *******************************************************************************/
+template<class Real>
+bool Matrix2<Real>::operator<=(const Matrix2<Real>& mat) const
+{
+    return (m_data[0] <= mat[0] && m_data[1] <= mat[1] &&
+            m_data[2] <= mat[2] && m_data[3] <= mat[3]);
+}
+
+/********************************************************************************
+ * Smaller-than operator.                                                       *
+ *******************************************************************************/
+template<class Real>
+bool Matrix2<Real>::operator<(const Matrix2<Real>& mat) const
+{
+    return (m_data[0] < mat[0] && m_data[1] < mat[1] &&
+            m_data[2] < mat[2] && m_data[3] < mat[3]);
+}
+
+#ifdef DEBUG
+/********************************************************************************
+ * Print out the matrix.                                                        *
+ *******************************************************************************/
+template<class Real>
+void Matrix2<Real>::print() const
+{
+    printf("\n|%g %g|\n|%g %g|\n\n", m_data[0], m_data[1], m_data[2], 
+            m_data[2]);
+}
+#endif
