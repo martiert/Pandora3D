@@ -78,17 +78,17 @@ namespace Pandora
                 /**
                  *  Copy constructor.
                  *  \param
-                 *      matrix - The 3x3 matrix to copy.
+                 *      mat - The 3x3 matrix to copy.
                  */
-                Matrix3(Matrix3& matrix);
+                Matrix3(Matrix3& mat);
 
                 /**
                  *  Copy constructor. Takes a 2x2 matrix and adds 0 everywhere
                  *  except in the last index, where we put a 1.
                  *  \param
-                 *      matrix - The 2x2 matrix to copy.
+                 *      mat - The 2x2 matrix to copy.
                  */
-                Matrix3(Matrix2& matrix);
+                Matrix3(Matrix2& mat);
 
                 /**
                  *  Destructor. Does nothing.
