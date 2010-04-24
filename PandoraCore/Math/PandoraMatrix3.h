@@ -27,7 +27,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 
 namespace Pandora 
 {
-    namespace Math 
+    namespace Math
     {
         /**
          *  The matrix class. The matrix is stored in the OpenGL way, that is
@@ -66,6 +66,27 @@ namespace Pandora
                 Matrix3(Real a0 = 1.0, Real a1 = 0.0, Real a2 = 0.0,
                         Real a3 = 0.0, Real a4 = 1.0, Real a5 = 0.0, 
                         Real a6 = 0.0, Real a7 = 0.0, Real a8 = 1.0);
+
+                /**
+                 *  Construct a rotation matrix which rotates rad radians
+                 *  around the given axis.
+                 *  \param
+                 *      rad - The number of radians to rotate.
+                 *  \param
+                 *      axis - The axis to rotate around.
+                 */
+                Matrix3(Real rad, const Vector3& axis);
+
+                /**
+                 *  Construct a scale matrix.
+                 *  \param
+                 *      x_scale - The number to scale with in x-direction.
+                 *  \param
+                 *      y_scale - The number to scale with in y-direction.
+                 *  \param
+                 *      z_scale - The number to scale with in z-direction.
+                 */
+                Matrix3(Real x_scale, Real y_scale, Real z_scale);
 
                 /**
                  *  Initialize the matrix with an array.
