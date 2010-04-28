@@ -69,13 +69,13 @@ namespace Pandora
 
                 /**
                  *  Construct a rotation matrix which rotates rad radians
-                 *  around the given axis.
+                 *  around a given axis.
                  *  \param
                  *      rad - The number of radians to rotate.
                  *  \param
-                 *      axis - The axis to rotate around.
+                 *      r - The axis to rotate around.
                  */
-                Matrix3(Real rad, const Vector3& axis);
+                Matrix3(Real rad, const Vector3& r);
 
                 /**
                  *  Construct a scale matrix.
@@ -303,6 +303,15 @@ namespace Pandora
                 void operator/=(const Real& scalar);
 
                 /**
+                 *  Get the absolute value of this matrix. That is, the
+                 *  absolute value of all the elements of the matrix.
+                 *  \return
+                 *      A matrix which is the absolute value of all the 
+                 *      elements.
+                 */
+                Matrix3 abs() const;
+
+                /**
                  *  Get the determinant of the matrix.
                  *  \return
                  *      The determinant of the matrix.
@@ -387,6 +396,9 @@ namespace Pandora
                  */
                 void print() const;
 #endif
+
+                static const Matrix3 ZERO;
+                static const Matrix3 IDENTITY;
             private:
                 Real m_data[9];
         };

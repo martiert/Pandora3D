@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix3 class for Pandora3D
 
 Creation Date : 2010-04-16
 
-Last Modified : lø. 24. april 2010 kl. 15.50 +0200
+Last Modified : on. 28. april 2010 kl. 16.15 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -36,9 +36,24 @@ Matrix3<Real>::Matrix3(Real a0, Real a1, Real a2, Real a3, Real a4, Real a5,
  * Make a rotation matrix.                                                      *
  *******************************************************************************/
 template<class Real>
-Matrix3<Real>::Matrix3(Real rad, const Vector3<Real>& axis)
+Matrix3<Real>::Matrix3(Real rad, const Vector3<Real>& r)
 {
-    //TODO
+    //Normalize the axis.
+    axis.normalize();
+    Real t_cos = Math::Cos(rad);
+    real t_sin = Math::Sin(rad);
+
+    m_data[0] = t_cos + (1 - t_cos)*r.x*r.x;
+    m_data[1] = (1 - t_cos)*r.x*r.y - r.z*t_sin;
+    m_data[2] = (1 - t_cos)*r.x*r.z + r.y*t_sin;
+
+    m_data[3] = (1 - t_cos)*r.x*r.y + r.z*t_sin;
+    m_data[4] = t_cos + (1 - t_cos)*r.y*r.y;
+    m_data[5] = (1 - t_cos)*r.y*r.z - r.x*t_sin;
+
+    m_data[6] = (1 - t_cos)*r.x*r.z - r.y*t_sin;
+    m_data[7] = (1 - t_cos)*r.y*r.z + r.x*t_sin;
+    m_data[8] = t_cos + (1 - t_cos)*r.z*r.z;
 }
 
 /********************************************************************************
@@ -186,3 +201,269 @@ Vector3<Real> Matrix3<Real>::getColumn(const int col) const
     assert(col < 3 && "Index out of bounds.");
     return Vector3<Real>(m_data[col], m_data[col + 3], m_data[col + 6]);
 }
+
+/********************************************************************************
+ * Matrix assignment.                                                           *
+ *******************************************************************************/
+template<class Real>
+void Matrix3<Real>::operator=(const Matrix3<Real>& mat)
+{
+    m_data[0] = mat[0];     m_data[1] = mat[1];     m_data[2] = mat[2];
+    m_data[3] = mat[3];     m_data[4] = mat[4];     m_data[5] = mat[5];
+    m_data[6] = mat[6];     m_data[7] = mat[7];     m_data[8] = mat[8];
+}
+
+/********************************************************************************
+ * Negate the matrix.                                                           *
+ *******************************************************************************/
+template<class Real>
+Matrix3<Real> Matrix3<Real>::operator-() const
+{
+    return Matrix3<Real>( -m_data[0], -m_data[1], -m_data[2],
+            -m_data[3], -m_data[4], -m_data[5],
+            -m_data[6], -m_data[7], -m_data[8] );
+}
+
+/********************************************************************************
+ * Add two matrices.                                                            *
+ *******************************************************************************/
+template<class Real>
+Matrix3<Real> Matrix3<Real>::operator+(const Matrix3<Real>& mat) const
+{
+    return Matrix3<Real>(
+            m_data[0] + mat[0], m_data[1] + mat[1], m_data[2] + mat[2],
+            m_data[3] + mat[3], m_data[4] + mat[4], m_data[5] + mat[5],
+            m_data[6] + mat[6], m_data[7] + mat[7], m_data[8] + mat[8]);
+}
+
+/********************************************************************************
+ * Subtract two matrices.                                                       *
+ *******************************************************************************/
+template<class Real>
+Matrix3<Real> Matrix3<Real>::operator-(const Matrix3<Real>& mat) const
+{
+    return Matrix3<Real>(
+            m_data[0] - mat[0], m_data[1] - mat[1], m_data[2] - mat[2],
+            m_data[3] - mat[3], m_data[4] - mat[4], m_data[5] - mat[5],
+            m_data[6] - mat[6], m_data[7] - mat[7], m_data[8] - mat[8]);
+}
+
+/********************************************************************************
+ * Multiply two matrix.                                                         *
+ *******************************************************************************/
+template<class Real>
+Matrix3<Real> Matrix3<Real>::operator*(const Matrix3<Real>& mat) const
+{
+    return Matrix3<Real>(
+            m_data[0]*mat[0] + m_data[1]*mat[3] + m_data[2]*mat[6],
+            m_data[0]*mat[1] + m_data[1]*mat[4] + m_data[2]*mat[7],
+            m_data[0]*mat[2] + m_data[1]*mat[5] + m_data[2]*mat[8],
+            m_data[3]*mat[0] + m_data[4]*mat[3] + m_data[5]*mat[6],
+            m_data[3]*mat[1] + m_data[4]*mat[4] + m_data[5]*mat[7],
+            m_data[3]*mat[2] + m_data[4]*mat[5] + m_data[5]*mat[8],
+            m_data[6]*mat[0] + m_data[7]*mat[3] + m_data[8]*mat[6],
+            m_data[6]*mat[1] + m_data[7]*mat[4] + m_data[8]*mat[7],
+            m_data[6]*mat[2] + m_data[7]*mat[5] + m_data[8]*mat[8]);
+}
+
+/********************************************************************************
+ * Multiply a matrix with a vector.                                             *
+ *******************************************************************************/
+template<class Real>
+Vector3<Real> Matrix3<Real>::operator*(const Vector3<Real>& vec) const
+{
+    return Vector3<Real>(
+            m_data[0]*vec[0] + m_data[1]*vec[1] + m_data[2]*vec[2],
+            m_data[3]*vec[0] + m_data[4]*vec[1] + m_data[5]*vec[2],
+            m_data[6]*vec[0] + m_data[7]*vec[1] + m_data[8]*vec[2]);
+}
+
+/********************************************************************************
+ * Multiply a matrix with a scalar.                                             *
+ *******************************************************************************/
+template<class Real>
+Matrix3<Real> Matrix3<Real>::operator*(const Real scalar) const
+{
+    return Matrix3<Real>(
+            m_data[0]*scalar, m_data[1]*scalar, m_data[2]*scalar,
+            m_data[3]*scalar, m_data[4]*scalar, m_data[5]*scalar,
+            m_data[6]*scalar, m_data[7]*scalar, m_data[8]*scalar);
+}
+
+/********************************************************************************
+ * Divide a matrix with a scalar.                                               *
+ *******************************************************************************/
+template<class Real>
+Matrix3<Real> Matrix3<Real>::operator/(const Real scalar) const
+{
+    assert(scalar != (Real)0.0 && "Division by zero error");
+    return (*this) * (1.0/scalar);
+}
+
+/********************************************************************************
+ * Add a matrix to this matrix.                                                 *
+ *******************************************************************************/
+template<class Real>
+void Matrix3<Real>::operator+=(const Matrix3<Real>& mat)
+{
+    (*this) = (*this) + mat;
+}
+
+/********************************************************************************
+ * Subtract a matrix from this matrix.                                          *
+ *******************************************************************************/
+template<class Real>
+void Matrix3<Real>::operator-=(const Matrix3<Real>& mat)
+{
+    (*this) = (*this) - mat;
+}
+
+/********************************************************************************
+ * Multiply this matrix with a scalar.                                          *
+ *******************************************************************************/
+template<class Real>
+void Matrix3<Real>::operator*=(const Real scalar)
+{
+    (*this) = (*this) * scalar;
+}
+
+/********************************************************************************
+ * Divide this matrix with a scalar.                                            *
+ *******************************************************************************/
+template<class Real>
+void Matrix3<Real>::operator/=(const Real scalar)
+{
+    (*this) = (*this) / scalar;
+}
+
+/********************************************************************************
+ * Get the absolute value of the matrix.                                        *
+ *******************************************************************************/
+template<class Real>
+Matrix3<Real> Matrix3<Real>::abs() const
+{
+    return Matrix3<Real>(
+            Math::Abs(m_data[0]), Math::Abs(m_data[1]), Math::Abs(m_data[2]),
+            Math::Abs(m_data[3]), Math::Abs(m_data[4]), Math::Abs(m_data[5]),
+            Math::Abs(m_data[6]), Math::Abs(m_data[7]), Math::Abs(m_data[8]));
+}
+
+/********************************************************************************
+ * Get the determinant of the matrix.                                           *
+ *******************************************************************************/
+template<class Real>
+Real Matrix3<Real>::det() const
+{
+    return (m_data[0]*(m_data[4]*m_data[8] - m_data[5]*m_data[7]) -
+            m_data[1]*(m_data[3]*m_data[8] - m_data[5]*m_data[6]) +
+            m_data[2]*(m_data[3]*m_data[7] - m_data[4]*m_data[6]));
+}
+
+/********************************************************************************
+ * Get the transpose of the matrix.                                             *
+ *******************************************************************************/
+template<class Real>
+Matrix3<Real> Matrix3<Real>::transpose() const
+{
+    return Matrix3<Real>(m_data[0], m_data[3], m_data[6],
+            m_data[1], m_data[4], m_data[7],
+            m_data[2], m_data[5], m_data[8]);
+}
+
+/********************************************************************************
+ * Get the inverse of the matrix.                                               *
+ *******************************************************************************/
+template<class Real>
+Matrix3<Real> Matrix3<Real>::inverse() const
+{
+    assert( det() != (Real) 0.0 && "Trying to invert a singular matrix.");
+
+    return ( Matrix3<Real>(
+                m_data[4]*m_data[8] - m_data[5]*m_data[7],
+                m_data[3]*m_data[8] - m_data[5]*m_data[6],
+                m_data[3]*m_data[7] - m_data[4]*m_data[6],
+                m_data[1]*m_data[8] - m_data[2]*m_data[7],
+                m_data[0]*m_data[8] - m_data[2]*m_data[6],
+                m_data[0]*m_data[7] - m_data[1]*m_data[6],
+                m_data[1]*m_data[5] - m_data[2]*m_data[4],
+                m_data[0]*m_data[5] - m_data[2]*m_data[3],
+                m_data[0]*m_data[4] - m_data[1]*m_data[3]) / det());
+}
+
+/********************************************************************************
+ * Check if two matrices are equal.                                             *
+ *******************************************************************************/
+template<class Real>
+bool Matrix3<Real>::operator==(const Matrix3<Real>& mat) const
+{
+    return (m_data[0] == mat[0] && m_data[1] == mat[1] && m_data[2] == mat[2] &&
+            m_data[3] == mat[3] && m_data[4] == mat[4] && m_data[5] == mat[5] &&
+            m_data[6] == mat[6] && m_data[7] == mat[7] && m_data[8] == mat[8]);
+}
+
+/********************************************************************************
+ * Check if two matrices are not equal.                                         *
+ *******************************************************************************/
+template<class Real>
+bool Matrix3<Real>::operator!=(const Matrix3<Real>& mat) const
+{
+    return !((*this) == mat);
+}
+
+/********************************************************************************
+ * Check if this matrix is larger-then-or-equal-to another.                     *
+ *******************************************************************************/
+template<class Real>
+bool Matrix3<Real>::operator>=(const Matrix3<Real>& mat) const
+{
+    return (m_data[0] >= mat[0] && m_data[1] >= mat[1] && m_data[2] >= mat[2] &&
+            m_data[3] >= mat[3] && m_data[4] >= mat[4] && m_data[5] >= mat[5] &&
+            m_data[6] >= mat[6] && m_data[7] >= mat[7] && m_data[8] >= mat[8]);
+}
+
+/********************************************************************************
+ * Check if this matrix is larger then another matrix.
+ *******************************************************************************/
+template<class Real>
+bool Matrix3<Real>::operator>(const Matrix3<Real>& mat) const
+{
+    return (m_data[0] > mat[0] && m_data[1] > mat[1] && m_data[2] > mat[2] &&
+            m_data[3] > mat[3] && m_data[4] > mat[4] && m_data[5] > mat[5] &&
+            m_data[6] > mat[6] && m_data[7] > mat[7] && m_data[8] > mat[8]);
+}
+
+/********************************************************************************
+ * Check if this matrix is smaller-then-or-equal-to another matrix.             *
+ *******************************************************************************/
+template<class Real>
+bool Matrix3<Real>::operator<=(const Matrix3<Real>& mat) const
+{
+    return (m_data[0] <= mat[0] && m_data[1] <= mat[1] && m_data[2] <= mat[2] &&
+            m_data[3] <= mat[3] && m_data[4] <= mat[4] && m_data[5] <= mat[5] &&
+            m_data[6] <= mat[6] && m_data[7] <= mat[7] && m_data[8] <= mat[8]);
+}
+
+/********************************************************************************
+ * Check if this matrix is smaller then another.                                *
+ *******************************************************************************/
+template<class Real>
+bool Matrix3<Real>::operator<(const Matrix3<Real>& mat) const
+{
+    return (m_data[0] < mat[0] && m_data[1] < mat[1] && m_data[2] < mat[2] &&
+            m_data[3] < mat[3] && m_data[4] < mat[4] && m_data[5] < mat[5] &&
+            m_data[6] < mat[6] && m_data[7] < mat[7] && m_data[8] < mat[8]);
+}
+
+#ifdef DEBUG
+/********************************************************************************
+ * Print out the matrix.
+ *******************************************************************************/
+template<class Real>
+void Matrix3<Real>::print() const
+{
+    printf("\n|%g %g %g|\n|%g %g %g|\n|%g %g %g|\n", 
+            m_data[0], m_data[1], m_data[2],
+            m_data[3], m_data[4], m_data[5],
+            m_data[6], m_data[7], m_data[8]);
+}
+#endif
