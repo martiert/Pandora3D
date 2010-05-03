@@ -20,10 +20,13 @@ http://www.gnu.org/copyleft/lesser.txt.
 #ifndef PANDORAMATRIX3_H
 #define PANDORAMATRIX3_H
 
-#include<assert.h>
-#include<stddef.h>
-#include<PandoraVector3.h>
-#include<PandoraMatrix2.h>
+#include <assert.h>
+#include <stddef.h>
+#include <string.h>
+
+#include "PandoraMath.h"
+#include "PandoraMatrix2.h"
+#include "PandoraVector3.h"
 
 namespace Pandora 
 {

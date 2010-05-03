@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix class from Pandora3D
 
 Creation Date : 2010-04-14
 
-Last Modified : ma. 19. april 2010 kl. 13.47 +0200
+Last Modified : ma. 03. mai 2010 kl. 16.11 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -40,10 +40,7 @@ Matrix2<Real>::Matrix2(const Real a, const Real b, const Real c, const Real d)
 template<class Real>
 Matrix2<Real>::Matrix2(Real array[4])
 {
-    m_data[0] = array[0];
-    m_data[1] = array[1];
-    m_data[2] = array[2];
-    m_data[3] = array[3];
+    memcpy(m_data, array, 4);
 }
 
 /********************************************************************************
@@ -52,10 +49,7 @@ Matrix2<Real>::Matrix2(Real array[4])
 template<class Real>
 Matrix2<Real>::Matrix2(Matrix2<Real>& matrix)
 {
-    m_data[0] = matrix[0];
-    m_data[1] = matrix[1];
-    m_data[2] = matrix[2];
-    m_data[3] = matrix[3];
+    memcpy(m_data, matrix.m_data, 4);
 }
 
 /********************************************************************************
@@ -171,10 +165,7 @@ Vector2<Real> Matrix2<Real>::getColumn(const int col) const
 template<class Real>
 void Matrix2<Real>::operator=(const Matrix2<Real>& matrix)
 {
-    m_data[0] = matrix[0];
-    m_data[1] = matrix[1];
-    m_data[2] = matrix[2];
-    m_data[3] = matrix[3];
+    memcpy(m_data, matrix.m_data, 4);
 }
 
 /********************************************************************************

@@ -17,9 +17,11 @@ http://www.gnu.org/copyleft/lesser.txt.
 --------------------------------------------------------------------------------
 */
 
+#include <stddef.h>
+#include <string.h>
+
 #include "PandoraMath.h"
 #include "PandoraVector2.h"
-#include <stddef.h>
 
 namespace Pandora
 {

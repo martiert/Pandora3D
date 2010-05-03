@@ -19,9 +19,10 @@ http://www.gnu.org/copyleft/lesser.txt.
 #ifndef PANDORAVECTOR2_H
 #define PANDORAVECTOR2_H
 
-#include "PandoraMath.h"
 #include <assert.h>
 #include <stddef.h>
+
+#include "PandoraMath.h"
 
 namespace Pandora
 {

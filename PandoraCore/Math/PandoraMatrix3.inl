@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix3 class for Pandora3D
 
 Creation Date : 2010-04-16
 
-Last Modified : on. 28. april 2010 kl. 16.15 +0200
+Last Modified : ma. 03. mai 2010 kl. 16.20 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -39,9 +39,9 @@ template<class Real>
 Matrix3<Real>::Matrix3(Real rad, const Vector3<Real>& r)
 {
     //Normalize the axis.
-    axis.normalize();
+    r.normalize();
     Real t_cos = Math::Cos(rad);
-    real t_sin = Math::Sin(rad);
+    Real t_sin = Math::Sin(rad);
 
     m_data[0] = t_cos + (1 - t_cos)*r.x*r.x;
     m_data[1] = (1 - t_cos)*r.x*r.y - r.z*t_sin;
@@ -73,9 +73,7 @@ Matrix3<Real>::Matrix3(Real x_scale, Real y_scale, Real z_scale)
 template<class Real>
 Matrix3<Real>::Matrix3(Real array[9])
 {
-    m_data[0] = array[0];   m_data[1] = array[1];   m_data[2] = array[2];
-    m_data[3] = array[3];   m_data[4] = array[4];   m_data[5] = array[5];
-    m_data[6] = array[6];   m_data[7] = array[7];   m_data[8] = array[8];
+    memcpy(m_data, array, 9);
 }
 
 /********************************************************************************
@@ -84,16 +82,14 @@ Matrix3<Real>::Matrix3(Real array[9])
 template<class Real>
 Matrix3<Real>::Matrix3(Matrix3<Real>& mat)
 {
-    m_data[0] = mat[0];     m_data[1] = mat[1];     m_data[2] = mat[2];
-    m_data[3] = mat[3];     m_data[4] = mat[4];     m_data[5] = mat[5];
-    m_data[6] = mat[6];     m_data[7] = mat[7];     m_data[8] = mat[8];
+    memcpy(m_data, mat.m_data, 9);
 }
 
 /********************************************************************************
  * Copy a 2D matrix to this matrix.                                             *
  *******************************************************************************/
 template<class Real>
-Matrix3<Real>::Matrix3(Matrix3<Real>& mat)
+Matrix3<Real>::Matrix3(Matrix2<Real>& mat)
 {
     m_data[0] = mat[0];     m_data[1] = mat[1];     m_data[2] = (Real) 0.0;
     m_data[3] = mat[2];     m_data[4] = mat[3];     m_data[5] = (Real) 0.0;
@@ -113,7 +109,7 @@ Matrix3<Real>::operator Real *()
  * Implicit conversion to constant array.                                       *
  *******************************************************************************/
 template<class Real>
-Matrix3<Real>::operator const Real *() const
+const Matrix3<Real>::operator Real *() const
 {
     return &(m_data[0]);
 }
@@ -208,9 +204,7 @@ Vector3<Real> Matrix3<Real>::getColumn(const int col) const
 template<class Real>
 void Matrix3<Real>::operator=(const Matrix3<Real>& mat)
 {
-    m_data[0] = mat[0];     m_data[1] = mat[1];     m_data[2] = mat[2];
-    m_data[3] = mat[3];     m_data[4] = mat[4];     m_data[5] = mat[5];
-    m_data[6] = mat[6];     m_data[7] = mat[7];     m_data[8] = mat[8];
+    memcpy(m_data, mat.m_data, 9);
 }
 
 /********************************************************************************

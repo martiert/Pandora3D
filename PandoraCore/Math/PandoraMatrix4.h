@@ -22,8 +22,12 @@ http://www.gnu.org/copyleft/lesser.txt.
 
 #include <assert.h>
 #include <stddef.h>
-#include <PandoraMatrix3.h>
-#include <PandoraVector4.h>
+#include <string.h>
+
+#include "PandoraMath.h"
+#include "PandoraMatrix3.h"
+#include "PandoraVector3.h"
+#include "PandoraVector4.h"
 
 namespace Pandora
 {
@@ -60,18 +64,13 @@ namespace Pandora
                  *  Construct either a scaling or a translation matrix,
                  *  depending on the boolean value given.
                  *  \param
-                 *      x - The scaling/translation in x-direction.
-                 *  \param
-                 *      y - The scaling/translation in y-direction.
-                 *  \param
-                 *      z - The scaling/translation in z-direction.
+                 *      vec - The scaling/translation vector.
                  *  \param
                  *      scale - A bool value which tells if it's a scaling
                  *              or a translation matrix. True if scaling, false
                  *              if translating.
                  */
-                Matrix4(const Real x, const Real y, const Real z, 
-                        const bool scale);
+                Matrix4(const Vector3& vec, const bool scale);
 
                 /**
                  *  Initialize the matrix with an array.
@@ -93,7 +92,7 @@ namespace Pandora
                  *  \param
                  *      mat - The matrix to copy.
                  */
-                Matrix4(const Matrix4& mat);
+                Matrix4(const Matrix3& mat);
 
                 /**
                  *  Destructor, does nothing.
