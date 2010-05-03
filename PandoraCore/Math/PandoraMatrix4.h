@@ -285,6 +285,23 @@ namespace Pandora
                  */
                 void operator/=(const Real& scalar);
 
+
+                /**
+                 *  Dot multiply this matrix with another.
+                 *  \param
+                 *      mat - The matrix to dot multiply with.
+                 *  \return
+                 *      This matrix dot-multiplied with another.
+                 */
+                Matrix4 dotprod() const;
+
+                /**
+                 *  Dot multiply a matrix to this matrix.
+                 *  \param
+                 *      mat - The matrix to dot multiply with.
+                 */
+                void operator*=(const Matrix4& mat);
+
                 /**
                  *  Get the absolute value of this matrix.
                  *  \return
@@ -305,6 +322,13 @@ namespace Pandora
                  *      The transpose of this matrix.
                  */
                 Matrix4 transpose() const;
+
+                /**
+                 *  Calculate the cofactor matrix of this matirx.
+                 *  \param
+                 *      The cofactor matrix of this matrix.
+                 */
+                Matrix4 cofactor() const;
 
                 /**
                  *  Get the inverse of this matrix.
@@ -382,6 +406,7 @@ namespace Pandora
 #endif
                 static const Matrix4 ZERO;
                 static const Matrix4 IDENTITY;
+                static const Matrix4 ONES;
             protected:
                 Real m_data[16];
         };

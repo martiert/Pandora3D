@@ -402,6 +402,7 @@ namespace Pandora
 
                 static const Matrix3 ZERO;
                 static const Matrix3 IDENTITY;
+                static const Matrix3 ONES;
             protected:
                 Real m_data[9];
         };

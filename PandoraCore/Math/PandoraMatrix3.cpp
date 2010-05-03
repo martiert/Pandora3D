@@ -2,11 +2,11 @@
 --------------------------------------------------------------------------------
 File Name : PandoraMatrix3.cpp
 
-Purpose :
+Purpose : Templates for the Pandora 3D Matrix.
 
 Creation Date : 2010-04-28
 
-Last Modified : ma. 03. mai 2010 kl. 14.38 +0200
+Last Modified : ma. 03. mai 2010 kl. 21.40 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -36,6 +36,15 @@ template<>
 const Math::Matrix3<double> Math::Matrix3<double>::IDENTITY(1.0, 0.0, 0.0,
         0.0, 1.0, 0.0,
         0.0, 0.0, 1.0);
+
+template<>
+const Math::Matrix3<float> Math::Matrix3<float>::ZERO(1.0f, 1.0f, 1.0f,
+        1.0f, 1.0f, 1.0f,
+        1.0f, 1.0f, 1.0f);
+template<>
+const Math::Matrix3<double> Math::Matrix3<double>::ZERO(1.0, 1.0, 1.0,
+        1.0, 1.0, 1.0,
+        1.0, 1.0, 1.0);
 
 /********************************************************************************
  * Operator so we can write scalar*matrix.                                      *

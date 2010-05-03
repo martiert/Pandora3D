@@ -348,7 +348,8 @@ namespace Pandora
 #endif
 
                 static const Matrix2 ZERO;
-                static const Matrix2 IDENTITY
+                static const Matrix2 IDENTITY;
+                static const Matrix2 ONES;
             protected:
                 Real m_data[4];
         };
