@@ -399,7 +399,7 @@ namespace Pandora
 
                 static const Matrix3 ZERO;
                 static const Matrix3 IDENTITY;
-            private:
+            protected:
                 Real m_data[9];
         };
     }

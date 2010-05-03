@@ -6,7 +6,7 @@ Purpose :
 
 Creation Date : 2010-04-28
 
-Last Modified : on. 28. april 2010 kl. 16.20 +0200
+Last Modified : ma. 03. mai 2010 kl. 14.38 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -20,19 +20,28 @@ using namespace Pandora
  * A few special matrices.                                                      *
  *******************************************************************************/
 template<>
-const Matrix3<float> Matrix3<float>::ZERO(0.0f, 0.0f, 0.0f, 
+const Math::Matrix3<float> Math::Matrix3<float>::ZERO(0.0f, 0.0f, 0.0f, 
         0.0f, 0.0f, 0.0f,
         0.0f, 0.0f, 0.0f);
 template<>
-const Matrix3<double> Matrix3<double>::ZERO(0.0, 0.0, 0.0, 
+const Math::Matrix3<double> Math::Matrix3<double>::ZERO(0.0, 0.0, 0.0, 
         0.0, 0.0, 0.0, 
         0.0, 0.0, 0.0);
 
 template<>
-const Matrix3<float> Matrix3<float>::IDENTITY(1.0f, 0.0f, 0.0f, 
+const Math::Matrix3<float> Math::Matrix3<float>::IDENTITY(1.0f, 0.0f, 0.0f, 
         0.0f, 1.0f, 0.0f,
         0.0f, 0.0f, 1.0f);
 template<>
-const Matrix3<double> Matrix3<double>::IDENTITY(1.0, 0.0, 0.0,
+const Math::Matrix3<double> Math::Matrix3<double>::IDENTITY(1.0, 0.0, 0.0,
         0.0, 1.0, 0.0,
         0.0, 0.0, 1.0);
+
+/********************************************************************************
+ * Operator so we can write scalar*matrix.                                      *
+ *******************************************************************************/
+template<class Real>
+Math::Matrix3<Real> operator*(const Real scalar, const Math::Matrix3<Real>& mat)
+{
+    return mat * scalar;
+}
