@@ -129,7 +129,7 @@ namespace Pandora
                  *  \param  
                  *      vec - The vector to change it with.
                  */
-                void setRow(const int row, const Vector2& vec);
+                void setRow(const int row, const Vector2<Real>& vec);
 
                 /**
                  *  Get a row from our matrix as a vector.
@@ -138,7 +138,7 @@ namespace Pandora
                  *  \return
                  *      row number row as a vector.
                  */
-                Vector2 getRow(const int row) const;
+                Vector2<Real> getRow(const int row) const;
 
                 /**
                  *  Set a column in our matrix from a vector.
@@ -147,7 +147,7 @@ namespace Pandora
                  *  \param
                  *      vec - The vector to change it with.
                  */
-                void setColumn(const int col, const Vector2& vec);
+                void setColumn(const int col, const Vector2<Real>& vec);
 
                 /**
                  *  Get a column from out matrix.
@@ -156,7 +156,7 @@ namespace Pandora
                  *  \return
                  *      Columns number col as a vector.
                  */
-                Vector2 getColumn(const int col) const; 
+                Vector2<Real> getColumn(const int col) const; 
 
                 /**
                  *  Assignment. Matrix to matrix.
@@ -253,7 +253,7 @@ namespace Pandora
                  *  \return
                  *      A matrix multiplied with a scalar.
                  */
-                Vector2 operator*(const Vector2& vec) const;
+                Vector2<Real> operator*(const Vector2<Real>& vec) const;
     
                 /**
                  *  Get the determinant of this matrix.

@@ -78,7 +78,7 @@ namespace Pandora
                  *  \param
                  *      r - The axis to rotate around.
                  */
-                Matrix3(Real rad, const Vector3& r);
+                Matrix3(Real rad, const Vector3<Real>& r);
 
                 /**
                  *  Construct a scale matrix.
@@ -180,7 +180,7 @@ namespace Pandora
                  *  \param
                  *      vec - The vector to copy from.
                  */
-                void setRow(const int row, const Vector3& vec);
+                void setRow(const int row, const Vector3<Real>& vec);
 
                 /**
                  *  Get row given as a vector.
@@ -189,7 +189,7 @@ namespace Pandora
                  *  \return
                  *      Row number row as a vector.
                  */
-                Vector3 getRow(const int row) const;
+                Vector3<Real> getRow(const int row) const;
 
                 /**
                  *  Set the column given to the vector given.
@@ -198,7 +198,7 @@ namespace Pandora
                  *  \param
                  *      vec - The vector to insert.
                  */
-                void setColumn(const int row, const Vector3& vec);
+                void setColumn(const int row, const Vector3<Real>& vec);
 
                 /**
                  *  Get the column given as a vector.
@@ -207,7 +207,7 @@ namespace Pandora
                  *  \return
                  *      Column number col as a vector.
                  */
-                Vector3 getColumn(const int row) const;
+                Vector3<Real> getColumn(const int row) const;
 
                 /**
                  *  Matrix assignment.
@@ -257,7 +257,7 @@ namespace Pandora
                  *  \return
                  *      A vector which is this matrix multiplied with a vector.
                  */
-                Vector3 operator*(const Vector3& vec) const;
+                Vector3<Real> operator*(const Vector3<Real>& vec) const;
 
                 /**
                  *  Multiply this matrix with a scalar.

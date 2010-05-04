@@ -6,7 +6,7 @@ Purpose :
 
 Creation Date : 2010-05-04
 
-Last Modified : ti. 04. mai 2010 kl. 21.21 +0200
+Last Modified : ti. 04. mai 2010 kl. 21.23 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -14,7 +14,7 @@ Created By :  Martin Ertsås
 
 #include "Matrix2Test.h"
 
-using Pandora::Math::Mat2f;
+//using Pandora::Math::Mat2f;
 
 void Matrix2Test::init()
 {
@@ -48,6 +48,8 @@ CppUnit::Test *Matrix2Test::suite()
     testSuite->addTest( new CppUnit::TestCaller<Matrix2Test>(
                 "Matrix2Test::testAssignment",
                 &Matrix2Test::testAssignment ));
+
+    return testSuite;
 }
 
 void Matrix2Test::setUp()

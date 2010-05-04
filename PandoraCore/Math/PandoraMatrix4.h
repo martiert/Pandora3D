@@ -58,7 +58,7 @@ namespace Pandora
                  *  \param
                  *      r - The axis to rotate around.    
                  */
-                Matrix4(const Real rad, const Vector4& r);
+                Matrix4(const Real rad, const Vector4<Real>& r);
 
                 /**
                  *  Construct either a scaling or a translation matrix,
@@ -70,7 +70,7 @@ namespace Pandora
                  *              or a translation matrix. True if scaling, false
                  *              if translating.
                  */
-                Matrix4(const Vector3& vec, const bool scale);
+                Matrix4(const Vector3<Real>& vec, const bool scale);
 
                 /**
                  *  Initialize the matrix with an array.
@@ -160,7 +160,7 @@ namespace Pandora
                  *  \return
                  *      Row number i as a vector.
                  */
-                Vector4 getRow(const int row);
+                Vector4<Real> getRow(const int row);
 
                 /**
                  *  Set row number i to the given vector.
@@ -169,7 +169,7 @@ namespace Pandora
                  *  \param
                  *      vec - The vector we wish to set it to.
                  */
-                void setRow(const int row, const Vector4& vec);
+                void setRow(const int row, const Vector4<Real>& vec);
 
                 /**
                  *  Get column number i from the matrix as a vector.
@@ -178,7 +178,7 @@ namespace Pandora
                  *  \return
                  *      Column i as a 4D vector.
                  */
-                Vector4 getColumn(const int col);
+                Vector4<Real> getColumn(const int col);
 
                 /**
                  *  Set column number i to the given matrix.
@@ -187,7 +187,7 @@ namespace Pandora
                  *  \param
                  *      vec - The vector we wish to set it to.
                  */
-                void setColumn(const int col, const Vector4& vec);
+                void setColumn(const int col, const Vector4<Real>& vec);
 
                 /**
                  *  Matrix assignment. Set this matrix equal to another.
@@ -237,7 +237,7 @@ namespace Pandora
                  *  \return
                  *      This matrix multiplied with vec.
                  */
-                Vector4 operator*(const Vector4& vec) const;
+                Vector4<Real> operator*(const Vector4<Real>& vec) const;
 
                 /**
                  *  Multiply a matrix with a scalar.
