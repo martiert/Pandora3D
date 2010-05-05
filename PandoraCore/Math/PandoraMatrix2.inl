@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix class from Pandora3D
 
 Creation Date : 2010-04-14
 
-Last Modified : ma. 03. mai 2010 kl. 16.11 +0200
+Last Modified : on. 05. mai 2010 kl. 22.25 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -22,11 +22,18 @@ typedef Matrix2<unsigned int> Mat2u;
 
 /********************************************************************************
  * Constructors.                                                                *
- *                                                                              *
+ *******************************************************************************/
+template<class Real>
+Matrix2<Real>::Matrix2()
+{
+}
+
+/********************************************************************************
  * Give four numbers to put in the matrix.                                      *
  *******************************************************************************/ 
 template<class Real>
-Matrix2<Real>::Matrix2(const Real a, const Real b, const Real c, const Real d)
+Matrix2<Real>::Matrix2(const Real& a, const Real& b, 
+        const Real& c, const Real& d)
 {
     m_data[0] = a;
     m_data[1] = b;
@@ -108,7 +115,7 @@ Real& Matrix2<Real>::operator()(const int row, const int col)
 template<class Real>
 const Real Matrix2<Real>::operator()(const int row, const int col) const
 {
-    assert(row < 2 && col  2 && "Index out of bounds");
+    assert(row < 2 && col < 2 && "Index out of bounds");
 
     return m_data[row*2 + col];
 }
@@ -225,7 +232,7 @@ Matrix2<Real> Matrix2<Real>::operator*(const Real& scalar) const
 template<class Real>
 Matrix2<Real> Matrix2<Real>::operator/(const Real& scalar) const
 {
-    assert(Real != 0 && "Division by zero");
+    assert(scalar != 0 && "Division by zero");
 
     Real scale = 1.0/scalar;
     return Matrix2<Real>(m_data[0]*scale, m_data[1]*scale,
@@ -375,6 +382,6 @@ template<class Real>
 void Matrix2<Real>::print() const
 {
     printf("\n|%g %g|\n|%g %g|\n\n", m_data[0], m_data[1], m_data[2], 
-            m_data[2]);
+            m_data[3]);
 }
 #endif

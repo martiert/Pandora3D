@@ -63,8 +63,6 @@ $(APP): $(OBJECTS)
 depend: make.dep
 
 make.dep:
-#	touch $@
-#	makedepend -f$@ -- $(CXXFLAGS) -- $(SOURCES)
 	for file in $(SOURCES); do $(CXX) $(CXXFLAGS) -M $$file >> $@; done
 
 include make.dep

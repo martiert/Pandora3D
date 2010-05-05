@@ -20,6 +20,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 #ifndef PANDORAVECTOR3_H
 #define PANDORAVECTOR3_H
 
+#include <stdio.h>
 #include <assert.h>
 #include <stddef.h>
 
@@ -288,7 +289,6 @@ namespace Pandora
                 Vector3 cross(const Vector3& vec) const;
 
 #ifdef DEBUG
-#include<stdio.h>
                 /**
                  *  Print out the vector. Only available in DEBUG mode.
                  */

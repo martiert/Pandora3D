@@ -20,6 +20,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 #ifndef PANDORAVECTOR4_H
 #define PANDORAVECTOR4_h
 
+#include <stdio.h>
 #include <assert.h>
 #include <stddef.h>
 
@@ -295,7 +296,6 @@ namespace Pandora
                 bool normalizeChecked();
 
 #ifdef DEBUG
-#include<stdio.h>
                 /**
                  * Print the vector. Only available in DEBUG mode.
                  */

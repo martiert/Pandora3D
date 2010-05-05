@@ -6,7 +6,7 @@ Purpose : Unit testing of the Pandora::Math::Vec2 implementation.
 
 Creation Date : 2010-01-25
 
-Last Modified : ma. 19. april 2010 kl. 13.33 +0200
+Last Modified : on. 05. mai 2010 kl. 21.42 +0200
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -98,7 +98,6 @@ void Vector2Test::testMultiplication()
 
 void Vector2Test::testArithmetic()
 {
-    m_1_1.print();
     printf("\tTesting other arithmetics\n");
 
     //Dot product

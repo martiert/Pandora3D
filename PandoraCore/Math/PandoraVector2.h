@@ -16,9 +16,11 @@ Temple Place - Suite 330, Boston, MA 02111-1307, USA, or go to
 http://www.gnu.org/copyleft/lesser.txt.
 --------------------------------------------------------------------------------
 */
+
 #ifndef PANDORAVECTOR2_H
 #define PANDORAVECTOR2_H
 
+#include <stdio.h>
 #include <assert.h>
 #include <stddef.h>
 
@@ -295,7 +297,6 @@ namespace Pandora
                 bool normalizeChecked();
 
 #ifdef DEBUG
-#include<stdio.h>
                 /**
                  *  Print out the vector. Available only in debug mode.
                  */

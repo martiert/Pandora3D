@@ -6,7 +6,7 @@ Purpose : Implementation of the List class used in Pandora3D
 
 Creation Date : 2010-01-25
 
-Last Modified : on. 14. april 2010 kl. 19.09 +0200
+Last Modified : on. 05. mai 2010 kl. 21.24 +0200
 
 Created By : Martin Ertsås
 ---------------------------------------------------------------------------------
@@ -15,6 +15,13 @@ Created By : Martin Ertsås
 /********************************************************************************
  * Makes the List itself.                                                       *
  *******************************************************************************/
+template<class T>
+List<T>::List()
+{
+    m_size = 0;
+    m_root = NULL;
+}
+
 template<class T>
 List<T>::List(const T& data)
 {

@@ -6,7 +6,7 @@ Purpose :
 
 Creation Date : 2010-05-04
 
-Last Modified : ti. 04. mai 2010 kl. 21.23 +0200
+Last Modified : on. 05. mai 2010 kl. 22.26 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -14,11 +14,46 @@ Created By :  Martin Ertsås
 
 #include "Matrix2Test.h"
 
-//using Pandora::Math::Mat2f;
+using Pandora::Math::Mat2f;
 
 void Matrix2Test::init()
 {
     printf("Starting Matrix2Test\n");
+}
+
+void Matrix2Test::testConstructor()
+{
+    printf("\tTesting constructor\n");
+}
+
+void Matrix2Test::testAddition()
+{
+    printf("\tTesting addition\n");
+}
+
+void Matrix2Test::testSubtraction()
+{
+    printf("\tTesting subtraction\n");
+}
+
+void Matrix2Test::testMultiplication()
+{
+    printf("\tTesting multiplication\n");
+}
+
+void Matrix2Test::testArithmetic()
+{
+    printf("\tTesting arithmetic\n");
+}
+
+void Matrix2Test::testComparison()
+{
+    printf("\tTesting comparison\n");
+}
+
+void Matrix2Test::testAssignment()
+{
+    printf("\tTesting assignment\n");
 }
 
 CppUnit::Test *Matrix2Test::suite()

@@ -41,13 +41,17 @@ namespace Pandora
         class List
         {
             public:
+                /**
+                 *  Make an empty list.
+                 */
+                List();
+
                 /** 
                  *  Default constructor
                  *  \param
-                 *      data - Optional argument. If present it's the root
-                 *      node of the List.
+                 *      data - The root node of the list.
                  */
-                List(const T& data = NULL);
+                List(const T& data);
 
                 /** 
                  *  Destructor 

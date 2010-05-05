@@ -2,49 +2,48 @@
 --------------------------------------------------------------------------------
 File Name : PandoraMatrix2.cpp
 
-Purpose : Templates for the Pandora 2D Matrix.
+Purpose :
 
-Creation Date : 2010-04-19
+Creation Date : 2010-05-05
 
-Last Modified : ma. 03. mai 2010 kl. 21.40 +0200
+Last Modified : on. 05. mai 2010 kl. 22.24 +0200
 
-Created By :  Martin ErtsÃ¥s
+Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
 */
 
 #include "PandoraMatrix2.h"
 
-using namespace Pandora
-
 /********************************************************************************
- * A few special matrices.                                                      *
+ * Some special matrices.                                                       *
  *******************************************************************************/
 template<>
-const Math::Matrix2<float> Math::Matrix2<float>::ZERO(0.0f, 0.0f, 
-        0.0f, 0.0f);
+const Pandora::Math::Matrix2<float> 
+    Pandora::Math::Matrix2<float>::ZERO(0.0f, 0.0f, 0.0f, 0.0f);
 template<>
-const Math::Matrix2<double> Math::Matrix2<double>::ZERO(0.0, 0.0, 
-        0.0, 0.0);
+const Pandora::Math::Matrix2<double>
+    Pandora::Math::Matrix2<double>::ZERO(0.0, 0.0, 0.0, 0.0);
 
 template<>
-const Math::Matrix2<float> Math::Matrix2<float>::IDENTITY(1.0f, 0.0f,
-        0.0f, 1.0f);
+const Pandora::Math::Matrix2<float>
+    Pandora::Math::Matrix2<float>::IDENTITY(1.0f, 0.0f, 0.0f, 1.0f);
 template<>
-const Math::Matrix2<double> Math::Matrix2<double>::IDENTITY(1.0, 0.0, 
-        0.0, 1.0);
+const Pandora::Math::Matrix2<double>
+    Pandora::Math::Matrix2<double>::IDENTITY(1.0, 0.0, 0.0, 1.0);
 
 template<>
-const Math::Matrix2<float> Math::Matrix2<float>::ONES(1.0f, 1.0f, 
-        1.0f, 1.0f);
+const Pandora::Math::Matrix2<float>
+    Pandora::Math::Matrix2<float>::ONES(1.0f, 1.0f, 1.0f, 1.0f);
 template<>
-const Math::Matrix2<double> Math::Matrix2<double>::ONES(1.0, 1.0,
-        1.0, 1.0);
+const Pandora::Math::Matrix2<double>
+    Pandora::Math::Matrix2<double>::ONES(1.0, 1.0, 1.0, 1.0);
 
 /********************************************************************************
- * Function so we can write scalar*matrix2.                                     *
+ * So we can write Real * Matrix                                                *
  *******************************************************************************/
 template<class Real>
-Math::Matrix2<Real> operator*(const Real scalar, const Math::Matrix2<Real>& mat)
+Pandora::Math::Matrix2<Real> operator*(const Real& scale, 
+        const Pandora::Math::Matrix2<Real>& mat)
 {
-    return mat * scalar;
+    return mat * scale;
 }

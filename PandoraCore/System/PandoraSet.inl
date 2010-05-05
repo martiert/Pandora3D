@@ -6,7 +6,7 @@ Purpose : Implementation of the Set class used in Pandora3D
 
 Creation Date : 2010-01-26
 
-Last Modified : on. 14. april 2010 kl. 19.12 +0200
+Last Modified : on. 05. mai 2010 kl. 21.27 +0200
 
 Created By : Martin Ertsås
 --------------------------------------------------------------------------------
@@ -145,7 +145,7 @@ bool Set<T>::remove(const T& elem)
     //Shuffle all the remaining data
     for(;i < m_size - 1; ++i)
         m_data[i] = m_data[i + 1];
-    m_data[i] = NULL;
+    m_data[i] = (T) NULL;
     m_elements--;
 
     return true;

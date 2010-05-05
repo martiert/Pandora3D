@@ -17,6 +17,10 @@ http://www.gnu.org/copyleft/lesser.txt.
 --------------------------------------------------------------------------------
 */
 
+#ifndef PANDORAMATRIX2_H
+#define PANDORAMATRIX2_H
+
+#include <stdio.h>
 #include <stddef.h>
 #include <string.h>
 
@@ -38,7 +42,13 @@ namespace Pandora
         {
             public:
                 /**
-                 *  Constructor. Takes four optional elements.
+                 *  Default constructor. Takes no arguments and makes an
+                 *  undefined matrix.
+                 */
+                Matrix2();
+
+                /**
+                 *  Constructor. Takes four arguments.
                  *  \param
                  *      a - Element in row one, column one.
                  *  \param
@@ -47,12 +57,9 @@ namespace Pandora
                  *      c - Element in row two, column one.
                  *  \param
                  *      d - Element in row two, column two.
-                 *  \note
-                 *      If no elements are sent to the constructor, the 
-                 *      identity matrix is constructed.
                  */
-                Matrix2(const Real& a = (Real) 1.0, const Real& b = (Real) 0.0, 
-                        const Real& c = (Real) 0.0, const Real& d = (Real) 1.0);
+                Matrix2(const Real& a, const Real& b, 
+                        const Real& c, const Real& d);
 
                 /**
                  *  Constructor. Copies an array to this vector.
@@ -340,7 +347,6 @@ namespace Pandora
                 bool operator<(const Matrix2& mat) const;
 
 #ifdef DEBUG
-#include<stdio.h>
                 /**
                  *  Print put the matrix. Available only in DEBUG mode.
                  */
@@ -353,5 +359,9 @@ namespace Pandora
             protected:
                 Real m_data[4];
         };
+
+#include "PandoraMatrix2.inl"
+
     }
 }
+#endif

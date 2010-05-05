@@ -20,6 +20,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 #ifndef PANDORAMATRIX4_H
 #define PANDORAMATRIX4_H
 
+#include <stdio.h>
 #include <assert.h>
 #include <stddef.h>
 #include <string.h>
@@ -398,7 +399,6 @@ namespace Pandora
                 bool operator<(const Matrix4& mat) const;
 
 #ifdef DEBUG
-#include <stdio.h>
                 /**
                  *  Print out the matrix. Only available in DEBUG mode.
                  */

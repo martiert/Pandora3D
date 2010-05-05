@@ -20,6 +20,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 #ifndef PANDORAMATRIX3_H
 #define PANDORAMATRIX3_H
 
+#include <stdio.h>
 #include <assert.h>
 #include <stddef.h>
 #include <string.h>
@@ -393,7 +394,6 @@ namespace Pandora
                 bool operator<(const Matrix3& mat) const;
 
 #ifdef DEBUG
-#include<stdio.h>
                 /**
                  *  Print out the matrix. Only available in DEBUG mode.
                  */
@@ -406,6 +406,9 @@ namespace Pandora
             protected:
                 Real m_data[9];
         };
+
+#include "PandoraMatrix3.inl"
+
     }
 }
 #endif
