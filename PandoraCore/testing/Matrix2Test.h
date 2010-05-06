@@ -26,6 +26,7 @@ class Matrix2Test : public CppUnit::TestCase
         void setUp();
         void tearDown();
     private:
+        Pandora::Math::Mat2f test1, test2;
 
 };
 #endif

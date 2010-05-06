@@ -66,14 +66,14 @@ namespace Pandora
                  *  \param
                  *      array - The array we take values from.
                  */
-                Matrix2(Real array[4]);
+                Matrix2(const Real array[4]);
 
                 /**
                  *  Copy a matrix to this matrix.
                  *  \param
                  *      mat - The matrix to copy from
                  */
-                Matrix2(Matrix2& mat);
+                Matrix2(const Matrix2& mat);
 
                 /**
                  *  Implicit conversion.
