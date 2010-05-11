@@ -6,7 +6,7 @@ Purpose : Testing the Math class in Pandora3D
 
 Creation Date : 2010-01-26
 
-Last Modified : ti. 26. jan. 2010 kl. 13.36 +0100
+Last Modified : ti. 11. mai 2010 kl. 11.30 +0200
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ using Pandora::Math::Math;
 
 void MathTest::init()
 {
-    printf("Starting MathTest\n");
+    printf("Starting MathTest\t\n");
 }
 
 void MathTest::testTrigonometries()
@@ -64,7 +64,7 @@ void MathTest::testTrigonometries()
 
 void MathTest::testRound()
 {
-    printf("\tTesting rounding functions\n");
+    printf("\tTesting round\t\n");
 
     CPPUNIT_ASSERT( Math<double>::Abs( Math<double>::Abs(1.2) - 1.2 )
             < eps );
@@ -101,7 +101,7 @@ void MathTest::testRound()
 
 void MathTest::testPow()
 {
-    printf("\tTesting Power and log functions\n");
+    printf("\tTesting pow/log\t\n");
 
     CPPUNIT_ASSERT( Math<double>::Abs( Math<double>::Exp(4.0) - exp(4.0) )
             < eps );

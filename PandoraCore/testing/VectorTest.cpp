@@ -6,7 +6,7 @@ Purpose :
 
 Creation Date : 2010-01-26
 
-Last Modified : to. 28. jan. 2010 kl. 22.27 +0100
+Last Modified : ti. 11. mai 2010 kl. 11.30 +0200
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -18,12 +18,12 @@ using Pandora::Utils::Vector;
 
 void VectorTest::init()
 {
-    printf("Starting VectorTest\n");
+    printf("Starting VectorTest\t\n");
 }
 
 void VectorTest::testGetter()
 {
-    printf("\tTesting Getters\n");
+    printf("\tTesting Getters\t\n");
 
     CPPUNIT_ASSERT( intVec->getElements() == 0 );
     CPPUNIT_ASSERT( intVec->getSize() == 4 );

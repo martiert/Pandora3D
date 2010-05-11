@@ -6,7 +6,7 @@ Purpose :
 
 Creation Date : 2010-01-26
 
-Last Modified : ti. 26. jan. 2010 kl. 13.21 +0100
+Last Modified : ti. 11. mai 2010 kl. 11.30 +0200
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ using Pandora::Utils::Stack;
 
 void StackTest::init()
 {
-    printf("Starting StackTest\n");
+    printf("Starting StackTest\t\n");
 }
 
 void StackTest::testConstructor()
@@ -34,7 +34,7 @@ void StackTest::testConstructor()
 
 void StackTest::testStack()
 {
-    printf("\tTesting Stack\n");
+    printf("\tTesting Stack\t\n");
 
     int inttmp, inttmp2;
     CPPUNIT_ASSERT( intStack->getTop(inttmp) );

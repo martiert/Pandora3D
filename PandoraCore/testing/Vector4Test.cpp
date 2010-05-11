@@ -6,7 +6,7 @@ Purpose :
 
 Creation Date : 2010-02-04
 
-Last Modified : sø. 07. feb. 2010 kl. 00.24 +0100
+Last Modified : ti. 11. mai 2010 kl. 11.30 +0200
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ using Pandora::Math::Vector4;
 
 void Vector4Test::init()
 {
-    printf("Starting Vector4Test\n");
+    printf("Starting Vector4Test\t\n");
 }
 
 void Vector4Test::testConstructor()

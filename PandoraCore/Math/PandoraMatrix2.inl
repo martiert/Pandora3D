@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix class from Pandora3D
 
 Creation Date : 2010-04-14
 
-Last Modified : to. 06. mai 2010 kl. 17.37 +0200
+Last Modified : ti. 11. mai 2010 kl. 11.39 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------

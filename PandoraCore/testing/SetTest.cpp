@@ -6,7 +6,7 @@ Purpose : Testing the Set class of Pandora3D.
 
 Creation Date : 2010-01-26
 
-Last Modified : ti. 26. jan. 2010 kl. 11.23 +0100
+Last Modified : ti. 11. mai 2010 kl. 11.30 +0200
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ using Pandora::Utils::Set;
 
 void SetTest::init()
 {
-    printf("Starting SetTest\n");
+    printf("Starting SetTest\t\n");
 }
 
 void SetTest::testConstructor()
@@ -79,7 +79,7 @@ void SetTest::testExistence()
 
 void SetTest::testRemove()
 {
-    printf("\tTesting remove\n");
+    printf("\tTesting remove\t\n");
 
     CPPUNIT_ASSERT( !charSet->remove('a') );
 
@@ -97,7 +97,7 @@ void SetTest::testRemove()
 
 void SetTest::testPointer()
 {
-    printf("\tTesting pointer\n");
+    printf("\tTesting pointer\t\n");
 
     char *charPtr = charSet->getPointer();
     int *intPtr = noincSet->getPointer();

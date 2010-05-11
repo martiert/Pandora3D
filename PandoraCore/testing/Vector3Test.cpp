@@ -6,7 +6,7 @@ Purpose : The implementation of the Test class for 3D vectors.
 
 Creation Date : 2010-01-28
 
-Last Modified : fr. 29. jan. 2010 kl. 16.47 +0100
+Last Modified : ti. 11. mai 2010 kl. 11.30 +0200
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -16,7 +16,7 @@ Created By :  Martin Ertsås
 
 void Vector3Test::init()
 {
-    printf("Starting Vector3Test\n");
+    printf("Starting Vector3Test\t\n");
 }
 
 void Vector3Test::testConstructor()

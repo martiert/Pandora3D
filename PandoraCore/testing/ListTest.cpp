@@ -6,7 +6,7 @@ Purpose : Testing the List class of Pandora3D.
 
 Creation Date : 2010-01-26
 
-Last Modified : on. 05. mai 2010 kl. 21.22 +0200
+Last Modified : ti. 11. mai 2010 kl. 11.30 +0200
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ using Pandora::Utils::List;
 
 void ListTest::init()
 {
-    printf("Starting ListTest\n");
+    printf("Starting ListTest\t\n");
 }
 
 void ListTest::testList()
