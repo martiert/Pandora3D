@@ -6,7 +6,7 @@ Purpose :
 
 Creation Date : 2010-05-05
 
-Last Modified : lø. 26. juni 2010 kl. 09.58 +0200
+Last Modified : lø. 26. juni 2010 kl. 16.56 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -37,5 +37,3 @@ const Pandora::Math::Matrix2<float>
 template<>
 const Pandora::Math::Matrix2<double>
     Pandora::Math::Matrix2<double>::ONES(1.0, 1.0, 1.0, 1.0);
-
-

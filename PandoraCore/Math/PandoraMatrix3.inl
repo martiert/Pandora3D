@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix3 class for Pandora3D
 
 Creation Date : 2010-04-16
 
-Last Modified : ma. 03. mai 2010 kl. 16.20 +0200
+Last Modified : lø. 26. juni 2010 kl. 18.27 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -148,7 +148,7 @@ Real& Matrix3<Real>::operator()(const int row, const int col)
  * Get copy of element (row,col).                                               *
  *******************************************************************************/
 template<class Real>
-const Real Matrix3<Real>::operator(const int row, const int col) const
+const Real Matrix3<Real>::operator()(const int row, const int col) const
 {
     assert(row < 3 && col < 3 && "Index out of bounds.");
     return m_data[col + row*3];
@@ -202,9 +202,10 @@ Vector3<Real> Matrix3<Real>::getColumn(const int col) const
  * Matrix assignment.                                                           *
  *******************************************************************************/
 template<class Real>
-void Matrix3<Real>::operator=(const Matrix3<Real>& mat)
+Matrix3<Real> Matrix3<Real>::operator=(const Matrix3<Real>& mat)
 {
     memcpy(m_data, mat.m_data, 9);
+    return *this;
 }
 
 /********************************************************************************
@@ -298,36 +299,40 @@ Matrix3<Real> Matrix3<Real>::operator/(const Real scalar) const
  * Add a matrix to this matrix.                                                 *
  *******************************************************************************/
 template<class Real>
-void Matrix3<Real>::operator+=(const Matrix3<Real>& mat)
+Matrix3<Real> Matrix3<Real>::operator+=(const Matrix3<Real>& mat)
 {
     (*this) = (*this) + mat;
+    return *this;
 }
 
 /********************************************************************************
  * Subtract a matrix from this matrix.                                          *
  *******************************************************************************/
 template<class Real>
-void Matrix3<Real>::operator-=(const Matrix3<Real>& mat)
+Matrix3<Real> Matrix3<Real>::operator-=(const Matrix3<Real>& mat)
 {
     (*this) = (*this) - mat;
+    return *this;
 }
 
 /********************************************************************************
  * Multiply this matrix with a scalar.                                          *
  *******************************************************************************/
 template<class Real>
-void Matrix3<Real>::operator*=(const Real scalar)
+Matrix3<Real> Matrix3<Real>::operator*=(const Real scalar)
 {
     (*this) = (*this) * scalar;
+    return *this;
 }
 
 /********************************************************************************
  * Divide this matrix with a scalar.                                            *
  *******************************************************************************/
 template<class Real>
-void Matrix3<Real>::operator/=(const Real scalar)
+Matrix3<Real> Matrix3<Real>::operator/=(const Real scalar)
 {
     (*this) = (*this) / scalar;
+    return *this;
 }
 
 /********************************************************************************
@@ -450,7 +455,7 @@ bool Matrix3<Real>::operator<(const Matrix3<Real>& mat) const
 
 #ifdef DEBUG
 /********************************************************************************
- * Print out the matrix.
+ * Print out the matrix.                                                        *
  *******************************************************************************/
 template<class Real>
 void Matrix3<Real>::print() const
@@ -461,3 +466,12 @@ void Matrix3<Real>::print() const
             m_data[6], m_data[7], m_data[8]);
 }
 #endif
+
+/********************************************************************************
+ * Makes it possible to write scalar*matrix.                                    *
+ *******************************************************************************/
+template<class Real>
+Matrix3<Real> operator*(const Real scalar, const Matrix3<Real>& mat)
+{
+    return mat*scalar;
+}

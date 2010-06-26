@@ -75,15 +75,10 @@ namespace Pandora
                  *  Copy a vector to this vector.
                  *  \param
                  *      vec - The vector to copy from.
+                 *  \return
+                 *      This vector.
                  */
-                void operator=(const Vector4& vec);
-
-                /**
-                 *  Copy an array to this vector.
-                 *  \param
-                 *      vec - The array to copy from.
-                 */
-                void operator=(const Real vec[4]);
+                Vector4 operator=(const Vector4& vec);
 
                 /**
                  *  Get element number i from the vector.
@@ -182,31 +177,39 @@ namespace Pandora
                  *  Add a vector to this vector.
                  *  \param
                  *      vec - The vector to add to this vector.
+                 *  \return
+                 *      This vector.
                  */
-                void operator+=(const Vector4& vec);
+                Vector4 operator+=(const Vector4& vec);
 
                 /**
                  *  Subtract a vector from this vector.
                  *  \param
                  *      vec - The vector to subtract with.
+                 *  \return
+                 *      This vector.
                  */
-                void operator-=(const Vector4& vec);
+                Vector4 operator-=(const Vector4& vec);
 
                 /**
                  *  Multiply this vector with a scalar.
                  *  \param
                  *      scalar - The scalar to multiply with.
+                 *  \return
+                 *      This vector.
                  */
-                void operator*=(const Real& scalar);
+                Vector4 operator*=(const Real& scalar);
 
                 /**
                  *  Divide this vector with a scalar.
                  *  \param
                  *      scalar - The scalar to divide with.
+                 *  \return
+                 *      This vector.
                  *  \note
                  *      The program will crash if the scalar is zero.
                  */
-                void operator/=(const Real& scalar);
+                Vector4 operator/=(const Real& scalar);
 
                 /**
                  *  Check if two vectors are equal.
@@ -304,6 +307,18 @@ namespace Pandora
            public:
                 Real x, y, z, w;
         };
+
+        /**
+         *  Makes it possible to write scalar*vec.
+         *  \param
+         *      scalar - The scalar.
+         *  \param
+         *      vec - The vector.
+         *  \return
+         *      scalar*vec.
+         */
+        template<class Real>
+        Vector4<Real> operator*(const Real scalar, const Vector4<Real>& vec);
 
 #include "PandoraVector4.inl"
 

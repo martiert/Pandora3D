@@ -69,15 +69,10 @@ namespace Pandora
                  *  Copy a vector to this vector.
                  *  \param
                  *      vec - The vector to copy.
+                 *  \return
+                 *      This vector.
                  */
                 Vector2 operator=(Vector2& vec);
-
-                /**
-                 *  Copy an array to this vector.
-                 *  \param
-                 *      vec - The array to copy.
-                 */
-                Vector2 operator=(Real vec[2]);
 
                 /**
                  *  Access operator. Get element number i from the vector.
@@ -168,6 +163,8 @@ namespace Pandora
                  *  Add a vector to this vector.
                  *  \param
                  *      vec - The vector to add to this vector.
+                 *  \return
+                 *      This vector.
                  */
                 Vector2 operator+=(const Vector2& vec);
 
@@ -175,6 +172,8 @@ namespace Pandora
                  *  Subtract a vector from this vector.
                  *  \param
                  *      vec - The vector to subtract with.
+                 *  \return
+                 *      This vector.
                  */
                 Vector2 operator-=(const Vector2& vec);
 
@@ -182,6 +181,8 @@ namespace Pandora
                  *  Multiply this vector with a scalar.
                  *  \param
                  *      scalar - The scalar to multiply with.
+                 *  \return
+                 *      This vector.
                  */
                 Vector2 operator*=(const Real& scalar);
 
@@ -189,6 +190,10 @@ namespace Pandora
                  *  Divide this vector with a scalar.
                  *  \param
                  *      scalar - The scalar to divide with.
+                 *  \return
+                 *      This vector.
+                 *  \note
+                 *      Program will crash if scalar is zero.
                  */
                 Vector2 operator/=(const Real& scalar);
 
@@ -306,8 +311,20 @@ namespace Pandora
                 Real x, y;
         };
 
+        /**
+         *  Makes it possible to write scalar*vec
+         *  \param
+         *      scalar - The scalar.
+         *  \param
+         *      vec - The vector.
+         *  \return
+         *      scalar*vec
+         */
+        template<class Real>
+        Vector2<Real> operator*(const Real scalar, const Vector2<Real>& vec);
+
 #include "PandoraVector2.inl"
 
    }
 }
-#endif
+#endif-

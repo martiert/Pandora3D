@@ -64,6 +64,15 @@ namespace Pandora
                 Vector3(const Real vec[3]);
 
                 /**
+                 *  Assignment operator.
+                 *  \param
+                 *      vec - The vector to copy.
+                 *  \return
+                 *      This vector.
+                 */
+                Vector3 operator=(const Vector3<Real>& vec);
+
+                /**
                  *  Destructor. Destroys the vector
                  */
                 ~Vector3();
@@ -221,31 +230,39 @@ namespace Pandora
                  *  Add a vector to this vector.
                  *  \param
                  *      vec - The vector to add to this vector.
+                 *  \return
+                 *      This vector.
                  */
-                void operator+=(const Vector3& vec);
+                Vector3 operator+=(const Vector3& vec);
 
                 /**
                  *  Subtract a vector from this vector.
                  *  \param
                  *      vec - The vector to subtract with.
+                 *  \return
+                 *      This vector.
                  */
-                void operator-=(const Vector3& vec);
+                Vector3 operator-=(const Vector3& vec);
 
                 /**
                  *  Multiply this vector with a scalar.
                  *  \param
                  *      scalar - The scalar to multiply with.
+                 *  \return
+                 *      This vector.
                  */
-                void operator*=(const Real& scalar);
+                Vector3 operator*=(const Real& scalar);
 
                 /**
                  *  Divide this vector with a scalar.
                  *  \param
                  *      scalar - The scalar to divide with.
+                 *  \return
+                 *      This vector.
                  *  \note
                  *      If scalar is zero, the program will crash.
                  */
-                void operator/=(const Real& scalar);
+                 Vector3 operator/=(const Real& scalar);
 
                 /**
                  *  Get the length of the vector. As the sqrt of the sum of 
@@ -297,6 +314,18 @@ namespace Pandora
             public:
                 Real x, y, z;
         };
+
+        /**
+         *  Multiply a scalar with a vector.
+         *  \param  
+         *      scalar - The scalar.
+         *  \param
+         *      vec - The vector.
+         *  \return
+         *      scalar*vec.
+         */
+        template<class Real>
+        Vector3<Real> operator*(const Real scalar, const Vector3<Real>& vec);
 
 #include "PandoraVector3.inl"
 

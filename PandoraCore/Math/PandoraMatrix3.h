@@ -407,6 +407,18 @@ namespace Pandora
                 Real m_data[9];
         };
 
+        /**
+         *  Can write scalar * matrix.
+         *  \param
+         *      scalar - The scalar to multiply with.
+         *  \param
+         *      mat - The matrix.
+         *  \return
+         *      mat*scalar.
+         */
+        template<class Real>
+        Matrix3<Real> operator*(const Real scalar, const Matrix3<Real>& mat);
+
 #include "PandoraMatrix3.inl"
 
     }

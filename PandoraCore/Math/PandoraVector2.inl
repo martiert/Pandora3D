@@ -6,7 +6,7 @@ Purpose : Implementation of the Vector2 class used in Pandora3D
 
 Creation Date : 2010-01-26
 
-Last Modified : ma. 19. april 2010 kl. 13.32 +0200
+Last Modified : lø. 26. juni 2010 kl. 17.17 +0200
 
 Created By : Martin Ertsås
 --------------------------------------------------------------------------------
@@ -62,20 +62,11 @@ Vector2<Real>::~Vector2()
  * Assignment operator.                                                         * 
  *******************************************************************************/ 
 template<class Real>
-void Vector2<Real>::operator=(Vector2<Real>& vec)
+Vector2<Real> Vector2<Real>::operator=(Vector2<Real>& vec)
 {
     x = vec[0];
     y = vec[1];
-}
-
-/********************************************************************************
- * Assignment operator.                                                         * 
- *******************************************************************************/ 
-template<class Real>
-void Vector2<Real>::operator=(Real vec[2])
-{
-    x = vec[0];
-    y = vec[1];
+    return *this;
 }
 
 /********************************************************************************
@@ -173,41 +164,45 @@ Vector2<Real> Vector2<Real>::operator/(const Real& scalar) const
  * Addition operator.                                                           *
  *******************************************************************************/
 template<class Real>
-void Vector2<Real>::operator+=(const Vector2<Real>& vec)
+Vector2<Real> Vector2<Real>::operator+=(const Vector2<Real>& vec)
 {
     x += vec.x;
     y += vec.y;
+    return *this;
 }
 
 /********************************************************************************
  * Subtraction operator.                                                        *
  *******************************************************************************/
 template<class Real>
-void Vector2<Real>::operator-=(const Vector2<Real>& vec)
+Vector2<Real> Vector2<Real>::operator-=(const Vector2<Real>& vec)
 {
     x -= vec.x;
     y -= vec.y;
+    return *this;
 }
 
 /********************************************************************************
  * Multiplication with scalar.                                                  *
  *******************************************************************************/
 template<class Real>
-void Vector2<Real>::operator*=(const Real& scalar)
+Vector2<Real> Vector2<Real>::operator*=(const Real& scalar)
 {
     x *= scalar;
     y *= scalar;
+    return *this;
 }
 
 /********************************************************************************
  * Division with scalar.                                                        *
  *******************************************************************************/
 template<class Real>
-void Vector2<Real>::operator/=(const Real& scalar)
+Vector2<Real> Vector2<Real>::operator/=(const Real& scalar)
 {
     assert( scalar != (Real) 0.0 );
     Real s = ((Real) 1.0)/scalar;
     (*this) *= s;
+    return *this;
 }
 
 /********************************************************************************
@@ -344,3 +339,12 @@ void Vector2<Real>::print() const
     printf("\n[%g %g]\n\n", x, y);
 }
 #endif
+
+/********************************************************************************
+ * Makes it possible to write scalar * vec.                                     *
+ *******************************************************************************/
+template<class Real>
+Vector2<Real> operator*(const Real scalar, const Vector2<Real>& vec)
+{
+    return vec * scalar;
+}

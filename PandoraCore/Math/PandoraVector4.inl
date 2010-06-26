@@ -6,7 +6,7 @@ Purpose : Implementation of the Vector4 class.
 
 Creation Date : 2010-01-31
 
-Last Modified : ma. 19. april 2010 kl. 13.38 +0200
+Last Modified : lø. 26. juni 2010 kl. 17.26 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -73,18 +73,7 @@ void Vector4<Real>::operator=(const Vector4<Real>& vec)
     y = vec.y;
     z = vec.z;
     w = vec.w;
-}
-
-/********************************************************************************
- * Assign an array to this vector.                                              *
- *******************************************************************************/
-template<class Real>
-void Vector4<Real>::operator=(const Real vec[4])
-{
-    x = vec[0];
-    y = vec[1];
-    z = vec[2];
-    w = vec[3];
+    return *this;
 }
 
 /********************************************************************************
@@ -186,45 +175,49 @@ Real Vector4<Real>::operator*(const Vector4<Real>& vec) const
  * Add a vector to this vector.                                                 *
  *******************************************************************************/
 template<class Real>
-void Vector4<Real>::operator+=(const Vector4<Real>& vec)
+Vector4<Real> Vector4<Real>::operator+=(const Vector4<Real>& vec)
 {
     x += vec.x;
     y += vec.y;
     z += vec.z;
     w += vec.w;
+    return *this;
 }
 
 /********************************************************************************
  * Subtract a vector from this vector.                                          *
  *******************************************************************************/
 template<class Real>
-void Vector4<Real>::operator-=(const Vector4<Real>& vec)
+Vector4<Real> Vector4<Real>::operator-=(const Vector4<Real>& vec)
 {
     (*this) += -vec;
+    return *this;
 }
 
 /********************************************************************************
  * Multiply this vector with a scalar.                                          *
  *******************************************************************************/
 template<class Real>
-void Vector4<Real>::operator*=(const Real& scalar)
+Vector4<Real> Vector4<Real>::operator*=(const Real& scalar)
 {
     x *= scalar;
     y *= scalar;
     z *= scalar;
     w *= scalar;
+    return *this;
 }
 
 /********************************************************************************
  * Divide this vector with a scalar.                                            *
  *******************************************************************************/
 template<class Real>
-void Vector4<Real>::operator/=(const Real& scalar)
+Vector4<Real> Vector4<Real>::operator/=(const Real& scalar)
 {
     assert(scalar != 0 && "Can not divide by zero");
     
     Real s = ((Real) 1.0)/scalar;
     (*this) *= s;
+    return *this;
 }
 
 /********************************************************************************
@@ -345,3 +338,12 @@ void Vector4<Real>::print() const
     printf("\n[%g %g %g %g]\n\n", x, y, z, w);
 }
 #endif
+
+/********************************************************************************
+ * Makes it possible to write scalar*vec.                                       *
+ *******************************************************************************/
+template<class Real>
+Vector4<Real> operator*(const Real scalar, const Vector4<Real>& vec)
+{
+    return vec*scalar;
+}

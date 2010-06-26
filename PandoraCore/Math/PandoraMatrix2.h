@@ -363,6 +363,12 @@ namespace Pandora
         /**
          *  Makes it possible to write
          *  scalar * matrix.
+         *  \param
+         *      scalar - The scalar to multipy with.
+         *  \param
+         *      mat - The matrix.
+         *  \return
+         *      The matrix mat multiplied with the scalar.
          */
         template<class Real>
         Matrix2<Real> operator*(const Real scalar, const Matrix2<Real>& mat);

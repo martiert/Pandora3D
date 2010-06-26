@@ -411,6 +411,18 @@ namespace Pandora
                 Real m_data[16];
         };
 
+        /**
+         *  Makes it possible to write scalar*matrix.
+         *  \param
+         *      scalar - The scalar.
+         *  \parma
+         *      mat - The matrix.
+         *  \return
+         *      scalar*matrix.
+         */
+        template<class Real>
+        Matrix4<Real> operator*(const Real scalar, const Matrix4<Real>& mat);
+
 #include "PandoraMatrix4.inl"
 
     }
