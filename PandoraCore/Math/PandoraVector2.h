@@ -70,14 +70,14 @@ namespace Pandora
                  *  \param
                  *      vec - The vector to copy.
                  */
-                void operator=(Vector2& vec);
+                Vector2 operator=(Vector2& vec);
 
                 /**
                  *  Copy an array to this vector.
                  *  \param
                  *      vec - The array to copy.
                  */
-                void operator=(Real vec[2]);
+                Vector2 operator=(Real vec[2]);
 
                 /**
                  *  Access operator. Get element number i from the vector.
@@ -169,28 +169,28 @@ namespace Pandora
                  *  \param
                  *      vec - The vector to add to this vector.
                  */
-                void operator+=(const Vector2& vec);
+                Vector2 operator+=(const Vector2& vec);
 
                 /**
                  *  Subtract a vector from this vector.
                  *  \param
                  *      vec - The vector to subtract with.
                  */
-                void operator-=(const Vector2& vec);
+                Vector2 operator-=(const Vector2& vec);
 
                 /**
                  *  Multiply this vector with a scalar.
                  *  \param
                  *      scalar - The scalar to multiply with.
                  */
-                void operator*=(const Real& scalar);
+                Vector2 operator*=(const Real& scalar);
 
                 /**
                  *  Divide this vector with a scalar.
                  *  \param
                  *      scalar - The scalar to divide with.
                  */
-                void operator/=(const Real& scalar);
+                Vector2 operator/=(const Real& scalar);
 
                 /**
                  *  Checks if two vectors are equal.

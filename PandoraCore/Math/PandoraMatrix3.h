@@ -26,7 +26,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include <string.h>
 
 #include "PandoraMath.h"
-#include "PandoraMatrix2.h"
+#include "PandoraMatrix3.h"
 #include "PandoraVector3.h"
 
 namespace Pandora 
@@ -215,7 +215,7 @@ namespace Pandora
                  *  \param
                  *      mat - The matrix to copy.
                  */
-                void operator=(const Matrix3& mat);
+                Matrix3 operator=(const Matrix3& mat);
 
                 /**
                  *  Negate the matrix.
@@ -283,28 +283,28 @@ namespace Pandora
                  *  \param
                  *      mat - The matrix to add to this matrix.
                  */
-                void operator+=(const Matrix3& mat);
+                Matrix3 operator+=(const Matrix3& mat);
 
                 /**
                  *  Subtract a matrix from this matrix.
                  *  \param
                  *      mat - The matrix to subtract with.
                  */
-                void operator-=(const Matrix3& mat);
+                Matrix3 operator-=(const Matrix3& mat);
 
                 /**
                  *  Multiply this matrix with a scalar.
                  *  \param
                  *      scalar - The scalar to multiply with.
                  */
-                void operator*=(const Real& scalar);
+                Matrix3 operator*=(const Real& scalar);
 
                 /**
                  *  Divide this matrix with a scalar.
                  *  \param
                  *      scalar - The scalar to divide with.
                  */
-                void operator/=(const Real& scalar);
+                Matrix3 operator/=(const Real& scalar);
 
                 /**
                  *  Get the absolute value of this matrix. That is, the

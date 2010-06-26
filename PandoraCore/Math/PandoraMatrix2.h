@@ -170,7 +170,7 @@ namespace Pandora
                  *  \param
                  *      matrix - The matrix to assign it to.
                  */
-                void operator=(const Matrix2& matrix);
+                Matrix2 operator=(const Matrix2& matrix);
 
                 /**
                  *  Negate this matrix.
@@ -230,28 +230,28 @@ namespace Pandora
                  *  \param
                  *      matrix - The matrix to add with.
                  */
-                void operator+=(const Matrix2& matrix);
+                Matrix2 operator+=(const Matrix2& matrix);
 
                 /**
                  *  Subtract a matrix from this matrix.
                  *  \param
                  *      matrix - The matrix to subtract with.
                  */
-                void operator-=(const Matrix2& matrix);
+                Matrix2 operator-=(const Matrix2& matrix);
 
                 /**
                  *  Multiply this matrix with a scalar.
                  *  \param
                  *      scalar - The scalar to multiply with.
                  */
-                void operator*=(const Real& scalar);
+                Matrix2 operator*=(const Real& scalar);
 
                 /**
                  *  Divide this matrix with a scalar.
                  *  \param
                  *      scalar - The scalar to divide with.
                  */
-                void operator/=(const Real& scalar);
+                Matrix2 operator/=(const Real& scalar);
 
                 /**
                  *  Multiply a matrix with a vector.
@@ -359,6 +359,13 @@ namespace Pandora
             protected:
                 Real m_data[4];
         };
+
+        /**
+         *  Makes it possible to write
+         *  scalar * matrix.
+         */
+        template<class Real>
+        Matrix2<Real> operator*(const Real scalar, const Matrix2<Real>& mat);
 
 #include "PandoraMatrix2.inl"
 

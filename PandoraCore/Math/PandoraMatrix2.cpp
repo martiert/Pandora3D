@@ -6,7 +6,7 @@ Purpose :
 
 Creation Date : 2010-05-05
 
-Last Modified : on. 05. mai 2010 kl. 22.24 +0200
+Last Modified : lø. 26. juni 2010 kl. 09.58 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -38,12 +38,4 @@ template<>
 const Pandora::Math::Matrix2<double>
     Pandora::Math::Matrix2<double>::ONES(1.0, 1.0, 1.0, 1.0);
 
-/********************************************************************************
- * So we can write Real * Matrix                                                *
- *******************************************************************************/
-template<class Real>
-Pandora::Math::Matrix2<Real> operator*(const Real& scale, 
-        const Pandora::Math::Matrix2<Real>& mat)
-{
-    return mat * scale;
-}
+

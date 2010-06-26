@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix class from Pandora3D
 
 Creation Date : 2010-04-14
 
-Last Modified : ti. 11. mai 2010 kl. 11.39 +0200
+Last Modified : lø. 26. juni 2010 kl. 09.58 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -170,9 +170,11 @@ Vector2<Real> Matrix2<Real>::getColumn(const int col) const
  * Assignment operator.                                                         *
  *******************************************************************************/
 template<class Real>
-void Matrix2<Real>::operator=(const Matrix2<Real>& matrix)
+Matrix2<Real> Matrix2<Real>::operator=(const Matrix2<Real>& matrix)
 {
-    memcpy(m_data, matrix.m_data, 4*sizeof(Real));
+    if(this != &matrix)
+        memcpy(m_data, matrix.m_data, 4*sizeof(Real));
+    return *this;
 }
 
 /********************************************************************************
@@ -213,7 +215,7 @@ Matrix2<Real> Matrix2<Real>::operator*(const Matrix2<Real>& matrix) const
     return Matrix2<Real>(m_data[0]*matrix[0] + m_data[1]*matrix[2],
             m_data[0]*matrix[1] + m_data[1]*matrix[3],
             m_data[2]*matrix[0] + m_data[3]*matrix[2],
-            m_data[2]*matrix[1] + m_data[2]*matrix[3]);
+            m_data[2]*matrix[1] + m_data[3]*matrix[3]);
 }
 
 /********************************************************************************
@@ -385,3 +387,13 @@ void Matrix2<Real>::print() const
             m_data[3]);
 }
 #endif
+
+/********************************************************************************
+ * So we can write Real * Matrix                                                *
+ *******************************************************************************/
+template<class Real>
+Pandora::Math::Matrix2<Real> operator*(const Real scale,
+        const Pandora::Math::Matrix2<Real>& mat)
+{
+    return mat * scale;
+}

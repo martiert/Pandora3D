@@ -6,7 +6,7 @@ Purpose :
 
 Creation Date : 2010-05-04
 
-Last Modified : ti. 11. mai 2010 kl. 11.53 +0200
+Last Modified : lø. 26. juni 2010 kl. 10.00 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -101,6 +101,26 @@ void Matrix2Test::testSubtraction()
 void Matrix2Test::testMultiplication()
 {
     printf("\tTesting multiplication\n");
+    //Matrix multiplication
+    Mat2d tmp = test1 * Mat2d::IDENTITY;
+    CPPUNIT_ASSERT( tmp == test1 );
+
+    tmp = test1 * test2;
+    CPPUNIT_ASSERT( tmp[0] == test1[0]*test2[0] + test1[1]*test2[2] );
+    CPPUNIT_ASSERT( tmp[1] == test1[0]*test2[1] + test1[1]*test2[3] );
+    CPPUNIT_ASSERT( tmp[2] == test1[2]*test2[0] + test1[3]*test2[2] );
+    CPPUNIT_ASSERT( tmp[3] == test1[2]*test2[1] + test1[3]*test2[3] );
+
+    //Matrix scalar multiplication
+    tmp = test1 * 1.0;
+    CPPUNIT_ASSERT( tmp == test1 );
+    tmp = 1.0 * test1;
+    CPPUNIT_ASSERT( tmp == test1 );
+    tmp = 3.4 * test2;
+    CPPUNIT_ASSERT( tmp[0] == test2[0] * 3.4 );
+    CPPUNIT_ASSERT( tmp[1] == test2[1] * 3.4 );
+    CPPUNIT_ASSERT( tmp[2] == test2[2] * 3.4 );
+    CPPUNIT_ASSERT( tmp[3] == test2[3] * 3.4 );
 }
 
 void Matrix2Test::testArithmetic()

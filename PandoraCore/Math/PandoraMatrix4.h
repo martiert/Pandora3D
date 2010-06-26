@@ -195,7 +195,7 @@ namespace Pandora
                  *  \param
                  *      mat - The matrix we wish to set it to.
                  */
-                void operator=(const Matrix4 mat);
+                Matrix4 operator=(const Matrix4 mat);
 
                 /**
                  *  Negate the matrix.
@@ -263,28 +263,28 @@ namespace Pandora
                  *  \param
                  *      mat - The matrix to add with.
                  */
-                void operator+=(const Matrix4& mat);
+                Matrix4 operator+=(const Matrix4& mat);
 
                 /**
                  *  Subtract a matrix from this matrix.
                  *  \param
                  *      mat - The matrix to subtract with.
                  */
-                void operator-=(const Matrix4& mat);
+                Matrix4 operator-=(const Matrix4& mat);
 
                 /**
                  *  Multiply this matrix with a scalar.
                  *  \param
                  *      scalar - The scalar to multiply with.
                  */
-                void operator*=(const Real& scalar);
+                Matrix4 operator*=(const Real& scalar);
 
                 /**
                  *  Divide this matrix with a scalar.
                  *  \param
                  *      scalar - The scalar to divide with.
                  */
-                void operator/=(const Real& scalar);
+                Matrix4 operator/=(const Real& scalar);
 
 
                 /**
@@ -301,7 +301,7 @@ namespace Pandora
                  *  \param
                  *      mat - The matrix to dot multiply with.
                  */
-                void operator*=(const Matrix4& mat);
+                Matrix4 operator*=(const Matrix4& mat);
 
                 /**
                  *  Get the absolute value of this matrix.
