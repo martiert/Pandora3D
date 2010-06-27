@@ -160,7 +160,7 @@ namespace Pandora
                  *  \return
                  *      A new vector which is this vector divided by scalar.
                  *  \note
-                 *      If scalar is zero, the program will crash.
+                 *      Will only check for division by zero in DEBUG mode.
                  */
                 Vector4 operator/(const Real& scalar) const;
 
@@ -207,7 +207,7 @@ namespace Pandora
                  *  \return
                  *      This vector.
                  *  \note
-                 *      The program will crash if the scalar is zero.
+                 *      Will only check for division by zero in DEBUG mode.
                  */
                 Vector4& operator/=(const Real& scalar);
 
@@ -303,7 +303,7 @@ namespace Pandora
                  * Print the vector. Only available in DEBUG mode.
                  */
                 void print() const;
-#endif
+#endif //DEBUG
            public:
                 Real x, y, z, w;
         };
@@ -322,6 +322,6 @@ namespace Pandora
 
 #include "PandoraVector4.inl"
 
-    }
-}
-#endif
+    } //namespace Math
+} //namespace Pandora
+#endif //PANDORAVECTOR4_H

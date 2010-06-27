@@ -233,6 +233,8 @@ namespace Pandora
                  *  Matrix assignment. Set this matrix equal to another.
                  *  \param
                  *      mat - The matrix we wish to set it to.
+                 *  \return
+                 *      This matrix.
                  */
                 Matrix4& operator=(const Matrix4& mat);
 
@@ -294,6 +296,8 @@ namespace Pandora
                  *      scalar - The scalar to divide with.
                  *  \return 
                  *      This matrix divided by a scalar.
+                 *  \note
+                 *      Will only check for division by zero in DEBUG mode.
                  */
                 Matrix4 operator/(const Real& scalar) const;
 
@@ -301,6 +305,8 @@ namespace Pandora
                  *  Add a matrix to this matrix.
                  *  \param
                  *      mat - The matrix to add with.
+                 *  \return
+                 *      This matrix.
                  */
                 Matrix4& operator+=(const Matrix4& mat);
 
@@ -308,6 +314,8 @@ namespace Pandora
                  *  Subtract a matrix from this matrix.
                  *  \param
                  *      mat - The matrix to subtract with.
+                 *  \return
+                 *      This matrix.
                  */
                 Matrix4& operator-=(const Matrix4& mat);
 
@@ -315,6 +323,8 @@ namespace Pandora
                  *  Multiply this matrix with a scalar.
                  *  \param
                  *      scalar - The scalar to multiply with.
+                 *  \return
+                 *      This matrix.
                  */
                 Matrix4& operator*=(const Real& scalar);
 
@@ -322,6 +332,10 @@ namespace Pandora
                  *  Divide this matrix with a scalar.
                  *  \param
                  *      scalar - The scalar to divide with.
+                 *  \return
+                 *      This matrix.
+                 *  \note
+                 *      Will only check for division by zero in DEBUG mode.
                  */
                 Matrix4& operator/=(const Real& scalar);
 
@@ -339,6 +353,8 @@ namespace Pandora
                  *  Dot multiply a matrix to this matrix.
                  *  \param
                  *      mat - The matrix to dot multiply with.
+                 *  \return
+                 *      This matrix.
                  */
                 Matrix4& operator*=(const Matrix4& mat);
 
@@ -442,7 +458,7 @@ namespace Pandora
                  *  Print out the matrix. Only available in DEBUG mode.
                  */
                 void print() const;
-#endif
+#endif //DEBUG
                 static const Matrix4 ZERO;
                 static const Matrix4 IDENTITY;
                 static const Matrix4 ONES;
@@ -464,6 +480,6 @@ namespace Pandora
 
 #include "PandoraMatrix4.inl"
 
-    }
-}
-#endif
+    } //namespace Math
+} //namespace Pandora
+#endif //PANDORAMATRIX4_H

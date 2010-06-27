@@ -287,6 +287,6 @@ namespace Pandora
 
 #include "PandoraMath.inl"
 
-    }
-}
-#endif
+    } //namespace Math
+} //namespace Pandora
+#endif //PANDORAMATH_H

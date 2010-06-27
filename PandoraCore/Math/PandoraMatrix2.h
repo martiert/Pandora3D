@@ -169,6 +169,8 @@ namespace Pandora
                  *  Assignment. Matrix to matrix.
                  *  \param
                  *      matrix - The matrix to assign it to.
+                 *  \return
+                 *      This matrix.
                  */
                 Matrix2& operator=(const Matrix2& matrix);
 
@@ -222,6 +224,8 @@ namespace Pandora
                  *      scalar - The scalar to divide with.
                  *  \return
                  *      The matrix divided with a scalar.
+                 *  \note
+                 *      Will only check for division by zero in DEBUG mode.
                  */
                 Matrix2 operator/(const Real& scalar) const;
 
@@ -229,6 +233,8 @@ namespace Pandora
                  *  Add a matrix to this matrix.
                  *  \param
                  *      matrix - The matrix to add with.
+                 *  \return
+                 *      This matrix.
                  */
                 Matrix2& operator+=(const Matrix2& matrix);
 
@@ -236,6 +242,8 @@ namespace Pandora
                  *  Subtract a matrix from this matrix.
                  *  \param
                  *      matrix - The matrix to subtract with.
+                 *  \return
+                 *      This matrix.
                  */
                 Matrix2& operator-=(const Matrix2& matrix);
 
@@ -243,6 +251,8 @@ namespace Pandora
                  *  Multiply this matrix with a scalar.
                  *  \param
                  *      scalar - The scalar to multiply with.
+                 *  \return
+                 *      This matrix.
                  */
                 Matrix2& operator*=(const Real& scalar);
 
@@ -250,6 +260,10 @@ namespace Pandora
                  *  Divide this matrix with a scalar.
                  *  \param
                  *      scalar - The scalar to divide with.
+                 *  \return
+                 *      This matrix.
+                 *  \note
+                 *      Will only check for division by zero in DEBUG mode.
                  */
                 Matrix2& operator/=(const Real& scalar);
 
@@ -351,7 +365,7 @@ namespace Pandora
                  *  Print put the matrix. Available only in DEBUG mode.
                  */
                 void print() const;
-#endif
+#endif //DEBUG
 
                 static const Matrix2 ZERO;
                 static const Matrix2 IDENTITY;
@@ -375,6 +389,6 @@ namespace Pandora
 
 #include "PandoraMatrix2.inl"
 
-    }
-}
-#endif
+    } //namespace Math
+} //namespace Pandora
+#endif //PANDORAMATRIX_H

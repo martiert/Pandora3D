@@ -210,6 +210,8 @@ namespace Pandora
                  *  Matrix assignment.
                  *  \param
                  *      mat - The matrix to copy.
+                 *  \return
+                 *      This matrix.
                  */
                 Matrix3& operator=(const Matrix3& mat);
 
@@ -271,6 +273,8 @@ namespace Pandora
                  *      scalar - The scalar to divide with.
                  *  \return
                  *      A matrix which is this matrix divided with a scalar.
+                 *  \note
+                 *      Will only check for division by zero in DEBUG mode.
                  */
                 Matrix3 operator/(const Real scalar) const;
 
@@ -278,6 +282,8 @@ namespace Pandora
                  *  Add a matrix to this matrix.
                  *  \param
                  *      mat - The matrix to add to this matrix.
+                 *  \return
+                 *      This matrix.
                  */
                 Matrix3& operator+=(const Matrix3& mat);
 
@@ -285,6 +291,8 @@ namespace Pandora
                  *  Subtract a matrix from this matrix.
                  *  \param
                  *      mat - The matrix to subtract with.
+                 *  \return
+                 *      This matrix.
                  */
                 Matrix3& operator-=(const Matrix3& mat);
 
@@ -292,6 +300,8 @@ namespace Pandora
                  *  Multiply this matrix with a scalar.
                  *  \param
                  *      scalar - The scalar to multiply with.
+                 *  \return
+                 *      This matrix.
                  */
                 Matrix3& operator*=(const Real& scalar);
 
@@ -299,6 +309,10 @@ namespace Pandora
                  *  Divide this matrix with a scalar.
                  *  \param
                  *      scalar - The scalar to divide with.
+                 *  \return
+                 *      This matrix.
+                 *  \note
+                 *      Will only check for division by zero in DEBUG mode.
                  */
                 Matrix3& operator/=(const Real& scalar);
 
@@ -394,7 +408,7 @@ namespace Pandora
                  *  Print out the matrix. Only available in DEBUG mode.
                  */
                 void print() const;
-#endif
+#endif //DEBUG
 
                 static const Matrix3 ZERO;
                 static const Matrix3 IDENTITY;
@@ -417,6 +431,6 @@ namespace Pandora
 
 #include "PandoraMatrix3.inl"
 
-    }
-}
-#endif
+    } //namespace Math
+} //namespace Pandora
+#endif //PANDORAMATRIX3_H
