@@ -6,7 +6,7 @@ Purpose : Implementation of the Vector4 class.
 
 Creation Date : 2010-01-31
 
-Last Modified : lø. 26. juni 2010 kl. 19.05 +0200
+Last Modified : sø. 27. juni 2010 kl. 23.06 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -296,27 +296,17 @@ Real Vector4<Real>::lengthSquared() const
 }
 
 /********************************************************************************
- * Normalize the vector. No error checking.                                     *
+ * Normalize the vector.                                                        *
  *******************************************************************************/
 template<class Real>
-void Vector4<Real>::normalize()
+Vector4<Real>& Vector4<Real>::normalize()
 {
     Real len = length();
-    (*this) /= len;
-}
 
-/********************************************************************************
- * Normalize the vector. Error checking.                                        *
- *******************************************************************************/
-template<class Real>
-bool Vector4<Real>::normalizeChecked()
-{
-    Real len = length();
-    if(len == 0)
-        return false;
+    assert(len != (Real) 0.0);
 
     (*this) /= len;
-    return true;
+    return *this;
 }
 
 /********************************************************************************

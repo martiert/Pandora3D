@@ -6,7 +6,7 @@ Purpose : Implementation of the Vector2 class used in Pandora3D
 
 Creation Date : 2010-01-26
 
-Last Modified : lø. 26. juni 2010 kl. 19.14 +0200
+Last Modified : sø. 27. juni 2010 kl. 23.06 +0200
 
 Created By : Martin Ertsås
 --------------------------------------------------------------------------------
@@ -300,24 +300,14 @@ Real Vector2<Real>::lengthSquared() const
  * Normalize the vector.                                                        *
  *******************************************************************************/
 template<class Real>
-void Vector2<Real>::normalize()
+Vector2<Real>& Vector2<Real>::normalize()
 {
     Real scale = length();
-    *this /= scale;
-}
 
-/********************************************************************************
- * Normalize the vector. Check if the scaling value is zero.                    *
- *******************************************************************************/
-template<class Real>
-bool Vector2<Real>::normalizeChecked()
-{
-    Real scale = length();
-    if(scale == 0)
-        return false;
+    assert(scale != (Real) 0.0);
 
     *this /= scale;
-    return true;
+    return *this;
 }
 
 /********************************************************************************

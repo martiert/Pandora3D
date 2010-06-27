@@ -282,19 +282,12 @@ namespace Pandora
                 /**
                  *  Normalize the vector, that its make the length of the 
                  *  vector 1.
+                 *  \return 
+                 *      This vector.
                  *  \note
-                 *      No error testing is done, do NOT try normalizing a zero
-                 *      vector.
+                 *      Will only check for zero length in DEBUG mode.
                  */
-                void normalize();
-
-                /**
-                 *  Normalize the vector, but check if it can be done first.
-                 *  \return
-                 *      true if the vector is normalized, false if it can't be
-                 *      done.
-                 */
-                bool normalizeChecked();
+                Vector3& normalize();
 
                 /**
                  *  Cross multiply this vector with another.

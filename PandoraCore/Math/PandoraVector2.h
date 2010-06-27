@@ -289,17 +289,12 @@ namespace Pandora
 
                 /**
                  *  Normalize the vector. No error checking is done.
-                 */
-                void normalize();
-
-                /**
-                 *  Normalize the vector. Check if possible first (length is 
-                 *  not zero).
                  *  \return
-                 *      False if the length of the vector is zero, and thus the
-                 *      vector is not normalized. True otherwise.
+                 *      This vector.
+                 *  \note
+                 *      Will only check for zero length in DEBUG mode.
                  */
-                bool normalizeChecked();
+                Vector2& normalize();
 
 #ifdef DEBUG
                 /**

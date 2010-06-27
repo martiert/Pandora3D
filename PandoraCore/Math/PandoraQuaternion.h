@@ -158,6 +158,39 @@ namespace Pandora
                  *      Will only check for division by zero in DEBUG mode.
                  */
                 Quaternion& operator/=(const Real& scalar);
+
+                /**
+                 *  Calculate the length of the quaternion, which is:
+                 *  sqrt(w^2 + x^2 + y^2 + z^2).
+                 *  \return
+                 *      The length of the quaternion.
+                 */
+                Real length() const;
+
+                /**
+                 *  Calculate the squared length of the quaternion.
+                 *  \return
+                 *      The squared length of the quaternion.
+                 */
+                Real lengthSquared() const;
+
+                /**
+                 *  Normalize the quaternion.
+                 *  \return
+                 *      This quaternion.
+                 *  \note
+                 *      Will only check for zero length in DEBUG mode.
+                 */
+                Quaternion& normalize();
+
+#ifdef DEBUG
+                /**
+                 *  Print the quaternion.
+                 *  \note
+                 *      Will only be available in DEBUG mode.
+                 */
+                void print();
+#endif //DEBUG
             public:
                 Real x, y, z, w;
         };

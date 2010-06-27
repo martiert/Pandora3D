@@ -287,16 +287,13 @@ namespace Pandora
                 Real lengthSquared() const;
 
                 /**
-                 *  Normalize the vector. No error checking is done.
+                 *  Normalize the vector.
+                 *  \return 
+                 *      This vector.
+                 *  \note
+                 *      Will only check for zero length in DEBUG mode.
                  */
-                void normalize();
-
-                /**
-                 *  Normalize the vector if the length is different from zero.
-                 *  \return
-                 *      true if the vector is normalized. False otherwise.
-                 */
-                bool normalizeChecked();
+                Vector4& normalize();
 
 #ifdef DEBUG
                 /**
