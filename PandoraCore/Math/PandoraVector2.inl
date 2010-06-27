@@ -6,7 +6,7 @@ Purpose : Implementation of the Vector2 class used in Pandora3D
 
 Creation Date : 2010-01-26
 
-Last Modified : lø. 26. juni 2010 kl. 17.17 +0200
+Last Modified : lø. 26. juni 2010 kl. 19.14 +0200
 
 Created By : Martin Ertsås
 --------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ Vector2<Real>::~Vector2()
  * Assignment operator.                                                         * 
  *******************************************************************************/ 
 template<class Real>
-Vector2<Real> Vector2<Real>::operator=(Vector2<Real>& vec)
+Vector2<Real>& Vector2<Real>::operator=(const Vector2<Real>& vec)
 {
     x = vec[0];
     y = vec[1];
@@ -164,7 +164,7 @@ Vector2<Real> Vector2<Real>::operator/(const Real& scalar) const
  * Addition operator.                                                           *
  *******************************************************************************/
 template<class Real>
-Vector2<Real> Vector2<Real>::operator+=(const Vector2<Real>& vec)
+Vector2<Real>& Vector2<Real>::operator+=(const Vector2<Real>& vec)
 {
     x += vec.x;
     y += vec.y;
@@ -175,7 +175,7 @@ Vector2<Real> Vector2<Real>::operator+=(const Vector2<Real>& vec)
  * Subtraction operator.                                                        *
  *******************************************************************************/
 template<class Real>
-Vector2<Real> Vector2<Real>::operator-=(const Vector2<Real>& vec)
+Vector2<Real>& Vector2<Real>::operator-=(const Vector2<Real>& vec)
 {
     x -= vec.x;
     y -= vec.y;
@@ -186,7 +186,7 @@ Vector2<Real> Vector2<Real>::operator-=(const Vector2<Real>& vec)
  * Multiplication with scalar.                                                  *
  *******************************************************************************/
 template<class Real>
-Vector2<Real> Vector2<Real>::operator*=(const Real& scalar)
+Vector2<Real>& Vector2<Real>::operator*=(const Real& scalar)
 {
     x *= scalar;
     y *= scalar;
@@ -197,7 +197,7 @@ Vector2<Real> Vector2<Real>::operator*=(const Real& scalar)
  * Division with scalar.                                                        *
  *******************************************************************************/
 template<class Real>
-Vector2<Real> Vector2<Real>::operator/=(const Real& scalar)
+Vector2<Real>& Vector2<Real>::operator/=(const Real& scalar)
 {
     assert( scalar != (Real) 0.0 );
     Real s = ((Real) 1.0)/scalar;

@@ -26,6 +26,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include <string.h>
 
 #include "PandoraMath.h"
+#include "PandoraMatrix2.h"
 #include "PandoraMatrix3.h"
 #include "PandoraVector3.h"
 
@@ -105,7 +106,7 @@ namespace Pandora
                  *  \param
                  *      mat - The 3x3 matrix to copy.
                  */
-                Matrix3(Matrix3& mat);
+                Matrix3(const Matrix3& mat);
 
                 /**
                  *  Copy constructor. Takes a 2x2 matrix and adds 0 everywhere
@@ -113,12 +114,7 @@ namespace Pandora
                  *  \param
                  *      mat - The 2x2 matrix to copy.
                  */
-                Matrix3(Matrix2& mat);
-
-                /**
-                 *  Destructor. Does nothing.
-                 */
-                ~Matrix3();
+                Matrix3(const Matrix2<Real>& mat);
 
                 /**
                  *  Implicit conversion to array.
@@ -215,7 +211,7 @@ namespace Pandora
                  *  \param
                  *      mat - The matrix to copy.
                  */
-                Matrix3 operator=(const Matrix3& mat);
+                Matrix3& operator=(const Matrix3& mat);
 
                 /**
                  *  Negate the matrix.
@@ -283,28 +279,28 @@ namespace Pandora
                  *  \param
                  *      mat - The matrix to add to this matrix.
                  */
-                Matrix3 operator+=(const Matrix3& mat);
+                Matrix3& operator+=(const Matrix3& mat);
 
                 /**
                  *  Subtract a matrix from this matrix.
                  *  \param
                  *      mat - The matrix to subtract with.
                  */
-                Matrix3 operator-=(const Matrix3& mat);
+                Matrix3& operator-=(const Matrix3& mat);
 
                 /**
                  *  Multiply this matrix with a scalar.
                  *  \param
                  *      scalar - The scalar to multiply with.
                  */
-                Matrix3 operator*=(const Real& scalar);
+                Matrix3& operator*=(const Real& scalar);
 
                 /**
                  *  Divide this matrix with a scalar.
                  *  \param
                  *      scalar - The scalar to divide with.
                  */
-                Matrix3 operator/=(const Real& scalar);
+                Matrix3& operator/=(const Real& scalar);
 
                 /**
                  *  Get the absolute value of this matrix. That is, the

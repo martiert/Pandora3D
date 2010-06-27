@@ -6,7 +6,7 @@ Purpose : The implementation of the 3D vector class.
 
 Creation Date : 2010-01-28
 
-Last Modified : lø. 26. juni 2010 kl. 17.22 +0200
+Last Modified : lø. 26. juni 2010 kl. 19.04 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -57,7 +57,7 @@ Vector3<Real>::Vector3(const Real vec[3])
  * Assignment operator.                                                         *
  *******************************************************************************/
 template<class Real>
-Vector3<Real> Vector3<Real>::operator(const Vector3<Real>& vec)
+Vector3<Real>& Vector3<Real>::operator=(const Vector3<Real>& vec)
 {
     x = vec.x;
     y = vec.y;
@@ -236,7 +236,7 @@ Vector3<Real> Vector3<Real>::operator-() const
  * Add a vector to this vector.                                                 *
  *******************************************************************************/
 template<class Real>
-Vector3<Real> Vector3<Real>::operator+=(const Vector3<Real>& vec)
+Vector3<Real>& Vector3<Real>::operator+=(const Vector3<Real>& vec)
 {
     x += vec.x;
     y += vec.y;
@@ -248,7 +248,7 @@ Vector3<Real> Vector3<Real>::operator+=(const Vector3<Real>& vec)
  * Subtract a vector from this vector.                                          *
  *******************************************************************************/
 template<class Real>
-Vector3<Real> Vector3<Real>::operator-=(const Vector3<Real>& vec)
+Vector3<Real>& Vector3<Real>::operator-=(const Vector3<Real>& vec)
 {
     (*this) += -vec;
     return *this;
@@ -258,7 +258,7 @@ Vector3<Real> Vector3<Real>::operator-=(const Vector3<Real>& vec)
  * Multiply this vector with a scalar.                                          *
  *******************************************************************************/
 template<class Real>
-Vector3<Real> Vector3<Real>::operator*=(const Real& scalar)
+Vector3<Real>& Vector3<Real>::operator*=(const Real& scalar)
 {
     x *= scalar;
     y *= scalar;
@@ -270,7 +270,7 @@ Vector3<Real> Vector3<Real>::operator*=(const Real& scalar)
  * Divide this vector with a scalar.                                            *
  *******************************************************************************/
 template<class Real>
-Vector3<Real> Vector3<Real>::operator/=(const Real& scalar)
+Vector3<Real>& Vector3<Real>::operator/=(const Real& scalar)
 {
     assert( scalar != (Real) 0.0 && "Can't divide by zero\n");
     Real s = ((Real) 1.0)/scalar;

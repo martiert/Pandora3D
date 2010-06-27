@@ -78,7 +78,7 @@ namespace Pandora
                  *  \return
                  *      This vector.
                  */
-                Vector4 operator=(const Vector4& vec);
+                Vector4& operator=(const Vector4& vec);
 
                 /**
                  *  Get element number i from the vector.
@@ -180,7 +180,7 @@ namespace Pandora
                  *  \return
                  *      This vector.
                  */
-                Vector4 operator+=(const Vector4& vec);
+                Vector4& operator+=(const Vector4& vec);
 
                 /**
                  *  Subtract a vector from this vector.
@@ -189,7 +189,7 @@ namespace Pandora
                  *  \return
                  *      This vector.
                  */
-                Vector4 operator-=(const Vector4& vec);
+                Vector4& operator-=(const Vector4& vec);
 
                 /**
                  *  Multiply this vector with a scalar.
@@ -198,7 +198,7 @@ namespace Pandora
                  *  \return
                  *      This vector.
                  */
-                Vector4 operator*=(const Real& scalar);
+                Vector4& operator*=(const Real& scalar);
 
                 /**
                  *  Divide this vector with a scalar.
@@ -209,7 +209,7 @@ namespace Pandora
                  *  \note
                  *      The program will crash if the scalar is zero.
                  */
-                Vector4 operator/=(const Real& scalar);
+                Vector4& operator/=(const Real& scalar);
 
                 /**
                  *  Check if two vectors are equal.

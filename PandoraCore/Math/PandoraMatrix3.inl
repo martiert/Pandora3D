@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix3 class for Pandora3D
 
 Creation Date : 2010-04-16
 
-Last Modified : lø. 26. juni 2010 kl. 18.27 +0200
+Last Modified : sø. 27. juni 2010 kl. 22.16 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -40,8 +40,8 @@ Matrix3<Real>::Matrix3(Real rad, const Vector3<Real>& r)
 {
     //Normalize the axis.
     r.normalize();
-    Real t_cos = Math::Cos(rad);
-    Real t_sin = Math::Sin(rad);
+    Real t_cos = Math<Real>::Cos(rad);
+    Real t_sin = Math<Real>::Sin(rad);
 
     m_data[0] = t_cos + (1 - t_cos)*r.x*r.x;
     m_data[1] = (1 - t_cos)*r.x*r.y - r.z*t_sin;
@@ -80,7 +80,7 @@ Matrix3<Real>::Matrix3(Real array[9])
  * Copy constructor.                                                            *
  *******************************************************************************/
 template<class Real>
-Matrix3<Real>::Matrix3(Matrix3<Real>& mat)
+Matrix3<Real>::Matrix3(const Matrix3<Real>& mat)
 {
     memcpy(m_data, mat.m_data, 9);
 }
@@ -89,7 +89,7 @@ Matrix3<Real>::Matrix3(Matrix3<Real>& mat)
  * Copy a 2D matrix to this matrix.                                             *
  *******************************************************************************/
 template<class Real>
-Matrix3<Real>::Matrix3(Matrix2<Real>& mat)
+Matrix3<Real>::Matrix3(const Matrix2<Real>& mat)
 {
     m_data[0] = mat[0];     m_data[1] = mat[1];     m_data[2] = (Real) 0.0;
     m_data[3] = mat[2];     m_data[4] = mat[3];     m_data[5] = (Real) 0.0;
@@ -109,7 +109,7 @@ Matrix3<Real>::operator Real *()
  * Implicit conversion to constant array.                                       *
  *******************************************************************************/
 template<class Real>
-const Matrix3<Real>::operator Real *() const
+Matrix3<Real>::operator const Real *() const
 {
     return &(m_data[0]);
 }
@@ -173,7 +173,7 @@ template<class Real>
 Vector3<Real> Matrix3<Real>::getRow(const int row) const
 {
     assert(row < 3 && "Index out of bounds.");
-    return Vector3<Real>(m_data[3*i], m_data[3*i+1], m_data[3*i+2]);
+    return Vector3<Real>(m_data[3*row], m_data[3*row + 1], m_data[3*row + 2]);
 }
 
 /********************************************************************************
@@ -202,7 +202,7 @@ Vector3<Real> Matrix3<Real>::getColumn(const int col) const
  * Matrix assignment.                                                           *
  *******************************************************************************/
 template<class Real>
-Matrix3<Real> Matrix3<Real>::operator=(const Matrix3<Real>& mat)
+Matrix3<Real>& Matrix3<Real>::operator=(const Matrix3<Real>& mat)
 {
     memcpy(m_data, mat.m_data, 9);
     return *this;
@@ -299,7 +299,7 @@ Matrix3<Real> Matrix3<Real>::operator/(const Real scalar) const
  * Add a matrix to this matrix.                                                 *
  *******************************************************************************/
 template<class Real>
-Matrix3<Real> Matrix3<Real>::operator+=(const Matrix3<Real>& mat)
+Matrix3<Real>& Matrix3<Real>::operator+=(const Matrix3<Real>& mat)
 {
     (*this) = (*this) + mat;
     return *this;
@@ -309,7 +309,7 @@ Matrix3<Real> Matrix3<Real>::operator+=(const Matrix3<Real>& mat)
  * Subtract a matrix from this matrix.                                          *
  *******************************************************************************/
 template<class Real>
-Matrix3<Real> Matrix3<Real>::operator-=(const Matrix3<Real>& mat)
+Matrix3<Real>& Matrix3<Real>::operator-=(const Matrix3<Real>& mat)
 {
     (*this) = (*this) - mat;
     return *this;
@@ -319,7 +319,7 @@ Matrix3<Real> Matrix3<Real>::operator-=(const Matrix3<Real>& mat)
  * Multiply this matrix with a scalar.                                          *
  *******************************************************************************/
 template<class Real>
-Matrix3<Real> Matrix3<Real>::operator*=(const Real scalar)
+Matrix3<Real>& Matrix3<Real>::operator*=(const Real& scalar)
 {
     (*this) = (*this) * scalar;
     return *this;
@@ -329,7 +329,7 @@ Matrix3<Real> Matrix3<Real>::operator*=(const Real scalar)
  * Divide this matrix with a scalar.                                            *
  *******************************************************************************/
 template<class Real>
-Matrix3<Real> Matrix3<Real>::operator/=(const Real scalar)
+Matrix3<Real>& Matrix3<Real>::operator/=(const Real& scalar)
 {
     (*this) = (*this) / scalar;
     return *this;
@@ -342,9 +342,9 @@ template<class Real>
 Matrix3<Real> Matrix3<Real>::abs() const
 {
     return Matrix3<Real>(
-            Math::Abs(m_data[0]), Math::Abs(m_data[1]), Math::Abs(m_data[2]),
-            Math::Abs(m_data[3]), Math::Abs(m_data[4]), Math::Abs(m_data[5]),
-            Math::Abs(m_data[6]), Math::Abs(m_data[7]), Math::Abs(m_data[8]));
+            Math<Real>::Abs(m_data[0]), Math<Real>::Abs(m_data[1]), Math<Real>::Abs(m_data[2]),
+            Math<Real>::Abs(m_data[3]), Math<Real>::Abs(m_data[4]), Math<Real>::Abs(m_data[5]),
+            Math<Real>::Abs(m_data[6]), Math<Real>::Abs(m_data[7]), Math<Real>::Abs(m_data[8]));
 }
 
 /********************************************************************************

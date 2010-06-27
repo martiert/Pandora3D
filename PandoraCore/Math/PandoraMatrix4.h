@@ -53,13 +53,57 @@ namespace Pandora
                 Matrix4();
 
                 /**
+                 *  Constructor. Makes a 4x4 matrix of the numbers given.
+                 *  \param
+                 *      m00 - The number at [0][0]
+                 *  \param
+                 *      m01 - The number at [0][1]
+                 *  \param
+                 *      m02 - The number at [0][2]
+                 *  \param
+                 *      m03 - The number at [0][3]
+                 *  \param
+                 *      m10 - The number at [1][0]
+                 *  \param
+                 *      m11 - The number at [1][1]
+                 *  \param
+                 *      m12 - The number at [1][2]
+                 *  \param
+                 *      m13 - The number at [1][3]
+                 *  \param
+                 *      m20 - The number at [2][0]
+                 *  \param
+                 *      m21 - The number at [2][1]
+                 *  \param
+                 *      m22 - The number at [2][2]
+                 *  \param
+                 *      m23 - The number at [2][3]
+                 *  \param
+                 *      m30 - The number at [3][0]
+                 *  \param
+                 *      m31 - The number at [3][1]
+                 *  \param
+                 *      m32 - The number at [3][2]
+                 *  \param
+                 *      m33 - The number at [3][3]
+                 */
+                Matrix4(const Real& m00, const Real& m01, const Real& m02, 
+                            const Real& m03,
+                        const Real& m10, const Real& m11, const Real& m12,
+                            const Real& m13,
+                        const Real& m20, const Real& m21, const Real& m22,
+                            const Real& m23,
+                        const Real& m30, const Real& m31, const Real& m32,
+                            const Real& m33);
+
+                /**
                  *  Makes a matrix which rotates rad radians around given axis.
                  *  \param
                  *      rad - The number of radians to rotate.
                  *  \param
                  *      r - The axis to rotate around.    
                  */
-                Matrix4(const Real rad, const Vector4<Real>& r);
+                Matrix4(const Real& rad, const Vector4<Real>& r);
 
                 /**
                  *  Construct either a scaling or a translation matrix,
@@ -93,12 +137,7 @@ namespace Pandora
                  *  \param
                  *      mat - The matrix to copy.
                  */
-                Matrix4(const Matrix3& mat);
-
-                /**
-                 *  Destructor, does nothing.
-                 */
-                ~Matrix4();
+                Matrix4(const Matrix3<Real>& mat);
 
                 /**
                  *  Implicit conversion to array.
@@ -112,7 +151,7 @@ namespace Pandora
                  *  \return
                  *      The matrix as a constant array.
                  */
-                const operator Real *() const;
+                operator const Real *() const;
 
                 /**
                  *  Get reference to element i in the matrix.
@@ -161,7 +200,7 @@ namespace Pandora
                  *  \return
                  *      Row number i as a vector.
                  */
-                Vector4<Real> getRow(const int row);
+                Vector4<Real> getRow(const int row) const;
 
                 /**
                  *  Set row number i to the given vector.
@@ -179,7 +218,7 @@ namespace Pandora
                  *  \return
                  *      Column i as a 4D vector.
                  */
-                Vector4<Real> getColumn(const int col);
+                Vector4<Real> getColumn(const int col) const;
 
                 /**
                  *  Set column number i to the given matrix.
@@ -195,7 +234,7 @@ namespace Pandora
                  *  \param
                  *      mat - The matrix we wish to set it to.
                  */
-                Matrix4 operator=(const Matrix4 mat);
+                Matrix4& operator=(const Matrix4& mat);
 
                 /**
                  *  Negate the matrix.
@@ -263,28 +302,28 @@ namespace Pandora
                  *  \param
                  *      mat - The matrix to add with.
                  */
-                Matrix4 operator+=(const Matrix4& mat);
+                Matrix4& operator+=(const Matrix4& mat);
 
                 /**
                  *  Subtract a matrix from this matrix.
                  *  \param
                  *      mat - The matrix to subtract with.
                  */
-                Matrix4 operator-=(const Matrix4& mat);
+                Matrix4& operator-=(const Matrix4& mat);
 
                 /**
                  *  Multiply this matrix with a scalar.
                  *  \param
                  *      scalar - The scalar to multiply with.
                  */
-                Matrix4 operator*=(const Real& scalar);
+                Matrix4& operator*=(const Real& scalar);
 
                 /**
                  *  Divide this matrix with a scalar.
                  *  \param
                  *      scalar - The scalar to divide with.
                  */
-                Matrix4 operator/=(const Real& scalar);
+                Matrix4& operator/=(const Real& scalar);
 
 
                 /**
@@ -294,14 +333,14 @@ namespace Pandora
                  *  \return
                  *      This matrix dot-multiplied with another.
                  */
-                Matrix4 dotprod() const;
+                Matrix4 dotprod(const Matrix4& mat) const;
 
                 /**
                  *  Dot multiply a matrix to this matrix.
                  *  \param
                  *      mat - The matrix to dot multiply with.
                  */
-                Matrix4 operator*=(const Matrix4& mat);
+                Matrix4& operator*=(const Matrix4& mat);
 
                 /**
                  *  Get the absolute value of this matrix.

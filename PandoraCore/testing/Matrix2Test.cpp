@@ -6,7 +6,7 @@ Purpose :
 
 Creation Date : 2010-05-04
 
-Last Modified : lø. 26. juni 2010 kl. 10.00 +0200
+Last Modified : sø. 27. juni 2010 kl. 22.17 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -16,6 +16,7 @@ Created By :  Martin Ertsås
 
 using Pandora::Math::Mat2d;
 using Pandora::Math::Math;
+using Pandora::Math::Vec2d;
 
 void Matrix2Test::init()
 {
@@ -101,7 +102,8 @@ void Matrix2Test::testSubtraction()
 void Matrix2Test::testMultiplication()
 {
     printf("\tTesting multiplication\n");
-    //Matrix multiplication
+
+    //Matrix matrix multiplication
     Mat2d tmp = test1 * Mat2d::IDENTITY;
     CPPUNIT_ASSERT( tmp == test1 );
 
@@ -121,6 +123,17 @@ void Matrix2Test::testMultiplication()
     CPPUNIT_ASSERT( tmp[1] == test2[1] * 3.4 );
     CPPUNIT_ASSERT( tmp[2] == test2[2] * 3.4 );
     CPPUNIT_ASSERT( tmp[3] == test2[3] * 3.4 );
+
+    //Matrix vector multiplication
+    Vec2d vec(1.0, 0.0);
+    Vec2d ans = test1 * vec;
+    CPPUNIT_ASSERT( ans[0] == test1[0] );
+    CPPUNIT_ASSERT( ans[1] == test1[2] );
+
+    vec[1] = 3.2;
+    ans = test2 * vec;
+    CPPUNIT_ASSERT( ans[0] == test2[0] + test2[1]*3.2 );
+    CPPUNIT_ASSERT( ans[1] == test2[2] + test2[3]*3.2 );
 }
 
 void Matrix2Test::testArithmetic()

@@ -170,7 +170,7 @@ namespace Pandora
                  *  \param
                  *      matrix - The matrix to assign it to.
                  */
-                Matrix2 operator=(const Matrix2& matrix);
+                Matrix2& operator=(const Matrix2& matrix);
 
                 /**
                  *  Negate this matrix.
@@ -230,28 +230,28 @@ namespace Pandora
                  *  \param
                  *      matrix - The matrix to add with.
                  */
-                Matrix2 operator+=(const Matrix2& matrix);
+                Matrix2& operator+=(const Matrix2& matrix);
 
                 /**
                  *  Subtract a matrix from this matrix.
                  *  \param
                  *      matrix - The matrix to subtract with.
                  */
-                Matrix2 operator-=(const Matrix2& matrix);
+                Matrix2& operator-=(const Matrix2& matrix);
 
                 /**
                  *  Multiply this matrix with a scalar.
                  *  \param
                  *      scalar - The scalar to multiply with.
                  */
-                Matrix2 operator*=(const Real& scalar);
+                Matrix2& operator*=(const Real& scalar);
 
                 /**
                  *  Divide this matrix with a scalar.
                  *  \param
                  *      scalar - The scalar to divide with.
                  */
-                Matrix2 operator/=(const Real& scalar);
+                Matrix2& operator/=(const Real& scalar);
 
                 /**
                  *  Multiply a matrix with a vector.

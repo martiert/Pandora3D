@@ -6,7 +6,7 @@ Purpose : Running all the test from Pandora3D.
 
 Creation Date : 2010-01-25
 
-Last Modified : ti. 04. mai 2010 kl. 21.12 +0200
+Last Modified : lø. 26. juni 2010 kl. 18.52 +0200
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -40,7 +40,6 @@ int main(int argc, char **argv)
     runner.addTest( Vector3Test::suite() );
     runner.addTest( Vector4Test::suite() );
     runner.addTest( Matrix2Test::suite() );
-
 
     runner.run();
     return 0;

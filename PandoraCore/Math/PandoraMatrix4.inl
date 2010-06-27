@@ -6,11 +6,19 @@ Purpose : Implementation of the Matrix4 class for Pandora.
 
 Creation Date : 2010-05-03
 
-Last Modified : lø. 26. juni 2010 kl. 18.17 +0200
+Last Modified : sø. 27. juni 2010 kl. 22.26 +0200
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
 */
+
+/********************************************************************************
+ * Some typedefs.                                                               *
+ *******************************************************************************/
+typedef Matrix4<float>          Mat4f;
+typedef Matrix4<double>         Mat4d;
+typedef Matrix4<int>            Mat4i;
+typedef Matrix4<unsigned int>   Mat4u;
 
 /********************************************************************************
  * Default constructor.                                                         *
@@ -19,14 +27,30 @@ template<class Real>
 Matrix4<Real>::Matrix4(){}
 
 /********************************************************************************
+ * Constructor.                                                                 *
+ *******************************************************************************/
+template<class Real>
+Matrix4<Real>::Matrix4(
+        const Real& m00, const Real& m01, const Real& m02, const Real& m03,
+        const Real& m10, const Real& m11, const Real& m12, const Real& m13,
+        const Real& m20, const Real& m21, const Real& m22, const Real& m23,
+        const Real& m30, const Real& m31, const Real& m32, const Real& m33)
+{
+    m_data[0] = m00; m_data[1] = m01; m_data[2] = m02; m_data[3] = m03;
+    m_data[4] = m10; m_data[5] = m11; m_data[6] = m12; m_data[7] = m13;
+    m_data[8] = m20; m_data[9] = m21; m_data[10] = m22; m_data[11] = m23;
+    m_data[12] = m30; m_data[13] = m31; m_data[14] = m32; m_data[15] = m33;
+}
+
+/********************************************************************************
  * Make rotation matrix.                                                        *
  *******************************************************************************/
 template<class Real>
-Matrix4<Real>::Matrix4(const Real& rad, const Vector4& r)
+Matrix4<Real>::Matrix4(const Real& rad, const Vector4<Real>& r)
 {
     r.normalize();
-    Real t_cos = Math::Cos(rad);
-    Real t_sin = Math::Sin(rad);
+    Real t_cos = Math<Real>::Cos(rad);
+    Real t_sin = Math<Real>::Sin(rad);
 
     m_data[0] = t_cos + (1 - t_cos)*r.x*r.x;
     m_data[1] = (1 - t_cos)*r.x*r.y - r.z*t_sin;
@@ -46,14 +70,14 @@ Matrix4<Real>::Matrix4(const Real& rad, const Vector4& r)
     m_data[12] = 0;
     m_data[13] = 0;
     m_data[14] = 0;
-    m_data[15] = 1;
+    m_data[15] = 1;
 }
 
 /********************************************************************************
  * Make a scaling or a rotation matrix.                                         *
  *******************************************************************************/
 template<class Real>
-Matrix4<Real>::Matrix4(const Vector3& vec, const bool scale)
+Matrix4<Real>::Matrix4(const Vector3<Real>& vec, const bool scale)
 {
     *this = IDENTITY;
     if(scale) {
@@ -93,16 +117,10 @@ template<class Real>
 Matrix4<Real>::Matrix4(const Matrix3<Real>& mat)
 {
     *this = IDENTITY;
-    m_data[0] = mat[0]; m_data[1] = mat[1]; m_data[2] = mat[2];
+    m_data[0] = mat[0]; m_data[1] = mat[1]; m_data[2] = mat[2];
     m_data[4] = mat[3]; m_data[5] = mat[4]; m_data[6] = mat[5];
     m_data[8] = mat[6]; m_data[9] = mat[7]; m_data[10] = mat[8];
 }
-
-/********************************************************************************
- * Destructor.                                                                  *
- *******************************************************************************/
-template<class Real>
-Matrix4<Real>::~Matrix4() {}
 
 /********************************************************************************
  * Conversion operator.                                                         *
@@ -117,7 +135,7 @@ Matrix4<Real>::operator Real *()
  * Constant conversion operator.                                                *
  *******************************************************************************/
 template<class Real>
-const Matrix4<Real>::operator Real *() const
+Matrix4<Real>::operator const Real *() const
 {
     return &(m_data[0]);
 }
@@ -200,7 +218,7 @@ Vector4<Real> Matrix4<Real>::getColumn(const int col) const
 {
     assert(col < 4 && "Index out of bounds");
 
-    return Vector4<real>(m_data[col], m_data[col + 4], m_data[col + 8], 
+    return Vector4<Real>(m_data[col], m_data[col + 4], m_data[col + 8], 
             m_data[col + 12]);
 }
 
@@ -222,7 +240,7 @@ void Matrix4<Real>::setColumn(const int col, const Vector4<Real>& vec)
  * Copy a matrix to this matrix.                                                *
  *******************************************************************************/
 template<class Real>
-Matrix4<Real> Matrix4<Real>::operator=(const Matrix4<Real>& mat)
+Matrix4<Real>& Matrix4<Real>::operator=(const Matrix4<Real>& mat)
 {
     memcpy(m_data, mat.m_data, 16);
     return *this;
@@ -274,7 +292,6 @@ Matrix4<Real> Matrix4<Real>::operator*(const Matrix4<Real>& mat) const
 {
     Matrix4<Real> tmp = Matrix4<Real>::ZERO;
 
-    /*
     for(int row = 0; row < 4; row++) {
         for(int col = 0; col < 4; col++) {
             for(int k = 0; k < 4; k++) {
@@ -282,8 +299,8 @@ Matrix4<Real> Matrix4<Real>::operator*(const Matrix4<Real>& mat) const
             }
         }
     }
-    */
 
+    /*
     //Row 1
     tmp[0] = m_data[0]*mat[0] + m_data[1]*mat[4] + m_data[2]*mat[8] + 
         m_data[3]*mat[12];
@@ -308,7 +325,7 @@ Matrix4<Real> Matrix4<Real>::operator*(const Matrix4<Real>& mat) const
     tmp[8] = m_data[8]*mat[0] + m_data[9]*mat[4] + m_data[10]*mat[8] +
         m_data[11]*mat[12];
     tmp[9] = m_data[8]*mat[1] + m_data[9]*mat[5] + m_data[10]*mat[9] +
-        'm_data[11]*mat[13];
+        m_data[11]*mat[13];
     tmp[10] = m_data[8]*mat[2] + m_data[9]*mat[6] + m_data[10]*mat[10] +
         m_data[11]*mat[14];
     tmp[11] = m_data[8]*mat[3] + m_data[9]*mat[7] + m_data[10]*mat[11] +
@@ -325,6 +342,7 @@ Matrix4<Real> Matrix4<Real>::operator*(const Matrix4<Real>& mat) const
         m_data[15]*mat[15];
 
     return tmp;
+    */
 }
 
 /********************************************************************************
@@ -334,10 +352,14 @@ template<class Real>
 Vector4<Real> Matrix4<Real>::operator*(const Vector4<Real>& vec) const
 {
     return Vector4<Real>(
-            vec[0]*mat[0] + vec[1]*mat[1] + vec[2]*mat[2] + vec[3]*mat[3],
-            vec[0]*mat[4] + vec[1]*mat[5] + vec[2]*mat[6] + vec[3]*mat[7],
-            vec[0]*mat[8] + vec[1]*mat[9] + vec[2]*mat[10] + vec[3]*mat[11],
-            vec[0]*mat[12] + vec[1]*mat[13] + vec[2]*mat[14] + vec[3]*mat[15]);
+            vec[0]*m_data[0] + vec[1]*m_data[1] + vec[2]*m_data[2] + 
+                vec[3]*m_data[3],
+            vec[0]*m_data[4] + vec[1]*m_data[5] + vec[2]*m_data[6] + 
+                vec[3]*m_data[7],
+            vec[0]*m_data[8] + vec[1]*m_data[9] + vec[2]*m_data[10] + 
+                vec[3]*m_data[11],
+            vec[0]*m_data[12] + vec[1]*m_data[13] + vec[2]*m_data[14] + 
+                vec[3]*m_data[15]);
 }
 
 /********************************************************************************
@@ -368,7 +390,7 @@ Matrix4<Real> Matrix4<Real>::operator/(const Real& scalar) const
  * Add a matrix to this matrix.                                                 *
  *******************************************************************************/
 template<class Real>
-Matrix4<Real> Matrix4<Real>::operator+=(const Matrix4<Real>& mat)
+Matrix4<Real>& Matrix4<Real>::operator+=(const Matrix4<Real>& mat)
 {
     for(int i = 0; i < 16; i++)
         m_data[i] += mat[i];
@@ -379,7 +401,7 @@ Matrix4<Real> Matrix4<Real>::operator+=(const Matrix4<Real>& mat)
  * Subtract a matrix from this matrix.                                          *
  *******************************************************************************/
 template<class Real>
-Matrix4<Real> Matrix4<Real>::operator-=(const Matrix4<Real>& mat)
+Matrix4<Real>& Matrix4<Real>::operator-=(const Matrix4<Real>& mat)
 {
     for(int i = 0; i < 16; i++)
         m_data[i] -= mat[i];
@@ -390,7 +412,7 @@ Matrix4<Real> Matrix4<Real>::operator-=(const Matrix4<Real>& mat)
  * Multiply this matrix with a scalar.                                          *
  *******************************************************************************/
 template<class Real>
-Matrix4<Real> Matrix4<Real>::operator*=(const Real& scalar)
+Matrix4<Real>& Matrix4<Real>::operator*=(const Real& scalar)
 {
     for(int i = 0; i < 16; i++)
         m_data[i] *= scalar;
@@ -401,7 +423,7 @@ Matrix4<Real> Matrix4<Real>::operator*=(const Real& scalar)
  * Divide this matrix with a scalar.                                            *
  *******************************************************************************/
 template<class Real>
-Matrix4<Real> Matrix4<Real>::operator/=(const Real& scalar)
+Matrix4<Real>& Matrix4<Real>::operator/=(const Real& scalar)
 {
     assert(scalar != 0.0 && "Division by zero");
 
@@ -430,7 +452,7 @@ Matrix4<Real> Matrix4<Real>::dotprod(const Matrix4<Real>& mat) const
  * Dot multiply a matrix to this matrix.                                        *
  *******************************************************************************/
 template<class Real>
-void Matrix4<Real>::operator*=(const Matrix4<Real>& mat)
+Matrix4<Real>& Matrix4<Real>::operator*=(const Matrix4<Real>& mat)
 {
     for(int i = 0; i < 16; i++)
         m_data[i] *= mat[i];
@@ -445,7 +467,7 @@ Matrix4<Real> Matrix4<Real>::abs() const
     Matrix4<Real> tmp;
 
     for(int i = 0; i < 16; i++)
-        tmp[i] = Math::Abs(m_data[i]);
+        tmp[i] = Math<Real>::Abs(m_data[i]);
 
     return tmp;
 }
@@ -519,7 +541,7 @@ Matrix4<Real> Matrix4<Real>::cofactor() const
     determ[6] = Matrix3<Real>(m_data[0], m_data[1], m_data[3],
             m_data[8], m_data[9], m_data[11],
             m_data[12], m_data[13], m_data[15]);
-    determ[7] = Matrix3<real>(m_data[0], m_data[1], m_data[2],
+    determ[7] = Matrix3<Real>(m_data[0], m_data[1], m_data[2],
             m_data[8], m_data[9], m_data[10],
             m_data[12], m_data[13], m_data[14]);
 
@@ -608,8 +630,8 @@ bool Matrix4<Real>::operator!=(const Matrix4<Real>& mat) const
 template<class Real>
 bool Matrix4<Real>::operator>=(const Matrix4<Real>& mat) const
 {
-    for(int i = 0; i < 16; i++) {
-        if(mat[i] > m_data[i]) {
+    for(int i = 0; i < 16; i++) {
+    if(mat[i] > m_data[i]) {
             return false;
         }
     }
@@ -638,7 +660,7 @@ template<class Real>
 bool Matrix4<Real>::operator<=(const Matrix4<Real>& mat) const
 {
     for(int i = 0; i < 16; i++) {
-        if(mat[i] < m_data[i]) {
+        if(mat[i] < m_data[i]) {
             return false;
         }
     }

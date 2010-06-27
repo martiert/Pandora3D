@@ -72,7 +72,7 @@ namespace Pandora
                  *  \return
                  *      This vector.
                  */
-                Vector2 operator=(Vector2& vec);
+                Vector2& operator=(const Vector2& vec);
 
                 /**
                  *  Access operator. Get element number i from the vector.
@@ -166,7 +166,7 @@ namespace Pandora
                  *  \return
                  *      This vector.
                  */
-                Vector2 operator+=(const Vector2& vec);
+                Vector2& operator+=(const Vector2& vec);
 
                 /**
                  *  Subtract a vector from this vector.
@@ -175,7 +175,7 @@ namespace Pandora
                  *  \return
                  *      This vector.
                  */
-                Vector2 operator-=(const Vector2& vec);
+                Vector2& operator-=(const Vector2& vec);
 
                 /**
                  *  Multiply this vector with a scalar.
@@ -184,7 +184,7 @@ namespace Pandora
                  *  \return
                  *      This vector.
                  */
-                Vector2 operator*=(const Real& scalar);
+                Vector2& operator*=(const Real& scalar);
 
                 /**
                  *  Divide this vector with a scalar.
@@ -195,7 +195,7 @@ namespace Pandora
                  *  \note
                  *      Program will crash if scalar is zero.
                  */
-                Vector2 operator/=(const Real& scalar);
+                Vector2& operator/=(const Real& scalar);
 
                 /**
                  *  Checks if two vectors are equal.
@@ -307,6 +307,7 @@ namespace Pandora
                  */
                 void print() const;
 #endif
+
             public:
                 Real x, y;
         };
@@ -327,4 +328,4 @@ namespace Pandora
 
    }
 }
-#endif-
+#endif

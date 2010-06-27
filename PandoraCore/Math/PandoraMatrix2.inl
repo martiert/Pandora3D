@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix class from Pandora3D
 
 Creation Date : 2010-04-14
 
-Last Modified : lø. 26. juni 2010 kl. 17.09 +0200
+Last Modified : sø. 27. juni 2010 kl. 22.21 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -15,10 +15,10 @@ Created By :  Martin Ertsås
 /********************************************************************************
  * Typedefs.                                                                    *
  *******************************************************************************/
-typedef Matrix2<float> Mat2f;
-typedef Matrix2<double> Mat2d;
-typedef Matrix2<int> Mat2i;
-typedef Matrix2<unsigned int> Mat2u;
+typedef Matrix2<float>          Mat2f;
+typedef Matrix2<double>         Mat2d;
+typedef Matrix2<int>            Mat2i;
+typedef Matrix2<unsigned int>   Mat2u;
 
 /********************************************************************************
  * Constructors.                                                                *
@@ -170,7 +170,7 @@ Vector2<Real> Matrix2<Real>::getColumn(const int col) const
  * Assignment operator.                                                         *
  *******************************************************************************/
 template<class Real>
-Matrix2<Real> Matrix2<Real>::operator=(const Matrix2<Real>& matrix)
+Matrix2<Real>& Matrix2<Real>::operator=(const Matrix2<Real>& matrix)
 {
     if(this != &matrix)
         memcpy(m_data, matrix.m_data, 4*sizeof(Real));
@@ -245,7 +245,7 @@ Matrix2<Real> Matrix2<Real>::operator/(const Real& scalar) const
  * Add a matrix to this matrix.                                                 *
  *******************************************************************************/
 template<class Real>
-Matrix2<Real> Matrix2<Real>::operator+=(const Matrix2<Real>& matrix)
+Matrix2<Real>& Matrix2<Real>::operator+=(const Matrix2<Real>& matrix)
 {
     *this = *this + matrix;
     return *this;
@@ -255,7 +255,7 @@ Matrix2<Real> Matrix2<Real>::operator+=(const Matrix2<Real>& matrix)
  * Subtract a matrix from this matrix.                                          *
  *******************************************************************************/
 template<class Real>
-Matrix2<Real> Matrix2<Real>::operator-=(const Matrix2<Real>& matrix)
+Matrix2<Real>& Matrix2<Real>::operator-=(const Matrix2<Real>& matrix)
 {
     *this = *this - matrix;
     return *this;
@@ -265,7 +265,7 @@ Matrix2<Real> Matrix2<Real>::operator-=(const Matrix2<Real>& matrix)
  * Multiply this matrix with a scalar.                                          *
  *******************************************************************************/
 template<class Real>
-Matrix2<Real> Matrix2<Real>::operator*=(const Real& scalar)
+Matrix2<Real>& Matrix2<Real>::operator*=(const Real& scalar)
 {
     *this = *this * scalar;
     return *this;
@@ -275,7 +275,7 @@ Matrix2<Real> Matrix2<Real>::operator*=(const Real& scalar)
  * Divide this matrix with a scalar.                                            *
  *******************************************************************************/
 template<class Real>
-Matrix2<Real> Matrix2<Real>::operator/=(const Real& scalar)
+Matrix2<Real>& Matrix2<Real>::operator/=(const Real& scalar)
 {
     *this = *this / scalar;
     return *this;

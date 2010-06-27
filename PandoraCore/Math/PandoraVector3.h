@@ -70,7 +70,7 @@ namespace Pandora
                  *  \return
                  *      This vector.
                  */
-                Vector3 operator=(const Vector3<Real>& vec);
+                Vector3& operator=(const Vector3<Real>& vec);
 
                 /**
                  *  Destructor. Destroys the vector
@@ -233,7 +233,7 @@ namespace Pandora
                  *  \return
                  *      This vector.
                  */
-                Vector3 operator+=(const Vector3& vec);
+                Vector3& operator+=(const Vector3& vec);
 
                 /**
                  *  Subtract a vector from this vector.
@@ -242,7 +242,7 @@ namespace Pandora
                  *  \return
                  *      This vector.
                  */
-                Vector3 operator-=(const Vector3& vec);
+                Vector3& operator-=(const Vector3& vec);
 
                 /**
                  *  Multiply this vector with a scalar.
@@ -251,7 +251,7 @@ namespace Pandora
                  *  \return
                  *      This vector.
                  */
-                Vector3 operator*=(const Real& scalar);
+                Vector3& operator*=(const Real& scalar);
 
                 /**
                  *  Divide this vector with a scalar.
@@ -262,7 +262,7 @@ namespace Pandora
                  *  \note
                  *      If scalar is zero, the program will crash.
                  */
-                 Vector3 operator/=(const Real& scalar);
+                 Vector3& operator/=(const Real& scalar);
 
                 /**
                  *  Get the length of the vector. As the sqrt of the sum of 
