@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix class from Pandora3D
 
 Creation Date : 2010-04-14
 
-Last Modified : sø. 27. juni 2010 kl. 22.21 +0200
+Last Modified : ma. 28. juni 2010 kl. 15.58 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -272,6 +272,17 @@ Matrix2<Real>& Matrix2<Real>::operator*=(const Real& scalar)
 }
 
 /********************************************************************************
+ * Dot multiplication.                                                          *
+ *******************************************************************************/
+template<class Real>
+Matrix2<Real>& Matrix2<Real>::operator*=(const Matrix2<Real>& mat)
+{
+    m_data[0] *= mat[0]; m_data[1] *= mat[1];
+    m_data[2] *= mat[2]; m_data[3] *= mat[3];
+    return *this;
+}
+
+/********************************************************************************
  * Divide this matrix with a scalar.                                            *
  *******************************************************************************/
 template<class Real>
@@ -289,6 +300,16 @@ Vector2<Real> Matrix2<Real>::operator*(const Vector2<Real>& vec) const
 {
     return Vector2<Real>(m_data[0]*vec[0] + m_data[1]*vec[1],
             m_data[2]*vec[0] + m_data[3]*vec[1]);
+}
+
+/********************************************************************************
+ * Dot multiplication.                                                          *
+ *******************************************************************************/
+template<class Real>
+Matrix2<Real> Matrix2<Real>::dot(const Matrix2<Real>& mat) const
+{
+    return Matrix2<Real>(m_data[0]*mat[0], m_data[1]*mat[1],
+            m_data[2]*mat[2], m_data[3]*mat[3]);
 }
 
 /********************************************************************************

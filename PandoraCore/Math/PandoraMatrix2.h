@@ -257,6 +257,15 @@ namespace Pandora
                 Matrix2& operator*=(const Real& scalar);
 
                 /**
+                 *  Dot multiply this matrix with another matrix.
+                 *  \param
+                 *      mat - The matrix to multiply with.
+                 *  \return
+                 *      This matrix.
+                 */
+                Matrix2& operator*=(const Matrix2& mat);
+
+                /**
                  *  Divide this matrix with a scalar.
                  *  \param
                  *      scalar - The scalar to divide with.
@@ -275,6 +284,15 @@ namespace Pandora
                  *      A matrix multiplied with a scalar.
                  */
                 Vector2<Real> operator*(const Vector2<Real>& vec) const;
+
+                /**
+                 *  Dot multipiplication.
+                 *  \param
+                 *      mat - The matrix to dot multiply with.
+                 *  \return
+                 *      This matrix dot multiplied with another matrix.
+                 */
+                Matrix2 dot(const Matrix2& mat) const;
     
                 /**
                  *  Get the determinant of this matrix.

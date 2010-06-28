@@ -6,7 +6,7 @@ Purpose : Unit testing of the Pandora::Math::Vec2 implementation.
 
 Creation Date : 2010-01-25
 
-Last Modified : ti. 11. mai 2010 kl. 11.30 +0200
+Last Modified : ma. 28. juni 2010 kl. 15.29 +0200
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -114,8 +114,6 @@ void Vector2Test::testArithmetic()
     //normalize
     tmp.normalize();
     CPPUNIT_ASSERT( tmp.length() == 1.0f );
-    m_0_0.normalizeChecked();
-    CPPUNIT_ASSERT( m_0_0.length() != 1.0f );
 }
 
 void Vector2Test::testComparison()

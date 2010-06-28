@@ -6,7 +6,7 @@ Purpose :
 
 Creation Date : 2010-05-04
 
-Last Modified : sø. 27. juni 2010 kl. 22.17 +0200
+Last Modified : ma. 28. juni 2010 kl. 16.13 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -134,21 +134,110 @@ void Matrix2Test::testMultiplication()
     ans = test2 * vec;
     CPPUNIT_ASSERT( ans[0] == test2[0] + test2[1]*3.2 );
     CPPUNIT_ASSERT( ans[1] == test2[2] + test2[3]*3.2 );
+
+    //Self multiplication
+    tmp = test1;
+    tmp *= 2.3;
+    CPPUNIT_ASSERT( tmp[0] == test1[0]*2.3 );
+    CPPUNIT_ASSERT( tmp[1]== test1[1]*2.3 );
+    CPPUNIT_ASSERT( tmp[2] == test1[2]*2.3 );
+    CPPUNIT_ASSERT( tmp[3] == test1[3]*2.3 );
+
+    tmp = test1;
+    tmp *= test2;
+    CPPUNIT_ASSERT( tmp[0] == test1[0]*test2[0] );
+    CPPUNIT_ASSERT( tmp[1] == test1[1]*test2[1] );
+    CPPUNIT_ASSERT( tmp[2] == test1[2]*test2[2] );
+    CPPUNIT_ASSERT( tmp[3] == test1[3]*test2[3] );
+
+    tmp = Mat2d::ZERO;
+    tmp = test1.dot(test2);
+    CPPUNIT_ASSERT( tmp[0] == test1[0]*test2[0] );
+    CPPUNIT_ASSERT( tmp[1] == test1[1]*test2[1] );
+    CPPUNIT_ASSERT( tmp[2] == test1[2]*test2[2] );
+    CPPUNIT_ASSERT( tmp[3] == test1[3]*test2[3] );       
 }
 
 void Matrix2Test::testArithmetic()
 {
     printf("\tTesting arithmetic\n");
+    double det = test1.det();
+    CPPUNIT_ASSERT( det == test1[0]*test1[3] - test1[1]*test1[2] );
+    det = Mat2d::IDENTITY.det();
+    CPPUNIT_ASSERT( det == 1.0 );
+
+    Mat2d inv = Mat2d::IDENTITY.inverse();
+    CPPUNIT_ASSERT( inv[0] == 1.0 );
+    CPPUNIT_ASSERT( inv[1] == 0.0 );
+    CPPUNIT_ASSERT( inv[2] == 0.0 );
+    CPPUNIT_ASSERT( inv[3] == 1.0 );
+
+    inv = test1.inverse();
+    Mat2d tmp = inv * test1;
+    CPPUNIT_ASSERT( tmp == Mat2d::IDENTITY );
+
+    tmp = test1 * inv;
+    CPPUNIT_ASSERT( tmp == Mat2d::IDENTITY );
+
+    tmp = test2.transpose();
+    CPPUNIT_ASSERT( tmp[0] == test2[0] );
+    CPPUNIT_ASSERT( tmp[1]== test2[2] );
+    CPPUNIT_ASSERT( tmp[2] == test2[1] );
+    CPPUNIT_ASSERT( tmp[3] == test2[3] );
 }
 
 void Matrix2Test::testComparison()
 {
     printf("\tTesting comparison\n");
+
+    Mat2d tmp = test1;
+    CPPUNIT_ASSERT( test2 != test1 );
+    CPPUNIT_ASSERT( test1 == tmp );
+    tmp *= 2.0;
+    CPPUNIT_ASSERT( test1 < tmp );
+    CPPUNIT_ASSERT( tmp > test1 );
+    tmp[2] = test1[2];
+    CPPUNIT_ASSERT( !(tmp > test1) );
+    CPPUNIT_ASSERT( test1 <= tmp );
+    CPPUNIT_ASSERT( tmp >= test1 );
 }
 
 void Matrix2Test::testAssignment()
 {
     printf("\tTesting assignment\n");
+
+    double *tmp = (double*) test1;
+    CPPUNIT_ASSERT( tmp[0] == test1[0] );
+    CPPUNIT_ASSERT( tmp[1] == test1[1] );
+    CPPUNIT_ASSERT( tmp[2] == test1[2] );
+    CPPUNIT_ASSERT( tmp[3] == test1[3] );
+    tmp[3] = 0.32;
+    CPPUNIT_ASSERT( tmp[3] == test1[3] );
+
+    const double *tmp2 = (const double*) test2;
+    CPPUNIT_ASSERT( tmp2[0] == test2[0] );
+    CPPUNIT_ASSERT( tmp2[1] == test2[1] );
+    CPPUNIT_ASSERT( tmp2[2] == test2[2] );
+    CPPUNIT_ASSERT( tmp2[3] == test2[3] );
+
+    test2(1,0) = 3.2;
+    test2(0,1) = 4.5;
+    CPPUNIT_ASSERT( test2[2] == 3.2 );
+    CPPUNIT_ASSERT( test2[1] == 4.5 );
+
+    Vec2d vec1 = test1.getRow(0);
+    CPPUNIT_ASSERT( vec1[0] == test1[0] );
+    CPPUNIT_ASSERT( vec1[1] == test1[1] );
+    vec1[1] = 4.0;
+    test1.setRow(0,vec1);
+    CPPUNIT_ASSERT( test1[1] == 4.0 );
+
+    vec1 = test1.getColumn(1);
+    CPPUNIT_ASSERT( vec1[0] == test1[1] );
+    CPPUNIT_ASSERT( vec1[1] == test1[3] );
+    vec1[0] = 2.3;
+    test1.setColumn(0, vec1);
+    CPPUNIT_ASSERT( test1[0] == 2.3 );
 }
 
 CppUnit::Test *Matrix2Test::suite()
@@ -184,7 +273,7 @@ CppUnit::Test *Matrix2Test::suite()
 
 void Matrix2Test::setUp()
 {
-    test1 = Mat2d(8.5, 2.1, 3.1, 5.9);
+    test1 = Mat2d(8.0, 2.0, 3.0, 6.0);
     test2 = Mat2d(4.0, 8.7, 9.2, 2.5);
     eps = Math<double>::EPSILON;
 }

@@ -6,7 +6,7 @@ Purpose : The implementation of the Test class for 3D vectors.
 
 Creation Date : 2010-01-28
 
-Last Modified : ti. 11. mai 2010 kl. 11.30 +0200
+Last Modified : ma. 28. juni 2010 kl. 15.30 +0200
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -122,11 +122,9 @@ void Vector3Test::testGeometry()
     CPPUNIT_ASSERT( m_1_0_0.length() == 1.0f );
     CPPUNIT_ASSERT( m_1_1_1.lengthSquared() == 3.0f );
     CPPUNIT_ASSERT( m_1_1_1.length() == Pandora::Math::Math<float>::Sqrt(3.0f) );
-    CPPUNIT_ASSERT( tmp.normalizeChecked() );
 
     tmp = Pandora::Math::Vector3<float>(0.0f, 0.0f, 0.0f);
     CPPUNIT_ASSERT( tmp.length() == 0.0f );
-    CPPUNIT_ASSERT( !tmp.normalizeChecked() );
     CPPUNIT_ASSERT( tmp.lengthSquared() == 0.0f );
 
     tmp = m_2_4_1.cross(m_2_4_1);
