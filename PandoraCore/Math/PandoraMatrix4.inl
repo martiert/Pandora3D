@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix4 class for Pandora.
 
 Creation Date : 2010-05-03
 
-Last Modified : sø. 27. juni 2010 kl. 22.26 +0200
+Last Modified : ma. 28. juni 2010 kl. 15.28 +0200
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -285,7 +285,6 @@ Matrix4<Real> Matrix4<Real>::operator-(const Matrix4<Real>& mat) const
 
 /********************************************************************************
  * Multiply two matrices.                                                       *
- * TODO: Check for speedups.                                                    *
  *******************************************************************************/
 template<class Real>
 Matrix4<Real> Matrix4<Real>::operator*(const Matrix4<Real>& mat) const
@@ -299,50 +298,6 @@ Matrix4<Real> Matrix4<Real>::operator*(const Matrix4<Real>& mat) const
             }
         }
     }
-
-    /*
-    //Row 1
-    tmp[0] = m_data[0]*mat[0] + m_data[1]*mat[4] + m_data[2]*mat[8] + 
-        m_data[3]*mat[12];
-    tmp[1] = m_data[0]*mat[1] + m_data[1]*mat[5] + m_data[2]*mat[9] +
-        m_data[3]*mat[13];
-    tmp[2] = m_data[0]*mat[2] + m_data[1]*mat[6] + m_data[2]*mat[10] +
-        m_data[3]*mat[14];
-    tmp[3] = m_data[0]*mat[3] + m_data[1]*mat[7] + m_data[2]*mat[11] +
-        m_data[3]*mat[15];
-
-    //Row 2
-    tmp[4] = m_data[4]*mat[0] + m_data[5]*mat[4] + m_data[6]*mat[8] +
-        m_data[7]*mat[12];
-    tmp[5] = m_data[4]*mat[1] + m_data[5]*mat[5] + m_data[6]*mat[9] +
-        m_data[7]*mat[13];
-    tmp[6] = m_data[4]*mat[2] + m_data[5]*mat[6] + m_data[6]*mat[10] +
-        m_data[7]*mat[14];
-    tmp[7] = m_data[4]*mat[3] + m_data[5]*mat[7] + m_data[6]*mat[11] +
-        m_data[7]*mat[15];
-
-    //Row 3
-    tmp[8] = m_data[8]*mat[0] + m_data[9]*mat[4] + m_data[10]*mat[8] +
-        m_data[11]*mat[12];
-    tmp[9] = m_data[8]*mat[1] + m_data[9]*mat[5] + m_data[10]*mat[9] +
-        m_data[11]*mat[13];
-    tmp[10] = m_data[8]*mat[2] + m_data[9]*mat[6] + m_data[10]*mat[10] +
-        m_data[11]*mat[14];
-    tmp[11] = m_data[8]*mat[3] + m_data[9]*mat[7] + m_data[10]*mat[11] +
-        m_data[11]*mat[15];
-
-    //Row 4
-    tmp[12] = m_data[12]*mat[0] + m_data[13]*mat[4] + m_data[14]*mat[8] +
-        m_data[15]*mat[12];
-    tmp[13] = m_data[12]*mat[1] + m_data[13]*mat[5] + m_data[14]*mat[9] +
-        m_data[15]*mat[13];
-    tmp[14] = m_data[12]*mat[2] + m_data[13]*mat[6] + m_data[14]*mat[10] +
-        m_data[15]*mat[14];
-    tmp[15] = m_data[12]*mat[3] + m_data[13]*mat[7] + m_data[14]*mat[11] +
-        m_data[15]*mat[15];
-
-    return tmp;
-    */
 }
 
 /********************************************************************************
