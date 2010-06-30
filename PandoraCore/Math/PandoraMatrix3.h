@@ -78,9 +78,9 @@ namespace Pandora
                  *  \param
                  *      rad - The number of radians to rotate.
                  *  \param
-                 *      r - The axis to rotate around.
+                 *      axis - The axis to rotate around.
                  */
-                Matrix3(Real rad, const Vector3<Real>& r);
+                Matrix3(Real rad, const Vector3<Real>& axis);
 
                 /**
                  *  Construct a scale matrix.
@@ -265,7 +265,7 @@ namespace Pandora
                  *  \return
                  *      A matrix which is this matrix multiplied with a scalar.
                  */
-                Matrix3 operator*(const Real scalar) const;
+                Matrix3 operator*(const Real& scalar) const;
 
                 /**
                  *  Divide this matrix with a scalar.
@@ -276,7 +276,7 @@ namespace Pandora
                  *  \note
                  *      Will only check for division by zero in DEBUG mode.
                  */
-                Matrix3 operator/(const Real scalar) const;
+                Matrix3 operator/(const Real& scalar) const;
 
                 /**
                  *  Add a matrix to this matrix.
@@ -370,8 +370,8 @@ namespace Pandora
                  *  \param
                  *      mat - The matrix to compare to.
                  *  \return
-                 *      True if all elements are larger then or equal, false
-                 *      otherwise.
+                 *      True if all elements are equal, or if the first element
+                 *      that differ is larger. False otherwise.
                  */
                 bool operator>=(const Matrix3& mat) const;
 
@@ -380,7 +380,8 @@ namespace Pandora
                  *  \param
                  *      mat -  The matrix to compare to.
                  *  \return
-                 *      True if all elements are larger, false otherwise.
+                 *      True is the first element that differ is larger then
+                 *      in mat. False otherwise.
                  */
                 bool operator>(const Matrix3& mat) const;
 
@@ -389,8 +390,8 @@ namespace Pandora
                  *  \param
                  *      mat - The matrix to compare to.
                  *  \return
-                 *      True if all elements are less then or equal. False
-                 *      otherwise.
+                 *      True if all elements are equal, or if the first element
+                 *      that differ is smaller. False otherwise.
                  */
                 bool operator<=(const Matrix3& mat) const;
 
@@ -399,7 +400,8 @@ namespace Pandora
                  *  \param
                  *      mat - The matrix to compare to.
                  *  \return
-                 *      True if all elements are less, false otherwise.
+                 *      True if the first element that differ is smaller then
+                 *      in mat. False otherwise.
                  */
                 bool operator<(const Matrix3& mat) const;
 
@@ -415,6 +417,16 @@ namespace Pandora
                 static const Matrix3 ONES;
             protected:
                 Real m_data[9];
+
+                /**
+                 *  Comparison function.
+                 *  \param
+                 *      mat - The matrix to compare to.
+                 *  \return
+                 *      0 if equal, positive if this is larger and negative 
+                 *      else.
+                 */
+                int compare(const Matrix3<Real>& mat) const;
         };
 
         /**
@@ -427,7 +439,7 @@ namespace Pandora
          *      mat*scalar.
          */
         template<class Real>
-        Matrix3<Real> operator*(const Real scalar, const Matrix3<Real>& mat);
+        Matrix3<Real> operator*(const Real& scalar, const Matrix3<Real>& mat);
 
 #include "PandoraMatrix3.inl"
 

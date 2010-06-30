@@ -6,7 +6,7 @@ Purpose : Implementation of the Vector2 class used in Pandora3D
 
 Creation Date : 2010-01-26
 
-Last Modified : sø. 27. juni 2010 kl. 23.06 +0200
+Last Modified : on. 30. juni 2010 kl. 15.24 +0200
 
 Created By : Martin Ertsås
 --------------------------------------------------------------------------------
@@ -211,8 +211,7 @@ Vector2<Real>& Vector2<Real>::operator/=(const Real& scalar)
 template<class Real>
 bool Vector2<Real>::operator==(const Vector2<Real>& vec) const
 {
-    return (Math<Real>::Abs(x - vec.x) < Math<Real>::EPSILON && 
-            Math<Real>::Abs(y - vec.y) < Math<Real>::EPSILON);
+    return compare(vec) == 0;
 }
 
 /********************************************************************************
@@ -221,7 +220,7 @@ bool Vector2<Real>::operator==(const Vector2<Real>& vec) const
 template<class Real>
 bool Vector2<Real>::operator!=(const Vector2<Real>& vec) const
 {
-    return !(*this == vec);
+    return compare(vec) != 0;
 }
 
 /********************************************************************************
@@ -230,7 +229,7 @@ bool Vector2<Real>::operator!=(const Vector2<Real>& vec) const
 template<class Real>
 bool Vector2<Real>::operator>(const Vector2<Real>& vec) const
 {
-    return (x > vec.x && y > vec.y);
+    return compare(vec) > 0;
 }
 
 /********************************************************************************
@@ -239,7 +238,7 @@ bool Vector2<Real>::operator>(const Vector2<Real>& vec) const
 template<class Real>
 bool Vector2<Real>::operator>=(const Vector2<Real>& vec) const
 {
-    return (x >= vec.x && y >= vec.y);
+    return compare(vec) >= 0;
 }
 
 /********************************************************************************
@@ -248,7 +247,7 @@ bool Vector2<Real>::operator>=(const Vector2<Real>& vec) const
 template<class Real>
 bool Vector2<Real>::operator<(const Vector2<Real>& vec) const
 {
-    return (x < vec.x && y < vec.y);
+    return compare(vec) < 0;
 }
 
 /********************************************************************************
@@ -257,7 +256,7 @@ bool Vector2<Real>::operator<(const Vector2<Real>& vec) const
 template<class Real>
 bool Vector2<Real>::operator<=(const Vector2<Real>& vec) const
 {
-    return (x <= vec.x && y <= vec.y);
+    return compare(vec) <= 0;
 }
 
 /********************************************************************************
@@ -337,4 +336,13 @@ template<class Real>
 Vector2<Real> operator*(const Real scalar, const Vector2<Real>& vec)
 {
     return vec * scalar;
+}
+
+/********************************************************************************
+ * Comparison function.                                                         *
+ *******************************************************************************/
+template<class Real>
+int Vector2<Real>::compare(const Vector2<Real>& vec) const
+{
+    return memcmp(&x, &vec.x, 2*sizeof(Real));
 }

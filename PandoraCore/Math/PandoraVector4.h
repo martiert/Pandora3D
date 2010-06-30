@@ -23,6 +23,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include <stdio.h>
 #include <assert.h>
 #include <stddef.h>
+#include <string.h>
 
 #include "PandoraMath.h"
 
@@ -234,8 +235,8 @@ namespace Pandora
                  *  \param
                  *      vec - The vector to compare to.
                  *  \return
-                 *      True if all of the elements of this vector is less then
-                 *      the corresponding elements of vec, false otherwise.
+                 *      True if the first different element is smaller then in
+                 *      vec. False otherwise.
                  */
                 bool operator<(const Vector4& vec) const;
 
@@ -244,9 +245,7 @@ namespace Pandora
                  *  \param
                  *      vec - The vector to compare to.
                  *  \return
-                 *      True if all of the elements of this vector is less then
-                 *      or equal to the corresponding elements of vec. False
-                 *      otherwise.
+                 *      True if either < or == holds. False otherwise.
                  */
                 bool operator<=(const Vector4& vec) const;
 
@@ -255,9 +254,8 @@ namespace Pandora
                  *  \param
                  *      vec - The vector to compare to.
                  *  \return
-                 *      True if all of the elements of this vector is larger
-                 *      then the corresponding elements of vec. False 
-                 *      otherwise.
+                 *      True if the first different element is larger then in
+                 *      vec. False otherwise.
                  */
                 bool operator>(const Vector4& vec) const;
 
@@ -266,9 +264,7 @@ namespace Pandora
                  *  \param
                  *      vec - The vector to compare to.
                  *  \return
-                 *      True if all of the elements of this vector is larger
-                 *      then or equal to the corresponding elements of vec. 
-                 *      False otherwise.
+                 *      True if > or == holds. False otherwise.
                  */
                 bool operator>=(const Vector4& vec) const;
 
@@ -303,6 +299,16 @@ namespace Pandora
 #endif //DEBUG
            public:
                 Real x, y, z, w;
+
+                /**
+                 *  Comparison function.
+                 *  \param
+                 *      vec - The vector to compare to.
+                 *  \return
+                 *      0 if equal, positive if this is larger and negative 
+                 *      else.
+                 */
+                int compare(const Vector4<Real>& vec) const;
         };
 
         /**

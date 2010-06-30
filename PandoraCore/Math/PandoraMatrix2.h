@@ -341,8 +341,8 @@ namespace Pandora
                  *  \param
                  *      mat - The matrix to compare to.
                  *  \return
-                 *      True if all elements are larger then or equal. False
-                 *      otherwise.
+                 *      True if all elements are equal, or the first element 
+                 *      that differ is larger then mat. False otherwise.
                  */
                 bool operator>=(const Matrix2& mat) const;
 
@@ -352,7 +352,8 @@ namespace Pandora
                  *  \param
                  *      mat - The matrix to compare to.
                  *  \return
-                 *      True if all elements are larger, false otherwise.
+                 *      True if the first element that differ is larger then
+                 *      mat. False otherwise.
                  */
                 bool operator>(const Matrix2& mat) const;
 
@@ -363,8 +364,8 @@ namespace Pandora
                  *  \param
                  *      mat - The matrix to compare to.
                  *  \return
-                 *      True if all elements are smaller then or equal. False
-                 *      otherwise.
+                 *      True if all elements are equal, or if the first element
+                 *      that differ is smaller then mat. False otherwise.
                  */
                 bool operator<=(const Matrix2& mat) const;
 
@@ -374,7 +375,8 @@ namespace Pandora
                  *  \param
                  *      mat - The matrix to compare to.
                  *  \return
-                 *      True if all elements are smaller, false otherwise.
+                 *      True if the first element that differ is smaller than
+                 *      in mat. False otherwise.
                  */
                 bool operator<(const Matrix2& mat) const;
 
@@ -390,6 +392,16 @@ namespace Pandora
                 static const Matrix2 ONES;
             protected:
                 Real m_data[4];
+
+                /**
+                 *  Comparison function.
+                 *  \param
+                 *      mat - The matrix to compare to.
+                 *  \return
+                 *      0 if equal, positive if this is larger and negative 
+                 *      else.
+                 */
+                int compare(const Matrix2<Real>& mat) const;
         };
 
         /**

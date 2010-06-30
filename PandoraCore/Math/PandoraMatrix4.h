@@ -417,8 +417,8 @@ namespace Pandora
                  *  \param
                  *      mat - The matrix to compare with.
                  *  \return 
-                 *      True if all elements are larger-then-or-equal-to the
-                 *      corresponding elements in mat. False otherwise.
+                 *      True if all elements are equal, or if the first element
+                 *      that differ is larger then mat. False otherwise.
                  */
                 bool operator>=(const Matrix4& mat) const;
 
@@ -427,8 +427,8 @@ namespace Pandora
                  *  \param
                  *      mat - The matrix to compare with.
                  *  \return
-                 *      True if all elements are larger-then the corresponding
-                 *      elements in mat. False otherwise.
+                 *      True if the first element that differ is larger then
+                 *      the element in mat. False otherwise.
                  */
                 bool operator>(const Matrix4& mat) const;
 
@@ -438,8 +438,8 @@ namespace Pandora
                  *  \param
                  *      mat - The matrix to compare with.
                  *  \return
-                 *      True if all elements is less-then-or-equal-to the
-                 *      corresponding elements in mat. False otherwise.
+                 *      True if all elements are equal, or if the first element
+                 *      that differ is smaller. False otherwise.
                  */
                 bool operator<=(const Matrix4& mat) const;
 
@@ -448,8 +448,8 @@ namespace Pandora
                  *  \param
                  *      mat - The matrix to compare with.
                  *  \return
-                 *      True if all elements is less-then the corresponding
-                 *      elements in mat. False otherwise.
+                 *      True if the first element that differs is smaller then
+                 *      in mat. False otherwise.
                  */
                 bool operator<(const Matrix4& mat) const;
 
@@ -464,6 +464,16 @@ namespace Pandora
                 static const Matrix4 ONES;
             protected:
                 Real m_data[16];
+
+                /**
+                 *  Comparison function.
+                 *  \param
+                 *      mat - The matrix to compare to.
+                 *  \return
+                 *      0 if equal, positive if this is larger and negative 
+                 *      else.
+                 */
+                int compare(const Matrix4<Real>& mat) const;
         };
 
         /**

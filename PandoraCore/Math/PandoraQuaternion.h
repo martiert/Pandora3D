@@ -193,6 +193,16 @@ namespace Pandora
 #endif //DEBUG
             public:
                 Real x, y, z, w;
+
+                /**
+                 *  Comparison function.
+                 *  \param
+                 *      quat - The quaternion to compare to.
+                 *  \return
+                 *      0 if equal, positive if this is larger and negative 
+                 *      else.
+                 */
+                int compare(const Quaternion<Real>& quat) const;
         };
     } //namespace Math
 } //namespace Pandora

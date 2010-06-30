@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix4 class for Pandora.
 
 Creation Date : 2010-05-03
 
-Last Modified : ma. 28. juni 2010 kl. 15.28 +0200
+Last Modified : on. 30. juni 2010 kl. 15.23 +0200
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -562,12 +562,7 @@ Matrix4<Real> Matrix4<Real>::inverse() const
 template<class Real>
 bool Matrix4<Real>::operator==(const Matrix4<Real>& mat) const
 {
-    for(int i = 0; i < 16; i++) {
-        if(mat[i] != m_data[i]) {
-            return false;
-        }
-    }
-    return true;
+    return compare(mat) == 0;
 }
 
 /********************************************************************************
@@ -576,7 +571,7 @@ bool Matrix4<Real>::operator==(const Matrix4<Real>& mat) const
 template<class Real>
 bool Matrix4<Real>::operator!=(const Matrix4<Real>& mat) const
 {
-    return !((*this) == mat);
+    return compare(mat) != 0;
 }
 
 /********************************************************************************
@@ -585,12 +580,7 @@ bool Matrix4<Real>::operator!=(const Matrix4<Real>& mat) const
 template<class Real>
 bool Matrix4<Real>::operator>=(const Matrix4<Real>& mat) const
 {
-    for(int i = 0; i < 16; i++) {
-    if(mat[i] > m_data[i]) {
-            return false;
-        }
-    }
-    return true;
+    return compare(mat) >= 0;
 }
 
 /********************************************************************************
@@ -599,13 +589,7 @@ bool Matrix4<Real>::operator>=(const Matrix4<Real>& mat) const
 template<class Real>
 bool Matrix4<Real>::operator>(const Matrix4<Real>& mat) const
 {
-    for(int i = 0; i < 16; i++) {
-        if(mat[i] >= m_data[i]) {
-            return false;
-        }
-    }
-
-    return true;
+    return compare(mat) > 0;
 }
 
 /********************************************************************************
@@ -614,12 +598,7 @@ bool Matrix4<Real>::operator>(const Matrix4<Real>& mat) const
 template<class Real>
 bool Matrix4<Real>::operator<=(const Matrix4<Real>& mat) const
 {
-    for(int i = 0; i < 16; i++) {
-        if(mat[i] < m_data[i]) {
-            return false;
-        }
-    }
-    return true;
+    return compare(mat) <= 0;
 }
 
 /********************************************************************************
@@ -628,12 +607,7 @@ bool Matrix4<Real>::operator<=(const Matrix4<Real>& mat) const
 template<class Real>
 bool Matrix4<Real>::operator<(const Matrix4<Real>& mat) const
 {
-    for(int i = 0; i < 16; i++) {
-        if(mat[i] <= m_data[i]) {
-            return false;
-        }
-    }
-    return true;
+    return compare(mat) < 0;
 }
 
 #ifdef DEBUG
@@ -661,4 +635,13 @@ template<class Real>
 Matrix4<Real> operator*(const Real scalar, const Matrix4<Real>& mat)
 {
     return mat * scalar;
+}
+
+/********************************************************************************
+ * Comparison operator.                                                         *
+ *******************************************************************************/
+template<class Real>
+int Matrix4<Real>::compare(const Matrix4<Real>& mat) const
+{
+    return memcmp(m_data, mat.m_data, 16*sizeof(Real));
 }

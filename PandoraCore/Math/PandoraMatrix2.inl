@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix class from Pandora3D
 
 Creation Date : 2010-04-14
 
-Last Modified : ma. 28. juni 2010 kl. 15.58 +0200
+Last Modified : on. 30. juni 2010 kl. 15.22 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -183,7 +183,7 @@ Matrix2<Real>& Matrix2<Real>::operator=(const Matrix2<Real>& matrix)
 template<class Real>
 Matrix2<Real> Matrix2<Real>::operator-() const
 {
-    return Matrix2<Real>(-m_data[0], -m_data[1], -m_data[2], -m_data[3]);
+    return Matrix2<Real>::ZERO - *this;
 }
 
 /********************************************************************************
@@ -348,8 +348,7 @@ Matrix2<Real> Matrix2<Real>::inverse() const
 template<class Real>
 bool Matrix2<Real>::operator==(const Matrix2<Real>& mat) const
 {
-    return (m_data[0] == mat[0] && m_data[1] == mat[1] &&
-            m_data[2] == mat[2] && m_data[3] == mat[3]);
+    return compare(mat) == 0;
 }
 
 /********************************************************************************
@@ -358,7 +357,7 @@ bool Matrix2<Real>::operator==(const Matrix2<Real>& mat) const
 template<class Real>
 bool Matrix2<Real>::operator!=(const Matrix2<Real>& mat) const
 {
-    return !(*this == mat);
+    return compare(mat) != 0;
 }
 
 /********************************************************************************
@@ -367,8 +366,7 @@ bool Matrix2<Real>::operator!=(const Matrix2<Real>& mat) const
 template<class Real>
 bool Matrix2<Real>::operator>=(const Matrix2<Real>& mat) const
 {
-    return (m_data[0] >= mat[0] && m_data[1] >= mat[1] &&
-            m_data[2] >= mat[2] && m_data[3] >= mat[3]);
+    return compare(mat) >= 0;
 }
 
 /********************************************************************************
@@ -377,8 +375,7 @@ bool Matrix2<Real>::operator>=(const Matrix2<Real>& mat) const
 template<class Real>
 bool Matrix2<Real>::operator>(const Matrix2<Real>& mat) const
 {
-    return (m_data[0] > mat[0] && m_data[1] > mat[1] &&
-            m_data[2] > mat[2] && m_data[3] > mat[3]);
+    return compare(mat) > 0;
 }
 
 /********************************************************************************
@@ -387,8 +384,7 @@ bool Matrix2<Real>::operator>(const Matrix2<Real>& mat) const
 template<class Real>
 bool Matrix2<Real>::operator<=(const Matrix2<Real>& mat) const
 {
-    return (m_data[0] <= mat[0] && m_data[1] <= mat[1] &&
-            m_data[2] <= mat[2] && m_data[3] <= mat[3]);
+    return compare(mat) <= 0;
 }
 
 /********************************************************************************
@@ -397,8 +393,7 @@ bool Matrix2<Real>::operator<=(const Matrix2<Real>& mat) const
 template<class Real>
 bool Matrix2<Real>::operator<(const Matrix2<Real>& mat) const
 {
-    return (m_data[0] < mat[0] && m_data[1] < mat[1] &&
-            m_data[2] < mat[2] && m_data[3] < mat[3]);
+    return compare(mat) < 0;
 }
 
 #ifdef DEBUG
@@ -420,4 +415,13 @@ template<class Real>
 Matrix2<Real> operator*(const Real scale, const Matrix2<Real>& mat)
 {
     return mat * scale;
+}
+
+/********************************************************************************
+ * Comparison function.                                                         *
+ *******************************************************************************/
+template<class Real>
+int Matrix2<Real>::compare(const Matrix2<Real>& mat) const
+{
+    return memcmp(&m_data, &mat.m_data, 4*sizeof(Real));
 }

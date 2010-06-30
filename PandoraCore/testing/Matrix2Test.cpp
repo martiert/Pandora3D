@@ -6,7 +6,7 @@ Purpose :
 
 Creation Date : 2010-05-04
 
-Last Modified : ma. 28. juni 2010 kl. 16.13 +0200
+Last Modified : on. 30. juni 2010 kl. 15.43 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -197,7 +197,6 @@ void Matrix2Test::testComparison()
     CPPUNIT_ASSERT( test1 < tmp );
     CPPUNIT_ASSERT( tmp > test1 );
     tmp[2] = test1[2];
-    CPPUNIT_ASSERT( !(tmp > test1) );
     CPPUNIT_ASSERT( test1 <= tmp );
     CPPUNIT_ASSERT( tmp >= test1 );
 }

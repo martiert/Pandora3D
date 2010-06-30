@@ -23,6 +23,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include <stdio.h>
 #include <assert.h>
 #include <stddef.h>
+#include <string.h>
 
 #include "PandoraMath.h"
 
@@ -134,8 +135,8 @@ namespace Pandora
                  *  \param
                  *      vec - The vector to compare to.
                  *  \return
-                 *      true if all the elements are smaller then the elements
-                 *      of vec, false otherwise.
+                 *      True if the first different element is less then the
+                 *      one in vec. False otherwise.
                  */
                 bool operator<(const Vector3& vec) const;
 
@@ -145,8 +146,7 @@ namespace Pandora
                  *  \param
                  *      vec - The vector to compare to.
                  *  \return
-                 *      true if all the elements are smaller then or equal to
-                 *      the elements of vec, false otherwise.
+                 *      True if < or == holds. False otherwise.
                  */
                 bool operator<=(const Vector3& vec) const;
 
@@ -155,8 +155,8 @@ namespace Pandora
                  *  \param
                  *      vec - The vector to compare to.
                  *  \return
-                 *      true if all the elements are larger then the elements
-                 *      of vec, false otherwise.
+                 *      True if first different element is larger then the one
+                 *      in vec. False otherwise.
                  */
                 bool operator>(const Vector3& vec) const;
 
@@ -166,8 +166,7 @@ namespace Pandora
                  *  \param
                  *      vec - The vector to compare to.
                  *  \return
-                 *      true if all the elements are larger then or equal to
-                 *      the elements of vec, false otherwise.
+                 *      True if > or == holds. False otherwise.
                  */
                 bool operator>=(const Vector3& vec) const;
 
@@ -307,6 +306,16 @@ namespace Pandora
 
             public:
                 Real x, y, z;
+
+                /**
+                 *  Comparison function.
+                 *  \param
+                 *      vec - The vector to compare to.
+                 *  \return
+                 *      0 if equal, positive if this is larger and negative 
+                 *      else.
+                 */
+                int compare(const Vector3<Real>& vec) const;
         };
 
         /**
@@ -319,7 +328,7 @@ namespace Pandora
          *      scalar*vec.
          */
         template<class Real>
-        Vector3<Real> operator*(const Real scalar, const Vector3<Real>& vec);
+        Vector3<Real> operator*(const Real& scalar, const Vector3<Real>& vec);
 
 #include "PandoraVector3.inl"
 

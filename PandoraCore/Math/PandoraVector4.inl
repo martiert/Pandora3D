@@ -6,7 +6,7 @@ Purpose : Implementation of the Vector4 class.
 
 Creation Date : 2010-01-31
 
-Last Modified : sø. 27. juni 2010 kl. 23.06 +0200
+Last Modified : on. 30. juni 2010 kl. 15.26 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -226,10 +226,7 @@ Vector4<Real>& Vector4<Real>::operator/=(const Real& scalar)
 template<class Real>
 bool Vector4<Real>::operator==(const Vector4<Real>& vec) const
 {
-    return ((Math<Real>::Abs(x - vec.x) < Math<Real>::EPSILON) &&
-            (Math<Real>::Abs(y - vec.y) < Math<Real>::EPSILON) &&
-            (Math<Real>::Abs(z - vec.z) < Math<Real>::EPSILON) &&
-            (Math<Real>::Abs(w - vec.w) < Math<Real>::EPSILON));
+    return compare(vec) == 0;
 }
 
 /********************************************************************************
@@ -238,7 +235,7 @@ bool Vector4<Real>::operator==(const Vector4<Real>& vec) const
 template<class Real>
 bool Vector4<Real>::operator!=(const Vector4<Real>& vec) const
 {
-    return !(*this == vec);
+    return compare(vec) != 0;
 }
 
 /********************************************************************************
@@ -247,7 +244,7 @@ bool Vector4<Real>::operator!=(const Vector4<Real>& vec) const
 template<class Real>
 bool Vector4<Real>::operator<(const Vector4<Real>& vec) const
 {
-    return (x < vec.x && y < vec.y && z < vec.z && w < vec.w);
+    return compare(vec) < 0;
 }
 
 /********************************************************************************
@@ -256,7 +253,7 @@ bool Vector4<Real>::operator<(const Vector4<Real>& vec) const
 template<class Real>
 bool Vector4<Real>::operator<=(const Vector4<Real>& vec) const
 {
-    return (x <= vec.x && y <= vec.y && z <= vec.z && w <= vec.w);
+    return compare(vec) <= 0;
 }
 
 /********************************************************************************
@@ -265,7 +262,7 @@ bool Vector4<Real>::operator<=(const Vector4<Real>& vec) const
 template<class Real>
 bool Vector4<Real>::operator>(const Vector4<Real>& vec) const
 {
-    return (x > vec.x && y > vec.y && z > vec.z && w > vec.w);
+    return compare(vec) > 0;
 }
 
 /********************************************************************************
@@ -274,7 +271,7 @@ bool Vector4<Real>::operator>(const Vector4<Real>& vec) const
 template<class Real>
 bool Vector4<Real>::operator>=(const Vector4<Real>& vec) const
 {
-    return (x >= vec.x && y >= vec.y && z >= vec.z && w >= vec.w);
+    return compare(vec) >= 0;
 }
 
 /********************************************************************************
@@ -336,4 +333,13 @@ template<class Real>
 Vector4<Real> operator*(const Real scalar, const Vector4<Real>& vec)
 {
     return vec*scalar;
+}
+
+/********************************************************************************
+ * Comparison function.                                                         *
+ *******************************************************************************/
+template<class Real>
+int Vector4<Real>::compare(const Vector4<Real>& vec) const
+{
+    return memcmp(&x, &vec.x, 4*sizeof(Real));
 }

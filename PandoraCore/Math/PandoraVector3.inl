@@ -6,7 +6,7 @@ Purpose : The implementation of the 3D vector class.
 
 Creation Date : 2010-01-28
 
-Last Modified : sø. 27. juni 2010 kl. 23.06 +0200
+Last Modified : on. 30. juni 2010 kl. 16.34 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -126,9 +126,7 @@ Real Vector3<Real>::operator[](const ptrdiff_t i) const
 template<class Real>
 bool Vector3<Real>::operator==(const Vector3<Real>& vec) const
 {
-    return ((Math<Real>::Abs(x - vec.x) < Math<Real>::EPSILON) &&
-            (Math<Real>::Abs(y - vec.y) < Math<Real>::EPSILON) &&
-            (Math<Real>::Abs(z - vec.z) < Math<Real>::EPSILON));
+    return compare(vec) == 0;
 }
 
 /********************************************************************************
@@ -137,7 +135,7 @@ bool Vector3<Real>::operator==(const Vector3<Real>& vec) const
 template<class Real>
 bool Vector3<Real>::operator!=(const Vector3<Real>& vec) const
 {
-    return !(*this == vec);
+    return compare(vec) != 0;
 }
 
 /********************************************************************************
@@ -146,7 +144,7 @@ bool Vector3<Real>::operator!=(const Vector3<Real>& vec) const
 template<class Real>
 bool Vector3<Real>::operator<(const Vector3<Real>& vec) const
 {
-    return ((x < vec.x) && (y < vec.y) && (z < vec.z));
+    return compare(vec) < 0;
 }
 
 /********************************************************************************
@@ -155,16 +153,16 @@ bool Vector3<Real>::operator<(const Vector3<Real>& vec) const
 template<class Real>
 bool Vector3<Real>::operator<=(const Vector3<Real>& vec) const
 {
-    return ((x <= vec.x) && (y <= vec.y) && (z <= vec.z));
+    return compare(vec) <= 0;
 }
 
 /********************************************************************************
- * Check if this vector is larger the another.                                  *
+ * Check if this vector is larger than another.                                 *
  *******************************************************************************/
 template<class Real>
 bool Vector3<Real>::operator>(const Vector3<Real>& vec) const
 {
-    return ((x > vec.x) && (y > vec.y) && (z > vec.z));
+    return compare(vec) > 0;
 }
 
 /********************************************************************************
@@ -173,7 +171,7 @@ bool Vector3<Real>::operator>(const Vector3<Real>& vec) const
 template<class Real>
 bool Vector3<Real>::operator>=(const Vector3<Real>& vec) const
 {
-    return ((x >= vec.x) && (y >= vec.y) && (z >= vec.z));
+    return compare(vec) >= 0;
 }
 
 /********************************************************************************
@@ -302,11 +300,11 @@ Real Vector3<Real>::lengthSquared() const
 template<class Real>
 Vector3<Real>& Vector3<Real>::normalize()
 {
-    Real length = length();
+    Real len = length();
 
-    assert(length != (Real) 0.0);
+    assert(len != (Real) 0.0);
 
-    *this /= length;
+    *this /= len;
     return *this;
 }
 
@@ -320,15 +318,6 @@ Vector3<Real> Vector3<Real>::cross(const Vector3<Real>& vec) const
             vec.x*z - x*vec.z,
             x*vec.y - y*vec.x);
 }
-
-/********************************************************************************
- * Allows for scalar*vec multiplication.                                        *
- *******************************************************************************/
-template<class Real>
-Vector3<Real> operator*(const Real& scalar, const Vector3<Real>& vec)
-{
-    return vec * scalar;
-}   
 
 #ifdef DEBUG
 /********************************************************************************
@@ -345,7 +334,16 @@ void Vector3<Real>::print() const
  * Makes it possible to write scalar*vec.                                       *
  *******************************************************************************/
 template<class Real>
-Vector3<Real> operator*(const Real scalar, const Vector3<Real>& vec)
+Vector3<Real> operator*(const Real& scalar, const Vector3<Real>& vec)
 {
     return vec*scalar;
+}
+
+/********************************************************************************
+ * Comparison function.                                                         *
+ *******************************************************************************/
+template<class Real>
+int Vector3<Real>::compare(const Vector3<Real>& vec) const
+{
+    return memcmp(&x, &vec.x, 3*sizeof(Real));
 }

@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix3 class for Pandora3D
 
 Creation Date : 2010-04-16
 
-Last Modified : ma. 28. juni 2010 kl. 16.29 +0200
+Last Modified : on. 30. juni 2010 kl. 16.05 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -36,9 +36,10 @@ Matrix3<Real>::Matrix3(Real a0, Real a1, Real a2, Real a3, Real a4, Real a5,
  * Make a rotation matrix.                                                      *
  *******************************************************************************/
 template<class Real>
-Matrix3<Real>::Matrix3(Real rad, const Vector3<Real>& r)
+Matrix3<Real>::Matrix3(Real rad, const Vector3<Real>& axis)
 {
     //Normalize the axis.
+    Vector3<Real> r = axis;
     r.normalize();
     Real t_cos = Math<Real>::Cos(rad);
     Real t_sin = Math<Real>::Sin(rad);
@@ -277,7 +278,7 @@ Vector3<Real> Matrix3<Real>::operator*(const Vector3<Real>& vec) const
  * Multiply a matrix with a scalar.                                             *
  *******************************************************************************/
 template<class Real>
-Matrix3<Real> Matrix3<Real>::operator*(const Real scalar) const
+Matrix3<Real> Matrix3<Real>::operator*(const Real& scalar) const
 {
     return Matrix3<Real>(
             m_data[0]*scalar, m_data[1]*scalar, m_data[2]*scalar,
@@ -289,7 +290,7 @@ Matrix3<Real> Matrix3<Real>::operator*(const Real scalar) const
  * Divide a matrix with a scalar.                                               *
  *******************************************************************************/
 template<class Real>
-Matrix3<Real> Matrix3<Real>::operator/(const Real scalar) const
+Matrix3<Real> Matrix3<Real>::operator/(const Real& scalar) const
 {
     assert(scalar != (Real)0.0 && "Division by zero error");
     return (*this) * (1.0/scalar);
@@ -375,18 +376,28 @@ Matrix3<Real> Matrix3<Real>::transpose() const
 template<class Real>
 Matrix3<Real> Matrix3<Real>::inverse() const
 {
-    assert( det() != (Real) 0.0 && "Trying to invert a singular matrix.");
+    Real determ = this->det();
+    assert( determ != (Real) 0.0 && "Trying to invert a singular matrix.");
+    determ = 1.0/determ;
 
-    return ( Matrix3<Real>(
-                m_data[4]*m_data[8] - m_data[5]*m_data[7],
-                m_data[3]*m_data[8] - m_data[5]*m_data[6],
-                m_data[3]*m_data[7] - m_data[4]*m_data[6],
-                m_data[1]*m_data[8] - m_data[2]*m_data[7],
-                m_data[0]*m_data[8] - m_data[2]*m_data[6],
-                m_data[0]*m_data[7] - m_data[1]*m_data[6],
-                m_data[1]*m_data[5] - m_data[2]*m_data[4],
-                m_data[0]*m_data[5] - m_data[2]*m_data[3],
-                m_data[0]*m_data[4] - m_data[1]*m_data[3]) / det());
+    Matrix3<Real> mat = this->transpose();
+
+    Real m11, m12, m13, m21, m22, m23, m31, m32, m33;
+    m11 = mat(1,1)*mat(2,2) - mat(1,2)*mat(2,1); 
+    m12 = mat(1,2)*mat(2,0) - mat(1,0)*mat(2,2);
+    m13 = mat(1,0)*mat(2,1) - mat(1,1)*mat(2,0);
+
+    m21 = mat(0,2)*mat(2,1) - mat(0,1)*mat(2,2);
+    m22 = mat(0,0)*mat(2,2) - mat(0,2)*mat(2,0);
+    m23 = mat(0,1)*mat(2,0) - mat(0,0)*mat(2,1);
+
+    m31 = mat(0,1)*mat(1,2) - mat(0,2)*mat(1,1);
+    m32 = mat(0,2)*mat(1,0) - mat(0,0)*mat(1,2);
+    m33 = mat(0,0)*mat(1,1) - mat(0,1)*mat(1,0);
+    
+    return (determ*Matrix3<Real>(m11, m12, m13,
+                m21, m22, m23,
+                m31, m32, m33));
 }
 
 /********************************************************************************
@@ -395,9 +406,7 @@ Matrix3<Real> Matrix3<Real>::inverse() const
 template<class Real>
 bool Matrix3<Real>::operator==(const Matrix3<Real>& mat) const
 {
-    return (m_data[0] == mat[0] && m_data[1] == mat[1] && m_data[2] == mat[2] &&
-            m_data[3] == mat[3] && m_data[4] == mat[4] && m_data[5] == mat[5] &&
-            m_data[6] == mat[6] && m_data[7] == mat[7] && m_data[8] == mat[8]);
+    return compare(mat) == 0;
 }
 
 /********************************************************************************
@@ -406,7 +415,7 @@ bool Matrix3<Real>::operator==(const Matrix3<Real>& mat) const
 template<class Real>
 bool Matrix3<Real>::operator!=(const Matrix3<Real>& mat) const
 {
-    return !((*this) == mat);
+    return compare(mat) != 0;
 }
 
 /********************************************************************************
@@ -415,9 +424,7 @@ bool Matrix3<Real>::operator!=(const Matrix3<Real>& mat) const
 template<class Real>
 bool Matrix3<Real>::operator>=(const Matrix3<Real>& mat) const
 {
-    return (m_data[0] >= mat[0] && m_data[1] >= mat[1] && m_data[2] >= mat[2] &&
-            m_data[3] >= mat[3] && m_data[4] >= mat[4] && m_data[5] >= mat[5] &&
-            m_data[6] >= mat[6] && m_data[7] >= mat[7] && m_data[8] >= mat[8]);
+    return compare(mat) >= 0;
 }
 
 /********************************************************************************
@@ -426,9 +433,7 @@ bool Matrix3<Real>::operator>=(const Matrix3<Real>& mat) const
 template<class Real>
 bool Matrix3<Real>::operator>(const Matrix3<Real>& mat) const
 {
-    return (m_data[0] > mat[0] && m_data[1] > mat[1] && m_data[2] > mat[2] &&
-            m_data[3] > mat[3] && m_data[4] > mat[4] && m_data[5] > mat[5] &&
-            m_data[6] > mat[6] && m_data[7] > mat[7] && m_data[8] > mat[8]);
+    return compare(mat) > 0;
 }
 
 /********************************************************************************
@@ -437,9 +442,7 @@ bool Matrix3<Real>::operator>(const Matrix3<Real>& mat) const
 template<class Real>
 bool Matrix3<Real>::operator<=(const Matrix3<Real>& mat) const
 {
-    return (m_data[0] <= mat[0] && m_data[1] <= mat[1] && m_data[2] <= mat[2] &&
-            m_data[3] <= mat[3] && m_data[4] <= mat[4] && m_data[5] <= mat[5] &&
-            m_data[6] <= mat[6] && m_data[7] <= mat[7] && m_data[8] <= mat[8]);
+    return compare(mat) <= 0;
 }
 
 /********************************************************************************
@@ -448,9 +451,7 @@ bool Matrix3<Real>::operator<=(const Matrix3<Real>& mat) const
 template<class Real>
 bool Matrix3<Real>::operator<(const Matrix3<Real>& mat) const
 {
-    return (m_data[0] < mat[0] && m_data[1] < mat[1] && m_data[2] < mat[2] &&
-            m_data[3] < mat[3] && m_data[4] < mat[4] && m_data[5] < mat[5] &&
-            m_data[6] < mat[6] && m_data[7] < mat[7] && m_data[8] < mat[8]);
+    return compare(mat) < 0;
 }
 
 #ifdef DEBUG
@@ -471,7 +472,16 @@ void Matrix3<Real>::print() const
  * Makes it possible to write scalar*matrix.                                    *
  *******************************************************************************/
 template<class Real>
-Matrix3<Real> operator*(const Real scalar, const Matrix3<Real>& mat)
+Matrix3<Real> operator*(const Real& scalar, const Matrix3<Real>& mat)
 {
     return mat*scalar;
+}
+
+/********************************************************************************
+ * Comparison function.                                                         *
+ *******************************************************************************/
+template<class Real>
+int Matrix3<Real>::compare(const Matrix3<Real>& mat) const
+{
+    return memcmp(m_data, mat.m_data, 9*sizeof(Real));
 }
