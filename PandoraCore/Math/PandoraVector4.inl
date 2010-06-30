@@ -6,7 +6,7 @@ Purpose : Implementation of the Vector4 class.
 
 Creation Date : 2010-01-31
 
-Last Modified : on. 30. juni 2010 kl. 15.26 +0200
+Last Modified : on. 30. juni 2010 kl. 23.05 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -38,10 +38,7 @@ Vector4<Real>::Vector4(Real x, Real y, Real z, Real w)
 template<class Real>
 Vector4<Real>::Vector4(Vector4<Real>& vec)
 {
-    x = vec.x;
-    y = vec.y;
-    z = vec.z;
-    w = vec.w;
+    memcpy(&x, &(vec.x), 4*sizeof(Real));
 }
 
 /********************************************************************************
@@ -50,10 +47,7 @@ Vector4<Real>::Vector4(Vector4<Real>& vec)
 template<class Real>
 Vector4<Real>::Vector4(Real vec[4])
 {
-    x = vec[0];
-    y = vec[1];
-    z = vec[2];
-    w = vec[3];
+    memcpy(&x, vec, 4*sizeof(Real));
 }
 
 /********************************************************************************
@@ -69,10 +63,8 @@ Vector4<Real>::~Vector4()
 template<class Real>
 Vector4<Real>& Vector4<Real>::operator=(const Vector4<Real>& vec)
 {
-    x = vec.x;
-    y = vec.y;
-    z = vec.z;
-    w = vec.w;
+    if(this != &vec)
+        memcpy(&x, &(vec.x), 4*sizeof(Real));
     return *this;
 }
 

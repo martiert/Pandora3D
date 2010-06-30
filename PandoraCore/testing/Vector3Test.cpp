@@ -6,7 +6,7 @@ Purpose : The implementation of the Test class for 3D vectors.
 
 Creation Date : 2010-01-28
 
-Last Modified : on. 30. juni 2010 kl. 16.07 +0200
+Last Modified : on. 30. juni 2010 kl. 22.55 +0200
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -72,14 +72,13 @@ void Vector3Test::testEquality()
     Pandora::Math::Vector3<float> tmp(m_1_1_1);
     CPPUNIT_ASSERT( tmp == m_1_1_1 );
     CPPUNIT_ASSERT( m_1_1_1 != m_1_0_0 );
-    CPPUNIT_ASSERT( m_1_1_1 >= m_1_0_0 );
 
-    CPPUNIT_ASSERT( m_2_4_1 > m_1_0_0 );
-    CPPUNIT_ASSERT( m_1_1_1 <= m_2_4_1 );
-    CPPUNIT_ASSERT( m_1_0_0 < m_2_4_1 );
+    CPPUNIT_ASSERT( m_1_1_1 >= m_1_0_0 );
+    CPPUNIT_ASSERT( m_2_4_1 >= m_1_1_1 );
+    CPPUNIT_ASSERT( m_1_1_1 >= tmp );
+    CPPUNIT_ASSERT( m_1_1_1 <= tmp );
 
     CPPUNIT_ASSERT( !(m_1_1_1 < m_2_4_1) );
-    CPPUNIT_ASSERT( !(m_1_1_1 > m_1_0_0) );
 }
 
 void Vector3Test::testArithmetic()

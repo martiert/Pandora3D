@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix4 class for Pandora.
 
 Creation Date : 2010-05-03
 
-Last Modified : on. 30. juni 2010 kl. 15.23 +0200
+Last Modified : on. 30. juni 2010 kl. 23.02 +0200
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -242,7 +242,8 @@ void Matrix4<Real>::setColumn(const int col, const Vector4<Real>& vec)
 template<class Real>
 Matrix4<Real>& Matrix4<Real>::operator=(const Matrix4<Real>& mat)
 {
-    memcpy(m_data, mat.m_data, 16);
+    if(this != &mat)
+        memcpy(m_data, mat.m_data, 16);
     return *this;
 }
 

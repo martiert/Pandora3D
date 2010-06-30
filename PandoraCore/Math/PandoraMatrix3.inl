@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix3 class for Pandora3D
 
 Creation Date : 2010-04-16
 
-Last Modified : on. 30. juni 2010 kl. 16.05 +0200
+Last Modified : on. 30. juni 2010 kl. 23.01 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -205,7 +205,8 @@ Vector3<Real> Matrix3<Real>::getColumn(const int col) const
 template<class Real>
 Matrix3<Real>& Matrix3<Real>::operator=(const Matrix3<Real>& mat)
 {
-    memcpy(m_data, mat.m_data, 9*sizeof(Real));
+    if(this != &mat)
+        memcpy(m_data, mat.m_data, 9*sizeof(Real));
     return *this;
 }
 

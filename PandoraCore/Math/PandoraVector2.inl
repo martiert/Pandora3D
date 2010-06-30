@@ -6,7 +6,7 @@ Purpose : Implementation of the Vector2 class used in Pandora3D
 
 Creation Date : 2010-01-26
 
-Last Modified : on. 30. juni 2010 kl. 15.24 +0200
+Last Modified : on. 30. juni 2010 kl. 23.03 +0200
 
 Created By : Martin Ertsås
 --------------------------------------------------------------------------------
@@ -36,8 +36,7 @@ Vector2<Real>::Vector2(const Real& x, const Real& y)
 template<class Real>
 Vector2<Real>::Vector2(Vector2<Real>& vec)
 {
-    x = vec[0];
-    y = vec[1];
+    memcpy(&x, &(vec.x), 2*sizeof(Real));
 }
 
 /********************************************************************************
@@ -46,8 +45,7 @@ Vector2<Real>::Vector2(Vector2<Real>& vec)
 template<class Real>
 Vector2<Real>::Vector2(Real vec[2])
 {
-    x = vec[0];
-    y = vec[1];
+    memcpy(&x, vec, 2*sizeof(Real));
 }
 
 /********************************************************************************
@@ -64,8 +62,8 @@ Vector2<Real>::~Vector2()
 template<class Real>
 Vector2<Real>& Vector2<Real>::operator=(const Vector2<Real>& vec)
 {
-    x = vec[0];
-    y = vec[1];
+    if(this != &vec)
+        memcpy(&x, &(vec.x), 2*sizeof(Real));
     return *this;
 }
 

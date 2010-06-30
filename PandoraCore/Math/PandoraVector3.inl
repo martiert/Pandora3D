@@ -6,7 +6,7 @@ Purpose : The implementation of the 3D vector class.
 
 Creation Date : 2010-01-28
 
-Last Modified : on. 30. juni 2010 kl. 16.34 +0200
+Last Modified : on. 30. juni 2010 kl. 23.04 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -37,9 +37,7 @@ Vector3<Real>::Vector3(const Real& x, const Real& y, const Real& z)
 template<class Real>
 Vector3<Real>::Vector3(const Vector3<Real>& vec)
 {
-    x = vec.x;
-    y = vec.y;
-    z = vec.z;
+    memcpy(&x, &vec.x, 3*sizeof(Real));
 }
 
 /********************************************************************************
@@ -48,9 +46,7 @@ Vector3<Real>::Vector3(const Vector3<Real>& vec)
 template<class Real>
 Vector3<Real>::Vector3(const Real vec[3])
 {
-    x = vec[0];
-    y = vec[1];
-    z = vec[2];
+    memcpy(&x, vec, 3*sizeof(Real));
 }
 
 /********************************************************************************
@@ -59,9 +55,8 @@ Vector3<Real>::Vector3(const Real vec[3])
 template<class Real>
 Vector3<Real>& Vector3<Real>::operator=(const Vector3<Real>& vec)
 {
-    x = vec.x;
-    y = vec.y;
-    z = vec.z;
+    if(this != &vec)
+        memcpy(&x, &vec.x, 3*sizeof(Real));
     return *this;
 }
 
@@ -98,11 +93,7 @@ Real& Vector3<Real>::operator[](const ptrdiff_t i)
 {
     assert(i < 3 && "Index out of range\n");
 
-    if(i == 0)
-        return x;
-    if(i == 1)
-        return y;
-    return z;
+    return (&x)[i];
 }
 
 /********************************************************************************
@@ -113,11 +104,7 @@ Real Vector3<Real>::operator[](const ptrdiff_t i) const
 {
     assert(i < 3 && "Index out of range\n");
 
-    if(i == 0)
-        return x;
-    if(i == 1)
-        return y;
-    return z;
+    return (&x)[i];
 }
 
 /********************************************************************************
