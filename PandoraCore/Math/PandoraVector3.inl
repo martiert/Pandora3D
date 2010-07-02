@@ -6,7 +6,7 @@ Purpose : The implementation of the 3D vector class.
 
 Creation Date : 2010-01-28
 
-Last Modified : on. 30. juni 2010 kl. 23.04 +0200
+Last Modified : fr. 02. juli 2010 kl. 14.07 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -136,11 +136,18 @@ bool Vector3<Real>::operator<(const Vector3<Real>& vec) const
 
 /********************************************************************************
  * Check if this vector is smaller then or equal to another.                    *
+ *                                                                              *
+ * TODO: Make it work with the compare function.                                *
  *******************************************************************************/
 template<class Real>
 bool Vector3<Real>::operator<=(const Vector3<Real>& vec) const
 {
-    return compare(vec) <= 0;
+    //return compare(vec) <= 0;
+    if(x < vec.x)
+        return true;
+    else if(x == vec.x && y <= vec.y)
+        return true;
+    return false;
 }
 
 /********************************************************************************
@@ -154,11 +161,18 @@ bool Vector3<Real>::operator>(const Vector3<Real>& vec) const
 
 /********************************************************************************
  * Check if this vector is larger then or equal to another.                     *
+ *                                                                              *
+ * TODO: Make it work with the compare function.                                *
  *******************************************************************************/
 template<class Real>
 bool Vector3<Real>::operator>=(const Vector3<Real>& vec) const
 {
-    return compare(vec) >= 0;
+    //return compare(vec) >= 0;
+    if(x > vec.x)
+        return true;
+    else if(x == vec.x && y >= vec.y)
+        return true;
+    return false;
 }
 
 /********************************************************************************
