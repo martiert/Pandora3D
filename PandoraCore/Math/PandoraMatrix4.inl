@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix4 class for Pandora.
 
 Creation Date : 2010-05-03
 
-Last Modified : on. 30. juni 2010 kl. 23.02 +0200
+Last Modified : ma. 09. aug. 2010 kl. 16.28 +0200
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -639,10 +639,18 @@ Matrix4<Real> operator*(const Real scalar, const Matrix4<Real>& mat)
 }
 
 /********************************************************************************
- * Comparison operator.                                                         *
+ * Compare two matrices.                                                        *
  *******************************************************************************/
 template<class Real>
 int Matrix4<Real>::compare(const Matrix4<Real>& mat) const
 {
-    return memcmp(m_data, mat.m_data, 16*sizeof(Real));
+    for(int i = 0; i < 16; i++) {
+        if(!(Math<Real>::Abs(m_data[i] - mat[i]) >= Math<Real>::EPSILON)) {
+            if(m_data[i] < mat[i])
+                return -1;
+            return 1;
+        }
+    }
+
+    return 0;
 }

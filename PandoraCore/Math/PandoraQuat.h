@@ -35,14 +35,14 @@ namespace Pandora
          *  imaginary components, while w is a real component.
          */
         template<class Real>
-        class Quaternion
+        class Quat
         {
             public:
                 /**
                  *  Constructor. Makes a quaternion with unspecified 
                  *  components.
                  */
-                Quaternion();
+                Quat();
 
                 /**
                  *  Constructor. Makes a specified quaternion.
@@ -55,7 +55,7 @@ namespace Pandora
                  *  \param
                  *      mw - The w component.
                  */
-                Quaternion(const Real& mx, const Real& my, const Real& mz,
+                Quat(const Real& mx, const Real& my, const Real& mz,
                         const Real& mw);
 
                 /**
@@ -63,7 +63,7 @@ namespace Pandora
                  *  \param
                  *      quat - The quaternion to copy.
                  */
-                Quaternion(const Quaterion& quat);
+                Quat(const Quaterion& quat);
 
                 /**
                  *  Assignment operator.
@@ -72,7 +72,7 @@ namespace Pandora
                  *  \return
                  *      This quaternion.
                  */
-                Quaternion& operator=(const Quaternion& quat);
+                Quat& operator=(const Quat& quat);
 
                 /**
                  *  Add two quaternions.
@@ -81,7 +81,7 @@ namespace Pandora
                  *  \return
                  *      This quaternion added by quat.
                  */
-                Quaternion operator+(const Quaternion& quat) const;
+                Quat operator+(const Quat& quat) const;
 
                 /**
                  *  Subtract two quaternions.
@@ -90,7 +90,7 @@ namespace Pandora
                  *  \return
                  *      This quaternion subtracted by quat.
                  */
-                Quaternion operator-(const Quaternion& quat) const;
+                Quat operator-(const Quat& quat) const;
 
                 /**
                  *  Multiply a quaternion with a scalar.
@@ -99,7 +99,7 @@ namespace Pandora
                  *  \return
                  *      This quaternion multiplied by scalar.
                  */
-                Quaternion operator*(const Real& scalar) const;
+                Quat operator*(const Real& scalar) const;
 
                 /**
                  *  Divide a quaternion by a scalar.
@@ -110,7 +110,7 @@ namespace Pandora
                  *  \note
                  *      Checks for division by zero in DEBUG mode only.
                  */
-                Quaternion operator/(const Real& scalar) const;
+                Quat operator/(const Real& scalar) const;
 
                 /**
                  *  Multiply two quaternions.
@@ -119,7 +119,7 @@ namespace Pandora
                  *  \return
                  *      This quaternion multiplied with quat.
                  */
-                Quaternion operator*(const Quaternion& quat) const;
+                Quat operator*(const Quat& quat) const;
 
                 /**
                  *  Add a quaternion to this quaternion.
@@ -128,7 +128,7 @@ namespace Pandora
                  *  \return
                  *      This quaternion.
                  */
-                Quaternion& operator+=(const Quaternion& quat);
+                Quat& operator+=(const Quat& quat);
 
                 /**
                  *  Subtract a quaternion from this quaternion.
@@ -137,7 +137,7 @@ namespace Pandora
                  *  \return
                  *      This quaternion.
                  */
-                Quaternion& operator-=(const Quaternion& quat);
+                Quat& operator-=(const Quat& quat);
 
                 /**
                  *  Multiply this quaternion with a scalar.
@@ -146,7 +146,7 @@ namespace Pandora
                  *  \return
                  *      This quaternion.
                  */
-                Quaternion& operator*=(const Real& scalar);
+                Quat& operator*=(const Real& scalar);
 
                 /**
                  *  Divide this quaternion with a scalar.
@@ -157,7 +157,7 @@ namespace Pandora
                  *  \note
                  *      Will only check for division by zero in DEBUG mode.
                  */
-                Quaternion& operator/=(const Real& scalar);
+                Quat& operator/=(const Real& scalar);
 
                 /**
                  *  Calculate the length of the quaternion, which is:
@@ -181,7 +181,7 @@ namespace Pandora
                  *  \note
                  *      Will only check for zero length in DEBUG mode.
                  */
-                Quaternion& normalize();
+                Quat& normalize();
 
 #ifdef DEBUG
                 /**
@@ -202,8 +202,11 @@ namespace Pandora
                  *      0 if equal, positive if this is larger and negative 
                  *      else.
                  */
-                int compare(const Quaternion<Real>& quat) const;
+                int compare(const Quat<Real>& quat) const;
         };
+
+#include "PandoraQuat.inl"
+
     } //namespace Math
 } //namespace Pandora
 #endif //PANDORAQUATERNION_H

@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix3 class for Pandora3D
 
 Creation Date : 2010-04-16
 
-Last Modified : on. 30. juni 2010 kl. 23.01 +0200
+Last Modified : ma. 09. aug. 2010 kl. 16.53 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -479,10 +479,18 @@ Matrix3<Real> operator*(const Real& scalar, const Matrix3<Real>& mat)
 }
 
 /********************************************************************************
- * Comparison function.                                                         *
+ * Compare two matrices.                                                        *
  *******************************************************************************/
 template<class Real>
 int Matrix3<Real>::compare(const Matrix3<Real>& mat) const
 {
-    return memcmp(m_data, mat.m_data, 9*sizeof(Real));
+    for(int i = 0; i < 9; i++) {
+        if(Math<Real>::Abs(m_data[i] - mat[i]) >= Math<Real>::EPSILON) {
+            if(m_data[i] < mat[i])
+                return -1;
+            return 1;
+        }
+    }
+
+    return 0;
 }

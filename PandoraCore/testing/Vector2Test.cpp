@@ -6,9 +6,9 @@ Purpose : Unit testing of the Pandora::Math::Vec2 implementation.
 
 Creation Date : 2010-01-25
 
-Last Modified : ma. 28. juni 2010 kl. 15.29 +0200
+Last Modified : ti. 06. juli 2010 kl. 10.58 +0200
 
-Created By :  Martin Ertsås
+Created [1] :  Martin Ertsås
 -------------------------------------------------------------------------------
 */
 
@@ -25,21 +25,21 @@ void Vector2Test::testConstructor()
 {
     printf("\tTesting constructors\n");
 
-    CPPUNIT_ASSERT( m_1_0.x == 1.0f );
-    CPPUNIT_ASSERT( m_1_0.y == 0.0f );
-    CPPUNIT_ASSERT( m_0_0.x == 0.0f );
-    CPPUNIT_ASSERT( m_0_0.y == 0.0f );
-    CPPUNIT_ASSERT( m_0_1.x == 0.0f );
-    CPPUNIT_ASSERT( m_0_1.y == 1.0f );
+    CPPUNIT_ASSERT( m_1_0[0] == 1.0f );
+    CPPUNIT_ASSERT( m_1_0[1] == 0.0f );
+    CPPUNIT_ASSERT( m_0_0[0] == 0.0f );
+    CPPUNIT_ASSERT( m_0_0[1] == 0.0f );
+    CPPUNIT_ASSERT( m_0_1[0] == 0.0f );
+    CPPUNIT_ASSERT( m_0_1[1] == 1.0f );
 
     Vec2f tmp(m_1_0);
-    CPPUNIT_ASSERT( tmp.x == m_1_0.x );
-    CPPUNIT_ASSERT( tmp.y == m_1_0.y );
+    CPPUNIT_ASSERT( tmp[0] == m_1_0[0] );
+    CPPUNIT_ASSERT( tmp[1] == m_1_0[1] );
 
     float test[] = {1.0f, 4.0f};
     Vec2f tmp2(&test[0]);
-    CPPUNIT_ASSERT( tmp2.x == test[0] );
-    CPPUNIT_ASSERT( tmp2.y == test[1] );
+    CPPUNIT_ASSERT( tmp2[0] == test[0] );
+    CPPUNIT_ASSERT( tmp2[1] == test[1] );
 }
 
 void Vector2Test::testAddition()
@@ -47,16 +47,16 @@ void Vector2Test::testAddition()
     printf("\tTesting addition\n");
 
     Vec2f tmp = m_1_0 + m_0_0;
-    CPPUNIT_ASSERT( tmp.x == m_1_0.x );
-    CPPUNIT_ASSERT( tmp.y == m_1_0.y );
+    CPPUNIT_ASSERT( tmp[0] == m_1_0[0] );
+    CPPUNIT_ASSERT( tmp[1] == m_1_0[1] );
 
     tmp = m_1_0 + m_0_1;
-    CPPUNIT_ASSERT( tmp.x == m_1_1.x );
-    CPPUNIT_ASSERT( tmp.y == m_1_1.y );
+    CPPUNIT_ASSERT( tmp[0] == m_1_1[0] );
+    CPPUNIT_ASSERT( tmp[1] == m_1_1[1] );
 
     tmp += m_1_0;
-    CPPUNIT_ASSERT( tmp.x == 2.0f );
-    CPPUNIT_ASSERT( tmp.y == 1.0f );
+    CPPUNIT_ASSERT( tmp[0] == 2.0f );
+    CPPUNIT_ASSERT( tmp[1] == 1.0f );
 }
 
 void Vector2Test::testSubtraction()
@@ -64,12 +64,12 @@ void Vector2Test::testSubtraction()
     printf("\tTesting subtraction\n");
 
     Vec2f tmp = m_4_2 - m_1_1;
-    CPPUNIT_ASSERT( tmp.x == 3.0f );
-    CPPUNIT_ASSERT( tmp.y == 1.0f );
+    CPPUNIT_ASSERT( tmp[0] == 3.0f );
+    CPPUNIT_ASSERT( tmp[1] == 1.0f );
 
     tmp -= m_1_1;
-    CPPUNIT_ASSERT( tmp.x == 2.0f );
-    CPPUNIT_ASSERT( tmp.y == 0.0f );
+    CPPUNIT_ASSERT( tmp[0] == 2.0f );
+    CPPUNIT_ASSERT( tmp[1] == 0.0f );
 }
 
 void Vector2Test::testMultiplication()
@@ -80,20 +80,20 @@ void Vector2Test::testMultiplication()
     CPPUNIT_ASSERT( tmp == 6.0f );
 
     Vec2f tmp2 = m_4_2 * 2.5f;
-    CPPUNIT_ASSERT( tmp2.x == 10.0f );
-    CPPUNIT_ASSERT( tmp2.y == 5.0f );
+    CPPUNIT_ASSERT( tmp2[0] == 10.0f );
+    CPPUNIT_ASSERT( tmp2[1] == 5.0f );
 
     tmp2 /= 2.5f;
-    CPPUNIT_ASSERT( tmp2.x == 4.0f );
-    CPPUNIT_ASSERT( tmp2.y == 2.0f );
+    CPPUNIT_ASSERT( tmp2[0] == 4.0f );
+    CPPUNIT_ASSERT( tmp2[1] == 2.0f );
 
     tmp2 = m_4_2 / 2.0f;
-    CPPUNIT_ASSERT( tmp2.x == 2.0f );
-    CPPUNIT_ASSERT( tmp2.y == 1.0f );
+    CPPUNIT_ASSERT( tmp2[0] == 2.0f );
+    CPPUNIT_ASSERT( tmp2[1] == 1.0f );
 
     tmp2 *= 2.0f;
-    CPPUNIT_ASSERT( tmp2.x == 4.0f );
-    CPPUNIT_ASSERT( tmp2.y == 2.0f );
+    CPPUNIT_ASSERT( tmp2[0] == 4.0f );
+    CPPUNIT_ASSERT( tmp2[1] == 2.0f );
 }
 
 void Vector2Test::testArithmetic()
@@ -102,8 +102,8 @@ void Vector2Test::testArithmetic()
 
     //Dot product
     Vec2f tmp = m_4_2.dotprod(m_4_2);
-    CPPUNIT_ASSERT( tmp.x == 16.0f );
-    CPPUNIT_ASSERT( tmp.y == 4.0f );
+    CPPUNIT_ASSERT( tmp[0] == 16.0f );
+    CPPUNIT_ASSERT( tmp[1] == 4.0f );
 
     //length
     float length = m_4_2.length();
@@ -132,8 +132,8 @@ void Vector2Test::testAssignment()
 {
     printf("\tTesting assignment\n");
 
-    CPPUNIT_ASSERT( m_1_1[0] == m_1_1.x );
-    CPPUNIT_ASSERT( m_1_1[1] == m_1_1.y );
+    CPPUNIT_ASSERT( m_1_1[0] == m_1_1[0] );
+    CPPUNIT_ASSERT( m_1_1[1] == m_1_1[1] );
     CPPUNIT_ASSERT( m_4_2[1] == 2.0f );
 
     Vec2f tmp;

@@ -6,7 +6,7 @@ Purpose : Implementation of the Vector2 class used in Pandora3D
 
 Creation Date : 2010-01-26
 
-Last Modified : on. 30. juni 2010 kl. 23.03 +0200
+Last Modified : ma. 09. aug. 2010 kl. 16.54 +0200
 
 Created By : Martin Ertsås
 --------------------------------------------------------------------------------
@@ -26,8 +26,8 @@ typedef Vector2<unsigned int> Vec2u;
 template<class Real>
 Vector2<Real>::Vector2(const Real& x, const Real& y)
 {
-    this->x = x;
-    this->y = y;
+    m_data[0] = x;
+    m_data[1] = y;
 }
 
 /********************************************************************************
@@ -36,7 +36,7 @@ Vector2<Real>::Vector2(const Real& x, const Real& y)
 template<class Real>
 Vector2<Real>::Vector2(Vector2<Real>& vec)
 {
-    memcpy(&x, &(vec.x), 2*sizeof(Real));
+    memcpy(m_data, vec.m_data, 2*sizeof(Real));
 }
 
 /********************************************************************************
@@ -45,7 +45,7 @@ Vector2<Real>::Vector2(Vector2<Real>& vec)
 template<class Real>
 Vector2<Real>::Vector2(Real vec[2])
 {
-    memcpy(&x, vec, 2*sizeof(Real));
+    memcpy(m_data, vec, 2*sizeof(Real));
 }
 
 /********************************************************************************
@@ -63,7 +63,7 @@ template<class Real>
 Vector2<Real>& Vector2<Real>::operator=(const Vector2<Real>& vec)
 {
     if(this != &vec)
-        memcpy(&x, &(vec.x), 2*sizeof(Real));
+        memcpy(m_data, vec.m_data, 2*sizeof(Real));
     return *this;
 }
 
@@ -75,9 +75,7 @@ Real& Vector2<Real>::operator[](const ptrdiff_t i)
 {
     assert(i < 2 && "Index out of bounds.");
 
-    if(i == 0)
-        return x;
-    return y;
+    return m_data[i];
 }
 
 /********************************************************************************
@@ -88,9 +86,7 @@ Real Vector2<Real>::operator[](const ptrdiff_t i) const
 {
     assert(i < 2 && "Index out of bounds.");
 
-    if(i == 0)
-        return x;
-    return y;
+    return m_data[i];
 }
 
 /********************************************************************************
@@ -99,7 +95,7 @@ Real Vector2<Real>::operator[](const ptrdiff_t i) const
 template<class Real>
 Vector2<Real>::operator Real*()
 {
-    return &x;
+    return m_data;
 }
 
 /********************************************************************************
@@ -108,7 +104,7 @@ Vector2<Real>::operator Real*()
 template<class Real>
 Vector2<Real>::operator const Real* () const
 {
-    return &x;
+    return m_data;
 }
 
 /********************************************************************************
@@ -117,7 +113,7 @@ Vector2<Real>::operator const Real* () const
 template<class Real>
 Vector2<Real> Vector2<Real>::operator+(const Vector2<Real>& vec) const
 {
-    return Vector2<Real>(x + vec.x, y + vec.y);
+    return Vector2<Real>(m_data[0] + vec[0], m_data[1] + vec[1]);
 }
 
 /********************************************************************************
@@ -126,7 +122,7 @@ Vector2<Real> Vector2<Real>::operator+(const Vector2<Real>& vec) const
 template<class Real>
 Vector2<Real> Vector2<Real>::operator-(const Vector2<Real>& vec) const
 {
-    return Vector2<Real>(x - vec.x, y - vec.y);
+    return Vector2<Real>(m_data[0] - vec[0], m_data[1] - vec[1]);
 }
 
 /********************************************************************************
@@ -135,7 +131,7 @@ Vector2<Real> Vector2<Real>::operator-(const Vector2<Real>& vec) const
 template<class Real>
 Real Vector2<Real>::operator*(const Vector2<Real>& vec) const
 {
-    return x*vec.x + y*vec.y;
+    return m_data[0]*vec[0] + m_data[1]*vec[1];
 }
 
 /********************************************************************************
@@ -144,7 +140,7 @@ Real Vector2<Real>::operator*(const Vector2<Real>& vec) const
 template<class Real>
 Vector2<Real> Vector2<Real>::operator*(const Real& scalar) const
 {
-    return Vector2<Real>(x*scalar, y*scalar);
+    return Vector2<Real>(m_data[0]*scalar, m_data[1]*scalar);
 }
 
 /********************************************************************************
@@ -164,8 +160,8 @@ Vector2<Real> Vector2<Real>::operator/(const Real& scalar) const
 template<class Real>
 Vector2<Real>& Vector2<Real>::operator+=(const Vector2<Real>& vec)
 {
-    x += vec.x;
-    y += vec.y;
+    m_data[0] += vec[0];
+    m_data[1] += vec[1];
     return *this;
 }
 
@@ -175,8 +171,8 @@ Vector2<Real>& Vector2<Real>::operator+=(const Vector2<Real>& vec)
 template<class Real>
 Vector2<Real>& Vector2<Real>::operator-=(const Vector2<Real>& vec)
 {
-    x -= vec.x;
-    y -= vec.y;
+    m_data[0] -= vec[0];
+    m_data[1] -= vec[1];
     return *this;
 }
 
@@ -186,8 +182,8 @@ Vector2<Real>& Vector2<Real>::operator-=(const Vector2<Real>& vec)
 template<class Real>
 Vector2<Real>& Vector2<Real>::operator*=(const Real& scalar)
 {
-    x *= scalar;
-    y *= scalar;
+    m_data[0] *= scalar;
+    m_data[1] *= scalar;
     return *this;
 }
 
@@ -263,7 +259,7 @@ bool Vector2<Real>::operator<=(const Vector2<Real>& vec) const
 template<class Real>
 Vector2<Real> Vector2<Real>::operator-() const
 {
-    return Vector2<Real>(-x, -y);
+    return Vector2<Real>(-m_data[0], -m_data[1]);
 }
 
 /********************************************************************************
@@ -272,7 +268,7 @@ Vector2<Real> Vector2<Real>::operator-() const
 template<class Real>
 Vector2<Real> Vector2<Real>::dotprod(const Vector2<Real>& vec) const
 {
-    return Vector2<Real>(x * vec.x, y * vec.y);
+    return Vector2<Real>(m_data[0]*vec[0], m_data[1]*vec[1]);
 }
 
 /********************************************************************************
@@ -281,7 +277,7 @@ Vector2<Real> Vector2<Real>::dotprod(const Vector2<Real>& vec) const
 template<class Real>
 Real Vector2<Real>::length() const
 {
-    return Math<Real>::Sqrt(x*x + y*y);
+    return Math<Real>::Sqrt(m_data[0]*m_data[0] + m_data[1]*m_data[1]);
 }
 
 /********************************************************************************
@@ -290,7 +286,7 @@ Real Vector2<Real>::length() const
 template<class Real>
 Real Vector2<Real>::lengthSquared() const
 {
-    return (x*x + y*y);
+    return (m_data[0]*m_data[0] + m_data[1]*m_data[1]);
 }
 
 /********************************************************************************
@@ -323,7 +319,7 @@ Vector2<Real> operator*(const Real& scalar, const Vector2<Real>& vec)
 template<class Real>
 void Vector2<Real>::print() const
 {
-    printf("\n[%g %g]\n\n", x, y);
+    printf("\n[%g %g]\n\n", m_data[0], m_data[1]);
 }
 #endif
 
@@ -337,10 +333,18 @@ Vector2<Real> operator*(const Real scalar, const Vector2<Real>& vec)
 }
 
 /********************************************************************************
- * Comparison function.                                                         *
+ * Compare two vectors.                                                         *
  *******************************************************************************/
 template<class Real>
 int Vector2<Real>::compare(const Vector2<Real>& vec) const
 {
-    return memcmp(&x, &vec.x, 2*sizeof(Real));
+    for(int i = 0; i < 2; i++) {
+        if(Math<Real>::Abs(m_data[i] - vec[i]) >= Math<Real>::EPSILON) {
+            if(m_data[i] > vec[i])
+                return 1;
+            return -1;
+        }
+    }
+
+    return 0;
 }

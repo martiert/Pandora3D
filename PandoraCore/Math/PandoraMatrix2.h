@@ -393,15 +393,7 @@ namespace Pandora
             protected:
                 Real m_data[4];
 
-                /**
-                 *  Comparison function.
-                 *  \param
-                 *      mat - The matrix to compare to.
-                 *  \return
-                 *      0 if equal, positive if this is larger and negative 
-                 *      else.
-                 */
-                int compare(const Matrix2<Real>& mat) const;
+                int compare(const Matrix2& mat) const;
         };
 
         /**

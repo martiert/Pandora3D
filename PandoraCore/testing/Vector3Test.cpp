@@ -6,9 +6,9 @@ Purpose : The implementation of the Test class for 3D vectors.
 
 Creation Date : 2010-01-28
 
-Last Modified : on. 30. juni 2010 kl. 22.55 +0200
+Last Modified : ti. 06. juli 2010 kl. 11.38 +0200
 
-Created By :  Martin Ertsås
+Created [1] :  Martin Ertsås
 -------------------------------------------------------------------------------
 */
 
@@ -23,25 +23,25 @@ void Vector3Test::testConstructor()
 {
     printf("\tTesting constructors\n");
 
-    CPPUNIT_ASSERT( m_1_1_1.x == 1.0f );
-    CPPUNIT_ASSERT( m_1_1_1.y == 1.0f );
-    CPPUNIT_ASSERT( m_1_1_1.z == 1.0f );
+    CPPUNIT_ASSERT( m_1_1_1[0] == 1.0f );
+    CPPUNIT_ASSERT( m_1_1_1[1] == 1.0f );
+    CPPUNIT_ASSERT( m_1_1_1[2] == 1.0f );
 
-    CPPUNIT_ASSERT( m_2_4_1.x == 2.0f );
-    CPPUNIT_ASSERT( m_2_4_1.y == 4.0f );
-    CPPUNIT_ASSERT( m_2_4_1.z == 1.0f );
+    CPPUNIT_ASSERT( m_2_4_1[0] == 2.0f );
+    CPPUNIT_ASSERT( m_2_4_1[1] == 4.0f );
+    CPPUNIT_ASSERT( m_2_4_1[2] == 1.0f );
 
-    CPPUNIT_ASSERT( m_1_0_0.x == 1.0f );
-    CPPUNIT_ASSERT( m_1_0_0.y == 0.0f );
-    CPPUNIT_ASSERT( m_1_0_0.z == 0.0f );
+    CPPUNIT_ASSERT( m_1_0_0[0] == 1.0f );
+    CPPUNIT_ASSERT( m_1_0_0[1] == 0.0f );
+    CPPUNIT_ASSERT( m_1_0_0[2] == 0.0f );
 
     Pandora::Math::Vector3<float> tmp(m_2_4_1);
-    CPPUNIT_ASSERT( tmp.x == 2.0f );
-    CPPUNIT_ASSERT( tmp.y == 4.0f );
-    CPPUNIT_ASSERT( tmp.z == 1.0f );
+    CPPUNIT_ASSERT( tmp[0] == 2.0f );
+    CPPUNIT_ASSERT( tmp[1] == 4.0f );
+    CPPUNIT_ASSERT( tmp[2] == 1.0f );
 
-    tmp.x = 3.0f;
-    CPPUNIT_ASSERT( m_2_4_1.x == 2.0f );
+    tmp[0] = 3.0f;
+    CPPUNIT_ASSERT( m_2_4_1[0] == 2.0f );
 }
 
 void Vector3Test::testAssignment()
@@ -51,18 +51,18 @@ void Vector3Test::testAssignment()
     float *tmp = (float*) m_2_4_1;
     const float *tmp2 = (const float*) m_2_4_1;
 
-    CPPUNIT_ASSERT( tmp[0] == m_2_4_1.x );
-    CPPUNIT_ASSERT( tmp[1] == m_2_4_1.y );
-    CPPUNIT_ASSERT( tmp[2] == m_2_4_1.z );
+    CPPUNIT_ASSERT( tmp[0] == m_2_4_1[0] );
+    CPPUNIT_ASSERT( tmp[1] == m_2_4_1[1] );
+    CPPUNIT_ASSERT( tmp[2] == m_2_4_1[2] );
 
-    CPPUNIT_ASSERT( tmp2[0] == m_2_4_1.x );
-    CPPUNIT_ASSERT( tmp2[1] == m_2_4_1.y );
-    CPPUNIT_ASSERT( tmp2[2] == m_2_4_1.z );
+    CPPUNIT_ASSERT( tmp2[0] == m_2_4_1[0] );
+    CPPUNIT_ASSERT( tmp2[1] == m_2_4_1[1] );
+    CPPUNIT_ASSERT( tmp2[2] == m_2_4_1[2] );
 
     tmp[0] = 4.0f;
-    CPPUNIT_ASSERT( m_2_4_1.x == 4.0f );
-    CPPUNIT_ASSERT( tmp[0] == m_2_4_1.x );
-    CPPUNIT_ASSERT( tmp2[0] == m_2_4_1.x );
+    CPPUNIT_ASSERT( m_2_4_1[0] == 4.0f );
+    CPPUNIT_ASSERT( tmp[0] == m_2_4_1[0] );
+    CPPUNIT_ASSERT( tmp2[0] == m_2_4_1[0] );
 }
 
 void Vector3Test::testEquality()
@@ -77,8 +77,6 @@ void Vector3Test::testEquality()
     CPPUNIT_ASSERT( m_2_4_1 >= m_1_1_1 );
     CPPUNIT_ASSERT( m_1_1_1 >= tmp );
     CPPUNIT_ASSERT( m_1_1_1 <= tmp );
-
-    CPPUNIT_ASSERT( !(m_1_1_1 < m_2_4_1) );
 }
 
 void Vector3Test::testArithmetic()
@@ -128,14 +126,14 @@ void Vector3Test::testGeometry()
     CPPUNIT_ASSERT( tmp.lengthSquared() == 0.0f );
 
     tmp = m_2_4_1.cross(m_2_4_1);
-    CPPUNIT_ASSERT( tmp.x == 0.0f );
-    CPPUNIT_ASSERT( tmp.y == 0.0f );
-    CPPUNIT_ASSERT( tmp.z == 0.0f );
+    CPPUNIT_ASSERT( tmp[0] == 0.0f );
+    CPPUNIT_ASSERT( tmp[1] == 0.0f );
+    CPPUNIT_ASSERT( tmp[2] == 0.0f );
 
     tmp = m_1_1_1.cross(m_2_4_1);
-    CPPUNIT_ASSERT( tmp.x == -3.0f );
-    CPPUNIT_ASSERT( tmp.y == 1.0f );
-    CPPUNIT_ASSERT( tmp.z == 2.0f );
+    CPPUNIT_ASSERT( tmp[0] == -3.0f );
+    CPPUNIT_ASSERT( tmp[1] == 1.0f );
+    CPPUNIT_ASSERT( tmp[2] == 2.0f );
 }
 
 CppUnit::Test *Vector3Test::suite()

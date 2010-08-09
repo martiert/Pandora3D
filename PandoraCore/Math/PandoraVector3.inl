@@ -6,7 +6,7 @@ Purpose : The implementation of the 3D vector class.
 
 Creation Date : 2010-01-28
 
-Last Modified : fr. 02. juli 2010 kl. 14.07 +0200
+Last Modified : ma. 09. aug. 2010 kl. 16.28 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -26,9 +26,9 @@ typedef Vector3<unsigned int> Vec3u;
 template<class Real>
 Vector3<Real>::Vector3(const Real& x, const Real& y, const Real& z)
 {
-    this->x = x;
-    this->y = y;
-    this->z = z;
+    m_data[0] = x;
+    m_data[1] = y;
+    m_data[2] = z;
 }
 
 /********************************************************************************
@@ -37,7 +37,7 @@ Vector3<Real>::Vector3(const Real& x, const Real& y, const Real& z)
 template<class Real>
 Vector3<Real>::Vector3(const Vector3<Real>& vec)
 {
-    memcpy(&x, &vec.x, 3*sizeof(Real));
+    memcpy(m_data, vec.m_data, 3*sizeof(Real));
 }
 
 /********************************************************************************
@@ -46,7 +46,7 @@ Vector3<Real>::Vector3(const Vector3<Real>& vec)
 template<class Real>
 Vector3<Real>::Vector3(const Real vec[3])
 {
-    memcpy(&x, vec, 3*sizeof(Real));
+    memcpy(m_data, vec, 3*sizeof(Real));
 }
 
 /********************************************************************************
@@ -56,7 +56,7 @@ template<class Real>
 Vector3<Real>& Vector3<Real>::operator=(const Vector3<Real>& vec)
 {
     if(this != &vec)
-        memcpy(&x, &vec.x, 3*sizeof(Real));
+        memcpy(m_data, vec.m_data, 3*sizeof(Real));
     return *this;
 }
 
@@ -73,7 +73,7 @@ Vector3<Real>::~Vector3()
 template<class Real>
 Vector3<Real>::operator const Real* () const
 {
-    return &x;
+    return m_data;
 }
 
 /********************************************************************************
@@ -82,7 +82,7 @@ Vector3<Real>::operator const Real* () const
 template<class Real>
 Vector3<Real>::operator Real* ()
 {
-    return &x;
+    return m_data;
 }
 
 /********************************************************************************
@@ -93,7 +93,7 @@ Real& Vector3<Real>::operator[](const ptrdiff_t i)
 {
     assert(i < 3 && "Index out of range\n");
 
-    return (&x)[i];
+    return m_data[i];
 }
 
 /********************************************************************************
@@ -104,7 +104,7 @@ Real Vector3<Real>::operator[](const ptrdiff_t i) const
 {
     assert(i < 3 && "Index out of range\n");
 
-    return (&x)[i];
+    return m_data[i];
 }
 
 /********************************************************************************
@@ -122,7 +122,7 @@ bool Vector3<Real>::operator==(const Vector3<Real>& vec) const
 template<class Real>
 bool Vector3<Real>::operator!=(const Vector3<Real>& vec) const
 {
-    return compare(vec) != 0;
+    return !(*this == vec);
 }
 
 /********************************************************************************
@@ -136,18 +136,11 @@ bool Vector3<Real>::operator<(const Vector3<Real>& vec) const
 
 /********************************************************************************
  * Check if this vector is smaller then or equal to another.                    *
- *                                                                              *
- * TODO: Make it work with the compare function.                                *
  *******************************************************************************/
 template<class Real>
 bool Vector3<Real>::operator<=(const Vector3<Real>& vec) const
 {
-    //return compare(vec) <= 0;
-    if(x < vec.x)
-        return true;
-    else if(x == vec.x && y <= vec.y)
-        return true;
-    return false;
+    return compare(vec) <= 0;
 }
 
 /********************************************************************************
@@ -161,18 +154,11 @@ bool Vector3<Real>::operator>(const Vector3<Real>& vec) const
 
 /********************************************************************************
  * Check if this vector is larger then or equal to another.                     *
- *                                                                              *
- * TODO: Make it work with the compare function.                                *
  *******************************************************************************/
 template<class Real>
 bool Vector3<Real>::operator>=(const Vector3<Real>& vec) const
 {
-    //return compare(vec) >= 0;
-    if(x > vec.x)
-        return true;
-    else if(x == vec.x && y >= vec.y)
-        return true;
-    return false;
+    return compare(vec) >= 0;
 }
 
 /********************************************************************************
@@ -181,7 +167,9 @@ bool Vector3<Real>::operator>=(const Vector3<Real>& vec) const
 template<class Real>
 Vector3<Real> Vector3<Real>::operator+(const Vector3<Real>& vec) const
 {
-    return Vector3<Real>(x + vec.x, y + vec.y, z + vec.z);
+    return Vector3<Real>(m_data[0] + vec[0],
+            m_data[1] + vec[1],
+            m_data[2] + vec[2]);
 }
 
 /********************************************************************************
@@ -199,7 +187,7 @@ Vector3<Real> Vector3<Real>::operator-(const Vector3<Real>& vec) const
 template<class Real>
 Real Vector3<Real>::operator*(const Vector3<Real>& vec) const
 {
-    return x*vec.x + y*vec.y + z*vec.z;
+    return m_data[0]*vec[0] + m_data[1]*vec[1] + m_data[2]*vec[2];
 }
 
 /********************************************************************************
@@ -208,7 +196,7 @@ Real Vector3<Real>::operator*(const Vector3<Real>& vec) const
 template<class Real>
 Vector3<Real> Vector3<Real>::operator*(const Real& scalar) const
 {
-    return Vector3<Real>(x*scalar, y*scalar, z*scalar);
+    return Vector3<Real>(m_data[0]*scalar, m_data[1]*scalar, m_data[2]*scalar);
 }
 
 /********************************************************************************
@@ -228,7 +216,7 @@ Vector3<Real> Vector3<Real>::operator/(const Real& scalar) const
 template<class Real>
 Vector3<Real> Vector3<Real>::operator-() const
 {
-    return Vector3<Real>(-x, -y, -z);
+    return Vector3<Real>(-m_data[0], -m_data[1], -m_data[2]);
 }
 
 /********************************************************************************
@@ -237,9 +225,9 @@ Vector3<Real> Vector3<Real>::operator-() const
 template<class Real>
 Vector3<Real>& Vector3<Real>::operator+=(const Vector3<Real>& vec)
 {
-    x += vec.x;
-    y += vec.y;
-    z += vec.z;
+    m_data[0] += vec[0];
+    m_data[1] += vec[1];
+    m_data[2] += vec[2];
     return *this;
 }
 
@@ -259,9 +247,9 @@ Vector3<Real>& Vector3<Real>::operator-=(const Vector3<Real>& vec)
 template<class Real>
 Vector3<Real>& Vector3<Real>::operator*=(const Real& scalar)
 {
-    x *= scalar;
-    y *= scalar;
-    z *= scalar;
+    m_data[0] *= scalar;
+    m_data[1] *= scalar;
+    m_data[2] *= scalar;
     return *this;
 }
 
@@ -283,7 +271,9 @@ Vector3<Real>& Vector3<Real>::operator/=(const Real& scalar)
 template<class Real>
 Real Vector3<Real>::length() const
 {
-    return Math<Real>::Sqrt(x*x + y*y + z*z);
+    return Math<Real>::Sqrt(m_data[0]*m_data[0] +
+            m_data[1]*m_data[1] +
+            m_data[2]*m_data[2]);
 }
 
 /********************************************************************************
@@ -292,7 +282,7 @@ Real Vector3<Real>::length() const
 template<class Real>
 Real Vector3<Real>::lengthSquared() const
 {
-    return (x*x + y*y + z*z);
+    return (m_data[0]*m_data[0] + m_data[1]*m_data[1] + m_data[2]*m_data[2]);
 }
 
 /********************************************************************************
@@ -315,9 +305,9 @@ Vector3<Real>& Vector3<Real>::normalize()
 template<class Real>
 Vector3<Real> Vector3<Real>::cross(const Vector3<Real>& vec) const
 {
-    return Vector3<Real>(y*vec.z - z*vec.y,
-            vec.x*z - x*vec.z,
-            x*vec.y - y*vec.x);
+    return Vector3<Real>(m_data[1]*vec[2] - m_data[2]*vec[1],
+            m_data[2]*vec[0] - m_data[0]*vec[2],
+            m_data[0]*vec[1] - m_data[1]*vec[0]);
 }
 
 #ifdef DEBUG
@@ -327,7 +317,7 @@ Vector3<Real> Vector3<Real>::cross(const Vector3<Real>& vec) const
 template<class Real>
 void Vector3<Real>::print() const
 {
-    printf("\n[%g %g %g]\n\n", x, y, z);
+    printf("\n[%g %g %g]\n\n", m_data[0], m_data[1], m_data[2]);
 }
 #endif
 
@@ -341,10 +331,18 @@ Vector3<Real> operator*(const Real& scalar, const Vector3<Real>& vec)
 }
 
 /********************************************************************************
- * Comparison function.                                                         *
+ * Compare two vectors.                                                         *
  *******************************************************************************/
 template<class Real>
 int Vector3<Real>::compare(const Vector3<Real>& vec) const
 {
-    return memcmp(&x, &vec.x, 3*sizeof(Real));
+    for(int i = 0; i < 3; i++) {
+        if(Math<Real>::Abs(m_data[i] - vec[i]) >= Math<Real>::EPSILON) {
+            if(m_data[i] > vec[i])
+                return 1;
+            return -1;
+        }
+    }
+
+    return 0;
 }

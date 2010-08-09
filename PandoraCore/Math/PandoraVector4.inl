@@ -6,7 +6,7 @@ Purpose : Implementation of the Vector4 class.
 
 Creation Date : 2010-01-31
 
-Last Modified : on. 30. juni 2010 kl. 23.05 +0200
+Last Modified : ma. 09. aug. 2010 kl. 16.04 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -26,10 +26,10 @@ typedef Vector4<unsigned int> Vec4u;
 template<class Real>
 Vector4<Real>::Vector4(Real x, Real y, Real z, Real w)
 {
-    this->x = x;
-    this->y = y;
-    this->z = z;
-    this->w = w;
+    m_data[0] = x;
+    m_data[1] = y;
+    m_data[2] = z;
+    m_data[3] = w;
 }
 
 /********************************************************************************
@@ -38,7 +38,7 @@ Vector4<Real>::Vector4(Real x, Real y, Real z, Real w)
 template<class Real>
 Vector4<Real>::Vector4(Vector4<Real>& vec)
 {
-    memcpy(&x, &(vec.x), 4*sizeof(Real));
+    memcpy(m_data, vec.m_data, 4*sizeof(Real));
 }
 
 /********************************************************************************
@@ -47,7 +47,7 @@ Vector4<Real>::Vector4(Vector4<Real>& vec)
 template<class Real>
 Vector4<Real>::Vector4(Real vec[4])
 {
-    memcpy(&x, vec, 4*sizeof(Real));
+    memcpy(m_data, vec, 4*sizeof(Real));
 }
 
 /********************************************************************************
@@ -64,7 +64,7 @@ template<class Real>
 Vector4<Real>& Vector4<Real>::operator=(const Vector4<Real>& vec)
 {
     if(this != &vec)
-        memcpy(&x, &(vec.x), 4*sizeof(Real));
+        memcpy(m_data, vec.m_data, 4*sizeof(Real));
     return *this;
 }
 
@@ -75,7 +75,7 @@ template<class Real>
 Real& Vector4<Real>::operator[](const ptrdiff_t i)
 {
     assert(i < 4 && "Index out of range");
-    return (&x)[i];
+    return m_data[i];
 }
 
 /********************************************************************************
@@ -85,7 +85,7 @@ template<class Real>
 Real Vector4<Real>::operator[](const ptrdiff_t i) const
 {
     assert(i < 4 && "Index out of range");
-    return (&x)[i];
+    return m_data[i];
 }
 
 /********************************************************************************
@@ -94,7 +94,7 @@ Real Vector4<Real>::operator[](const ptrdiff_t i) const
 template<class Real>
 Vector4<Real>::operator Real *()
 {
-    return &x;
+    return m_data;
 }
 
 /********************************************************************************
@@ -103,7 +103,7 @@ Vector4<Real>::operator Real *()
 template<class Real>
 Vector4<Real>::operator const Real *() const
 {
-    return &x;
+    return m_data;
 }
 
 /********************************************************************************
@@ -112,7 +112,7 @@ Vector4<Real>::operator const Real *() const
 template<class Real>
 Vector4<Real> Vector4<Real>::operator-() const
 {
-    return Vector4<Real>(-x, -y, -z, -w);
+    return Vector4<Real>(-m_data[0], -m_data[1], -m_data[2], -m_data[3]);
 }
 
 /********************************************************************************
@@ -121,7 +121,10 @@ Vector4<Real> Vector4<Real>::operator-() const
 template<class Real>
 Vector4<Real> Vector4<Real>::operator+(const Vector4<Real>& vec) const
 {
-    return Vector4<Real>(x+vec.x, y+vec.y, z+vec.z, w+vec.w);
+    return Vector4<Real>(m_data[0] + vec[0],
+            m_data[1] + vec[1],
+            m_data[2] + vec[2],
+            m_data[3] + vec[3]);
 }
 
 /********************************************************************************
@@ -139,7 +142,10 @@ Vector4<Real> Vector4<Real>::operator-(const Vector4<Real>& vec) const
 template<class Real>
 Vector4<Real> Vector4<Real>::operator*(const Real& scalar) const
 {
-    return Vector4<Real>(x*scalar, y*scalar, z*scalar, w*scalar);
+    return Vector4<Real>(m_data[0]*scalar,
+            m_data[1]*scalar,
+            m_data[2]*scalar,
+            m_data[3]*scalar);
 }
 
 /********************************************************************************
@@ -160,7 +166,8 @@ Vector4<Real> Vector4<Real>::operator/(const Real& scalar) const
 template<class Real>
 Real Vector4<Real>::operator*(const Vector4<Real>& vec) const
 {
-    return (x*vec.x + y*vec.y + z*vec.z + w*vec.w);
+    return (m_data[0]*vec[0] + m_data[1]*vec[1] + 
+            m_data[2]*vec[2] + m_data[3]*vec[3]);
 }
 
 /********************************************************************************
@@ -169,10 +176,10 @@ Real Vector4<Real>::operator*(const Vector4<Real>& vec) const
 template<class Real>
 Vector4<Real>& Vector4<Real>::operator+=(const Vector4<Real>& vec)
 {
-    x += vec.x;
-    y += vec.y;
-    z += vec.z;
-    w += vec.w;
+    m_data[0] += vec[0];
+    m_data[1] += vec[1];
+    m_data[2] += vec[2];
+    m_data[3] += vec[3];
     return *this;
 }
 
@@ -192,10 +199,10 @@ Vector4<Real>& Vector4<Real>::operator-=(const Vector4<Real>& vec)
 template<class Real>
 Vector4<Real>& Vector4<Real>::operator*=(const Real& scalar)
 {
-    x *= scalar;
-    y *= scalar;
-    z *= scalar;
-    w *= scalar;
+    m_data[0] *= scalar;
+    m_data[1] *= scalar;
+    m_data[2] *= scalar;
+    m_data[3] *= scalar;
     return *this;
 }
 
@@ -272,7 +279,8 @@ bool Vector4<Real>::operator>=(const Vector4<Real>& vec) const
 template<class Real>
 Real Vector4<Real>::length() const
 {
-    return Math<Real>::Sqrt(x*x + y*y + z*z + w*w);
+    return Math<Real>::Sqrt(m_data[0]*m_data[0] + m_data[1]*m_data[1] +
+            m_data[2]*m_data[2] + m_data[3]*m_data[3]);
 }
 
 /********************************************************************************
@@ -281,7 +289,8 @@ Real Vector4<Real>::length() const
 template<class Real>
 Real Vector4<Real>::lengthSquared() const
 {
-    return (x*x + y*y + z*z + w*w);
+    return (m_data[0]*m_data[0] + m_data[1]*m_data[1] + m_data[2]*m_data[2] +
+            m_data[3]*m_data[3]);
 }
 
 /********************************************************************************
@@ -314,7 +323,7 @@ Vector4<Real> operator*(const Real& scalar, const Vector4<Real>& vec)
 template<class Real>
 void Vector4<Real>::print() const
 {
-    printf("\n[%g %g %g %g]\n\n", x, y, z, w);
+    printf("\n[%g %g %g %g]\n\n", m_data[0], m_data[1], m_data[2], m_data[3]);
 }
 #endif
 
@@ -333,5 +342,13 @@ Vector4<Real> operator*(const Real scalar, const Vector4<Real>& vec)
 template<class Real>
 int Vector4<Real>::compare(const Vector4<Real>& vec) const
 {
-    return memcmp(&x, &vec.x, 4*sizeof(Real));
+    for(int i = 0; i < 4; i++) {
+        if(Math<Real>::Abs(m_data[i] - vec[i]) >= Math<Real>::EPSILON) {
+            if(m_data[i] > vec[i])
+                return 1;
+            return -1;
+        }
+    }       
+
+    return 0;
 }

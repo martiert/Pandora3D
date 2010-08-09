@@ -303,8 +303,8 @@ namespace Pandora
                 void print() const;
 #endif //DEBUG
 
-            public:
-                Real x, y;
+            protected:
+                Real m_data[2];
 
                 /**
                  *  Comparison function.

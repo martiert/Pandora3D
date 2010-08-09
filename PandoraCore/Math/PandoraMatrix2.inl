@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix class from Pandora3D
 
 Creation Date : 2010-04-14
 
-Last Modified : on. 30. juni 2010 kl. 15.22 +0200
+Last Modified : ma. 09. aug. 2010 kl. 16.54 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -418,10 +418,18 @@ Matrix2<Real> operator*(const Real scale, const Matrix2<Real>& mat)
 }
 
 /********************************************************************************
- * Comparison function.                                                         *
+ * Compare two matrices.                                                        *
  *******************************************************************************/
 template<class Real>
 int Matrix2<Real>::compare(const Matrix2<Real>& mat) const
 {
-    return memcmp(&m_data, &mat.m_data, 4*sizeof(Real));
+    for(int i = 0; i < 4; i++) {
+        if(Math<Real>::Abs(m_data[i] - mat[i]) >= Math<Real>::EPSILON) {
+            if(m_data[i] < mat[i])
+                return -1;
+            return 1;
+        }
+    }
+
+    return 0;
 }
