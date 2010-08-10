@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix class from Pandora3D
 
 Creation Date : 2010-04-14
 
-Last Modified : ma. 09. aug. 2010 kl. 16.54 +0200
+Last Modified : ti. 10. aug. 2010 kl. 15.12 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -403,7 +403,7 @@ bool Matrix2<Real>::operator<(const Matrix2<Real>& mat) const
 template<class Real>
 void Matrix2<Real>::print() const
 {
-    printf("\n|%g %g|\n|%g %g|\n\n", m_data[0], m_data[1], m_data[2], 
+    printf("\n|%8.4f %8.4f|\n|%8.4f %8.4f|\n\n", m_data[0], m_data[1], m_data[2], 
             m_data[3]);
 }
 #endif

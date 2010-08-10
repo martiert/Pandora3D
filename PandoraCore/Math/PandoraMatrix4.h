@@ -103,7 +103,7 @@ namespace Pandora
                  *  \param
                  *      r - The axis to rotate around.    
                  */
-                Matrix4(const Real& rad, const Vector4<Real>& r);
+                Matrix4(const Real& rad, Vector4<Real> r);
 
                 /**
                  *  Construct either a scaling or a translation matrix,

@@ -6,7 +6,7 @@ Purpose : Running all the test from Pandora3D.
 
 Creation Date : 2010-01-25
 
-Last Modified : ma. 28. juni 2010 kl. 16.15 +0200
+Last Modified : ti. 10. aug. 2010 kl. 14.08 +0200
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -24,6 +24,7 @@ Created By :  Martin Ertsås
 #include "Vector4Test.h"
 #include "Matrix2Test.h"
 #include "Matrix3Test.h"
+#include "Matrix4Test.h"
 
 int main(int argc, char **argv)
 {
@@ -42,6 +43,7 @@ int main(int argc, char **argv)
     runner.addTest( Vector4Test::suite() );
     runner.addTest( Matrix2Test::suite() );
     runner.addTest( Matrix3Test::suite() );
+    runner.addTest( Matrix4Test::suite() );
 
     runner.run();
     return 0;

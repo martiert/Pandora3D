@@ -6,7 +6,7 @@ Purpose : Implementation of the Vector2 class used in Pandora3D
 
 Creation Date : 2010-01-26
 
-Last Modified : ma. 09. aug. 2010 kl. 16.54 +0200
+Last Modified : ti. 10. aug. 2010 kl. 15.14 +0200
 
 Created By : Martin Ertsås
 --------------------------------------------------------------------------------
@@ -319,7 +319,7 @@ Vector2<Real> operator*(const Real& scalar, const Vector2<Real>& vec)
 template<class Real>
 void Vector2<Real>::print() const
 {
-    printf("\n[%g %g]\n\n", m_data[0], m_data[1]);
+    printf("\n[%8.4f %8.4f]\n\n", m_data[0], m_data[1]);
 }
 #endif
 

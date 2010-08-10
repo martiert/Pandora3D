@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix4 class for Pandora.
 
 Creation Date : 2010-05-03
 
-Last Modified : ma. 09. aug. 2010 kl. 16.28 +0200
+Last Modified : ti. 10. aug. 2010 kl. 18.10 +0200
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -46,23 +46,23 @@ Matrix4<Real>::Matrix4(
  * Make rotation matrix.                                                        *
  *******************************************************************************/
 template<class Real>
-Matrix4<Real>::Matrix4(const Real& rad, const Vector4<Real>& r)
+Matrix4<Real>::Matrix4(const Real& rad, Vector4<Real> r)
 {
     r.normalize();
     Real t_cos = Math<Real>::Cos(rad);
     Real t_sin = Math<Real>::Sin(rad);
 
-    m_data[0] = t_cos + (1 - t_cos)*r.x*r.x;
-    m_data[1] = (1 - t_cos)*r.x*r.y - r.z*t_sin;
-    m_data[2] = (1 - t_cos)*r.x*r.z + r.y*t_sin;
+    m_data[0] = t_cos + (1 - t_cos)*r[0]*r[0];
+    m_data[1] = (1 - t_cos)*r[0]*r[1] - r[2]*t_sin;
+    m_data[2] = (1 - t_cos)*r[0]*r[2] + r[1]*t_sin;
 
-    m_data[4] = (1 - t_cos)*r.x*r.y + r.z*t_sin;
-    m_data[5] = t_cos + (1 - t_cos)*r.y*r.y;
-    m_data[6] = (1 - t_cos)*r.y*r.z - r.x*t_sin;
+    m_data[4] = (1 - t_cos)*r[0]*r[1] + r[2]*t_sin;
+    m_data[5] = t_cos + (1 - t_cos)*r[1]*r[1];
+    m_data[6] = (1 - t_cos)*r[1]*r[2] - r[0]*t_sin;
 
-    m_data[8] = (1 - t_cos)*r.x*r.z - r.y*t_sin;
-    m_data[9] = (1 - t_cos)*r.y*r.z + r.x*t_sin;
-    m_data[10] = t_cos + (1 - t_cos)*r.z*r.z;
+    m_data[8] = (1 - t_cos)*r[0]*r[2] - r[1]*t_sin;
+    m_data[9] = (1 - t_cos)*r[1]*r[2] + r[0]*t_sin;
+    m_data[10] = t_cos + (1 - t_cos)*r[2]*r[2];
 
     m_data[3] = 0;
     m_data[7] = 0;
@@ -98,7 +98,7 @@ Matrix4<Real>::Matrix4(const Vector3<Real>& vec, const bool scale)
 template<class Real>
 Matrix4<Real>::Matrix4(const Real array[16])
 {
-    memcpy(m_data, array, 16);
+    memcpy(m_data, array, 16*sizeof(Real));
 }
 
 /********************************************************************************
@@ -107,7 +107,7 @@ Matrix4<Real>::Matrix4(const Real array[16])
 template<class Real>
 Matrix4<Real>::Matrix4(const Matrix4<Real>& mat)
 {
-    memcpy(m_data, mat.m_data, 16);
+    memcpy(m_data, mat.m_data, 16*sizeof(Real));
 }
 
 /********************************************************************************
@@ -243,7 +243,7 @@ template<class Real>
 Matrix4<Real>& Matrix4<Real>::operator=(const Matrix4<Real>& mat)
 {
     if(this != &mat)
-        memcpy(m_data, mat.m_data, 16);
+        memcpy(m_data, mat.m_data, 16*sizeof(Real));
     return *this;
 }
 
@@ -253,7 +253,9 @@ Matrix4<Real>& Matrix4<Real>::operator=(const Matrix4<Real>& mat)
 template<class Real>
 Matrix4<Real> Matrix4<Real>::operator-() const
 {
-    return ((*this) * ((Real) -1.0));
+    Mat4d tmp;
+    tmp = (*this) * (-1);
+    return tmp;
 }
 
 /********************************************************************************
@@ -299,6 +301,8 @@ Matrix4<Real> Matrix4<Real>::operator*(const Matrix4<Real>& mat) const
             }
         }
     }
+
+    return tmp;
 }
 
 /********************************************************************************
@@ -327,7 +331,7 @@ Matrix4<Real> Matrix4<Real>::operator*(const Real& scalar) const
     Matrix4<Real> mat((*this));
 
     for(int i = 0; i < 16; i++)
-        mat *= scalar;
+        mat[i] *= scalar;
     return mat;
 }
 
@@ -540,7 +544,7 @@ Matrix4<Real> Matrix4<Real>::cofactor() const
     tmp[12] = -1;
     tmp[14] = -1;
 
-    return (cofact.dot(tmp));
+    return (cofact.dotprod(tmp));
 }
 
 
@@ -621,10 +625,10 @@ void Matrix4<Real>::print() const
     printf("\n");
     for(int row = 0; row < 4; row++) {
         printf("|");
-        for(int col = 0; col < 3; col++) {
-            printf("%g ", m_data[row*4 + col]);
+        for(int col = 0; col < 4; col++) {
+            printf("%8.4f", m_data[row*4 + col]);
         }
-        printf("%g|\n", m_data[row*4 + 4]);
+        printf("|\n");
     }
 }
 #endif
@@ -645,7 +649,7 @@ template<class Real>
 int Matrix4<Real>::compare(const Matrix4<Real>& mat) const
 {
     for(int i = 0; i < 16; i++) {
-        if(!(Math<Real>::Abs(m_data[i] - mat[i]) >= Math<Real>::EPSILON)) {
+        if(Math<Real>::Abs(m_data[i] - mat[i]) >= Math<Real>::EPSILON) {
             if(m_data[i] < mat[i])
                 return -1;
             return 1;

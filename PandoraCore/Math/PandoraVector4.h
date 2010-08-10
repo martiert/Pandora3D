@@ -18,7 +18,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 */
 
 #ifndef PANDORAVECTOR4_H
-#define PANDORAVECTOR4_h
+#define PANDORAVECTOR4_H
 
 #include <stdio.h>
 #include <assert.h>

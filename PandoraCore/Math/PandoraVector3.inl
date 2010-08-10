@@ -6,7 +6,7 @@ Purpose : The implementation of the 3D vector class.
 
 Creation Date : 2010-01-28
 
-Last Modified : ma. 09. aug. 2010 kl. 16.28 +0200
+Last Modified : ti. 10. aug. 2010 kl. 15.14 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -317,7 +317,7 @@ Vector3<Real> Vector3<Real>::cross(const Vector3<Real>& vec) const
 template<class Real>
 void Vector3<Real>::print() const
 {
-    printf("\n[%g %g %g]\n\n", m_data[0], m_data[1], m_data[2]);
+    printf("\n[%8.4f %8.4f %8.4f]\n\n", m_data[0], m_data[1], m_data[2]);
 }
 #endif
 
