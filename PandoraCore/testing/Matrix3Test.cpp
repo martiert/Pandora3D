@@ -6,7 +6,7 @@ Purpose :
 
 Creation Date : 2010-05-04
 
-Last Modified : on. 30. juni 2010 kl. 15.58 +0200
+Last Modified : ti. 10. aug. 2010 kl. 14.03 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -154,11 +154,35 @@ void Matrix3Test::testArithmetic()
 void Matrix3Test::testComparison()
 {
     printf("\tTesting comparison\n");
+
+    CPPUNIT_ASSERT( test1 > test2 );
+    CPPUNIT_ASSERT( test2 < test3 );
+
+    Mat3d tmp = test1;
+    CPPUNIT_ASSERT( tmp == test1 );
+    CPPUNIT_ASSERT( tmp <= test1 );
+    CPPUNIT_ASSERT( tmp >= test1 );
+    tmp[2] += 2;
+    CPPUNIT_ASSERT( test1 <= tmp );
+
+    tmp[2] -= 4;
+    CPPUNIT_ASSERT( test1 >= tmp );
+    CPPUNIT_ASSERT( test1 != test2 );
+    CPPUNIT_ASSERT( test1 != tmp );
 }
 
 void Matrix3Test::testAssignment()
 {
     printf("\tTesting assignment\n");
+
+    Mat3d tmp = test1;
+    CPPUNIT_ASSERT( tmp == test1 );
+    tmp[2] += 3;
+    CPPUNIT_ASSERT( tmp != test1 );
+
+    double *arr = (double*) test1;
+    arr[2] += 3;
+    CPPUNIT_ASSERT( test1 == tmp );
 }
 
 CppUnit::Test *Matrix3Test::suite()
