@@ -39,8 +39,7 @@ namespace Pandora
         {
             public:
                 /**
-                 *  Constructor. Makes a quaternion with unspecified 
-                 *  components.
+                 *  Constructor. Makes a undefined quaternion
                  */
                 Quat();
 
