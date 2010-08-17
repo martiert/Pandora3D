@@ -6,7 +6,7 @@ Purpose : Implementation of the Vector2 class used in Pandora3D
 
 Creation Date : 2010-01-26
 
-Last Modified : ti. 10. aug. 2010 kl. 15.14 +0200
+Last Modified : on. 11. aug. 2010 kl. 23.14 +0200
 
 Created By : Martin Ertsås
 --------------------------------------------------------------------------------
@@ -310,6 +310,35 @@ template<class Real>
 Vector2<Real> operator*(const Real& scalar, const Vector2<Real>& vec)
 {
     return vec * scalar;
+}
+
+/********************************************************************************
+ * Compute the perpendicular.                                                   *
+ *******************************************************************************/
+template<class Real>
+Vector2<Real> Vector2<Real>::perp() const
+{
+    return Vector2<Real>(m_data[1], -m_data[0]);
+}
+
+/********************************************************************************
+ * Compute the dotperp.                                                         *
+ *******************************************************************************/
+template<class Real>
+Real Vector2<Real>::dotPerp(const Vector2<Real>& vec) const
+{
+    return m_data[0]*vec[1] - m_data[1]*vec[0];
+}
+
+/********************************************************************************
+ * Orthonormalize the vectors.                                                  *
+ *******************************************************************************/
+template<class Real>
+void Vector2<Real>::orthonormalize(Vector2<Real>& vec1, Vector2<Real>& vec2)
+{
+    vec1.normalize();
+    vec2 = vec2 - (vec1*vec2)*vec1;
+    vec2.normalize();
 }
 
 #ifdef DEBUG

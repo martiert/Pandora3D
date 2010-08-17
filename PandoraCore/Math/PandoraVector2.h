@@ -296,6 +296,33 @@ namespace Pandora
                  */
                 Vector2& normalize();
 
+                /**
+                 *  Compute the perpendicular vector to this vector.
+                 *  \return
+                 *      The perpendicular to this vector.
+                 */
+                Vector2 perp() const;
+
+                /**
+                 *  Compute this vector multipled with the perpendicular of
+                 *  the given vector.
+                 *  \param
+                 *      vec - The perpendicular of the vector to multiply with.
+                 *  \return
+                 *      A scalar which is this vector dot multiplied with the
+                 *      perpendicular to vec.
+                 */
+                Real dotPerp(const Vector2& vec) const;
+
+                /**
+                 *  Compute a gram-schmidt orthonormalization of two vectors.
+                 *  \param
+                 *      vec1 - The first vector in the orthonormalization.
+                 *  \param
+                 *      vec2 - The second vector.
+                 */
+                static void orthonormalize(Vector2& vec1, Vector2& vec2);
+
 #ifdef DEBUG
                 /**
                  *  Print out the vector. Available only in debug mode.

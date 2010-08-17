@@ -239,6 +239,16 @@ namespace Pandora
                 Matrix4& operator=(const Matrix4& mat);
 
                 /**
+                 *  Matrix assignment. Set the top left part of the matrix
+                 *  equal to a 3x3 matrix.
+                 *  \param
+                 *      mat - The matrix we assign to.
+                 *  \return
+                 *      This matrix.
+                 */
+                Matrix4& operator=(const Matrix3<Real>& mat);
+
+                /**
                  *  Negate the matrix.
                  *  \return
                  *      This matrix negated.

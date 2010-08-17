@@ -6,7 +6,7 @@ Purpose :
 
 Creation Date : 2010-08-09
 
-Last Modified : ti. 10. aug. 2010 kl. 18.43 +0200
+Last Modified : ti. 10. aug. 2010 kl. 19.48 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -95,6 +95,12 @@ Quat<Real> Quat<Real>::operator/(const Real& scalar) const
 template<class Real>
 Quat<Real> Quat<Real>::operator*(const Quat<Real>& quat) const
 {
+    Vec3d v1(x,y,z);
+    Vec3d v2(quat.x, quat.y, quat.z);
+    Real mx = w*quat.w - (v1*v2);
+    Vec3d tmp = w*v2 + quat.w*v1 + v1.cross(v2);
+
+    return Quat<Real>(tmp[0], tmp[1], tmp[2], w*quat.w - (v1*v2));
 }
 
 /********************************************************************************
@@ -138,6 +144,15 @@ Quat<Real>& Quat<Real>::operator/=(const Real& scalar)
 }
 
 /********************************************************************************
+ * Inverte the quaternion.                                                      *
+ *******************************************************************************/
+template<class Real>
+Quat<Real> Quat<Real>::inverse() const
+{
+    return Quat<Real>(-x, -y, -z, w);
+}
+
+/********************************************************************************
  * Calculate the length of the quaternion.                                      *
  *******************************************************************************/
 template<class Real>
@@ -170,6 +185,26 @@ Quat<Real>& Quat<Real>::normalize()
     z /= len;
     w /= len;
     return (*this);
+}
+
+/********************************************************************************
+ * Make a rotation matrix.                                                      *
+ *******************************************************************************/
+template<class Real>
+Matrix3<Real> Quat<Real>::toRotationMatrix() const
+{
+    Matrix3<Real> tmp;
+
+    tmp[0] = 1 - 2*y*y - 2*z*z;
+    tmp[1] = 2*x*y - 2*z*w;
+    tmp[2] = 2*x*z + 2*y*w;
+    tmp[3] = 2*x*y + 2*z*w;
+    tmp[4] = 1 - 2*x*x - 2*z*z;
+    tmp[5] = 2*y*z - 2*x*w;
+    tmp[6] = 2*x*z - 2*y*w;
+    tmp[7] = 2*y*z + 2*x*w;
+    tmp[8] = 1 - 2*x*x - 2*y*y;
+    return tmp;
 }
 
 #ifdef DEBUG

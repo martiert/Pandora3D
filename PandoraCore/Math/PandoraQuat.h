@@ -52,7 +52,7 @@ namespace Pandora
                  *  \param
                  *      mz - The z component.
                  *  \param
-                 *      mw - The w component.
+                 *      mw - The w component (Real part)
                  */
                 Quat(const Real& mx, const Real& my, const Real& mz,
                         const Real& mw);
@@ -159,6 +159,13 @@ namespace Pandora
                 Quat& operator/=(const Real& scalar);
 
                 /**
+                 *  Calculate the inverse of the quaternion.
+                 *  \return
+                 *      This quaternion inverse.
+                 */
+                Quat inverse() const;
+
+                /**
                  *  Calculate the length of the quaternion, which is:
                  *  sqrt(w^2 + x^2 + y^2 + z^2).
                  *  \return
@@ -181,6 +188,13 @@ namespace Pandora
                  *      Will only check for zero length in DEBUG mode.
                  */
                 Quat& normalize();
+
+                /*
+                 *  Get the rotation matrix from this quaternion.
+                 *  \return
+                 *      The rotation matrix this quaternion represents.
+                 */
+                Matrix3<Real> toRotationMatrix() const;
 
 #ifdef DEBUG
                 /**

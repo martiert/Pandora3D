@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix4 class for Pandora.
 
 Creation Date : 2010-05-03
 
-Last Modified : ti. 10. aug. 2010 kl. 18.10 +0200
+Last Modified : ti. 10. aug. 2010 kl. 19.51 +0200
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -245,6 +245,20 @@ Matrix4<Real>& Matrix4<Real>::operator=(const Matrix4<Real>& mat)
     if(this != &mat)
         memcpy(m_data, mat.m_data, 16*sizeof(Real));
     return *this;
+}
+
+/********************************************************************************
+ * Copy a 3x3 matrix to this matrix.                                            *
+ *******************************************************************************/
+template<class Real>
+Matrix4<Real>& Matrix4<Real>::operator=(const Matrix3<Real>& mat)
+{
+    *this = IDENTITY;
+    m_data[0] = mat[0]; m_data[1] = mat[1]; m_data[2] = mat[2];
+    m_data[4] = mat[3]; m_data[5] = mat[4]; m_data[6] = mat[5];
+    m_data[8] = mat[6]; m_data[9] = mat[7]; m_data[10] = mat[8];
+
+    return (*this);
 }
 
 /********************************************************************************

@@ -297,6 +297,17 @@ namespace Pandora
                  */
                 Vector3 cross(const Vector3& vec) const;
 
+                /**
+                 *  Make an orthonormal basis.
+                 *  \param
+                 *      vec1 - First vector.
+                 *  \param
+                 *      vec2 - Second vector.
+                 *  \param
+                 *      vec3 - Third vector.
+                 */
+                static void orthonormalize(Vector3& vec1, Vector3& vec2, Vector3& vec3);
+
 #ifdef DEBUG
                 /**
                  *  Print out the vector. Only available in DEBUG mode.

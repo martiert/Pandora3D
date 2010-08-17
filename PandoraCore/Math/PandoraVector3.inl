@@ -6,7 +6,7 @@ Purpose : The implementation of the 3D vector class.
 
 Creation Date : 2010-01-28
 
-Last Modified : ti. 10. aug. 2010 kl. 15.14 +0200
+Last Modified : on. 11. aug. 2010 kl. 23.18 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -308,6 +308,20 @@ Vector3<Real> Vector3<Real>::cross(const Vector3<Real>& vec) const
     return Vector3<Real>(m_data[1]*vec[2] - m_data[2]*vec[1],
             m_data[2]*vec[0] - m_data[0]*vec[2],
             m_data[0]*vec[1] - m_data[1]*vec[0]);
+}
+
+/********************************************************************************
+ * Orthonormalize.                                                              *
+ *******************************************************************************/
+template<class Real>
+void Vector3<Real>::orthonormalize(Vector3<Real>& vec1, Vector3<Real>& vec2,
+        Vector3<Real>& vec3)
+{
+    vec1.normalize();
+    vec2 = vec2 - (vec1*vec2)*vec1;
+    vec2.normalize;
+    vec3 = vec3 - (vec1*vec3)*vec1 - (vec2*vec3)*vec2;
+    vec3.normalize();
 }
 
 #ifdef DEBUG
