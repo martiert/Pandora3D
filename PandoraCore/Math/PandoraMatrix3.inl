@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix3 class for Pandora3D
 
 Creation Date : 2010-04-16
 
-Last Modified : ti. 10. aug. 2010 kl. 15.14 +0200
+Last Modified : ti. 17. aug. 2010 kl. 15.29 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -455,6 +455,171 @@ bool Matrix3<Real>::operator<(const Matrix3<Real>& mat) const
     return compare(mat) < 0;
 }
 
+/********************************************************************************
+ * Get the axis angle.                                                          *
+ *******************************************************************************/
+template<class Real>
+void Matrix3<Real>::toAxisAngle(Vector3<Real>& axis, Real& angle) const
+{
+    Real trace = m_data[0] + m_data[4] + m_data[8];
+    angle = Math<Real>::Arccos((trace - 1)/2);
+
+    while( angle >= Math<Real>::TWO_PI )
+        angle -= Math<Real>::TWO_PI;
+
+    trace = 2*Math<Real>::Sin(angle);
+    axis[0] = (m_data[2][1] - m_data[1][2])/trace;
+    axis[1] = (m_data[0][2] - m_data[2][0])/trace;
+    axis[2] = (m_data[1][0] - m_data[0][1])/trace;
+}
+
+/********************************************************************************
+ * From euler angles.                                                           *
+ *******************************************************************************/
+template<class Real>
+Matrix3<Real>& fromEulerAnglesXYZ(const Real& yaw, const Real& pitch, 
+        const Real& roll)
+{
+    Real cos, sin;
+
+    cos = Math<Real>::Cos(yaw);
+    sin = Math<Real>::Sin(yaw);
+    Matrix3<Real> x_mat(1.0, 0.0, 0.0,
+                        0.0, cos, -sin,
+                        0.0, sin, cos);
+
+    cos = Math<Real>::Cos(pitch);
+    sin = Math<Real>::Sin(pitch);
+    Matrix3<Real> y_mat(cos, 0.0, sin,
+                        0.0, 1.0, 0.0,
+                        -sin, 0.0, cos);
+
+    cos = Math<Real>::Cos(roll);
+    sin = Math<Real>::Sin(roll);
+    Matrix3<Real> z_mat(cos, -sin, 0.0,
+                        sin, cos, 0.0, 
+                        0.0, 0.0, 1.0);
+
+    *this = x_mat*(y_mat*z_mat);
+    return *this;
+}
+
+/********************************************************************************
+ * Orthonormalize the matrix.                                                   *
+ *******************************************************************************/
+template<class Real>
+Matrix3<Real>& Matrix3<Real>::orthonormalize()
+{
+    Real len = Math<Real>::Sqrt( m_data[0]*m_data[0] + m_data[3]*m_data[3] +
+            m_data[6]*m_data[6] );
+    
+    assert( len != 0 );
+
+    m_data[0] /= len;
+    m_data[3] /= len;
+    m_data[6] /= len;
+
+    Real dot = m_data[0]*m_data[1] + m_data[3]*m_data[4] + m_data[6]*m_data[7];
+    m_data[1] -= dot*m_data[0];
+    m_data[4] -= dot*m_data[3];
+    m_data[7] -= dot*m_data[6];
+
+    len = Math<Real>::Sqrt( m_data[1]*m_data[1] + m_data[4]*m_data[4] +
+            m_data[7]*m_data[7]);
+
+    assert( len != 0 );
+    m_data[1] /= len;
+    m_data[4] /= len;
+    m_data[7] /= len;
+
+    dot = m_data[0]*m_data[2] + m_data[3]*m_data[5] + m_data[6]*m_data[8];
+    m_data[2] -= dot*m_data[0];
+    m_data[5] -= dot*m_data[3];
+    m_data[8] -= dot*m_data[6];
+
+    dot = m_data[1]*m_data[2] + m_data[4]*m_data[5] + m_data[7]*m_data[8];
+    m_data[2] -= dot*m_data[1];
+    m_data[5] -= dot*m_data[4];
+    m_data[8] -= dot*m_data[7];
+
+    len = Math<Real>::Sqrt( m_data[2]*m_data[2] + m_data[5]*m_data[5] +
+            m_data[8]*m_data[8] );
+
+    assert( len != 0 );
+
+    m_data[2] /= len;
+    m_data[5] /= len;
+    m_data[8] /= len;
+    return *this;
+}
+
+/********************************************************************************
+ * Eigenvalue decomposition.                                                    *
+ *******************************************************************************/
+template<class Real>
+void Matrix3<Real>::eigenDecompose(Vector3<Real>& lambda, Matrix3<Real>& v_mat)
+    const
+{
+    Real diag[3], subdiag[2];
+    v_mat = *this;
+    bool reflection = v_mat.tridiagonalize(diag, subdiag);
+    bool converged = v_mat.QLfactorize(diag, subdiag);
+    assert( converged );
+
+    int i;
+    Real save;
+
+    if( diag[1] < diag[0] ) {
+        save = diag[0];
+        diag[0] = diag[1];
+        diag[1] = save;
+
+        for(i = 0; i < 3; i++) {
+            save = v_mat(i,0);
+            v_mat(i,0) = v_mat(i, 1);
+            v_mat(i, 1) = save;
+        }
+        reflection = !reflection;
+    }
+
+    if( diag[2]  < diag[1] ) {
+        save = diag[1];
+        diag[1] = diag[2];
+        diag[2] = save;
+
+        for(i = 0; i < 3; i++) {
+            save = v_mat(i,1);
+            v_mat(i,1) = v_mat(i,2);
+            v_mat(i,2) = save;
+        }
+        reflection = !reflection;
+    }
+
+    if( diag[1] < diag[0] ) {
+        save = diag[0];
+        diag[0] = diag[1];
+        diag[1] = save;
+
+        for(i = 0; i < 3; i++) {
+            save = v_mat(i,0);
+            v_mat(i,0) = v_mat(i,1);
+            v_mat(i,1) = save;
+        }
+        
+        reflection = !reflection;
+    }
+
+    lambda[0] = diag[0];
+    lambda[1] = diag[1];
+    lambda[2] = diag[2];
+
+    if( reflection ) {
+        v_mat(0,2) = -v_mat(0,2);
+        v_mat(1,2) = -v_mat(1,2);
+        v_mat(2,2) = -v_mat(2,2);
+    }
+}
+
 #ifdef DEBUG
 /********************************************************************************
  * Print out the matrix.                                                        *
@@ -493,4 +658,198 @@ int Matrix3<Real>::compare(const Matrix3<Real>& mat) const
     }
 
     return 0;
+}
+
+/********************************************************************************
+ * Tridiagonalize the matrix.                                                   *
+ *******************************************************************************/
+template<class Real>
+bool Matrix3<Real>::tridiagonalize(Real diag[3], Real subdiag[2])
+{
+    Real m00 = m_data[0];
+    Real m01 = m_data[1];
+    Real m02 = m_data[2];
+    Real m11 = m_data[4];
+    Real m12 = m_data[5];
+    Real m22 = m_data[8];
+
+    diag[0] = m00;
+    if( Math<Real>::Abs(m02) >= Math<Real>::EPSILON) {
+        subdiag[0] = Math<Real>::Sqrt(m01*m01 + m02*m02);
+        Real invlen = 1.0/subdiag[0];
+        m01 *= invlen;
+        m02 *= invlen;
+
+        Real tmp = 2.0*m01*m12*m02*(m22-m11);
+        diag[1] = m11 + m02*tmp;
+        diag[2] = m22 - m02*tmp;
+        subdiag[1] = m12 - m01*tmp;
+
+        m_data[0] = 1.0;
+        m_data[1] = 0.0;
+        m_data[2] = 0.0;
+        m_data[3] = 0.0;
+        m_data[4] = m01;
+        m_data[5] = m02;
+        m_data[6] = 0.0;
+        m_data[7] = m02;
+        m_data[8] = -m01;
+        return true;
+    }
+
+    diag[1] = m11;
+    diag[2] = m22;
+    subdiag[0] = m01;
+    subdiag[1] = m12;
+
+    m_data[0] = 1.0;
+    m_data[1] = 0.0;
+    m_data[2] = 0.0;
+    m_data[3] = 0.0;
+    m_data[4] = 1.0;
+    m_data[5] = 0.0;
+    m_data[6] = 0.0;
+    m_data[7] = 0.0;
+    m_data[8] = 1.0;
+    return false;
+}
+
+/********************************************************************************
+ * Run a QL factorization algorithm.                                            *
+ *******************************************************************************/
+template<class Real>
+bool Matrix3<Real>::QLfactorize(Real diag[3], Real subdiag[2])
+{
+    const int max = 32;
+    for(int i = 0; i < max; i++) {
+        Real sum, diff, discr, evalue0, evalue1, cos, sin, tmp;
+        int row;
+
+        sum = Math<Real>::Abs(diag[0]) + Math<Real>::Abs(diag[1]);
+        if( subdiag[0] == (Real) 0.0 ) {
+            sum = diag[1] + diag[2];
+            diff = diag[1] - diag[2];
+            discr = Math<Real>::Sqrt(diff*diff + 4.0*subdiag[1]*subdiag[1]);
+            evalue0 = 0.5*(sum - discr);
+            evalue1 = 0.5*(sum + discr);
+
+            if( diff < 0.0 ) {
+                cos = diag[2] - evalue0;
+                sin = subdiag[1];
+            } else {
+                cos = subdiag[1];
+                sin = diag[1] - evalue0;
+            }
+
+            tmp = Math<Real>::InvSqrt(cos*cos + sin*sin);
+            cos *= tmp;
+            sin *= tmp;
+
+            for(row = 0; row < 3; row++) {
+                tmp = m_data[3*row + 2];
+                m_data[3*row+2] = sin*m_data[3*row + 1] + cos*tmp;
+                m_data[3*row+1] = cos*m_data[3*row+1] - sin*tmp;
+            }
+
+            diag[1] = evalue0;
+            diag[2] = evalue1;
+            subdiag[0] = 0.0;
+            subdiag[1] = 0.0;
+            return true;
+        }
+
+        sum = Math<Real>::Abs(diag[1]) + Math<Real>::Abs(diag[2]);
+        if( subdiag[1] == 0.0 ) {
+            sum = diag[0] + diag[1]
+                diff = diag[0] - diag[1];
+            discr = Math<Real>::Sqrt(diff*diff + 4.0*subdiag[0]*subdiag[0]);
+            evalue0 = 0.5*(sum - discr);
+            evalue1 = 0.5*(sim + discr);
+
+            if(diff < 0.0) {
+                cos = diag[1] - evalue0;
+                sin = subdiag[0];
+            } else {
+                cos = subdiag[0];
+                sin = diag[0] - evalue0;
+            }
+
+            tmp = Math<Real>::InvSqrt(cos*cos + sin*sin);
+            cos *= tmp;
+            sin *= tmp;
+
+            for(row = 0; row < 3; row++) {
+                tmp = m_data[3*row + 1];
+                m_data[3*row + 1] = sin*m_data[3*row] + cos*tmp;
+                m_data[3*row] = cos*m_data[3*row] - sin*tmp;
+            }
+
+            diag[0] = evalue0;
+            diag[1] = evalue1;
+            subdiag[0] = 0.0;
+            subdiag[1] = 0.0;
+            return true;
+        }
+
+        Real ratio = (diag[1] - diag[0])/(2.0*subdiag[0]);
+        Real root = Math<Real>::Sqrt(1.0 + ratio*ratio);
+        Real B = subdiag[1];
+        Real A = diag[2] - diag[0];
+        if( ratio < 0.0 )
+            A += subdiag[0]/(ratio - root);
+        else
+            A += subdiag[0]/(ration + root);
+
+        if( Math<Real>::Abs(B) >= Math<Real>::Abs(A) ) {
+            ratio = A/B;
+            sin = Math<Real>::InvSqrt(1.0 + ratio*ratio);
+            cos = ratio*sin;
+        } else {
+            ratio = B/A;
+            cos = Math<Real>::InvSqrt(1.0 + ratio*ratio);
+            sin = ratio*cos;
+        }
+
+        for(row = 0; row < 3; row++) {
+            tmp = m_data[row*3 + 2];
+            m_data[row*3+2] = sin*m_data[row*3+1] + cos*tmp;
+            m_data[row*3+1] = cos*m_data[row*3+1] - sin*tmP;
+        }
+
+        Real tmp0 = (diag[1] - diag[2])*sin + 2.0*subdiag[1]*cos;
+        Real tmp1 = cos*subdiag[0];
+        B = sin*subdiag[0];
+        A = cos*tmp0 - subdiag[1];
+        tmp0 *= sin;
+
+        if( Math<Real>::Abs(B) >= Math<Real>::Abs(A) ) {
+            ratio = A/B;
+            root = Math<Real>::Sqrt(1.0 + ratio*ratio);
+            subdaig[1] = B*root;
+            sin = 1.0/root;
+            cos = ratio*sin;
+        } else {
+            ratio = B/A;
+            root = Math<Real>::Sqrt(1.0 + ratio*ratio);
+            subdiag[1] = A*root;
+            cos = 1.0/root;
+            sin = ratio*cos;
+        }
+
+        for(row = 0; row < 3; row++) {
+            tmp = m_data[row*3 + 1];
+            m_data[row*3+1] = sin*m_data[row*3] + cos*tmp;
+            m_data[row*3] = cos*m_data[row*3] - sin*tmp;
+        }
+
+        Real tmp2 = diag[1] - tmp0;
+        diag[2] += tmp0;
+        tmp0 = (diag[0] - tmp2)*sin + 2.0*tmp1*cos;
+        subdiag[0] = cos*tmp0 - tmp1;
+        tmp0 *= sin;
+        diag[1] = tmp2 + tmp0;
+        diag[0] -= tmp0;
+    }
+
+    return false;
 }

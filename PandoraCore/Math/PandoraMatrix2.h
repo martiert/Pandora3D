@@ -380,6 +380,27 @@ namespace Pandora
                  */
                 bool operator<(const Matrix2& mat) const;
 
+                /**
+                 *  Extract the angle of rotation from this rotation matrix.
+                 *  \return
+                 *      The angle we rotate using this rotation matrix.
+                 */
+                Real toAngle() const;
+
+                /**
+                 *  Orthonormalize this matrix.
+                 */
+                void orthonormalize();
+
+                /**
+                 *  Eigenvalue decompose this matrix.
+                 *  \param
+                 *      lambda - The eigenvalues.
+                 *  \param
+                 *      v_mat - The eigenvectors in columnwise order.
+                 */
+                void eigenDecompose(Vector2<Real>& lambda, Matrix2& v_mat) const;
+
 #ifdef DEBUG
                 /**
                  *  Print put the matrix. Available only in DEBUG mode.

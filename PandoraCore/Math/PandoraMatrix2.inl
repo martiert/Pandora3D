@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix class from Pandora3D
 
 Creation Date : 2010-04-14
 
-Last Modified : ti. 10. aug. 2010 kl. 15.12 +0200
+Last Modified : ti. 17. aug. 2010 kl. 12.42 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -394,6 +394,76 @@ template<class Real>
 bool Matrix2<Real>::operator<(const Matrix2<Real>& mat) const
 {
     return compare(mat) < 0;
+}
+
+/********************************************************************************
+ * Extract the angle of rotation.                                               *
+ *******************************************************************************/
+template<class Real>
+Real Matrix2<Real>::toAngle() const
+{
+    return Math<Real>::Atan2(m_data[2], m_data[3]);
+}
+
+/********************************************************************************
+ * Orthonormalize the matrix.                                                   *
+ *******************************************************************************/
+template<class Real>
+void Matrix2<Real>::orthonormalize()
+{
+    Real len = Math<Real>::Sqrt(m_data[0]*m_data[0] + m_data[2]*m_data[2]);
+    m_data[0] /= len;
+    m_data[2] /= len;
+
+    Real dot = m_data[0]*m_data[1] + m_data[2]*m_data[3];
+    m_data[1] -= dot*m_data[0];
+    m_data[3] -= dot*m_data[2];
+
+    len = Math<Real>::Sqrt(m_data[1]*m_data[1] + m_data[3]*m_data[3]);
+    m_data[1] /= len;
+    m_data[3] /= len;
+}
+
+/********************************************************************************
+ * Eigenvalue decompose the matrix.                                             *
+ * Algorithm from http://cds.caltech.edu/~andrea/research/sw/2x2_eigen.html     *
+ *******************************************************************************/
+template<class Real>
+void Matrix2<Real>::eigenDecompose(Vector2<Real>& lambda, Matrix2<Real>& v_mat) 
+    const
+{
+    assert( m_data[0] == m_data[3] && 
+            "Mat2::eigenm_data[3]ecompose: Matrix is not symmetric" );
+
+    if(m_data[1]*m_data[2] < Math<Real>::EPSILON ) {
+        lambda[0] = m_data[0]; v_mat[0] = 1; v_mat[1] = 0;
+        lambda[1] = m_data[3]; v_mat[2] = 0; v_mat[3] = 1;
+        return;
+    }
+
+    double tr = m_data[0] + m_data[3];
+    double det = m_data[0] * m_data[3] - m_data[1] * m_data[2];
+    double S = Math<Real>::Sqrt( tr*tr/4 - det );
+    lambda[0] = tr/2 + S;
+    lambda[1] = tr/2 - S;
+
+    double SS = Math<Real>::Sqrt( Math<Real>::Max((m_data[0]-m_data[3])*(m_data[0]-m_data[3])/4 + m_data[1] * m_data[2], 0.0) );
+    if( m_data[0] - m_data[3] < 0 ) {
+        v_mat[0] = m_data[2];
+        v_mat[1] = - (m_data[0]-m_data[3])/2 + SS;
+        v_mat[2] = + (m_data[0]-m_data[3])/2 - SS;
+        v_mat[3] = m_data[1];
+    } else {
+        v_mat[2] = m_data[2];
+        v_mat[3] = - (m_data[0]-m_data[3])/2 - SS;
+        v_mat[0] = + (m_data[0]-m_data[3])/2 + SS;
+        v_mat[1] = m_data[1];
+    }
+
+    double n1 = Math<Real>::Sqrt(v_mat[0]*v_mat[0] + v_mat[1]*v_mat[1]);
+    v_mat[0] /= n1; v_mat[1] /= n1;
+    double n2 = Math<Real>::Sqrt(v_mat[2]*v_mat[2] + v_mat[3]*v_mat[3]);
+    v_mat[2] /= n2; v_mat[3] /= n2;
 }
 
 #ifdef DEBUG

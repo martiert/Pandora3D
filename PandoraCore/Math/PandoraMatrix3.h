@@ -405,6 +405,51 @@ namespace Pandora
                  */
                 bool operator<(const Matrix3& mat) const;
 
+                /**
+                 *  Get the rotation in radians and the axis we rotate around.
+                 *  \param
+                 *      axis - The axis we rotate around.
+                 *  \param
+                 *      angle - The angle we rotate.
+                 */
+                void toAxisAngle(Vector3<Real>& axis, Real& angle) const;
+
+                /**
+                 *  Orhtonormalize the matrix.
+                 *  \return
+                 *      This matrix.
+                 */
+                Matrix3& orthonormalize();
+
+                /**
+                 *  Eigenvalue decompose the matrix.
+                 *  \param
+                 *      lambda - The eigenvalues.
+                 *  \param
+                 *      v_mat - The eigenvectors in columns.
+                 */
+                void eigenDecompose(Vector3<Real>& lambda, Matrix3& v_mat) const;
+
+                /**
+                 *  Several routines to convert from Euler angles.
+                 */
+                Matrix3& fromEulerAnglesXYZ(Real yaw, Real pitch, Real roll);
+                Matrix3& fromEulerAnglesXZY(Real yaw, Real pitch, Real roll);
+                Matrix3& fromEulerAnglesYXZ(Real yaw, Real pitch, Real roll);
+                Matrix3& fromEulerAnglesYZX(Real yaw, Real pitch, Real roll);
+                Matrix3& fromEulerAnglesZXY(Real yaw, Real pitch, Real roll);
+                Matrix3& fromEulerAnglesZYX(Real yaw, Real pitch, Real roll);
+
+                /**
+                 *  Several routines to convert to euler angles.
+                 */
+                bool toEulerAnglesXYZ(Real& yaw, Real& pitch, Real& roll);
+                bool toEulerAnglesXZY(Real& yaw, Real& pitch, Real& roll);
+                bool toEulerAnglesYXZ(Real& yaw, Real& pitch, Real& roll);
+                bool toEulerAnglesYZX(Real& yaw, Real& pitch, Real& roll);
+                bool toEulerAnglesZXY(Real& yaw, Real& pitch, Real& roll);
+                bool toEulerAnglesZYX(Real& yaw, Real& pitch, Real& roll);
+
 #ifdef DEBUG
                 /**
                  *  Print out the matrix. Only available in DEBUG mode.
@@ -419,6 +464,29 @@ namespace Pandora
                 Real m_data[9];
 
                 int compare(const Matrix3& mat) const;
+
+                /**
+                 *  Tridiagonalize the matrix.
+                 *  \param
+                 *      diag - The diagonal entries of the matrix.
+                 *  \param
+                 *      subdiag - The subdiagonal entries of the matrix.
+                 *  \return
+                 *      True if it was diagonalize, false if it was already 
+                 *      diagonal.
+                 */
+                bool tridiagonalize(Real diag[3], Real subdiag[2]);
+
+                /**
+                 *  Run a QL factorization algorithm.
+                 *  \param
+                 *      diag - The diagonal entries.
+                 *  \param
+                 *      subdiag - The subdiagonal entries.
+                 *  \return
+                 *      True if the algorithm converges. False otherwise.
+                 */
+                bool QLfactorize(Real diag[3], Real subdiag[2]);
         };
 
         /**
