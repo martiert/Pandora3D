@@ -46,16 +46,25 @@ namespace Pandora
                 /**
                  *  Constructor. Makes a specified quaternion.
                  *  \param
-                 *      mx - The x component.
+                 *      w - The w component (Real part)
                  *  \param
-                 *      my - The y component.
+                 *      x - The x component.
                  *  \param
-                 *      mz - The z component.
+                 *      y - The y component.
                  *  \param
-                 *      mw - The w component (Real part)
+                 *      z - The z component.
                  */
-                Quat(const Real& mx, const Real& my, const Real& mz,
-                        const Real& mw);
+                Quat(const Real& w, const Real& x, const Real& y, 
+                        const Real& z);
+
+                /**
+                 *  Constructor. Makes a quaternion.
+                 *  \param
+                 *      w - The real part.
+                 *  \param
+                 *      imag - The imaginary part.
+                 */
+                Quat(const Real& mw, const Vector3<Real>& mimag);
 
                 /**
                  *  Copy constructor.
@@ -65,6 +74,20 @@ namespace Pandora
                 Quat(const Quaterion& quat);
 
                 /**
+                 *  Make a quaternion from a 3D rotation matrix.
+                 *  \param
+                 *      mat - The rotation matrix.
+                 */
+                Quat(const Matrix3<Real>& mat);
+
+                /**
+                 *  Make a quaternion from a 4D rotation matrix.
+                 *  \param
+                 *      mat - The rotation matrix.
+                 */
+                Quat(const Matrix4<Real>& mat);
+
+                /**
                  *  Assignment operator.
                  *  \param
                  *      quat - The quaternion we should assign to.
@@ -72,6 +95,13 @@ namespace Pandora
                  *      This quaternion.
                  */
                 Quat& operator=(const Quat& quat);
+
+                /**
+                 *  Negate the quaternion.
+                 *  \return
+                 *      The quaternion negated.
+                 */
+                Quat operator-() const;
 
                 /**
                  *  Add two quaternions.
@@ -159,6 +189,13 @@ namespace Pandora
                 Quat& operator/=(const Real& scalar);
 
                 /**
+                 *  Compute the conjugate of the quaternion.
+                 *  \return
+                 *      The conjugate of the quaternion.
+                 */
+                Quat conjugate() const;
+
+                /**
                  *  Calculate the inverse of the quaternion.
                  *  \return
                  *      This quaternion inverse.
@@ -193,8 +230,89 @@ namespace Pandora
                  *  Get the rotation matrix from this quaternion.
                  *  \return
                  *      The rotation matrix this quaternion represents.
+                 *  \note
+                 *      This only works if the quaternion is already a
+                 *      unit quaternion.
                  */
                 Matrix3<Real> toRotationMatrix() const;
+
+                /*
+                 *  Get the rotation matrix from this quaternion.
+                 *  \return
+                 *      The rotation matrix this quaternion represents.
+                 *  \note
+                 *      This only works if the quaternion is already a
+                 *      unit quaternion.
+                 */
+                Matrix3<Real> toRotationMatrix() const;
+
+                /**
+                 *  Make this quaternion from a rotation matrix.
+                 *  \param
+                 *      mat - The matrix were converting from.
+                 *  \return
+                 *      This quaternion.
+                 */
+                Quat& fromRotationMatrix();
+
+                /**
+                 *  Check if two quaternions are equal.
+                 *  \param
+                 *      quat - The quaternion to compare with.
+                 *  \return
+                 *      True if all elements are equal, false else.
+                 */
+                bool operator==(const Quat& quat) const;
+
+                /**
+                 *  Check if two quaternions are different.
+                 *  \param
+                 *      quat - The quaternion to compare with.
+                 *  \return
+                 *      True if not all elements are equal.
+                 */
+                bool operator!=(const Quat& quat) const;
+
+
+                /**
+                 *  Check if this quaternion are larger then another.
+                 *  \param
+                 *      quat - The quaternion to compare with.
+                 *  \return
+                 *      True if the first different element is larger then
+                 *      in quat, or all elements are equal.
+                 */
+                bool operator>=(const Quat& quat) const;
+
+                /**
+                 *  Check if this quaternion are larger then in quat.
+                 *  \param
+                 *      quat - The quaternion to compare with.
+                 *  \return
+                 *      True if the first different element is larger
+                 *      then in quat and the two quaternions differ.
+                 */
+                bool operator>(const Quat& quat) const;
+                
+                 /**
+                 *  Check if this quaternion is smaller then or equal to another.
+                 *  \param
+                 *      quat - The quaternion to compare with.
+                 *  \return
+                 *      True if all elements are equal, or if the first non-equal
+                 *      element is smaller in this quaternion.
+                 */
+                bool operator<=(const Quat& quat) const;               
+                
+                /**
+                 *  Check if this quaternion is smaller then another.
+                 *  \param
+                 *      quat - The quaternion to compare with.
+                 *  \return
+                 *      True if they are not equal and the first differing
+                 *      element in this quaternion is smallest.
+                 */
+                bool operator<(const Quat& quat) const;
 
 #ifdef DEBUG
                 /**
@@ -205,7 +323,8 @@ namespace Pandora
                 void print();
 #endif //DEBUG
             public:
-                Real x, y, z, w;
+                Real w;
+                Vector3<Real> imag;
 
                 /**
                  *  Comparison function.
@@ -216,6 +335,8 @@ namespace Pandora
                  *      else.
                  */
                 int compare(const Quat<Real>& quat) const;
+
+                static Quat IDENTITY;
         };
 
 #include "PandoraQuat.inl"

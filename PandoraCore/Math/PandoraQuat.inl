@@ -6,7 +6,7 @@ Purpose :
 
 Creation Date : 2010-08-09
 
-Last Modified : ti. 10. aug. 2010 kl. 19.48 +0200
+Last Modified : on. 25. aug. 2010 kl. 20.23 +0200
 
 Created By :  Martin Ertsås
 --------------------------------------------------------------------------------
@@ -24,12 +24,22 @@ Quat<Real>::Quat()
  * Constructor.                                                                 *
  *******************************************************************************/
 template<class Real>
-Quat<Real>::Quat(const Real& mx, const Real& my, const Real& mz, const Real& mw)
+Quat<Real>::Quat(const Real& mw, const Real& x, const Real& y, const Real& z)
 {
-    x = mx;
-    y = my;
-    z = mz;
     w = mw;
+    imag[0] = x;
+    imag[1] = y;
+    imag[2] = z;
+}
+
+/********************************************************************************
+ * Constructor.                                                                 *
+ *******************************************************************************/
+template<class Real>
+Quat<Real>::Quat(const Real& mw, const Vector3<Real>& mimag)
+{
+    w = mw;
+    imag = mimag;
 }
 
 /********************************************************************************
@@ -38,7 +48,38 @@ Quat<Real>::Quat(const Real& mx, const Real& my, const Real& mz, const Real& mw)
 template<class Real>
 Quat<Real>::Quat(const Quat<Real>& quat)
 {
-    memcpy(&x, &(quat.x), 4*sizeof(Real));
+    w = quat.w;
+    imag = quat.imag;
+}
+
+/********************************************************************************
+ * Quaternion from matrix.                                                      *
+ *******************************************************************************/
+template<class Real>
+Quat<Real>::Quat(const Matrix3<Real>& mat)
+{
+    fromRotationMatrix(mat);
+}
+
+/********************************************************************************
+ * Quaternion from matrix.                                                      *
+ *******************************************************************************/
+template<class Real>
+Quat<Real>::Quat(const Matrix4<Real>& mat)
+{
+    Matrix3<Real> tmp(mat[0], mat[1], mat[2],
+                      mat[4], mat[5], mat[6],
+                      mat[8], mat[9], mat[10]);
+    fromRotationMatrix(tmp);
+}
+
+/********************************************************************************
+ * Negate the quaternion.                                                       *
+ *******************************************************************************/
+template<class Real>
+Quat<Real> Quat<Real>::operator-() const
+{
+    return Quat<Real>(-w, -imag);
 }
 
 /********************************************************************************
@@ -47,7 +88,8 @@ Quat<Real>::Quat(const Quat<Real>& quat)
 template<class Real>
 Quat<Real>& Quat<Real>::operator=(const Quat<Real>& quat)
 {
-    memcpy(&x, &(quat.x), 4*sizeof(Real));
+    w = quat.w;
+    imag = quat.imag;
     return *this
 }
 
@@ -57,7 +99,7 @@ Quat<Real>& Quat<Real>::operator=(const Quat<Real>& quat)
 template<class Real>
 Quat<Real> Quat<Real>::operator+(const Quat<Real>& quat) const
 {
-    return Quat<Real>(x+quat.x, y+quat.y, z+quat.z, w+quat.w);
+    return Quat<Real>(w + quat.w, imag + quat.imag);
 }
 
 /********************************************************************************
@@ -66,7 +108,7 @@ Quat<Real> Quat<Real>::operator+(const Quat<Real>& quat) const
 template<class Real>
 Quat<Real> Quat<Real>::operator-(const Quat<Real>& quat) const
 {
-    return Quat<Real>(x-quat.x, y-quat.y, z-quat.z, w-quat.w);
+    return Quat<Real>(w - quat.w, imag - quat.imag);
 }
 
 /********************************************************************************
@@ -75,7 +117,7 @@ Quat<Real> Quat<Real>::operator-(const Quat<Real>& quat) const
 template<class Real>
 Quat<Real> Quat<Real>::operator*(const Real& scalar) const
 {
-    return Quat<Real>(x*scalar, y*scalar, z*scalar, w*scalar);
+    return Quat<Real>(scalar * w, imag * scalar);
 }
 
 /********************************************************************************
@@ -95,12 +137,8 @@ Quat<Real> Quat<Real>::operator/(const Real& scalar) const
 template<class Real>
 Quat<Real> Quat<Real>::operator*(const Quat<Real>& quat) const
 {
-    Vec3d v1(x,y,z);
-    Vec3d v2(quat.x, quat.y, quat.z);
-    Real mx = w*quat.w - (v1*v2);
-    Vec3d tmp = w*v2 + quat.w*v1 + v1.cross(v2);
-
-    return Quat<Real>(tmp[0], tmp[1], tmp[2], w*quat.w - (v1*v2));
+    return Quat<Real>(w*quat.w - imag*quat.imag, 
+            imag.cross(quat.imag) + quat.w*imag + w*quat.imag);
 }
 
 /********************************************************************************
@@ -109,7 +147,7 @@ Quat<Real> Quat<Real>::operator*(const Quat<Real>& quat) const
 template<class Real>
 Quat<Real>& Quat<Real>::operator+=(const Quat<Real>& quat)
 {
-    (*this) = (*this) + quat;
+    (*this) w= (*this) + quat;
     return (*this);
 }
 
@@ -144,12 +182,21 @@ Quat<Real>& Quat<Real>::operator/=(const Real& scalar)
 }
 
 /********************************************************************************
+ * Compute the conjugate.                                                       *
+ *******************************************************************************/
+template<class Real>
+Quat<Real> Quat<Real>::conjugate() const
+{
+    return Quat<Real>(w, -imag);
+}
+
+/********************************************************************************
  * Inverte the quaternion.                                                      *
  *******************************************************************************/
 template<class Real>
 Quat<Real> Quat<Real>::inverse() const
 {
-    return Quat<Real>(-x, -y, -z, w);
+    return (1.0/lengthSquared())*conjugate();
 }
 
 /********************************************************************************
@@ -158,7 +205,7 @@ Quat<Real> Quat<Real>::inverse() const
 template<class Real>
 Real Quat<Real>::length() const
 {
-    return Math<Real>::Sqrt(x*x + y*y + z*z + w*w);
+    return Math<Real>::Sqrt(w*w + imag*imag);
 }
 
 /********************************************************************************
@@ -167,7 +214,7 @@ Real Quat<Real>::length() const
 template<class Real>
 Real Quat<Real>::lengthSquared() const
 {
-    return (x*x + y*y + z*z + w*w);
+    return (w*w + imag*imag);
 }
 
 /********************************************************************************
@@ -180,10 +227,7 @@ Quat<Real>& Quat<Real>::normalize()
 
     assert( len != 0.0 );
 
-    x /= len;
-    y /= len;
-    z /= len;
-    w /= len;
+    *this /= len;
     return (*this);
 }
 
@@ -193,18 +237,128 @@ Quat<Real>& Quat<Real>::normalize()
 template<class Real>
 Matrix3<Real> Quat<Real>::toRotationMatrix() const
 {
+    assert( length() == 1.0 && "Quat<Real>::toRotationMatrix: Quaternion needs to be unit length");
     Matrix3<Real> tmp;
 
-    tmp[0] = 1 - 2*y*y - 2*z*z;
-    tmp[1] = 2*x*y - 2*z*w;
-    tmp[2] = 2*x*z + 2*y*w;
-    tmp[3] = 2*x*y + 2*z*w;
-    tmp[4] = 1 - 2*x*x - 2*z*z;
-    tmp[5] = 2*y*z - 2*x*w;
-    tmp[6] = 2*x*z - 2*y*w;
-    tmp[7] = 2*y*z + 2*x*w;
-    tmp[8] = 1 - 2*x*x - 2*y*y;
+    tmp[0] = 1 - 2 * (imag[1]*imag[1] + imag[2]*imag[2]);
+    tmp[1] = 2 * (imag[0]*imag[1] - w*imag[2]);
+    tmp[2] = 2 * (imag[0]*imag[2] + w*imag[1]);
+
+    tmp[3] = 2 * (imag[0]*imag[1] + w*imag[2]);
+    tmp[4] = 1 - 2*(imag[0]*imag[0] + imag[2]*imag[2]);
+    tmp[5] = 2 * (imag[1]*imag[2] - w*imag[0]);
+
+    tmp[6] = 2 * (imag[0]*imag[2] - w*imag[1]);
+    tmp[7] = 2 * (imag[1]*imag[2] + w*imag[0]);
+    tmp[8] = 1 - 2 * (imag[0]*imag[0] + imag[1]*imag[1]);
+
     return tmp;
+}
+
+/********************************************************************************
+ * Make a rotation matrix.                                                      *
+ *******************************************************************************/
+template<class Real>
+Matrix4<Real> Quat<Real>::toRotationMatrix() const
+{
+    assert( length() == 1.0 && "Quat<Real>::toRotationMatrix: Quaternion needs to be unit length");
+    Matrix3<Real> tmp = toRotationMatrix();
+    Matrix4<Real> ans(tmp);
+
+    return ans;
+}
+
+/********************************************************************************
+ * Make quaternion from a 3D matrix.                                            *
+ *******************************************************************************/
+template<class Real>
+Quat<Real>& Quat<Real>::fromRotationMatrix(const Matrix3<Real>& mat)
+{
+    Real trace = mat.trace();
+    Real root;
+
+    if(trace > 0.0) {
+        // |w| > 1/2
+        root = Math<Real>::Sqrt(trace + 1);
+        w = 0.5*root; //w
+        root = 0.5/root; //1/(4w)
+        imag[0] = (mat(2,1) - mat(1,2))*root;
+        imag[1] = (mat(0,2) - mat(2,0))*root;
+        imag[2] = (mat(1,0) - mat(0,1))*root;
+    } else {
+        // |w| <= 1/2
+        int i = 0;
+        if( mat(1,1) > mat(0,0) )
+            i = 1;
+        if( mat(2,2) > mat(i,i) )
+            i = 2;
+
+        int j = (i+1) % 3;
+        int k = (j+1) % 3;
+
+        root = Math<Real>:Sqrt( mat(i,i) - rot(j,j) - rot(k,k) + 1.0);
+        imag[i] = 0.5*root;
+        root = 0.5/root;
+        w = (mat(k,j) - mat(j,k))*root;
+        imag[j] = (mat(j,i) + mat(i,j))*root;
+        imag[k] = (mat(k,i) + mat(i,k))*root;
+    }
+
+    return *this;
+}
+
+/********************************************************************************
+ * Check for equality.                                                          *
+ *******************************************************************************/
+template<class Real>
+bool Quat<Real>::operator==(const Quat<Real>& quat) const
+{
+    return compare(quat) == 0;
+}
+
+/********************************************************************************
+ * Check for inequality.                                                        *
+ *******************************************************************************/
+template<class Real>
+bool Quat<Real>::operator!=(const Quat<Real>& quat) const
+{
+    return compare(quat) != 0;
+}
+
+/********************************************************************************
+ * geq operator.                                                                *
+ *******************************************************************************/
+template<class Real>
+bool Quat<Real>::operator>=(const Quat<Real>& quat) const
+{
+    return compare(quat) >= 0;
+}
+
+/********************************************************************************
+ * > operator.                                                                  *
+ *******************************************************************************/
+template<class Real>
+bool Quat<Real>::operator>(const Quat<Real>& quat) const
+{
+    return compare(quat) > 0;
+}
+
+/********************************************************************************
+ * leq operator.                                                                *
+ *******************************************************************************/
+template<class Real>
+bool Quat<Real>::operator<=(const Quat<Real>& quat) const
+{
+    return compare(quat) <= 0;
+}
+
+/********************************************************************************
+ * < operator.                                                                  *
+ *******************************************************************************/
+template<class Real>
+bool Quat<Real>::operator<(const Quat<Real>& quat) const
+{
+    return compare(quat) < 0;
 }
 
 #ifdef DEBUG
@@ -214,6 +368,27 @@ Matrix3<Real> Quat<Real>::toRotationMatrix() const
 template<class Real>
 void Quat<Real>::print() const
 {
-    printf("|%8.4f %8.4f %8.4f %8.4f|\n", x, y, z, w);
+    printf("|%8.4f %8.4f %8.4f %8.4f|\n", w, imag[0], imag[1], imag[2]);
 }
 #endif
+
+/********************************************************************************
+ * comparison.                                                                  *
+ *******************************************************************************/
+template<class Real>
+int Quat<Real>::compare(const Quat<Real>& quat) const
+{
+    if(w > quat.w)
+        return 1;
+    if(w < quat.w)
+        return -1;
+
+    for(int i = 0; i < 3; i++) {
+        if(imag[i] > quat.imag[i])
+            return 1;
+        if(imag[i] < quat.imag[i])
+            return -1;
+    }
+
+    return 0;
+}
