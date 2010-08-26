@@ -1,24 +1,23 @@
 /*
 --------------------------------------------------------------------------------
-File Name : PandoraVector3.inl
+File Name : PandoraVector3.cpp
 
-Purpose : The implementation of the 3D vector class.
+Purpose : Implementation of the 3D vector class.
 
 Creation Date : 2010-01-28
 
-Last Modified : on. 11. aug. 2010 kl. 23.18 +0200
+Last Modified : to. 26. aug. 2010 kl. 21.44 +0200
 
-Created By :  Martin Ertsås
+Created By :  Martin Ertsaas (martiert@student.matnat.uio.no)
 --------------------------------------------------------------------------------
 */
 
-/********************************************************************************
- * Typedefs.                                                                    *
- *******************************************************************************/
-typedef Vector3<float> Vec3f;
-typedef Vector3<double> Vec3d;
-typedef Vector3<int> Vec3i;
-typedef Vector3<unsigned int> Vec3u;
+#include "../include/PandoraVector3.h"
+
+namespace Pandora
+{
+    namespace Math
+    {
 
 /********************************************************************************
  * Default constructor.                                                         *
@@ -31,6 +30,7 @@ Vector3<Real>::Vector3(const Real& x, const Real& y, const Real& z)
     m_data[2] = z;
 }
 
+
 /********************************************************************************
  * Copy constructor.                                                            *
  *******************************************************************************/
@@ -40,6 +40,7 @@ Vector3<Real>::Vector3(const Vector3<Real>& vec)
     memcpy(m_data, vec.m_data, 3*sizeof(Real));
 }
 
+
 /********************************************************************************
  * Copy an array to this vector.                                                *
  *******************************************************************************/
@@ -48,6 +49,7 @@ Vector3<Real>::Vector3(const Real vec[3])
 {
     memcpy(m_data, vec, 3*sizeof(Real));
 }
+
 
 /********************************************************************************
  * Assignment operator.                                                         *
@@ -60,12 +62,14 @@ Vector3<Real>& Vector3<Real>::operator=(const Vector3<Real>& vec)
     return *this;
 }
 
+
 /********************************************************************************
  * Destructor.                                                                  *
  *******************************************************************************/
 template<class Real>
 Vector3<Real>::~Vector3()
 { }
+
 
 /********************************************************************************
  * Implicit conversion to constant pointer.                                     *
@@ -76,6 +80,7 @@ Vector3<Real>::operator const Real* () const
     return m_data;
 }
 
+
 /********************************************************************************
  * Implicit conversion.                                                         *
  *******************************************************************************/
@@ -84,6 +89,7 @@ Vector3<Real>::operator Real* ()
 {
     return m_data;
 }
+
 
 /********************************************************************************
  * Assignment operator.                                                         *
@@ -96,6 +102,7 @@ Real& Vector3<Real>::operator[](const ptrdiff_t i)
     return m_data[i];
 }
 
+
 /********************************************************************************
  * Get value from index i.                                                      *
  *******************************************************************************/
@@ -107,6 +114,7 @@ Real Vector3<Real>::operator[](const ptrdiff_t i) const
     return m_data[i];
 }
 
+
 /********************************************************************************
  * Equality operator.                                                           *
  *******************************************************************************/
@@ -115,6 +123,7 @@ bool Vector3<Real>::operator==(const Vector3<Real>& vec) const
 {
     return compare(vec) == 0;
 }
+
 
 /********************************************************************************
  * Inequality operator.                                                         *
@@ -125,6 +134,7 @@ bool Vector3<Real>::operator!=(const Vector3<Real>& vec) const
     return !(*this == vec);
 }
 
+
 /********************************************************************************
  * Check if this vector is less then another.                                   *
  *******************************************************************************/
@@ -133,6 +143,7 @@ bool Vector3<Real>::operator<(const Vector3<Real>& vec) const
 {
     return compare(vec) < 0;
 }
+
 
 /********************************************************************************
  * Check if this vector is smaller then or equal to another.                    *
@@ -143,6 +154,7 @@ bool Vector3<Real>::operator<=(const Vector3<Real>& vec) const
     return compare(vec) <= 0;
 }
 
+
 /********************************************************************************
  * Check if this vector is larger than another.                                 *
  *******************************************************************************/
@@ -152,6 +164,7 @@ bool Vector3<Real>::operator>(const Vector3<Real>& vec) const
     return compare(vec) > 0;
 }
 
+
 /********************************************************************************
  * Check if this vector is larger then or equal to another.                     *
  *******************************************************************************/
@@ -160,6 +173,7 @@ bool Vector3<Real>::operator>=(const Vector3<Real>& vec) const
 {
     return compare(vec) >= 0;
 }
+
 
 /********************************************************************************
  * Add this vector with another.                                                *
@@ -172,6 +186,7 @@ Vector3<Real> Vector3<Real>::operator+(const Vector3<Real>& vec) const
             m_data[2] + vec[2]);
 }
 
+
 /********************************************************************************
  * Subtract a vector from this vector.                                          *
  *******************************************************************************/
@@ -180,6 +195,7 @@ Vector3<Real> Vector3<Real>::operator-(const Vector3<Real>& vec) const
 {
     return ((*this) + (-vec));
 }
+
 
 /********************************************************************************
  * Dot multiply two vectors.                                                    *
@@ -190,6 +206,7 @@ Real Vector3<Real>::operator*(const Vector3<Real>& vec) const
     return m_data[0]*vec[0] + m_data[1]*vec[1] + m_data[2]*vec[2];
 }
 
+
 /********************************************************************************
  * Multiply this vector with a scalar.                                          *
  *******************************************************************************/
@@ -198,6 +215,7 @@ Vector3<Real> Vector3<Real>::operator*(const Real& scalar) const
 {
     return Vector3<Real>(m_data[0]*scalar, m_data[1]*scalar, m_data[2]*scalar);
 }
+
 
 /********************************************************************************
  * Divide this vector with a scalar.                                            *
@@ -210,6 +228,7 @@ Vector3<Real> Vector3<Real>::operator/(const Real& scalar) const
     return (*this)*s;
 }
 
+
 /********************************************************************************
  * Negate the vector.                                                           *
  *******************************************************************************/
@@ -218,6 +237,7 @@ Vector3<Real> Vector3<Real>::operator-() const
 {
     return Vector3<Real>(-m_data[0], -m_data[1], -m_data[2]);
 }
+
 
 /********************************************************************************
  * Add a vector to this vector.                                                 *
@@ -231,6 +251,7 @@ Vector3<Real>& Vector3<Real>::operator+=(const Vector3<Real>& vec)
     return *this;
 }
 
+
 /********************************************************************************
  * Subtract a vector from this vector.                                          *
  *******************************************************************************/
@@ -240,6 +261,7 @@ Vector3<Real>& Vector3<Real>::operator-=(const Vector3<Real>& vec)
     (*this) += -vec;
     return *this;
 }
+
 
 /********************************************************************************
  * Multiply this vector with a scalar.                                          *
@@ -253,6 +275,7 @@ Vector3<Real>& Vector3<Real>::operator*=(const Real& scalar)
     return *this;
 }
 
+
 /********************************************************************************
  * Divide this vector with a scalar.                                            *
  *******************************************************************************/
@@ -265,6 +288,7 @@ Vector3<Real>& Vector3<Real>::operator/=(const Real& scalar)
     return *this;
 }
 
+
 /********************************************************************************
  * Getting the length of the vector.                                            *
  *******************************************************************************/
@@ -276,6 +300,7 @@ Real Vector3<Real>::length() const
             m_data[2]*m_data[2]);
 }
 
+
 /********************************************************************************
  * Getting the squared length of the vector.                                    *
  *******************************************************************************/
@@ -284,6 +309,7 @@ Real Vector3<Real>::lengthSquared() const
 {
     return (m_data[0]*m_data[0] + m_data[1]*m_data[1] + m_data[2]*m_data[2]);
 }
+
 
 /********************************************************************************
  * Normalize the vector.                                                        *
@@ -299,6 +325,7 @@ Vector3<Real>& Vector3<Real>::normalize()
     return *this;
 }
 
+
 /********************************************************************************
  * Cross multiply this vector with another.                                     *
  *******************************************************************************/
@@ -309,6 +336,7 @@ Vector3<Real> Vector3<Real>::cross(const Vector3<Real>& vec) const
             m_data[2]*vec[0] - m_data[0]*vec[2],
             m_data[0]*vec[1] - m_data[1]*vec[0]);
 }
+
 
 /********************************************************************************
  * Orthonormalize.                                                              *
@@ -324,16 +352,6 @@ void Vector3<Real>::orthonormalize(Vector3<Real>& vec1, Vector3<Real>& vec2,
     vec3.normalize();
 }
 
-#ifdef DEBUG
-/********************************************************************************
- * Print out the matrix.
- *******************************************************************************/
-template<class Real>
-void Vector3<Real>::print() const
-{
-    printf("\n[%8.4f %8.4f %8.4f]\n\n", m_data[0], m_data[1], m_data[2]);
-}
-#endif
 
 /********************************************************************************
  * Makes it possible to write scalar*vec.                                       *
@@ -343,6 +361,7 @@ Vector3<Real> operator*(const Real& scalar, const Vector3<Real>& vec)
 {
     return vec*scalar;
 }
+
 
 /********************************************************************************
  * Compare two vectors.                                                         *
@@ -360,3 +379,17 @@ int Vector3<Real>::compare(const Vector3<Real>& vec) const
 
     return 0;
 }
+
+
+#ifdef DEBUG
+/********************************************************************************
+ * Print out the matrix.
+ *******************************************************************************/
+template<class Real>
+void Vector3<Real>::print() const
+{
+    printf("\n[%8.4f %8.4f %8.4f]\n\n", m_data[0], m_data[1], m_data[2]);
+}
+#endif
+} // namespace Math
+} // namespace Pandora

@@ -1,24 +1,23 @@
 /*
 --------------------------------------------------------------------------------
-File Name : PandoraVector4.inl
+File Name : PandoraVector4.cpp
 
 Purpose : Implementation of the Vector4 class.
 
 Creation Date : 2010-01-31
 
-Last Modified : ti. 10. aug. 2010 kl. 15.14 +0200
+Last Modified : to. 26. aug. 2010 kl. 21.44 +0200
 
-Created By :  Martin Ertsås
+Created By :  Martin Ertsaas (martiert@student.matnat.uio.no)
 --------------------------------------------------------------------------------
 */
 
-/********************************************************************************
- * Typedefs.                                                                    *
- *******************************************************************************/
-typedef Vector4<float> Vec4f;
-typedef Vector4<double> Vec4d;
-typedef Vector4<int> Vec4i;
-typedef Vector4<unsigned int> Vec4u;
+#include "../include/PandoraVector4.h"
+
+namespace Pandora
+{
+    namespace Math
+    {
 
 /********************************************************************************
  * Default constructor.                                                         *
@@ -32,6 +31,7 @@ Vector4<Real>::Vector4(Real x, Real y, Real z, Real w)
     m_data[3] = w;
 }
 
+
 /********************************************************************************
  * Copy constructor.                                                            *
  *******************************************************************************/
@@ -40,6 +40,7 @@ Vector4<Real>::Vector4(Vector4<Real>& vec)
 {
     memcpy(m_data, vec.m_data, 4*sizeof(Real));
 }
+
 
 /********************************************************************************
  * Copy an array to this vector.                                                *
@@ -50,12 +51,14 @@ Vector4<Real>::Vector4(Real vec[4])
     memcpy(m_data, vec, 4*sizeof(Real));
 }
 
+
 /********************************************************************************
  * Destructor.                                                                  *
  *******************************************************************************/
 template<class Real>
 Vector4<Real>::~Vector4()
 {}
+
 
 /********************************************************************************
  * Assign a vector to this vector.                                              *
@@ -68,6 +71,7 @@ Vector4<Real>& Vector4<Real>::operator=(const Vector4<Real>& vec)
     return *this;
 }
 
+
 /********************************************************************************
  * Get element number i from the vector.                                        *
  *******************************************************************************/
@@ -77,6 +81,7 @@ Real& Vector4<Real>::operator[](const ptrdiff_t i)
     assert(i < 4 && "Index out of range");
     return m_data[i];
 }
+
 
 /********************************************************************************
  * Get value in element number i from the vector.                               *
@@ -88,6 +93,7 @@ Real Vector4<Real>::operator[](const ptrdiff_t i) const
     return m_data[i];
 }
 
+
 /********************************************************************************
  * Implicit conversion to array.                                                *
  *******************************************************************************/
@@ -96,6 +102,7 @@ Vector4<Real>::operator Real *()
 {
     return m_data;
 }
+
 
 /********************************************************************************
  * Implicit conversion to constant array.                                       *
@@ -106,6 +113,7 @@ Vector4<Real>::operator const Real *() const
     return m_data;
 }
 
+
 /********************************************************************************
  * Negate a vector.                                                             *
  *******************************************************************************/
@@ -114,6 +122,7 @@ Vector4<Real> Vector4<Real>::operator-() const
 {
     return Vector4<Real>(-m_data[0], -m_data[1], -m_data[2], -m_data[3]);
 }
+
 
 /********************************************************************************
  * Add two vectors.                                                             *
@@ -127,6 +136,7 @@ Vector4<Real> Vector4<Real>::operator+(const Vector4<Real>& vec) const
             m_data[3] + vec[3]);
 }
 
+
 /********************************************************************************
  * Subtract two vectors.                                                        *
  *******************************************************************************/
@@ -135,6 +145,7 @@ Vector4<Real> Vector4<Real>::operator-(const Vector4<Real>& vec) const
 {
     return ((*this) + (-vec));
 }
+
 
 /********************************************************************************
  * Multiply a vector with a scalar.                                             *
@@ -148,6 +159,7 @@ Vector4<Real> Vector4<Real>::operator*(const Real& scalar) const
             m_data[3]*scalar);
 }
 
+
 /********************************************************************************
  * Divide a vector with a scalar.                                               *
  *******************************************************************************/
@@ -160,6 +172,7 @@ Vector4<Real> Vector4<Real>::operator/(const Real& scalar) const
     return ((*this) * s);
 }
 
+
 /********************************************************************************
  * Dot multiply two vectors.                                                    *
  *******************************************************************************/
@@ -169,6 +182,7 @@ Real Vector4<Real>::operator*(const Vector4<Real>& vec) const
     return (m_data[0]*vec[0] + m_data[1]*vec[1] + 
             m_data[2]*vec[2] + m_data[3]*vec[3]);
 }
+
 
 /********************************************************************************
  * Add a vector to this vector.                                                 *
@@ -183,6 +197,7 @@ Vector4<Real>& Vector4<Real>::operator+=(const Vector4<Real>& vec)
     return *this;
 }
 
+
 /********************************************************************************
  * Subtract a vector from this vector.                                          *
  *******************************************************************************/
@@ -192,6 +207,7 @@ Vector4<Real>& Vector4<Real>::operator-=(const Vector4<Real>& vec)
     (*this) += -vec;
     return *this;
 }
+
 
 /********************************************************************************
  * Multiply this vector with a scalar.                                          *
@@ -206,6 +222,7 @@ Vector4<Real>& Vector4<Real>::operator*=(const Real& scalar)
     return *this;
 }
 
+
 /********************************************************************************
  * Divide this vector with a scalar.                                            *
  *******************************************************************************/
@@ -219,6 +236,7 @@ Vector4<Real>& Vector4<Real>::operator/=(const Real& scalar)
     return *this;
 }
 
+
 /********************************************************************************
  * Check if two vectors are equal.                                              '
  *******************************************************************************/
@@ -227,6 +245,7 @@ bool Vector4<Real>::operator==(const Vector4<Real>& vec) const
 {
     return compare(vec) == 0;
 }
+
 
 /********************************************************************************
  * Check if two vectors are unequal.                                            *
@@ -246,6 +265,7 @@ bool Vector4<Real>::operator<(const Vector4<Real>& vec) const
     return compare(vec) < 0;
 }
 
+
 /********************************************************************************
  * Check if this vector is less then or equal to another.                       *
  *******************************************************************************/
@@ -254,6 +274,7 @@ bool Vector4<Real>::operator<=(const Vector4<Real>& vec) const
 {
     return compare(vec) <= 0;
 }
+
 
 /********************************************************************************
  * Check if this vector is larger then another.                                 *
@@ -264,6 +285,7 @@ bool Vector4<Real>::operator>(const Vector4<Real>& vec) const
     return compare(vec) > 0;
 }
 
+
 /********************************************************************************
  * Check if this vector is larger then or equal to another.                     *
  *******************************************************************************/
@@ -272,6 +294,7 @@ bool Vector4<Real>::operator>=(const Vector4<Real>& vec) const
 {
     return compare(vec) >= 0;
 }
+
 
 /********************************************************************************
  * Get the length of the vector.                                                *
@@ -283,6 +306,7 @@ Real Vector4<Real>::length() const
             m_data[2]*m_data[2] + m_data[3]*m_data[3]);
 }
 
+
 /********************************************************************************
  * Get the squared length of the vector.                                        *
  *******************************************************************************/
@@ -292,6 +316,7 @@ Real Vector4<Real>::lengthSquared() const
     return (m_data[0]*m_data[0] + m_data[1]*m_data[1] + m_data[2]*m_data[2] +
             m_data[3]*m_data[3]);
 }
+
 
 /********************************************************************************
  * Normalize the vector.                                                        *
@@ -307,6 +332,7 @@ Vector4<Real>& Vector4<Real>::normalize()
     return *this;
 }
 
+
 /********************************************************************************
  * Allows one to write scalar * vector.                                         *
  *******************************************************************************/
@@ -316,16 +342,6 @@ Vector4<Real> operator*(const Real& scalar, const Vector4<Real>& vec)
     return vec*scalar;
 }
 
-#ifdef DEBUG
-/********************************************************************************
- * Print out the vector.                                                        *
- *******************************************************************************/
-template<class Real>
-void Vector4<Real>::print() const
-{
-    printf("\n[%8.4f %8.4f %8.4f %8.4f]\n\n", m_data[0], m_data[1], m_data[2], m_data[3]);
-}
-#endif
 
 /********************************************************************************
  * Makes it possible to write scalar*vec.                                       *
@@ -335,6 +351,7 @@ Vector4<Real> operator*(const Real scalar, const Vector4<Real>& vec)
 {
     return vec*scalar;
 }
+
 
 /********************************************************************************
  * Comparison function.                                                         *
@@ -352,3 +369,17 @@ int Vector4<Real>::compare(const Vector4<Real>& vec) const
 
     return 0;
 }
+
+
+#ifdef DEBUG
+/********************************************************************************
+ * Print out the vector.                                                        *
+ *******************************************************************************/
+template<class Real>
+void Vector4<Real>::print() const
+{
+    printf("\n[%8.4f %8.4f %8.4f %8.4f]\n\n", m_data[0], m_data[1], m_data[2], m_data[3]);
+}
+#endif
+} // namespace Math
+} // namespace Pandora

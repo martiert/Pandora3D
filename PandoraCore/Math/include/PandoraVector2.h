@@ -356,7 +356,13 @@ namespace Pandora
         template<class Real>
         Vector2<Real> operator*(const Real scalar, const Vector2<Real>& vec);
 
-#include "PandoraVector2.inl"
+        /**
+         *  Typedefs.
+         */
+        typedef Vector2<float>          Vec2f;
+        typedef Vector2<double>         Vec2d;
+        typedef Vector2<int>            Vec2i;
+        typedef Vector2<unsigned int>   Vec2u;
 
    } //namespace Math
 } //namespace Pandora

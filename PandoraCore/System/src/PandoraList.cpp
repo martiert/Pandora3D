@@ -1,16 +1,23 @@
 /*
 ---------------------------------------------------------------------------------
-File Name : PandoraList.inl
+File Name : PandoraList.cpp
 
 Purpose : Implementation of the List class used in Pandora3D
 
 Creation Date : 2010-01-25
 
-Last Modified : on. 05. mai 2010 kl. 21.24 +0200
+Last Modified : to. 26. aug. 2010 kl. 22.02 +0200
 
-Created By : Martin Ertsås
+Created By : Martin Ertsaas (martiert@student.matnat.uio.no)
 ---------------------------------------------------------------------------------
 */
+
+#include "../include/PandoraList.h"
+
+namespace Pandora
+{
+    namespace Utils
+    {
 
 /********************************************************************************
  * Makes the List itself.                                                       *
@@ -21,6 +28,7 @@ List<T>::List()
     m_size = 0;
     m_root = NULL;
 }
+
 
 template<class T>
 List<T>::List(const T& data)
@@ -37,6 +45,7 @@ List<T>::List(const T& data)
     m_size = 1;
 }
 
+
 /********************************************************************************
  * Delete the List.                                                             *
  *******************************************************************************/
@@ -51,6 +60,7 @@ List<T>::~List()
     }
 }
 
+
 /********************************************************************************
  * Insert an element at the start of the List. O(1)                             *
  *******************************************************************************/
@@ -63,6 +73,7 @@ void List<T>::insert(const T& data)
     m_root = tmp;
     m_size++;
 }
+
 
 /********************************************************************************
  * Remove an element from the List. O(n)                                        *
@@ -108,6 +119,7 @@ bool List<T>::remove(const T& data)
     return true;
 }
 
+
 /********************************************************************************
  * See if an element exists in the List. O(n)                                   *
  *******************************************************************************/
@@ -126,6 +138,7 @@ bool List<T>::exists(const T& data)
     return false;
 }
 
+
 /********************************************************************************
  * Remove all elements from the List.                                           *
  *******************************************************************************/
@@ -143,6 +156,7 @@ void List<T>::removeAll()
     m_size = 0;
 }
 
+
 /********************************************************************************
  * Get the length of the list.                                                  *
  *******************************************************************************/
@@ -151,3 +165,5 @@ unsigned int List<T>::length()
 {
     return m_size;
 }
+} // namespace Utils
+} // namespace Pandora

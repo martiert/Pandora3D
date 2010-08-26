@@ -1,16 +1,23 @@
 /*
 --------------------------------------------------------------------------------
-File Name : PandoraStack.inl
+File Name : PandoraStack.cpp
 
 Purpose : Implementation of the Stack class used in Pandora3D
 
 Creation Date : 2010-01-24
 
-Last Modified : on. 14. april 2010 kl. 19.14 +0200
+Last Modified : to. 26. aug. 2010 kl. 22.02 +0200
 
-Created By : Martin Ertsås
+Created By : Martin Ertsaas (martiert@student.matnat.uio.no)
 --------------------------------------------------------------------------------
 */
+
+#include "../include/PandoraStack.h"
+
+namespace Pandora
+{
+    namespace Utils
+    {
 
 /********************************************************************************
  * Constructor.                                                                 *
@@ -23,6 +30,7 @@ Stack<T>::Stack(unsigned int size)
     m_stack = new T[size];
 }
 
+
 /********************************************************************************
  * Destructor.                                                                  *
  *******************************************************************************/
@@ -31,6 +39,7 @@ Stack<T>::~Stack()
 {
     delete[] m_stack;
 }
+
 
 /********************************************************************************
  * Check if the stack is empty.                                                 *
@@ -41,6 +50,7 @@ bool Stack<T>::isEmpty() const
     return m_stackAt == -1;
 }
 
+
 /********************************************************************************
  * Check if the stack is full.                                                  *
  *******************************************************************************/
@@ -49,6 +59,7 @@ bool Stack<T>::isFull() const
 {
     return m_stackAt == (m_size - 1);
 }
+
 
 /********************************************************************************
  * Push an item on the stack.                                                   *
@@ -59,6 +70,7 @@ void Stack<T>::push(const T& item)
     assert(m_stackAt < (m_size - 1) && "Stack is full");
     m_stack[++m_stackAt] = item;
 }
+
 
 /********************************************************************************
  * Pop the first item.                                                          *
@@ -74,6 +86,7 @@ bool Stack<T>::pop(T& item)
     return true;
 }
 
+
 /********************************************************************************
  * Clear the Stack.                                                             *
  *******************************************************************************/
@@ -82,6 +95,7 @@ void Stack<T>::clear()
 {
     m_stackAt = -1;
 }
+
 
 /********************************************************************************
  * Get the top of the stack without popping.                                    *
@@ -95,3 +109,5 @@ bool Stack<T>::getTop(T& item)
     item = m_stack[m_stackAt];
     return true;
 }
+} // namespace Utils
+} // namespace Pandora

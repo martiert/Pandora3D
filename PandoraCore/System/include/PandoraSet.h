@@ -119,9 +119,6 @@ namespace Pandora
                 unsigned int m_size; //The size of the array
                 unsigned int m_increment; //What to increment the array size by
         };
-
-#include "PandoraSet.inl"
-
     }
 }
 #endif

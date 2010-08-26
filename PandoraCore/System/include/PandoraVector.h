@@ -162,9 +162,6 @@ namespace Pandora
                 unsigned int m_size;
                 unsigned int m_increment;
         };
-
-#include "PandoraVector.inl"
-
     }
 }
 #endif

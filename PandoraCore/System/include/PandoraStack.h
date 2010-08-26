@@ -97,9 +97,6 @@ namespace Pandora
                 T* m_stack;
                 int m_size, m_stackAt;
         };
-
-#include "PandoraStack.inl"
-
     }
 }
 #endif

@@ -1,16 +1,23 @@
 /*
 --------------------------------------------------------------------------------
-File Name : PandoraHashtable.inl
+File Name : PandoraHashtable.cpp
  
 Purpose : Implementation of the Hashtable class used in Pandora3D
  
 Creation Date : 2010-01-24
 
-Last Modified : on. 14. april 2010 kl. 18.19 +0200
+Last Modified : to. 26. aug. 2010 kl. 22.02 +0200
  
-Created By : Martin Ertsås
+Created By : Martin Ertsaas (martiert@student.matnat.uio.no)
 --------------------------------------------------------------------------------
 */
+
+#include "../include/PandoraHashtable.h"
+
+namespace Pandora
+{
+    namespace Utils
+    {
 
 /********************************************************************************
  * Constructor.                                                                 *
@@ -22,6 +29,7 @@ HashTable<Key,Value>::HashTable(const unsigned int& size)
     m_elements = 0;
     m_values = new Node<Key,Value>[size];
 }
+
 
 /********************************************************************************
  * Destructor.                                                                  *
@@ -35,6 +43,7 @@ HashTable<Key,Value>::~HashTable()
 
     delete[] m_values;
 }
+
 
 /********************************************************************************
  * Insert a value into the HashTable. Returns false if the table is full or     *
@@ -64,6 +73,7 @@ bool HashTable<Key,Value>::insert(const Key& key, const Value& value)
     return true;
 }
 
+
 /********************************************************************************
  * Remove element from the table, and return the value of the element.          *
  *******************************************************************************/
@@ -88,6 +98,7 @@ Value& HashTable<Key,Value>::remove(const Key& key)
     return tmp;
 }
 
+
 /********************************************************************************
  * Remove all elements from the table.                                          *
  *******************************************************************************/
@@ -105,6 +116,7 @@ void HashTable<Key,Value>::removeAll()
     }
 }
 
+
 /********************************************************************************
  * Checks if the key is present in the table.                                   *
  *******************************************************************************/
@@ -119,6 +131,7 @@ bool HashTable<Key,Value>::exists(const Key& key) const
 
     return false;
 }
+
 
 /********************************************************************************
  * Checks if the key is present in the table and, if it is, returns the         *
@@ -136,6 +149,7 @@ Value& HashTable<Key,Value>::find(const Key& key) const
     return NULL;
 }
 
+
 /********************************************************************************
  * The Hash function.                                                           *
  *******************************************************************************/
@@ -152,3 +166,5 @@ int HashTable<Key,Value>::hashFunction(const Key& key) const
     double fraction = fmod(multiply * hashKey, 1.0);
     return floor(fraction * m_size);
 }
+} // namespace Utils
+} // namespace Pandora

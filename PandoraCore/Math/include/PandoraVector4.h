@@ -323,7 +323,13 @@ namespace Pandora
         template<class Real>
         Vector4<Real> operator*(const Real scalar, const Vector4<Real>& vec);
 
-#include "PandoraVector4.inl"
+        /**
+         *  Typedefs.
+         */
+        typedef Vector4<float>          Vec4f;
+        typedef Vector4<double>         Vec4d;
+        typedef Vector4<int>            Vec4i;
+        typedef Vector4<unsigned int>   Vec4u;
 
     } //namespace Math
 } //namespace Pandora

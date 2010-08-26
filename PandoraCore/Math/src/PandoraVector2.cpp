@@ -1,24 +1,24 @@
 /*
 --------------------------------------------------------------------------------
-File Name : PandoraVector2.inl
+File Name : PandoraVector2.cpp
 
 Purpose : Implementation of the Vector2 class used in Pandora3D
 
 Creation Date : 2010-01-26
 
-Last Modified : on. 11. aug. 2010 kl. 23.14 +0200
+Last Modified : to. 26. aug. 2010 kl. 21.44 +0200
 
-Created By : Martin Ertsås
+Created By :  Martin Ertsaas (martiert@student.matnat.uio.no)
 --------------------------------------------------------------------------------
 */
 
-/********************************************************************************
- * Typedefs.                                                                    * 
- *******************************************************************************/ 
-typedef Vector2<float> Vec2f;
-typedef Vector2<double> Vec2d;
-typedef Vector2<int> Vec2i;
-typedef Vector2<unsigned int> Vec2u;
+#include "../include/PandoraVector2.h"
+
+namespace Pandora
+{
+    namespace Math
+    {
+
 
 /********************************************************************************
  * Constructor.                                                                 * 
@@ -30,6 +30,7 @@ Vector2<Real>::Vector2(const Real& x, const Real& y)
     m_data[1] = y;
 }
 
+
 /********************************************************************************
  * Constructor.                                                                 * 
  *******************************************************************************/ 
@@ -38,6 +39,7 @@ Vector2<Real>::Vector2(Vector2<Real>& vec)
 {
     memcpy(m_data, vec.m_data, 2*sizeof(Real));
 }
+
 
 /********************************************************************************
  * Constructor.                                                                 * 
@@ -48,6 +50,7 @@ Vector2<Real>::Vector2(Real vec[2])
     memcpy(m_data, vec, 2*sizeof(Real));
 }
 
+
 /********************************************************************************
  * Destructor.                                                                  * 
  *******************************************************************************/ 
@@ -55,6 +58,7 @@ template<class Real>
 Vector2<Real>::~Vector2()
 {
 }
+
 
 /********************************************************************************
  * Assignment operator.                                                         * 
@@ -67,6 +71,7 @@ Vector2<Real>& Vector2<Real>::operator=(const Vector2<Real>& vec)
     return *this;
 }
 
+
 /********************************************************************************
  * Access operator.                                                             *
  *******************************************************************************/ 
@@ -77,6 +82,7 @@ Real& Vector2<Real>::operator[](const ptrdiff_t i)
 
     return m_data[i];
 }
+
 
 /********************************************************************************
  * Get a copy of element number i from the vector.                              *
@@ -89,6 +95,7 @@ Real Vector2<Real>::operator[](const ptrdiff_t i) const
     return m_data[i];
 }
 
+
 /********************************************************************************
  * Implicit conversion operator.                                                *
  *******************************************************************************/ 
@@ -97,6 +104,7 @@ Vector2<Real>::operator Real*()
 {
     return m_data;
 }
+
 
 /********************************************************************************
  * Get a constant copy of the vector.                                           *
@@ -107,6 +115,7 @@ Vector2<Real>::operator const Real* () const
     return m_data;
 }
 
+
 /********************************************************************************
  * Addition operator.                                                           *
  *******************************************************************************/ 
@@ -115,6 +124,7 @@ Vector2<Real> Vector2<Real>::operator+(const Vector2<Real>& vec) const
 {
     return Vector2<Real>(m_data[0] + vec[0], m_data[1] + vec[1]);
 }
+
 
 /********************************************************************************
  * Subtraction operator.                                                        *
@@ -125,6 +135,7 @@ Vector2<Real> Vector2<Real>::operator-(const Vector2<Real>& vec) const
     return Vector2<Real>(m_data[0] - vec[0], m_data[1] - vec[1]);
 }
 
+
 /********************************************************************************
  * Normal vector multiplication.                                                *
  *******************************************************************************/ 
@@ -134,6 +145,7 @@ Real Vector2<Real>::operator*(const Vector2<Real>& vec) const
     return m_data[0]*vec[0] + m_data[1]*vec[1];
 }
 
+
 /********************************************************************************
  * Multiply vector with a scalar.                                               *
  *******************************************************************************/
@@ -142,6 +154,7 @@ Vector2<Real> Vector2<Real>::operator*(const Real& scalar) const
 {
     return Vector2<Real>(m_data[0]*scalar, m_data[1]*scalar);
 }
+
 
 /********************************************************************************
  * Divide vector with a scalar.                                                 *
@@ -154,6 +167,7 @@ Vector2<Real> Vector2<Real>::operator/(const Real& scalar) const
     return (*this) * s;
 }
 
+
 /********************************************************************************
  * Addition operator.                                                           *
  *******************************************************************************/
@@ -164,6 +178,7 @@ Vector2<Real>& Vector2<Real>::operator+=(const Vector2<Real>& vec)
     m_data[1] += vec[1];
     return *this;
 }
+
 
 /********************************************************************************
  * Subtraction operator.                                                        *
@@ -176,6 +191,7 @@ Vector2<Real>& Vector2<Real>::operator-=(const Vector2<Real>& vec)
     return *this;
 }
 
+
 /********************************************************************************
  * Multiplication with scalar.                                                  *
  *******************************************************************************/
@@ -186,6 +202,7 @@ Vector2<Real>& Vector2<Real>::operator*=(const Real& scalar)
     m_data[1] *= scalar;
     return *this;
 }
+
 
 /********************************************************************************
  * Division with scalar.                                                        *
@@ -199,6 +216,7 @@ Vector2<Real>& Vector2<Real>::operator/=(const Real& scalar)
     return *this;
 }
 
+
 /********************************************************************************
  * Equality operator.                                                           *
  *******************************************************************************/
@@ -207,6 +225,7 @@ bool Vector2<Real>::operator==(const Vector2<Real>& vec) const
 {
     return compare(vec) == 0;
 }
+
 
 /********************************************************************************
  * Non equality operator.                                                       *
@@ -217,6 +236,7 @@ bool Vector2<Real>::operator!=(const Vector2<Real>& vec) const
     return compare(vec) != 0;
 }
 
+
 /********************************************************************************
  * Check if this vector is larger then another.                                 *
  *******************************************************************************/
@@ -225,6 +245,7 @@ bool Vector2<Real>::operator>(const Vector2<Real>& vec) const
 {
     return compare(vec) > 0;
 }
+
 
 /********************************************************************************
  * Check if this vector is larger then or equal to another.                     *
@@ -235,6 +256,7 @@ bool Vector2<Real>::operator>=(const Vector2<Real>& vec) const
     return compare(vec) >= 0;
 }
 
+
 /********************************************************************************
  * Check if this vector is smaller then another.                                *
  *******************************************************************************/
@@ -243,6 +265,7 @@ bool Vector2<Real>::operator<(const Vector2<Real>& vec) const
 {
     return compare(vec) < 0;
 }
+
 
 /********************************************************************************
  * Check if this vector is smaller then or equal to another.                    *
@@ -253,6 +276,7 @@ bool Vector2<Real>::operator<=(const Vector2<Real>& vec) const
     return compare(vec) <= 0;
 }
 
+
 /********************************************************************************
  * Negate a vector.                                                             *
  *******************************************************************************/
@@ -261,6 +285,7 @@ Vector2<Real> Vector2<Real>::operator-() const
 {
     return Vector2<Real>(-m_data[0], -m_data[1]);
 }
+
 
 /********************************************************************************
  * Dot product between two vectors.                                             *
@@ -271,6 +296,7 @@ Vector2<Real> Vector2<Real>::dotprod(const Vector2<Real>& vec) const
     return Vector2<Real>(m_data[0]*vec[0], m_data[1]*vec[1]);
 }
 
+
 /********************************************************************************
  * Return length of the vector.                                                 *
  *******************************************************************************/
@@ -280,6 +306,7 @@ Real Vector2<Real>::length() const
     return Math<Real>::Sqrt(m_data[0]*m_data[0] + m_data[1]*m_data[1]);
 }
 
+
 /********************************************************************************
  * Return squared length of the vector.                                         *
  *******************************************************************************/
@@ -288,6 +315,7 @@ Real Vector2<Real>::lengthSquared() const
 {
     return (m_data[0]*m_data[0] + m_data[1]*m_data[1]);
 }
+
 
 /********************************************************************************
  * Normalize the vector.                                                        *
@@ -303,6 +331,7 @@ Vector2<Real>& Vector2<Real>::normalize()
     return *this;
 }
 
+
 /********************************************************************************
  * Allows one to write scalar * vector.                                         *
  *******************************************************************************/
@@ -311,6 +340,7 @@ Vector2<Real> operator*(const Real& scalar, const Vector2<Real>& vec)
 {
     return vec * scalar;
 }
+
 
 /********************************************************************************
  * Compute the perpendicular.                                                   *
@@ -321,6 +351,7 @@ Vector2<Real> Vector2<Real>::perp() const
     return Vector2<Real>(m_data[1], -m_data[0]);
 }
 
+
 /********************************************************************************
  * Compute the dotperp.                                                         *
  *******************************************************************************/
@@ -329,6 +360,7 @@ Real Vector2<Real>::dotPerp(const Vector2<Real>& vec) const
 {
     return m_data[0]*vec[1] - m_data[1]*vec[0];
 }
+
 
 /********************************************************************************
  * Orthonormalize the vectors.                                                  *
@@ -341,16 +373,6 @@ void Vector2<Real>::orthonormalize(Vector2<Real>& vec1, Vector2<Real>& vec2)
     vec2.normalize();
 }
 
-#ifdef DEBUG
-/********************************************************************************
- * Print out the vector.                                                        *
- *******************************************************************************/
-template<class Real>
-void Vector2<Real>::print() const
-{
-    printf("\n[%8.4f %8.4f]\n\n", m_data[0], m_data[1]);
-}
-#endif
 
 /********************************************************************************
  * Makes it possible to write scalar * vec.                                     *
@@ -360,6 +382,7 @@ Vector2<Real> operator*(const Real scalar, const Vector2<Real>& vec)
 {
     return vec * scalar;
 }
+
 
 /********************************************************************************
  * Compare two vectors.                                                         *
@@ -377,3 +400,16 @@ int Vector2<Real>::compare(const Vector2<Real>& vec) const
 
     return 0;
 }
+
+#ifdef DEBUG
+/********************************************************************************
+ * Print out the vector.                                                        *
+ *******************************************************************************/
+template<class Real>
+void Vector2<Real>::print() const
+{
+    printf("\n[%8.4f %8.4f]\n\n", m_data[0], m_data[1]);
+}
+#endif
+} // namespace Math
+} // namespace Pandora

@@ -1,16 +1,23 @@
 /*
 --------------------------------------------------------------------------------
-File Name : PandoraQuat.inl
+File Name : PandoraQuat.cpp
 
-Purpose :
+Purpose : Implementation of the quaternion class in Pandora 3D.
 
 Creation Date : 2010-08-09
 
-Last Modified : on. 25. aug. 2010 kl. 20.23 +0200
+Last Modified : to. 26. aug. 2010 kl. 21.33 +0200
 
-Created By :  Martin Ertsås
+Created By :  Martin Ertsaas (martiert@student.matnat.uio.no)
 --------------------------------------------------------------------------------
 */
+
+#include "../include/PandoraQuat.h"
+
+namespace Pandora
+{
+    namespace Math
+    {
 
 /********************************************************************************
  * Default constructor.                                                         *
@@ -19,6 +26,7 @@ template<class Real>
 Quat<Real>::Quat()
 {
 }
+
 
 /********************************************************************************
  * Constructor.                                                                 *
@@ -32,6 +40,7 @@ Quat<Real>::Quat(const Real& mw, const Real& x, const Real& y, const Real& z)
     imag[2] = z;
 }
 
+
 /********************************************************************************
  * Constructor.                                                                 *
  *******************************************************************************/
@@ -41,6 +50,7 @@ Quat<Real>::Quat(const Real& mw, const Vector3<Real>& mimag)
     w = mw;
     imag = mimag;
 }
+
 
 /********************************************************************************
  * Copy constructor.                                                            *
@@ -52,6 +62,7 @@ Quat<Real>::Quat(const Quat<Real>& quat)
     imag = quat.imag;
 }
 
+
 /********************************************************************************
  * Quaternion from matrix.                                                      *
  *******************************************************************************/
@@ -60,6 +71,7 @@ Quat<Real>::Quat(const Matrix3<Real>& mat)
 {
     fromRotationMatrix(mat);
 }
+
 
 /********************************************************************************
  * Quaternion from matrix.                                                      *
@@ -73,6 +85,7 @@ Quat<Real>::Quat(const Matrix4<Real>& mat)
     fromRotationMatrix(tmp);
 }
 
+
 /********************************************************************************
  * Negate the quaternion.                                                       *
  *******************************************************************************/
@@ -81,6 +94,7 @@ Quat<Real> Quat<Real>::operator-() const
 {
     return Quat<Real>(-w, -imag);
 }
+
 
 /********************************************************************************
  * Copy operator.                                                               *
@@ -93,6 +107,7 @@ Quat<Real>& Quat<Real>::operator=(const Quat<Real>& quat)
     return *this
 }
 
+
 /********************************************************************************
  * Add two quaternions.                                                         *
  *******************************************************************************/
@@ -101,6 +116,7 @@ Quat<Real> Quat<Real>::operator+(const Quat<Real>& quat) const
 {
     return Quat<Real>(w + quat.w, imag + quat.imag);
 }
+
 
 /********************************************************************************
  * Subtract two quaternions.                                                    *
@@ -111,6 +127,7 @@ Quat<Real> Quat<Real>::operator-(const Quat<Real>& quat) const
     return Quat<Real>(w - quat.w, imag - quat.imag);
 }
 
+
 /********************************************************************************
  * Multiply a quaternion with a scalar.                                         *
  *******************************************************************************/
@@ -119,6 +136,7 @@ Quat<Real> Quat<Real>::operator*(const Real& scalar) const
 {
     return Quat<Real>(scalar * w, imag * scalar);
 }
+
 
 /********************************************************************************
  * Divide a quaternion with a scalar.                                           *
@@ -131,6 +149,7 @@ Quat<Real> Quat<Real>::operator/(const Real& scalar) const
     return ((*this) * scal);
 }
 
+
 /********************************************************************************
  * Multiply two quaternions.                                                    *
  *******************************************************************************/
@@ -140,6 +159,7 @@ Quat<Real> Quat<Real>::operator*(const Quat<Real>& quat) const
     return Quat<Real>(w*quat.w - imag*quat.imag, 
             imag.cross(quat.imag) + quat.w*imag + w*quat.imag);
 }
+
 
 /********************************************************************************
  * Add a quaternion to this quaternion.                                         *
@@ -151,6 +171,7 @@ Quat<Real>& Quat<Real>::operator+=(const Quat<Real>& quat)
     return (*this);
 }
 
+
 /********************************************************************************
  * Subtract a quaternion from this quaternion.                                  *
  *******************************************************************************/
@@ -160,6 +181,7 @@ Quat<Real>& Quat<Real>::operator-=(const Quat<Real>& quat)
     (*this) = (*this) - quat;
     return (*this);
 }
+
 
 /********************************************************************************
  * Multiply this quaternion with a scalar.                                      *
@@ -171,6 +193,7 @@ Quat<Real>& Quat<Real>::operator*=(const Real& scalar)
     return (*this);
 }
 
+
 /********************************************************************************
  * Divide this quaternion with a scalar.                                        *
  *******************************************************************************/
@@ -181,6 +204,7 @@ Quat<Real>& Quat<Real>::operator/=(const Real& scalar)
     return (*this);
 }
 
+
 /********************************************************************************
  * Compute the conjugate.                                                       *
  *******************************************************************************/
@@ -189,6 +213,7 @@ Quat<Real> Quat<Real>::conjugate() const
 {
     return Quat<Real>(w, -imag);
 }
+
 
 /********************************************************************************
  * Inverte the quaternion.                                                      *
@@ -199,6 +224,7 @@ Quat<Real> Quat<Real>::inverse() const
     return (1.0/lengthSquared())*conjugate();
 }
 
+
 /********************************************************************************
  * Calculate the length of the quaternion.                                      *
  *******************************************************************************/
@@ -208,6 +234,7 @@ Real Quat<Real>::length() const
     return Math<Real>::Sqrt(w*w + imag*imag);
 }
 
+
 /********************************************************************************
  * Calculate the squared length of the quaternion.                              *
  *******************************************************************************/
@@ -216,6 +243,7 @@ Real Quat<Real>::lengthSquared() const
 {
     return (w*w + imag*imag);
 }
+
 
 /********************************************************************************
  * Normalize the quaternion.                                                    *
@@ -230,6 +258,7 @@ Quat<Real>& Quat<Real>::normalize()
     *this /= len;
     return (*this);
 }
+
 
 /********************************************************************************
  * Make a rotation matrix.                                                      *
@@ -255,6 +284,7 @@ Matrix3<Real> Quat<Real>::toRotationMatrix() const
     return tmp;
 }
 
+
 /********************************************************************************
  * Make a rotation matrix.                                                      *
  *******************************************************************************/
@@ -267,6 +297,7 @@ Matrix4<Real> Quat<Real>::toRotationMatrix() const
 
     return ans;
 }
+
 
 /********************************************************************************
  * Make quaternion from a 3D matrix.                                            *
@@ -307,6 +338,7 @@ Quat<Real>& Quat<Real>::fromRotationMatrix(const Matrix3<Real>& mat)
     return *this;
 }
 
+
 /********************************************************************************
  * Check for equality.                                                          *
  *******************************************************************************/
@@ -315,6 +347,7 @@ bool Quat<Real>::operator==(const Quat<Real>& quat) const
 {
     return compare(quat) == 0;
 }
+
 
 /********************************************************************************
  * Check for inequality.                                                        *
@@ -325,6 +358,7 @@ bool Quat<Real>::operator!=(const Quat<Real>& quat) const
     return compare(quat) != 0;
 }
 
+
 /********************************************************************************
  * geq operator.                                                                *
  *******************************************************************************/
@@ -333,6 +367,7 @@ bool Quat<Real>::operator>=(const Quat<Real>& quat) const
 {
     return compare(quat) >= 0;
 }
+
 
 /********************************************************************************
  * > operator.                                                                  *
@@ -343,6 +378,7 @@ bool Quat<Real>::operator>(const Quat<Real>& quat) const
     return compare(quat) > 0;
 }
 
+
 /********************************************************************************
  * leq operator.                                                                *
  *******************************************************************************/
@@ -351,6 +387,7 @@ bool Quat<Real>::operator<=(const Quat<Real>& quat) const
 {
     return compare(quat) <= 0;
 }
+
 
 /********************************************************************************
  * < operator.                                                                  *
@@ -361,16 +398,6 @@ bool Quat<Real>::operator<(const Quat<Real>& quat) const
     return compare(quat) < 0;
 }
 
-#ifdef DEBUG
-/********************************************************************************
- * Print the quaternion.                                                        *
- *******************************************************************************/
-template<class Real>
-void Quat<Real>::print() const
-{
-    printf("|%8.4f %8.4f %8.4f %8.4f|\n", w, imag[0], imag[1], imag[2]);
-}
-#endif
 
 /********************************************************************************
  * comparison.                                                                  *
@@ -392,3 +419,17 @@ int Quat<Real>::compare(const Quat<Real>& quat) const
 
     return 0;
 }
+
+
+#ifdef DEBUG
+/********************************************************************************
+ * Print the quaternion.                                                        *
+ *******************************************************************************/
+template<class Real>
+void Quat<Real>::print() const
+{
+    printf("|%8.4f %8.4f %8.4f %8.4f|\n", w, imag[0], imag[1], imag[2]);
+}
+#endif
+} // namespace Math
+} // namespace Pandora

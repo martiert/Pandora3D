@@ -1,30 +1,66 @@
 /*
 -------------------------------------------------------------------------------
-File Name : PandoraMatrix4.inl
+File Name : PandoraMatrix4.cpp
 
-Purpose : Implementation of the Matrix4 class for Pandora.
+Purpose : Implementation of the Matrix4 class in Pandora3D.
 
-Creation Date : 2010-05-03
+Creation Date : 2010-06-26
 
-Last Modified : ti. 10. aug. 2010 kl. 19.51 +0200
+Last Modified : to. 26. aug. 2010 kl. 21.44 +0200
 
-Created By :  Martin Ertsås
+Created By :  Martin Ertsaas (martiert@student.matnat.uio.no)
 -------------------------------------------------------------------------------
 */
 
+#include "../include/PandoraMatrix4.h"
+
+namespace Pandora
+{
+    namespace Math
+    {
+
 /********************************************************************************
- * Some typedefs.                                                               *
+ * Some special matrices.                                                       *
  *******************************************************************************/
-typedef Matrix4<float>          Mat4f;
-typedef Matrix4<double>         Mat4d;
-typedef Matrix4<int>            Mat4i;
-typedef Matrix4<unsigned int>   Mat4u;
+template<> 
+const Matrix4<float> Matrix4<float>::ZERO(  0.0f, 0.0f, 0.0f, 0.0f,
+                                            0.0f, 0.0f, 0.0f, 0.0f,
+                                            0.0f, 0.0f, 0.0f, 0.0f,
+                                            0.0f, 0.0f, 0.0f, 0.0f);
+template<> 
+const Matrix4<float> Matrix4<float>::IDENTITY(  1.0f, 0.0f, 0.0f, 0.0f,
+                                                0.0f, 1.0f, 0.0f, 0.0f,
+                                                0.0f, 0.0f, 1.0f, 0.0f,
+                                                0.0f, 0.0f, 0.0f, 1.0f);
+template<>
+const Matrix4<float> Matrix4<float>::ONES(  1.0f, 1.0f, 1.0f, 1.0f,
+                                            1.0f, 1.0f, 1.0f, 1.0f,
+                                            1.0f, 1.0f, 1.0f, 1.0f,
+                                            1.0f, 1.0f, 1.0f, 1.0f);
+
+template<>
+const Matrix4<double> Matrix4<double>::ZERO(0.0, 0.0, 0.0, 0.0,
+                                            0.0, 0.0, 0.0, 0.0,
+                                            0.0, 0.0, 0.0, 0.0,
+                                            0.0, 0.0, 0.0, 0.0);
+template<>
+const Matrix4<double> Matrix4<double>::IDENTITY(1.0, 0.0, 0.0, 0.0,
+                                                0.0, 1.0, 0.0, 0.0,
+                                                0.0, 0.0, 1.0, 0.0,
+                                                0.0, 0.0, 0.0, 1.0);
+template<>
+const Matrix4<double> Matrix4<double>::ONES(1.0, 1.0, 1.0, 1.0,
+                                            1.0, 1.0, 1.0, 1.0,
+                                            1.0, 1.0, 1.0, 1.0,
+                                            1.0, 1.0, 1.0, 1.0);
+
 
 /********************************************************************************
  * Default constructor.                                                         *
  *******************************************************************************/
 template<class Real>
 Matrix4<Real>::Matrix4(){}
+
 
 /********************************************************************************
  * Constructor.                                                                 *
@@ -41,6 +77,7 @@ Matrix4<Real>::Matrix4(
     m_data[8] = m20; m_data[9] = m21; m_data[10] = m22; m_data[11] = m23;
     m_data[12] = m30; m_data[13] = m31; m_data[14] = m32; m_data[15] = m33;
 }
+
 
 /********************************************************************************
  * Make rotation matrix.                                                        *
@@ -73,6 +110,7 @@ Matrix4<Real>::Matrix4(const Real& rad, Vector4<Real> r)
     m_data[15] = 1;
 }
 
+
 /********************************************************************************
  * Make a scaling or a rotation matrix.                                         *
  *******************************************************************************/
@@ -92,6 +130,7 @@ Matrix4<Real>::Matrix4(const Vector3<Real>& vec, const bool scale)
     m_data[11] = vec[2];
 }
 
+
 /********************************************************************************
  * Construct a matrix from an array.                                            *
  *******************************************************************************/
@@ -101,6 +140,7 @@ Matrix4<Real>::Matrix4(const Real array[16])
     memcpy(m_data, array, 16*sizeof(Real));
 }
 
+
 /********************************************************************************
  * Copy a 4D matrix.                                                            *
  *******************************************************************************/
@@ -109,6 +149,7 @@ Matrix4<Real>::Matrix4(const Matrix4<Real>& mat)
 {
     memcpy(m_data, mat.m_data, 16*sizeof(Real));
 }
+
 
 /********************************************************************************
  * Copy a 3D matrix.                                                            *
@@ -122,6 +163,7 @@ Matrix4<Real>::Matrix4(const Matrix3<Real>& mat)
     m_data[8] = mat[6]; m_data[9] = mat[7]; m_data[10] = mat[8];
 }
 
+
 /********************************************************************************
  * Conversion operator.                                                         *
  *******************************************************************************/
@@ -131,6 +173,7 @@ Matrix4<Real>::operator Real *()
     return &(m_data[0]);
 }
 
+
 /********************************************************************************
  * Constant conversion operator.                                                *
  *******************************************************************************/
@@ -139,6 +182,7 @@ Matrix4<Real>::operator const Real *() const
 {
     return &(m_data[0]);
 }
+
 
 /********************************************************************************
  * Access operator.                                                             *
@@ -151,6 +195,7 @@ Real& Matrix4<Real>::operator[](const ptrdiff_t i)
     return m_data[i];
 }
 
+
 /********************************************************************************
  * Constant access operator.                                                    *
  *******************************************************************************/
@@ -161,6 +206,7 @@ const Real Matrix4<Real>::operator[](const ptrdiff_t i) const
 
     return m_data[i];
 }
+
 
 /********************************************************************************
  * Get reference to element (row,col).                                          *
@@ -173,6 +219,7 @@ Real& Matrix4<Real>::operator()(const int row, const int col)
     return m_data[col + row*4];
 }
 
+
 /********************************************************************************
  * Get constant copy of element (row,col).                                      *
  *******************************************************************************/
@@ -183,6 +230,7 @@ const Real Matrix4<Real>::operator()(const int row, const int col) const
 
     return m_data[col + row*4];
 }
+
 
 /********************************************************************************
  * Get row number row.                                                          *
@@ -195,6 +243,7 @@ Vector4<Real> Matrix4<Real>::getRow(const int row) const
     return Vector4<Real>(m_data[4*row], m_data[4*row + 1], m_data[4*row + 2],
             m_data[4*row + 3]);
 }
+
 
 /********************************************************************************
  * Set row number row to the given vector.                                      *
@@ -210,6 +259,7 @@ void Matrix4<Real>::setRow(const int row, const Vector4<Real>& vec)
     m_data[4*row + 3]   = vec[3];
 }
 
+
 /********************************************************************************
  * Get column numbet col as a vector.                                           *
  *******************************************************************************/
@@ -221,6 +271,7 @@ Vector4<Real> Matrix4<Real>::getColumn(const int col) const
     return Vector4<Real>(m_data[col], m_data[col + 4], m_data[col + 8], 
             m_data[col + 12]);
 }
+
 
 /********************************************************************************
  * Set column number col to the given vector.                                   *
@@ -236,6 +287,7 @@ void Matrix4<Real>::setColumn(const int col, const Vector4<Real>& vec)
     m_data[col + 12] = vec[3];
 }
 
+
 /********************************************************************************
  * Copy a matrix to this matrix.                                                *
  *******************************************************************************/
@@ -246,6 +298,7 @@ Matrix4<Real>& Matrix4<Real>::operator=(const Matrix4<Real>& mat)
         memcpy(m_data, mat.m_data, 16*sizeof(Real));
     return *this;
 }
+
 
 /********************************************************************************
  * Copy a 3x3 matrix to this matrix.                                            *
@@ -261,6 +314,7 @@ Matrix4<Real>& Matrix4<Real>::operator=(const Matrix3<Real>& mat)
     return (*this);
 }
 
+
 /********************************************************************************
  * Negate this matrix.                                                          *
  *******************************************************************************/
@@ -271,6 +325,7 @@ Matrix4<Real> Matrix4<Real>::operator-() const
     tmp = (*this) * (-1);
     return tmp;
 }
+
 
 /********************************************************************************
  * Add two matrices.                                                            *
@@ -286,6 +341,7 @@ Matrix4<Real> Matrix4<Real>::operator+(const Matrix4<Real>& mat) const
     return tmp;
 }
 
+
 /********************************************************************************
  * Subtract two matrices.                                                       *
  *******************************************************************************/
@@ -299,6 +355,7 @@ Matrix4<Real> Matrix4<Real>::operator-(const Matrix4<Real>& mat) const
     
     return tmp;
 }
+
 
 /********************************************************************************
  * Multiply two matrices.                                                       *
@@ -319,6 +376,7 @@ Matrix4<Real> Matrix4<Real>::operator*(const Matrix4<Real>& mat) const
     return tmp;
 }
 
+
 /********************************************************************************
  * Multiply a matrix with a vector.                                             *
  *******************************************************************************/
@@ -336,6 +394,7 @@ Vector4<Real> Matrix4<Real>::operator*(const Vector4<Real>& vec) const
                 vec[3]*m_data[15]);
 }
 
+
 /********************************************************************************
  * Multiply a matrix with a scalar.                                             *
  *******************************************************************************/
@@ -349,6 +408,7 @@ Matrix4<Real> Matrix4<Real>::operator*(const Real& scalar) const
     return mat;
 }
 
+
 /********************************************************************************
  * Divide a matrix with a scalar.                                               *
  *******************************************************************************/
@@ -359,6 +419,7 @@ Matrix4<Real> Matrix4<Real>::operator/(const Real& scalar) const
 
     return ((*this) * (1.0/scalar));
 }
+
 
 /********************************************************************************
  * Add a matrix to this matrix.                                                 *
@@ -371,6 +432,7 @@ Matrix4<Real>& Matrix4<Real>::operator+=(const Matrix4<Real>& mat)
     return *this;
 }
 
+
 /********************************************************************************
  * Subtract a matrix from this matrix.                                          *
  *******************************************************************************/
@@ -382,6 +444,7 @@ Matrix4<Real>& Matrix4<Real>::operator-=(const Matrix4<Real>& mat)
     return *this;
 }
 
+
 /********************************************************************************
  * Multiply this matrix with a scalar.                                          *
  *******************************************************************************/
@@ -392,6 +455,7 @@ Matrix4<Real>& Matrix4<Real>::operator*=(const Real& scalar)
         m_data[i] *= scalar;
     return *this;
 }
+
 
 /********************************************************************************
  * Divide this matrix with a scalar.                                            *
@@ -408,6 +472,7 @@ Matrix4<Real>& Matrix4<Real>::operator/=(const Real& scalar)
     return *this;
 }
 
+
 /********************************************************************************
  * Dot multiply two matrices.                                                   *
  *******************************************************************************/
@@ -422,6 +487,7 @@ Matrix4<Real> Matrix4<Real>::dotprod(const Matrix4<Real>& mat) const
     return tmp;
 }
 
+
 /********************************************************************************
  * Dot multiply a matrix to this matrix.                                        *
  *******************************************************************************/
@@ -431,6 +497,7 @@ Matrix4<Real>& Matrix4<Real>::operator*=(const Matrix4<Real>& mat)
     for(int i = 0; i < 16; i++)
         m_data[i] *= mat[i];
 }
+
 
 /********************************************************************************
  * Get the absolute value of all the elements in the matrix.                    *
@@ -445,6 +512,7 @@ Matrix4<Real> Matrix4<Real>::abs() const
 
     return tmp;
 }
+
 
 /********************************************************************************
  * Get the determinant of the matrix.                                           *
@@ -466,6 +534,7 @@ Real Matrix4<Real>::det() const
                 + m_data[6] * (m_data[8]*m_data[13] - m_data[9]*m_data[12]));
 }
 
+
 /********************************************************************************
  * Find the transpose of the matrix.                                            *
  *******************************************************************************/
@@ -482,6 +551,7 @@ Matrix4<Real> Matrix4<Real>::transpose() const
     
     return tmp;
 }
+
 
 /********************************************************************************
  * Find the cofactor matrix of this matrix.                                     *
@@ -575,6 +645,7 @@ Matrix4<Real> Matrix4<Real>::inverse() const
     return adjoint / (this->det());
 }
 
+
 /********************************************************************************
  * Check for equality.                                                          *
  *******************************************************************************/
@@ -583,6 +654,7 @@ bool Matrix4<Real>::operator==(const Matrix4<Real>& mat) const
 {
     return compare(mat) == 0;
 }
+
 
 /********************************************************************************
  * Check for inequality.                                                        *
@@ -593,6 +665,7 @@ bool Matrix4<Real>::operator!=(const Matrix4<Real>& mat) const
     return compare(mat) != 0;
 }
 
+
 /********************************************************************************
  * Check if this matrix is larger-then-or-equal-to another matrix.              *
  *******************************************************************************/
@@ -601,6 +674,7 @@ bool Matrix4<Real>::operator>=(const Matrix4<Real>& mat) const
 {
     return compare(mat) >= 0;
 }
+
 
 /********************************************************************************
  * Check if this matrix is larger then another matrix.                          *
@@ -611,6 +685,7 @@ bool Matrix4<Real>::operator>(const Matrix4<Real>& mat) const
     return compare(mat) > 0;
 }
 
+
 /********************************************************************************
  * Check if this matrix is less-then-or-equal-to another matrix.                *
  *******************************************************************************/
@@ -620,6 +695,7 @@ bool Matrix4<Real>::operator<=(const Matrix4<Real>& mat) const
     return compare(mat) <= 0;
 }
 
+
 /********************************************************************************
  * Check if this matrix is less then another matrix.                            *
  *******************************************************************************/
@@ -628,6 +704,35 @@ bool Matrix4<Real>::operator<(const Matrix4<Real>& mat) const
 {
     return compare(mat) < 0;
 }
+
+
+/********************************************************************************
+ * Makes it possible to write scalar*matrix.                                    *
+ *******************************************************************************/
+template<class Real>
+Matrix4<Real> operator*(const Real scalar, const Matrix4<Real>& mat)
+{
+    return mat * scalar;
+}
+
+
+/********************************************************************************
+ * Compare two matrices.                                                        *
+ *******************************************************************************/
+template<class Real>
+int Matrix4<Real>::compare(const Matrix4<Real>& mat) const
+{
+    for(int i = 0; i < 16; i++) {
+        if(Math<Real>::Abs(m_data[i] - mat[i]) >= Math<Real>::EPSILON) {
+            if(m_data[i] < mat[i])
+                return -1;
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
 
 #ifdef DEBUG
 /********************************************************************************
@@ -646,29 +751,5 @@ void Matrix4<Real>::print() const
     }
 }
 #endif
-
-/********************************************************************************
- * Makes it possible to write scalar*matrix.                                    *
- *******************************************************************************/
-template<class Real>
-Matrix4<Real> operator*(const Real scalar, const Matrix4<Real>& mat)
-{
-    return mat * scalar;
-}
-
-/********************************************************************************
- * Compare two matrices.                                                        *
- *******************************************************************************/
-template<class Real>
-int Matrix4<Real>::compare(const Matrix4<Real>& mat) const
-{
-    for(int i = 0; i < 16; i++) {
-        if(Math<Real>::Abs(m_data[i] - mat[i]) >= Math<Real>::EPSILON) {
-            if(m_data[i] < mat[i])
-                return -1;
-            return 1;
-        }
-    }
-
-    return 0;
-}
+} // namespace Math
+} // namespace Pandora

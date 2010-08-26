@@ -430,26 +430,6 @@ namespace Pandora
                  */
                 void eigenDecompose(Vector3<Real>& lambda, Matrix3& v_mat) const;
 
-                /**
-                 *  Several routines to convert from Euler angles.
-                 */
-                Matrix3& fromEulerAnglesXYZ(Real yaw, Real pitch, Real roll);
-                Matrix3& fromEulerAnglesXZY(Real yaw, Real pitch, Real roll);
-                Matrix3& fromEulerAnglesYXZ(Real yaw, Real pitch, Real roll);
-                Matrix3& fromEulerAnglesYZX(Real yaw, Real pitch, Real roll);
-                Matrix3& fromEulerAnglesZXY(Real yaw, Real pitch, Real roll);
-                Matrix3& fromEulerAnglesZYX(Real yaw, Real pitch, Real roll);
-
-                /**
-                 *  Several routines to convert to euler angles.
-                 */
-                bool toEulerAnglesXYZ(Real& yaw, Real& pitch, Real& roll);
-                bool toEulerAnglesXZY(Real& yaw, Real& pitch, Real& roll);
-                bool toEulerAnglesYXZ(Real& yaw, Real& pitch, Real& roll);
-                bool toEulerAnglesYZX(Real& yaw, Real& pitch, Real& roll);
-                bool toEulerAnglesZXY(Real& yaw, Real& pitch, Real& roll);
-                bool toEulerAnglesZYX(Real& yaw, Real& pitch, Real& roll);
-
 #ifdef DEBUG
                 /**
                  *  Print out the matrix. Only available in DEBUG mode.
@@ -501,7 +481,13 @@ namespace Pandora
         template<class Real>
         Matrix3<Real> operator*(const Real& scalar, const Matrix3<Real>& mat);
 
-#include "PandoraMatrix3.inl"
+        /**
+         *  Typedefs.
+         */
+        typedef Matrix3<float>          Mat3f;
+        typedef Matrix3<double>         Mat3d;
+        typedef Matrix3<int>            Mat3i;
+        typedef Matrix3<unsigned int>   Mat3u;
 
     } //namespace Math
 } //namespace Pandora

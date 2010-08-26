@@ -284,9 +284,6 @@ namespace Pandora
                 static Real IntervalRandom(Real min, Real max, 
                         unsigned int seed = 0);
         };
-
-#include "PandoraMath.inl"
-
     } //namespace Math
 } //namespace Pandora
 #endif //PANDORAMATH_H

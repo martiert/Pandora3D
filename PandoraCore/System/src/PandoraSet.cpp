@@ -1,16 +1,23 @@
 /*
 --------------------------------------------------------------------------------
-File Name : PandoraSet.inl
+File Name : PandoraSet.cpp
 
 Purpose : Implementation of the Set class used in Pandora3D
 
 Creation Date : 2010-01-26
 
-Last Modified : on. 05. mai 2010 kl. 21.27 +0200
+Last Modified : to. 26. aug. 2010 kl. 22.02 +0200
 
-Created By : Martin Ertsås
+Created By : Martin Ertsaas (martiert@student.matnat.uio.no)
 --------------------------------------------------------------------------------
 */
+
+#include "../include/PandoraSet.h"
+
+namespace Pandora
+{
+    namespace Utils
+    {
 
 /********************************************************************************
  * Constructor.                                                                 *
@@ -24,6 +31,7 @@ Set<T>::Set(const unsigned int size, const unsigned int increment)
     m_elements = 0;
 }
 
+
 /********************************************************************************
  * Destructor.                                                                  *
  *******************************************************************************/
@@ -32,6 +40,7 @@ Set<T>::~Set()
 {
     delete[] m_data;
 }
+
 
 /********************************************************************************
  * Appends an element to the first free place in the set. If no free spots, we  *
@@ -69,6 +78,7 @@ bool Set<T>::insert(const T& in)
     }
 }
 
+
 /********************************************************************************
  * Search for an element in the set.                                            *
  *******************************************************************************/
@@ -88,6 +98,7 @@ bool Set<T>::exists(const T& search) const
     return false;
 }
 
+
 /********************************************************************************
  * Get the number of elements in the set.                                       *
  *******************************************************************************/
@@ -96,6 +107,7 @@ unsigned int Set<T>::getElements() const
 {
     return m_elements;
 }
+
 
 /********************************************************************************
  * Get the number of places in the set.                                         *
@@ -106,6 +118,7 @@ unsigned int Set<T>::getSize() const
     return m_size;
 }
 
+
 /********************************************************************************
  * Get the number of elements to increment the set by.                          *
  *******************************************************************************/
@@ -115,6 +128,7 @@ unsigned int Set<T>::getIncrement() const
     return m_increment;
 }
 
+
 /********************************************************************************
  * Get the array itself.                                                        *
  *******************************************************************************/
@@ -123,6 +137,7 @@ T* Set<T>::getPointer()
 {
     return m_data;
 }
+
 
 /********************************************************************************
  * Remove an element from the set. Returns true if the element is removed,      *
@@ -151,6 +166,7 @@ bool Set<T>::remove(const T& elem)
     return true;
 }
 
+
 /********************************************************************************
  * Removes all the data from the set.                                           *
  *******************************************************************************/
@@ -161,3 +177,5 @@ void Set<T>::removeAll()
     delete[] m_data;
     m_data = new T[m_size];
 }
+} // namespace Utils
+} // namespace Pandora

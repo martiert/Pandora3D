@@ -125,9 +125,6 @@ namespace Pandora
 
                 int hashFunction(const Key& key) const;
         };
-
-#include "PandoraHashtable.inl"
-
     }
 }
 #endif

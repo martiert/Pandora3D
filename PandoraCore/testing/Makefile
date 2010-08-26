@@ -47,7 +47,7 @@
 APP      := test
 CXX      := g++
 LD       := g++
-SOURCES  := $(wildcard *.cpp ../System/*.cpp ../Math/*.cpp)
+SOURCES  := $(wildcard *.cpp ../System/*.cpp ../Math/src/*.cpp)
 OBJECTS  := $(patsubst %.cpp, %.o, $(SOURCES))
 
 CXXFLAGS := $(CXXFLAGS) -Wall -pedantic -g2 -DDEBUG
@@ -57,8 +57,8 @@ LDFLAGS  := $(LDFLAGS) -lcppunit -ldl
 
 all: depend $(APP)
 
-$(APP): $(OBJECTS)
-	$(LD) -o $(APP) $(LDFLAGS) $(OBJECTS)
+$(APP): $(OBJECT2)
+	$(LD) -o $(APP) $(LDFLAGS) $(OBJECT2)
 
 depend: make.dep
 

@@ -97,9 +97,6 @@ namespace Pandora
                 Node<T> *m_root;
                 unsigned int m_size;
         };
-
-#include "PandoraList.inl"
-
     }
 }
 #endif

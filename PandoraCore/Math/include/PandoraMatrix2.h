@@ -430,7 +430,13 @@ namespace Pandora
         template<class Real>
         Matrix2<Real> operator*(const Real scalar, const Matrix2<Real>& mat);
 
-#include "PandoraMatrix2.inl"
+        /**
+         *  Typedefs.
+         */
+        typedef Matrix2<float>          Mat2f;
+        typedef Matrix2<double>         Mat2d;
+        typedef Matrix2<int>            Mat2i;
+        typedef Matrix2<unsigned int>   Mat2u;
 
     } //namespace Math
 } //namespace Pandora

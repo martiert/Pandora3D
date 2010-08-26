@@ -71,7 +71,7 @@ namespace Pandora
                  *  \param
                  *      quat - The quaternion to copy.
                  */
-                Quat(const Quaterion& quat);
+                Quat(const Quaternion& quat);
 
                 /**
                  *  Make a quaternion from a 3D rotation matrix.
@@ -338,8 +338,6 @@ namespace Pandora
 
                 static Quat IDENTITY;
         };
-
-#include "PandoraQuat.inl"
 
     } //namespace Math
 } //namespace Pandora

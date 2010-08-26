@@ -1,16 +1,24 @@
 /*
 --------------------------------------------------------------------------------
-File Name : PandoraVector.inl
+File Name : PandoraVector.cpp
 
 Purpose : Implementation of the Vector class used in Pandora3D
 
 Creation Date : 2010-01-24
 
-Last Modified : on. 14. april 2010 kl. 19.19 +0200
+Last Modified : to. 26. aug. 2010 kl. 22.02 +0200
 
-Created By : Martin Ertsås
+Created By : Martin Ertsaas (martiert@student.matnat.uio.no)
 --------------------------------------------------------------------------------
 */
+
+#include "../include/PandoraVector.h"
+
+
+namespace Pandora
+{
+    namespace Utils
+    {
 
 /********************************************************************************
  * Constructor.                                                                 *
@@ -24,6 +32,7 @@ Vector<T>::Vector(const unsigned int size, const unsigned int inc)
     m_data = new T[m_size];
 }
 
+
 /********************************************************************************
  * Destructor.                                                                  *
  *******************************************************************************/
@@ -32,6 +41,7 @@ Vector<T>::~Vector()
 {
     delete[] m_data;
 }
+
 
 /********************************************************************************
  * Get a c-pointer.                                                             *
@@ -42,6 +52,7 @@ T* Vector<T>::c_ptr()
     return &m_data[0];
 }
 
+
 /********************************************************************************
  * Get a constant c-pointer.                                                    *
  *******************************************************************************/
@@ -50,6 +61,7 @@ const T* Vector<T>::c_ptr() const
 {
     return m_data[0];
 }
+
 
 /********************************************************************************
  * Access element number i.                                                     *
@@ -62,6 +74,7 @@ T& Vector<T>::operator[](const ptrdiff_t i)
     return m_data[i];
 }
 
+
 /********************************************************************************
  * Access constant element number i.                                            *
  *******************************************************************************/
@@ -71,6 +84,7 @@ const T& Vector<T>::operator[](const ptrdiff_t i) const
     assert(i < m_size && "Index out of bounds");
     return m_data[i];
 }
+
 
 /********************************************************************************
  * Set this element to the first free element in the vector.                    *
@@ -102,6 +116,7 @@ void Vector<T>::append(const T& element)
         m_size += m_increment;
     }
 }
+
 
 /********************************************************************************
  * Inserts the element into the given place. If the place is unused, or we are  *
@@ -136,6 +151,7 @@ void Vector<T>::insert(const unsigned int i, const T& element)
     m_data[i] = element;
 }
 
+
 /********************************************************************************
  * Remove the element in the selected place, and return it.                     *
  *******************************************************************************/
@@ -154,6 +170,7 @@ T& Vector<T>::remove(const unsigned int i)
     return tmp;
 }
 
+
 /********************************************************************************
  * Remove all the data from this vector.                                        *
  *******************************************************************************/
@@ -166,6 +183,7 @@ void Vector<T>::removeAll()
     m_elements = 0;
 }
 
+
 /********************************************************************************
  * Return the number of elements in the vector.                                 *
  *******************************************************************************/
@@ -174,6 +192,7 @@ unsigned int Vector<T>::getElements() const
 {
     return m_elements;
 }
+
 
 /********************************************************************************
  * Return the size of the vector.                                               *
@@ -184,6 +203,7 @@ unsigned int Vector<T>::getSize() const
     return m_size;
 }
 
+
 /********************************************************************************
  * Returns the number we are to increase the vector with.                       *
  *******************************************************************************/
@@ -192,6 +212,7 @@ unsigned int Vector<T>::getIncrement() const
 {
     return m_increment;
 }
+
 
 /********************************************************************************
  * Set new size of the vector.                                                  *
@@ -214,6 +235,7 @@ void Vector<T>::setSize(const unsigned int size)
         m_elements = size;
 }
 
+
 /********************************************************************************
  * Set new number of element to increase by.                                    *
  *******************************************************************************/
@@ -222,3 +244,5 @@ void Vector<T>::setIncrement(const unsigned int inc)
 {
     m_increment = inc;
 }
+} // namespace Utils
+} // namespace Pandora
