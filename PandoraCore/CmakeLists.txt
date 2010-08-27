@@ -1,6 +1,4 @@
 #Main CmakeLists.txt file
 
-ADD_SUBDIRECTORY(include)
-ADD_SUBDIRECTORY(src)
-ADD_SUBDIRECTORY(obj)
-ADD_SUBDIRECTORY(testing)
+add_subdirectory(Math)
+add_subdirectory(System)
