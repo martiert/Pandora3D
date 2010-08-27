@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix3 class in Pandora 3D.
 
 Creation Date : 2010-06-26
 
-Last Modified : to. 26. aug. 2010 kl. 21.49 +0200
+Last Modified : Fri 27 Aug 2010 11:45:01 CEST
 
 Created By :  Martin Ertsaas (martiert@student.matnat.uio.no)
 -------------------------------------------------------------------------------
@@ -532,6 +532,229 @@ void Matrix3<Real>::toAxisAngle(Vector3<Real>& axis, Real& angle) const
     axis[0] = (m_data[2][1] - m_data[1][2])/trace;
     axis[1] = (m_data[0][2] - m_data[2][0])/trace;
     axis[2] = (m_data[1][0] - m_data[0][1])/trace;
+}
+
+
+/********************************************************************************
+ * From euler angles.                                                           *
+ *******************************************************************************/
+template<class Real>
+Matrix3<Real>& Matrix3<Real>::fromEulerAnglesXYZ(const Real& yaw, const Real& pitch, 
+        const Real& roll)
+{
+    Real cos, sin;
+
+    cos = Math<Real>::Cos(yaw);
+    sin = Math<Real>::Sin(yaw);
+    Matrix3<Real> x_mat(1.0, 0.0, 0.0,
+                        0.0, cos, -sin,
+                        0.0, sin, cos);
+
+    cos = Math<Real>::Cos(pitch);
+    sin = Math<Real>::Sin(pitch);
+    Matrix3<Real> y_mat(cos, 0.0, sin,
+                        0.0, 1.0, 0.0,
+                        -sin, 0.0, cos);
+
+    cos = Math<Real>::Cos(roll);
+    sin = Math<Real>::Sin(roll);
+    Matrix3<Real> z_mat(cos, -sin, 0.0,
+                        sin, cos, 0.0, 
+                        0.0, 0.0, 1.0);
+
+    *this = x_mat*(y_mat*z_mat);
+    return *this;
+}
+
+
+template<class Real>
+Matrix3<Real>& Matrix3<Real>::fromEulerAnglesXZY(const Real& yaw, const Real& pitch, 
+        const Real& roll)
+{
+    Real cos, sin;
+
+    cos = Math<Real>::Cos(yaw);
+    sin = Math<Real>::Sin(yaw);
+    Matrix3<Real> x_mat(1.0, 0.0, 0.0,
+                        0.0, cos, -sin,
+                        0.0, sin, cos);
+
+    cos = Math<Real>::Cos(pitch);
+    sin = Math<Real>::Sin(pitch);
+    Matrix3<Real> z_mat(cos, -sin, 0.0,
+                        sin, cos, 0.0,
+                        0.0, 0.0, 1.0);
+
+    cos = Math<Real>::Cos(roll);
+    sin = Math<Real>::Sin(roll);
+    Matrix3<Real> y_mat(cos, 0.0, sin,
+                        0.0, 1.0, 0.0,
+                        -sin, 0.0, cos);
+
+    *this = x_mat*(z_mat*y_mat);
+    return *this;
+}
+
+
+template<class Real>
+Matrix3<Real>& Matrix3<Real>::fromEulerAnglesYXZ(const Real& yaw, const Real& pitch, 
+        const Real& roll)
+{
+    Real cos, sin;
+
+    cos = Math<Real>::Cos(yaw);
+    sin = Math<Real>::Sin(yaw);
+    Matrix3<Real> y_mat(cos, 0.0, sin,
+                        0.0, 1.0, 0.0,
+                        -sin, 0.0, cos);
+
+    cos = Math<Real>::Cos(pitch);
+    sin = Math<Real>::Sin(pitch);
+    Matrix3<Real> x_mat(1.0, 0.0 ,0.0,
+                        0.0, cos, -sin,
+                        0.0, sin, cos);
+
+    cos = Math<Real>::Cos(roll);
+    sin = Math<Real>::Sin(roll);
+    Matrix3<Real> z_mat(cos, -sin, 0.0,
+                        sin, cos, 0.0,
+                        0.0, 0.0, 1.0);
+
+    *this = y_mat*(x_mat*z_mat);
+    return *this;
+}
+
+
+template<class Real>
+Matrix3<Real>& Matrix3<Real>::fromEulerAnglesYZX(const Real& yaw, const Real& pitch, 
+        const Real& roll)
+{
+    Real cos, sin;
+
+    cos = Math<Real>::Cos(yaw);
+    sin = Math<Real>::Sin(yaw);
+    Matrix3<Real> y_mat(cos, 0.0, sin,
+                        0.0, 1.0, 0.0,
+                        -sin, 0.0, cos);
+
+    cos = Math<Real>::Cos(pitch);
+    sin = Math<Real>::Sin(pitch);
+    Matrix3<Real> z_mat(cos, -sin, 0.0,
+                        sin, cos, 0.0,
+                        0.0, 0.0, 1.0);
+
+
+    cos = Math<Real>::Cos(roll);
+    sin = Math<Real>::Sin(roll); 
+    Matrix3<Real> x_mat(1.0, 0.0 ,0.0,
+                        0.0, cos, -sin,
+                        0.0, sin, cos);
+
+    *this = y_mat*(z_mat*x_mat);
+    return *this;
+}
+
+
+template<class Real>
+Matrix3& fromEulerAnglesZXY(const Real& yaw, const Real& pitch, const Real& roll)
+{
+    Real cos, sin;
+
+    cos = Math<Real>::Cos(yaw);
+    sin = Math<Real>::Sin(yaw);
+    Matrix3<Real> z_mat(cos, -sin, 0.0,
+                        sin, cos, 0.0,
+                        0.0, 0.0, 1.0);
+
+
+    cos = Math<Real>::Cos(pitch);
+    sin = Math<Real>::Sin(pitch);
+    Matrix3<Real> x_mat(1.0, 0.0 ,0.0,
+                        0.0, cos, -sin,
+                        0.0, sin, cos);
+
+    cos = Math<Real>::Cos(roll);
+    sin = Math<Real>::Sin(roll);
+    Matrix3<Real> y_mat(cos, 0.0, sin,
+                        0.0, 1.0, 0.0,
+                        -sin, 0.0, cos);
+
+    *this = z_mat*(x_mat*y_mat);
+    return *this;
+}
+
+
+template<class Real>
+Matrix3<Real>& Matrix3<Real>::fromEulerAnglesZYX(const Real& yaw, const Real& pitch, 
+        const Real& roll)
+{
+    Real cos, sin;
+
+    cos = Math<Real>::Cos(yaw);
+    sin = Math<Real>::Sin(yaw);
+    Matrix3<Real> z_mat(cos, -sin, 0.0,
+                        sin, cos, 0.0,
+                        0.0, 0.0, 1.0);
+
+    cos = Math<Real>::Cos(pitch);
+    sin = Math<Real>::Sin(pitch);
+    Matrix3<Real> y_mat(cos, 0.0, sin,
+                        0.0, 1.0, 0.0,
+                        -sin, 0.0, cos);
+
+    cos = Math<Real>::Cos(roll);
+    sin = Math<Real>::Sin(roll);
+    Matrix3<Real> x_mat(1.0, 0.0 ,0.0,
+                        0.0, cos, -sin,
+                        0.0, sin, cos);
+
+    *this = z_mat*(y_mat*x_mat);
+    return *this;
+}
+
+
+/********************************************************************************
+ * To Euler angles.                                                             *
+ *******************************************************************************/
+template<class Real>
+bool Matrix3<Real>::toEulerAnglesXYZ(Real& yaw, Real& pitch, Real& roll)
+{
+    return false;
+}
+
+
+template<class Real>
+bool Matrix3<Real>::toEulerAnglesXZY(Real& yaw, Real& pitch, Real& roll)
+{
+    return false;
+}
+
+
+template<class Real>
+bool Matrix3<Real>::toEulerAnglesYXZ(Real& yaw, Real& pitch, Real& roll)
+{
+    return false;
+}
+
+
+template<class Real>
+bool Matrix3<Real>::toEulerAnglesYZX(Real& yaw, Real& pitch, Real& roll)
+{
+    return false;
+}
+
+
+template<class Real>
+bool Matrix3<Real>::toEulerAnglesZXY(Real& yaw, Real& pitch, Real& roll)
+{
+    return false;
+}
+
+
+template<class Real>
+bool Matrix3<Real>::toEulerAnglesZYX(Real& yaw, Real& pitch, Real& roll)
+{
+    return false;
 }
 
 
