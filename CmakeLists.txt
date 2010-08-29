@@ -1,5 +1,0 @@
-#Top-Level CmakeLists.txt
-project(Pandora3D)
-cmake_minimum_required(VERSION 2.6)
-
-add_subdirectory(PandoraCore)

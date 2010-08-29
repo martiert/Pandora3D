@@ -1,4 +1,0 @@
-#Main CmakeLists.txt file
-
-add_subdirectory(Math)
-add_subdirectory(System)
