@@ -393,6 +393,13 @@ namespace Pandora
                 void orthonormalize();
 
                 /**
+                 *  Get the trace of the matrix.
+                 *  \return
+                 *      The trace of the matrix.
+                 */
+                Real trace() const;
+
+                /**
                  *  Eigenvalue decompose this matrix.
                  *  \param
                  *      lambda - The eigenvalues.

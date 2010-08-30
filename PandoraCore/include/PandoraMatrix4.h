@@ -463,6 +463,13 @@ namespace Pandora
                  */
                 bool operator<(const Matrix4& mat) const;
 
+                /**
+                 *  Get the trace of the matrix.
+                 *  \return
+                 *      The trace of the matrix.
+                 */
+                Real trace() const;
+
 #ifdef DEBUG
                 /**
                  *  Print out the matrix. Only available in DEBUG mode.

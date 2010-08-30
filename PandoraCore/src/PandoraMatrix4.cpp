@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix4 class in Pandora3D.
 
 Creation Date : 2010-06-26
 
-Last Modified : to. 26. aug. 2010 kl. 21.44 +0200
+Last Modified : man 30-08-2010 10:39:12 CEST
 
 Created By :  Martin Ertsaas (martiert@student.matnat.uio.no)
 -------------------------------------------------------------------------------
@@ -643,6 +643,16 @@ Matrix4<Real> Matrix4<Real>::inverse() const
     Matrix4<Real> adjoint = (this->cofactor()).transpose();
 
     return adjoint / (this->det());
+}
+
+
+/********************************************************************************
+ * Get the trace of the matrix.                                                 *
+ *******************************************************************************/
+template<class Real>
+Real Matrix4<Real>::trace() const
+{
+    return m_data[0] + m_data[5] + m_data[10] + m_data[15];
 }
 
 

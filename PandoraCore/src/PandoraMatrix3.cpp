@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix3 class in Pandora 3D.
 
 Creation Date : 2010-06-26
 
-Last Modified : Fri 27 Aug 2010 11:45:01 CEST
+Last Modified : man 30-08-2010 10:38:30 CEST
 
 Created By :  Martin Ertsaas (martiert@student.matnat.uio.no)
 -------------------------------------------------------------------------------
@@ -532,6 +532,16 @@ void Matrix3<Real>::toAxisAngle(Vector3<Real>& axis, Real& angle) const
     axis[0] = (m_data[2][1] - m_data[1][2])/trace;
     axis[1] = (m_data[0][2] - m_data[2][0])/trace;
     axis[2] = (m_data[1][0] - m_data[0][1])/trace;
+}
+
+
+/********************************************************************************
+ * Get the trace of the matrix.                                                 *
+ *******************************************************************************/
+template<class Real>
+Real Matrix3<Real>::trace() const
+{
+    return m_data[0] + m_data[4] + m_data[8];
 }
 
 

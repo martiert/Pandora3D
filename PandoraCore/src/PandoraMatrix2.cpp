@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix2 class in Pandora 3D.
 
 Creation Date : 2010-05-05
 
-Last Modified : to. 26. aug. 2010 kl. 21.38 +0200
+Last Modified : man 30-08-2010 10:39:16 CEST
 
 Created By :  Martin Ertsaas (martiert@student.matnat.uio.no)
 --------------------------------------------------------------------------------
@@ -526,6 +526,16 @@ template<class Real>
 Matrix2<Real> operator*(const Real scale, const Matrix2<Real>& mat)
 {
     return mat * scale;
+}
+
+
+/********************************************************************************
+ * Get the trace of the matrix.                                                 *
+ *******************************************************************************/
+template<class Real>
+Real Matrix2<Real>::trace() const
+{
+    return m_data[0] + m_data[3];
 }
 
 

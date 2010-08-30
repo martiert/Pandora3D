@@ -6,13 +6,13 @@ Purpose : Implementation of the Hashtable class used in Pandora3D
  
 Creation Date : 2010-01-24
 
-Last Modified : to. 26. aug. 2010 kl. 22.02 +0200
+Last Modified : man 30-08-2010 11:02:59 CEST
  
 Created By : Martin Ertsaas (martiert@student.matnat.uio.no)
 --------------------------------------------------------------------------------
 */
 
-#include "../include/PandoraHashtable.h"
+#include "../include/PandoraHashTable.h"
 
 namespace Pandora
 {

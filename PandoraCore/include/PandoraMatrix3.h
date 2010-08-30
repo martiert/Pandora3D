@@ -404,6 +404,13 @@ namespace Pandora
                  *      in mat. False otherwise.
                  */
                 bool operator<(const Matrix3& mat) const;
+                
+                /**
+                 *  Get the trace of the matrix.
+                 *  \return
+                 *      The trace of the matrix.
+                 */
+                Real trace() const;
 
                 /**
                  *  Get the rotation in radians and the axis we rotate around.
