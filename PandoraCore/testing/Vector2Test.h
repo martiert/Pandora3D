@@ -8,7 +8,7 @@
 #include <cppunit/TestCaller.h>
 #include <cppunit/ui/text/TestRunner.h>
 
-#include "../Math/include/PandoraVector2.h"
+#include "../include/PandoraVector2.h"
 
 class Vector2Test : public CppUnit::TestCase
 {

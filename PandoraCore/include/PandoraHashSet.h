@@ -25,7 +25,9 @@ namespace Pandora
     namespace Utils
     {
         /**
-         *  A class for storing keys in a set.
+         *  A class for storing keys in a set. The KEY class needs a function
+         *  hash(int) which hashes the class. There is no default hash function
+         *  implemented, as the class itselv is expected to hash.
          */
         template<class KEY>
         class HashSet
@@ -36,7 +38,7 @@ namespace Pandora
                  *  \param
                  *      size - The size of the set. Defaults to 101.
                  */
-                HashSet(const int size);
+                HashSet(const unsigned int size);
 
                 /**
                  *  Destructor.
@@ -67,6 +69,13 @@ namespace Pandora
                 void removeAll();
 
                 /**
+                 *  Get the number of elements in the set.
+                 *  \return
+                 *      The number of elements.
+                 */
+                int getQuantity() const;
+
+                /**
                  *  Search for a key in the set.
                  *  \param
                  *      key - The key we are searching for.
@@ -86,6 +95,8 @@ namespace Pandora
                  *  Get the next entry of the set.
                  *  \return 
                  *      The next entry of the set.
+                 *  \note
+                 *      getFirst() must have been called for this to work.
                  */
                 KEY* getNext() const;
             private:
@@ -94,14 +105,15 @@ namespace Pandora
                     public:
                         KEY key;
                         HashItem *next;
-                }
+                };
                     
-                int m_size;
+                unsigned int m_size;
+                unsigned int m_quantity;
                 HashItem** m_set;
 
-                int m_quantity = 0;
                 //Used for iterating.
-                int m_idxat = 0;
+                unsigned int m_idx;
+                HashItem* m_present;
         };
     } // namespace Utils
 } // namespace Pandora

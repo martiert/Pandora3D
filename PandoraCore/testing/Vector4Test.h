@@ -6,7 +6,7 @@
 #include <cppunit/TestCaller.h>
 #include <cppunit/ui/text/TestRunner.h>
 
-#include "../Math/include/PandoraVector4.h"
+#include "../include/PandoraVector4.h"
 
 class Vector4Test : public CppUnit::TestCase
 {

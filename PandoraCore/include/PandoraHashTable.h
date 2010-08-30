@@ -21,6 +21,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 
 #include <stdlib.h>
 #include <math.h>
+#include "PandoraIterator.h"
 
 namespace Pandora
 {
@@ -28,23 +29,12 @@ namespace Pandora
     {
         namespace
         {
-            //One node in the table.
-            template<class Key, class Value>
-            struct Node
-            {
-                Key key;
-                Value *value;
-            };
-        } //Anon namespace
 
         /** 
          *  A HashTable class.
          *  \note
-         *      This class has a standard <VAR>hashFunction</VAR> function, but
-         *      it can, and should, be overwritten with the userHashFunction 
-         *      function.
-         *  \todo 
-         *      Make an iterator
+         *      The key needs a hash(int) function used for hashing. There is
+         *      no default hash function.
          */
         template<class Key, class Value>
         class HashTable
@@ -73,7 +63,7 @@ namespace Pandora
                  *      False if the table is full, or we get a collision.
                  *      True else.
                  */
-                bool insert(const Key& key, const Value& value);
+                void insert(const Key& key, const Value& value);
 
                 /**
                  *  Remove an element from the HashTable.
@@ -108,22 +98,28 @@ namespace Pandora
                 Value& find(const Key& key) const;
 
                 /**
-                 *  A user defined hash function.
-                 *  \param
-                 *      key - The key to hash.
+                 *  Get a Key iterator.
                  *  \return
-                 *      The key as an integer between 0 and m_size.
-                 *  \note
-                 *      The user is responsible for making a good hashfunction
-                 *      without collisions, since collisions will be ignored.
+                 *      A key iterator.
                  */
-                int (*userHashFunction)(const Key& key);
+                Iterator<Key> getKeys() const;
+
+                /**
+                 *  Get a Value iterator.
+                 *  \return
+                 *      A value iterator.
+                 */
+                Iterator<Value> getValues() const;
             protected:
+                class Node {
+                    Key key;
+                    Value value;
+                    Node *next;
+                }
+
                 unsigned int m_size;
                 unsigned int m_elements;
-                Node<Key, Value> *m_values;
-
-                int hashFunction(const Key& key) const;
+                Node *m_values;
         };
     }
 }
