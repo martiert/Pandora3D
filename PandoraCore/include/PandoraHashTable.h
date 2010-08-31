@@ -21,7 +21,6 @@ http://www.gnu.org/copyleft/lesser.txt.
 
 #include <stdlib.h>
 #include <math.h>
-#include "PandoraIterator.h"
 
 namespace Pandora
 {
@@ -98,18 +97,40 @@ namespace Pandora
                 Value& find(const Key& key) const;
 
                 /**
-                 *  Get a Key iterator.
+                 *  Get the first Key. Iterator function.
                  *  \return
-                 *      A key iterator.
+                 *      The first Key in the table.
+                 *  \note
+                 *      Needs to be called before getNextKey.
                  */
-                Iterator<Key> getKeys() const;
+                Key* getFirstKey();
 
                 /**
-                 *  Get a Value iterator.
+                 *  Get the next key. Iterator function.
                  *  \return
-                 *      A value iterator.
+                 *      The next key in the table.
+                 *  \note
+                 *      Needs getFirstKey to be called first.
                  */
-                Iterator<Value> getValues() const;
+                Key* getNextKey();
+
+                /**
+                 *  Get the first value. Iterator function.
+                 *  \return
+                 *      The first Value in the table.
+                 *  \note
+                 *      Needs to be called before getNextvalue.
+                 */
+                Value* getFirstValue();
+
+                /**
+                 *  Get the next value. Iterator function.
+                 *  \return
+                 *      The next value in the table.
+                 *  \note
+                 *      Needs getFirstValue to be called first.
+                 */
+                Value* getNextValue();
             protected:
                 class Node {
                     Key key;
@@ -119,7 +140,14 @@ namespace Pandora
 
                 unsigned int m_size;
                 unsigned int m_elements;
-                Node *m_values;
+                Node **m_values;
+
+                // Iterators.
+                Node *m_keyIterator;
+                int m_keyIdx;
+
+                Node *m_valueIterator;
+                int m_valueIdx;
         };
     }
 }

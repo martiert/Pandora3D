@@ -6,7 +6,7 @@ Purpose : Implementation of the Hashtable class used in Pandora3D
  
 Creation Date : 2010-01-24
 
-Last Modified : ma. 30. aug. 2010 kl. 13.57 +0200
+Last Modified : Tue 31 Aug 2010 14:24:13 CEST
  
 Created By : Martin Ertsaas (martiert@student.matnat.uio.no)
 --------------------------------------------------------------------------------
@@ -27,7 +27,7 @@ HashTable<Key,Value>::HashTable(const unsigned int& size)
 {
     m_size = size;
     m_elements = 0;
-    m_values = new Node[size];
+    m_values = new Node*[size];
     memcpy(m_value, 0, m_size*sizeof(Node));
 }
 
@@ -140,7 +140,7 @@ bool HashTable<Key,Value>::exists(const Key& key) const
  * element.                                                                     *
  *******************************************************************************/
 template<class Key,class Value>
-Value& HashTable<Key,Value>::find(const Key& key) const
+Value& HashTable<Key,Value>::find(const Key& key)
 {
     int index = key.hash(m_size);
 
@@ -158,41 +158,85 @@ Value& HashTable<Key,Value>::find(const Key& key) const
 
 
 /********************************************************************************
- * Get a key iterator.                                                          *
+ * Get the first key.                                                           *
  *******************************************************************************/
 template<class Key, class Value>
-Iterator<Key> HashTable<Key,Value>::getKeys() const
+Key* HashTable<Key,Value>::getFirstKey()
 {
-    Iterator<Key> keyIt();
+    m_keyIdx = 0;
+    while(m_keyIdx < m_size && !m_values[m_keyIdx])
+        m_keyIdx++;
 
-    for(int i = 0; i < m_size; i++) {
-        Node *node = m_values[i];
-        while(node) {
-            keyIt->append(node->key);
-            node = node->next;
-        }
-    }
+    if(m_keyIdx == m_size)
+        return 0;
 
-    return keyIt;
+    m_keyIterator = m_values[m_keyIdx];
+    return &(m_keyIterator->key);
 }
 
 
 /********************************************************************************
- * Get a value iterator.                                                        *
+ * Get the next key.                                                            *
  *******************************************************************************/
-template<class Key, class Value>
-Iterator<Value> HashTable<Key,Value>::getValues() const
+template<class Key,class Value>
+Key* HashTable<Key,Value>::getNextKey()
 {
-    Iterator<Value> valueIt();
-
-    for(int i = 0; i < m_size; i++) {
-        Node *node = m_value[i];
-        while(node) {
-            valueIt->append(node->value);
-            node = node->next;
-        }
+    if(m_keyIterator->next) {
+        m_keyIterator = m_keyIterator->next;
+        return &(m_keyiterator->key);
     }
 
-    return valueIt;
+    m_keyIdx++;
+    while(m_keyIdx < m_size && !m_values[m_keyIdx])
+        m_keyIdx++;
+
+    if(m_keyIdx == m_size)
+        return 0;
+
+    m_keyIterator = m_values[m_keyIdx];
+    return &(m_keyIterator->key);
+}
+
+
+/********************************************************************************
+ * Get the first value.                                                         *
+ *******************************************************************************/
+template<class Key, class Value>
+Value* HashTable<Key,Value>::getFirstValue()
+{
+    m_valueIdx = 0;
+    while(m_valueIdx < m_size && !m_values[m_valueIdx])
+        m_valueIdx++;
+
+    if(m_valueIdx == m_size)
+        return 0;
+
+    m_valueIterator = m_values[m_valueIdx];
+    return &(m_valueIterator->value);
+}
+
+
+/********************************************************************************
+ * Get the next value                                                           *
+ *******************************************************************************/
+template<class Key,class Value>
+Value* HashTable<Key,Value>::getNextValue()
+{
+    if(m_valueIterator->next) {
+        m_valueIterator = m_valueIterator->next;
+        return &(m_valueiterator->value);
+    }
+
+    m_valueIdx++;
+    while(m_valueIdx < m_size && !m_values[m_valueIdx])
+        m_valueIdx++;
+
+    if(m_valueIdx == m_size)
+        return 0;
+
+    m_valueIterator = m_values[m_valueIdx];
+    return &(m_valueIterator->value);
+}
+
 } // namespace Utils
 } // namespace Pandora

@@ -82,14 +82,14 @@ namespace Pandora
                  *  \return
                  *      The address of the key. null if it's not found.
                  */
-                KEY* get(const KEY& key) const;
+                KEY* get(const KEY& key);
 
                 /**
                  *  Get the first entry of the set.
                  *  \return
                  *      The first entry of the set.
                  */
-                KEY* getFirst() const;
+                KEY* getFirst();
 
                 /**
                  *  Get the next entry of the set.
@@ -98,7 +98,7 @@ namespace Pandora
                  *  \note
                  *      getFirst() must have been called for this to work.
                  */
-                KEY* getNext() const;
+                KEY* getNext();
             private:
                 class HashItem
                 {
