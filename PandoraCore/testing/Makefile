@@ -47,18 +47,18 @@
 APP      := test
 CXX      := g++
 LD       := g++
-SOURCES  := $(wildcard *.cpp ../src/*.cpp)
+SOURCES  := ../src/PandoraMath.cpp MathTest.cpp ../src/PandoraMatrix2.cpp Matrix2Test.cpp ../src/PandoraMatrix3.cpp Matrix3Test.cpp ../src/PandoraMatrix4.cpp Matrix4Test.cpp ../src/PandoraVector2.cpp Vector2Test.cpp ../src/PandoraVector3.cpp Vector3Test.cpp ../src/PandoraVector4.cpp Vector4Test.cpp ../src/PandoraVector.cpp VectorTest.cpp ../src/PandoraSet.cpp SetTest.cpp ../src/PandoraStack.cpp StackTest.cpp ../src/PandoraList.cpp ListTest.cpp ../src/PandoraString.cpp StringTest.cpp test.cpp
 OBJECTS  := $(patsubst %.cpp, %.o, $(SOURCES))
 
-CXXFLAGS := $(CXXFLAGS) -Wall -pedantic -g2 -DDEBUG
-LDFLAGS  := $(LDFLAGS) -lcppunit -ldl
+CXXFLAGS := $(CXXFLAGS) -Wall -pedantic -g2 -DDEBUG -I../include
+LDFLAGS  := $(LDFLAGS) -lcppunit -ldl -lm
 
 .PHONY: all depend clean
 
 all: depend $(APP)
 
 $(APP): $(OBJECTS)
-	$(LD) -o $(APP) $(LDFLAGS) $(OBJECT2)
+	$(LD) -o $(APP) $(LDFLAGS) $(OBJECTS)
 
 depend: make.dep
 

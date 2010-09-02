@@ -421,6 +421,29 @@ namespace Pandora
                  */
                 void toAxisAngle(Vector3<Real>& axis, Real& angle) const;
 
+                Matrix3& fromEulerAnglesXYZ(const Real& yaw, const Real& pitch, 
+                        const Real& roll);
+                Matrix3& fromEulerAnglesXZY(const Real& yaw, const Real& pitch, 
+                        const Real& roll);
+                Matrix3& fromEulerAnglesYXZ(const Real& yaw, const Real& pitch, 
+                        const Real& roll);
+                Matrix3& fromEulerAnglesYZX(const Real& yaw, const Real& pitch, 
+                        const Real& roll);
+                Matrix3& fromEulerAnglesZXY(const Real& yaw, const Real& pitch, 
+                        const Real& roll);
+                Matrix3& fromEulerAnglesZYX(const Real& yaw, const Real& pitch, 
+                        const Real& roll);
+
+
+                bool toEulerAnglesXYZ(Real& yaw, Real& pitch, Real& roll);
+                bool toEulerAnglesXZY(Real& yaw, Real& pitch, Real& roll);
+                bool toEulerAnglesYXZ(Real& yaw, Real& pitch, Real& roll);
+                bool toEulerAnglesYZX(Real& yaw, Real& pitch, Real& roll);
+                bool toEulerAnglesZXY(Real& yaw, Real& pitch, Real& roll);
+                bool toEulerAnglesZYX(Real& yaw, Real& pitch, Real& roll);
+
+
+
                 /**
                  *  Orhtonormalize the matrix.
                  *  \return

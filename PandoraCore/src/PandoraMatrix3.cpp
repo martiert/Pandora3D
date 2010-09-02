@@ -6,7 +6,7 @@ Purpose : Implementation of the Matrix3 class in Pandora 3D.
 
 Creation Date : 2010-06-26
 
-Last Modified : man 30-08-2010 10:38:30 CEST
+Last Modified : Thu 02 Sep 2010 15:11:03 CEST
 
 Created By :  Martin Ertsaas (martiert@student.matnat.uio.no)
 -------------------------------------------------------------------------------
@@ -666,7 +666,7 @@ Matrix3<Real>& Matrix3<Real>::fromEulerAnglesYZX(const Real& yaw, const Real& pi
 
 
 template<class Real>
-Matrix3& fromEulerAnglesZXY(const Real& yaw, const Real& pitch, const Real& roll)
+Matrix3<Real>& Matrix3<Real>::fromEulerAnglesZXY(const Real& yaw, const Real& pitch, const Real& roll)
 {
     Real cos, sin;
 

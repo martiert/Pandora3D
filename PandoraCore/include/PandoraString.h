@@ -22,6 +22,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 
 #include <string.h>
 #include <stddef.h>
+#include <assert.h>
 
 namespace Pandora
 {
@@ -42,7 +43,7 @@ namespace Pandora
                  *  \param
                  *      string - The string we wish to copy.
                  */
-                String(const String string);
+                String(const String& string);
 
                 /**
                  *  Destructor.

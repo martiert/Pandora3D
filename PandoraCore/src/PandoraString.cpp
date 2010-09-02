@@ -6,7 +6,7 @@ Purpose :
 
 Creation Date : 2010-08-27
 
-Last Modified : Fri 27 Aug 2010 16:33:26 CEST
+Last Modified : Thu 02 Sep 2010 15:16:48 CEST
 
 Created By :  Martin Ertsaas (martiert@student.matnat.uio.no)
 -------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ String::String(const char* string)
 /********************************************************************************
  * Constructor.                                                                 *
  *******************************************************************************/
-String::String(const String string)
+String::String(const String& string)
 {
     m_len = string.length();
     memcpy((void*)m_string, (void*)string.c_str(), m_len + 1);
@@ -124,7 +124,7 @@ unsigned int String::length() const
 int String::substr(const char* substring) const
 {
     int badCharShift[256];
-    int sublen = substring.length();
+    int sublen = strlen(substring);
 
     for(int i = 0; i < 256; i++)
         badCharShift[i] = sublen;
@@ -144,7 +144,7 @@ int String::substr(const char* substring) const
             }
         }
 
-        offset += basCharShift[ (int)m_string[offset + last] ];
+        offset += badCharShift[ (int)m_string[offset + last] ];
     }
 
     return -1;
@@ -156,5 +156,8 @@ int String::substr(const char* substring) const
  *******************************************************************************/
 int String::substr(const String substring) const
 {
-    return substr(substring.c_ptr());
+    return substr(substring.c_str());
 }
+
+} // namespace Utils
+} // namespace Pandora

@@ -6,7 +6,7 @@
 #include <cppunit/TestCaller.h>
 #include <cppunit/ui/text/TestRunner.h>
 
-#include "../include/PandoraMatrix2.h"
+#include <PandoraMatrix2.h>
 
 class Matrix2Test : public CppUnit::TestCase
 {

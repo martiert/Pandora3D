@@ -1,26 +1,23 @@
-#ifndef STACKTEST_H
-#define STACKTEST_H
+#ifndef STRINGTEST_H
+#define STRINGTEST_H
 
 #include <cppunit/TestCase.h>
 #include <cppunit/TestSuite.h>
 #include <cppunit/TestCaller.h>
 #include <cppunit/ui/text/TestRunner.h>
 
-#include <PandoraStack.h>
+#include <PandoraString.h>
 
-class StackTest : public CppUnit::TestCase
+class StringTest : public CppUnit::TestCase
 {
     public:
-        StackTest() : TestCase("StackTest") {}
+        StringTest() : TestCase("StringTest") {}
         void init();
         void testConstructor();
-        void testStack();
 
         static CppUnit::Test *suite();
         void setUp();
         void tearDown();
     private:
-        Pandora::Utils::Stack<int> *intStack;
-        Pandora::Utils::Stack<float> *floatStack;
 };
 #endif

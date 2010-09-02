@@ -6,7 +6,7 @@
 #include <cppunit/TestCaller.h>
 #include <cppunit/ui/text/TestRunner.h>
 
-#include "../include/PandoraSet.h"
+#include <PandoraSet.h>
 
 class SetTest : public CppUnit::TestCase
 {

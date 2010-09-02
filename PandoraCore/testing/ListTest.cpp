@@ -6,9 +6,9 @@ Purpose : Testing the List class of Pandora3D.
 
 Creation Date : 2010-01-26
 
-Last Modified : ti. 11. mai 2010 kl. 11.30 +0200
+Last Modified : Thu 02 Sep 2010 15:20:40 CEST
 
-Created By :  Martin Ertsås
+Created By :  Martin Ertsaas
 -------------------------------------------------------------------------------
 */
 

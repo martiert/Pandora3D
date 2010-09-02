@@ -9,7 +9,7 @@
 #include <cppunit/ui/text/TestRunner.h>
 #include <math.h>
 
-#include "../include/PandoraMath.h"
+#include <PandoraMath.h>
 
 class MathTest : public CppUnit::TestCase
 {
