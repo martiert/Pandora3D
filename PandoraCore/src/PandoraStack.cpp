@@ -6,13 +6,13 @@ Purpose : Implementation of the Stack class used in Pandora3D
 
 Creation Date : 2010-01-24
 
-Last Modified : to. 26. aug. 2010 kl. 22.02 +0200
+Last Modified : to. 02. sep. 2010 kl. 16.24 +0200
 
 Created By : Martin Ertsaas (martiert@student.matnat.uio.no)
 --------------------------------------------------------------------------------
 */
 
-#include "../include/PandoraStack.h"
+#include <PandoraStack.h>
 
 namespace Pandora
 {

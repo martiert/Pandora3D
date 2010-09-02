@@ -6,13 +6,13 @@ Purpose : Implementation of the Vector4 class.
 
 Creation Date : 2010-01-31
 
-Last Modified : to. 26. aug. 2010 kl. 21.44 +0200
+Last Modified : to. 02. sep. 2010 kl. 16.25 +0200
 
 Created By :  Martin Ertsaas (martiert@student.matnat.uio.no)
 --------------------------------------------------------------------------------
 */
 
-#include "../include/PandoraVector4.h"
+#include <PandoraVector4.h>
 
 namespace Pandora
 {

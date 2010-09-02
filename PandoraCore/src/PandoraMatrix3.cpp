@@ -6,13 +6,13 @@ Purpose : Implementation of the Matrix3 class in Pandora 3D.
 
 Creation Date : 2010-06-26
 
-Last Modified : Thu 02 Sep 2010 15:11:03 CEST
+Last Modified : to. 02. sep. 2010 kl. 16.23 +0200
 
 Created By :  Martin Ertsaas (martiert@student.matnat.uio.no)
 -------------------------------------------------------------------------------
 */
 
-#include "../include/PandoraMatrix3.h"
+#include <PandoraMatrix3.h>
 
 namespace Pandora
 {
