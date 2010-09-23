@@ -1,5 +1,5 @@
-# $Id: Makefile,v 1.4 2008/03/08 22:53:55 dyken Exp $
-# 
+# $Id: Makefile,v 1.3 2007/09/05 14:28:20 chrischu Exp $
+#
 # Sample Makefile for a single executable with all sources in one directory.
 #
 # Authors: Christopher Dyken, <erikd at ifi.uio.no>
@@ -44,14 +44,14 @@
 # -l<lib>                       Link with library
 # -L<dir>                       Also look in <dir> for libraries
 
-APP      := test
+APP      := main
 CXX      := g++
 LD       := g++
-SOURCES  := ../src/PandoraMath.cpp MathTest.cpp ../src/PandoraMatrix2.cpp Matrix2Test.cpp ../src/PandoraMatrix3.cpp Matrix3Test.cpp ../src/PandoraMatrix4.cpp Matrix4Test.cpp ../src/PandoraVector2.cpp Vector2Test.cpp ../src/PandoraVector3.cpp Vector3Test.cpp ../src/PandoraVector4.cpp Vector4Test.cpp ../src/PandoraVector.cpp VectorTest.cpp ../src/PandoraSet.cpp SetTest.cpp ../src/PandoraStack.cpp StackTest.cpp ../src/PandoraList.cpp ListTest.cpp ../src/PandoraString.cpp StringTest.cpp test.cpp
+SOURCES  := $(wildcard *.cpp ../src/*.cpp)
 OBJECTS  := $(patsubst %.cpp, %.o, $(SOURCES))
 
 CXXFLAGS := $(CXXFLAGS) -Wall -pedantic -g2 -DDEBUG -I../include
-LDFLAGS  := $(LDFLAGS) -lcppunit -ldl -lm
+LDFLAGS  := $(LDFLAGS) -lm -lGL -L/usr/X11R6/lib -lGLU -lglut -lXi -lXmu -lcppunit
 
 .PHONY: all depend clean
 
@@ -63,12 +63,14 @@ $(APP): $(OBJECTS)
 depend: make.dep
 
 make.dep:
+#	touch $@
+#	makedepend -f$@ -- $(CXXFLAGS) -- $(SOURCES)
 	for file in $(SOURCES); do $(CXX) $(CXXFLAGS) -M $$file >> $@; done
 
 include make.dep
 
 clean:
-	rm -f $(OBJECTS) *.a *~ core
+	rm -f *.o *.a *~ core $(APP)
 
 distclean: clean
-	rm -f make.dep *.bak $(APP)
+	rm -f make.dep *.bak
