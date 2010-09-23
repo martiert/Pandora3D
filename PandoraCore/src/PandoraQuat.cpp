@@ -6,13 +6,13 @@ Purpose : Implementation of the quaternion class in Pandora 3D.
 
 Creation Date : 2010-08-09
 
-Last Modified : to. 26. aug. 2010 kl. 21.33 +0200
+Last Modified : to. 02. sep. 2010 kl. 16.24 +0200
 
 Created By :  Martin Ertsaas (martiert@student.matnat.uio.no)
 --------------------------------------------------------------------------------
 */
 
-#include "../include/PandoraQuat.h"
+#include <PandoraQuat.h>
 
 namespace Pandora
 {

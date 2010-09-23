@@ -2,8 +2,6 @@
 
 project(PandoraCore)
 
-include(PrecompiledHeader)
-
 set (HEADER_FILES
         include/PandoraMath.h
         include/PandoraVector2.h

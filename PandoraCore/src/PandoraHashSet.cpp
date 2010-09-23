@@ -6,13 +6,13 @@ Purpose :
 
 Creation Date : 2010-08-30
 
-Last Modified : ma. 30. aug. 2010 kl. 14.25 +0200
+Last Modified : to. 02. sep. 2010 kl. 16.23 +0200
 
 Created By :  Martin Ertsaas (martiert@student.matnat.uio.no)ås
 --------------------------------------------------------------------------------
 */
 
-#include "../include/PandoraHashSet.h"
+#include <PandoraHashSet.h>
 
 namespace Pandora
 {

@@ -6,13 +6,13 @@ Purpose :
 
 Creation Date : 2010-08-27
 
-Last Modified : Thu 02 Sep 2010 15:16:48 CEST
+Last Modified : to. 02. sep. 2010 kl. 16.24 +0200
 
 Created By :  Martin Ertsaas (martiert@student.matnat.uio.no)
 -------------------------------------------------------------------------------
 */
 
-#include "../include/PandoraString.h"
+#include <PandoraString.h>
 
 namespace Pandora
 {
