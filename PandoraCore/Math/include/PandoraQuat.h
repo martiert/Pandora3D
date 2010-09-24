@@ -71,7 +71,7 @@ namespace Pandora
                  *  \param
                  *      quat - The quaternion to copy.
                  */
-                Quat(const Quaternion& quat);
+                Quat(const Quat& quat);
 
                 /**
                  *  Make a quaternion from a 3D rotation matrix.
@@ -236,16 +236,6 @@ namespace Pandora
                  */
                 Matrix3<Real> toRotationMatrix() const;
 
-                /*
-                 *  Get the rotation matrix from this quaternion.
-                 *  \return
-                 *      The rotation matrix this quaternion represents.
-                 *  \note
-                 *      This only works if the quaternion is already a
-                 *      unit quaternion.
-                 */
-                Matrix3<Real> toRotationMatrix() const;
-
                 /**
                  *  Make this quaternion from a rotation matrix.
                  *  \param
@@ -253,7 +243,7 @@ namespace Pandora
                  *  \return
                  *      This quaternion.
                  */
-                Quat& fromRotationMatrix();
+                Quat& fromRotationMatrix(const Matrix3<Real>& mat);
 
                 /**
                  *  Check if two quaternions are equal.

@@ -6,7 +6,7 @@ Purpose : Implementation of the quaternion class in Pandora 3D.
 
 Creation Date : 2010-08-09
 
-Last Modified : to. 02. sep. 2010 kl. 16.24 +0200
+Last Modified : Fri Sep 24 15:56:31 2010
 
 Created By :  Martin Ertsaas (martiert@student.matnat.uio.no)
 --------------------------------------------------------------------------------
@@ -104,7 +104,7 @@ Quat<Real>& Quat<Real>::operator=(const Quat<Real>& quat)
 {
     w = quat.w;
     imag = quat.imag;
-    return *this
+    return *this;
 }
 
 
@@ -167,7 +167,7 @@ Quat<Real> Quat<Real>::operator*(const Quat<Real>& quat) const
 template<class Real>
 Quat<Real>& Quat<Real>::operator+=(const Quat<Real>& quat)
 {
-    (*this) w= (*this) + quat;
+    (*this) = (*this) + quat;
     return (*this);
 }
 
@@ -284,21 +284,6 @@ Matrix3<Real> Quat<Real>::toRotationMatrix() const
     return tmp;
 }
 
-
-/********************************************************************************
- * Make a rotation matrix.                                                      *
- *******************************************************************************/
-template<class Real>
-Matrix4<Real> Quat<Real>::toRotationMatrix() const
-{
-    assert( length() == 1.0 && "Quat<Real>::toRotationMatrix: Quaternion needs to be unit length");
-    Matrix3<Real> tmp = toRotationMatrix();
-    Matrix4<Real> ans(tmp);
-
-    return ans;
-}
-
-
 /********************************************************************************
  * Make quaternion from a 3D matrix.                                            *
  *******************************************************************************/
@@ -327,7 +312,7 @@ Quat<Real>& Quat<Real>::fromRotationMatrix(const Matrix3<Real>& mat)
         int j = (i+1) % 3;
         int k = (j+1) % 3;
 
-        root = Math<Real>:Sqrt( mat(i,i) - rot(j,j) - rot(k,k) + 1.0);
+        root = Math<Real>::Sqrt(mat(i,i) - mat(j,j) - mat(k,k) + 1.0);
         imag[i] = 0.5*root;
         root = 0.5/root;
         w = (mat(k,j) - mat(j,k))*root;

@@ -6,7 +6,7 @@ Purpose : Implementation of the Math class in Pandora.
 
 Creation Date : 2010-01-30
 
-Last Modified : to. 02. sep. 2010 kl. 16.23 +0200
+Last Modified : fr. 24. sep. 2010 kl. 15.52 +0200
 
 Created By :  Martin Ertsaas (martiert@student.matnat.uio.no)
 -------------------------------------------------------------------------------
@@ -220,7 +220,7 @@ Real Math<Real>::Mod(Real x, Real y)
 template<class Real>
 Real Math<Real>::Sqrt(Real value)
 {
-    return (Real) sqrt(value);
+    return (Real) sqrtf(value);
 }
 
 
