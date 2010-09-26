@@ -11,5 +11,4 @@ set(src src/PandoraMath.cpp
         src/PandoraMatrix4.cpp
         src/PandoraQuat.cpp)
 
-add_library(PandoraMath
-        STATIC ${src})
+add_library(PandoraMath SHARED ${src})

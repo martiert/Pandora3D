@@ -11,4 +11,4 @@ set(src src/PandoraSet.cpp
         src/PandoraVector.cpp)
 
 add_library(PandoraSystem
-        STATIC ${src})
+    SHARED ${src})
