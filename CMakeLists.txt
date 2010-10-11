@@ -1,9 +1,10 @@
 #Top-Level CmakeLists.txt
-#cmake_minimum_required(VERSION 2.6)
+# Needs at least 2.6.3 for ctest support
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6.3)
 
-project(Pandora3D)
+PROJECT(PANDORA3D)
 
-set(Pandora3D_VERSION_MAJOR 0)
-set(Pandora3D_VERSION_MINOR 1)
+SET(PANDORA3D_VERSION_MAJOR 0)
+SET(PAMDORA3D_VERSION_MINOR 1)
 
-add_subdirectory(PandoraCore)
+ADD_SUBDIRECTORY(PandoraCore)

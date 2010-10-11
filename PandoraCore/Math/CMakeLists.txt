@@ -1,8 +1,8 @@
-project(PandoraMath)
+PROJECT(PANDORAMATH)
 
-include_directories(include)
+INCLUDE_DIRECTORIES(include)
 
-set(src src/PandoraMath.cpp
+SET(src src/PandoraMath.cpp
         src/PandoraVector2.cpp
         src/PandoraVector3.cpp
         src/PandoraVector4.cpp
@@ -11,4 +11,4 @@ set(src src/PandoraMath.cpp
         src/PandoraMatrix4.cpp
         src/PandoraQuat.cpp)
 
-add_library(PandoraMath SHARED ${src})
+ADD_LIBRARY(PandoraMath STATIC ${src})

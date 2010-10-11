@@ -1,6 +1,7 @@
 #Main CmakeLists.txt file
+PROJECT(PANDORACORE)
 
-project(PandoraCore)
+INCLUDE_DIRECTORIES(System)
 
-add_subdirectory(Math)
-add_subdirectory(System)
+ADD_SUBDIRECTORY(Math)
+#ADD_SUBDIRECTORY(System)
