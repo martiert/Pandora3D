@@ -16,3 +16,5 @@ SET(src src/PandoraMath.cpp
         src/PandoraQuat.cpp)
 
 ADD_LIBRARY(PandoraMath STATIC ${src})
+
+ADD_SUBDIRECTORY(tests)
