@@ -1,7 +1,7 @@
 PROJECT(PANDORAMATH)
 
 IF(NOT LIBRARY_OUTPUT_PATH)
-    SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
+    SET(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 ENDIF(NOT LIBRARY_OUTPUT_PATH)
 
 INCLUDE_DIRECTORIES(include)
@@ -15,6 +15,6 @@ SET(src src/PandoraMath.cpp
         src/PandoraMatrix4.cpp
         src/PandoraQuat.cpp)
 
-ADD_LIBRARY(PandoraMath SHARED ${src})
+ADD_LIBRARY(PandoraMath STATIC ${src})
 
 ADD_SUBDIRECTORY(tests)
