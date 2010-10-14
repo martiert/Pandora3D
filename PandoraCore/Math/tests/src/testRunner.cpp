@@ -6,15 +6,23 @@ Purpose :
 
 Creation Date : 2010-10-14
 
-Last Modified : to. 14. okt. 2010 kl. 11.16 +0200
+Last Modified : Thu Oct 14 13:47:49 2010
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
 */
 
 #include <boost/test/unit_test.hpp>
+using boost::unit_test_framework::test_suite;
 
-int main(int argc, char** argv)
+#include "Vector2_test.h"
+
+//Test program entry point.
+test_suite* init_unit_test_suite(int argc, char** args)
 {
-    return 0;
+    test_suite* top_test_suite = BOOST_TEST_SUITE("Master test suite");
+
+    top_test_suite->add(new Vector2_test_suite());
+
+    return top_test_suite;
 }
