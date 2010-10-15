@@ -13,7 +13,7 @@ class Vector2_test
         void test_construct();
 
     private:
-        Pandora::Math::Vec2f vec1, vec2, vec3;
+        Pandora::Math::Vec2f vec1;
 };
 
 class Vector2_test_suite : public boost::unit_test_framework::test_suite

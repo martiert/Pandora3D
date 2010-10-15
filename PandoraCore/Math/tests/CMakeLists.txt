@@ -1,4 +1,5 @@
 PROJECT(MATHTESTS)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6.3)
 
 IF(NOT LIBRARY_OUTPUT_PATH)
     SET(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
@@ -8,7 +9,7 @@ IF(NOT EXECUTABLE_OUTPUT_PATH)
     SET(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 ENDIF(NOT EXECUTABLE_OUTPUT_PATH)
 
-SET(src src/testRunner.cpp
+SET(Math_tests_src src/testRunner.cpp
         src/Vector2_test.cpp
 #        src/Vector3_test.cpp
 #        src/Vector4_test.cpp
@@ -28,8 +29,5 @@ INCLUDE_DIRECTORIES(include ${Boost_INCLUDE_DIR})
 LINK_DIRECTORIES(${Boost_LIBRARIES} ${LIBRARY_OUTPUT_PATH})
 
 #Build link and make as test
-ADD_EXECUTABLE(MathTests ${src})
-ADD_DEPENDENCIES(MathTests PandoraMath)
+ADD_EXECUTABLE(MathTests ${Math_tests_src})
 TARGET_LINK_LIBRARIES(MathTests ${Boost_LIBRARIES} PandoraMath)
-
-#ADD_TEST(MathTests ${EXECUTABLE_OUTPUT_PATH}/MathTests)
