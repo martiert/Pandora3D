@@ -23,4 +23,4 @@ SET(Math_src src/PandoraMath.cpp
 
 ADD_LIBRARY(PandoraMath STATIC ${Math_src})
 
-ADD_SUBDIRECTORY(tests)
+#ADD_SUBDIRECTORY(tests)

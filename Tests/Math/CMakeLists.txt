@@ -1,4 +1,4 @@
-PROJECT(MATHTESTS)
+PROJECT(PANDORAMATHTESTS)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6.3)
 
 IF(NOT LIBRARY_OUTPUT_PATH)
@@ -21,13 +21,23 @@ SET(Math_tests_src src/testRunner.cpp
         )
 
 # Find Boost unit testing
-SET(Boost_USE_STATIC_LIBS ON)
-SET(Boost_USE_MULTITHREADED ON)
-FIND_PACKAGE(Boost 1.36.0 COMPONENTS unit_test_framework REQUIRED)
+FIND_PACKAGE(Boost REQUIRED COMPONENTS unit_test_framework)
 
-INCLUDE_DIRECTORIES(include ${Boost_INCLUDE_DIR})
-LINK_DIRECTORIES(${Boost_LIBRARIES} ${LIBRARY_OUTPUT_PATH})
+FIND_PATH(PANDORAMATH_INCLUDE_DIR PandoraMath.h PATHS
+    ../../PandoraCore/Math/include
+    DOC "Path to the directory where PandoraMath.h can be found")
+FIND_PATH(PANDORAMATH_LIB_DIR
+    NAMES
+    libPandoraMath.a
+    PandoraMath.lib
+    PATHS
+    ../../build/lib
+    ../../build/lib/Release
+    ../../build/lib/Debug
+    DOC "Path to directory where the PandoraMath library can be found")
 
-#Build link and make as test
-ADD_EXECUTABLE(MathTests ${Math_tests_src})
-TARGET_LINK_LIBRARIES(MathTests ${Boost_LIBRARIES} PandoraMath)
+INCLUDE_DIRECTORIES(
+    include
+    ${PANDORAMATH_INCLUDE_DIR}
+    ${Boost_INCLUDE_DIR}
+    )
