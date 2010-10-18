@@ -326,7 +326,9 @@ namespace Pandora
                  */
                 int compare(const Quat<Real>& quat) const;
 
-                static Quat IDENTITY;
+                static const Quat IDENTITY;
+                static const Quat ZERO;
+                static const Quat ONES;
         };
 
 #include "tmpl/PandoraQuat.tmpl"

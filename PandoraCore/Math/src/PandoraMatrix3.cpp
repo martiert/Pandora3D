@@ -6,22 +6,19 @@ Purpose : Implementation of the Matrix3 class in Pandora 3D.
 
 Creation Date : 2010-06-26
 
-Last Modified : ma. 18. okt. 2010 kl. 20.10 +0200
+Last Modified : ma. 18. okt. 2010 kl. 20.49 +0200
 
 Created By :  Martin Ertsaas (martiert@student.matnat.uio.no)
 -------------------------------------------------------------------------------
 */
 
-#include <PandoraMatrix3.h>
+#include "PandoraMatrix3.h"
 
 namespace Pandora
 {
     namespace Math
     {
 
-/********************************************************************************
- * Some special matrices.                                                       *
- *******************************************************************************/
 template<> const Matrix3<float> Matrix3<float>::ZERO(   0.0f, 0.0f, 0.0f,
                                                         0.0f, 0.0f, 0.0f,
                                                         0.0f, 0.0f, 0.0f);
@@ -42,6 +39,5 @@ template<> const Matrix3<double> Matrix3<double>::ONES( 1.0, 1.0, 1.0,
                                                         1.0, 1.0, 1.0,
                                                         1.0, 1.0, 1.0);
 
-
-} // namespace Math
+    } // namespace Math
 } // namespace Pandora

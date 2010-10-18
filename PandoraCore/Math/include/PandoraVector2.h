@@ -330,6 +330,12 @@ namespace Pandora
                 void print() const;
 #endif //DEBUG
 
+            public:
+                static const Vector2<Real> e1;
+                static const Vector2<Real> e2;
+                static const Vector2<Real> ZERO;
+                static const Vector2<Real> ONES;
+
             protected:
                 Real m_data[2];
 

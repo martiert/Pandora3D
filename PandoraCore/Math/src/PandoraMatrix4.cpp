@@ -6,22 +6,19 @@ Purpose : Implementation of the Matrix4 class in Pandora3D.
 
 Creation Date : 2010-06-26
 
-Last Modified : ma. 18. okt. 2010 kl. 20.10 +0200
+Last Modified : ma. 18. okt. 2010 kl. 20.49 +0200
 
 Created By :  Martin Ertsaas (martiert@student.matnat.uio.no)
 -------------------------------------------------------------------------------
 */
 
-#include <PandoraMatrix4.h>
+#include "PandoraMatrix4.h"
 
 namespace Pandora
 {
     namespace Math
     {
 
-/********************************************************************************
- * Some special matrices.                                                       *
- *******************************************************************************/
 template<> 
 const Matrix4<float> Matrix4<float>::ZERO(  0.0f, 0.0f, 0.0f, 0.0f,
                                             0.0f, 0.0f, 0.0f, 0.0f,
@@ -54,6 +51,5 @@ const Matrix4<double> Matrix4<double>::ONES(1.0, 1.0, 1.0, 1.0,
                                             1.0, 1.0, 1.0, 1.0,
                                             1.0, 1.0, 1.0, 1.0);
 
-
-} // namespace Math
+    } // namespace Math
 } // namespace Pandora

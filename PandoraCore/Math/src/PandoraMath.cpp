@@ -6,18 +6,19 @@ Purpose : Implementation of the Math class in Pandora.
 
 Creation Date : 2010-01-30
 
-Last Modified : ma. 18. okt. 2010 kl. 20.14 +0200
+Last Modified : ma. 18. okt. 2010 kl. 20.49 +0200
 
 Created By :  Martin Ertsaas (martiert@student.matnat.uio.no)
 -------------------------------------------------------------------------------
 */
 
-#include <PandoraMath.h>
+#include "PandoraMath.h"
 
 namespace Pandora
 {
     namespace Math
     {
+
 template<> const float Math<float>::EPSILON = FLT_EPSILON;
 template<> const float Math<float>::MAX_REAL = FLT_MAX;
 template<> const float Math<float>::PI = (float) (4.0*atan(1.0));
@@ -38,5 +39,5 @@ template<> const double Math<double>::INV_TWO_PI = 1.0/Math<double>::TWO_PI;
 template<> const double Math<double>::DEG_TO_RAD =Math<double>::PI/180.0;
 template<> const double Math<double>::RAD_TO_DEG = 180.0/Math<double>::PI;
 
-} // namespace Math
+    } // namespace Math
 } // namespace Pandora
