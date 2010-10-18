@@ -33,3 +33,4 @@ LINK_DIRECTORIES(
 
 ADD_EXECUTABLE(MathTests ${Math_tests_src})
 TARGET_LINK_LIBRARIES(MathTests ${Boost_LIBRARIES} PandoraMath)
+ADD_TEST(MathTest "${EXECUTABLE_OUTPUT_PATH}/MathTests")
