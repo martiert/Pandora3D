@@ -14,6 +14,7 @@ SET(Math_tests_src src/testRunner.cpp
         )
 
 # Find Boost unit testing
+SET(Boost_USE_STATIC_LIBS ON)
 FIND_PACKAGE(Boost REQUIRED COMPONENTS unit_test_framework)
 
 FIND_PATH(PANDORAMATH_INCLUDE_DIR PandoraMath.h PATHS
