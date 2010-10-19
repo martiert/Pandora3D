@@ -6,7 +6,7 @@ Purpose :
 
 Creation Date : 2010-10-14
 
-Last Modified : ma. 18. okt. 2010 kl. 22.22 +0200
+Last Modified : ti. 19. okt. 2010 kl. 11.02 +0200
 
 Created By :  Martin Ertsaas (martiert@student.matnat.uio.no)
 -------------------------------------------------------------------------------
@@ -40,6 +40,7 @@ void Vector2_test::test_construct()
 void Vector2_test::test_equality()
 {
     BOOST_CHECK(vec1 != vec3);
+    BOOST_CHECK(vec1 < vec3);
 }
 
 void Vector2_test::test_addition()
