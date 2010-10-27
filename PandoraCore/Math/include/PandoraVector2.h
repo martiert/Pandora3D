@@ -312,7 +312,7 @@ namespace Pandora
                  *      A scalar which is this vector dot multiplied with the
                  *      perpendicular to vec.
                  */
-                Real dotPerp(const Vector2& vec) const;
+                Vector2 dotPerp(const Vector2& vec) const;
 
                 /**
                  *  Compute a gram-schmidt orthonormalization of two vectors.
