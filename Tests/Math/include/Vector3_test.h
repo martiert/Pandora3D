@@ -20,7 +20,7 @@ class Vector3_test
         void test_aritmetic();
 
     private:
-        Pandora::Math::Vec3f vec1, vec2, vec3;
+        Pandora::Math::Vec3f vec1, vec2, vec3, vec4;
 };
 
 class Vector3_test_suite : public boost::unit_test_framework::test_suite

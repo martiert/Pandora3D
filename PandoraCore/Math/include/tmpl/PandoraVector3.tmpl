@@ -348,15 +348,7 @@ Vector3<Real> operator*(const Real& scalar, const Vector3<Real>& vec)
 template<class Real>
 int Vector3<Real>::compare(const Vector3<Real>& vec) const
 {
-    for(int i = 0; i < 3; i++) {
-        if(Math<Real>::Abs(m_data[i] - vec[i]) >= Math<Real>::EPSILON) {
-            if(m_data[i] > vec[i])
-                return 1;
-            return -1;
-        }
-    }
-
-    return 0;
+    return memcmp(m_data, vec.m_data, 3*sizeof(Real));
 }
 
 
