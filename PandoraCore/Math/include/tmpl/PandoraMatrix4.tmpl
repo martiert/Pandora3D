@@ -498,7 +498,6 @@ Matrix4<Real> Matrix4<Real>::transpose() const
 
 /********************************************************************************
  * Find the cofactor matrix of this matrix.                                     *
- * TODO: Simplify this implementation.
  *******************************************************************************/
 template<class Real>
 Matrix4<Real> Matrix4<Real>::cofactor() const
@@ -675,15 +674,7 @@ Matrix4<Real> operator*(const Real scalar, const Matrix4<Real>& mat)
 template<class Real>
 int Matrix4<Real>::compare(const Matrix4<Real>& mat) const
 {
-    for(int i = 0; i < 16; i++) {
-        if(Math<Real>::Abs(m_data[i] - mat[i]) >= Math<Real>::EPSILON) {
-            if(m_data[i] < mat[i])
-                return -1;
-            return 1;
-        }
-    }
-
-    return 0;
+    return memcmp(m_data, mat.m_data, 16*sizeof(Real));
 }
 
 

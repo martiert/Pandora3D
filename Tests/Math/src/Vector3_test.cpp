@@ -6,7 +6,7 @@ Purpose :
 
 Creation Date : 2010-10-14
 
-Last Modified : to. 28. okt. 2010 kl. 18.01 +0200
+Last Modified : lø. 13. nov. 2010 kl. 17.09 +0100
 
 Created By :  Martin Ertsaas (martiert@student.matnat.uio.no)
 -------------------------------------------------------------------------------
@@ -82,9 +82,45 @@ void Vector3_test::test_addition()
 void Vector3_test::test_multiplication()
 {
     printf("\tTesting Vec3f multiplication\n");
+
+    float tmp_scalar = vec1 * vec2;
+    BOOST_CHECK( tmp_scalar == vec1[0]*vec2[0] + vec1[1]*vec2[1] + vec1[2]*vec2[2] );
+
+    Vec3f tmp = vec1 * 2.0f;
+    BOOST_CHECK( tmp[0] == vec1[0]*2.0f );
+    BOOST_CHECK( tmp[1] == vec1[1]*2.0f );
+    BOOST_CHECK( tmp[2] == vec1[2]*2.0f );
+
+    vec1 *= 2.0f;
+    BOOST_CHECK( vec1 == tmp );
+
+    tmp = vec1 / 2.0f;
+    BOOST_CHECK( tmp[0] == vec1[0]/2.0f );
+    BOOST_CHECK( tmp[1] == vec1[1]/2.0f );
+    BOOST_CHECK( tmp[2] == vec1[2]/2.0f );
+
+    vec1 /= 2.0f;
+    BOOST_CHECK( tmp == vec1 );
 }
 
 void Vector3_test::test_aritmetic()
 {
     printf("\tTesting Vec3f aritmetic\n");
+
+    BOOST_CHECK( vec1.length() == Pandora::Math::Math<float>::Sqrt(vec1*vec1) );
+    BOOST_CHECK( vec1.lengthSquared() == vec1*vec1 );
+
+    BOOST_CHECK( vec2.length() != 1.0 );
+    vec2.normalize();
+    BOOST_CHECK( Pandora::Math::Math<float>::Abs(vec2.length() - 1.0f) < Pandora::Math::Math<float>::EPSILON );
+
+    Vec3f tmp = vec1.cross(vec2);
+    BOOST_CHECK( tmp[0] == vec1[1]*vec2[2] - vec1[2]*vec2[1] );
+    BOOST_CHECK( tmp[1] == vec1[2]*vec2[0] - vec1[0]*vec2[2] );
+    BOOST_CHECK( tmp[2] == vec1[0]*vec2[1] - vec1[1]*vec2[0] );
+
+    Vec3f::orthonormalize(vec1, vec2, tmp);
+    BOOST_CHECK( vec1*vec2 == 0.0f );
+    BOOST_CHECK( vec1*tmp == 0.0f );
+    BOOST_CHECK( vec2*tmp == 0.0f );
 }
