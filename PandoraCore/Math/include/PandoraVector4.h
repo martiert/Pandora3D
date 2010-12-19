@@ -330,7 +330,7 @@ namespace Pandora
          *      scalar*vec.
          */
         template<class Real>
-        Vector4<Real> operator*(const Real scalar, const Vector4<Real>& vec);
+        Vector4<Real> operator*(const Real& scalar, const Vector4<Real>& vec);
 
         /**
          *  Typedefs.

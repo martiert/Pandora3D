@@ -6,7 +6,7 @@ Purpose :
 
 Creation Date : 2010-10-14
 
-Last Modified : on. 03. nov. 2010 kl. 17.35 +0100
+Last Modified : sø. 19. des. 2010 kl. 12.58 +0100
 
 Created By :  Martin Ertsås
 -------------------------------------------------------------------------------
@@ -17,6 +17,7 @@ using boost::unit_test_framework::test_suite;
 
 #include "Vector2_test.h"
 #include "Vector3_test.h"
+#include "Vector4_test.h"
 
 //Test program entry point.
 test_suite* init_unit_test_suite(int argc, char** args)
@@ -25,6 +26,7 @@ test_suite* init_unit_test_suite(int argc, char** args)
 
     top_test_suite->add(new Vector2_test_suite());
     top_test_suite->add(new Vector3_test_suite());
+    top_test_suite->add(new Vector4_test_suite());
 
     return top_test_suite;
 }
