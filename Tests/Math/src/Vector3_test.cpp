@@ -17,7 +17,7 @@ Created By :  Martin Ertsaas (martiert@student.matnat.uio.no)
 using Pandora::Math::Vec3f;
 
 Vector3_test::Vector3_test()
-{    
+{
     float tmp[3] = {6.8, 2.1, 9.6};
     vec1 = Vec3f();
     vec2 = Vec3f(4.3, 6.4, 5.4);
@@ -27,7 +27,6 @@ Vector3_test::Vector3_test()
 
 void Vector3_test::test_construct()
 {
-    printf("\tTesting Vec3f constructors\n");
     BOOST_CHECK( vec1[0] == 1.0f );
     BOOST_CHECK( vec1[1] == 0.0f );
     BOOST_CHECK( vec1[2] == 0.0f );
@@ -44,8 +43,6 @@ void Vector3_test::test_construct()
 
 void Vector3_test::test_equality()
 {
-    printf("\tTesting Vec3f equality\n");
-
     BOOST_CHECK( vec2 == vec3 );
     BOOST_CHECK( vec1 != vec2 );
     BOOST_CHECK( vec1 < vec2 );
@@ -56,7 +53,6 @@ void Vector3_test::test_equality()
 
 void Vector3_test::test_addition()
 {
-    printf("\tTesting Vec3f addition\n");
     Vec3f tmp = vec1 + vec2;
     BOOST_CHECK( tmp[0] == vec1[0] + vec2[0] );
     BOOST_CHECK( tmp[1] == vec1[1] + vec2[1] );
@@ -81,8 +77,6 @@ void Vector3_test::test_addition()
 
 void Vector3_test::test_multiplication()
 {
-    printf("\tTesting Vec3f multiplication\n");
-
     float tmp_scalar = vec1 * vec2;
     BOOST_CHECK( tmp_scalar == vec1[0]*vec2[0] + vec1[1]*vec2[1] + vec1[2]*vec2[2] );
 
@@ -105,8 +99,6 @@ void Vector3_test::test_multiplication()
 
 void Vector3_test::test_aritmetic()
 {
-    printf("\tTesting Vec3f aritmetic\n");
-
     BOOST_CHECK( vec1.length() == Pandora::Math::Math<float>::Sqrt(vec1*vec1) );
     BOOST_CHECK( vec1.lengthSquared() == vec1*vec1 );
 

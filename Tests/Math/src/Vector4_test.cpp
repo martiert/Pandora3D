@@ -17,7 +17,7 @@ Created By :  Martin Ertsaas (martiert@student.matnat.uio.no)
 using Pandora::Math::Vec4f;
 
 Vector4_test::Vector4_test()
-{   
+{
     float arr[4] = {4.1f, 6.5f, 7.8f, 9.3f};
     vec1 = Vec4f(1.0f, 4.0f, 3.1f, 5.6f);
     vec2 = Vec4f(4.1f, 3.7f, 6.7f, 3.2f);
@@ -27,8 +27,6 @@ Vector4_test::Vector4_test()
 
 void Vector4_test::test_construct()
 {
-    printf("\tTesting Vec4f constructors\n");
-
     BOOST_ASSERT( vec1[0] == 1.0f );
     BOOST_ASSERT( vec1[1] == 4.0f );
     BOOST_ASSERT( vec1[2] == 3.1f );
@@ -54,8 +52,6 @@ void Vector4_test::test_construct()
 
 void Vector4_test::test_equality()
 {
-    printf("\tTesting Vec4f equality\n");
-
     Vec4f tmp = vec1;
     BOOST_ASSERT( vec1 == tmp );
     BOOST_ASSERT( vec1 >= vec3 );
@@ -67,7 +63,6 @@ void Vector4_test::test_equality()
 
 void Vector4_test::test_addition()
 {
-    printf("\tTesting Vec4f addition\n");
     Vec4f tmp = vec1 + vec4;
     BOOST_ASSERT( tmp[0] == vec1[0] + vec4[0] );
     BOOST_ASSERT( tmp[1] == vec1[1] + vec4[1] );
@@ -95,7 +90,6 @@ void Vector4_test::test_addition()
 
 void Vector4_test::test_multiplication()
 {
-    printf("\tTesting Vec4f multiplication\n");
     float squared = vec1*vec1;
     BOOST_ASSERT( squared == vec1.lengthSquared() );
 
@@ -103,7 +97,7 @@ void Vector4_test::test_multiplication()
     BOOST_ASSERT( vec3[1] == vec1[1]*0.45f );
     BOOST_ASSERT( vec3[2] == vec1[2]*0.45f );
     BOOST_ASSERT( vec3[3] == vec1[3]*0.45f );
- 
+
     Vec4f tmp = vec1 / 0.5f;
 
     BOOST_ASSERT( tmp[0] == vec1[0] / 0.5f );
@@ -125,8 +119,6 @@ void Vector4_test::test_multiplication()
 
 void Vector4_test::test_aritmetic()
 {
-    printf("\tTesting Vec4f aritmetic\n");
-
     BOOST_ASSERT( vec1.length() == Pandora::Math::Math<float>::Sqrt(vec1.lengthSquared()) );
 
     vec2.normalize();

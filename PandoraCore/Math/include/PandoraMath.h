@@ -2,16 +2,16 @@
 --------------------------------------------------------------------------------
 This source file is part of Pandora3D.
 
-This program is free software: you can redistribute it and/or modify it under 
-the terms of the GNU Lesser General Public License as published by the Free Software 
-Foundation. Either version 2 of the License, or (at your option) any later 
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU Lesser General Public License as published by the Free Software
+Foundation. Either version 2 of the License, or (at your option) any later
 version.
 
 This program comes without any warranty whatsoever, but under the hope that it
 will be useful. See the GNU Lesser  General Public License for more information.
 
-You should have received a copy of the GNU Lesser General Public License along 
-with this program; if not, write to the Free Software Foundation, Inc., 59 
+You should have received a copy of the GNU Lesser General Public License along
+with this program; if not, write to the Free Software Foundation, Inc., 59
 Temple Place - Suite 330, Boston, MA 02111-1307, USA, or go to
 http://www.gnu.org/copyleft/lesser.txt.
 --------------------------------------------------------------------------------
@@ -85,7 +85,7 @@ namespace Pandora
                  *  \return
                  *      The number of radians in the interval [0,\f$\pi\f$].
                  *  \note
-                 *      If the value is less then -1 we return \f$ \pi \f$, if 
+                 *      If the value is less then -1 we return \f$ \pi \f$, if
                  *      the value is larger then 1, we return 0.
                  */
                 static Real Acos(Real value);
@@ -98,8 +98,8 @@ namespace Pandora
                  *      The number of radians in the interval \f$
                  *      [-\frac{\pi}{2},\frac{\pi}{2}]\f$.
                  *  \note
-                 *      If the value is less then -1 we return \f$ 
-                 *      -\frac{\pi}{2}\f$, and if the value is larger then 1, 
+                 *      If the value is less then -1 we return \f$
+                 *      -\frac{\pi}{2}\f$, and if the value is larger then 1,
                  *      we return \f$\frac{\pi}{2}\f$.
                  */
                 static Real Asin(Real value);
@@ -109,7 +109,7 @@ namespace Pandora
                  *  \param
                  *      value - The tangent value.
                  *  \return
-                 *      The number of radians in the interval \f$ 
+                 *      The number of radians in the interval \f$
                  *      [-\frac{\pi}{2},\frac{\pi}{2}] \f$.
                  */
                 static Real Atan(Real value);
@@ -278,11 +278,33 @@ namespace Pandora
                  *  \param
                  *      seed - The seed to use. Optional. Defaults to 0.
                  *  \return
-                 *      A random number between [min,max). Including min, 
+                 *      A random number between [min,max). Including min,
                  *      excluding max.
                  */
-                static Real IntervalRandom(Real min, Real max, 
+                static Real IntervalRandom(Real min, Real max,
                         unsigned int seed = 0);
+
+                /**
+                 *  Find the maximum of two values.
+                 *  \param
+                 *      a - Value one.
+                 *  \param
+                 *      b - Value two.
+                 *  \return
+                 *      The largest of a and b.
+                 */
+                static Real Max(Real a, Real b);
+
+                /**
+                 *  Find the minimum of two values.
+                 *  \param
+                 *      a - Value one.
+                 *  \param
+                 *      b - Value two.
+                 *  \return
+                 *      The smallest of a and b.
+                 */
+                static Real Min(Real a, Real b);
         };
 
 #include "tmpl/PandoraMath.tmpl"

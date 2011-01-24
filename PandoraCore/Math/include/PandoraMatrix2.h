@@ -2,16 +2,16 @@
 --------------------------------------------------------------------------------
 This source file is part of Pandora3D.
 
-This program is free software: you can redistribute it and/or modify it under 
-the terms of the GNU General Public License as published by the Free Software 
-Foundation. Either version 2 of the License, or (at your option) any later 
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation. Either version 2 of the License, or (at your option) any later
 version.
 
 This program comes without any warranty whatsoever, but under the hope that it
 will be useful. See the GNU General Public License for more information.
 
-You should have received a copy of the GNU Lesser General Public License along 
-with this program; if not, write to the Free Software Foundation, Inc., 59 
+You should have received a copy of the GNU Lesser General Public License along
+with this program; if not, write to the Free Software Foundation, Inc., 59
 Temple Place - Suite 330, Boston, MA 02111-1307, USA, or go to
 http://www.gnu.org/copyleft/lesser.txt.
 --------------------------------------------------------------------------------
@@ -58,7 +58,7 @@ namespace Pandora
                  *  \param
                  *      d - Element in row two, column two.
                  */
-                Matrix2(const Real& a, const Real& b, 
+                Matrix2(const Real& a, const Real& b,
                         const Real& c, const Real& d);
 
                 /**
@@ -133,7 +133,7 @@ namespace Pandora
                  *  Set a row in our matrix from a vector.
                  *  \param
                  *      row - The row to change.
-                 *  \param  
+                 *  \param
                  *      vec - The vector to change it with.
                  */
                 void setRow(const int row, const Vector2<Real>& vec);
@@ -163,7 +163,7 @@ namespace Pandora
                  *  \return
                  *      Columns number col as a vector.
                  */
-                Vector2<Real> getColumn(const int col) const; 
+                Vector2<Real> getColumn(const int col) const;
 
                 /**
                  *  Assignment. Matrix to matrix.
@@ -202,7 +202,7 @@ namespace Pandora
                 /**
                  *  Matrix to matrix multiplication.
                  *  \param
-                 *      matrix - The matrix to multiply this matrix with from 
+                 *      matrix - The matrix to multiply this matrix with from
                  *      the right.
                  *  \return
                  *      This matrix multiplied with matrix.
@@ -257,15 +257,6 @@ namespace Pandora
                 Matrix2& operator*=(const Real& scalar);
 
                 /**
-                 *  Dot multiply this matrix with another matrix.
-                 *  \param
-                 *      mat - The matrix to multiply with.
-                 *  \return
-                 *      This matrix.
-                 */
-                Matrix2& operator*=(const Matrix2& mat);
-
-                /**
                  *  Divide this matrix with a scalar.
                  *  \param
                  *      scalar - The scalar to divide with.
@@ -293,7 +284,7 @@ namespace Pandora
                  *      This matrix dot multiplied with another matrix.
                  */
                 Matrix2 dot(const Matrix2& mat) const;
-    
+
                 /**
                  *  Get the determinant of this matrix.
                  *  \return
@@ -335,13 +326,13 @@ namespace Pandora
                 bool operator!=(const Matrix2& mat) const;
 
                 /**
-                 *  Check if this matrix is larger then or equal to another 
-                 *  matrix. That is, all element have to be larger then or 
+                 *  Check if this matrix is larger then or equal to another
+                 *  matrix. That is, all element have to be larger then or
                  *  equal.
                  *  \param
                  *      mat - The matrix to compare to.
                  *  \return
-                 *      True if all elements are equal, or the first element 
+                 *      True if all elements are equal, or the first element
                  *      that differ is larger then mat. False otherwise.
                  */
                 bool operator>=(const Matrix2& mat) const;
@@ -398,16 +389,6 @@ namespace Pandora
                  *      The trace of the matrix.
                  */
                 Real trace() const;
-
-                /**
-                 *  Eigenvalue decompose this matrix.
-                 *  \param
-                 *      lambda - The eigenvalues.
-                 *  \param
-                 *      v_mat - The eigenvectors in columnwise order.
-                 */
-                void eigenDecompose(Vector2<Real>& lambda, Matrix2& v_mat) const;
-
 #ifdef DEBUG
                 /**
                  *  Print put the matrix. Available only in DEBUG mode.

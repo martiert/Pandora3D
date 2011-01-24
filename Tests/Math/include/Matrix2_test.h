@@ -4,6 +4,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include "PandoraMatrix2.h"
+#include "PandoraVector2.h"
 #include "PandoraMath.h"
 
 class Matrix2_test

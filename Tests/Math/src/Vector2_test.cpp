@@ -17,7 +17,7 @@ Created By :  Martin Ertsaas (martiert@student.matnat.uio.no)
 using Pandora::Math::Vec2f;
 
 Vector2_test::Vector2_test()
-{    
+{
     float tmp[2] = {4.3f, 1.8f};
     vec1 = Vec2f(2.0f, 3.4f);
     vec2 = Vec2f(vec1);
@@ -26,7 +26,6 @@ Vector2_test::Vector2_test()
 
 void Vector2_test::test_construct()
 {
-    printf("\tTesting Vec2f constructors\n");
     BOOST_CHECK(vec1[0] == 2.0f);
     BOOST_CHECK(vec1[1] == 3.4f);
     BOOST_CHECK(vec2[0] == vec1[0]);
@@ -41,7 +40,6 @@ void Vector2_test::test_construct()
 
 void Vector2_test::test_equality()
 {
-    printf("\tTesting Vec2f equality\n");
     BOOST_CHECK(vec1 != vec3);
     BOOST_CHECK(vec1 < vec3);
     BOOST_CHECK(vec1 == vec2);
@@ -54,7 +52,6 @@ void Vector2_test::test_equality()
 
 void Vector2_test::test_addition()
 {
-    printf("\tTesting Vec2f addition\n");
     Vec2f tmp = vec1 + vec2;
     BOOST_CHECK(tmp[0] == vec1[0] + vec2[0]);
     BOOST_CHECK(tmp[1] == vec1[1] + vec2[1]);
@@ -74,7 +71,6 @@ void Vector2_test::test_addition()
 
 void Vector2_test::test_multiplication()
 {
-    printf("\tTesting Vec2f multiplication\n");
     float tmp = vec1 * vec2;
     BOOST_CHECK(tmp == (vec1[0]*vec2[0] + vec1[1]*vec2[1]));
 
@@ -99,7 +95,6 @@ void Vector2_test::test_multiplication()
 
 void Vector2_test::test_aritmetic()
 {
-    printf("\tTesting Vec2f aritmetic\n");
     BOOST_CHECK(vec1.length() == Pandora::Math::Math<float>::Sqrt(vec1 * vec1));
     BOOST_CHECK(vec1.lengthSquared() == vec1 * vec1);
     BOOST_CHECK(vec1 * vec1.perp() == 0);

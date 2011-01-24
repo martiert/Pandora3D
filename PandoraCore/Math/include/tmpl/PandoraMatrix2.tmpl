@@ -9,9 +9,9 @@ Matrix2<Real>::Matrix2()
 
 /********************************************************************************
  * Give four numbers to put in the matrix.                                      *
- *******************************************************************************/ 
+ *******************************************************************************/
 template<class Real>
-Matrix2<Real>::Matrix2(const Real& a, const Real& b, 
+Matrix2<Real>::Matrix2(const Real& a, const Real& b,
         const Real& c, const Real& d)
 {
     m_data[0] = a;
@@ -44,7 +44,7 @@ Matrix2<Real>::Matrix2(const Matrix2<Real>& matrix)
 
 /********************************************************************************
  * Implicit conversion to array.                                                *
- *******************************************************************************/ 
+ *******************************************************************************/
 template<class Real>
 Matrix2<Real>::operator Real *()
 {
@@ -53,8 +53,8 @@ Matrix2<Real>::operator Real *()
 
 
 /********************************************************************************
- * Implicit conversion to constant array.                                       * 
- *******************************************************************************/ 
+ * Implicit conversion to constant array.                                       *
+ *******************************************************************************/
 template<class Real>
 Matrix2<Real>::operator const Real *() const
 {
@@ -63,8 +63,8 @@ Matrix2<Real>::operator const Real *() const
 
 
 /********************************************************************************
- * Get index number i from the matrix.                                          * 
- *******************************************************************************/ 
+ * Get index number i from the matrix.                                          *
+ *******************************************************************************/
 template<class Real>
 Real& Matrix2<Real>::operator[](const ptrdiff_t i)
 {
@@ -75,19 +75,19 @@ Real& Matrix2<Real>::operator[](const ptrdiff_t i)
 
 
 /********************************************************************************
- * Return constant reference to index number i in the matrix.                   * 
- *******************************************************************************/ 
+ * Return constant reference to index number i in the matrix.                   *
+ *******************************************************************************/
 template<class Real>
 const Real Matrix2<Real>::operator[](const ptrdiff_t i) const
 {
-     assert( i < 4 && "Index out of bounds\n");   
+     assert( i < 4 && "Index out of bounds\n");
      return m_data[i];
 }
 
 
 /********************************************************************************
- * Get element in (row,col) from the matrix.                                    * 
- *******************************************************************************/ 
+ * Get element in (row,col) from the matrix.                                    *
+ *******************************************************************************/
 template<class Real>
 Real& Matrix2<Real>::operator()(const int row, const int col)
 {
@@ -98,8 +98,8 @@ Real& Matrix2<Real>::operator()(const int row, const int col)
 
 
 /********************************************************************************
- * Get constant refference to element (row,col) in the matrix.                  * 
- *******************************************************************************/ 
+ * Get constant refference to element (row,col) in the matrix.                  *
+ *******************************************************************************/
 template<class Real>
 const Real Matrix2<Real>::operator()(const int row, const int col) const
 {
@@ -187,7 +187,7 @@ Matrix2<Real> Matrix2<Real>::operator-() const
 template<class Real>
 Matrix2<Real> Matrix2<Real>::operator+(const Matrix2<Real>& matrix) const
 {
-    return Matrix2<Real>(m_data[0]+matrix[0], m_data[1]+matrix[1], 
+    return Matrix2<Real>(m_data[0]+matrix[0], m_data[1]+matrix[1],
             m_data[2]+matrix[2], m_data[3]+matrix[3]);
 }
 
@@ -270,18 +270,6 @@ template<class Real>
 Matrix2<Real>& Matrix2<Real>::operator*=(const Real& scalar)
 {
     *this = *this * scalar;
-    return *this;
-}
-
-
-/********************************************************************************
- * Dot multiplication.                                                          *
- *******************************************************************************/
-template<class Real>
-Matrix2<Real>& Matrix2<Real>::operator*=(const Matrix2<Real>& mat)
-{
-    m_data[0] *= mat[0]; m_data[1] *= mat[1];
-    m_data[2] *= mat[2]; m_data[3] *= mat[3];
     return *this;
 }
 
@@ -441,50 +429,6 @@ void Matrix2<Real>::orthonormalize()
     m_data[3] /= len;
 }
 
-
-/********************************************************************************
- * Eigenvalue decompose the matrix.                                             *
- * Algorithm from http://cds.caltech.edu/~andrea/research/sw/2x2_eigen.html     *
- *******************************************************************************/
-template<class Real>
-void Matrix2<Real>::eigenDecompose(Vector2<Real>& lambda, Matrix2<Real>& v_mat) 
-    const
-{
-    assert( m_data[0] == m_data[3] && 
-            "Mat2::eigenm_data[3]ecompose: Matrix is not symmetric" );
-
-    if(m_data[1]*m_data[2] < Math<Real>::EPSILON ) {
-        lambda[0] = m_data[0]; v_mat[0] = 1; v_mat[1] = 0;
-        lambda[1] = m_data[3]; v_mat[2] = 0; v_mat[3] = 1;
-        return;
-    }
-
-    double tr = m_data[0] + m_data[3];
-    double det = m_data[0] * m_data[3] - m_data[1] * m_data[2];
-    double S = Math<Real>::Sqrt( tr*tr/4 - det );
-    lambda[0] = tr/2 + S;
-    lambda[1] = tr/2 - S;
-
-    double SS = Math<Real>::Sqrt( Math<Real>::Max((m_data[0]-m_data[3])*(m_data[0]-m_data[3])/4 + m_data[1] * m_data[2], 0.0) );
-    if( m_data[0] - m_data[3] < 0 ) {
-        v_mat[0] = m_data[2];
-        v_mat[1] = - (m_data[0]-m_data[3])/2 + SS;
-        v_mat[2] = + (m_data[0]-m_data[3])/2 - SS;
-        v_mat[3] = m_data[1];
-    } else {
-        v_mat[2] = m_data[2];
-        v_mat[3] = - (m_data[0]-m_data[3])/2 - SS;
-        v_mat[0] = + (m_data[0]-m_data[3])/2 + SS;
-        v_mat[1] = m_data[1];
-    }
-
-    double n1 = Math<Real>::Sqrt(v_mat[0]*v_mat[0] + v_mat[1]*v_mat[1]);
-    v_mat[0] /= n1; v_mat[1] /= n1;
-    double n2 = Math<Real>::Sqrt(v_mat[2]*v_mat[2] + v_mat[3]*v_mat[3]);
-    v_mat[2] /= n2; v_mat[3] /= n2;
-}
-
-
 /********************************************************************************
  * So we can write Real * Matrix                                                *
  *******************************************************************************/
@@ -530,7 +474,7 @@ int Matrix2<Real>::compare(const Matrix2<Real>& mat) const
 template<class Real>
 void Matrix2<Real>::print() const
 {
-    printf("\n|%8.4f %8.4f|\n|%8.4f %8.4f|\n\n", m_data[0], m_data[1], m_data[2], 
+    printf("\n|%8.4f %8.4f|\n|%8.4f %8.4f|\n\n", m_data[0], m_data[1], m_data[2],
             m_data[3]);
 }
 #endif
