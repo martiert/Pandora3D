@@ -83,17 +83,6 @@ namespace Pandora
                 Matrix3(Real rad, const Vector3<Real>& axis);
 
                 /**
-                 *  Construct a scale matrix.
-                 *  \param
-                 *      x_scale - The number to scale with in x-direction.
-                 *  \param
-                 *      y_scale - The number to scale with in y-direction.
-                 *  \param
-                 *      z_scale - The number to scale with in z-direction.
-                 */
-                Matrix3(Real x_scale, Real y_scale, Real z_scale);
-
-                /**
                  *  Initialize the matrix with an array.
                  *  \param
                  *      array - An array of size 9 which is used to initialize 
