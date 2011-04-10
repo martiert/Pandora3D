@@ -23,31 +23,18 @@ Matrix3<Real>::Matrix3(Real rad, const Vector3<Real>& axis)
     Real t_cos = Math<Real>::Cos(rad);
     Real t_sin = Math<Real>::Sin(rad);
 
-    m_data[0] = t_cos + (1 - t_cos)*r.x*r.x;
-    m_data[1] = (1 - t_cos)*r.x*r.y - r.z*t_sin;
-    m_data[2] = (1 - t_cos)*r.x*r.z + r.y*t_sin;
+    m_data[0] = t_cos + (1 - t_cos)*r[0]*r[0];
+    m_data[1] = (1 - t_cos)*r[0]*r[1] - r[2]*t_sin;
+    m_data[2] = (1 - t_cos)*r[0]*r[2] + r[1]*t_sin;
 
-    m_data[3] = (1 - t_cos)*r.x*r.y + r.z*t_sin;
-    m_data[4] = t_cos + (1 - t_cos)*r.y*r.y;
-    m_data[5] = (1 - t_cos)*r.y*r.z - r.x*t_sin;
+    m_data[3] = (1 - t_cos)*r[0]*r[1] + r[2]*t_sin;
+    m_data[4] = t_cos + (1 - t_cos)*r[1]*r[1];
+    m_data[5] = (1 - t_cos)*r[1]*r[2] - r[0]*t_sin;
 
-    m_data[6] = (1 - t_cos)*r.x*r.z - r.y*t_sin;
-    m_data[7] = (1 - t_cos)*r.y*r.z + r.x*t_sin;
-    m_data[8] = t_cos + (1 - t_cos)*r.z*r.z;
+    m_data[6] = (1 - t_cos)*r[0]*r[2] - r[1]*t_sin;
+    m_data[7] = (1 - t_cos)*r[1]*r[2] + r[0]*t_sin;
+    m_data[8] = t_cos + (1 - t_cos)*r[2]*r[2];
 }
-
-
-/********************************************************************************
- * Make a scale matrix.                                                         *
- *******************************************************************************/
-template<class Real>
-Matrix3<Real>::Matrix3(Real x_scale, Real y_scale, Real z_scale)
-{
-    m_data[0] = x_scale;    m_data[1] = 0;          m_data[2] = 0;
-    m_data[3] = 0;          m_data[4] = y_scale;    m_data[5] = 0;
-    m_data[6] = 0;          m_data[7] = 0;          m_data[8] = z_scale;
-}
-
 
 /********************************************************************************
  * Copy an array to this matrix.                                                *

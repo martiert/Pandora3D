@@ -14,6 +14,7 @@ SET(Math_tests_src src/testRunner.cpp
         src/Vector3_test.cpp
         src/Vector4_test.cpp
         src/Matrix2_test.cpp
+        src/Matrix3_test.cpp
         )
 
 # Find Boost unit testing
