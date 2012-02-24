@@ -1,0 +1,6 @@
+#!/bin/bash
+cd Tests
+echo ""
+echo "Running math tests"
+echo ""
+cppcheck -I../include -Iinclude --file-list=cppcheckfiles.txt --enable=all

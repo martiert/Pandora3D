@@ -1,0 +1,9 @@
+#!/bin/bash
+cd System
+echo ""
+echo ""
+echo "Running tests for the System library"
+echo ""
+here=`pwd`
+cppcheck -Iinclude --file-list=cppcheckfiles.txt --enable=all
+cd $here

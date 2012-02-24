@@ -1,0 +1,6 @@
+#!/bin/bash
+cd PandoraCore
+here=`pwd`
+bash ./Math/runcppcheck
+bash ./System/runcppcheck
+cd $here

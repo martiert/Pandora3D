@@ -1,0 +1,10 @@
+#!/bin/bash
+cd Math
+echo ""
+echo ""
+echo "Running tests for the Math library"
+echo ""
+here=`pwd`
+cppcheck -Iinclude --file-list=cppcheckfiles.txt --enable=all
+bash ./Tests/runcppcheck
+cd $here
