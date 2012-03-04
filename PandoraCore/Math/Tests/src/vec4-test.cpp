@@ -129,3 +129,35 @@ TEST (Vector4Test, negation)
     EXPECT_EQ (-vec_1.z (), vec_2.z ());
     EXPECT_EQ (-vec_1.w (), vec_2.w ());
 }
+
+TEST (Vector4Test, addition)
+{
+    const Math::Vec4d vec_1 (3.2, 4.5, 3.1, 6.7);
+    const Math::Vec4d vec_2 (4.5, 7.6, 1.1, 2.3);
+
+    auto vec_3 = vec_1 + vec_2;
+    EXPECT_EQ (vec_1.x () + vec_2.x (), vec_3.x ());
+    EXPECT_EQ (vec_1.y () + vec_2.y (), vec_3.y ());
+    EXPECT_EQ (vec_1.z () + vec_2.z (), vec_3.z ());
+    EXPECT_EQ (vec_1.w () + vec_2.w (), vec_3.w ());
+
+    vec_3 = vec_1 - vec_2;
+    EXPECT_EQ (vec_1.x () - vec_2.x (), vec_3.x ());
+    EXPECT_EQ (vec_1.y () - vec_2.y (), vec_3.y ());
+    EXPECT_EQ (vec_1.z () - vec_2.z (), vec_3.z ());
+    EXPECT_EQ (vec_1.w () - vec_2.w (), vec_3.w ());
+
+    vec_3 = vec_1;
+    vec_3 += vec_2;
+    EXPECT_EQ (vec_1.x () + vec_2.x (), vec_3.x ());
+    EXPECT_EQ (vec_1.y () + vec_2.y (), vec_3.y ());
+    EXPECT_EQ (vec_1.z () + vec_2.z (), vec_3.z ());
+    EXPECT_EQ (vec_1.w () + vec_2.w (), vec_3.w ());
+
+    vec_3 = vec_1;
+    vec_3 -= vec_2;
+    EXPECT_EQ (vec_1.x () - vec_2.x (), vec_3.x ());
+    EXPECT_EQ (vec_1.y () - vec_2.y (), vec_3.y ());
+    EXPECT_EQ (vec_1.z () - vec_2.z (), vec_3.z ());
+    EXPECT_EQ (vec_1.w () - vec_2.w (), vec_3.w ());
+}

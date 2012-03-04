@@ -29,6 +29,9 @@ namespace Math
             T& operator[] (const size_t i);
             T operator[] (const size_t i) const;
 
+            Vector4& operator+= (const Vector4& vec);
+            Vector4& operator-= (const Vector4& vec);
+
             T length () const;
             T lengthSquared () const;
 
@@ -42,6 +45,12 @@ namespace Math
 
     template<typename T>
     Vector4<T> operator- (const Vector4<T>& vec);
+
+    template<typename T>
+    Vector4<T> operator+ (const Vector4<T>& vec_1, const Vector4<T>& vec_2);
+
+    template<typename T>
+    Vector4<T> operator- (const Vector4<T>& vec_1, const Vector4<T>& vec_2);
 
 #define VECTOR4_INCLUDE_FILE
 #include "vector4-impl.h"

@@ -18,7 +18,7 @@ TEST (Vector2Test, construction)
     EXPECT_EQ (tmp[0], vector_3.x ());
     EXPECT_EQ (tmp[1], vector_3.y ());
 
-    const Math::Vec2d vector_4 = vector_1;
+    auto vector_4 = vector_1;
     EXPECT_EQ (vector_1.x (), vector_4.x ());
     EXPECT_EQ (vector_1.y (), vector_4.y ());
 
@@ -84,7 +84,7 @@ TEST (Vector2Test, normalize_throws_domain_error_for_length_zero)
 TEST (Vector2Test, negation)
 {
     const Math::Vec2d vec_1 (2.3, 4.2);
-    const Math::Vec2d vec_2 = -vec_1;
+    auto vec_2 = -vec_1;
 
     EXPECT_EQ (-vec_1.x (), vec_2.x ());
     EXPECT_EQ (-vec_1.y (), vec_2.y ());
@@ -95,7 +95,7 @@ TEST (Vector2Test, addition)
     const Math::Vec2d vector_1 (2.3, 1.2);
     const Math::Vec2d vector_2 (3.0, 2.9);
 
-    Math::Vec2d res = vector_1 + vector_2;
+    auto res = vector_1 + vector_2;
 
     EXPECT_EQ (vector_1.x () + vector_2.x (), res.x ());
     EXPECT_EQ (vector_1.y () + vector_2.y (), res.y ());
@@ -109,7 +109,7 @@ TEST (Vector2Test, multiplication)
 {
     const Math::Vec2d vector_1 (2.3, 1.2);
 
-    Math::Vec2d res = vector_1 * 2.3;
+    auto res = vector_1 * 2.3;
     EXPECT_EQ (vector_1.x () * 2.3, res.x ());
     EXPECT_EQ (vector_1.y () * 2.3, res.y ());
 
@@ -131,7 +131,7 @@ TEST (Vector2Test, multiplication)
     EXPECT_EQ (vec1.x () * vec2.x (), res.x ());
     EXPECT_EQ (vec1.y () * vec2.y (), res.y ());
 
-    double dot = vec1.dot (vec2);
+    auto dot = vec1.dot (vec2);
     EXPECT_EQ ((vec1.x () * vec2.x () + vec1.y () * vec2.y ()), dot);
 }
 
@@ -139,8 +139,8 @@ TEST (Vector2Test, perp_vector_is_only_zero_vec_for_zero_vector)
 {
     srand (time (NULL));
     for (int i = 0; i < 20000; ++i) {
-        double val1 = (rand () % 10000) / 10.0;
-        double val2 = (rand () % 10000) / 10.0;
+        auto val1 = (rand () % 10000) / 10.0;
+        auto val2 = (rand () % 10000) / 10.0;
         const Math::Vec2d vec (val1, val2);
 
         const Math::Vec2d perp = vec.perp ();
@@ -154,7 +154,7 @@ TEST (Vector2Test, perp_vector_is_only_zero_vec_for_zero_vector)
     }
 
     const Math::Vec2d vec (0.0, 0.0);
-    const Math::Vec2d perp = vec.perp ();
+    auto perp = vec.perp ();
 
     EXPECT_EQ (0.0, perp.x ());
     EXPECT_EQ (0.0, perp.y ());
@@ -164,11 +164,11 @@ TEST (Vector2Test, dot_product_with_perp_vector_is_zero)
 {
     srand (time (NULL));
     for (int i = 0; i < 20000; ++i) {
-        double val1 = (rand () % 10000) / 10.0;
-        double val2 = (rand () % 10000) / 10.0;
+        auto val1 = (rand () % 10000) / 10.0;
+        auto val2 = (rand () % 10000) / 10.0;
         const Math::Vec2d vec (val1, val2);
 
-        const Math::Vec2d perp = vec.perp ();
+        auto perp = vec.perp ();
         EXPECT_EQ (0.0, vec.dot (perp));
         EXPECT_EQ (0.0, perp.dot (vec));
     }
@@ -179,7 +179,7 @@ TEST (Vector2Test, addition_to_vector2)
     const Math::Vec2d vec1 (2.3, 5.4);
     Math::Vec2d vec2 (9.4, 3.7);
 
-    const Math::Vec2d vec3 = vec1 + vec2;
+    auto vec3 = vec1 + vec2;
     vec2 += vec1;
 
     EXPECT_EQ (vec2.x (), vec2.x ());
@@ -191,7 +191,7 @@ TEST (Vector2Test, subtraction_from_vector2)
     const Math::Vec2d vec1 (2.3, 5.4);
     Math::Vec2d vec2 (9.4, 3.7);
 
-    const Math::Vec2d vec3 = vec1 - vec2;
+    auto vec3 = vec1 - vec2;
     vec2 -= vec1;
 
     EXPECT_EQ (vec2.x (), vec2.x ());
@@ -203,7 +203,7 @@ TEST (Vector2Test, multiplication_inplace)
     Math::Vec2d vec1 (5.4, 2.3);
     const double scalar = 2.4;
 
-    Math::Vec2d vec2 = vec1 * scalar;
+    auto vec2 = vec1 * scalar;
     vec1 *= scalar;
 
     EXPECT_EQ (vec1.x (), vec2.x ());
@@ -220,9 +220,9 @@ TEST (Vector2Test, multiplication_inplace)
 TEST (Vector2Test, division_inplace)
 {
     Math::Vec2d vec1 (5.4, 2.3);
-    const double scalar = 2.4;
+    auto scalar = 2.4;
 
-    Math::Vec2d vec2 = vec1 / scalar;
+    auto vec2 = vec1 / scalar;
     vec1 /= scalar;
 
     EXPECT_EQ (vec1.x (), vec2.x ());
@@ -240,7 +240,7 @@ TEST (Vector2Test, inplace_arithmetic_returns_ref_to_self)
 {
     Math::Vec2d vec1 (2.3, 5.4);
     Math::Vec2d vec2 (3.4, 8.7);
-    const double tmp = 5.4;
+    auto tmp = 5.4;
 
     Math::Vec2d *res;
 
@@ -306,6 +306,6 @@ TEST (Vector2Test, orthonormal_basis)
     EXPECT_THROW (generateOrthonormalBasis (vec1, vec2), std::domain_error);
     EXPECT_THROW (generateOrthonormalBasis (vec2, vec1), std::domain_error);
 
-    Math::Vec2d vec3 = vec2;
+    auto vec3 = vec2;
     EXPECT_THROW (generateOrthonormalBasis (vec2, vec3), std::domain_error);
 }

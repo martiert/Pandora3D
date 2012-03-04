@@ -21,7 +21,7 @@ TEST (Vector3Test, construction)
     EXPECT_EQ (tmp[1], vector_3.y ());
     EXPECT_EQ (tmp[2], vector_3.z ());
 
-    const Math::Vec3d vector_4 = vector_1;
+    auto vector_4 = vector_1;
     EXPECT_EQ (vector_1.x (), vector_4.x ());
     EXPECT_EQ (vector_1.y (), vector_4.y ());
     EXPECT_EQ (vector_1.z (), vector_4.z ());
@@ -107,7 +107,7 @@ TEST (Vector3Test, addition)
     const Math::Vec3d vec_1 (2.3, 4.2, 8.7);
     const Math::Vec3d vec_2 (4.3, 1.2, 5.6);
 
-    Math::Vec3d vec_3 = vec_1 + vec_2;
+    auto vec_3 = vec_1 + vec_2;
     EXPECT_EQ (vec_1.x () + vec_2.x (), vec_3.x ());
     EXPECT_EQ (vec_1.y () + vec_2.y (), vec_3.y ());
     EXPECT_EQ (vec_1.z () + vec_2.z (), vec_3.z ());
@@ -134,7 +134,7 @@ TEST (Vector3Test, multiplication)
 {
     const Math::Vec3d vector_1 (3.2, 5.4, 1.2);
 
-    Math::Vec3d res = vector_1 * 2.4;
+    auto res = vector_1 * 2.4;
     EXPECT_EQ (vector_1.x () * 2.4, res.x ());
     EXPECT_EQ (vector_1.y () * 2.4, res.y ());
     EXPECT_EQ (vector_1.z () * 2.4, res.z ());
@@ -165,7 +165,7 @@ TEST (Vector3Test, multiplication)
     EXPECT_EQ (vector_1.z () * vector_3.x () - vector_1.x () * vector_3.z (), res.y ());
     EXPECT_EQ (vector_1.x () * vector_3.y () - vector_1.y () * vector_3.x (), res.z ());
 
-    Math::Vec3d vector_4 = vector_1;
+    auto vector_4 = vector_1;
     vector_4 *= 2.4;
     EXPECT_EQ (vector_1.x () * 2.4, vector_4.x ());
     EXPECT_EQ (vector_1.y () * 2.4, vector_4.y ());

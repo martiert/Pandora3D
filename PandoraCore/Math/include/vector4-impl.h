@@ -107,6 +107,28 @@ T Vector4<T>::operator[] (const size_t i) const
 }
 
 template<typename T>
+Vector4<T>& Vector4<T>::operator+= (const Vector4<T>& vec)
+{
+    _x += vec.x ();
+    _y += vec.y ();
+    _z += vec.z ();
+    _w += vec.w ();
+
+    return *this;
+}
+
+template<typename T>
+Vector4<T>& Vector4<T>::operator-= (const Vector4<T>& vec)
+{
+    _x -= vec.x ();
+    _y -= vec.y ();
+    _z -= vec.z ();
+    _w -= vec.w ();
+
+    return *this;
+}
+
+template<typename T>
 T Vector4<T>::length () const
 {
     return std::sqrt (this->lengthSquared ());
@@ -138,6 +160,24 @@ template<typename T>
 Vector4<T> operator- (const Vector4<T>& vec)
 {
     return Vector4<T> (-vec.x (), -vec.y (), -vec.z (), -vec.w ());
+}
+
+template<typename T>
+Vector4<T> operator+ (const Vector4<T>& vec_1, const Vector4<T>& vec_2)
+{
+    return Vector4<T> (vec_1.x () + vec_2.x (),
+                        vec_1.y () + vec_2.y (),
+                        vec_1.z () + vec_2.z (),
+                        vec_1.w () + vec_2.w ());
+}
+
+template<typename T>
+Vector4<T> operator- (const Vector4<T>& vec_1, const Vector4<T>& vec_2)
+{
+    return Vector4<T> (vec_1.x () - vec_2.x (),
+                        vec_1.y () - vec_2.y (),
+                        vec_1.z () - vec_2.z (),
+                        vec_1.w () - vec_2.w ());
 }
 
 #else // VECTOR4_INCLUDE_FILE
