@@ -95,7 +95,7 @@ TEST (Vector3Test, normalize)
 TEST (Vector3Test, negation)
 {
     const Math::Vec3d vec_1 (2.3, 4.2, 8.7);
-    const Math::Vec3d vec_2 = -vec_1;
+    auto vec_2 = -vec_1;
 
     EXPECT_EQ (-vec_2.x (), vec_1.x ());
     EXPECT_EQ (-vec_2.y (), vec_1.y ());

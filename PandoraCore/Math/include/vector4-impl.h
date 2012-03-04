@@ -2,101 +2,142 @@
 
 template<typename T>
 Vector4<T>::Vector4 ()
-  : _x (0), _y (0), _z (0), _w (0)
+    : _x (0), _y (0), _z (0), _w (0)
 { }
 
 template<typename T>
 Vector4<T>::Vector4 (const T& x, const T& y, const T& z, const T& w)
-  : _x (x), _y (y), _z (z), _w (w)
+    : _x (x), _y (y), _z (z), _w (w)
 { }
 
 template<typename T>
 Vector4<T>::Vector4 (const Vector4<T>& vec)
-  : _x (vec._x), _y (vec._y), _z (vec._z), _w (vec._w)
+    : _x (vec._x), _y (vec._y), _z (vec._z), _w (vec._w)
 { }
 
 template<typename T>
 Vector4<T>::Vector4 (const T data[4])
-  : _x (data[0]), _y (data[1]), _z (data[2]), _w (data[3])
+    : _x (data[0]), _y (data[1]), _z (data[2]), _w (data[3])
 { }
 
 template<typename T>
-Vector4<T>::Vector4 (const Vector3<T>& vec)
-  : _x (vec.x ()), _y (vec.y ()), _z (vec.z ()), _w (1)
+    Vector4<T>::Vector4 (const Vector3<T>& vec)
+: _x (vec.x ()), _y (vec.y ()), _z (vec.z ()), _w (1)
 { }
 
 template<typename T>
 T& Vector4<T>::x ()
 {
-  return _x;
+    return _x;
 }
 
 template<typename T>
 T& Vector4<T>::y ()
 {
-  return _y;
+    return _y;
 }
 
 template<typename T>
 T& Vector4<T>::z ()
 {
-  return _z;
+    return _z;
 }
 
 template<typename T>
 T& Vector4<T>::w ()
 {
-  return _w;
+    return _w;
 }
 
 template<typename T>
 T Vector4<T>::x () const
 {
-  return _x;
+    return _x;
 }
 
 template<typename T>
 T Vector4<T>::y () const
 {
-  return _y;
+    return _y;
 }
 
 template<typename T>
 T Vector4<T>::z () const
 {
-  return _z;
+    return _z;
 }
 
 template<typename T>
 T Vector4<T>::w () const
 {
-  return _w;
+    return _w;
 }
 
 template<typename T>
 T& Vector4<T>::operator[] (const size_t i)
 {
-  if (i == 0)
-    return _x;
-  if (i == 1)
-    return _y;
-  if (i == 2)
-    return _z;
+    if (i > 3)
+        throw std::out_of_range ("Index out of range for 4D vectors");
 
-  return _w;
+    if (i == 0)
+        return _x;
+    if (i == 1)
+        return _y;
+    if (i == 2)
+        return _z;
+
+    return _w;
 }
 
 template<typename T>
 T Vector4<T>::operator[] (const size_t i) const
 {
-  if (i == 0)
-    return _x;
-  if (i == 1)
-    return _y;
-  if (i == 2)
-    return _z;
+    if (i > 3)
+        throw std::out_of_range ("Index out of range for 4D vectors");
 
-  return _w;
+
+    if (i == 0)
+        return _x;
+    if (i == 1)
+        return _y;
+    if (i == 2)
+        return _z;
+
+    return _w;
+}
+
+template<typename T>
+T Vector4<T>::length () const
+{
+    return std::sqrt (this->lengthSquared ());
+}
+
+template<typename T>
+T Vector4<T>::lengthSquared () const
+{
+    return _x * _x + _y * _y + _z * _z + _w * _w;
+}
+
+template<typename T>
+Vector4<T>& Vector4<T>::normalize ()
+{
+    T len = length ();
+
+    if (len == 0)
+        throw std::domain_error ("Cannot normalize a zero vector");
+
+    _x /= len;
+    _y /= len;
+    _z /= len;
+    _w /= len;
+
+    return *this;
+}
+
+template<typename T>
+Vector4<T> operator- (const Vector4<T>& vec)
+{
+    return Vector4<T> (-vec.x (), -vec.y (), -vec.z (), -vec.w ());
 }
 
 #else // VECTOR4_INCLUDE_FILE
