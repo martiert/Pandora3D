@@ -1,3 +1,5 @@
+#ifdef VECTOR3_INCLUDE_FILE
+
 template<typename T>
 Vector3<T>::Vector3 ()
     : _x (0), _y (0), _z (0)
@@ -296,3 +298,9 @@ void generateOrthonormalBasis (Vector3<T>& vec1, Vector3<T>& vec2, Vector3<T>& v
     vec3 = vec3 - vec1.dot (vec3) * vec1 - vec2.dot (vec3) * vec2;
     vec3.normalize ();
 }
+
+#else // VECTOR3_INCLUDE_FILE
+
+#error "Never include this file anywhere but vector3.h"
+
+#endif // VECTOR3_INCLUDE_FILE

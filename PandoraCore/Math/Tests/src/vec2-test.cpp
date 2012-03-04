@@ -1,54 +1,53 @@
 #include <Math/vector2.h>
 
 #include <gtest/gtest.h>
-#include <cmath>
 
 TEST (Vector2Test, construction)
 {
-    float tmp[] = {2.3f, 1.2f};
-    const Math::Vec2f vector_1;
-    const Math::Vec2f vector_2 (0.1f, 2.3f);
-    const Math::Vec2f vector_3 (tmp);
-    const Math::Vec2f vector_4 = vector_1;
-    const Math::Vec2f vector_5 = tmp;
+    double tmp[] = {2.3, 1.2};
 
-    EXPECT_EQ (vector_1.x (), 0.0f);
-    EXPECT_EQ (vector_1.y (), 0.0f);
+    const Math::Vec2d vector_1;
+    EXPECT_EQ (0.0, vector_1.x ());
+    EXPECT_EQ (0.0, vector_1.y ());
 
-    EXPECT_EQ (vector_2.x (), 0.1f);
-    EXPECT_EQ (vector_2.y (), 2.3f);
+    const Math::Vec2d vector_2 (0.1, 2.3);
+    EXPECT_EQ (0.1, vector_2.x ());
+    EXPECT_EQ (2.3, vector_2.y ());
 
-    EXPECT_EQ (vector_3.x (), tmp[0]);
-    EXPECT_EQ (vector_3.y (), tmp[1]);
+    const Math::Vec2d vector_3 (tmp);
+    EXPECT_EQ (tmp[0], vector_3.x ());
+    EXPECT_EQ (tmp[1], vector_3.y ());
 
-    EXPECT_EQ (vector_4.x (), vector_1.x ());
-    EXPECT_EQ (vector_4.y (), vector_1.y ());
+    const Math::Vec2d vector_4 = vector_1;
+    EXPECT_EQ (vector_1.x (), vector_4.x ());
+    EXPECT_EQ (vector_1.y (), vector_4.y ());
 
-    EXPECT_EQ (vector_5.x (), tmp[0]);
-    EXPECT_EQ (vector_5.y (), tmp[1]);
+    const Math::Vec2d vector_5 = tmp;
+    EXPECT_EQ (tmp[0], vector_5.x ());
+    EXPECT_EQ (tmp[1], vector_5.y ());
 }
 
 TEST (Vector2Test, index_operator_valid_input)
 {
-    Math::Vec2f vector_1 (4.3f, 2.1f);
-    const Math::Vec2f vector_2 (2.3f, 1.5f);
+    Math::Vec2d vector_1 (4.3, 2.1);
+    const Math::Vec2d vector_2 (2.3, 1.5);
 
-    EXPECT_EQ (vector_1[0], 4.3f);
-    EXPECT_EQ (vector_1[1], 2.1f);
+    EXPECT_EQ (4.3, vector_1[0]);
+    EXPECT_EQ (2.1, vector_1[1]);
 
-    EXPECT_EQ (vector_2[0], 2.3f);
-    EXPECT_EQ (vector_2[1], 1.5f);
+    EXPECT_EQ (2.3, vector_2[0]);
+    EXPECT_EQ (1.5, vector_2[1]);
 
-    vector_1[0] = 2.1f;
-    EXPECT_EQ (vector_1[0], 2.1f);
-    EXPECT_EQ (vector_1[1], 2.1f);
+    vector_1[0] = 2.1;
+    EXPECT_EQ (2.1, vector_1[0]);
+    EXPECT_EQ (2.1, vector_1[1]);
 }
 
 TEST (Vector2Test, index_operator_throws_out_of_range_exception_when_out_of_range)
 {
-    Math::Vec2f vector;
-    const Math::Vec2f const_vector;
-    float tmp = 2;
+    Math::Vec2d vector;
+    const Math::Vec2d const_vector;
+    double tmp = 2;
 
     EXPECT_THROW (tmp = vector[2], std::out_of_range);
     EXPECT_THROW (tmp = const_vector[2], std::out_of_range);
@@ -58,129 +57,129 @@ TEST (Vector2Test, index_operator_throws_out_of_range_exception_when_out_of_rang
 
 TEST (Vector2Test, length)
 {
-    const Math::Vec2f vector_1 (2.3f, 1.2f);
-    const Math::Vec2f vector_2;
+    const Math::Vec2d vector_1 (2.3, 1.2);
+    const Math::Vec2d vector_2;
 
-    EXPECT_EQ (vector_1.lengthSquared (), (vector_1.x () * vector_1.x () + vector_1.y () * vector_1.y ()));
-    EXPECT_EQ (vector_2.lengthSquared (), 0.0f);
+    EXPECT_EQ ((vector_1.x () * vector_1.x () + vector_1.y () * vector_1.y ()), vector_1.lengthSquared ());
+    EXPECT_EQ (0.0, vector_2.lengthSquared ());
 
-    EXPECT_EQ (vector_1.length (), std::sqrt (vector_1.x () * vector_1.x () + vector_1.y () * vector_1.y ()));
-    EXPECT_EQ (vector_2.length (), 0.0f);
+    EXPECT_EQ (std::sqrt (vector_1.x () * vector_1.x () + vector_1.y () * vector_1.y ()), vector_1.length ());
+    EXPECT_EQ (0.0, vector_2.length ());
 }
 
 TEST (Vector2Test, normalize_gives_length_of_1)
 {
-    Math::Vec2f vec_1 (4.0f, 3.0f);
+    Math::Vec2d vec_1 (4.0, 3.0);
     vec_1.normalize ();
-    EXPECT_EQ (vec_1.length (), 1.0f);
+    EXPECT_EQ (1.0, vec_1.length ());
 }
 
 TEST (Vector2Test, normalize_throws_domain_error_for_length_zero)
 {
-    Math::Vec2f vec;
+    Math::Vec2d vec;
 
     EXPECT_THROW (vec.normalize (), std::domain_error);
 }
 
 TEST (Vector2Test, negation)
 {
-    const Math::Vec2f vec_1 (2.3f, 4.2f);
-    const Math::Vec2f vec_2 = -vec_1;
+    const Math::Vec2d vec_1 (2.3, 4.2);
+    const Math::Vec2d vec_2 = -vec_1;
 
-    EXPECT_EQ (vec_2.x (), -vec_1.x ());
-    EXPECT_EQ (vec_2.y (), -vec_1.y ());
+    EXPECT_EQ (-vec_1.x (), vec_2.x ());
+    EXPECT_EQ (-vec_1.y (), vec_2.y ());
 }
 
 TEST (Vector2Test, addition)
 {
-    const Math::Vec2f vector_1 (2.3f, 1.2f);
-    const Math::Vec2f vector_2 (3.0f, 2.9f);
+    const Math::Vec2d vector_1 (2.3, 1.2);
+    const Math::Vec2d vector_2 (3.0, 2.9);
 
-    Math::Vec2f res = vector_1 + vector_2;
+    Math::Vec2d res = vector_1 + vector_2;
 
-    EXPECT_EQ (res.x (), vector_1.x () + vector_2.x ());
-    EXPECT_EQ (res.y (), vector_1.y () + vector_2.y ());
+    EXPECT_EQ (vector_1.x () + vector_2.x (), res.x ());
+    EXPECT_EQ (vector_1.y () + vector_2.y (), res.y ());
 
     res = vector_1 - vector_2;
-    EXPECT_EQ (res.x (), vector_1.x () - vector_2.x ());
-    EXPECT_EQ (res.y (), vector_1.y () - vector_2.y ());
+    EXPECT_EQ (vector_1.x () - vector_2.x (), res.x ());
+    EXPECT_EQ (vector_1.y () - vector_2.y (), res.y ());
 }
 
 TEST (Vector2Test, multiplication)
 {
-    const Math::Vec2f vector_1 (2.3f, 1.2f);
+    const Math::Vec2d vector_1 (2.3, 1.2);
 
-    Math::Vec2f res = vector_1 * 2.3f;
-    EXPECT_EQ (res.x (), vector_1.x () * 2.3f);
-    EXPECT_EQ (res.y (), vector_1.y () * 2.3f);
+    Math::Vec2d res = vector_1 * 2.3;
+    EXPECT_EQ (vector_1.x () * 2.3, res.x ());
+    EXPECT_EQ (vector_1.y () * 2.3, res.y ());
 
-    res = vector_1 / 2.3f;
-    EXPECT_EQ (res.x (), vector_1.x () / 2.3f);
-    EXPECT_EQ (res.y (), vector_1.y () / 2.3f);
+    res = vector_1 / 2.3;
+    EXPECT_EQ (vector_1.x () / 2.3, res.x ());
+    EXPECT_EQ (vector_1.y () / 2.3, res.y ());
 
-    res = 2.3f * vector_1;
-    EXPECT_EQ (res.x (), vector_1.x () * 2.3f);
-    EXPECT_EQ (res.y (), vector_1.y () * 2.3f);
+    res = 2.3 * vector_1;
+    EXPECT_EQ (vector_1.x () * 2.3, res.x ());
+    EXPECT_EQ (vector_1.y () * 2.3, res.y ());
 
-    EXPECT_THROW (vector_1 / 0.0f, std::invalid_argument);
+    EXPECT_THROW (vector_1 / 0.0, std::invalid_argument);
 
-    const Math::Vec2f vec1 (2.3f, 1.2f);
-    const Math::Vec2f vec2 (1.4f, 4.3f);
+    const Math::Vec2d vec1 (2.3, 1.2);
+    const Math::Vec2d vec2 (1.4, 4.3);
 
     res = vec1 * vec2;
 
-    EXPECT_EQ (res.x (), vec1.x () * vec2.x ());
-    EXPECT_EQ (res.y (), vec1.y () * vec2.y ());
+    EXPECT_EQ (vec1.x () * vec2.x (), res.x ());
+    EXPECT_EQ (vec1.y () * vec2.y (), res.y ());
 
-    float dot = vec1.dot (vec2);
-    EXPECT_EQ (dot, (vec1.x () * vec2.x () + vec1.y () * vec2.y ()));
+    double dot = vec1.dot (vec2);
+    EXPECT_EQ ((vec1.x () * vec2.x () + vec1.y () * vec2.y ()), dot);
 }
 
 TEST (Vector2Test, perp_vector_is_only_zero_vec_for_zero_vector)
 {
     srand (time (NULL));
     for (int i = 0; i < 20000; ++i) {
-        float val1 = (rand () % 10000) / 10.0f;
-        float val2 = (rand () % 10000) / 10.0f;
-        const Math::Vec2f vec (val1, val2);
+        double val1 = (rand () % 10000) / 10.0;
+        double val2 = (rand () % 10000) / 10.0;
+        const Math::Vec2d vec (val1, val2);
 
-        const Math::Vec2f perp = vec.perp ();
+        const Math::Vec2d perp = vec.perp ();
 
-        if (vec.x () != 0.0f || vec.y () != 0.0f)
-            EXPECT_TRUE (perp.x () != 0.0f || perp.y () != 0.0f);
+        if (vec.x () != 0.0 || vec.y () != 0.0)
+            EXPECT_TRUE (perp.x () != 0.0 || perp.y () != 0.0);
         else {
-            EXPECT_EQ (perp.x (), 0.0f);
-            EXPECT_EQ (perp.y (), 0.0f);
+            EXPECT_EQ (0.0, perp.x ());
+            EXPECT_EQ (0.0, perp.y ());
         }
     }
 
-    const Math::Vec2f vec (0.0f, 0.0f);
-    const Math::Vec2f perp = vec.perp ();
+    const Math::Vec2d vec (0.0, 0.0);
+    const Math::Vec2d perp = vec.perp ();
 
-    EXPECT_EQ (perp.x (), 0.0f);
-    EXPECT_EQ (perp.y (), 0.0f);
+    EXPECT_EQ (0.0, perp.x ());
+    EXPECT_EQ (0.0, perp.y ());
 }
 
 TEST (Vector2Test, dot_product_with_perp_vector_is_zero)
 {
     srand (time (NULL));
     for (int i = 0; i < 20000; ++i) {
-        float val1 = (rand () % 10000) / 10.0f;
-        float val2 = (rand () % 10000) / 10.0f;
-        const Math::Vec2f vec (val1, val2);
+        double val1 = (rand () % 10000) / 10.0;
+        double val2 = (rand () % 10000) / 10.0;
+        const Math::Vec2d vec (val1, val2);
 
-        const Math::Vec2f perp = vec.perp ();
-        EXPECT_EQ (vec.dot (perp), 0.0f);
-        EXPECT_EQ (perp.dot (vec), 0.0f);
+        const Math::Vec2d perp = vec.perp ();
+        EXPECT_EQ (0.0, vec.dot (perp));
+        EXPECT_EQ (0.0, perp.dot (vec));
     }
 }
 
 TEST (Vector2Test, addition_to_vector2)
 {
-    const Math::Vec2f vec1 (2.3f, 5.4f);
-    Math::Vec2f vec2 (9.4f, 3.7f);
+    const Math::Vec2d vec1 (2.3, 5.4);
+    Math::Vec2d vec2 (9.4, 3.7);
 
-    const Math::Vec2f vec3 = vec1 + vec2;
+    const Math::Vec2d vec3 = vec1 + vec2;
     vec2 += vec1;
 
     EXPECT_EQ (vec2.x (), vec2.x ());
@@ -189,10 +188,10 @@ TEST (Vector2Test, addition_to_vector2)
 
 TEST (Vector2Test, subtraction_from_vector2)
 {
-    const Math::Vec2f vec1 (2.3f, 5.4f);
-    Math::Vec2f vec2 (9.4f, 3.7f);
+    const Math::Vec2d vec1 (2.3, 5.4);
+    Math::Vec2d vec2 (9.4, 3.7);
 
-    const Math::Vec2f vec3 = vec1 - vec2;
+    const Math::Vec2d vec3 = vec1 - vec2;
     vec2 -= vec1;
 
     EXPECT_EQ (vec2.x (), vec2.x ());
@@ -201,74 +200,74 @@ TEST (Vector2Test, subtraction_from_vector2)
 
 TEST (Vector2Test, multiplication_inplace)
 {
-    Math::Vec2f vec1 (5.4f, 2.3f);
-    const float scalar = 2.4f;
+    Math::Vec2d vec1 (5.4, 2.3);
+    const double scalar = 2.4;
 
-    Math::Vec2f vec2 = vec1 * scalar;
+    Math::Vec2d vec2 = vec1 * scalar;
     vec1 *= scalar;
 
-    EXPECT_FLOAT_EQ (vec1.x (), vec2.x ());
-    EXPECT_FLOAT_EQ (vec1.y (), vec2.y ());
+    EXPECT_EQ (vec1.x (), vec2.x ());
+    EXPECT_EQ (vec1.y (), vec2.y ());
 
-    const Math::Vec2f vec3 (4.5f, 2.3f);
+    const Math::Vec2d vec3 (4.5, 2.3);
     vec2 = vec1 * vec3;
     vec1 *= vec3;
 
-    EXPECT_FLOAT_EQ (vec1.x (), vec2.x ());
-    EXPECT_FLOAT_EQ (vec1.y (), vec2.y ());
+    EXPECT_EQ (vec1.x (), vec2.x ());
+    EXPECT_EQ (vec1.y (), vec2.y ());
 }
 
 TEST (Vector2Test, division_inplace)
 {
-    Math::Vec2f vec1 (5.4f, 2.3f);
-    const float scalar = 2.4f;
+    Math::Vec2d vec1 (5.4, 2.3);
+    const double scalar = 2.4;
 
-    Math::Vec2f vec2 = vec1 / scalar;
+    Math::Vec2d vec2 = vec1 / scalar;
     vec1 /= scalar;
 
-    EXPECT_FLOAT_EQ (vec1.x (), vec2.x ());
-    EXPECT_FLOAT_EQ (vec1.y (), vec2.y ());
+    EXPECT_EQ (vec1.x (), vec2.x ());
+    EXPECT_EQ (vec1.y (), vec2.y ());
 }
 
 TEST (Vector2Test, test_inplace_division_by_zero_throws_invalid_argument)
 {
-    Math::Vec2f vec (2.3f, 1.2f);
+    Math::Vec2d vec (2.3, 1.2);
 
-    EXPECT_THROW (vec /= 0.0f, std::invalid_argument);
+    EXPECT_THROW (vec /= 0.0, std::invalid_argument);
 }
 
 TEST (Vector2Test, inplace_arithmetic_returns_ref_to_self)
 {
-    Math::Vec2f vec1 (2.3f, 5.4f);
-    Math::Vec2f vec2 (3.4f, 8.7f);
-    const float tmp = 5.4f;
+    Math::Vec2d vec1 (2.3, 5.4);
+    Math::Vec2d vec2 (3.4, 8.7);
+    const double tmp = 5.4;
 
-    Math::Vec2f *res;
+    Math::Vec2d *res;
 
     res = &(vec1 += vec2);
-    EXPECT_EQ (res, &vec1);
+    EXPECT_EQ (&vec1, res);
 
     res = &(vec2 -= vec1);
-    EXPECT_EQ (res, &vec2);
+    EXPECT_EQ (&vec2, res);
 
     res = &(vec1 *= vec2);
-    EXPECT_EQ (res, &vec1);
+    EXPECT_EQ (&vec1, res);
 
     res = &(vec2 *= tmp);
-    EXPECT_EQ (res, &vec2);
+    EXPECT_EQ (&vec2, res);
 
     res = &(vec1 /= tmp);
-    EXPECT_EQ (res, &vec1);
+    EXPECT_EQ (&vec1, res);
 }
 
 TEST (Vector2Test, comparison_operators)
 {
-    const Math::Vec2f vec1 (3.4f, 1.7f);
-    const Math::Vec2f vec2 (3.6f, 7.8f);
-    const Math::Vec2f vec3 (3.4f, 1.1f);
-    const Math::Vec2f vec4 (3.4f, 8.1f);
-    const Math::Vec2f vec5 (3.4f, 1.7f);
-    const Math::Vec2f vec6 (1.4f, 1.7f);
+    const Math::Vec2d vec1 (3.4, 1.7);
+    const Math::Vec2d vec2 (3.6, 7.8);
+    const Math::Vec2d vec3 (3.4, 1.1);
+    const Math::Vec2d vec4 (3.4, 8.1);
+    const Math::Vec2d vec5 (3.4, 1.7);
+    const Math::Vec2d vec6 (1.4, 1.7);
 
     EXPECT_EQ (vec1, vec5);
     EXPECT_NE (vec1, vec2);
@@ -293,20 +292,20 @@ TEST (Vector2Test, comparison_operators)
 
 TEST (Vector2Test, orthonormal_basis)
 {
-    Math::Vec2f vec1 (2.5f, 1.2f);
-    Math::Vec2f vec2 (4.5f, 7.0f);
+    Math::Vec2d vec1 (2.0, 1.0);
+    Math::Vec2d vec2 (4.0, 7.0);
 
-    EXPECT_NE (vec1.dot (vec2), 0.0f);
+    EXPECT_NE (vec1.dot (vec2), 0.0);
 
     Math::generateOrthonormalBasis (vec1, vec2);
-    EXPECT_FLOAT_EQ (vec1.dot (vec2), 0.0f);
-    EXPECT_FLOAT_EQ (vec1.length (), 1.0f);
-    EXPECT_FLOAT_EQ (vec2.length (), 1.0f);
+    EXPECT_FLOAT_EQ (0.0, vec1.dot (vec2));
+    EXPECT_FLOAT_EQ (1.0, vec1.length ());
+    EXPECT_FLOAT_EQ (1.0, vec2.length ());
 
-    vec1 = Math::Vec2f (0.0f, 0.0f);
+    vec1 = Math::Vec2d (0.0, 0.0);
     EXPECT_THROW (generateOrthonormalBasis (vec1, vec2), std::domain_error);
     EXPECT_THROW (generateOrthonormalBasis (vec2, vec1), std::domain_error);
 
-    Math::Vec2f vec3 = vec2;
+    Math::Vec2d vec3 = vec2;
     EXPECT_THROW (generateOrthonormalBasis (vec2, vec3), std::domain_error);
 }

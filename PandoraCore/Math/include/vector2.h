@@ -1,7 +1,6 @@
 #ifndef MATH_VECTOR2_HPP_INCLUDED
 #define MATH_VECTOR2_HPP_INCLUDED
 
-#include <cstddef>
 #include <stdexcept>
 #include <cmath>
 
@@ -88,7 +87,9 @@ namespace Math
     template<typename T>
     void generateOrthonormalBasis (Vector2<T>& vec1, Vector2<T>& vec2);
 
+#define VECTOR2_INCLUDE_FILE
 #include "vector2-impl.h"
+#undef VECTOR2_INCLUDE_FILE
 
     typedef Vector2<float> Vec2f;
     typedef Vector2<double> Vec2d;

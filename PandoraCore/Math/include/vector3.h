@@ -1,7 +1,6 @@
 #ifndef MATH_VECTOR3_HPP_INCLUDED
 #define MATH_VECTOR3_HPP_INCLUDED
 
-#include <cstddef>
 #include <stdexcept>
 #include <cmath>
 
@@ -89,7 +88,9 @@ namespace Math
     template<typename T>
     void generateOrthonormalBasis (Vector3<T>& vec1, Vector3<T>& vec2, Vector3<T>& vec3);
 
+#define VECTOR3_INCLUDE_FILE
 #include "vector3-impl.h"
+#undef VECTOR3_INCLUDE_FILE
 
     typedef Vector3<float> Vec3f;
     typedef Vector3<double> Vec3d;
