@@ -129,6 +129,42 @@ Vector4<T>& Vector4<T>::operator-= (const Vector4<T>& vec)
 }
 
 template<typename T>
+Vector4<T>& Vector4<T>::operator*= (const Vector4<T>& vec)
+{
+    _x *= vec.x ();
+    _y *= vec.y ();
+    _z *= vec.z ();
+    _w *= vec.w ();
+
+    return *this;
+}
+
+template<typename T>
+Vector4<T>& Vector4<T>::operator*= (const T& scalar)
+{
+    _x *= scalar;
+    _y *= scalar;
+    _z *= scalar;
+    _w *= scalar;
+
+    return *this;
+}
+
+template<typename T>
+Vector4<T>& Vector4<T>::operator/= (const T& scalar)
+{
+    if (scalar == 0)
+        throw std::invalid_argument ("Out of bounds of a 4D vector.");
+
+    _x /= scalar;
+    _y /= scalar;
+    _z /= scalar;
+    _w /= scalar;
+
+    return *this;
+}
+
+template<typename T>
 T Vector4<T>::length () const
 {
     return std::sqrt (this->lengthSquared ());
@@ -138,6 +174,12 @@ template<typename T>
 T Vector4<T>::lengthSquared () const
 {
     return _x * _x + _y * _y + _z * _z + _w * _w;
+}
+
+template<typename T>
+T Vector4<T>::dot (const Vector4<T>& vec) const
+{
+    return _x * vec.x () + _y * vec.y () + _z * vec.z () + _w * vec.w ();
 }
 
 template<typename T>
@@ -178,6 +220,36 @@ Vector4<T> operator- (const Vector4<T>& vec_1, const Vector4<T>& vec_2)
                         vec_1.y () - vec_2.y (),
                         vec_1.z () - vec_2.z (),
                         vec_1.w () - vec_2.w ());
+}
+
+template<typename T>
+Vector4<T> operator* (const Vector4<T>& vec_1, const Vector4<T>& vec_2)
+{
+    auto tmp = vec_1;
+    tmp *= vec_2;
+    return tmp;
+}
+
+template<typename T>
+Vector4<T> operator* (const Vector4<T>& vec, const T& scalar)
+{
+    auto tmp = vec;
+    tmp *= scalar;
+    return tmp;
+}
+
+template<typename T>
+Vector4<T> operator* (const T& scalar, const Vector4<T>& vec)
+{
+    return vec * scalar;
+}
+
+template<typename T>
+Vector4<T> operator/ (const Vector4<T>& vec, const T& scalar)
+{
+    auto tmp = vec;
+    tmp /= scalar;
+    return tmp;
 }
 
 #else // VECTOR4_INCLUDE_FILE

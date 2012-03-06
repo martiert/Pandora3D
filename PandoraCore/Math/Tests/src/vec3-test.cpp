@@ -139,6 +139,11 @@ TEST (Vector3Test, multiplication)
     EXPECT_EQ (vector_1.y () * 2.4, res.y ());
     EXPECT_EQ (vector_1.z () * 2.4, res.z ());
 
+    res = 2.4 * vector_1;
+    EXPECT_EQ (vector_1.x () * 2.4, res.x ());
+    EXPECT_EQ (vector_1.y () * 2.4, res.y ());
+    EXPECT_EQ (vector_1.z () * 2.4, res.z ());
+
     res = vector_1 / 2.4;
     EXPECT_EQ (vector_1.x () / 2.4, res.x ());
     EXPECT_EQ (vector_1.y () / 2.4, res.y ());

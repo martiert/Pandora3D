@@ -161,3 +161,61 @@ TEST (Vector4Test, addition)
     EXPECT_EQ (vec_1.z () - vec_2.z (), vec_3.z ());
     EXPECT_EQ (vec_1.w () - vec_2.w (), vec_3.w ());
 }
+
+TEST (Vector4Test, multiplication)
+{
+    const Math::Vec4d vec_1 (3.2, 4.5, 3.1, 6.7);
+
+    auto res = vec_1 * 2.4;
+    EXPECT_EQ (vec_1.x () * 2.4, res.x ());
+    EXPECT_EQ (vec_1.y () * 2.4, res.y ());
+    EXPECT_EQ (vec_1.z () * 2.4, res.z ());
+    EXPECT_EQ (vec_1.w () * 2.4, res.w ());
+
+    res = 2.4 * vec_1;
+    EXPECT_EQ (vec_1.x () * 2.4, res.x ());
+    EXPECT_EQ (vec_1.y () * 2.4, res.y ());
+    EXPECT_EQ (vec_1.z () * 2.4, res.z ());
+    EXPECT_EQ (vec_1.w () * 2.4, res.w ());
+
+    res = vec_1 / 2.4;
+    EXPECT_EQ (vec_1.x () / 2.4, res.x ());
+    EXPECT_EQ (vec_1.y () / 2.4, res.y ());
+    EXPECT_EQ (vec_1.z () / 2.4, res.z ());
+    EXPECT_EQ (vec_1.w () / 2.4, res.w ());
+
+    res *= 2.4;
+    EXPECT_EQ (vec_1.x (), res.x ());
+    EXPECT_EQ (vec_1.y (), res.y ());
+    EXPECT_EQ (vec_1.z (), res.z ());
+    EXPECT_EQ (vec_1.w (), res.w ());
+
+    res /= 2.4;
+    EXPECT_EQ (vec_1.x () / 2.4, res.x ());
+    EXPECT_EQ (vec_1.y () / 2.4, res.y ());
+    EXPECT_EQ (vec_1.z () / 2.4, res.z ());
+    EXPECT_EQ (vec_1.w () / 2.4, res.w ());
+
+    const Math::Vec4d vec_2 (4.5, 7.6, 1.1, 2.3);
+    res = vec_1 * vec_2;
+    EXPECT_EQ (vec_1.x () * vec_2.x (), res.x ());
+    EXPECT_EQ (vec_1.y () * vec_2.y (), res.y ());
+    EXPECT_EQ (vec_1.z () * vec_2.z (), res.z ());
+    EXPECT_EQ (vec_1.w () * vec_2.w (), res.w ());
+
+    EXPECT_THROW (vec_1 / 0.0, std::invalid_argument);
+    EXPECT_THROW (res /= 0.0, std::invalid_argument);
+
+    res = vec_1;
+    res *= vec_2;
+    EXPECT_EQ (vec_1.x () * vec_2.x (), res.x ());
+    EXPECT_EQ (vec_1.y () * vec_2.y (), res.y ());
+    EXPECT_EQ (vec_1.z () * vec_2.z (), res.z ());
+    EXPECT_EQ (vec_1.w () * vec_2.w (), res.w ());
+
+    auto scalar = vec_1.dot (vec_2);
+    EXPECT_EQ (vec_1.x () * vec_2.x () +
+               vec_1.y () * vec_2.y () +
+               vec_1.z () * vec_2.z () +
+               vec_1.w () * vec_2.w (), scalar);
+}

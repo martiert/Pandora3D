@@ -31,9 +31,15 @@ namespace Math
 
             Vector4& operator+= (const Vector4& vec);
             Vector4& operator-= (const Vector4& vec);
+            Vector4& operator*= (const Vector4& vec);
+
+            Vector4& operator*= (const T& scalar);
+            Vector4& operator/= (const T& scalar);
 
             T length () const;
             T lengthSquared () const;
+
+            T dot (const Vector4& vec) const;
 
             Vector4& normalize ();
         private:
@@ -51,6 +57,18 @@ namespace Math
 
     template<typename T>
     Vector4<T> operator- (const Vector4<T>& vec_1, const Vector4<T>& vec_2);
+
+    template<typename T>
+    Vector4<T> operator* (const Vector4<T>& vec_1, const Vector4<T>& vec_2);
+
+    template<typename T>
+    Vector4<T> operator* (const Vector4<T>& vec, const T& scalar);
+
+    template<typename T>
+    Vector4<T> operator* (const T& scalar, const Vector4<T>& vec);
+
+    template<typename T>
+    Vector4<T> operator/ (const Vector4<T>& vec, const T& scalar);
 
 #define VECTOR4_INCLUDE_FILE
 #include "vector4-impl.h"

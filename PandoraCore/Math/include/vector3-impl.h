@@ -152,7 +152,7 @@ T Vector3<T>::length () const
 template<typename T>
 T Vector3<T>::lengthSquared () const
 {
-    return (_x * _x + _y * _y + _z * _z);
+    return dot (*this);
 }
 
 template<typename T>
@@ -163,9 +163,7 @@ void Vector3<T>::normalize ()
     if (len == 0)
         throw std::domain_error ("Can not normalize a zero vector");
 
-    _x /= len;
-    _y /= len;
-    _z /= len;
+    *this /= len;
 }
 
 template<typename T>
@@ -188,40 +186,47 @@ Vector3<T> operator- (const Vector3<T>& vec)
 template<typename T>
 Vector3<T> operator+ (const Vector3<T>& vec1, const Vector3<T>& vec2)
 {
-    return Vector3<T> (vec1.x () + vec2.x (), vec1.y () + vec2.y (), vec1.z () + vec2.z ());
+    auto tmp = vec1;
+    tmp += vec2;
+    return tmp;
 }
 
 template<typename T>
 Vector3<T> operator- (const Vector3<T>& vec1, const Vector3<T>& vec2)
 {
-    return Vector3<T> (vec1.x () - vec2.x (), vec1.y () - vec2.y (), vec1.z () - vec2.z ());
+    auto tmp = vec1;
+    tmp -= vec2;
+    return tmp;
 }
 
 template<typename T>
 Vector3<T> operator* (const Vector3<T>& vec, const T& scalar)
 {
-    return Vector3<T> (vec.x () * scalar, vec.y () * scalar, vec.z () * scalar);
+    auto tmp = vec;
+    tmp *= scalar;
+    return tmp;
 }
 
 template<typename T>
 Vector3<T> operator* (const T& scalar, const Vector3<T>& vec)
 {
-    return Vector3<T> (vec.x () * scalar, vec.y () * scalar, vec.z () * scalar);
+    return vec * scalar;
 }
 
 template<typename T>
 Vector3<T> operator* (const Vector3<T>& vec1, const Vector3<T>& vec2)
 {
-    return Vector3<T> (vec1.x () * vec2.x (), vec1.y () * vec2.y (), vec1.z () * vec2.z ());
+    auto tmp = vec1;
+    tmp *= vec2;
+    return tmp;
 }
 
 template<typename T>
 Vector3<T> operator/ (const Vector3<T>& vec, const T& scalar)
 {
-    if (scalar == 0)
-        throw std::invalid_argument ("Can not divide vector by zero");
-
-    return Vector3<T> (vec.x () / scalar, vec.y () / scalar, vec.z () / scalar);
+    auto tmp = vec;
+    tmp /= scalar;
+    return tmp;
 }
 
 template<typename T>
