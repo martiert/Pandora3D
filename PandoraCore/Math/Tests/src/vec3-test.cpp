@@ -7,34 +7,34 @@ TEST (Vector3Test, construction)
     double tmp[] = {2.3, 3.1, 4.7};
 
     const Math::Vec3d vector_1;
-    EXPECT_EQ (0.0, vector_1.x ());
-    EXPECT_EQ (0.0, vector_1.y ());
-    EXPECT_EQ (0.0, vector_1.z ());
+    EXPECT_EQ (0.0, vector_1.x);
+    EXPECT_EQ (0.0, vector_1.y);
+    EXPECT_EQ (0.0, vector_1.z);
 
     const Math::Vec3d vector_2 (0.1, 2.3, 3.7);
-    EXPECT_EQ (0.1, vector_2.x ());
-    EXPECT_EQ (2.3, vector_2.y ());
-    EXPECT_EQ (3.7, vector_2.z ());
+    EXPECT_EQ (0.1, vector_2.x);
+    EXPECT_EQ (2.3, vector_2.y);
+    EXPECT_EQ (3.7, vector_2.z);
 
     const Math::Vec3d vector_3 (tmp);
-    EXPECT_EQ (tmp[0], vector_3.x ());
-    EXPECT_EQ (tmp[1], vector_3.y ());
-    EXPECT_EQ (tmp[2], vector_3.z ());
+    EXPECT_EQ (tmp[0], vector_3.x);
+    EXPECT_EQ (tmp[1], vector_3.y);
+    EXPECT_EQ (tmp[2], vector_3.z);
 
     auto vector_4 = vector_1;
-    EXPECT_EQ (vector_1.x (), vector_4.x ());
-    EXPECT_EQ (vector_1.y (), vector_4.y ());
-    EXPECT_EQ (vector_1.z (), vector_4.z ());
+    EXPECT_EQ (vector_1.x, vector_4.x);
+    EXPECT_EQ (vector_1.y, vector_4.y);
+    EXPECT_EQ (vector_1.z, vector_4.z);
 
     const Math::Vec3d vector_5 = tmp;
-    EXPECT_EQ (tmp[0], vector_5.x ());
-    EXPECT_EQ (tmp[1], vector_5.y ());
-    EXPECT_EQ (tmp[2], vector_5.z ());
+    EXPECT_EQ (tmp[0], vector_5.x);
+    EXPECT_EQ (tmp[1], vector_5.y);
+    EXPECT_EQ (tmp[2], vector_5.z);
 
     const Math::Vec3d vector_6 (vector_1);
-    EXPECT_EQ (vector_1.x (), vector_6.x ());
-    EXPECT_EQ (vector_1.y (), vector_6.y ());
-    EXPECT_EQ (vector_1.x (), vector_6.z ());
+    EXPECT_EQ (vector_1.x, vector_6.x);
+    EXPECT_EQ (vector_1.y, vector_6.y);
+    EXPECT_EQ (vector_1.x, vector_6.z);
 }
 
 TEST (Vector3Test, index_operator_valid_input)
@@ -73,10 +73,10 @@ TEST (Vector3Test, length)
     const Math::Vec3d vector_1 (2.3, 4.2, 1.2);
     const Math::Vec3d vector_2;
 
-    EXPECT_EQ ((vector_1.x ()*vector_1.x () + vector_1.y ()*vector_1.y () + vector_1.z ()*vector_1.z ()), vector_1.lengthSquared ());
+    EXPECT_EQ ((vector_1.x*vector_1.x + vector_1.y*vector_1.y + vector_1.z*vector_1.z), vector_1.lengthSquared ());
     EXPECT_EQ (0.0, vector_2.lengthSquared ());
 
-    EXPECT_EQ (std::sqrt (vector_1.x ()*vector_1.x () + vector_1.y ()*vector_1.y () + vector_1.z ()*vector_1.z ()), vector_1.length ());
+    EXPECT_EQ (std::sqrt (vector_1.x*vector_1.x + vector_1.y*vector_1.y + vector_1.z*vector_1.z), vector_1.length ());
     EXPECT_EQ (0.0, vector_2.lengthSquared ());
 }
 
@@ -97,9 +97,9 @@ TEST (Vector3Test, negation)
     const Math::Vec3d vec_1 (2.3, 4.2, 8.7);
     auto vec_2 = -vec_1;
 
-    EXPECT_EQ (-vec_2.x (), vec_1.x ());
-    EXPECT_EQ (-vec_2.y (), vec_1.y ());
-    EXPECT_EQ (-vec_2.z (), vec_1.z ());
+    EXPECT_EQ (-vec_2.x, vec_1.x);
+    EXPECT_EQ (-vec_2.y, vec_1.y);
+    EXPECT_EQ (-vec_2.z, vec_1.z);
 }
 
 TEST (Vector3Test, addition)
@@ -108,26 +108,26 @@ TEST (Vector3Test, addition)
     const Math::Vec3d vec_2 (4.3, 1.2, 5.6);
 
     auto vec_3 = vec_1 + vec_2;
-    EXPECT_EQ (vec_1.x () + vec_2.x (), vec_3.x ());
-    EXPECT_EQ (vec_1.y () + vec_2.y (), vec_3.y ());
-    EXPECT_EQ (vec_1.z () + vec_2.z (), vec_3.z ());
+    EXPECT_EQ (vec_1.x + vec_2.x, vec_3.x);
+    EXPECT_EQ (vec_1.y + vec_2.y, vec_3.y);
+    EXPECT_EQ (vec_1.z + vec_2.z, vec_3.z);
 
     vec_3 = vec_1 - vec_2;
-    EXPECT_EQ (vec_1.x () - vec_2.x (), vec_3.x ());
-    EXPECT_EQ (vec_1.y () - vec_2.y (), vec_3.y ());
-    EXPECT_EQ (vec_1.z () - vec_2.z (), vec_3.z ());
+    EXPECT_EQ (vec_1.x - vec_2.x, vec_3.x);
+    EXPECT_EQ (vec_1.y - vec_2.y, vec_3.y);
+    EXPECT_EQ (vec_1.z - vec_2.z, vec_3.z);
 
     vec_3 = vec_1;
     vec_3 += vec_2;
-    EXPECT_EQ (vec_1.x () + vec_2.x (), vec_3.x ());
-    EXPECT_EQ (vec_1.y () + vec_2.y (), vec_3.y ());
-    EXPECT_EQ (vec_1.z () + vec_2.z (), vec_3.z ());
+    EXPECT_EQ (vec_1.x + vec_2.x, vec_3.x);
+    EXPECT_EQ (vec_1.y + vec_2.y, vec_3.y);
+    EXPECT_EQ (vec_1.z + vec_2.z, vec_3.z);
 
     vec_3 = vec_1;
     vec_3 -= vec_2;
-    EXPECT_EQ (vec_1.x () - vec_2.x (), vec_3.x ());
-    EXPECT_EQ (vec_1.y () - vec_2.y (), vec_3.y ());
-    EXPECT_EQ (vec_1.z () - vec_2.z (), vec_3.z ());
+    EXPECT_EQ (vec_1.x - vec_2.x, vec_3.x);
+    EXPECT_EQ (vec_1.y - vec_2.y, vec_3.y);
+    EXPECT_EQ (vec_1.z - vec_2.z, vec_3.z);
 }
 
 TEST (Vector3Test, multiplication)
@@ -135,58 +135,58 @@ TEST (Vector3Test, multiplication)
     const Math::Vec3d vector_1 (3.2, 5.4, 1.2);
 
     auto res = vector_1 * 2.4;
-    EXPECT_EQ (vector_1.x () * 2.4, res.x ());
-    EXPECT_EQ (vector_1.y () * 2.4, res.y ());
-    EXPECT_EQ (vector_1.z () * 2.4, res.z ());
+    EXPECT_EQ (vector_1.x * 2.4, res.x);
+    EXPECT_EQ (vector_1.y * 2.4, res.y);
+    EXPECT_EQ (vector_1.z * 2.4, res.z);
 
     res = 2.4 * vector_1;
-    EXPECT_EQ (vector_1.x () * 2.4, res.x ());
-    EXPECT_EQ (vector_1.y () * 2.4, res.y ());
-    EXPECT_EQ (vector_1.z () * 2.4, res.z ());
+    EXPECT_EQ (vector_1.x * 2.4, res.x);
+    EXPECT_EQ (vector_1.y * 2.4, res.y);
+    EXPECT_EQ (vector_1.z * 2.4, res.z);
 
     res = vector_1 / 2.4;
-    EXPECT_EQ (vector_1.x () / 2.4, res.x ());
-    EXPECT_EQ (vector_1.y () / 2.4, res.y ());
-    EXPECT_EQ (vector_1.z () / 2.4, res.z ());
+    EXPECT_EQ (vector_1.x / 2.4, res.x);
+    EXPECT_EQ (vector_1.y / 2.4, res.y);
+    EXPECT_EQ (vector_1.z / 2.4, res.z);
 
     res = 2.3 * vector_1;
-    EXPECT_EQ (vector_1.x () * 2.3, res.x ());
-    EXPECT_EQ (vector_1.y () * 2.3, res.y ());
-    EXPECT_EQ (vector_1.z () * 2.3, res.z ());
+    EXPECT_EQ (vector_1.x * 2.3, res.x);
+    EXPECT_EQ (vector_1.y * 2.3, res.y);
+    EXPECT_EQ (vector_1.z * 2.3, res.z);
 
     const Math::Vec3d vector_2 (3.7, 7.5, 9.2);
     res = vector_1 * vector_2;
 
-    EXPECT_EQ (vector_1.x () * vector_2.x (), res.x ());
-    EXPECT_EQ (vector_1.y () * vector_2.y (), res.y ());
-    EXPECT_EQ (vector_1.z () * vector_2.z (), res.z ());
+    EXPECT_EQ (vector_1.x * vector_2.x, res.x);
+    EXPECT_EQ (vector_1.y * vector_2.y, res.y);
+    EXPECT_EQ (vector_1.z * vector_2.z, res.z);
 
     EXPECT_THROW (vector_1 / 0.0, std::invalid_argument);
 
     const Math::Vec3d vector_3 (4.3, 2.3, 1.7);
     res = vector_1.cross (vector_3);
 
-    EXPECT_EQ (vector_1.y () * vector_3.z () - vector_1.z () * vector_3.y (), res.x ());
-    EXPECT_EQ (vector_1.z () * vector_3.x () - vector_1.x () * vector_3.z (), res.y ());
-    EXPECT_EQ (vector_1.x () * vector_3.y () - vector_1.y () * vector_3.x (), res.z ());
+    EXPECT_EQ (vector_1.y * vector_3.z - vector_1.z * vector_3.y, res.x);
+    EXPECT_EQ (vector_1.z * vector_3.x - vector_1.x * vector_3.z, res.y);
+    EXPECT_EQ (vector_1.x * vector_3.y - vector_1.y * vector_3.x, res.z);
 
     auto vector_4 = vector_1;
     vector_4 *= 2.4;
-    EXPECT_EQ (vector_1.x () * 2.4, vector_4.x ());
-    EXPECT_EQ (vector_1.y () * 2.4, vector_4.y ());
-    EXPECT_EQ (vector_1.z () * 2.4, vector_4.z ());
+    EXPECT_EQ (vector_1.x * 2.4, vector_4.x);
+    EXPECT_EQ (vector_1.y * 2.4, vector_4.y);
+    EXPECT_EQ (vector_1.z * 2.4, vector_4.z);
 
     vector_4 = vector_3;
     vector_4 /= 4.7;
-    EXPECT_EQ (vector_3.x () / 4.7, vector_4.x ());
-    EXPECT_EQ (vector_3.y () / 4.7, vector_4.y ());
-    EXPECT_EQ (vector_3.z () / 4.7, vector_4.z ());
+    EXPECT_EQ (vector_3.x / 4.7, vector_4.x);
+    EXPECT_EQ (vector_3.y / 4.7, vector_4.y);
+    EXPECT_EQ (vector_3.z / 4.7, vector_4.z);
 
     vector_4 = vector_1;
     vector_4 *= vector_3;
-    EXPECT_EQ (vector_1.x () * vector_3.x (), vector_4.x ());
-    EXPECT_EQ (vector_1.y () * vector_3.y (), vector_4.y ());
-    EXPECT_EQ (vector_1.z () * vector_3.z (), vector_4.z ());
+    EXPECT_EQ (vector_1.x * vector_3.x, vector_4.x);
+    EXPECT_EQ (vector_1.y * vector_3.y, vector_4.y);
+    EXPECT_EQ (vector_1.z * vector_3.z, vector_4.z);
 
     EXPECT_THROW (vector_4 /= 0.0, std::invalid_argument);
 }

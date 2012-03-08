@@ -2,76 +2,28 @@
 
 template<typename T>
 Vector4<T>::Vector4 ()
-    : _x (0), _y (0), _z (0), _w (0)
+    : x (0), y (0), z (0), w (0)
 { }
 
 template<typename T>
 Vector4<T>::Vector4 (const T& x, const T& y, const T& z, const T& w)
-    : _x (x), _y (y), _z (z), _w (w)
+    : x (x), y (y), z (z), w (w)
 { }
 
 template<typename T>
 Vector4<T>::Vector4 (const Vector4<T>& vec)
-    : _x (vec._x), _y (vec._y), _z (vec._z), _w (vec._w)
+    : x (vec.x), y (vec.y), z (vec.z), w (vec.w)
 { }
 
 template<typename T>
 Vector4<T>::Vector4 (const T data[4])
-    : _x (data[0]), _y (data[1]), _z (data[2]), _w (data[3])
+    : x (data[0]), y (data[1]), z (data[2]), w (data[3])
 { }
 
 template<typename T>
     Vector4<T>::Vector4 (const Vector3<T>& vec)
-: _x (vec.x ()), _y (vec.y ()), _z (vec.z ()), _w (1)
+: x (vec.x), y (vec.y), z (vec.z), w (1)
 { }
-
-template<typename T>
-T& Vector4<T>::x ()
-{
-    return _x;
-}
-
-template<typename T>
-T& Vector4<T>::y ()
-{
-    return _y;
-}
-
-template<typename T>
-T& Vector4<T>::z ()
-{
-    return _z;
-}
-
-template<typename T>
-T& Vector4<T>::w ()
-{
-    return _w;
-}
-
-template<typename T>
-T Vector4<T>::x () const
-{
-    return _x;
-}
-
-template<typename T>
-T Vector4<T>::y () const
-{
-    return _y;
-}
-
-template<typename T>
-T Vector4<T>::z () const
-{
-    return _z;
-}
-
-template<typename T>
-T Vector4<T>::w () const
-{
-    return _w;
-}
 
 template<typename T>
 T& Vector4<T>::operator[] (const size_t i)
@@ -80,13 +32,13 @@ T& Vector4<T>::operator[] (const size_t i)
         throw std::out_of_range ("Index out of range for 4D vectors");
 
     if (i == 0)
-        return _x;
+        return x;
     if (i == 1)
-        return _y;
+        return y;
     if (i == 2)
-        return _z;
+        return z;
 
-    return _w;
+    return w;
 }
 
 template<typename T>
@@ -97,22 +49,22 @@ T Vector4<T>::operator[] (const size_t i) const
 
 
     if (i == 0)
-        return _x;
+        return x;
     if (i == 1)
-        return _y;
+        return y;
     if (i == 2)
-        return _z;
+        return z;
 
-    return _w;
+    return w;
 }
 
 template<typename T>
 Vector4<T>& Vector4<T>::operator+= (const Vector4<T>& vec)
 {
-    _x += vec.x ();
-    _y += vec.y ();
-    _z += vec.z ();
-    _w += vec.w ();
+    x += vec.x;
+    y += vec.y;
+    z += vec.z;
+    w += vec.w;
 
     return *this;
 }
@@ -120,10 +72,10 @@ Vector4<T>& Vector4<T>::operator+= (const Vector4<T>& vec)
 template<typename T>
 Vector4<T>& Vector4<T>::operator-= (const Vector4<T>& vec)
 {
-    _x -= vec.x ();
-    _y -= vec.y ();
-    _z -= vec.z ();
-    _w -= vec.w ();
+    x -= vec.x;
+    y -= vec.y;
+    z -= vec.z;
+    w -= vec.w;
 
     return *this;
 }
@@ -131,10 +83,10 @@ Vector4<T>& Vector4<T>::operator-= (const Vector4<T>& vec)
 template<typename T>
 Vector4<T>& Vector4<T>::operator*= (const Vector4<T>& vec)
 {
-    _x *= vec.x ();
-    _y *= vec.y ();
-    _z *= vec.z ();
-    _w *= vec.w ();
+    x *= vec.x;
+    y *= vec.y;
+    z *= vec.z;
+    w *= vec.w;
 
     return *this;
 }
@@ -142,10 +94,10 @@ Vector4<T>& Vector4<T>::operator*= (const Vector4<T>& vec)
 template<typename T>
 Vector4<T>& Vector4<T>::operator*= (const T& scalar)
 {
-    _x *= scalar;
-    _y *= scalar;
-    _z *= scalar;
-    _w *= scalar;
+    x *= scalar;
+    y *= scalar;
+    z *= scalar;
+    w *= scalar;
 
     return *this;
 }
@@ -156,10 +108,10 @@ Vector4<T>& Vector4<T>::operator/= (const T& scalar)
     if (scalar == 0)
         throw std::invalid_argument ("Out of bounds of a 4D vector.");
 
-    _x /= scalar;
-    _y /= scalar;
-    _z /= scalar;
-    _w /= scalar;
+    x /= scalar;
+    y /= scalar;
+    z /= scalar;
+    w /= scalar;
 
     return *this;
 }
@@ -173,13 +125,13 @@ T Vector4<T>::length () const
 template<typename T>
 T Vector4<T>::lengthSquared () const
 {
-    return _x * _x + _y * _y + _z * _z + _w * _w;
+    return x * x + y * y + z * z + w * w;
 }
 
 template<typename T>
 T Vector4<T>::dot (const Vector4<T>& vec) const
 {
-    return _x * vec.x () + _y * vec.y () + _z * vec.z () + _w * vec.w ();
+    return x * vec.x + y * vec.y + z * vec.z + w * vec.w;
 }
 
 template<typename T>
@@ -190,10 +142,10 @@ Vector4<T>& Vector4<T>::normalize ()
     if (len == 0)
         throw std::domain_error ("Cannot normalize a zero vector");
 
-    _x /= len;
-    _y /= len;
-    _z /= len;
-    _w /= len;
+    x /= len;
+    y /= len;
+    z /= len;
+    w /= len;
 
     return *this;
 }
@@ -201,25 +153,25 @@ Vector4<T>& Vector4<T>::normalize ()
 template<typename T>
 Vector4<T> operator- (const Vector4<T>& vec)
 {
-    return Vector4<T> (-vec.x (), -vec.y (), -vec.z (), -vec.w ());
+    return Vector4<T> (-vec.x, -vec.y, -vec.z, -vec.w);
 }
 
 template<typename T>
 Vector4<T> operator+ (const Vector4<T>& vec_1, const Vector4<T>& vec_2)
 {
-    return Vector4<T> (vec_1.x () + vec_2.x (),
-                        vec_1.y () + vec_2.y (),
-                        vec_1.z () + vec_2.z (),
-                        vec_1.w () + vec_2.w ());
+    return Vector4<T> (vec_1.x + vec_2.x,
+                        vec_1.y + vec_2.y,
+                        vec_1.z + vec_2.z,
+                        vec_1.w + vec_2.w);
 }
 
 template<typename T>
 Vector4<T> operator- (const Vector4<T>& vec_1, const Vector4<T>& vec_2)
 {
-    return Vector4<T> (vec_1.x () - vec_2.x (),
-                        vec_1.y () - vec_2.y (),
-                        vec_1.z () - vec_2.z (),
-                        vec_1.w () - vec_2.w ());
+    return Vector4<T> (vec_1.x - vec_2.x,
+                        vec_1.y - vec_2.y,
+                        vec_1.z - vec_2.z,
+                        vec_1.w - vec_2.w);
 }
 
 template<typename T>

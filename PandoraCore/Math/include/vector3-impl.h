@@ -2,59 +2,23 @@
 
 template<typename T>
 Vector3<T>::Vector3 ()
-    : _x (0), _y (0), _z (0)
+    : x (0), y (0), z (0)
 {}
 
 template<typename T>
 Vector3<T>::Vector3 (const T& x, const T& y, const T& z)
-    : _x (x), _y (y), _z (z)
+    : x (x), y (y), z (z)
 {}
 
 template<typename T>
 Vector3<T>::Vector3 (const Vector3<T>& vec)
-    : _x (vec._x), _y (vec._y), _z (vec._z)
+    : x (vec.x), y (vec.y), z (vec.z)
 {}
 
 template<typename T>
 Vector3<T>::Vector3 (const T data[3])
-    : _x (data[0]), _y (data[1]), _z (data[2])
+    : x (data[0]), y (data[1]), z (data[2])
 {}
-
-template<typename T>
-T& Vector3<T>::x ()
-{
-    return _x;
-}
-
-template<typename T>
-T& Vector3<T>::y ()
-{
-    return _y;
-}
-
-template<typename T>
-T& Vector3<T>::z ()
-{
-    return _z;
-}
-
-template<typename T>
-T Vector3<T>::x () const
-{
-    return _x;
-}
-
-template<typename T>
-T Vector3<T>::y () const
-{
-    return _y;
-}
-
-template<typename T>
-T Vector3<T>::z () const
-{
-    return _z;
-}
 
 template<typename T>
 T& Vector3<T>::operator[] (const size_t i)
@@ -63,11 +27,11 @@ T& Vector3<T>::operator[] (const size_t i)
         throw std::out_of_range ("Index out of range for 3D vectors");
 
     if (i == 0)
-        return _x;
+        return x;
     if (i == 1)
-        return _y;
+        return y;
 
-    return _z;
+    return z;
 }
 
 template<typename T>
@@ -77,19 +41,19 @@ T Vector3<T>::operator[] (const size_t i) const
         throw std::out_of_range ("Index out of range for 3D vectors");
 
     if (i == 0)
-        return _x;
+        return x;
     if (i == 1)
-        return _y;
+        return y;
 
-    return _z;
+    return z;
 }
 
 template<typename T>
 Vector3<T>& Vector3<T>::operator+= (const Vector3<T>& vec)
 {
-    _x += vec.x ();
-    _y += vec.y ();
-    _z += vec.z ();
+    x += vec.x;
+    y += vec.y;
+    z += vec.z;
 
     return *this;
 }
@@ -97,9 +61,9 @@ Vector3<T>& Vector3<T>::operator+= (const Vector3<T>& vec)
 template<typename T>
 Vector3<T>& Vector3<T>::operator-= (const Vector3<T>& vec)
 {
-    _x -= vec.x ();
-    _y -= vec.y ();
-    _z -= vec.z ();
+    x -= vec.x;
+    y -= vec.y;
+    z -= vec.z;
 
     return *this;
 }
@@ -107,9 +71,9 @@ Vector3<T>& Vector3<T>::operator-= (const Vector3<T>& vec)
 template<typename T>
 Vector3<T>& Vector3<T>::operator*= (const Vector3<T>& vec)
 {
-    _x *= vec.x ();
-    _y *= vec.y ();
-    _z *= vec.z ();
+    x *= vec.x;
+    y *= vec.y;
+    z *= vec.z;
 
     return *this;
 }
@@ -117,9 +81,9 @@ Vector3<T>& Vector3<T>::operator*= (const Vector3<T>& vec)
 template<typename T>
 Vector3<T>& Vector3<T>::operator*= (const T& scalar)
 {
-    _x *= scalar;
-    _y *= scalar;
-    _z *= scalar;
+    x *= scalar;
+    y *= scalar;
+    z *= scalar;
 
     return *this;
 }
@@ -130,9 +94,9 @@ Vector3<T>& Vector3<T>::operator/= (const T& scalar)
     if (scalar == 0)
         throw std::invalid_argument ("Can not divide vector by zero");
 
-    _x /= scalar;
-    _y /= scalar;
-    _z /= scalar;
+    x /= scalar;
+    y /= scalar;
+    z /= scalar;
 
     return *this;
 }
@@ -140,7 +104,7 @@ Vector3<T>& Vector3<T>::operator/= (const T& scalar)
 template<typename T>
 T Vector3<T>::dot (const Vector3<T>& vec) const
 {
-    return (_x * vec.x () + _y * vec.y () + _z * vec.z ());
+    return (x * vec.x + y * vec.y + z * vec.z);
 }
 
 template<typename T>
@@ -170,9 +134,9 @@ template<typename T>
 Vector3<T> Vector3<T>::cross (const Vector3<T>& other) const
 {
     Vector3<T> res;
-    res.x () = _y * other.z () - _z * other.y ();
-    res.y () = _z * other.x () - _x * other.z ();
-    res.z () = _x * other.y () - _y * other.x ();
+    res.x = y * other.z - z * other.y;
+    res.y = z * other.x - x * other.z;
+    res.z = x * other.y - y * other.x;
 
     return res;
 }
@@ -180,7 +144,7 @@ Vector3<T> Vector3<T>::cross (const Vector3<T>& other) const
 template<typename T>
 Vector3<T> operator- (const Vector3<T>& vec)
 {
-    return Vector3<T> (-vec.x (), -vec.y (), -vec.z ());
+    return Vector3<T> (-vec.x, -vec.y, -vec.z);
 }
 
 template<typename T>
@@ -232,7 +196,7 @@ Vector3<T> operator/ (const Vector3<T>& vec, const T& scalar)
 template<typename T>
 bool operator== (const Vector3<T>& vec1, const Vector3<T>& vec2)
 {
-    return (vec1.x () == vec2.x () && vec1.y () == vec2.y () && vec1.z () == vec2.z ());
+    return (vec1.x == vec2.x && vec1.y == vec2.y && vec1.z == vec2.z);
 }
 
 template<typename T>
@@ -244,17 +208,17 @@ bool operator!= (const Vector3<T>& vec1, const Vector3<T>& vec2)
 template<typename T>
 bool operator< (const Vector3<T>& vec1, const Vector3<T>& vec2)
 {
-    if (vec1.x () < vec2.x ())
+    if (vec1.x < vec2.x)
         return true;
-    if (vec1.x () > vec2.x ())
+    if (vec1.x > vec2.x)
         return false;
 
-    if (vec1.y () < vec2.y ())
+    if (vec1.y < vec2.y)
         return true;
-    if (vec1.y () > vec2.y ())
+    if (vec1.y > vec2.y)
         return false;
 
-    if (vec1.z () < vec2.z ())
+    if (vec1.z < vec2.z)
         return true;
 
     return false;
@@ -263,17 +227,17 @@ bool operator< (const Vector3<T>& vec1, const Vector3<T>& vec2)
 template<typename T>
 bool operator> (const Vector3<T>& vec1, const Vector3<T>& vec2)
 {
-    if (vec1.x () > vec2.x ())
+    if (vec1.x > vec2.x)
         return true;
-    if (vec1.x () < vec2.x ())
+    if (vec1.x < vec2.x)
         return false;
 
-    if (vec1.y () > vec2.y ())
+    if (vec1.y > vec2.y)
         return true;
-    if (vec1.y () < vec2.y ())
+    if (vec1.y < vec2.y)
         return false;
 
-    if (vec1.z () > vec2.z ())
+    if (vec1.z > vec2.z)
         return true;
 
     return false;

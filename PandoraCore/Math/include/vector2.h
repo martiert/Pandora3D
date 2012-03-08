@@ -10,16 +10,14 @@ namespace Math
     class Vector2
     {
         public:
+            T x;
+            T y;
+
+        public:
             Vector2 ();
             Vector2 (const T x, const T y);
             Vector2 (const Vector2& vector);
             Vector2 (const T data[2]);
-
-            T x () const;
-            T y () const;
-
-            T& x ();
-            T& y ();
 
             T& operator[] (const size_t i);
             T operator[] (const size_t i) const;
@@ -37,9 +35,6 @@ namespace Math
             Vector2 perp () const;
 
             void normalize ();
-        private:
-            T _x;
-            T _y;
     };
 
     template<typename T>

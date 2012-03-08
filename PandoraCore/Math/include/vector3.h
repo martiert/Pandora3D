@@ -10,18 +10,15 @@ namespace Math
     class Vector3
     {
         public:
+            T x;
+            T y;
+            T z;
+
+        public:
             Vector3 ();
             Vector3 (const T& x, const T& y, const T& z);
             Vector3 (const Vector3& vec);
             Vector3 (const T data[3]);
-
-            T& x ();
-            T& y ();
-            T& z ();
-
-            T x () const;
-            T y () const;
-            T z () const;
 
             T& operator[] (const size_t i);
             T operator[] (const size_t i) const;
@@ -40,10 +37,6 @@ namespace Math
             void normalize ();
 
             Vector3 cross (const Vector3& other) const;
-        private:
-            T _x;
-            T _y;
-            T _z;
     };
 
     template<typename T>

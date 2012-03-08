@@ -7,24 +7,24 @@ TEST (Vector2Test, construction)
     double tmp[] = {2.3, 1.2};
 
     const Math::Vec2d vector_1;
-    EXPECT_EQ (0.0, vector_1.x ());
-    EXPECT_EQ (0.0, vector_1.y ());
+    EXPECT_EQ (0.0, vector_1.x);
+    EXPECT_EQ (0.0, vector_1.y);
 
     const Math::Vec2d vector_2 (0.1, 2.3);
-    EXPECT_EQ (0.1, vector_2.x ());
-    EXPECT_EQ (2.3, vector_2.y ());
+    EXPECT_EQ (0.1, vector_2.x);
+    EXPECT_EQ (2.3, vector_2.y);
 
     const Math::Vec2d vector_3 (tmp);
-    EXPECT_EQ (tmp[0], vector_3.x ());
-    EXPECT_EQ (tmp[1], vector_3.y ());
+    EXPECT_EQ (tmp[0], vector_3.x);
+    EXPECT_EQ (tmp[1], vector_3.y);
 
     auto vector_4 = vector_1;
-    EXPECT_EQ (vector_1.x (), vector_4.x ());
-    EXPECT_EQ (vector_1.y (), vector_4.y ());
+    EXPECT_EQ (vector_1.x, vector_4.x);
+    EXPECT_EQ (vector_1.y, vector_4.y);
 
     const Math::Vec2d vector_5 = tmp;
-    EXPECT_EQ (tmp[0], vector_5.x ());
-    EXPECT_EQ (tmp[1], vector_5.y ());
+    EXPECT_EQ (tmp[0], vector_5.x);
+    EXPECT_EQ (tmp[1], vector_5.y);
 }
 
 TEST (Vector2Test, index_operator_valid_input)
@@ -60,10 +60,10 @@ TEST (Vector2Test, length)
     const Math::Vec2d vector_1 (2.3, 1.2);
     const Math::Vec2d vector_2;
 
-    EXPECT_EQ ((vector_1.x () * vector_1.x () + vector_1.y () * vector_1.y ()), vector_1.lengthSquared ());
+    EXPECT_EQ ((vector_1.x * vector_1.x + vector_1.y * vector_1.y), vector_1.lengthSquared ());
     EXPECT_EQ (0.0, vector_2.lengthSquared ());
 
-    EXPECT_EQ (std::sqrt (vector_1.x () * vector_1.x () + vector_1.y () * vector_1.y ()), vector_1.length ());
+    EXPECT_EQ (std::sqrt (vector_1.x * vector_1.x + vector_1.y * vector_1.y), vector_1.length ());
     EXPECT_EQ (0.0, vector_2.length ());
 }
 
@@ -86,8 +86,8 @@ TEST (Vector2Test, negation)
     const Math::Vec2d vec_1 (2.3, 4.2);
     auto vec_2 = -vec_1;
 
-    EXPECT_EQ (-vec_1.x (), vec_2.x ());
-    EXPECT_EQ (-vec_1.y (), vec_2.y ());
+    EXPECT_EQ (-vec_1.x, vec_2.x);
+    EXPECT_EQ (-vec_1.y, vec_2.y);
 }
 
 TEST (Vector2Test, addition)
@@ -97,12 +97,12 @@ TEST (Vector2Test, addition)
 
     auto res = vector_1 + vector_2;
 
-    EXPECT_EQ (vector_1.x () + vector_2.x (), res.x ());
-    EXPECT_EQ (vector_1.y () + vector_2.y (), res.y ());
+    EXPECT_EQ (vector_1.x + vector_2.x, res.x);
+    EXPECT_EQ (vector_1.y + vector_2.y, res.y);
 
     res = vector_1 - vector_2;
-    EXPECT_EQ (vector_1.x () - vector_2.x (), res.x ());
-    EXPECT_EQ (vector_1.y () - vector_2.y (), res.y ());
+    EXPECT_EQ (vector_1.x - vector_2.x, res.x);
+    EXPECT_EQ (vector_1.y - vector_2.y, res.y);
 }
 
 TEST (Vector2Test, multiplication)
@@ -110,16 +110,16 @@ TEST (Vector2Test, multiplication)
     const Math::Vec2d vector_1 (2.3, 1.2);
 
     auto res = vector_1 * 2.3;
-    EXPECT_EQ (vector_1.x () * 2.3, res.x ());
-    EXPECT_EQ (vector_1.y () * 2.3, res.y ());
+    EXPECT_EQ (vector_1.x * 2.3, res.x);
+    EXPECT_EQ (vector_1.y * 2.3, res.y);
 
     res = vector_1 / 2.3;
-    EXPECT_EQ (vector_1.x () / 2.3, res.x ());
-    EXPECT_EQ (vector_1.y () / 2.3, res.y ());
+    EXPECT_EQ (vector_1.x / 2.3, res.x);
+    EXPECT_EQ (vector_1.y / 2.3, res.y);
 
     res = 2.3 * vector_1;
-    EXPECT_EQ (vector_1.x () * 2.3, res.x ());
-    EXPECT_EQ (vector_1.y () * 2.3, res.y ());
+    EXPECT_EQ (vector_1.x * 2.3, res.x);
+    EXPECT_EQ (vector_1.y * 2.3, res.y);
 
     EXPECT_THROW (vector_1 / 0.0, std::invalid_argument);
 
@@ -128,11 +128,11 @@ TEST (Vector2Test, multiplication)
 
     res = vec1 * vec2;
 
-    EXPECT_EQ (vec1.x () * vec2.x (), res.x ());
-    EXPECT_EQ (vec1.y () * vec2.y (), res.y ());
+    EXPECT_EQ (vec1.x * vec2.x, res.x);
+    EXPECT_EQ (vec1.y * vec2.y, res.y);
 
     auto dot = vec1.dot (vec2);
-    EXPECT_EQ ((vec1.x () * vec2.x () + vec1.y () * vec2.y ()), dot);
+    EXPECT_EQ ((vec1.x * vec2.x + vec1.y * vec2.y), dot);
 }
 
 TEST (Vector2Test, perp_vector_is_only_zero_vec_for_zero_vector)
@@ -145,19 +145,19 @@ TEST (Vector2Test, perp_vector_is_only_zero_vec_for_zero_vector)
 
         const Math::Vec2d perp = vec.perp ();
 
-        if (vec.x () != 0.0 || vec.y () != 0.0)
-            EXPECT_TRUE (perp.x () != 0.0 || perp.y () != 0.0);
+        if (vec.x != 0.0 || vec.y != 0.0)
+            EXPECT_TRUE (perp.x != 0.0 || perp.y != 0.0);
         else {
-            EXPECT_EQ (0.0, perp.x ());
-            EXPECT_EQ (0.0, perp.y ());
+            EXPECT_EQ (0.0, perp.x);
+            EXPECT_EQ (0.0, perp.y);
         }
     }
 
     const Math::Vec2d vec (0.0, 0.0);
     auto perp = vec.perp ();
 
-    EXPECT_EQ (0.0, perp.x ());
-    EXPECT_EQ (0.0, perp.y ());
+    EXPECT_EQ (0.0, perp.x);
+    EXPECT_EQ (0.0, perp.y);
 }
 
 TEST (Vector2Test, dot_product_with_perp_vector_is_zero)
@@ -182,8 +182,8 @@ TEST (Vector2Test, addition_to_vector2)
     auto vec3 = vec1 + vec2;
     vec2 += vec1;
 
-    EXPECT_EQ (vec2.x (), vec2.x ());
-    EXPECT_EQ (vec2.y (), vec2.y ());
+    EXPECT_EQ (vec2.x, vec2.x);
+    EXPECT_EQ (vec2.y, vec2.y);
 }
 
 TEST (Vector2Test, subtraction_from_vector2)
@@ -194,8 +194,8 @@ TEST (Vector2Test, subtraction_from_vector2)
     auto vec3 = vec1 - vec2;
     vec2 -= vec1;
 
-    EXPECT_EQ (vec2.x (), vec2.x ());
-    EXPECT_EQ (vec2.y (), vec2.y ());
+    EXPECT_EQ (vec2.x, vec2.x);
+    EXPECT_EQ (vec2.y, vec2.y);
 }
 
 TEST (Vector2Test, multiplication_inplace)
@@ -206,15 +206,15 @@ TEST (Vector2Test, multiplication_inplace)
     auto vec2 = vec1 * scalar;
     vec1 *= scalar;
 
-    EXPECT_EQ (vec1.x (), vec2.x ());
-    EXPECT_EQ (vec1.y (), vec2.y ());
+    EXPECT_EQ (vec1.x, vec2.x);
+    EXPECT_EQ (vec1.y, vec2.y);
 
     const Math::Vec2d vec3 (4.5, 2.3);
     vec2 = vec1 * vec3;
     vec1 *= vec3;
 
-    EXPECT_EQ (vec1.x (), vec2.x ());
-    EXPECT_EQ (vec1.y (), vec2.y ());
+    EXPECT_EQ (vec1.x, vec2.x);
+    EXPECT_EQ (vec1.y, vec2.y);
 }
 
 TEST (Vector2Test, division_inplace)
@@ -225,8 +225,8 @@ TEST (Vector2Test, division_inplace)
     auto vec2 = vec1 / scalar;
     vec1 /= scalar;
 
-    EXPECT_EQ (vec1.x (), vec2.x ());
-    EXPECT_EQ (vec1.y (), vec2.y ());
+    EXPECT_EQ (vec1.x, vec2.x);
+    EXPECT_EQ (vec1.y, vec2.y);
 }
 
 TEST (Vector2Test, test_inplace_division_by_zero_throws_invalid_argument)
