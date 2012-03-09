@@ -2764,22 +2764,15 @@ void PrettyUnitTestResultPrinter::OnTestPartResult(
 }
 
 void PrettyUnitTestResultPrinter::OnTestEnd(const TestInfo& test_info) {
-  if (test_info.result()->Passed()) {
-    ColoredPrintf(COLOR_GREEN, "[  OK  ] ");
-  } else {
+  if (!test_info.result()->Passed()) {
     ColoredPrintf(COLOR_RED, "[FAILED] ");
-  }
-  PrintTestName(test_case_name_.c_str(), test_info.name());
-  if (test_info.result()->Failed())
-    PrintFullTestCommentIfPresent(test_info);
+    PrintTestName(test_case_name_.c_str(), test_info.name());
+    if (test_info.result()->Failed())
+      PrintFullTestCommentIfPresent(test_info);
 
-  if (GTEST_FLAG(print_time)) {
-    printf(" (%s ms)\n", internal::StreamableToString(
-           test_info.result()->elapsed_time()).c_str());
-  } else {
     printf("\n");
+    fflush(stdout);
   }
-  fflush(stdout);
 }
 
 void PrettyUnitTestResultPrinter::OnTestCaseEnd(const TestCase& test_case) {
@@ -2789,7 +2782,7 @@ void PrettyUnitTestResultPrinter::OnTestCaseEnd(const TestCase& test_case) {
   const internal::String counts =
       FormatCountableNoun(test_case.test_to_run_count(), "test", "tests");
   ColoredPrintf(COLOR_GREEN, "[------] ");
-  printf("%s from %s (%s ms total)\n\n",
+  printf("%s from %s (%s ms total)\n",
          counts.c_str(), test_case_name_.c_str(),
          internal::StreamableToString(test_case.elapsed_time()).c_str());
   fflush(stdout);
@@ -2826,15 +2819,6 @@ void PrettyUnitTestResultPrinter::PrintFailedTests(const UnitTest& unit_test) {
 
 void PrettyUnitTestResultPrinter::OnTestIterationEnd(const UnitTest& unit_test,
                                                      int /*iteration*/) {
-  ColoredPrintf(COLOR_GREEN,  "[======] ");
-  printf("%s from %s ran.",
-         FormatTestCount(unit_test.test_to_run_count()).c_str(),
-         FormatTestCaseCount(unit_test.test_case_to_run_count()).c_str());
-  if (GTEST_FLAG(print_time)) {
-    printf(" (%s ms total)",
-           internal::StreamableToString(unit_test.elapsed_time()).c_str());
-  }
-  printf("\n");
   ColoredPrintf(COLOR_GREEN,  "[PASSED] ");
   printf("%s.\n", FormatTestCount(unit_test.successful_test_count()).c_str());
 
