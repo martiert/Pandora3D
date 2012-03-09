@@ -2739,40 +2739,16 @@ void PrettyUnitTestResultPrinter::OnTestIterationStart(
                   "Note: Randomizing tests' orders with a seed of %d .\n",
                   unit_test.random_seed());
   }
-
-  ColoredPrintf(COLOR_GREEN,  "[======] ");
-  printf("Running %s from %s.\n",
-         FormatTestCount(unit_test.test_to_run_count()).c_str(),
-         FormatTestCaseCount(unit_test.test_case_to_run_count()).c_str());
-  fflush(stdout);
 }
 
 void PrettyUnitTestResultPrinter::OnEnvironmentsSetUpStart(
     const UnitTest& /*unit_test*/) {
-  ColoredPrintf(COLOR_GREEN,  "[------] ");
-  printf("Global test environment set-up.\n");
-  fflush(stdout);
 }
 
-void PrettyUnitTestResultPrinter::OnTestCaseStart(const TestCase& test_case) {
-  test_case_name_ = test_case.name();
-  const internal::String counts =
-      FormatCountableNoun(test_case.test_to_run_count(), "test", "tests");
-  ColoredPrintf(COLOR_GREEN, "[------] ");
-  printf("%s from %s", counts.c_str(), test_case_name_.c_str());
-  if (test_case.type_param() == NULL) {
-    printf("\n");
-  } else {
-    printf(", where TypeParam = %s\n", test_case.type_param());
-  }
-  fflush(stdout);
+void PrettyUnitTestResultPrinter::OnTestCaseStart(const TestCase& /*test_case*/) {
 }
 
 void PrettyUnitTestResultPrinter::OnTestStart(const TestInfo& /* test_info */) {
-  // ColoredPrintf(COLOR_GREEN,  "[ RUN      ] ");
-  // PrintTestName(test_case_name_.c_str(), test_info.name());
-  // printf("\n");
-  // fflush(stdout);
 }
 
 // Called after an assertion failure.
@@ -2821,9 +2797,6 @@ void PrettyUnitTestResultPrinter::OnTestCaseEnd(const TestCase& test_case) {
 
 void PrettyUnitTestResultPrinter::OnEnvironmentsTearDownStart(
     const UnitTest& /*unit_test*/) {
-  ColoredPrintf(COLOR_GREEN,  "[------] ");
-  printf("Global test environment tear-down\n");
-  fflush(stdout);
 }
 
 // Internal helper for printing the list of failed tests.
