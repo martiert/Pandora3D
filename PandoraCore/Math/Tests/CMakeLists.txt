@@ -4,6 +4,7 @@ INCLUDE_DIRECTORIES ("${gtest_SOURCE_DIR}/include")
 INCLUDE_DIRECTORIES ("${Math_SOURCE_DIR}/include")
 
 SET (src
+    src/matrix2-test.cpp
     src/vec4-test.cpp
     src/vec3-test.cpp
     src/vec2-test.cpp

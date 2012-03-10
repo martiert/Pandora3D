@@ -1,5 +1,5 @@
-#ifndef MATH_VECTOR2_HPP_INCLUDED
-#define MATH_VECTOR2_HPP_INCLUDED
+#ifndef MATH_VECTOR2_H_INCLUDED
+#define MATH_VECTOR2_H_INCLUDED
 
 #include <stdexcept>
 #include <cmath>
@@ -38,6 +38,11 @@ namespace Math
 
             void normalize ();
     };
+
+    typedef Vector2<float> Vec2f;
+    typedef Vector2<double> Vec2d;
+    typedef Vector2<int> Vec2i;
+    typedef Vector2<unsigned int> Vec2u;
 
     template<typename T>
     Vector2<T> operator- (const Vector2<T>& vec);
@@ -87,9 +92,6 @@ namespace Math
 #define VECTOR2_INCLUDE_FILE
 #include "vector2-impl.h"
 #undef VECTOR2_INCLUDE_FILE
-
-    typedef Vector2<float> Vec2f;
-    typedef Vector2<double> Vec2d;
 }
 
-#endif // MATH_VECTOR2_HPP_INCLUDED
+#endif // MATH_VECTOR2_H_INCLUDED

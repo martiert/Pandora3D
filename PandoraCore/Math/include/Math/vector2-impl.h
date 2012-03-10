@@ -229,7 +229,5 @@ void generateOrthonormalBasis (Vector2<T>& vec1, Vector2<T>& vec2)
 }
 
 #else // VECTOR2_INCLUDE_FILE
-
 #error "Never include this file anywhere but vector2.h"
-
 #endif // VECTOR2_INCLUDE_FILE

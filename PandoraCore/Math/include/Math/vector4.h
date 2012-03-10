@@ -42,6 +42,11 @@ namespace Math
             Vector4& normalize ();
     };
 
+    typedef Vector4<float> Vec4f;
+    typedef Vector4<double> Vec4d;
+    typedef Vector4<int> Vec4i;
+    typedef Vector4<unsigned int> Vec4u;
+
     template<typename T>
     Vector4<T> operator- (const Vector4<T>& vec);
 
@@ -84,11 +89,6 @@ namespace Math
 #define VECTOR4_INCLUDE_FILE
 #include "vector4-impl.h"
 #undef VECTOR4_INCLUDE_FILE
-
-    typedef Vector4<float> Vec4f;
-    typedef Vector4<double> Vec4d;
-    typedef Vector4<int> Vec4i;
-    typedef Vector4<unsigned int> Vec4u;
 }
 
 #endif // MATH_VECTOR4_HPP_INCLUDED

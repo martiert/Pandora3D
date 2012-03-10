@@ -41,6 +41,11 @@ namespace Math
             Vector3 cross (const Vector3& other) const;
     };
 
+    typedef Vector3<float> Vec3f;
+    typedef Vector3<double> Vec3d;
+    typedef Vector3<int> Vec3i;
+    typedef Vector3<unsigned int> Vec3u;
+
     template<typename T>
     Vector3<T> operator- (const Vector3<T>& vec);
 
@@ -86,11 +91,6 @@ namespace Math
 #define VECTOR3_INCLUDE_FILE
 #include "vector3-impl.h"
 #undef VECTOR3_INCLUDE_FILE
-
-    typedef Vector3<float> Vec3f;
-    typedef Vector3<double> Vec3d;
-    typedef Vector3<int> Vec3i;
-    typedef Vector3<unsigned int> Vec3u;
 }
 
 #endif // MATH_VECTOR3_HPP_INCLUDED
