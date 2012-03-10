@@ -73,12 +73,6 @@ target_link_libraries(gtest_main gtest)
 
 ########################################################################
 #
-# Copy the include files to the binary dir.
-MESSAGE (STATUS "Copying gtest include files")
-FILE (COPY include/gtest DESTINATION ${CMAKE_BINARY_DIR}/include/gtest)
-
-########################################################################
-#
 # Samples on how to link user tests with gtest or gtest_main.
 #
 # They are not built by default.  To build them, set the

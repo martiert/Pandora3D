@@ -9,6 +9,8 @@ IF (NOT LIBRARY_OUTPUT_PATH)
   SET (LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 ENDIF (NOT LIBRARY_OUTPUT_PATH)
 
+SET (PANDORA_MATH_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+
 # include own directories
 INCLUDE_DIRECTORIES (include)
 
@@ -20,9 +22,5 @@ SET (Math_src
 
 ADD_LIBRARY (Math SHARED ${Math_src})
 TARGET_LINK_LIBRARIES (Math m)
-
-MESSAGE (STATUS "Copying Math include files")
-FILE (GLOB copy_files "include/*")
-FILE (COPY ${copy_files} DESTINATION ${CMAKE_BINARY_DIR}/include/Math/Math)
 
 ADD_SUBDIRECTORY (Tests)

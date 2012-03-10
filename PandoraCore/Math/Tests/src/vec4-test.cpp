@@ -219,3 +219,32 @@ TEST (Vector4Test, multiplication)
                vec_1.z * vec_2.z +
                vec_1.w * vec_2.w, scalar);
 }
+
+TEST (Vector4Test, comparison_operator)
+{
+    const Math::Vec4d vec1 (3.4, 5.6, 7.1, 2.3);
+    const Math::Vec4d vec2 (2.3, 4.1, 6.7, 2.1);
+    const Math::Vec4d vec3 (3.4, 5.6, 7.1, 2.3);
+
+    EXPECT_EQ (vec1, vec3);
+    EXPECT_FALSE (vec1 == vec2);
+
+    EXPECT_NE (vec1, vec2);
+    EXPECT_FALSE (vec1 != vec3);
+
+    EXPECT_GT (vec1, vec2);
+    EXPECT_FALSE (vec2 > vec1);
+    EXPECT_FALSE (vec3 > vec1);
+
+    EXPECT_LT (vec2, vec1);
+    EXPECT_FALSE (vec1 < vec2);
+    EXPECT_FALSE (vec1 < vec3);
+
+    EXPECT_GE (vec1, vec2);
+    EXPECT_GE (vec1, vec3);
+    EXPECT_FALSE (vec2 >= vec1);
+
+    EXPECT_LE (vec2, vec1);
+    EXPECT_LE (vec1, vec3);
+    EXPECT_FALSE (vec1 <= vec2);
+}

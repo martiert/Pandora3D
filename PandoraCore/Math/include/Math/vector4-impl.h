@@ -204,6 +204,73 @@ Vector4<T> operator/ (const Vector4<T>& vec, const T& scalar)
     return tmp;
 }
 
+template<typename T>
+bool operator== (const Vector4<T>& vec1, const Vector4<T>& vec2)
+{
+    return (vec1.x == vec2.x &&
+            vec1.y == vec2.y &&
+            vec1.z == vec2.z &&
+            vec1.w == vec2.w);
+}
+
+template<typename T>
+bool operator!= (const Vector4<T>& vec1, const Vector4<T>& vec2)
+{
+    return !(vec1 == vec2);
+}
+
+template<typename T>
+bool operator> (const Vector4<T>& vec1, const Vector4<T>& vec2)
+{
+    if (vec1.x != vec2.x)
+        return vec1.x > vec2.x;
+    if (vec1.y != vec2.y)
+        return vec1.y > vec2.y;
+   if (vec1.z != vec2.z)
+        return vec1.z > vec2.z;
+
+   return vec1.w > vec2.w;
+}
+
+template<typename T>
+bool operator< (const Vector4<T>& vec1, const Vector4<T>& vec2)
+{
+    if (vec1.x != vec2.x)
+        return vec1.x < vec2.x;
+    if (vec1.y != vec2.y)
+        return vec1.y < vec2.y;
+   if (vec1.z != vec2.z)
+        return vec1.z < vec2.z;
+
+   return vec1.w < vec2.w;
+}
+
+template<typename T>
+bool operator>= (const Vector4<T>& vec1, const Vector4<T>& vec2)
+{
+    if (vec1.x != vec2.x)
+        return vec1.x > vec2.x;
+    if (vec1.y != vec2.y)
+        return vec1.y > vec2.y;
+   if (vec1.z != vec2.z)
+        return vec1.z > vec2.z;
+
+   return vec1.w >= vec2.w;
+}
+
+template<typename T>
+bool operator<= (const Vector4<T>& vec1, const Vector4<T>& vec2)
+{
+    if (vec1.x != vec2.x)
+        return vec1.x < vec2.x;
+    if (vec1.y != vec2.y)
+        return vec1.y < vec2.y;
+   if (vec1.z != vec2.z)
+        return vec1.z < vec2.z;
+
+   return vec1.w <= vec2.w;
+}
+
 #else // VECTOR4_INCLUDE_FILE
 #error "Never include this file anywhere but vector4.h"
 #endif // VECTOR4_INCLUDE_FILE

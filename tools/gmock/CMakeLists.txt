@@ -84,13 +84,6 @@ target_link_libraries(gmock_main gmock)
 
 ########################################################################
 #
-# Copy the include files to the binary dir.
-MESSAGE (STATUS "Copying gmock include files")
-FILE (COPY include/gmock DESTINATION ${CMAKE_BINARY_DIR}/include/gmock)
-
-
-########################################################################
-#
 # Google Mock's own tests.
 #
 # You can skip this section if you aren't interested in testing

@@ -61,6 +61,24 @@ namespace Math
     template<typename T>
     Vector4<T> operator/ (const Vector4<T>& vec, const T& scalar);
 
+    template<typename T>
+    bool operator== (const Vector4<T>& vec1, const Vector4<T>& vec2);
+
+    template<typename T>
+    bool operator!= (const Vector4<T>& vec1, const Vector4<T>& vec2);
+
+    template<typename T>
+    bool operator> (const Vector4<T>& vec1, const Vector4<T>& vec2);
+
+    template<typename T>
+    bool operator< (const Vector4<T>& vec1, const Vector4<T>& vec2);
+
+    template<typename T>
+    bool operator>= (const Vector4<T>& vec1, const Vector4<T>& vec2);
+
+    template<typename T>
+    bool operator<= (const Vector4<T>& vec1, const Vector4<T>& vec2);
+
 #define VECTOR4_INCLUDE_FILE
 #include "vector4-impl.h"
 #undef VECTOR4_INCLUDE_FILE
