@@ -248,3 +248,40 @@ TEST (Vector4Test, comparison_operator)
     EXPECT_LE (vec1, vec3);
     EXPECT_FALSE (vec1 <= vec2);
 }
+
+TEST (Vector4Test, vector_can_be_casted)
+{
+    Math::Vec4d vector;
+    auto pointer = (double *) vector;
+
+    EXPECT_EQ (pointer[0], vector.x);
+    EXPECT_EQ (pointer[1], vector.y);
+    EXPECT_EQ (pointer[2], vector.z);
+    EXPECT_EQ (pointer[3], vector.w);
+
+    auto pointer2 = static_cast<double*> (vector);
+    EXPECT_EQ (pointer2[0], vector.x);
+    EXPECT_EQ (pointer2[1], vector.y);
+    EXPECT_EQ (pointer2[2], vector.z);
+    EXPECT_EQ (pointer2[3], vector.w);
+
+    auto tmp = pointer2[0];
+    ++pointer2[0];
+    EXPECT_EQ (pointer2[0], tmp + 1);
+    EXPECT_EQ (pointer2[0], pointer[0]);
+    EXPECT_EQ (vector.x, pointer2[0]);
+
+    const Math::Vec4d vector2;
+    auto pointer3 = (const double*) vector2;
+    auto pointer4 = static_cast<const double*> (vector2);
+
+    EXPECT_EQ (vector2.x, pointer3[0]);
+    EXPECT_EQ (vector2.y, pointer3[1]);
+    EXPECT_EQ (vector2.z, pointer3[2]);
+    EXPECT_EQ (vector2.w, pointer3[3]);
+
+    EXPECT_EQ (vector2.x, pointer4[0]);
+    EXPECT_EQ (vector2.y, pointer4[1]);
+    EXPECT_EQ (vector2.z, pointer4[2]);
+    EXPECT_EQ (vector2.w, pointer4[3]);
+}

@@ -49,6 +49,18 @@ T Vector3<T>::operator[] (const size_t i) const
 }
 
 template<typename T>
+Vector3<T>::operator T* ()
+{
+    return &x;
+}
+
+template<typename T>
+Vector3<T>::operator const T* () const
+{
+    return &x;
+}
+
+template<typename T>
 Vector3<T>& Vector3<T>::operator+= (const Vector3<T>& vec)
 {
     x += vec.x;

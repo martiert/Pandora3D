@@ -24,6 +24,8 @@ namespace Math
 
             T& operator[] (const size_t i);
             T operator[] (const size_t i) const;
+            operator T* ();
+            operator const T* () const;
 
             Vector4& operator+= (const Vector4& vec);
             Vector4& operator-= (const Vector4& vec);

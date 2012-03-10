@@ -51,8 +51,30 @@ TEST (Vector2Test, index_operator_throws_out_of_range_exception_when_out_of_rang
 
     EXPECT_THROW (tmp = vector[2], std::out_of_range);
     EXPECT_THROW (tmp = const_vector[2], std::out_of_range);
+}
 
-    vector[0] = tmp;
+TEST (Vector2Test, vector_can_be_casted)
+{
+    Math::Vec2d vector;
+    auto pointer = (double *) vector;
+
+    EXPECT_EQ (pointer[0], vector.x);
+    EXPECT_EQ (pointer[1], vector.y);
+
+    auto pointer2 = static_cast<double*> (vector);
+    EXPECT_EQ (pointer2[0], vector.x);
+    EXPECT_EQ (pointer2[1], vector.y);
+
+    auto tmp = pointer2[0];
+    ++pointer2[0];
+    EXPECT_EQ (pointer2[0], tmp + 1);
+    EXPECT_EQ (pointer2[0], pointer[0]);
+    EXPECT_EQ (vector.x, pointer2[0]);
+
+    const Math::Vec2d vector2 (3.4, 2.1);
+    auto const_ptr = (const double*) vector2;
+    EXPECT_EQ (const_ptr[0], vector2.x);
+    EXPECT_EQ (const_ptr[1], vector2.y);
 }
 
 TEST (Vector2Test, length)
