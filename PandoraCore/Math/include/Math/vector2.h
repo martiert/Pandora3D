@@ -16,7 +16,6 @@ namespace Math
         public:
             Vector2 ();
             Vector2 (const T x, const T y);
-            Vector2 (const Vector2& vector);
             Vector2 (const T data[2]);
 
             T& operator[] (const size_t i);

@@ -11,11 +11,6 @@ Vector4<T>::Vector4 (const T& x, const T& y, const T& z, const T& w)
 { }
 
 template<typename T>
-Vector4<T>::Vector4 (const Vector4<T>& vec)
-    : x (vec.x), y (vec.y), z (vec.z), w (vec.w)
-{ }
-
-template<typename T>
 Vector4<T>::Vector4 (const T data[4])
     : x (data[0]), y (data[1]), z (data[2]), w (data[3])
 { }

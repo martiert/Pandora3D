@@ -12,7 +12,6 @@ namespace Math
             Matrix2 ();
             Matrix2 (const T& m00, const T& m01, const T& m10, const T&  m11);
             Matrix2 (T array[4]);
-            Matrix2 (const Matrix2& matrix);
 
             T& operator () (const size_t& i, const size_t& j);
             T operator () (const size_t& i, const size_t& j) const;

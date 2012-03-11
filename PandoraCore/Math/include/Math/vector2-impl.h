@@ -11,11 +11,6 @@ Vector2<T>::Vector2 (const T x, const T y)
 { }
 
 template<typename T>
-Vector2<T>::Vector2 (const Vector2& vector)
-    : x (vector.x), y (vector.y)
-{ }
-
-template<typename T>
 Vector2<T>::Vector2 (const T array[2])
     : x (array[0]), y (array[1])
 { }

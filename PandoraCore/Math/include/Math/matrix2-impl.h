@@ -16,11 +16,6 @@ Matrix2<T>::Matrix2 (T array[4])
 { }
 
 template<typename T>
-Matrix2<T>::Matrix2 (const Matrix2<T>& matrix)
-    : data {matrix.data[0], matrix.data[1], matrix.data[2], matrix.data[3]}
-{ }
-
-template<typename T>
 T& Matrix2<T>::operator () (const size_t& i, const size_t& j)
 {
     if (i > 1 || j > 1)

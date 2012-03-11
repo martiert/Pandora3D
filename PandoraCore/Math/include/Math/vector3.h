@@ -17,7 +17,6 @@ namespace Math
         public:
             Vector3 ();
             Vector3 (const T& x, const T& y, const T& z);
-            Vector3 (const Vector3& vec);
             Vector3 (const T data[3]);
 
             T& operator[] (const size_t i);

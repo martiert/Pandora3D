@@ -11,11 +11,6 @@ Vector3<T>::Vector3 (const T& x, const T& y, const T& z)
 {}
 
 template<typename T>
-Vector3<T>::Vector3 (const Vector3<T>& vec)
-    : x (vec.x), y (vec.y), z (vec.z)
-{}
-
-template<typename T>
 Vector3<T>::Vector3 (const T data[3])
     : x (data[0]), y (data[1]), z (data[2])
 {}

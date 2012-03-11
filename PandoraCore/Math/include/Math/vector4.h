@@ -18,7 +18,6 @@ namespace Math
         public:
             Vector4 ();
             Vector4 (const T& x, const T& y, const T& z, const T& w);
-            Vector4 (const Vector4& vec);
             Vector4 (const T data[4]);
             Vector4 (const Vector3<T>& vec);
 
