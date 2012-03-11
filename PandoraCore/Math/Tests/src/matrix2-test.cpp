@@ -198,3 +198,53 @@ TEST (Matrix2Test, multiplication_with_identity_returns_the_same_matrix)
     EXPECT_EQ (result (1,0), matrix (1,0));
     EXPECT_EQ (result (1,1), matrix (1,1));
 }
+
+TEST (Matrix2Test, division_by_scalar)
+{
+    const Math::Matrix2d matrix (4.5, 2.1, 4.7, 9.8);
+    auto result = matrix / 3.4;
+
+    EXPECT_EQ (matrix (0,0)/3.4, result (0,0));
+    EXPECT_EQ (matrix (0,1)/3.4, result (0,1));
+    EXPECT_EQ (matrix (1,0)/3.4, result (1,0));
+    EXPECT_EQ (matrix (1,1)/3.4, result (1,1));
+
+    result = matrix;
+    result /= 3.4;
+    EXPECT_EQ (matrix (0,0)/3.4, result (0,0));
+    EXPECT_EQ (matrix (0,1)/3.4, result (0,1));
+    EXPECT_EQ (matrix (1,0)/3.4, result (1,0));
+    EXPECT_EQ (matrix (1,1)/3.4, result (1,1));
+}
+
+TEST (Matrix2Test, division_by_zero_throws_invalid_argument)
+{
+    Math::Matrix2d matrix;
+
+    EXPECT_THROW (matrix / 0.0, std::invalid_argument);
+    EXPECT_THROW (matrix /= 0.0, std::invalid_argument);
+}
+
+TEST (Matrix2Test, multiplication_with_inverse_returns_identity)
+{
+    const Math::Matrix2d matrix (3.4, 2.0, 5.6, 7.2);
+    auto inverse = matrix.inverse ();
+
+    auto result = inverse * matrix;
+    EXPECT_FLOAT_EQ (1, result (0,0));
+    EXPECT_FLOAT_EQ (0, result (0,1));
+    EXPECT_FLOAT_EQ (0, result (1,0));
+    EXPECT_FLOAT_EQ (1, result (1,1));
+
+    result = matrix * inverse;
+    EXPECT_FLOAT_EQ (1, result (0,0));
+    EXPECT_FLOAT_EQ (0, result (0,1));
+    EXPECT_FLOAT_EQ (0, result (1,0));
+    EXPECT_FLOAT_EQ (1, result (1,1));
+}
+
+TEST (Matrix2Test, inverse_of_singular_matrix_throws_runtime_error)
+{
+    const Math::Matrix2d matrix (2.6, 4.8, 1.3, 2.4);
+    EXPECT_THROW (matrix.inverse (), std::runtime_error);
+}

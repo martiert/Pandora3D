@@ -82,9 +82,39 @@ Matrix2<T>& Matrix2<T>::operator*= (const T& scalar)
 }
 
 template<typename T>
+Matrix2<T>& Matrix2<T>::operator/= (const T& scalar)
+{
+    if (scalar == 0)
+        throw std::invalid_argument ("Cannot divide a matrix by zero");
+
+    data[0] /= scalar;
+    data[1] /= scalar;
+    data[2] /= scalar;
+    data[3] /= scalar;
+
+    return *this;
+}
+
+template<typename T>
 T Matrix2<T>::determinant () const
 {
     return data[0]*data[3] - data[1]*data[2];
+}
+
+template<typename T>
+Matrix2<T> Matrix2<T>::inverse () const
+{
+    T det = determinant ();
+
+    if (det == 0)
+        throw std::runtime_error ("Inverse of singular matrix don't exist");
+
+    T scale = 1.0/det;
+
+    Matrix2<T> result (data[3], -data[1],
+                       -data[2], data[0]);
+
+    return result * scale;
 }
 
 template<typename T>
@@ -124,6 +154,15 @@ template<typename T>
 Matrix2<T> operator* (const T& scalar, const Matrix2<T>& matrix)
 {
     return matrix * scalar;
+}
+
+template<typename T>
+Matrix2<T> operator/ (const Matrix2<T>& matrix, const T& scalar)
+{
+    Matrix2<T> result (matrix);
+    result /= scalar;
+
+    return result;
 }
 
 #else // MATRIX2_INCLUDE_FILE

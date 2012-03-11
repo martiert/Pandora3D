@@ -22,8 +22,10 @@ namespace Math
             Matrix2& operator+= (const Matrix2& matrix);
             Matrix2& operator-= (const Matrix2& matrix);
             Matrix2& operator*= (const T& scalar);
+            Matrix2& operator/= (const T& scalar);
 
             T determinant () const;
+            Matrix2 inverse () const;
         private:
             T data[4];
     };
@@ -47,6 +49,9 @@ namespace Math
 
     template<typename T>
     Matrix2<T> operator* (const T& scalar, const Matrix2<T>& matrix);
+
+    template<typename T>
+    Matrix2<T> operator/ (const Matrix2<T>& matrix, const T& scalar);
 
 #define MATRIX2_INCLUDE_FILE
 #include "matrix2-impl.h"
