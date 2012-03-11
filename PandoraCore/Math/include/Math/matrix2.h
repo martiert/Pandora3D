@@ -20,6 +20,10 @@ namespace Math
             operator const T* () const;
 
             Matrix2& operator+= (const Matrix2& matrix);
+            Matrix2& operator-= (const Matrix2& matrix);
+            Matrix2& operator*= (const T& scalar);
+
+            T determinant () const;
         private:
             T data[4];
     };
@@ -31,6 +35,12 @@ namespace Math
 
     template<typename T>
     Matrix2<T> operator+ (const Matrix2<T>& lmatrix, const Matrix2<T>& rmatrix);
+
+    template<typename T>
+    Matrix2<T> operator- (const Matrix2<T>& lmatrix, const Matrix2<T>& rmatrix);
+
+    template<typename T>
+    Matrix2<T> operator* (const Matrix2<T>& lmatrix, const Matrix2<T>& rmatrix);
 
     template<typename T>
     Matrix2<T> operator* (const Matrix2<T>& matrix, const T& scalar);

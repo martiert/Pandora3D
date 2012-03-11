@@ -110,6 +110,13 @@ TEST (Matrix2Test, matrix_multiplication_with_scalar)
     EXPECT_EQ (matrix1 (0,1) * 4.5, matrix2 (0,1));
     EXPECT_EQ (matrix1 (1,0) * 4.5, matrix2 (1,0));
     EXPECT_EQ (matrix1 (1,1) * 4.5, matrix2 (1,1));
+
+    matrix2 = matrix1;
+    matrix2 *= 2.3;
+    EXPECT_EQ (matrix1 (0,0) * 2.3, matrix2 (0,0));
+    EXPECT_EQ (matrix1 (0,1) * 2.3, matrix2 (0,1));
+    EXPECT_EQ (matrix1 (1,0) * 2.3, matrix2 (1,0));
+    EXPECT_EQ (matrix1 (1,1) * 2.3, matrix2 (1,1));
 }
 
 TEST (Matrix2Test, matrix_addition)
@@ -129,4 +136,65 @@ TEST (Matrix2Test, matrix_addition)
     EXPECT_EQ (matrix3 (0,1), matrix4 (0,1));
     EXPECT_EQ (matrix3 (1,0), matrix4 (1,0));
     EXPECT_EQ (matrix3 (1,1), matrix4 (1,1));
+}
+
+TEST (Matrix2Test, matrix_subtraction)
+{
+    const Math::Matrix2d matrix1 (3.5, 1.2, 6.7, 4.3);
+    const Math::Matrix2d matrix2 (2.1, 5.6, 7.2, 3.2);
+    auto matrix3 = matrix1 - matrix2;
+
+    EXPECT_EQ (matrix1 (0,0) - matrix2 (0,0), matrix3 (0,0));
+    EXPECT_EQ (matrix1 (0,1) - matrix2 (0,1), matrix3 (0,1));
+    EXPECT_EQ (matrix1 (1,0) - matrix2 (1,0), matrix3 (1,0));
+    EXPECT_EQ (matrix1 (1,1) - matrix2 (1,1), matrix3 (1,1));
+
+    auto matrix4 (matrix1);
+    matrix4 -= matrix2;
+    EXPECT_EQ (matrix3 (0,0), matrix4 (0,0));
+    EXPECT_EQ (matrix3 (0,1), matrix4 (0,1));
+    EXPECT_EQ (matrix3 (1,0), matrix4 (1,0));
+    EXPECT_EQ (matrix3 (1,1), matrix4 (1,1));
+}
+
+TEST (Matrix2Test, matrix_determinand)
+{
+    const Math::Matrix2d matrix1;
+    EXPECT_EQ (1.0, matrix1.determinant ());
+
+    const Math::Matrix2d matrix2 (3.4, 2.3, 4.5, 7.9);
+    EXPECT_EQ (3.4 * 7.9 - 2.3 * 4.5, matrix2.determinant ());
+
+    const Math::Matrix2d matrix3 (0.0, 0.0, 0.0, 0.0);
+    EXPECT_EQ (0.0, matrix3.determinant ());
+}
+
+TEST (Matrix2Test, matrix_multiplication)
+{
+    const Math::Matrix2d mat1 (2.3, 4.2, 1.2, 6.7);
+    const Math::Matrix2d mat2 (4.5, 2.1, 5.6, 9.8);
+    auto mat3 = mat1 * mat2;
+
+    EXPECT_EQ (mat1 (0,0) * mat2 (0,0) + mat1 (0,1) * mat2 (1,0), mat3 (0,0));
+    EXPECT_EQ (mat1 (0,0) * mat2 (0,1) + mat1 (0,1) * mat2 (1,1), mat3 (0,1));
+    EXPECT_EQ (mat1 (1,0) * mat2 (0,0) + mat1 (1,1) * mat2 (1,0), mat3 (1,0));
+    EXPECT_EQ (mat1 (1,0) * mat2 (0,1) + mat1 (1,1) * mat2 (1,1), mat3 (1,1));
+}
+
+TEST (Matrix2Test, multiplication_with_identity_returns_the_same_matrix)
+{
+    const Math::Matrix2d identity;
+    const Math::Matrix2d matrix (4.5, 3.2, 6.7, 9.8);
+    auto result = matrix * identity;
+
+    EXPECT_EQ (result (0,0), matrix (0,0));
+    EXPECT_EQ (result (0,1), matrix (0,1));
+    EXPECT_EQ (result (1,0), matrix (1,0));
+    EXPECT_EQ (result (1,1), matrix (1,1));
+
+    result = identity * matrix;
+    EXPECT_EQ (result (0,0), matrix (0,0));
+    EXPECT_EQ (result (0,1), matrix (0,1));
+    EXPECT_EQ (result (1,0), matrix (1,0));
+    EXPECT_EQ (result (1,1), matrix (1,1));
 }

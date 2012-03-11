@@ -60,10 +60,57 @@ Matrix2<T>& Matrix2<T>::operator+= (const Matrix2<T>& matrix)
 }
 
 template<typename T>
+Matrix2<T>& Matrix2<T>::operator-= (const Matrix2<T>& matrix)
+{
+    data[0] -= matrix (0,0);
+    data[1] -= matrix (0,1);
+    data[2] -= matrix (1,0);
+    data[3] -= matrix (1,1);
+
+    return *this;
+}
+
+template<typename T>
+Matrix2<T>& Matrix2<T>::operator*= (const T& scalar)
+{
+    data[0] *= scalar;
+    data[1] *= scalar;
+    data[2] *= scalar;
+    data[3] *= scalar;
+
+    return *this;
+}
+
+template<typename T>
+T Matrix2<T>::determinant () const
+{
+    return data[0]*data[3] - data[1]*data[2];
+}
+
+template<typename T>
 Matrix2<T> operator+ (const Matrix2<T>& lmatrix, const Matrix2<T>& rmatrix)
 {
     return Matrix2<T> (lmatrix (0,0) + rmatrix (0,0), lmatrix (0,1) + rmatrix (0,1),
                        lmatrix (1,0) + rmatrix (1,0), lmatrix (1,1) + rmatrix (1,1));
+}
+
+template<typename T>
+Matrix2<T> operator- (const Matrix2<T>& lmatrix, const Matrix2<T>& rmatrix)
+{
+    return Matrix2<T> (lmatrix (0,0) - rmatrix (0,0), lmatrix (0,1) - rmatrix (0,1),
+                       lmatrix (1,0) - rmatrix (1,0), lmatrix (1,1) - rmatrix (1,1));
+}
+
+template<typename T>
+Matrix2<T> operator* (const Matrix2<T>& lmatrix, const Matrix2<T>& rmatrix)
+{
+    Matrix2<T> res;
+    res (0,0) = lmatrix (0,0) * rmatrix (0,0) + lmatrix (0,1) * rmatrix (1,0);
+    res (0,1) = lmatrix (0,0) * rmatrix (0,1) + lmatrix (0,1) * rmatrix (1,1);
+    res (1,0) = lmatrix (1,0) * rmatrix (0,0) + lmatrix (1,1) * rmatrix (1,0);
+    res (1,1) = lmatrix (1,0) * rmatrix (0,1) + lmatrix (1,1) * rmatrix (1,1);
+
+    return res;
 }
 
 template<typename T>
