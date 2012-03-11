@@ -2488,11 +2488,6 @@ static internal::String FormatTestCount(int test_count) {
   return FormatCountableNoun(test_count, "test", "tests");
 }
 
-// Formats the count of test cases.
-static internal::String FormatTestCaseCount(int test_case_count) {
-  return FormatCountableNoun(test_case_count, "test case", "test cases");
-}
-
 // Converts a TestPartResult::Type enum to human-friendly string
 // representation.  Both kNonFatalFailure and kFatalFailure are translated
 // to "Failure", as the user usually doesn't care about the difference
