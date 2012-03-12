@@ -21,9 +21,7 @@ T& Vector2<T>::operator[] (const size_t i)
     if (i > 1)
         throw std::out_of_range ("Index out of range for 2D vectors");
 
-    if (i == 0)
-        return x;
-    return y;
+    return (&x)[i];
 }
 
 template<typename T>
@@ -32,9 +30,7 @@ T Vector2<T>::operator[] (const size_t i) const
     if (i > 1)
         throw std::out_of_range ("Index out of range for 2D vectors");
 
-    if (i == 0)
-        return x;
-    return y;
+    return (&x)[i];
 }
 
 template<typename T>
@@ -100,13 +96,13 @@ Vector2<T>& Vector2<T>::operator/= (const T& scalar)
 template<typename T>
 T Vector2<T>::lengthSquared () const
 {
-    return (x * x + y * y);
+    return dot (*this);
 }
 
 template<typename T>
 T Vector2<T>::length () const
 {
-    return std::sqrt (x * x + y * y);
+    return std::sqrt (lengthSquared ());
 }
 
 template<typename T>
@@ -129,8 +125,7 @@ void Vector2<T>::normalize ()
     if (len == 0)
         throw std::domain_error ("Can not normalize a zero vector");
 
-    x /= len;
-    y /= len;
+    *this /= len;
 }
 
 template<typename T>
@@ -187,30 +182,6 @@ template<typename T>
 bool operator!= (const Vector2<T>& vec1, const Vector2<T>& vec2)
 {
     return !(vec1.x == vec2.x);
-}
-
-template<typename T>
-bool operator< (const Vector2<T>& vec1, const Vector2<T>& vec2)
-{
-    return (vec1.x < vec2.x || (vec1.x == vec2.x && vec1.y < vec2.y));
-}
-
-template<typename T>
-bool operator> (const Vector2<T>& vec1, const Vector2<T>& vec2)
-{
-    return (vec1.x > vec2.x || (vec1.x == vec2.x && vec1.y > vec2.y));
-}
-
-template<typename T>
-bool operator<= (const Vector2<T>& vec1, const Vector2<T>& vec2)
-{
-    return ((vec1 == vec2) || (vec1 < vec2));
-}
-
-template<typename T>
-bool operator>= (const Vector2<T>& vec1, const Vector2<T>& vec2)
-{
-    return ((vec1 == vec2) || (vec1 > vec2));
 }
 
 template<typename T>

@@ -25,6 +25,7 @@ T& Matrix3<T>::operator () (const size_t& i, const size_t& j)
 {
     if (i > 2 || j > 2)
         throw std::out_of_range ("Index operator out of range");
+
     return data[i*3 + j];
 }
 
@@ -33,6 +34,7 @@ T Matrix3<T>::operator () (const size_t& i, const size_t& j) const
 {
     if (i > 2 || j > 2)
         throw std::out_of_range ("Index operator out of range");
+
     return data[i*3 + j];
 }
 

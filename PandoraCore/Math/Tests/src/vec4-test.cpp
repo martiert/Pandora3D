@@ -231,22 +231,6 @@ TEST (Vector4Test, comparison_operator)
 
     EXPECT_NE (vec1, vec2);
     EXPECT_FALSE (vec1 != vec3);
-
-    EXPECT_GT (vec1, vec2);
-    EXPECT_FALSE (vec2 > vec1);
-    EXPECT_FALSE (vec3 > vec1);
-
-    EXPECT_LT (vec2, vec1);
-    EXPECT_FALSE (vec1 < vec2);
-    EXPECT_FALSE (vec1 < vec3);
-
-    EXPECT_GE (vec1, vec2);
-    EXPECT_GE (vec1, vec3);
-    EXPECT_FALSE (vec2 >= vec1);
-
-    EXPECT_LE (vec2, vec1);
-    EXPECT_LE (vec1, vec3);
-    EXPECT_FALSE (vec1 <= vec2);
 }
 
 TEST (Vector4Test, vector_can_be_casted)

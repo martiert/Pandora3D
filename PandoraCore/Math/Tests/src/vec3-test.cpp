@@ -195,35 +195,13 @@ TEST (Vector3Test, comparison_operators)
 {
     const Math::Vec3d vec1 (3.4, 1.7, 4.3);
     const Math::Vec3d vec2 (3.6, 7.8, 1.2);
-    const Math::Vec3d vec3 (3.4, 1.1, 8.5);
-    const Math::Vec3d vec4 (3.4, 8.1, 4.3);
-    const Math::Vec3d vec5 (3.4, 1.7, 4.3);
-    const Math::Vec3d vec6 (1.4, 1.7, 6.7);
-    const Math::Vec3d vec7 (3.4, 1.1, 9.5);
-    const Math::Vec3d vec8 (3.4, 1.1, 0.5);
+    const Math::Vec3d vec3 (3.4, 1.7, 4.3);
 
-    EXPECT_EQ (vec1, vec5);
+    EXPECT_EQ (vec1, vec3);
     EXPECT_NE (vec1, vec2);
-    EXPECT_LE (vec1, vec5);
-    EXPECT_LE (vec1, vec2);
-    EXPECT_LE (vec1, vec4);
-    EXPECT_GE (vec1, vec5);
-    EXPECT_GE (vec1, vec6);
-    EXPECT_GE (vec1, vec3);
-    EXPECT_GT (vec1, vec3);
-    EXPECT_GT (vec1, vec6);
-    EXPECT_LT (vec1, vec2);
-    EXPECT_LT (vec1, vec4);
-    EXPECT_LT (vec3, vec7);
-    EXPECT_LE (vec3, vec7);
-    EXPECT_GE (vec3, vec8);
 
     EXPECT_FALSE (vec1 == vec2);
-    EXPECT_FALSE (vec1 != vec5);
-    EXPECT_FALSE (vec1 > vec5);
-    EXPECT_FALSE (vec1 >= vec2);
-    EXPECT_FALSE (vec1 < vec6);
-    EXPECT_FALSE (vec1 <= vec6);
+    EXPECT_FALSE (vec1 != vec3);
 }
 
 TEST (Vector3Test, vector_can_be_casted)

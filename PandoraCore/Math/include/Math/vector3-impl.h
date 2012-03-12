@@ -21,12 +21,7 @@ T& Vector3<T>::operator[] (const size_t i)
     if (i > 2)
         throw std::out_of_range ("Index out of range for 3D vectors");
 
-    if (i == 0)
-        return x;
-    if (i == 1)
-        return y;
-
-    return z;
+    return (&x)[i];
 }
 
 template<typename T>
@@ -35,12 +30,7 @@ T Vector3<T>::operator[] (const size_t i) const
     if (i > 2)
         throw std::out_of_range ("Index out of range for 3D vectors");
 
-    if (i == 0)
-        return x;
-    if (i == 1)
-        return y;
-
-    return z;
+    return (&x)[i];
 }
 
 template<typename T>
@@ -210,56 +200,6 @@ template<typename T>
 bool operator!= (const Vector3<T>& vec1, const Vector3<T>& vec2)
 {
     return !(vec1 == vec2);
-}
-
-template<typename T>
-bool operator< (const Vector3<T>& vec1, const Vector3<T>& vec2)
-{
-    if (vec1.x < vec2.x)
-        return true;
-    if (vec1.x > vec2.x)
-        return false;
-
-    if (vec1.y < vec2.y)
-        return true;
-    if (vec1.y > vec2.y)
-        return false;
-
-    if (vec1.z < vec2.z)
-        return true;
-
-    return false;
-}
-
-template<typename T>
-bool operator> (const Vector3<T>& vec1, const Vector3<T>& vec2)
-{
-    if (vec1.x > vec2.x)
-        return true;
-    if (vec1.x < vec2.x)
-        return false;
-
-    if (vec1.y > vec2.y)
-        return true;
-    if (vec1.y < vec2.y)
-        return false;
-
-    if (vec1.z > vec2.z)
-        return true;
-
-    return false;
-}
-
-template<typename T>
-bool operator<= (const Vector3<T>& vec1, const Vector3<T>& vec2)
-{
-    return (vec1 == vec2 || vec1 < vec2);
-}
-
-template<typename T>
-bool operator>= (const Vector3<T>& vec1, const Vector3<T>& vec2)
-{
-    return (vec1 == vec2 || vec1 > vec2);
 }
 
 template<typename T>

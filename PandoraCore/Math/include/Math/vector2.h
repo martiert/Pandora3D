@@ -68,22 +68,7 @@ namespace Math
     bool operator== (const Vector2<T>& vec1, const Vector2<T>& vec2);
 
     template<typename T>
-    bool operator== (const Vector2<T>& vec1, const Vector2<T>& vec2);
-
-    template<typename T>
     bool operator!= (const Vector2<T>& vec1, const Vector2<T>& vec2);
-
-    template<typename T>
-    bool operator< (const Vector2<T>& vec1, const Vector2<T>& vec2);
-
-    template<typename T>
-    bool operator> (const Vector2<T>& vec1, const Vector2<T>& vec2);
-
-    template<typename T>
-    bool operator<= (const Vector2<T>& vec1, const Vector2<T>& vec2);
-
-    template<typename T>
-    bool operator>= (const Vector2<T>& vec1, const Vector2<T>& vec2);
 
     template<typename T>
     void generateOrthonormalBasis (Vector2<T>& vec1, Vector2<T>& vec2);

@@ -26,14 +26,7 @@ T& Vector4<T>::operator[] (const size_t i)
     if (i > 3)
         throw std::out_of_range ("Index out of range for 4D vectors");
 
-    if (i == 0)
-        return x;
-    if (i == 1)
-        return y;
-    if (i == 2)
-        return z;
-
-    return w;
+    return (&x)[i];
 }
 
 template<typename T>
@@ -42,15 +35,7 @@ T Vector4<T>::operator[] (const size_t i) const
     if (i > 3)
         throw std::out_of_range ("Index out of range for 4D vectors");
 
-
-    if (i == 0)
-        return x;
-    if (i == 1)
-        return y;
-    if (i == 2)
-        return z;
-
-    return w;
+    return (&x)[i];
 }
 
 template<typename T>
@@ -132,7 +117,7 @@ T Vector4<T>::length () const
 template<typename T>
 T Vector4<T>::lengthSquared () const
 {
-    return x * x + y * y + z * z + w * w;
+    return dot (*this);
 }
 
 template<typename T>
@@ -149,12 +134,7 @@ Vector4<T>& Vector4<T>::normalize ()
     if (len == 0)
         throw std::domain_error ("Cannot normalize a zero vector");
 
-    x /= len;
-    y /= len;
-    z /= len;
-    w /= len;
-
-    return *this;
+    return *this /= len;
 }
 
 template<typename T>
@@ -166,19 +146,17 @@ Vector4<T> operator- (const Vector4<T>& vec)
 template<typename T>
 Vector4<T> operator+ (const Vector4<T>& vec_1, const Vector4<T>& vec_2)
 {
-    return Vector4<T> (vec_1.x + vec_2.x,
-                        vec_1.y + vec_2.y,
-                        vec_1.z + vec_2.z,
-                        vec_1.w + vec_2.w);
+    auto result = vec_1;
+    result += vec_2;
+    return result;
 }
 
 template<typename T>
 Vector4<T> operator- (const Vector4<T>& vec_1, const Vector4<T>& vec_2)
 {
-    return Vector4<T> (vec_1.x - vec_2.x,
-                        vec_1.y - vec_2.y,
-                        vec_1.z - vec_2.z,
-                        vec_1.w - vec_2.w);
+    auto result = vec_1;
+    result -= vec_2;
+    return result;
 }
 
 template<typename T>
@@ -224,58 +202,6 @@ template<typename T>
 bool operator!= (const Vector4<T>& vec1, const Vector4<T>& vec2)
 {
     return !(vec1 == vec2);
-}
-
-template<typename T>
-bool operator> (const Vector4<T>& vec1, const Vector4<T>& vec2)
-{
-    if (vec1.x != vec2.x)
-        return vec1.x > vec2.x;
-    if (vec1.y != vec2.y)
-        return vec1.y > vec2.y;
-   if (vec1.z != vec2.z)
-        return vec1.z > vec2.z;
-
-   return vec1.w > vec2.w;
-}
-
-template<typename T>
-bool operator< (const Vector4<T>& vec1, const Vector4<T>& vec2)
-{
-    if (vec1.x != vec2.x)
-        return vec1.x < vec2.x;
-    if (vec1.y != vec2.y)
-        return vec1.y < vec2.y;
-   if (vec1.z != vec2.z)
-        return vec1.z < vec2.z;
-
-   return vec1.w < vec2.w;
-}
-
-template<typename T>
-bool operator>= (const Vector4<T>& vec1, const Vector4<T>& vec2)
-{
-    if (vec1.x != vec2.x)
-        return vec1.x > vec2.x;
-    if (vec1.y != vec2.y)
-        return vec1.y > vec2.y;
-   if (vec1.z != vec2.z)
-        return vec1.z > vec2.z;
-
-   return vec1.w >= vec2.w;
-}
-
-template<typename T>
-bool operator<= (const Vector4<T>& vec1, const Vector4<T>& vec2)
-{
-    if (vec1.x != vec2.x)
-        return vec1.x < vec2.x;
-    if (vec1.y != vec2.y)
-        return vec1.y < vec2.y;
-   if (vec1.z != vec2.z)
-        return vec1.z < vec2.z;
-
-   return vec1.w <= vec2.w;
 }
 
 #else // VECTOR4_INCLUDE_FILE

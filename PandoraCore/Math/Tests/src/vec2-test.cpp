@@ -286,30 +286,13 @@ TEST (Vector2Test, comparison_operators)
 {
     const Math::Vec2d vec1 (3.4, 1.7);
     const Math::Vec2d vec2 (3.6, 7.8);
-    const Math::Vec2d vec3 (3.4, 1.1);
-    const Math::Vec2d vec4 (3.4, 8.1);
-    const Math::Vec2d vec5 (3.4, 1.7);
-    const Math::Vec2d vec6 (1.4, 1.7);
+    const Math::Vec2d vec3 (3.4, 1.7);
 
-    EXPECT_EQ (vec1, vec5);
+    EXPECT_EQ (vec1, vec3);
     EXPECT_NE (vec1, vec2);
-    EXPECT_LE (vec1, vec5);
-    EXPECT_LE (vec1, vec2);
-    EXPECT_LE (vec1, vec4);
-    EXPECT_GE (vec1, vec5);
-    EXPECT_GE (vec1, vec6);
-    EXPECT_GE (vec1, vec3);
-    EXPECT_GT (vec1, vec3);
-    EXPECT_GT (vec1, vec6);
-    EXPECT_LT (vec1, vec2);
-    EXPECT_LT (vec1, vec4);
 
     EXPECT_FALSE (vec1 == vec2);
-    EXPECT_FALSE (vec1 != vec5);
-    EXPECT_FALSE (vec1 > vec5);
-    EXPECT_FALSE (vec1 >= vec2);
-    EXPECT_FALSE (vec1 < vec6);
-    EXPECT_FALSE (vec1 <= vec6);
+    EXPECT_FALSE (vec1 != vec3);
 }
 
 TEST (Vector2Test, orthonormal_basis)
