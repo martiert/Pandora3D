@@ -2,6 +2,7 @@
 #define MATH_MATRIX2_H_INCLUDED
 
 #include <stdexcept>
+#include <cstring>
 
 namespace Math
 {
@@ -51,6 +52,12 @@ namespace Math
 
     template<typename T>
     Matrix2<T> operator/ (const Matrix2<T>& matrix, const T& scalar);
+
+    template<typename T>
+    bool operator== (const Matrix2<T>& lmatrix, const Matrix2<T>& rmatrix);
+
+    template<typename T>
+    bool operator!= (const Matrix2<T>& lmatrix, const Matrix2<T>& rmatrix);
 
 #define MATRIX2_INCLUDE_FILE
 #include "matrix2-impl.h"

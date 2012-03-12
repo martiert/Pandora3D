@@ -248,3 +248,16 @@ TEST (Matrix2Test, inverse_of_singular_matrix_throws_runtime_error)
     const Math::Matrix2d matrix (2.6, 4.8, 1.3, 2.4);
     EXPECT_THROW (matrix.inverse (), std::runtime_error);
 }
+
+TEST (Matrix2Test, test_equal_matrixes)
+{
+    const Math::Matrix2d matrix1 (3.4, 1.2, 6.7, 7.7);
+    const Math::Matrix2d matrix2 (3.4, 1.2, 6.7, 7.7);
+    const Math::Matrix2d matrix3 (5.6, 2.3, 1.2, 7.8);
+
+    EXPECT_EQ (matrix1, matrix2);
+    EXPECT_NE (matrix1, matrix3);
+
+    EXPECT_FALSE (matrix1 == matrix3);
+    EXPECT_FALSE (matrix1 != matrix2);
+}

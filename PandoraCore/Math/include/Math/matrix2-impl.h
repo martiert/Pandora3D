@@ -20,6 +20,7 @@ T& Matrix2<T>::operator () (const size_t& i, const size_t& j)
 {
     if (i > 1 || j > 1)
         throw std::out_of_range ("matrix index out of range");
+
     return data[i*2 + j];
 }
 
@@ -28,6 +29,7 @@ T Matrix2<T>::operator () (const size_t& i, const size_t& j) const
 {
     if (i > 1 || j > 1)
         throw std::out_of_range ("matrix index out of range");
+
     return data[i*2 + j];
 }
 
@@ -115,15 +117,17 @@ Matrix2<T> Matrix2<T>::inverse () const
 template<typename T>
 Matrix2<T> operator+ (const Matrix2<T>& lmatrix, const Matrix2<T>& rmatrix)
 {
-    return Matrix2<T> (lmatrix (0,0) + rmatrix (0,0), lmatrix (0,1) + rmatrix (0,1),
-                       lmatrix (1,0) + rmatrix (1,0), lmatrix (1,1) + rmatrix (1,1));
+    auto result = lmatrix;
+    result += rmatrix;
+    return result;
 }
 
 template<typename T>
 Matrix2<T> operator- (const Matrix2<T>& lmatrix, const Matrix2<T>& rmatrix)
 {
-    return Matrix2<T> (lmatrix (0,0) - rmatrix (0,0), lmatrix (0,1) - rmatrix (0,1),
-                       lmatrix (1,0) - rmatrix (1,0), lmatrix (1,1) - rmatrix (1,1));
+    auto result = lmatrix;
+    result -= rmatrix;
+    return result;
 }
 
 template<typename T>
@@ -141,8 +145,9 @@ Matrix2<T> operator* (const Matrix2<T>& lmatrix, const Matrix2<T>& rmatrix)
 template<typename T>
 Matrix2<T> operator* (const Matrix2<T>& matrix, const T& scalar)
 {
-    return Matrix2<T> (matrix (0,0) * scalar, matrix (0,1) * scalar,
-                       matrix (1,0) * scalar, matrix (1,1) * scalar);
+    auto result = matrix;
+    result *= scalar;
+    return result;
 }
 
 template<typename T>
@@ -154,10 +159,21 @@ Matrix2<T> operator* (const T& scalar, const Matrix2<T>& matrix)
 template<typename T>
 Matrix2<T> operator/ (const Matrix2<T>& matrix, const T& scalar)
 {
-    Matrix2<T> result (matrix);
+    auto result = matrix;
     result /= scalar;
-
     return result;
+}
+
+template<typename T>
+bool operator== (const Matrix2<T>& lmatrix, const Matrix2<T>& rmatrix)
+{
+    return std::memcmp ((const T*) lmatrix, (const T*) rmatrix, 4 * sizeof (T)) == 0;
+}
+
+template<typename T>
+bool operator!= (const Matrix2<T>& lmatrix, const Matrix2<T>& rmatrix)
+{
+    return !(lmatrix == rmatrix);
 }
 
 #else // MATRIX2_INCLUDE_FILE
