@@ -17,6 +17,16 @@ namespace Math
 
             T& operator () (const size_t& i, const size_t& j);
             T operator () (const size_t& i, const size_t& j) const;
+
+            operator T* ();
+            operator const T* () const;
+
+            Matrix3& operator*= (const T& scalar);
+            Matrix3& operator/= (const T& scalar);
+            Matrix3& operator+= (const Matrix3& other);
+            Matrix3& operator-= (const Matrix3& other);
+
+            T determinant () const;
         private:
             T data[9];
     };
@@ -25,6 +35,24 @@ namespace Math
     typedef Matrix3<float> Matrix3f;
     typedef Matrix3<int> Matrix3i;
     typedef Matrix3<unsigned int> Matrix3u;
+
+    template<typename T>
+    Matrix3<T> operator* (const Matrix3<T>& matrix, const T& scalar);
+
+    template<typename T>
+    Matrix3<T> operator* (const T& scalar, const Matrix3<T>& matrix);
+
+    template<typename T>
+    Matrix3<T> operator/ (const Matrix3<T>& matrix, const T& scalar);
+
+    template<typename T>
+    Matrix3<T> operator+ (const Matrix3<T>& left, const Matrix3<T>& right);
+
+    template<typename T>
+    Matrix3<T> operator- (const Matrix3<T>& left, const Matrix3<T>& right);
+
+    template<typename T>
+    Matrix3<T> operator* (const Matrix3<T>& left, const Matrix3<T>& right);
 
 #define MATRIX3_INCLUDE_FILE
 #include "matrix3-impl.h"

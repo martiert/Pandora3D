@@ -77,7 +77,7 @@ TEST (Matrix2Test, can_cast_matrix_to_pointer)
     EXPECT_EQ (ptr2[3], matrix1 (1,1));
 
     ptr[2] = 2.1;
-    EXPECT_EQ (ptr[2], matrix1 (1,0));
+    EXPECT_EQ (2.1, matrix1 (1,0));
 
     const Math::Matrix2d matrix2 (3.2, 5.6, 7.1, 2.3);
     auto ptr3 = (const double*) matrix2;
@@ -157,7 +157,7 @@ TEST (Matrix2Test, matrix_subtraction)
     EXPECT_EQ (matrix3 (1,1), matrix4 (1,1));
 }
 
-TEST (Matrix2Test, matrix_determinand)
+TEST (Matrix2Test, matrix_determinant)
 {
     const Math::Matrix2d matrix1;
     EXPECT_EQ (1.0, matrix1.determinant ());
