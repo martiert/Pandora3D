@@ -2,22 +2,22 @@
 
 template<typename T>
 Matrix3<T>::Matrix3 ()
-    : data {1, 0, 0, 0, 1, 0, 0, 0, 1}
+    : data ({1, 0, 0, 0, 1, 0, 0, 0, 1})
 { }
 
 template<typename T>
 Matrix3<T>::Matrix3 (const T& m00, const T& m01, const T& m02,
                      const T& m10, const T& m11, const T& m12,
                      const T& m20, const T& m21, const T& m22)
-    : data {m00, m01, m02, m10, m11, m12, m20, m21, m22}
+    : data ({m00, m01, m02, m10, m11, m12, m20, m21, m22})
 { }
 
 
 template<typename T>
 Matrix3<T>::Matrix3 (const T array[9])
-    : data {array[0], array[1], array[2],
+    : data ({array[0], array[1], array[2],
             array[3], array[4], array[5],
-            array[6], array[7], array[8]}
+            array[6], array[7], array[8]})
 { }
 
 template<typename T>

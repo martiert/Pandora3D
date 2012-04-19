@@ -2,18 +2,21 @@
 
 template<typename T>
 Matrix2<T>::Matrix2 ()
-    : data {1, 0, 0, 1}
-{ }
+    : data ({1,0,0,1})
+{
+}
 
 template<typename T>
 Matrix2<T>::Matrix2 (const T& m00, const T& m01, const T& m10, const T&  m11)
-    : data {m00, m01, m10, m11}
-{ }
+    : data ({m00, m01, m10, m11})
+{
+}
 
 template<typename T>
 Matrix2<T>::Matrix2 (T array[4])
-    : data {array[0], array[1], array[2], array[3]}
-{ }
+    : data ({array[0], array[1], array[2], array[3]})
+{
+}
 
 template<typename T>
 T& Matrix2<T>::operator () (const size_t& i, const size_t& j)
