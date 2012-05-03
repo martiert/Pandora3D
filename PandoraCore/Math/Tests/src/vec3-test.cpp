@@ -2,58 +2,77 @@
 
 #include <gtest/gtest.h>
 
-TEST (Vector3Test, construction)
+TEST (Vector3Test, empty_constructor_gives_zero_vector)
 {
-    double tmp[] = {2.3, 3.1, 4.7};
-
-    const Math::Vec3d vector_1;
-    EXPECT_EQ (0.0, vector_1.x);
-    EXPECT_EQ (0.0, vector_1.y);
-    EXPECT_EQ (0.0, vector_1.z);
-
-    const Math::Vec3d vector_2 (0.1, 2.3, 3.7);
-    EXPECT_EQ (0.1, vector_2.x);
-    EXPECT_EQ (2.3, vector_2.y);
-    EXPECT_EQ (3.7, vector_2.z);
-
-    const Math::Vec3d vector_3 (tmp);
-    EXPECT_EQ (tmp[0], vector_3.x);
-    EXPECT_EQ (tmp[1], vector_3.y);
-    EXPECT_EQ (tmp[2], vector_3.z);
-
-    auto vector_4 = vector_1;
-    EXPECT_EQ (vector_1.x, vector_4.x);
-    EXPECT_EQ (vector_1.y, vector_4.y);
-    EXPECT_EQ (vector_1.z, vector_4.z);
-
-    const Math::Vec3d vector_5 = tmp;
-    EXPECT_EQ (tmp[0], vector_5.x);
-    EXPECT_EQ (tmp[1], vector_5.y);
-    EXPECT_EQ (tmp[2], vector_5.z);
-
-    const Math::Vec3d vector_6 (vector_1);
-    EXPECT_EQ (vector_1.x, vector_6.x);
-    EXPECT_EQ (vector_1.y, vector_6.y);
-    EXPECT_EQ (vector_1.x, vector_6.z);
+    const Math::Vec3d vector;
+    EXPECT_EQ (0.0, vector.x);
+    EXPECT_EQ (0.0, vector.y);
+    EXPECT_EQ (0.0, vector.z);
 }
 
-TEST (Vector3Test, index_operator_valid_input)
+TEST (Vector3Test, constructing_a_vector_with_three_arguments_populates_the_vector_with_those_arguments)
+{
+    const Math::Vec3d vector (0.1, 2.3, 3.7);
+    EXPECT_EQ (0.1, vector.x);
+    EXPECT_EQ (2.3, vector.y);
+    EXPECT_EQ (3.7, vector.z);
+}
+
+TEST (Vector3Test, constructing_a_vector_with_an_array_of_three_elements_populates_vector_with_the_array)
+{
+    double tmp[] = {2.3, 3.1, 4.7};
+    const Math::Vec3d vector (tmp);
+    EXPECT_EQ (tmp[0], vector.x);
+    EXPECT_EQ (tmp[1], vector.y);
+    EXPECT_EQ (tmp[2], vector.z);
+}
+
+TEST (Vector3Test, assigning_a_vector_to_an_array_populates_vector_with_given_array)
+{
+    double tmp[] = {2.3, 3.1, 4.7};
+    const Math::Vec3d vector = tmp;
+    EXPECT_EQ (tmp[0], vector.x);
+    EXPECT_EQ (tmp[1], vector.y);
+    EXPECT_EQ (tmp[2], vector.z);
+}
+
+TEST (Vector3Test, assigning_a_vector_to_another_vector_populates_the_vector)
+{
+    const Math::Vec3d vector (0.1, 2.3, 3.7);
+    auto copy = vector;
+    EXPECT_EQ (vector.x, copy.x);
+    EXPECT_EQ (vector.y, copy.y);
+    EXPECT_EQ (vector.z, copy.z);
+}
+
+TEST (Vector3Test, copy_constructor_makes_hard_copy)
+{
+    const Math::Vec3d vector (0.1, 2.3, 3.7);
+    auto copy (vector);
+    EXPECT_EQ (vector.x, copy.x);
+    EXPECT_EQ (vector.y, copy.y);
+    EXPECT_EQ (vector.z, copy.z);
+    ++copy.x;
+    EXPECT_NE (vector.x, copy.x);
+}
+
+TEST (Vector3Test, index_operator_maps_to_x_y_and_z)
 {
     Math::Vec3d vector_1 (4.3, 3.1, 4.1);
-    const Math::Vec3d vector_3 (3.3, 1.5, 2.6);
+    const Math::Vec3d vector_2 (3.3, 1.5, 2.6);
 
-    EXPECT_EQ (4.3, vector_1[0]);
-    EXPECT_EQ (3.1, vector_1[1]);
-    EXPECT_EQ (4.1, vector_1[2]);
+    EXPECT_EQ (vector_1.x, vector_1[0]);
+    EXPECT_EQ (vector_1.y, vector_1[1]);
+    EXPECT_EQ (vector_1.z, vector_1[2]);
 
-    EXPECT_EQ (3.3, vector_3[0]);
-    EXPECT_EQ (1.5, vector_3[1]);
-    EXPECT_EQ (2.6, vector_3[2]);
+    EXPECT_EQ (vector_2.x, vector_2[0]);
+    EXPECT_EQ (vector_2.y, vector_2[1]);
+    EXPECT_EQ (vector_2.z, vector_2[2]);
 
     vector_1[0] = 3.1;
-    EXPECT_EQ (3.1, vector_1[0]);
-    EXPECT_EQ (3.1, vector_1[1]);
-    EXPECT_EQ (4.1, vector_1[2]);
+    EXPECT_EQ (vector_1.x, vector_1[0]);
+    EXPECT_EQ (vector_1.y, vector_1[1]);
+    EXPECT_EQ (vector_1.z, vector_1[2]);
 }
 
 TEST (Vector3Test, index_operator_throws_out_of_range_exception_when_out_of_range)
@@ -64,32 +83,33 @@ TEST (Vector3Test, index_operator_throws_out_of_range_exception_when_out_of_rang
 
     EXPECT_THROW (tmp = vector[3], std::out_of_range);
     EXPECT_THROW (tmp = const_vector[3], std::out_of_range);
-
-    vector[0] = tmp;
 }
 
-TEST (Vector3Test, length)
+TEST (Vector3Test, length_of_zero_vector_is_zero)
+{
+    const Math::Vec3d vector;
+    EXPECT_EQ (0.0, vector.length ());
+    EXPECT_EQ (0.0, vector.lengthSquared ());
+}
+
+TEST (Vector3Test, length_of_vector_follows_mathematical_rules)
 {
     const Math::Vec3d vector_1 (2.3, 4.2, 1.2);
-    const Math::Vec3d vector_2;
-
-    EXPECT_EQ ((vector_1.x*vector_1.x + vector_1.y*vector_1.y + vector_1.z*vector_1.z), vector_1.lengthSquared ());
-    EXPECT_EQ (0.0, vector_2.lengthSquared ());
-
     EXPECT_EQ (std::sqrt (vector_1.x*vector_1.x + vector_1.y*vector_1.y + vector_1.z*vector_1.z), vector_1.length ());
-    EXPECT_EQ (0.0, vector_2.lengthSquared ());
+    EXPECT_EQ ((vector_1.x*vector_1.x + vector_1.y*vector_1.y + vector_1.z*vector_1.z), vector_1.lengthSquared ());
 }
 
-TEST (Vector3Test, normalize)
+TEST (Vector3Test, normalize_vector_gives_length_of_1)
 {
-    Math::Vec3d vec_1 (3.2, 1.2, 4.5);
-    Math::Vec3d vec_2;
+    Math::Vec3d vector (3.2, 1.2, 4.5);
+    vector.normalize ();
+    EXPECT_FLOAT_EQ (1.0, vector.length ());
+}
 
-    EXPECT_NE (1.0, vec_1.length ());
-    vec_1.normalize ();
-    EXPECT_FLOAT_EQ (1.0, vec_1.length ());
-
-    EXPECT_THROW (vec_2.normalize (), std::domain_error);
+TEST (Vector3Test, normalize_zero_vector_throws_domain_error)
+{
+    Math::Vec3d vector;
+    EXPECT_THROW (vector.normalize (), std::domain_error);
 }
 
 TEST (Vector3Test, negation)
