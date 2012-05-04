@@ -112,7 +112,7 @@ TEST (Vector3Test, normalize_zero_vector_throws_domain_error)
     EXPECT_THROW (vector.normalize (), std::domain_error);
 }
 
-TEST (Vector3Test, negation)
+TEST (Vector3Test, negating_a_vector_returns_the_negation_of_each_element)
 {
     const Math::Vec3d vec_1 (2.3, 4.2, 8.7);
     auto vec_2 = -vec_1;
@@ -122,168 +122,312 @@ TEST (Vector3Test, negation)
     EXPECT_EQ (-vec_2.z, vec_1.z);
 }
 
-TEST (Vector3Test, addition)
+TEST (Vector3Test, adding_two_vectors_adds_the_vectors_by_elements)
 {
     const Math::Vec3d vec_1 (2.3, 4.2, 8.7);
     const Math::Vec3d vec_2 (4.3, 1.2, 5.6);
 
-    auto vec_3 = vec_1 + vec_2;
-    EXPECT_EQ (vec_1.x + vec_2.x, vec_3.x);
-    EXPECT_EQ (vec_1.y + vec_2.y, vec_3.y);
-    EXPECT_EQ (vec_1.z + vec_2.z, vec_3.z);
-
-    vec_3 = vec_1 - vec_2;
-    EXPECT_EQ (vec_1.x - vec_2.x, vec_3.x);
-    EXPECT_EQ (vec_1.y - vec_2.y, vec_3.y);
-    EXPECT_EQ (vec_1.z - vec_2.z, vec_3.z);
-
-    vec_3 = vec_1;
-    vec_3 += vec_2;
-    EXPECT_EQ (vec_1.x + vec_2.x, vec_3.x);
-    EXPECT_EQ (vec_1.y + vec_2.y, vec_3.y);
-    EXPECT_EQ (vec_1.z + vec_2.z, vec_3.z);
-
-    vec_3 = vec_1;
-    vec_3 -= vec_2;
-    EXPECT_EQ (vec_1.x - vec_2.x, vec_3.x);
-    EXPECT_EQ (vec_1.y - vec_2.y, vec_3.y);
-    EXPECT_EQ (vec_1.z - vec_2.z, vec_3.z);
+    auto res = vec_1 + vec_2;
+    EXPECT_EQ (vec_1.x + vec_2.x, res.x);
+    EXPECT_EQ (vec_1.y + vec_2.y, res.y);
+    EXPECT_EQ (vec_1.z + vec_2.z, res.z);
 }
 
-TEST (Vector3Test, multiplication)
+TEST (Vector3Test, subtracting_two_vectors_subtracts_the_vectors_by_elements)
+{
+    const Math::Vec3d vec_1 (2.3, 4.2, 8.7);
+    const Math::Vec3d vec_2 (4.3, 1.2, 5.6);
+
+    auto res = vec_1 - vec_2;
+    EXPECT_EQ (vec_1.x - vec_2.x, res.x);
+    EXPECT_EQ (vec_1.y - vec_2.y, res.y);
+    EXPECT_EQ (vec_1.z - vec_2.z, res.z);
+}
+
+TEST (Vector3Test, adding_a_vector_to_a_vector_adds_element_wise)
+{
+    const Math::Vec3d vec_1 (2.3, 4.2, 8.7);
+    const Math::Vec3d vec_2 (4.3, 1.2, 5.6);
+
+    auto res = vec_1;
+    res += vec_2;
+    EXPECT_EQ (vec_1.x + vec_2.x, res.x);
+    EXPECT_EQ (vec_1.y + vec_2.y, res.y);
+    EXPECT_EQ (vec_1.z + vec_2.z, res.z);
+}
+
+TEST (Vector3Test, subtracting_a_vector_from_a_vector_subtracts_element_wise)
+{
+    const Math::Vec3d vec_1 (2.3, 4.2, 8.7);
+    const Math::Vec3d vec_2 (4.3, 1.2, 5.6);
+
+    auto res = vec_1;
+    res -= vec_2;
+    EXPECT_EQ (vec_1.x - vec_2.x, res.x);
+    EXPECT_EQ (vec_1.y - vec_2.y, res.y);
+    EXPECT_EQ (vec_1.z - vec_2.z, res.z);
+}
+
+TEST (Vector3Test, multiplying_vector_with_scalar_from_right_multiplies_each_element_by_the_scalar)
+{
+    const Math::Vec3d vector (3.2, 5.4, 1.2);
+    auto res = vector * 2.4;
+    EXPECT_EQ (vector.x * 2.4, res.x);
+    EXPECT_EQ (vector.y * 2.4, res.y);
+    EXPECT_EQ (vector.z * 2.4, res.z);
+}
+
+TEST (Vector3Test, multiplying_vector_with_scalar_from_left_multiplies_each_element_by_the_scalar)
+{
+    const Math::Vec3d vector (3.2, 5.4, 1.2);
+    auto res = 2.4 * vector;
+    EXPECT_EQ (vector.x * 2.4, res.x);
+    EXPECT_EQ (vector.y * 2.4, res.y);
+    EXPECT_EQ (vector.z * 2.4, res.z);
+}
+
+TEST (Vector3Test, dividing_vector_with_scalar_from_right_divides_each_element_by_the_scalar)
+{
+    const Math::Vec3d vector (3.2, 5.4, 1.2);
+    auto res = vector / 2.4;
+    EXPECT_EQ (vector.x / 2.4, res.x);
+    EXPECT_EQ (vector.y / 2.4, res.y);
+    EXPECT_EQ (vector.z / 2.4, res.z);
+}
+
+TEST (Vector3Test, multiplying_two_vectors_multiplies_component_wise)
+{
+    const Math::Vec3d left (3.2, 5.4, 1.2);
+    const Math::Vec3d right (3.7, 7.5, 9.2);
+    auto res = left * right;
+
+    EXPECT_EQ (left.x * right.x, res.x);
+    EXPECT_EQ (left.y * right.y, res.y);
+    EXPECT_EQ (left.z * right.z, res.z);
+}
+
+TEST (Vector3Test, dividing_a_vector_with_zero_throws_invalid_argument)
+{
+    const Math::Vec3d vector (3.2, 5.4, 1.2);
+    EXPECT_THROW (vector / 0.0, std::invalid_argument);
+}
+
+TEST (Vector3Test, cross_product_of_two_vector_follows_mathematical_rules)
 {
     const Math::Vec3d vector_1 (3.2, 5.4, 1.2);
+    const Math::Vec3d vector_2 (4.3, 2.3, 1.7);
+    auto res = vector_1.cross (vector_2);
 
-    auto res = vector_1 * 2.4;
-    EXPECT_EQ (vector_1.x * 2.4, res.x);
-    EXPECT_EQ (vector_1.y * 2.4, res.y);
-    EXPECT_EQ (vector_1.z * 2.4, res.z);
-
-    res = 2.4 * vector_1;
-    EXPECT_EQ (vector_1.x * 2.4, res.x);
-    EXPECT_EQ (vector_1.y * 2.4, res.y);
-    EXPECT_EQ (vector_1.z * 2.4, res.z);
-
-    res = vector_1 / 2.4;
-    EXPECT_EQ (vector_1.x / 2.4, res.x);
-    EXPECT_EQ (vector_1.y / 2.4, res.y);
-    EXPECT_EQ (vector_1.z / 2.4, res.z);
-
-    res = 2.3 * vector_1;
-    EXPECT_EQ (vector_1.x * 2.3, res.x);
-    EXPECT_EQ (vector_1.y * 2.3, res.y);
-    EXPECT_EQ (vector_1.z * 2.3, res.z);
-
-    const Math::Vec3d vector_2 (3.7, 7.5, 9.2);
-    res = vector_1 * vector_2;
-
-    EXPECT_EQ (vector_1.x * vector_2.x, res.x);
-    EXPECT_EQ (vector_1.y * vector_2.y, res.y);
-    EXPECT_EQ (vector_1.z * vector_2.z, res.z);
-
-    EXPECT_THROW (vector_1 / 0.0, std::invalid_argument);
-
-    const Math::Vec3d vector_3 (4.3, 2.3, 1.7);
-    res = vector_1.cross (vector_3);
-
-    EXPECT_EQ (vector_1.y * vector_3.z - vector_1.z * vector_3.y, res.x);
-    EXPECT_EQ (vector_1.z * vector_3.x - vector_1.x * vector_3.z, res.y);
-    EXPECT_EQ (vector_1.x * vector_3.y - vector_1.y * vector_3.x, res.z);
-
-    auto vector_4 = vector_1;
-    vector_4 *= 2.4;
-    EXPECT_EQ (vector_1.x * 2.4, vector_4.x);
-    EXPECT_EQ (vector_1.y * 2.4, vector_4.y);
-    EXPECT_EQ (vector_1.z * 2.4, vector_4.z);
-
-    vector_4 = vector_3;
-    vector_4 /= 4.7;
-    EXPECT_EQ (vector_3.x / 4.7, vector_4.x);
-    EXPECT_EQ (vector_3.y / 4.7, vector_4.y);
-    EXPECT_EQ (vector_3.z / 4.7, vector_4.z);
-
-    vector_4 = vector_1;
-    vector_4 *= vector_3;
-    EXPECT_EQ (vector_1.x * vector_3.x, vector_4.x);
-    EXPECT_EQ (vector_1.y * vector_3.y, vector_4.y);
-    EXPECT_EQ (vector_1.z * vector_3.z, vector_4.z);
-
-    EXPECT_THROW (vector_4 /= 0.0, std::invalid_argument);
+    EXPECT_EQ (vector_1.y * vector_2.z - vector_1.z * vector_2.y, res.x);
+    EXPECT_EQ (vector_1.z * vector_2.x - vector_1.x * vector_2.z, res.y);
+    EXPECT_EQ (vector_1.x * vector_2.y - vector_1.y * vector_2.x, res.z);
 }
 
-TEST (Vector3Test, comparison_operators)
+TEST (Vector3Test, dot_product_with_zero_vector_is_zero)
 {
-    const Math::Vec3d vec1 (3.4, 1.7, 4.3);
-    const Math::Vec3d vec2 (3.6, 7.8, 1.2);
-    const Math::Vec3d vec3 (3.4, 1.7, 4.3);
-
-    EXPECT_EQ (vec1, vec3);
-    EXPECT_NE (vec1, vec2);
-
-    EXPECT_FALSE (vec1 == vec2);
-    EXPECT_FALSE (vec1 != vec3);
+    const Math::Vec3d vector (3.2, 5.4, 1.2);
+    const Math::Vec3d zero;
+    EXPECT_EQ (0.0, vector.dot (zero));
 }
 
-TEST (Vector3Test, vector_can_be_casted)
+TEST (Vector3Test, dot_product_of_two_vectors_add_the_product_of_each_component)
 {
-    Math::Vec3d vector;
-    auto pointer = (double *) vector;
+    const Math::Vec3d vector_1 (3.2, 5.4, 1.2);
+    const Math::Vec3d vector_2 (4.3, 2.3, 1.7);
 
+    auto dotprod = vector_1.dot (vector_2);
+    auto vec_prod = vector_1 * vector_2;
+    EXPECT_EQ (vec_prod.x + vec_prod.y + vec_prod.z, dotprod);
+}
+
+TEST (Vector3Test, multiplying_scalar_to_a_vector_multiplies_each_component_with_the_scalar)
+{
+    const Math::Vec3d vector (3.2, 5.4, 1.2);
+    auto res = vector;
+    res *= 2.4;
+    EXPECT_EQ (vector.x * 2.4, res.x);
+    EXPECT_EQ (vector.y * 2.4, res.y);
+    EXPECT_EQ (vector.z * 2.4, res.z);
+}
+
+TEST (Vector3Test, dividing_vector_with_a_scalar_divides_each_components_with_the_scalar)
+{
+    const Math::Vec3d vector (3.2, 5.4, 1.2);
+    auto res = vector;
+    res /= 4.7;
+    EXPECT_EQ (vector.x / 4.7, res.x);
+    EXPECT_EQ (vector.y / 4.7, res.y);
+    EXPECT_EQ (vector.z / 4.7, res.z);
+}
+
+TEST (Vector3Test, multiplying_vector_with_a_vector_multiplies_component_wise)
+{
+    const Math::Vec3d vector (3.2, 5.4, 1.2);
+    const Math::Vec3d other (5.6, 4.2, 7.8);
+    auto res = vector;
+    res *= other;
+    EXPECT_EQ (vector.x * other.x, res.x);
+    EXPECT_EQ (vector.y * other.y, res.y);
+    EXPECT_EQ (vector.z * other.z, res.z);
+}
+
+TEST (Vector3Test, dividing_vector_with_zero_throws_invalid_argument)
+{
+    Math::Vec3d vector (3.2, 5.4, 1.2);
+    EXPECT_THROW (vector /= 0.0, std::invalid_argument);
+}
+
+TEST (Vector3Test, equality_operator_returns_true_for_the_same_object)
+{
+    const Math::Vec3d vector (3.2, 5.4, 1.2);
+    EXPECT_EQ (vector, vector);
+}
+
+TEST (Vector3Test, equality_operator_returns_true_for_copy)
+{
+    const Math::Vec3d vector (3.2, 5.4, 1.2);
+    auto copy = vector;
+    EXPECT_EQ (vector, copy);
+}
+
+TEST (Vector3Test, equality_operator_returns_true_for_objects_with_equal_elements)
+{
+    const Math::Vec3d vector (3.2, 5.4, 1.2);
+    const Math::Vec3d other (3.2, 5.4, 1.2);
+    EXPECT_EQ (vector, other);
+}
+
+TEST (Vector3Test, equality_operator_returns_false_for_object_with_different_x)
+{
+    const Math::Vec3d vector (3.2, 5.4, 1.2);
+    const Math::Vec3d other (5.6, 5.4, 1.2);
+    EXPECT_FALSE (vector == other);
+}
+
+TEST (Vector3Test, equality_operator_returns_false_for_object_with_different_y)
+{
+    const Math::Vec3d vector (3.2, 5.4, 1.2);
+    const Math::Vec3d other (3.2, 1.4, 1.2);
+    EXPECT_FALSE (vector == other);
+}
+
+TEST (Vector3Test, equality_operator_returns_false_for_object_with_different_z)
+{
+    const Math::Vec3d vector (3.2, 5.4, 1.2);
+    const Math::Vec3d other (3.2, 5.4, 3.7);
+    EXPECT_FALSE (vector == other);
+}
+
+TEST (Vector3Test, inequality_operator_returns_false_for_the_same_object)
+{
+    const Math::Vec3d vector (3.2, 5.4, 1.2);
+    EXPECT_FALSE (vector != vector);
+}
+
+TEST (Vector3Test, inequality_operator_returns_false_for_copy)
+{
+    const Math::Vec3d vector (3.2, 5.4, 1.2);
+    auto copy = vector;
+    EXPECT_FALSE (vector != copy);
+}
+
+TEST (Vector3Test, inequality_operator_returns_false)
+{
+    const Math::Vec3d vector (3.2, 5.4, 1.2);
+    const Math::Vec3d other (3.2, 5.4, 1.2);
+    EXPECT_FALSE (vector != other);
+}
+
+TEST (Vector3Test, inequality_operator_returns_true_for_object_with_different_x)
+{
+    const Math::Vec3d vector (3.2, 5.4, 1.2);
+    const Math::Vec3d other (5.6, 5.4, 1.2);
+    EXPECT_NE (vector, other);
+}
+
+TEST (Vector3Test, inequality_operator_returns_true_for_object_with_different_y)
+{
+    const Math::Vec3d vector (3.2, 5.4, 1.2);
+    const Math::Vec3d other (3.2, 1.4, 1.2);
+    EXPECT_NE (vector, other);
+}
+
+TEST (Vector3Test, inequality_operator_returns_true_for_object_with_different_z)
+{
+    const Math::Vec3d vector (3.2, 5.4, 1.2);
+    const Math::Vec3d other (3.2, 5.4, 3.7);
+    EXPECT_NE (vector, other);
+}
+
+TEST (Vector3Test, vector_can_be_casted_c_style)
+{
+    const Math::Vec3d vector;
+    auto pointer = (const double *) vector;
     EXPECT_EQ (pointer[0], vector.x);
     EXPECT_EQ (pointer[1], vector.y);
     EXPECT_EQ (pointer[2], vector.z);
-
-    auto pointer2 = static_cast<double*> (vector);
-    EXPECT_EQ (pointer2[0], vector.x);
-    EXPECT_EQ (pointer2[1], vector.y);
-    EXPECT_EQ (pointer2[2], vector.z);
-
-    auto tmp = pointer2[0];
-    ++pointer2[0];
-    EXPECT_EQ (pointer2[0], tmp + 1);
-    EXPECT_EQ (pointer2[0], pointer[0]);
-    EXPECT_EQ (vector.x, pointer2[0]);
-
-    const Math::Vec3d vector2;
-    auto pointer3 = (const double*) vector2;
-    auto pointer4 = static_cast<const double*> (vector2);
-
-    EXPECT_EQ (vector2.x, pointer3[0]);
-    EXPECT_EQ (vector2.y, pointer3[1]);
-    EXPECT_EQ (vector2.z, pointer3[2]);
-
-    EXPECT_EQ (vector2.x, pointer4[0]);
-    EXPECT_EQ (vector2.y, pointer4[1]);
-    EXPECT_EQ (vector2.z, pointer4[2]);
 }
 
-TEST (Vector3Test, orthonormal_basis)
+TEST (Vector3Test, vector_can_be_statically_casted)
+{
+    const Math::Vec3d vector;
+    auto pointer = static_cast<const double*> (vector);
+    EXPECT_EQ (pointer[0], vector.x);
+    EXPECT_EQ (pointer[1], vector.y);
+    EXPECT_EQ (pointer[2], vector.z);
+}
+
+TEST (Vector3Test, casted_vector_manipulates_the_object)
+{
+    Math::Vec3d vector;
+    auto pointer = static_cast<double*> (vector);
+    ++pointer[0];
+    EXPECT_EQ (vector.x, pointer[0]);
+    EXPECT_EQ (vector.y, pointer[1]);
+    EXPECT_EQ (vector.z, pointer[2]);
+}
+
+TEST (Vector3Test, othonormal_basis_with_zero_vector_throws_domain_error)
+{
+    Math::Vec3d vec1 (3.0, 5.0, 7.0);
+    Math::Vec3d vec2 (7.0, 9.0, 17.0);
+    Math::Vec3d zero (0.0, 0.0, 0.0);
+
+    EXPECT_THROW (Math::generateOrthonormalBasis (zero, vec2, vec1), std::domain_error);
+    EXPECT_THROW (Math::generateOrthonormalBasis (vec1, zero, vec2), std::domain_error);
+    EXPECT_THROW (Math::generateOrthonormalBasis (vec1, vec2, zero), std::domain_error);
+}
+
+TEST (Vector3Test, orthonormal_basis_with_equal_vectors_throws_domain_error)
+{
+    Math::Vec3d vec1 (3.0, 5.0, 7.0);
+    Math::Vec3d vec2 (7.0, 9.0, 17.0);
+    EXPECT_THROW (Math::generateOrthonormalBasis (vec1, vec2, vec1), std::domain_error);
+    EXPECT_THROW (Math::generateOrthonormalBasis (vec1, vec2, vec2), std::domain_error);
+    EXPECT_THROW (Math::generateOrthonormalBasis (vec1, vec1, vec2), std::domain_error);
+}
+
+TEST (Vector3Test, orthonormal_basis_gives_vectors_of_length_1)
 {
     Math::Vec3d vec1 (3.0, 5.0, 7.0);
     Math::Vec3d vec2 (7.0, 9.0, 17.0);
     Math::Vec3d vec3 (8.4, 2.0, 2.0);
 
-    EXPECT_NE (0.0, vec1.dot (vec2));
-    EXPECT_NE (0.0, vec1.dot (vec3));
-    EXPECT_NE (0.0, vec2.dot (vec3));
+    Math::generateOrthonormalBasis (vec1, vec2, vec3);
+
+    EXPECT_FLOAT_EQ (1, vec1.length ());
+    EXPECT_FLOAT_EQ (1, vec2.length ());
+    EXPECT_FLOAT_EQ (1, vec3.length ());
+}
+
+TEST (Vector3Test, orthonormal_basis_gives_dot_products_of_zero)
+{
+    Math::Vec3d vec1 (3.0, 5.0, 7.0);
+    Math::Vec3d vec2 (7.0, 9.0, 17.0);
+    Math::Vec3d vec3 (8.4, 2.0, 2.0);
 
     Math::generateOrthonormalBasis (vec1, vec2, vec3);
     EXPECT_NEAR (0, vec1.dot (vec2), 1e-8);
     EXPECT_NEAR (0, vec1.dot (vec3), 1e-8);
     EXPECT_NEAR (0, vec2.dot (vec3), 1e-8);
-    EXPECT_FLOAT_EQ (1, vec1.length ());
-    EXPECT_FLOAT_EQ (1, vec2.length ());
-    EXPECT_FLOAT_EQ (1, vec3.length ());
-
-    Math::Vec3d tmp (0.0, 0.0, 0.0);
-    EXPECT_THROW (Math::generateOrthonormalBasis (tmp, vec2, vec3), std::domain_error);
-    EXPECT_THROW (Math::generateOrthonormalBasis (vec1, tmp, vec3), std::domain_error);
-    EXPECT_THROW (Math::generateOrthonormalBasis (vec1, vec2, tmp), std::domain_error);
-
-    tmp = vec2;
-    EXPECT_THROW (Math::generateOrthonormalBasis (tmp, vec2, vec3), std::domain_error);
-    tmp = vec1;
-    EXPECT_THROW (Math::generateOrthonormalBasis (vec1, tmp, vec3), std::domain_error);
-    tmp = vec3;
-    EXPECT_THROW (Math::generateOrthonormalBasis (tmp, vec2, vec3), std::domain_error);
 }
