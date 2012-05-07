@@ -70,12 +70,8 @@ TEST (Vector2Test, index_operator_maps_to_x_and_y)
 
 TEST (Vector2Test, index_operator_throws_out_of_range_exception_when_out_of_range)
 {
-    Math::Vec2d vector;
-    const Math::Vec2d const_vector;
-    double tmp = 2;
-
-    EXPECT_THROW (tmp = vector[2], std::out_of_range);
-    EXPECT_THROW (tmp = const_vector[2], std::out_of_range);
+    const Math::Vec2d vector;
+    EXPECT_THROW (vector[2], std::out_of_range);
 }
 
 TEST (Vector2Test, vector_can_be_casted_to_array_c_style)

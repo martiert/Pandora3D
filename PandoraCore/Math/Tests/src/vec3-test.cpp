@@ -77,12 +77,9 @@ TEST (Vector3Test, index_operator_maps_to_x_y_and_z)
 
 TEST (Vector3Test, index_operator_throws_out_of_range_exception_when_out_of_range)
 {
-    Math::Vec3d vector;
-    const Math::Vec3d const_vector;
-    double tmp = 3;
+    const Math::Vec3d vector;
 
-    EXPECT_THROW (tmp = vector[3], std::out_of_range);
-    EXPECT_THROW (tmp = const_vector[3], std::out_of_range);
+    EXPECT_THROW (vector[3], std::out_of_range);
 }
 
 TEST (Vector3Test, length_of_zero_vector_is_zero)

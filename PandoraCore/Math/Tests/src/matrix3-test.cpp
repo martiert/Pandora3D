@@ -105,7 +105,7 @@ TEST (Matrix3Test, matrix_can_be_assigned)
     EXPECT_EQ (matrix1 (2,2), copy (2,2));
 }
 
-TEST (Matrix3Test, index_operator_throws_out_of_range_exception)
+TEST (Matrix3Test, index_operator_throws_out_of_range_exception_for_invalid_input)
 {
     const Math::Matrix3d mat1;
     Math::Matrix3d mat2;
@@ -116,65 +116,62 @@ TEST (Matrix3Test, index_operator_throws_out_of_range_exception)
     EXPECT_THROW (mat2 (3,0), std::out_of_range);
 }
 
-TEST (Matrix3Test, can_cast_matrix_to_pointer)
+TEST (Matrix3Test, can_cast_matrix_to_pointer_c_style)
 {
-    Math::Matrix3d matrix1 (2.3, 4.1, 6.5,
-                            1.8, 4.5, 9.8,
-                            4.4, 3.2, 3.4);
-    auto ptr = (double *) matrix1;
-    auto ptr2 = static_cast<double*> (matrix1);
+    const Math::Matrix3d matrix (2.3, 4.1, 6.5,
+                                  1.8, 4.5, 9.8,
+                                  4.4, 3.2, 3.4);
+    auto ptr = (const double *) matrix;
 
-    EXPECT_EQ (matrix1 (0,0), ptr[0]);
-    EXPECT_EQ (matrix1 (0,1), ptr[1]);
-    EXPECT_EQ (matrix1 (0,2), ptr[2]);
-    EXPECT_EQ (matrix1 (1,0), ptr[3]);
-    EXPECT_EQ (matrix1 (1,1), ptr[4]);
-    EXPECT_EQ (matrix1 (1,2), ptr[5]);
-    EXPECT_EQ (matrix1 (2,0), ptr[6]);
-    EXPECT_EQ (matrix1 (2,1), ptr[7]);
-    EXPECT_EQ (matrix1 (2,2), ptr[8]);
-
-    EXPECT_EQ (matrix1 (0,0), ptr2[0]);
-    EXPECT_EQ (matrix1 (0,1), ptr2[1]);
-    EXPECT_EQ (matrix1 (0,2), ptr2[2]);
-    EXPECT_EQ (matrix1 (1,0), ptr2[3]);
-    EXPECT_EQ (matrix1 (1,1), ptr2[4]);
-    EXPECT_EQ (matrix1 (1,2), ptr2[5]);
-    EXPECT_EQ (matrix1 (2,0), ptr2[6]);
-    EXPECT_EQ (matrix1 (2,1), ptr2[7]);
-    EXPECT_EQ (matrix1 (2,2), ptr2[8]);
-
-    ptr[4] = 6.7;
-    EXPECT_EQ (6.7, matrix1 (1,1));
-
-    const Math::Matrix3d matrix2 (4.6, 2.3, 1.7,
-                                  9.7, 4.3, 7.9,
-                                  5.2, 6.1, 3.3);
-    auto ptr3 = (const double*) matrix2;
-    auto ptr4 = static_cast<const double*> (matrix2);
-
-    EXPECT_EQ (matrix2 (0,0), ptr3[0]);
-    EXPECT_EQ (matrix2 (0,1), ptr3[1]);
-    EXPECT_EQ (matrix2 (0,2), ptr3[2]);
-    EXPECT_EQ (matrix2 (1,0), ptr3[3]);
-    EXPECT_EQ (matrix2 (1,1), ptr3[4]);
-    EXPECT_EQ (matrix2 (1,2), ptr3[5]);
-    EXPECT_EQ (matrix2 (2,0), ptr3[6]);
-    EXPECT_EQ (matrix2 (2,1), ptr3[7]);
-    EXPECT_EQ (matrix2 (2,2), ptr3[8]);
-
-    EXPECT_EQ (matrix2 (0,0), ptr4[0]);
-    EXPECT_EQ (matrix2 (0,1), ptr4[1]);
-    EXPECT_EQ (matrix2 (0,2), ptr4[2]);
-    EXPECT_EQ (matrix2 (1,0), ptr4[3]);
-    EXPECT_EQ (matrix2 (1,1), ptr4[4]);
-    EXPECT_EQ (matrix2 (1,2), ptr4[5]);
-    EXPECT_EQ (matrix2 (2,0), ptr4[6]);
-    EXPECT_EQ (matrix2 (2,1), ptr4[7]);
-    EXPECT_EQ (matrix2 (2,2), ptr4[8]);
+    EXPECT_EQ (matrix (0,0), ptr[0]);
+    EXPECT_EQ (matrix (0,1), ptr[1]);
+    EXPECT_EQ (matrix (0,2), ptr[2]);
+    EXPECT_EQ (matrix (1,0), ptr[3]);
+    EXPECT_EQ (matrix (1,1), ptr[4]);
+    EXPECT_EQ (matrix (1,2), ptr[5]);
+    EXPECT_EQ (matrix (2,0), ptr[6]);
+    EXPECT_EQ (matrix (2,1), ptr[7]);
+    EXPECT_EQ (matrix (2,2), ptr[8]);
 }
 
-TEST (Matrix3Test, multiply_with_scalar)
+TEST (Matrix3Test, can_static_cast_matrix_to_pointer)
+{
+    const Math::Matrix3d matrix (2.3, 4.1, 6.5,
+                            1.8, 4.5, 9.8,
+                            4.4, 3.2, 3.4);
+    auto ptr = static_cast<const double*> (matrix);
+
+    EXPECT_EQ (matrix (0,0), ptr[0]);
+    EXPECT_EQ (matrix (0,1), ptr[1]);
+    EXPECT_EQ (matrix (0,2), ptr[2]);
+    EXPECT_EQ (matrix (1,0), ptr[3]);
+    EXPECT_EQ (matrix (1,1), ptr[4]);
+    EXPECT_EQ (matrix (1,2), ptr[5]);
+    EXPECT_EQ (matrix (2,0), ptr[6]);
+    EXPECT_EQ (matrix (2,1), ptr[7]);
+    EXPECT_EQ (matrix (2,2), ptr[8]);
+}
+
+TEST (Matrix3Test, manipulating_the_casted_ptr_manipulates_the_matrix)
+{
+    Math::Matrix3d matrix (2.3, 4.1, 6.5,
+                            1.8, 4.5, 9.8,
+                            4.4, 3.2, 3.4);
+    auto ptr = static_cast<double*> (matrix);
+    ++ptr[3];
+
+    EXPECT_EQ (matrix (0,0), ptr[0]);
+    EXPECT_EQ (matrix (0,1), ptr[1]);
+    EXPECT_EQ (matrix (0,2), ptr[2]);
+    EXPECT_EQ (matrix (1,0), ptr[3]);
+    EXPECT_EQ (matrix (1,1), ptr[4]);
+    EXPECT_EQ (matrix (1,2), ptr[5]);
+    EXPECT_EQ (matrix (2,0), ptr[6]);
+    EXPECT_EQ (matrix (2,1), ptr[7]);
+    EXPECT_EQ (matrix (2,2), ptr[8]);
+}
+
+TEST (Matrix3Test, multiply_scalar_to_matrix_multiplies_each_component_of_the_matrix)
 {
     Math::Matrix3d matrix (2.3, 5.1, 3.3,
                             7.8, 5.9, 9.9,
@@ -194,7 +191,7 @@ TEST (Matrix3Test, multiply_with_scalar)
     EXPECT_EQ (matrix (2,2) * 5.6, result (2,2));
 }
 
-TEST (Matrix3Test, matrix_with_scalar_multiplication)
+TEST (Matrix3Test, multipling_matrix_with_scalar_from_right_multiplies_each_component)
 {
     const Math::Matrix3d matrix (2.3, 4.1, 6.5,
                                   1.8, 4.5, 9.8,
@@ -213,7 +210,26 @@ TEST (Matrix3Test, matrix_with_scalar_multiplication)
     EXPECT_EQ (matrix (2,2) * 4.3, result (2,2));
 }
 
-TEST (Matrix3Test, matrix_scalar_division)
+TEST (Matrix3Test, multipling_matrix_with_scalar_from_left_multiplies_each_component)
+{
+    const Math::Matrix3d matrix (2.3, 4.1, 6.5,
+                                  1.8, 4.5, 9.8,
+                                  4.4, 3.2, 3.4);
+
+    auto result = 4.3 * matrix;
+
+    EXPECT_EQ (matrix (0,0) * 4.3, result (0,0));
+    EXPECT_EQ (matrix (0,1) * 4.3, result (0,1));
+    EXPECT_EQ (matrix (0,2) * 4.3, result (0,2));
+    EXPECT_EQ (matrix (1,0) * 4.3, result (1,0));
+    EXPECT_EQ (matrix (1,1) * 4.3, result (1,1));
+    EXPECT_EQ (matrix (1,2) * 4.3, result (1,2));
+    EXPECT_EQ (matrix (2,0) * 4.3, result (2,0));
+    EXPECT_EQ (matrix (2,1) * 4.3, result (2,1));
+    EXPECT_EQ (matrix (2,2) * 4.3, result (2,2));
+}
+
+TEST (Matrix3Test, dividing_scalar_to_matrix_divides_each_component)
 {
     const Math::Matrix3d matrix (2.3, 4.1, 6.5,
                                  1.8, 4.5, 9.8,
@@ -233,7 +249,7 @@ TEST (Matrix3Test, matrix_scalar_division)
     EXPECT_EQ (matrix (2,2) / 4.3, result (2,2));
 }
 
-TEST (Matrix3Test, matrix_with_scalar_division)
+TEST (Matrix3Test, dividing_matrix_and_scalar_divides_each_component)
 {
     const Math::Matrix3d matrix (2.3, 4.1, 6.5,
                                  1.8, 4.5, 9.8,
@@ -253,26 +269,7 @@ TEST (Matrix3Test, matrix_with_scalar_division)
 
 }
 
-TEST (Matrix3Test, scalar_matrix_multiplication)
-{
-    const Math::Matrix3d matrix (2.3, 4.1, 6.5,
-                                  1.8, 4.5, 9.8,
-                                  4.4, 3.2, 3.4);
-
-    auto result = 2.7 * matrix;
-
-    EXPECT_EQ (matrix (0,0) * 2.7, result (0,0));
-    EXPECT_EQ (matrix (0,1) * 2.7, result (0,1));
-    EXPECT_EQ (matrix (0,2) * 2.7, result (0,2));
-    EXPECT_EQ (matrix (1,0) * 2.7, result (1,0));
-    EXPECT_EQ (matrix (1,1) * 2.7, result (1,1));
-    EXPECT_EQ (matrix (1,2) * 2.7, result (1,2));
-    EXPECT_EQ (matrix (2,0) * 2.7, result (2,0));
-    EXPECT_EQ (matrix (2,1) * 2.7, result (2,1));
-    EXPECT_EQ (matrix (2,2) * 2.7, result (2,2));
-}
-
-TEST (Matrix3Test, matrix_addition)
+TEST (Matrix3Test, adding_matrix_with_matrix_adds_each_element)
 {
     const Math::Matrix3d matrix1 (2.3, 4.1, 6.5,
                                   1.8, 4.5, 9.8,
@@ -297,7 +294,7 @@ TEST (Matrix3Test, matrix_addition)
     EXPECT_EQ (matrix1 (2,2) + matrix2 (2,2), result (2,2));
 }
 
-TEST (Matrix2Test, matrix_to_matrix_addition)
+TEST (Matrix2Test, adding_two_matrices_adds_each_element)
 {
     const Math::Matrix3d matrix1 (2.3, 4.1, 6.5,
                                   1.8, 4.5, 9.8,
@@ -320,7 +317,7 @@ TEST (Matrix2Test, matrix_to_matrix_addition)
     EXPECT_EQ (matrix1 (2,2) + matrix2 (2,2), result (2,2));
 }
 
-TEST (Matrix3Test, matrix_subtraction)
+TEST (Matrix3Test, subtracting_matrix_from_matrix_subtracts_each_element)
 {
     const Math::Matrix3d matrix1 (2.3, 4.1, 6.5,
                                   1.8, 4.5, 9.8,
@@ -345,7 +342,7 @@ TEST (Matrix3Test, matrix_subtraction)
     EXPECT_EQ (matrix1 (2,2) - matrix2 (2,2), result (2,2));
 }
 
-TEST (Matrix3Test, matrix_to_matrix_subtraction)
+TEST (Matrix3Test, subtracting_two_matrices_subtracts_each_element)
 {
     const Math::Matrix3d matrix1 (2.3, 4.1, 6.5,
                                   1.8, 4.5, 9.8,
@@ -368,29 +365,90 @@ TEST (Matrix3Test, matrix_to_matrix_subtraction)
     EXPECT_EQ (matrix1 (2,2) - matrix2 (2,2), result (2,2));
 }
 
-TEST (Matrix3Test, matrix_determinant)
+TEST (Matrix3Test, determinant_of_zero_matrix_is_zero)
 {
-    const Math::Matrix3d matrix1;
-    EXPECT_EQ (1.0, matrix1.determinant ());
+    const Math::Matrix3d zero (0, 0, 0,
+                                 0, 0, 0,
+                                 0, 0, 0);
 
-    const Math::Matrix3d matrix2 (0, 0, 0, 0, 0, 0, 0, 0, 0);
-    EXPECT_EQ (0.0, matrix2.determinant ());
+    EXPECT_EQ (0, zero.determinant ());
+}
 
-    const Math::Matrix3d matrix3(2.3, 4.1, 6.5,
+TEST (Matrix3Test, determinant_of_identity_matrix_is_one)
+{
+    const Math::Matrix3d identity;
+    EXPECT_EQ (1, identity.determinant ());
+}
+
+TEST (Matrix3Test, matrix_determinant_follows_mathematical_rules)
+{
+    const Math::Matrix3d matrix (2.3, 4.1, 6.5,
                                  1.8, 4.5, 9.8,
                                  4.4, 3.2, 3.4);
 
-    auto det = matrix3 (0,0) * (matrix3 (1,1) * matrix3 (2,2) -
-                               matrix3 (1,2) * matrix3 (2,1)) -
-               matrix3 (0,1) * (matrix3 (1,0) * matrix3 (2,2) -
-                               matrix3 (2,0) * matrix3 (1,2)) +
-               matrix3 (0,2) * (matrix3 (1,0) * matrix3 (2,1) -
-                               matrix3 (2,0) * matrix3 (1,1));
+    auto det = matrix (0,0) * (matrix (1,1) * matrix (2,2) -
+                               matrix (1,2) * matrix (2,1)) -
+               matrix (0,1) * (matrix (1,0) * matrix (2,2) -
+                               matrix (2,0) * matrix (1,2)) +
+               matrix (0,2) * (matrix (1,0) * matrix (2,1) -
+                               matrix (2,0) * matrix (1,1));
 
-    EXPECT_EQ (det, matrix3.determinant ());
+    EXPECT_EQ (det, matrix.determinant ());
 }
 
-TEST (Matrix3Test, matrix_matrix_multiplication)
+TEST (Matrix3Test, matrix_multipliplied_with_zero_matrix_from_right_is_zero_matrix)
+{
+    const Math::Matrix3d matrix (3.2, 5.1, 6.5,
+                                 6.5, 3.2, 1.2,
+                                 7.8, 2.4, 9.8);
+    const Math::Matrix3d zero (0, 0, 0,
+                               0, 0, 0,
+                               0, 0, 0);
+    auto result = matrix * zero;
+
+    for (size_t i = 0; i < 9; ++i)
+        EXPECT_EQ (0, result[i]);
+}
+
+TEST (Matrix3Test, matrix_multipliplied_with_zero_matrix_from_left_is_zero_matrix)
+{
+    const Math::Matrix3d matrix (3.2, 5.1, 6.5,
+                                 6.5, 3.2, 1.2,
+                                 7.8, 2.4, 9.8);
+    const Math::Matrix3d zero (0, 0, 0,
+                               0, 0, 0,
+                               0, 0, 0);
+    auto result = zero * matrix;
+
+    for (size_t i = 0; i < 9; ++i)
+        EXPECT_EQ (0, result[i]);
+}
+
+TEST (Matrix3Test, matrix_multipliplied_with_identity_from_right_is_the_same_matrix_again)
+{
+    const Math::Matrix3d matrix (3.2, 5.1, 6.5,
+                                 6.5, 3.2, 1.2,
+                                 7.8, 2.4, 9.8);
+    const Math::Matrix3d identity;
+    auto result = matrix * identity;
+
+    for (size_t i = 0; i < 9; ++i)
+        EXPECT_EQ (matrix[i], result[i]);
+}
+
+TEST (Matrix3Test, matrix_multipliplied_with_identity_from_left_is_the_same_matrix_again)
+{
+    const Math::Matrix3d matrix (3.2, 5.1, 6.5,
+                                 6.5, 3.2, 1.2,
+                                 7.8, 2.4, 9.8);
+    const Math::Matrix3d identity;
+    auto result = identity * matrix;
+
+    for (size_t i = 0; i < 9; ++i)
+        EXPECT_EQ (matrix[i], result[i]);
+}
+
+TEST (Matrix3Test, matrix_matrix_multiplication_follows_normal_mathematical_rules)
 {
     const Math::Matrix3d mat1 (2.3, 4.1, 6.5,
                                1.7, 8.7, 2.3,
@@ -404,9 +462,8 @@ TEST (Matrix3Test, matrix_matrix_multiplication)
     for (auto i = 0; i < 3; ++i) {
         for (auto j = 0; j < 3; ++j) {
             auto res = 0.0;
-            for (auto k = 0; k < 3; ++k) {
+            for (auto k = 0; k < 3; ++k)
                 res += mat1 (i,k) * mat2 (k,j);
-            }
             EXPECT_EQ (res, result (i,j));
         }
     }
@@ -418,22 +475,4 @@ TEST (Matrix3Test, division_by_zero_throws_invalid_argument)
 
     EXPECT_THROW (matrix / 0.0, std::invalid_argument);
     EXPECT_THROW (matrix /= 0.0, std::invalid_argument);
-}
-
-TEST (Matrix3Test, multiplication_with_identity_returns_the_same_matrix)
-{
-    const Math::Matrix3d identity;
-    const Math::Matrix3d matrix (3.2, 4.5, 6.7,
-                                 1.2, 8.8, 4.1,
-                                 9.7, 4.8, 4.3);
-
-    auto result = matrix * identity;
-    for (int i = 0; i < 3; ++i)
-        for (int j = 0; j < 3; ++j)
-            EXPECT_EQ (matrix (i,j), result (i,j));
-
-    result = identity * matrix;
-    for (int i = 0; i < 3; ++i)
-        for (int j = 0; j < 3; ++j)
-            EXPECT_EQ (matrix (i,j), result (i,j));
 }
