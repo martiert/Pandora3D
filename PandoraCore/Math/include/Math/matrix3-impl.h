@@ -39,6 +39,24 @@ T Matrix3<T>::operator () (const size_t& i, const size_t& j) const
 }
 
 template<typename T>
+T& Matrix3<T>::operator [] (const size_t& i)
+{
+    if (i > 8)
+        throw std::out_of_range ("Index operator out of range");
+
+    return data[i];
+}
+
+template<typename T>
+T Matrix3<T>::operator [] (const size_t& i) const
+{
+    if (i > 8)
+        throw std::out_of_range ("Index operator out of range");
+
+    return data[i];
+}
+
+template<typename T>
 Matrix3<T>::operator T* ()
 {
     return &data[0];
@@ -95,6 +113,46 @@ T Matrix3<T>::determinant () const
     return  data[0] * (data[4]*data[8] - data[5]*data[7]) -
             data[1] * (data[3]*data[8] - data[5]*data[6]) +
             data[2] * (data[3]*data[7] - data[4]*data[6]);
+}
+
+template<typename T>
+T Matrix3<T>::trace () const
+{
+    return data[0] + data[4] + data[8];
+}
+
+template<typename T>
+Matrix3<T> Matrix3<T>::transpose () const
+{
+  return Matrix3<T> (data[0], data[3], data[6],
+                     data[1], data[4], data[7],
+                     data[2], data[5], data[8]);
+}
+
+template<typename T>
+Matrix3<T> Matrix3<T>::inverse () const
+{
+    auto det = determinant ();
+
+    if (det == 0)
+        throw std::runtime_error ("Can not invert singular matrix");
+
+    auto trans = transpose ();
+
+    Matrix3<T> result;
+    result[0] = trans[4] * trans[8] - trans[5] * trans[7];
+    result[1] = - (trans[3] * trans[8] - trans[5] * trans[6]);
+    result[2] = trans[3] * trans[7] - trans[4] * trans[6];
+
+    result[3] = - (trans[1] * trans[8] - trans[2] * trans[7]);
+    result[4] = trans[0] * trans[8] - trans[2] * trans[6];
+    result[5] = - (trans[0] * trans[7] - trans[1] * trans[6]);
+
+    result[6] = trans[1] * trans[5] - trans[2] * trans[4];
+    result[7] = - (trans[0] * trans[5] - trans[2] * trans[3]);
+    result[8] = trans[0] * trans[4] - trans[1] * trans[3];
+
+    return result / det;
 }
 
 template<typename T>

@@ -1,6 +1,7 @@
 #include <Math/matrix3.h>
 
 #include <gtest/gtest.h>
+#include <cmath>
 
 TEST (Matrix3Test, empty_constructor_makes_identity_matrix)
 {
@@ -114,6 +115,8 @@ TEST (Matrix3Test, index_operator_throws_out_of_range_exception_for_invalid_inpu
     EXPECT_THROW (mat1 (3,0), std::out_of_range);
     EXPECT_THROW (mat2 (0,3), std::out_of_range);
     EXPECT_THROW (mat2 (3,0), std::out_of_range);
+    EXPECT_THROW (mat1 [9], std::out_of_range);
+    EXPECT_THROW (mat2 [9], std::out_of_range);
 }
 
 TEST (Matrix3Test, can_cast_matrix_to_pointer_c_style)
@@ -475,4 +478,120 @@ TEST (Matrix3Test, division_by_zero_throws_invalid_argument)
 
     EXPECT_THROW (matrix / 0.0, std::invalid_argument);
     EXPECT_THROW (matrix /= 0.0, std::invalid_argument);
+}
+
+TEST (Matrix3Test, trace_of_zero_matrix_is_zero)
+{
+    const Math::Matrix3d zero (0, 0, 0,
+                         0, 0, 0,
+                         0, 0, 0);
+    EXPECT_EQ (0, zero.trace ());
+}
+
+TEST (Matrix3Test, trace_of_identity_matrix_is_three)
+{
+    const Math::Matrix3d identity;
+    EXPECT_EQ (3, identity.trace ());
+}
+
+TEST (Matrix3Test, trace_of_random_matrix_is_sum_of_diagonal)
+{
+    srand (time (NULL));
+    for (int i = 0; i < 1000; ++i) {
+        Math::Matrix3d randmatrix;
+        for (int i = 0; i < 9; ++i) {
+            randmatrix[i] = rand ();
+        }
+
+        auto trace = randmatrix (0,0) + randmatrix (1,1) + randmatrix (2,2);
+        EXPECT_EQ (trace, randmatrix.trace ());
+    }
+}
+
+TEST (Matrix3Test, transpose_of_zero_matrix_is_zero)
+{
+    const Math::Matrix3d zero (0, 0, 0,
+                               0, 0, 0,
+                               0, 0, 0);
+    auto transpose = zero.transpose ();
+
+    for (size_t i = 0; i < 9; ++i)
+        EXPECT_EQ (0, transpose[i]);
+}
+
+TEST (Matrix3Test, transpose_of_identity_is_identity)
+{
+    const Math::Matrix3d identity;
+    auto transpose = identity.transpose ();
+
+    for (size_t i = 0; i < 9; ++i)
+        EXPECT_EQ (identity[i], transpose[i]);
+}
+
+TEST (Matrix3Test, transpose_of_matrix_swaps_rows_with_columns)
+{
+    const Math::Matrix3d matrix (3.2, 1.2, 6.7,
+                                 4.3, 1.8, 6.5,
+                                 2.1, 7.8, 5.4);
+    auto transpose = matrix.transpose ();
+
+    for (size_t i = 0; i < 3; ++i)
+        for (size_t j = 0; j < 3; ++j)
+            EXPECT_EQ (matrix (i,j), transpose (j,i));
+}
+
+TEST (Matrix3Test, inverse_of_identity_is_identity)
+{
+    const Math::Matrix3d matrix;
+    auto inverse = matrix.inverse ();
+
+    EXPECT_EQ (1, inverse (0,0));
+    EXPECT_EQ (0, inverse (0,1));
+    EXPECT_EQ (0, inverse (0,2));
+
+    EXPECT_EQ (0, inverse (1,0));
+    EXPECT_EQ (1, inverse (1,1));
+    EXPECT_EQ (0, inverse (1,2));
+
+    EXPECT_EQ (0, inverse (2,0));
+    EXPECT_EQ (0, inverse (2,1));
+    EXPECT_EQ (1, inverse (2,2));
+}
+
+TEST (Matrix3Test, matrix_multiplied_with_its_inverse_from_right_is_identity)
+{
+    const Math::Matrix3d matrix (3.5, 7.0, 4.5,
+                                 1.0, 8.0, 5.0,
+                                 9.0, 5.5, 1.0);
+    auto inverse = matrix.inverse ();
+    auto result = matrix * inverse;
+    double precision = std::pow (10, -15);
+
+    EXPECT_NEAR (1, result (0,0), precision);
+    EXPECT_NEAR (0, result (0,1), precision);
+    EXPECT_NEAR (0, result (0,2), precision);
+
+    EXPECT_NEAR (0, result (1,0), precision);
+    EXPECT_NEAR (1, result (1,1), precision);
+    EXPECT_NEAR (0, result (1,2), precision);
+
+    EXPECT_NEAR (0, result (2,0), precision);
+    EXPECT_NEAR (0, result (2,1), precision);
+    EXPECT_NEAR (1, result (2,2), precision);
+}
+
+TEST (Matrix3Test, inverse_of_zero_matrix_throws_runtime_error)
+{
+    const Math::Matrix3d matrix (0, 0, 0,
+                                 0, 0, 0,
+                                 0, 0, 0);
+    EXPECT_THROW (matrix.inverse (), std::runtime_error);
+}
+
+TEST (Matrix3Test, inverse_of_singular_matrix_throws_runtime_error)
+{
+    const Math::Matrix3d matrix (3.2, 6.4, 1.6,
+                                 2.2, 4.4, 1.1,
+                                 6.8, 13.6, 3.4);
+    EXPECT_THROW (matrix.inverse (), std::runtime_error);
 }

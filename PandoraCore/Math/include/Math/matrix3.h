@@ -18,6 +18,9 @@ namespace Math
             T& operator () (const size_t& i, const size_t& j);
             T operator () (const size_t& i, const size_t& j) const;
 
+            T& operator [] (const size_t& i);
+            T operator [] (const size_t& i) const;
+
             operator T* ();
             operator const T* () const;
 
@@ -27,6 +30,11 @@ namespace Math
             Matrix3& operator-= (const Matrix3& other);
 
             T determinant () const;
+            T trace () const;
+
+            Matrix3 transpose () const;
+
+            Matrix3 inverse () const;
         private:
             T data[9];
     };
