@@ -25,6 +25,7 @@ namespace Math
             Matrix2& operator/= (const T& scalar);
 
             T determinant () const;
+            Matrix2 transpose () const;
             Matrix2 inverse () const;
         private:
             T data[4];

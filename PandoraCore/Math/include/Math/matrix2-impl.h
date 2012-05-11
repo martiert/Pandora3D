@@ -102,6 +102,13 @@ T Matrix2<T>::determinant () const
 }
 
 template<typename T>
+Matrix2<T> Matrix2<T>::transpose () const
+{
+    return Matrix2<T> (data[0], data[2], data[1], data[3]);
+}
+
+
+template<typename T>
 Matrix2<T> Matrix2<T>::inverse () const
 {
     T det = determinant ();

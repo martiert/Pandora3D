@@ -303,6 +303,35 @@ TEST (Matrix2Test, multiplication_with_inverse_from_left_returns_identity)
     EXPECT_FLOAT_EQ (1, result (1,1));
 }
 
+TEST (Matrix2Test, transpose_of_identity_is_identity)
+{
+    const Math::Matrix2d identity;
+    auto transpose = identity.transpose ();
+
+    EXPECT_EQ (1, transpose (0,0));
+    EXPECT_EQ (0, transpose (0,1));
+    EXPECT_EQ (0, transpose (1,0));
+    EXPECT_EQ (1, transpose (1,1));
+}
+
+TEST (Matrix2Test, transpose_of_matrix_switches_rows_and_columns)
+{
+    srand (time (NULL));
+    for (int i = 0; i < 1000; ++i) {
+        Math::Matrix2d matrix;
+        matrix (0,0) = rand ();
+        matrix (0,1) = rand ();
+        matrix (1,0) = rand ();
+        matrix (1,1) = rand ();
+        auto transpose = matrix.transpose ();
+
+        EXPECT_EQ (matrix (0,0), transpose (0,0));
+        EXPECT_EQ (matrix (1,0), transpose (0,1));
+        EXPECT_EQ (matrix (0,1), transpose (1,0));
+        EXPECT_EQ (matrix (1,1), transpose (1,1));
+    }
+}
+
 TEST (Matrix2Test, inverse_of_singular_matrix_throws_runtime_error)
 {
     const Math::Matrix2d matrix (2.6, 4.8, 1.3, 2.4);

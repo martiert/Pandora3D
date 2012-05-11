@@ -62,6 +62,12 @@ namespace Math
     template<typename T>
     Matrix3<T> operator* (const Matrix3<T>& left, const Matrix3<T>& right);
 
+    template<typename T>
+    bool operator== (const Matrix3<T>& left, const Matrix3<T>& right);
+
+    template<typename T>
+    bool operator!= (const Matrix3<T>& left, const Matrix3<T>& right);
+
 #define MATRIX3_INCLUDE_FILE
 #include "matrix3-impl.h"
 #undef MATRIX3_INCLUDE_FILE

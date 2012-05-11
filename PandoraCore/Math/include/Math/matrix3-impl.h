@@ -213,6 +213,19 @@ Matrix3<T> operator* (const Matrix3<T>& left, const Matrix3<T>& right)
     return result;
 }
 
+template<typename T>
+bool operator== (const Matrix3<T>& left, const Matrix3<T>& right)
+{
+    return memcmp ((const T*) left, (const T*) right, 9 * sizeof (T)) == 0;
+}
+
+template<typename T>
+bool operator!= (const Matrix3<T>& left, const Matrix3<T>& right)
+{
+    return !operator== (left, right);
+}
+
+
 #else // MATRIX3_INCLUDE_FILE
 #error "Never include this file anywhere but matrix3.h"
 #endif // MATRIX3_INCLUDE_FILE

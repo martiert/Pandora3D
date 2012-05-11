@@ -595,3 +595,85 @@ TEST (Matrix3Test, inverse_of_singular_matrix_throws_runtime_error)
                                  6.8, 13.6, 3.4);
     EXPECT_THROW (matrix.inverse (), std::runtime_error);
 }
+
+TEST (Matrix3Test, equality_of_same_matrix_returns_true)
+{
+    const Math::Matrix3d matrix (4.3, 2.1, 6.7,
+                                 6.7, 3.2, 1.1,
+                                 9.8, 5.5, 3.2);
+    EXPECT_EQ (matrix, matrix);
+}
+
+TEST (Matrix3Test, equality_of_copied_matrix_returns_true)
+{
+    const Math::Matrix3d matrix (4.3, 2.1, 6.7,
+                                 6.7, 3.2, 1.1,
+                                 9.8, 5.5, 3.2);
+    auto copy = matrix;
+    EXPECT_EQ (matrix, copy);
+}
+
+TEST (Matrix3Test, equality_of_equal_matrix_returns_true)
+{
+    const Math::Matrix3d matrix (4.3, 2.1, 6.7,
+                                 6.7, 3.2, 1.1,
+                                 9.8, 5.5, 3.2);
+    const Math::Matrix3d equal (4.3, 2.1, 6.7,
+                                 6.7, 3.2, 1.1,
+                                 9.8, 5.5, 3.2);
+
+    EXPECT_EQ (matrix, equal);
+}
+
+TEST (Matrix3Test, equality_of_matrix_with_one_different_element_returns_false)
+{
+    const Math::Matrix3d matrix (4.3, 2.1, 6.7,
+                                 6.7, 3.2, 1.1,
+                                 9.8, 5.5, 3.2);
+    for (int i = 0; i < 9; ++i) {
+        auto other = matrix;
+        other[i] += 4;
+        EXPECT_FALSE (matrix == other);
+    }
+}
+
+TEST (Matrix3Test, inequality_of_same_matrix_returns_false)
+{
+    const Math::Matrix3d matrix (4.3, 2.1, 6.7,
+                                 6.7, 3.2, 1.1,
+                                 9.8, 5.5, 3.2);
+    EXPECT_FALSE (matrix != matrix);
+}
+
+TEST (Matrix3Test, inequality_of_copied_matrix_returns_false)
+{
+    const Math::Matrix3d matrix (4.3, 2.1, 6.7,
+                                 6.7, 3.2, 1.1,
+                                 9.8, 5.5, 3.2);
+    auto copy = matrix;
+    EXPECT_FALSE (matrix != copy);
+}
+
+TEST (Matrix3Test, inequality_of_equal_matrix_returns_false)
+{
+    const Math::Matrix3d matrix (4.3, 2.1, 6.7,
+                                 6.7, 3.2, 1.1,
+                                 9.8, 5.5, 3.2);
+    const Math::Matrix3d equal (4.3, 2.1, 6.7,
+                                 6.7, 3.2, 1.1,
+                                 9.8, 5.5, 3.2);
+
+    EXPECT_FALSE (matrix != equal);
+}
+
+TEST (Matrix3Test, inequality_of_matrix_with_one_different_element_returns_true)
+{
+    const Math::Matrix3d matrix (4.3, 2.1, 6.7,
+                                 6.7, 3.2, 1.1,
+                                 9.8, 5.5, 3.2);
+    for (int i = 0; i < 9; ++i) {
+        auto other = matrix;
+        other[i] += 4;
+        EXPECT_NE (matrix, other);
+    }
+}
