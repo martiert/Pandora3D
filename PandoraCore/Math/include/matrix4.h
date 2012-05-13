@@ -1,6 +1,7 @@
-#ifndef MATH_MATRIX3_H_INCLUDED
-#define MATH_MATRIX3_H_INCLUDED
+#ifndef MATH_MATRIX4_H_INCLUDED
+#define MATH_MATRIX4_H_INCLUDED
 
+#include "matrix3.h"
 #include <stdexcept>
 
 namespace Math
@@ -16,8 +17,14 @@ namespace Math
                      const T& a20, const T& a21, const T& a22, const T& a23,
                      const T& a30, const T& a31, const T& a32, const T& a33);
 
+            Matrix4 (const T array[16]);
+            Matrix4 (const Matrix3<T>& matrix);
+
             T& operator () (const size_t& i, const size_t& j);
             T operator () (const size_t& i, const size_t& j) const;
+
+            T& operator[] (const size_t& i);
+            T operator[] (const size_t& i) const;
         private:
             T data[16];
 
@@ -32,4 +39,4 @@ namespace Math
 #include "matrix4-impl.h"
 #undef MATRIX4_INCLUDE_FILE
 }
-#endif // MATH_MATRIX3_H_INCLUDED
+#endif // MATH_MATRIX4_H_INCLUDED
