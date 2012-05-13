@@ -13,7 +13,7 @@ Matrix2<T>::Matrix2 (const T& m00, const T& m01, const T& m10, const T&  m11)
 }
 
 template<typename T>
-Matrix2<T>::Matrix2 (T array[4])
+Matrix2<T>::Matrix2 (const T array[4])
     : data ({array[0], array[1], array[2], array[3]})
 {
 }

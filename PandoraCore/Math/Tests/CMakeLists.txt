@@ -5,7 +5,7 @@ INCLUDE_DIRECTORIES ("${Math_SOURCE_DIR}/include")
 INCLUDE_DIRECTORIES ("include")
 
 SET (src
-    src/test_helpers.cpp
+    src/test-helpers.cpp
     src/matrix4-test.cpp
     src/matrix3-test.cpp
     src/matrix2-test.cpp

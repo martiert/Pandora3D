@@ -1,7 +1,4 @@
-#include <vector4.h>
-#include <vector3.h>
-
-#include <gtest/gtest.h>
+#include "test-helpers.h"
 
 TEST (Vector4Test, empty_constructor_creates_zero_vector)
 {
@@ -23,126 +20,181 @@ TEST (Vector4Test, construction_with_arguments_populates_the_vector_with_those_a
 
 TEST (Vector4Test, construction_from_array_populates_vector_with_array)
 {
-    double array[] = {3.4, 3.2, 2.1, 5.4};
+    BEGIN_MULTITEST
+
+    auto array = create_double_array_of_size (4);
     const Math::Vec4d vector (array);
+
     EXPECT_EQ (array[0], vector.x);
     EXPECT_EQ (array[1], vector.y);
     EXPECT_EQ (array[2], vector.z);
     EXPECT_EQ (array[3], vector.w);
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, copy_constructor_copies_each_element)
 {
-    const Math::Vec4d vector (0.1, 7.8, 4.3, 2.3);
+    BEGIN_MULTITEST
+
+    const auto vector = create_random_vector4d ();
     const Math::Vec4d copy (vector);
+
     EXPECT_EQ (vector.x, copy.x);
     EXPECT_EQ (vector.y, copy.y);
     EXPECT_EQ (vector.z, copy.z);
     EXPECT_EQ (vector.w, copy.w);
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, copy_constructor_makes_hard_copy)
 {
-    Math::Vec4d vector (0.1, 7.8, 4.3, 2.3);
+    BEGIN_MULTITEST
+
+    auto vector = create_random_vector4d ();
     const Math::Vec4d copy (vector);
     ++vector.x;
     EXPECT_NE (vector.x, copy.x);
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, assignment_from_vector_makes_copy)
 {
-    const Math::Vec4d vector (0.1, 7.8, 4.3, 2.3);
+    BEGIN_MULTITEST
+
+    const auto vector = create_random_vector4d ();
     Math::Vec4d copy;
     copy = vector;
+
     EXPECT_EQ (vector.x, copy.x);
     EXPECT_EQ (vector.y, copy.y);
     EXPECT_EQ (vector.z, copy.z);
     EXPECT_EQ (vector.w, copy.w);
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, assignment_from_array_assigns_each_element_to_vector)
 {
-    double array[] = {3.4, 3.2, 2.1, 5.4};
+    BEGIN_MULTITEST
+
+    auto array = create_double_array_of_size (4);
     Math::Vec4d vector;
     vector = array;
+
     EXPECT_EQ (array[0], vector.x);
     EXPECT_EQ (array[1], vector.y);
     EXPECT_EQ (array[2], vector.z);
     EXPECT_EQ (array[3], vector.w);
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, copy_from_Vector3_gives_a_Vector3_with_1_as_the_w_component)
 {
-    const Math::Vec3d vector3d (4.5, 3.2, 1.9);
+    BEGIN_MULTITEST
+
+    const auto vector3d = create_random_vector3d ();
     const Math::Vec4d copy (vector3d);
+
     EXPECT_EQ (vector3d.x, copy.x);
     EXPECT_EQ (vector3d.y, copy.y);
     EXPECT_EQ (vector3d.z, copy.z);
     EXPECT_EQ (1.0, copy.w);
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, assigning_from_Vector3_gives_a_Vector3_with_1_as_the_w_component)
 {
-    const Math::Vec3d vector3d (4.5, 3.2, 1.9);
+    BEGIN_MULTITEST
+
+    const auto vector3d = create_random_vector3d ();
     Math::Vec4d copy;
     copy = vector3d;
+
     EXPECT_EQ (vector3d.x, copy.x);
     EXPECT_EQ (vector3d.y, copy.y);
     EXPECT_EQ (vector3d.z, copy.z);
     EXPECT_EQ (1.0, copy.w);
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, index_operator_maps_to_x_y_z_w)
 {
-    const Math::Vec4d vector (2.3, 6.7, 8.9, 1.6);
+    BEGIN_MULTITEST
+
+    const auto vector = create_random_vector4d ();
 
     EXPECT_EQ (vector.x, vector[0]);
     EXPECT_EQ (vector.y, vector[1]);
     EXPECT_EQ (vector.z, vector[2]);
     EXPECT_EQ (vector.w, vector[3]);
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, index_operator_manipulates_data)
 {
-    Math::Vec4d vector (2.3, 6.7, 8.9, 1.6);
+    auto vector = create_random_vector4d ();
     vector[2] = 5.3;
+
     EXPECT_EQ (5.3, vector.z);
 }
 
 TEST (Vector4Test, index_operator_throws_out_of_range_exception_when_out_of_range)
 {
-    const Math::Vec4d vector;
+    const auto vector = create_random_vector4d ();
+
     EXPECT_THROW (vector[4], std::out_of_range);
 }
 
 TEST (Vector4Test, length_of_zero_vector_is_zero)
 {
     const Math::Vec4d zero;
+
     EXPECT_EQ (0.0, zero.length ());
     EXPECT_EQ (0.0, zero.lengthSquared ());
 }
 
 TEST (Vector4Test, lengthSquared_of_vector_is_the_sum_of_the_squared_components)
 {
-    const Math::Vec4d vector (2.3, 4.5, 7.6, 9.4);
+    BEGIN_MULTITEST
+
+    const auto vector = create_random_vector4d ();
 
     EXPECT_EQ (vector.x * vector.x +
             vector.y * vector.y +
             vector.z * vector.z +
             vector.w * vector.w, vector.lengthSquared ());
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, length_of_vector_is_the_square_root_of_the_squared_length)
 {
-    const Math::Vec4d vector (2.3, 4.5, 7.6, 9.4);
+    BEGIN_MULTITEST
+
+    const auto vector = create_random_vector4d ();
+
     EXPECT_EQ (std::sqrt (vector.lengthSquared ()), vector.length ());
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, normalization_of_vector_gives_length_of_1)
 {
-    Math::Vec4d vector (3.2, 4.2, 6.7, 4.3);
+    BEGIN_MULTITEST
+
+    auto vector = create_random_vector4d ();
     vector.normalize ();
-    EXPECT_EQ (1.0, vector.length ());
+
+    EXPECT_FLOAT_EQ (1.0, vector.length ());
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, normalization_of_zero_vector_throws_domain_error)
@@ -153,43 +205,57 @@ TEST (Vector4Test, normalization_of_zero_vector_throws_domain_error)
 
 TEST (Vector4Test, negation_of_vector_negates_each_component)
 {
-    const Math::Vec4d vector (3.2, 4.3, 1.2, 6.7);
+    BEGIN_MULTITEST
+
+    const auto vector = create_random_vector4d ();
     auto res = -vector;
 
     EXPECT_EQ (-vector.x, res.x);
     EXPECT_EQ (-vector.y, res.y);
     EXPECT_EQ (-vector.z, res.z);
     EXPECT_EQ (-vector.w, res.w);
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, adding_two_vectors_adds_each_component)
 {
-    const Math::Vec4d vec_1 (3.2, 4.5, 3.1, 6.7);
-    const Math::Vec4d vec_2 (4.5, 7.6, 1.1, 2.3);
+    BEGIN_MULTITEST
+
+    const auto vec_1 = create_random_vector4d ();
+    const auto vec_2 = create_random_vector4d ();
     auto res = vec_1 + vec_2;
 
     EXPECT_EQ (vec_1.x + vec_2.x, res.x);
     EXPECT_EQ (vec_1.y + vec_2.y, res.y);
     EXPECT_EQ (vec_1.z + vec_2.z, res.z);
     EXPECT_EQ (vec_1.w + vec_2.w, res.w);
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, subtracting_two_vectors_subtracts_each_component)
 {
-    const Math::Vec4d vec_1 (3.2, 4.5, 3.1, 6.7);
-    const Math::Vec4d vec_2 (4.5, 7.6, 1.1, 2.3);
+    BEGIN_MULTITEST
+
+    const auto vec_1 = create_random_vector4d ();
+    const auto vec_2 = create_random_vector4d ();
     auto res = vec_1 - vec_2;
 
     EXPECT_EQ (vec_1.x - vec_2.x, res.x);
     EXPECT_EQ (vec_1.y - vec_2.y, res.y);
     EXPECT_EQ (vec_1.z - vec_2.z, res.z);
     EXPECT_EQ (vec_1.w - vec_2.w, res.w);
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, adding_vector_to_vector_adds_each_component)
 {
-    const Math::Vec4d vec_1 (3.2, 4.5, 3.1, 6.7);
-    const Math::Vec4d vec_2 (4.5, 7.6, 1.1, 2.3);
+    BEGIN_MULTITEST
+
+    const auto vec_1 = create_random_vector4d ();
+    const auto vec_2 = create_random_vector4d ();
     auto res = vec_1;
     res += vec_2;
 
@@ -197,12 +263,16 @@ TEST (Vector4Test, adding_vector_to_vector_adds_each_component)
     EXPECT_EQ (vec_1.y + vec_2.y, res.y);
     EXPECT_EQ (vec_1.z + vec_2.z, res.z);
     EXPECT_EQ (vec_1.w + vec_2.w, res.w);
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, subtracting_vector_from_vector_subtracts_each_component)
 {
-    const Math::Vec4d vec_1 (3.2, 4.5, 3.1, 6.7);
-    const Math::Vec4d vec_2 (4.5, 7.6, 1.1, 2.3);
+    BEGIN_MULTITEST
+
+    const auto vec_1 = create_random_vector4d ();
+    const auto vec_2 = create_random_vector4d ();
     auto res = vec_1;
     res -= vec_2;
 
@@ -210,75 +280,104 @@ TEST (Vector4Test, subtracting_vector_from_vector_subtracts_each_component)
     EXPECT_EQ (vec_1.y - vec_2.y, res.y);
     EXPECT_EQ (vec_1.z - vec_2.z, res.z);
     EXPECT_EQ (vec_1.w - vec_2.w, res.w);
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, multiplying_vector_with_scalar_from_right_multiplies_each_component_with_scalar)
 {
-    const Math::Vec4d vector (3.2, 4.5, 3.1, 6.7);
-    auto res = vector * 2.4;
+    BEGIN_MULTITEST
 
-    EXPECT_EQ (vector.x * 2.4, res.x);
-    EXPECT_EQ (vector.y * 2.4, res.y);
-    EXPECT_EQ (vector.z * 2.4, res.z);
-    EXPECT_EQ (vector.w * 2.4, res.w);
+    const auto vector = create_random_vector4d ();
+    auto scalar = rand () / 100.0;
+    auto res = vector * scalar;
+
+    EXPECT_EQ (vector.x * scalar, res.x);
+    EXPECT_EQ (vector.y * scalar, res.y);
+    EXPECT_EQ (vector.z * scalar, res.z);
+    EXPECT_EQ (vector.w * scalar, res.w);
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, multiplying_vector_with_scalar_from_left_multiplies_each_component_with_scalar)
 {
-    const Math::Vec4d vector (3.2, 4.5, 3.1, 6.7);
-    auto res = 2.4 * vector;
+    BEGIN_MULTITEST
 
-    EXPECT_EQ (vector.x * 2.4, res.x);
-    EXPECT_EQ (vector.y * 2.4, res.y);
-    EXPECT_EQ (vector.z * 2.4, res.z);
-    EXPECT_EQ (vector.w * 2.4, res.w);
+    const auto vector = create_random_vector4d ();
+    auto scalar = rand () / 100.0;
+    auto res = scalar * vector;
+
+    EXPECT_EQ (vector.x * scalar, res.x);
+    EXPECT_EQ (vector.y * scalar, res.y);
+    EXPECT_EQ (vector.z * scalar, res.z);
+    EXPECT_EQ (vector.w * scalar, res.w);
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, dividing_vector_with_scalar_from_right_divides_each_component_with_scalar)
 {
-    const Math::Vec4d vector (3.2, 4.5, 3.1, 6.7);
-    auto res = vector / 2.4;
+    BEGIN_MULTITEST
 
-    EXPECT_EQ (vector.x / 2.4, res.x);
-    EXPECT_EQ (vector.y / 2.4, res.y);
-    EXPECT_EQ (vector.z / 2.4, res.z);
-    EXPECT_EQ (vector.w / 2.4, res.w);
+    const auto vector = create_random_vector4d ();
+    auto scalar = rand () / 100.0;
+    auto res = vector / scalar;
+
+    EXPECT_EQ (vector.x / scalar, res.x);
+    EXPECT_EQ (vector.y / scalar, res.y);
+    EXPECT_EQ (vector.z / scalar, res.z);
+    EXPECT_EQ (vector.w / scalar, res.w);
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, dividing_vector_and_zero_throws_invalid_argument)
 {
-    const Math::Vec4d vector (3.2, 4.5, 3.1, 6.7);
+    const auto vector = create_random_vector4d ();
     EXPECT_THROW (vector / 0.0, std::invalid_argument);
 }
 
 TEST (Vector4Test, multiplying_vector_with_scalar_multiplies_each_component_with_scalar)
 {
-    const Math::Vec4d vector (3.2, 4.5, 3.1, 6.7);
-    auto res = vector;
-    res *= 2.4;
+    BEGIN_MULTITEST
 
-    EXPECT_EQ (vector.x * 2.4, res.x);
-    EXPECT_EQ (vector.y * 2.4, res.y);
-    EXPECT_EQ (vector.z * 2.4, res.z);
-    EXPECT_EQ (vector.w * 2.4, res.w);
+    const auto vector = create_random_vector4d ();
+    auto scalar = rand () / 100.0;
+    auto res = vector;
+    res *= scalar;
+
+    EXPECT_EQ (vector.x * scalar, res.x);
+    EXPECT_EQ (vector.y * scalar, res.y);
+    EXPECT_EQ (vector.z * scalar, res.z);
+    EXPECT_EQ (vector.w * scalar, res.w);
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, dividing_vector_with_scalar_divides_each_component_with_scalar)
 {
-    const Math::Vec4d vector (3.2, 4.5, 3.1, 6.7);
-    auto res = vector;
-    res /= 2.4;
+    BEGIN_MULTITEST
 
-    EXPECT_EQ (vector.x / 2.4, res.x);
-    EXPECT_EQ (vector.y / 2.4, res.y);
-    EXPECT_EQ (vector.z / 2.4, res.z);
-    EXPECT_EQ (vector.w / 2.4, res.w);
+    const auto vector = create_random_vector4d ();
+    auto scalar = rand () / 100.0;
+    auto res = vector;
+    res /= scalar;
+
+    EXPECT_EQ (vector.x / scalar, res.x);
+    EXPECT_EQ (vector.y / scalar, res.y);
+    EXPECT_EQ (vector.z / scalar, res.z);
+    EXPECT_EQ (vector.w / scalar, res.w);
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, multiplying_vector_to_vector_multiplies_each_component)
 {
-    const Math::Vec4d vector (3.2, 4.5, 3.1, 6.7);
-    const Math::Vec4d other (5.4, 2.1, 7.6, 9.8);
+    BEGIN_MULTITEST
+
+    const auto vector = create_random_vector4d ();
+    const auto other = create_random_vector4d ();
     auto res = vector;
     res *= other;
 
@@ -286,47 +385,71 @@ TEST (Vector4Test, multiplying_vector_to_vector_multiplies_each_component)
     EXPECT_EQ (vector.y * other.y, res.y);
     EXPECT_EQ (vector.z * other.z, res.z);
     EXPECT_EQ (vector.w * other.w, res.w);
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, dividing_vector_with_zero_throws_invalid_argument)
 {
-    Math::Vec4d vector (3.1, 2.6, 7.1, 8.3);
+    auto vector = create_random_vector4d ();
     EXPECT_THROW (vector /= 0.0, std::invalid_argument);
 }
 
 TEST (Vector4Test, dot_product_of_two_vectors_add_the_product_of_the_vectors)
 {
-    const Math::Vec4d vector (3.2, 4.5, 3.1, 6.7);
-    const Math::Vec4d other (5.4, 2.1, 7.6, 9.8);
+    BEGIN_MULTITEST
+
+    const auto vector = create_random_vector4d ();
+    const auto other = create_random_vector4d ();
     auto dotprod = vector.dot (other);
     auto multvec = vector * other;
+
     EXPECT_EQ (multvec.x + multvec.y + multvec.z + multvec.w, dotprod);
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, equality_operator_on_same_object_returns_true)
 {
-    const Math::Vec4d vector (3.2, 4.5, 3.1, 6.7);
+    BEGIN_MULTITEST
+
+    const auto vector = create_random_vector4d ();
+
     EXPECT_EQ (vector, vector);
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, equality_operator_on_copy_returns_true)
 {
-    const Math::Vec4d vector (3.2, 4.5, 3.1, 6.7);
+    BEGIN_MULTITEST
+
+    const auto vector = create_random_vector4d ();
     auto copy (vector);
+
     EXPECT_EQ (vector, copy);
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, equality_operator_on_similar_vectors_return_true)
 {
-    const Math::Vec4d vector (3.2, 4.5, 3.1, 6.7);
-    const Math::Vec4d similar (3.2, 4.5, 3.1, 6.7);
+    BEGIN_MULTITEST
+
+    auto array = create_double_array_of_size (4);
+    const Math::Vec4d vector (array);
+    const Math::Vec4d similar (array);
+
     EXPECT_EQ (vector, similar);
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, equality_operator_on_different_x_returns_false)
 {
     const Math::Vec4d vector (3.2, 4.5, 3.1, 6.7);
     const Math::Vec4d different (2.3, 4.5, 3.1, 6.7);
+
     EXPECT_FALSE (vector == different);
 }
 
@@ -334,6 +457,7 @@ TEST (Vector4Test, equality_operator_on_different_y_returns_false)
 {
     const Math::Vec4d vector (3.2, 4.5, 3.1, 6.7);
     const Math::Vec4d different (3.2, 4.0, 3.1, 6.7);
+
     EXPECT_FALSE (vector == different);
 }
 
@@ -341,6 +465,7 @@ TEST (Vector4Test, equality_operator_on_different_z_returns_false)
 {
     const Math::Vec4d vector (3.2, 4.5, 3.1, 6.7);
     const Math::Vec4d different (3.2, 4.5, .1, 6.7);
+
     EXPECT_FALSE (vector == different);
 }
 
@@ -348,6 +473,7 @@ TEST (Vector4Test, equality_operator_on_different_w_returns_false)
 {
     const Math::Vec4d vector (3.2, 4.5, 3.1, 6.7);
     const Math::Vec4d different (3.2, 4.5, 3.1, 7.8);
+
     EXPECT_FALSE (vector == different);
 }
 
@@ -355,6 +481,7 @@ TEST (Vector4Test, inequality_operator_on_different_x_returns_true)
 {
     const Math::Vec4d vector (3.2, 4.5, 3.1, 6.7);
     const Math::Vec4d different (2.3, 4.5, 3.1, 6.7);
+
     EXPECT_NE (vector, different);
 }
 
@@ -362,6 +489,7 @@ TEST (Vector4Test, inequality_operator_on_different_y_returns_true)
 {
     const Math::Vec4d vector (3.2, 4.5, 3.1, 6.7);
     const Math::Vec4d different (3.2, 4.0, 3.1, 6.7);
+
     EXPECT_NE (vector, different);
 }
 
@@ -369,6 +497,7 @@ TEST (Vector4Test, inequality_operator_on_different_z_returns_true)
 {
     const Math::Vec4d vector (3.2, 4.5, 3.1, 6.7);
     const Math::Vec4d different (3.2, 4.5, .1, 6.7);
+
     EXPECT_NE (vector, different);
 }
 
@@ -376,32 +505,49 @@ TEST (Vector4Test, inequality_operator_on_different_w_returns_true)
 {
     const Math::Vec4d vector (3.2, 4.5, 3.1, 6.7);
     const Math::Vec4d different (3.2, 4.5, 3.1, 7.8);
+
     EXPECT_NE (vector, different);
 }
 
 TEST (Vector4Test, inequality_operator_on_same_object_returns_false)
 {
-    const Math::Vec4d vector (3.2, 4.5, 3.1, 6.7);
+    BEGIN_MULTITEST
+
+    const auto vector = create_random_vector4d ();
+
     EXPECT_FALSE (vector != vector);
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, inequality_operator_on_copy_returns_false)
 {
-    const Math::Vec4d vector (3.2, 4.5, 3.1, 6.7);
+    BEGIN_MULTITEST
+
+    const auto vector = create_random_vector4d ();
     auto copy (vector);
+
     EXPECT_FALSE (vector != copy);
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, inequality_operator_on_similar_vectors_return_false)
 {
-    const Math::Vec4d vector (3.2, 4.5, 3.1, 6.7);
-    const Math::Vec4d similar (3.2, 4.5, 3.1, 6.7);
+    BEGIN_MULTITEST
+
+    auto array = create_double_array_of_size (4);
+    const Math::Vec4d vector (array);
+    const Math::Vec4d similar (array);
+
     EXPECT_FALSE (vector != similar);
+
+    END_MULTITEST
 }
 
 TEST (Vector4Test, vector_can_be_casted_c_style)
 {
-    const Math::Vec4d vector (3.2, 4.5, 3.1, 6.7);
+    const auto vector = create_random_vector4d ();
     auto pointer = (const double *) vector;
 
     EXPECT_EQ (pointer[0], vector.x);
@@ -412,7 +558,7 @@ TEST (Vector4Test, vector_can_be_casted_c_style)
 
 TEST (Vector4Test, vector_can_be_statically_casted)
 {
-    const Math::Vec4d vector (3.2, 4.5, 3.1, 6.7);
+    const auto vector = create_random_vector4d ();
     auto pointer = static_cast<const double *> (vector);
 
     EXPECT_EQ (pointer[0], vector.x);
@@ -423,7 +569,7 @@ TEST (Vector4Test, vector_can_be_statically_casted)
 
 TEST (Vector4Test, changing_the_casted_pointers_changes_the_vector)
 {
-    Math::Vec4d vector (3.2, 4.5, 3.1, 6.7);
+    auto vector = create_random_vector4d ();
     auto pointer = (double *) vector;
     auto static_ptr = static_cast<double *> (vector);
 

@@ -208,10 +208,15 @@ void generateOrthonormalBasis (Vector3<T>& vec1, Vector3<T>& vec2, Vector3<T>& v
     if (vec1 == vec2 || vec1 == vec3 || vec2 == vec3)
         throw std::domain_error ("Can not make orthonormal basis of equal vectors");
 
+    const Vector3<T> zero;
+    if (vec1 == zero || vec2 == zero || vec3 == zero)
+        throw std::domain_error ("Can not make othonormal basis of zero vector");
+
+    vec2 = vec1.cross (vec3);
+    vec3 = vec1.cross (vec2);
+
     vec1.normalize ();
-    vec2 = vec2 - vec1.dot (vec2) * vec1;
     vec2.normalize ();
-    vec3 = vec3 - vec1.dot (vec3) * vec1 - vec2.dot (vec3) * vec2;
     vec3.normalize ();
 }
 

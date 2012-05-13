@@ -1,6 +1,4 @@
-#include <vector2.h>
-
-#include <gtest/gtest.h>
+#include "test-helpers.h"
 
 TEST (Vector2Test, empty_constructor_gives_zero_vector)
 {
@@ -11,61 +9,90 @@ TEST (Vector2Test, empty_constructor_gives_zero_vector)
 
 TEST (Vector2Test, constructing_a_vector_with_two_arguments_populates_the_vector_with_those_arguments)
 {
-    const Math::Vec2d vector (0.1, 2.3);
-    EXPECT_EQ (0.1, vector.x);
-    EXPECT_EQ (2.3, vector.y);
+    BEGIN_MULTITEST
+
+    auto tmp = create_double_array_of_size (2);
+    const Math::Vec2d vector (tmp[0], tmp[1]);
+
+    EXPECT_EQ (tmp[0], vector.x);
+    EXPECT_EQ (tmp[1], vector.y);
+
+    END_MULTITEST
 }
 
 TEST (Vector2Test, constructing_a_vector_with_a_array_of_two_elements_populates_vector_with_the_array)
 {
-    double tmp[] = {2.3, 1.2};
+    BEGIN_MULTITEST
 
-    const Math::Vec2d vector (tmp);
-    EXPECT_EQ (tmp[0], vector.x);
-    EXPECT_EQ (tmp[1], vector.y);
+    auto array = create_double_array_of_size (2);
+    const Math::Vec2d vector (array);
+
+    EXPECT_EQ (array[0], vector.x);
+    EXPECT_EQ (array[1], vector.y);
+
+    delete[] array;
+    END_MULTITEST
 }
 
 TEST (Vector2Test, assigning_a_vector_to_an_array_populates_vector_with_given_array)
 {
-    double tmp[] = {2.3, 1.2};
+    BEGIN_MULTITEST
 
-    const Math::Vec2d vector = tmp;
-    EXPECT_EQ (tmp[0], vector.x);
-    EXPECT_EQ (tmp[1], vector.y);
+    auto array = create_double_array_of_size (2);
+    const Math::Vec2d vector = array;
+
+    EXPECT_EQ (array[0], vector.x);
+    EXPECT_EQ (array[1], vector.y);
+
+    delete[] array;
+    END_MULTITEST
 }
 
 TEST (Vector2Test, assigning_a_vector_to_another_vector_populates_the_vector)
 {
-    const Math::Vec2d vector (2.5, 1.2);
+    BEGIN_MULTITEST
+
+    const auto vector = create_random_vector2d ();
     auto copy = vector;
+
     EXPECT_EQ (vector.x, copy.x);
     EXPECT_EQ (vector.y, copy.y);
+
+    END_MULTITEST
 }
 
 TEST (Vector2Test, copy_constructor_makes_a_hard_copy)
 {
-    const Math::Vec2d vector (3.2, 7.6);
+    BEGIN_MULTITEST
+
+    const auto vector = create_random_vector2d ();
     auto copy (vector);
+
     EXPECT_EQ (vector.x, copy.x);
     EXPECT_EQ (vector.y, copy.y);
     ++copy.x;
     EXPECT_NE (vector.x, copy.x);
+
+    END_MULTITEST
 }
 
 TEST (Vector2Test, index_operator_maps_to_x_and_y)
 {
-    Math::Vec2d vector_1 (4.3, 2.1);
-    const Math::Vec2d vector_2 (2.3, 1.5);
+    BEGIN_MULTITEST
 
-    EXPECT_EQ (vector_1.x, vector_1[0]);
-    EXPECT_EQ (vector_1.y, vector_1[1]);
+    auto vector = create_random_vector2d ();
+    const auto const_vector = create_random_vector2d ();
 
-    EXPECT_EQ (vector_2.x, vector_2[0]);
-    EXPECT_EQ (vector_2.y, vector_2[1]);
+    EXPECT_EQ (vector.x, vector[0]);
+    EXPECT_EQ (vector.y, vector[1]);
 
-    vector_1[0] = 2.1;
-    EXPECT_EQ (vector_1.x, vector_1[0]);
-    EXPECT_EQ (vector_1.y, vector_1[1]);
+    vector[0] += 4.2;
+    EXPECT_EQ (vector.x, vector[0]);
+
+    EXPECT_EQ (const_vector.x, const_vector[0]);
+    EXPECT_EQ (const_vector.y, const_vector[1]);
+
+    END_MULTITEST
 }
 
 TEST (Vector2Test, index_operator_throws_out_of_range_exception_when_out_of_range)
@@ -76,7 +103,7 @@ TEST (Vector2Test, index_operator_throws_out_of_range_exception_when_out_of_rang
 
 TEST (Vector2Test, vector_can_be_casted_to_array_c_style)
 {
-    Math::Vec2d vector (4.5, 2.1);
+    auto vector = create_random_vector2d ();
     auto pointer = (double *) vector;
 
     EXPECT_EQ (pointer[0], vector.x);
@@ -85,17 +112,19 @@ TEST (Vector2Test, vector_can_be_casted_to_array_c_style)
 
 TEST (Vector2Test, vector_can_be_static_casted_to_array)
 {
-    Math::Vec2d vector (4.5, 2.1);
+    auto vector = create_random_vector2d ();
     auto pointer = static_cast<double*> (vector);
+
     EXPECT_EQ (pointer[0], vector.x);
     EXPECT_EQ (pointer[1], vector.y);
 }
 
 TEST (Vector2Test, changing_the_array_we_cast_to_changes_the_vector)
 {
-    Math::Vec2d vector (4.5, 2.1);
+    auto vector = create_random_vector2d ();
     auto pointer = static_cast<double*> (vector);
     auto tmp = pointer[0];
+
     ++pointer[0];
     EXPECT_EQ (pointer[0], tmp + 1);
     EXPECT_EQ (vector.x, pointer[0]);
@@ -103,8 +132,9 @@ TEST (Vector2Test, changing_the_array_we_cast_to_changes_the_vector)
 
 TEST (Vector2Test, const_vector_can_be_cast_to_const_ptr)
 {
-    const Math::Vec2d vector (3.4, 2.1);
+    const auto vector = create_random_vector2d ();
     auto const_ptr = (const double*) vector;
+
     EXPECT_EQ (const_ptr[0], vector.x);
     EXPECT_EQ (const_ptr[1], vector.y);
 }
@@ -118,16 +148,24 @@ TEST (Vector2Test, zero_vector_gives_zero_length)
 
 TEST (Vector2Test, length_of_vector_follows_mathematical_rules)
 {
-    const Math::Vec2d vector (2.3, 1.2);
+    BEGIN_MULTITEST
+
+    const auto vector = create_random_vector2d ();
     EXPECT_EQ ((vector.x * vector.x + vector.y * vector.y), vector.lengthSquared ());
     EXPECT_EQ (std::sqrt (vector.x * vector.x + vector.y * vector.y), vector.length ());
+
+    END_MULTITEST
 }
 
 TEST (Vector2Test, normalize_non_zero_vector_gives_new_length_of_1)
 {
-    Math::Vec2d vec_1 (4.0, 3.0);
+    BEGIN_MULTITEST 
+
+    auto vec_1 = create_random_vector2d ();
     vec_1.normalize ();
-    EXPECT_EQ (1.0, vec_1.length ());
+    EXPECT_FLOAT_EQ (1.0, vec_1.length ());
+
+    END_MULTITEST
 }
 
 TEST (Vector2Test, normalize_throws_domain_error_for_length_zero)
@@ -139,74 +177,118 @@ TEST (Vector2Test, normalize_throws_domain_error_for_length_zero)
 
 TEST (Vector2Test, vector_negation_negates_each_component)
 {
-    const Math::Vec2d vec (2.3, 4.2);
+    BEGIN_MULTITEST
+
+    const auto vec = create_random_vector2d ();
     auto neg = -vec;
 
     EXPECT_EQ (-vec.x, neg.x);
     EXPECT_EQ (-vec.y, neg.y);
+
+    END_MULTITEST
 }
 
 TEST (Vector2Test, adding_two_vectors_adds_each_component)
 {
-    const Math::Vec2d vector_1 (2.3, 1.2);
-    const Math::Vec2d vector_2 (3.0, 2.9);
+    BEGIN_MULTITEST
 
+    const auto vector_1 = create_random_vector2d ();
+    const auto vector_2 = create_random_vector2d ();
     auto res = vector_1 + vector_2;
 
     EXPECT_EQ (vector_1.x + vector_2.x, res.x);
     EXPECT_EQ (vector_1.y + vector_2.y, res.y);
 
-    res = vector_1 - vector_2;
+    END_MULTITEST
+}
+
+TEST (Vector2Test, subtracting_two_vectors_subtracts_each_component)
+{
+    BEGIN_MULTITEST
+
+    const auto vector_1 = create_random_vector2d ();
+    const auto vector_2 = create_random_vector2d ();
+    auto res = vector_1 - vector_2;
+
     EXPECT_EQ (vector_1.x - vector_2.x, res.x);
     EXPECT_EQ (vector_1.y - vector_2.y, res.y);
+
+    END_MULTITEST
 }
 
 TEST (Vector2Test, multiplying_vector_with_scalar_from_right_multiplies_each_component)
 {
-    const Math::Vec2d vector (2.3, 1.2);
+    BEGIN_MULTITEST
+
+    const auto vector = create_random_vector2d ();
     auto res = vector * 2.3;
+
     EXPECT_EQ (vector.x * 2.3, res.x);
     EXPECT_EQ (vector.y * 2.3, res.y);
+
+    END_MULTITEST
 }
 
 TEST (Vector2Test, dividing_vector_with_scalar_divides_each_component)
 {
-    const Math::Vec2d vector (2.3, 1.2);
-    auto res = vector / 2.3;
-    EXPECT_EQ (vector.x / 2.3, res.x);
-    EXPECT_EQ (vector.y / 2.3, res.y);
+    BEGIN_MULTITEST
+
+    const auto vector = create_random_vector2d ();
+    double scalar = rand () / 100.0;
+    auto res = vector / scalar;
+
+    EXPECT_EQ (vector.x / scalar, res.x);
+    EXPECT_EQ (vector.y / scalar, res.y);
+
+    END_MULTITEST
 }
 
 TEST (Vector2Test, multiplying_vector_with_scalar_from_left_multiplies_each_component)
 {
-    const Math::Vec2d vector (2.3, 1.2);
-    auto res = 2.3 * vector;
-    EXPECT_EQ (vector.x * 2.3, res.x);
-    EXPECT_EQ (vector.y * 2.3, res.y);
+    BEGIN_MULTITEST
+
+    const auto vector = create_random_vector2d ();
+    auto scalar = rand () / 100.0;
+    auto res = scalar * vector;
+
+    EXPECT_EQ (vector.x * scalar, res.x);
+    EXPECT_EQ (vector.y * scalar, res.y);
+
+    END_MULTITEST
 }
 
 TEST (Vector2Test, dividing_vector_with_zero_throws_invalid_argument)
 {
-    const Math::Vec2d vector (2.3, 1.2);
+    const auto vector = create_random_vector2d ();
     EXPECT_THROW (vector / 0.0, std::invalid_argument);
 }
 
 TEST (Vector2Test, multiplying_two_vectors_multiplies_component_wise)
 {
-    const Math::Vec2d vec1 (2.3, 1.2);
-    const Math::Vec2d vec2 (1.4, 4.3);
+    BEGIN_MULTITEST
+
+    const auto vec1 = create_random_vector2d ();
+    const auto vec2 = create_random_vector2d ();
     auto res = vec1 * vec2;
+
     EXPECT_EQ (vec1.x * vec2.x, res.x);
     EXPECT_EQ (vec1.y * vec2.y, res.y);
+
+    END_MULTITEST
 }
 
 TEST (Vector2Test, dot_product_of_two_vectors_gives_the_sum_of_the_vectors_multiplied)
 {
-    const Math::Vec2d vec1 (2.3, 1.2);
-    const Math::Vec2d vec2 (1.4, 4.3);
+    BEGIN_MULTITEST
+
+    const auto vec1 = create_random_vector2d ();
+    const auto vec2 = create_random_vector2d ();
+
     auto dot = vec1.dot (vec2);
-    auto res = vec1 * vec2;
-    EXPECT_EQ (res.x + res.y, dot);
+    auto mult = vec1 * vec2;
+    EXPECT_EQ (mult.x + mult.y, dot);
+
+    END_MULTITEST
 }
 
 TEST (Vector2Test, perp_vector_is_zero_vector_for_zero_vector)
@@ -220,103 +302,123 @@ TEST (Vector2Test, perp_vector_is_zero_vector_for_zero_vector)
 
 TEST (Vector2Test, perpendicular_vector_of_non_zero_vector_is_non_zero)
 {
-    srand (time (NULL));
-    for (int i = 0; i < 20000; ++i) {
-        auto val1 = (rand () % 10000) / 10.0 + 1;
-        auto val2 = (rand () % 10000) / 10.0 + 1;
-        const Math::Vec2d vec (val1, val2);
+    BEGIN_MULTITEST
 
-        const Math::Vec2d perp = vec.perp ();
+    const auto vector = create_random_vector2d ();
+    auto perp = vector.perp ();
 
-        EXPECT_TRUE (perp.x != 0.0 || perp.y != 0.0);
-    }
+    EXPECT_TRUE (perp.x != 0.0 || perp.y != 0.0);
+
+    END_MULTITEST
 }
 
 TEST (Vector2Test, dot_product_with_perp_vector_is_zero)
 {
-    srand (time (NULL));
-    for (int i = 0; i < 20000; ++i) {
-        auto val1 = (rand () % 10000) / 10.0 + 1;
-        auto val2 = (rand () % 10000) / 10.0 + 1;
-        const Math::Vec2d vec (val1, val2);
+    BEGIN_MULTITEST
 
-        auto perp = vec.perp ();
-        EXPECT_EQ (0.0, vec.dot (perp));
-        EXPECT_EQ (0.0, perp.dot (vec));
-    }
+    const auto vector = create_random_vector2d ();
+    auto perp = vector.perp ();
+
+    EXPECT_EQ (0.0, vector.dot (perp));
+    EXPECT_EQ (0.0, perp.dot (vector));
+
+    END_MULTITEST
 }
 
 TEST (Vector2Test, addition_to_vector_gives_same_as_the_vectors_added)
 {
-    const Math::Vec2d vec1 (2.3, 5.4);
-    Math::Vec2d vec2 (9.4, 3.7);
+    BEGIN_MULTITEST
+
+    const auto vec1 = create_random_vector2d ();
+    auto vec2 = create_random_vector2d ();
 
     auto vec3 = vec1 + vec2;
     vec2 += vec1;
 
     EXPECT_EQ (vec2.x, vec2.x);
     EXPECT_EQ (vec2.y, vec2.y);
+
+    END_MULTITEST
 }
 
 TEST (Vector2Test, subtraction_from_vector_gives_same_as_vectors_subtracted)
 {
-    const Math::Vec2d vec1 (2.3, 5.4);
-    Math::Vec2d vec2 (9.4, 3.7);
+    BEGIN_MULTITEST
+
+    const auto vec1 = create_random_vector2d ();
+    auto vec2 = create_random_vector2d ();
 
     auto vec3 = vec1 - vec2;
     vec2 -= vec1;
 
     EXPECT_EQ (vec2.x, vec2.x);
     EXPECT_EQ (vec2.y, vec2.y);
+
+    END_MULTITEST
 }
 
 TEST (Vector2Test, multiplication_inplace_with_scalar_gives_same_as_vector_times_scalar)
 {
-    Math::Vec2d vec1 (5.4, 2.3);
-    const double scalar = 2.4;
+    BEGIN_MULTITEST
+
+    auto vec1 = create_random_vector2d ();
+    auto scalar = rand () / 100.0;
 
     auto vec2 = vec1 * scalar;
     vec1 *= scalar;
 
     EXPECT_EQ (vec1.x, vec2.x);
     EXPECT_EQ (vec1.y, vec2.y);
+
+    END_MULTITEST
 }
 
 TEST (Vector2Test, multiplication_inplace_with_vector_gives_same_as_vector_times_vector)
 {
-    Math::Vec2d vec1 (5.4, 2.3);
-    const Math::Vec2d vec3 (4.5, 2.3);
-    auto vec2 = vec1 * vec3;
-    vec1 *= vec3;
+    BEGIN_MULTITEST
 
-    EXPECT_EQ (vec1.x, vec2.x);
-    EXPECT_EQ (vec1.y, vec2.y);
+    const auto vec1 = create_random_vector2d ();
+    auto vec2 = create_random_vector2d ();
+
+    auto vec3 = vec1 * vec2;
+    vec2 *= vec1;
+
+    EXPECT_EQ (vec3.x, vec2.x);
+    EXPECT_EQ (vec3.y, vec2.y);
+
+    END_MULTITEST
 }
 
 TEST (Vector2Test, division_inplace_with_with_scalar_gives_same_as_vector_divided_by_scalar)
 {
-    Math::Vec2d vec1 (5.4, 2.3);
-    auto scalar = 2.4;
+    BEGIN_MULTITEST
+
+    auto vec1 = create_random_vector2d ();
+    auto scalar = rand () / 100.0;
 
     auto vec2 = vec1 / scalar;
     vec1 /= scalar;
 
     EXPECT_EQ (vec1.x, vec2.x);
     EXPECT_EQ (vec1.y, vec2.y);
+
+    END_MULTITEST
 }
 
 TEST (Vector2Test, inplace_division_by_zero_throws_invalid_argument)
 {
-    Math::Vec2d vec (2.3, 1.2);
+    auto vec = create_random_vector2d ();
 
     EXPECT_THROW (vec /= 0.0, std::invalid_argument);
 }
 
 TEST (Vector2Test, inplace_arithmetic_returns_ref_to_self)
 {
-    Math::Vec2d vec1 (2.3, 5.4);
-    Math::Vec2d vec2 (3.4, 8.7);
-    auto tmp = 5.4;
+    BEGIN_MULTITEST
+
+    auto vec1 = create_random_vector2d ();
+    auto vec2 = create_random_vector2d ();
+    auto tmp = rand () / 100.0;
 
     Math::Vec2d *res;
 
@@ -334,26 +436,44 @@ TEST (Vector2Test, inplace_arithmetic_returns_ref_to_self)
 
     res = &(vec1 /= tmp);
     EXPECT_EQ (&vec1, res);
+
+    END_MULTITEST
 }
 
 TEST (Vector2Test, equality_operator_gives_true_for_same_vector)
 {
-    const Math::Vec2d vector (3.2, 1.8);
+    BEGIN_MULTITEST
+
+    const auto vector = create_random_vector2d ();
     EXPECT_EQ (vector, vector);
+
+    END_MULTITEST
 }
 
 TEST (Vector2Test, equality_operator_gives_true_for_copied_vector)
 {
-    const Math::Vec2d vector (3.2, 1.8);
+    BEGIN_MULTITEST
+
+    const auto vector = create_random_vector2d ();
     auto copy = vector;
+
     EXPECT_EQ (copy, vector);
+
+    END_MULTITEST
 }
 
 TEST (Vector2Test, equality_operator_gives_true_for_vectors_with_equal_components)
 {
-    const Math::Vec2d vector (3.2, 1.8);
-    const Math::Vec2d same (3.2, 1.8);
+    BEGIN_MULTITEST
+
+    auto array = create_double_array_of_size (2);
+    const Math::Vec2d vector (array);
+    const Math::Vec2d same (array);
+
     EXPECT_EQ (vector, same);
+
+    delete[] array;
+    END_MULTITEST
 }
 
 TEST (Vector2Test, equality_operator_gives_false_for_unequal_x)
@@ -386,22 +506,36 @@ TEST (Vector2Test, non_equal_operator_gives_true_for_unequal_y)
 
 TEST (Vector2Test, non_equal_operator_gives_false_for_same_vector)
 {
-    const Math::Vec2d vector (3.2, 1.8);
+    BEGIN_MULTITEST
+
+    const auto vector = create_random_vector2d ();
     EXPECT_FALSE (vector != vector);
+
+    END_MULTITEST
 }
 
 TEST (Vector2Test, non_equal_operator_gives_false_for_copy)
 {
-    const Math::Vec2d vector (3.2, 1.8);
+    BEGIN_MULTITEST
+
+    const auto vector = create_random_vector2d ();
     auto copy = vector;
     EXPECT_FALSE (copy != vector);
+
+    END_MULTITEST
 }
 
 TEST (Vector2Test, non_equal_operator_gives_false_for_vectors_with_equal_components)
 {
-    const Math::Vec2d vector (3.2, 1.8);
-    const Math::Vec2d same (3.2, 1.8);
+    BEGIN_MULTITEST
+
+    auto array = create_double_array_of_size (2);
+    const Math::Vec2d vector (array);
+    const Math::Vec2d same (array);
     EXPECT_FALSE (vector != same);
+
+    delete[] array;
+    END_MULTITEST
 }
 
 TEST (Vector2Test, orhtonormal_basis_with_zero_vector_throws_domain_error)
@@ -421,11 +555,18 @@ TEST (Vector2Test, orthonormal_basis_with_equal_vectors_throws_domain_error)
 
 TEST (Vector2Test, orthonormal_basis_creates_perpendicular_vectors_of_length_1)
 {
-    Math::Vec2d vec1 (2.0, 1.0);
-    Math::Vec2d vec2 (4.0, 7.0);
+    int i = 0;
+    BEGIN_MULTITEST
 
-    Math::generateOrthonormalBasis (vec1, vec2);
-    EXPECT_FLOAT_EQ (0.0, vec1.dot (vec2));
-    EXPECT_FLOAT_EQ (1.0, vec1.length ());
-    EXPECT_FLOAT_EQ (1.0, vec2.length ());
+    auto vec1 = create_random_vector2d ();
+    auto vec2 = create_random_vector2d ();
+
+    if (vec1 != vec2) {
+        Math::generateOrthonormalBasis (vec1, vec2);
+        EXPECT_NEAR (0.0, vec1.dot (vec2), PRECISION);
+        EXPECT_NEAR (1.0, vec1.length (), PRECISION);
+        EXPECT_NEAR (1.0, vec2.length (), PRECISION);
+    }
+
+    END_MULTITEST
 }
