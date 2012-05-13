@@ -45,6 +45,8 @@ TEST (Matrix3Test, matrix_can_be_constructed_from_array)
     EXPECT_EQ (array[7], tmp (2,1));
     EXPECT_EQ (array[8], tmp (2,2));
 
+    delete[] array;
+
     END_MULTITEST
 }
 
@@ -66,6 +68,8 @@ TEST (Matrix3Test, matrix_can_be_specified)
     EXPECT_EQ (array[6], tmp (2,0));
     EXPECT_EQ (array[7], tmp (2,1));
     EXPECT_EQ (array[8], tmp (2,2));
+
+    delete[] array;
 
     END_MULTITEST
 }
@@ -641,6 +645,8 @@ TEST (Matrix3Test, equality_of_equal_matrix_returns_true)
 
     EXPECT_EQ (matrix, equal);
 
+    delete[] array;
+
     END_MULTITEST
 }
 
@@ -691,6 +697,8 @@ TEST (Matrix3Test, inequality_of_equal_matrix_returns_false)
     const Math::Matrix3d equal (array);
 
     EXPECT_FALSE (matrix != equal);
+
+    delete[] array;
 
     END_MULTITEST
 }

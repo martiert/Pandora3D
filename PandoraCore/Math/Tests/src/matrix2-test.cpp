@@ -21,6 +21,8 @@ TEST (Matrix2Test, matrix_copies_array)
 
     tmp[0] = 4.5;
     EXPECT_NE (tmp[0], mat1 (0,0));
+
+    delete[] tmp;
 }
 
 TEST (Matrix2Test, matrix_can_be_specified)
@@ -35,6 +37,7 @@ TEST (Matrix2Test, matrix_can_be_specified)
     EXPECT_EQ (tmp[2], mat1 (1,0));
     EXPECT_EQ (tmp[3], mat1 (1,1));
 
+    delete[] tmp;
     END_MULTITEST
 }
 
@@ -458,6 +461,7 @@ TEST (Matrix2Test, equal_operator_of_similar_matrices_returns_true)
 
     EXPECT_EQ (matrix1, matrix2);
 
+    delete[] array;
     END_MULTITEST
 }
 
@@ -526,6 +530,7 @@ TEST (Matrix2Test, unequal_operator_of_similar_matrices_returns_false)
 
     EXPECT_FALSE (matrix1 != matrix2);
 
+    delete[] array;
     END_MULTITEST
 }
 

@@ -30,6 +30,7 @@ TEST (Vector4Test, construction_from_array_populates_vector_with_array)
     EXPECT_EQ (array[2], vector.z);
     EXPECT_EQ (array[3], vector.w);
 
+    delete[] array;
     END_MULTITEST
 }
 
@@ -89,6 +90,7 @@ TEST (Vector4Test, assignment_from_array_assigns_each_element_to_vector)
     EXPECT_EQ (array[2], vector.z);
     EXPECT_EQ (array[3], vector.w);
 
+    delete[] array;
     END_MULTITEST
 }
 
@@ -442,6 +444,7 @@ TEST (Vector4Test, equality_operator_on_similar_vectors_return_true)
 
     EXPECT_EQ (vector, similar);
 
+    delete[] array;
     END_MULTITEST
 }
 
@@ -542,6 +545,7 @@ TEST (Vector4Test, inequality_operator_on_similar_vectors_return_false)
 
     EXPECT_FALSE (vector != similar);
 
+    delete[] array;
     END_MULTITEST
 }
 

@@ -17,6 +17,7 @@ TEST (Vector2Test, constructing_a_vector_with_two_arguments_populates_the_vector
     EXPECT_EQ (tmp[0], vector.x);
     EXPECT_EQ (tmp[1], vector.y);
 
+    delete[] tmp;
     END_MULTITEST
 }
 

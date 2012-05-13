@@ -27,6 +27,7 @@ TEST (Vector3Test, constructing_a_vector_with_an_array_of_three_elements_populat
     EXPECT_EQ (tmp[1], vector.y);
     EXPECT_EQ (tmp[2], vector.z);
 
+    delete[] tmp;
     END_MULTITEST
 }
 
@@ -41,6 +42,7 @@ TEST (Vector3Test, assigning_a_vector_to_an_array_populates_vector_with_given_ar
     EXPECT_EQ (tmp[1], vector.y);
     EXPECT_EQ (tmp[2], vector.z);
 
+    delete[] tmp;
     END_MULTITEST
 }
 
@@ -417,6 +419,7 @@ TEST (Vector3Test, equality_operator_returns_true_for_objects_with_equal_element
 
     EXPECT_EQ (vector, other);
 
+    delete[] array;
     END_MULTITEST
 }
 

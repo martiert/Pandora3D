@@ -38,25 +38,73 @@ Matrix4<T>::Matrix4 (const Matrix3<T>& matrix)
 template<typename T>
 T& Matrix4<T>::operator () (const size_t& i, const size_t& j)
 {
+    if (i > 3 || j > 3)
+        throw std::out_of_range ("Element outside of matrix boundary");
+
     return data[i*4 + j];
 }
 
 template<typename T>
 T Matrix4<T>::operator () (const size_t& i, const size_t& j) const
 {
+    if (i > 3 || j > 3)
+        throw std::out_of_range ("Element outside of matrix boundary");
+
     return data[i*4 + j];
 }
 
 template<typename T>
 T& Matrix4<T>::operator[] (const size_t& i)
 {
+    if (i > 15)
+        throw std::out_of_range ("Element outside of matrix boundary");
+
     return data[i];
 }
 
 template<typename T>
 T Matrix4<T>::operator[] (const size_t& i) const
 {
+    if (i > 15)
+        throw std::out_of_range ("Element outside of matrix boundary");
+
     return data[i];
+}
+
+template<typename T>
+Matrix4<T>::operator T* ()
+{
+    return data;
+}
+
+template<typename T>
+Matrix4<T>::operator const T* () const
+{
+    return data;
+}
+
+template<typename T>
+Matrix4<T>& Matrix4<T>::operator*= (const T& scalar)
+{
+    for (size_t i = 0; i < 16; ++i)
+        data[i] *= scalar;
+
+    return *this;
+}
+
+template<typename T>
+Matrix4<T> operator* (const Matrix4<T>& matrix, const T& scalar)
+{
+    Matrix4<T> result = matrix;
+    for (size_t i = 0; i < 16; ++i)
+        result[i] *= scalar;
+    return result;
+}
+
+template<typename T>
+Matrix4<T> operator* (const T& scalar, const Matrix4<T>& matrix)
+{
+    return matrix * scalar;
 }
 
 #else // MATRIX4_INCLUDE_FILE

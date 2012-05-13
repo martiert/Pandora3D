@@ -25,6 +25,11 @@ namespace Math
 
             T& operator[] (const size_t& i);
             T operator[] (const size_t& i) const;
+
+            operator T* ();
+            operator const T* () const;
+
+            Matrix4& operator*= (const T& scalar);
         private:
             T data[16];
 
@@ -34,6 +39,12 @@ namespace Math
     typedef Matrix4<float> Matrix4f;
     typedef Matrix4<int> Matrix4i;
     typedef Matrix4<unsigned int> Matrix4u;
+
+    template<typename T>
+    Matrix4<T> operator* (const Matrix4<T>& matrix, const T& scalar);
+
+    template<typename T>
+    Matrix4<T> operator* (const T& scalar, const Matrix4<T>& matrix);
 
 #define MATRIX4_INCLUDE_FILE
 #include "matrix4-impl.h"
