@@ -1,13 +1,6 @@
-#include <Math/matrix4.h>
-#include <gtest/gtest.h>
+#include "test_helpers.h"
 
-TEST (Matrix4Test, can_populate_4d_matrix)
-{
-    const Math::Matrix4d matrix (3.2, 1.2, 6.7, 5.2,
-                                 8.7, 5.4, 2.3, 3.3,
-                                 8.9, 7.6, 4.3, 3.3,
-                                 1.4, 5.4, 3.4, 8.8);
-}
+#include <gtest/gtest.h>
 
 TEST (Matrix4Test, default_constructor_creates_identity_matrix)
 {
@@ -21,4 +14,63 @@ TEST (Matrix4Test, default_constructor_creates_identity_matrix)
               EXPECT_EQ (0, matrix (i,j));
         }
     }
+}
+
+TEST (Matrix4Test, constructor_with_arguments_populates_matrix)
+{
+    START_MANY
+    auto array = create_double_array_of_size (16);
+    const Math::Matrix4d matrix (array[0], array[1], array[2], array[3],
+                                    array[4], array[5], array[6], array[7],
+                                    array[8], array[9], array[10], array[11],
+                                    array[12], array[13], array[14], array[15]);
+
+    for (size_t i = 0; i < 16; ++i)
+        EXPECT_EQ (array[i], matrix[i]);
+
+    delete [] array;
+    END_MANY
+}
+
+TEST (Matrix4Test, matrix_constructed_from_array_populates_matrix_with_array_values)
+{
+    START_MANY
+    auto array = create_double_array_of_size (16);
+    const Math::Matrix4d matrix (array);
+
+    for (size_t i = 0; i < 16; ++i)
+        EXPECT_EQ (array[i], matrix[i]);
+
+    delete [] array;
+    END_MANY
+}
+
+TEST (Matrix4Test, matrix_created_from_3d_matrix_is_zero_padded_with_one_at_3_3)
+{
+    START_MANY
+    auto matrix3d = create_random_3d_matrix ();
+    Math::Matrix4d matrix (matrix3d);
+
+    for (size_t i = 0; i < 3; ++i)
+        for (size_t j = 0; j < 3; ++j)
+            EXPECT_EQ (matrix3d (i,j), matrix [i*4 + j]);
+
+    for (size_t i = 0; i < 3; ++i) {
+        EXPECT_EQ (0, matrix (3,i));
+        EXPECT_EQ (0, matrix (i,3));
+    }
+
+    EXPECT_EQ (1, matrix (3,3));
+    END_MANY
+}
+
+TEST (Matrix4Test, copied_matrix_copies_the_elements_from_the_other_matrix)
+{
+    START_MANY
+    auto matrix = create_random_4d_matrix ();
+    Math::Matrix4d copy (matrix);
+
+    for (size_t j = 0; j < 16; ++j)
+        EXPECT_EQ (matrix[j], copy[j]);
+    END_MANY
 }

@@ -20,6 +20,7 @@ SET (Math_src
     src/vector4.cpp
     src/matrix2.cpp
     src/matrix3.cpp
+    src/matrix4.cpp
   )
 
 ADD_LIBRARY (Math SHARED ${Math_src})

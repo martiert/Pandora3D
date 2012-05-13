@@ -1,5 +1,5 @@
-#include <Math/vector4.h>
-#include <Math/vector3.h>
+#include <vector4.h>
+#include <vector3.h>
 
 #include <gtest/gtest.h>
 
