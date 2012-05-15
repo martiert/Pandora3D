@@ -92,7 +92,7 @@ Matrix3<T>& Matrix3<T>::operator/= (const T& scalar)
 template<typename T>
 Matrix3<T>& Matrix3<T>::operator+= (const Matrix3<T>& other)
 {
-    for (auto i : {0,1,2,3,4,5,6,7,8})
+    for (auto i = 0; i < 9; ++i)
         data[i] += other.data[i];
 
     return *this;
@@ -101,7 +101,7 @@ Matrix3<T>& Matrix3<T>::operator+= (const Matrix3<T>& other)
 template<typename T>
 Matrix3<T>& Matrix3<T>::operator-= (const Matrix3<T>& other)
 {
-    for (auto i : {0,1,2,3,4,5,6,7,8})
+    for (auto i = 0; i < 9; ++i)
         data[i] -= other.data[i];
 
     return *this;

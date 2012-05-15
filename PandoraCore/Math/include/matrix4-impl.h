@@ -86,17 +86,68 @@ Matrix4<T>::operator const T* () const
 template<typename T>
 Matrix4<T>& Matrix4<T>::operator*= (const T& scalar)
 {
-    for (size_t i = 0; i < 16; ++i)
+    for (auto i = 0; i < 16; ++i)
         data[i] *= scalar;
 
     return *this;
 }
 
 template<typename T>
+Matrix4<T>& Matrix4<T>::operator/= (const T& scalar)
+{
+    if (scalar == 0)
+        throw std::invalid_argument ("Can not divide matrix by zero");
+
+    for (auto i = 0; i < 16; ++i)
+        data[i] /= scalar;
+
+    return *this;
+}
+
+template<typename T>
+Matrix4<T>& Matrix4<T>::operator+= (const Matrix4 other)
+{
+    for (auto i = 0; i < 16; ++i)
+        data[i] += other[i];
+    return *this;
+}
+
+template<typename T>
+Matrix4<T>& Matrix4<T>::operator-= (const Matrix4 other)
+{
+    for (auto i = 0; i < 16; ++i)
+        data[i] -= other[i];
+    return *this;
+}
+
+template<typename T>
+Matrix4<T> Matrix4<T>::transpose () const
+{
+    Matrix4<T> res;
+    for (auto i = 0; i < 4; ++i)
+        for (auto j = 0; j < 4; ++j)
+            res (j,i) = data[i*4 + j];
+
+    return res;
+}
+
+template<typename T>
+T Matrix4<T>::trace () const
+{
+    return data[0] + data[5] + data[10] + data[15];
+}
+
+template<typename T>
+T Matrix4<T>::determinant () const
+{
+    return data[0] * data[5] * data[10] * data[15];
+}
+
+template<typename T>
 Matrix4<T> operator* (const Matrix4<T>& matrix, const T& scalar)
 {
     Matrix4<T> result = matrix;
-    for (size_t i = 0; i < 16; ++i)
+    for (auto i = 0; i < 16; ++i)
         result[i] *= scalar;
     return result;
 }
@@ -105,6 +156,51 @@ template<typename T>
 Matrix4<T> operator* (const T& scalar, const Matrix4<T>& matrix)
 {
     return matrix * scalar;
+}
+
+template<typename T>
+Matrix4<T> operator/ (const Matrix4<T>& matrix, const T& scalar)
+{
+    if (scalar == 0)
+        throw std::invalid_argument ("Can not divide matrix by zero");
+
+    Matrix4<T> result = matrix;
+    for (auto i = 0; i < 16; ++i)
+        result[i] /= scalar;
+    return result;
+}
+
+template<typename T>
+Matrix4<T> operator+ (const Matrix4<T>& left, const Matrix4<T>& right)
+{
+    Matrix4<T> result;
+    for (auto i = 0; i < 16; ++i)
+        result[i] = left[i] + right[i];
+    return result;
+}
+
+template<typename T>
+Matrix4<T> operator- (const Matrix4<T>& left, const Matrix4<T>& right)
+{
+    Matrix4<T> result;
+    for (auto i = 0; i < 16; ++i)
+        result[i] = left[i] - right[i];
+    return result;
+}
+
+template<typename T>
+Matrix4<T> operator* (const Matrix4<T>& left, const Matrix4<T>& right)
+{
+    Matrix4<T> result;
+    for (auto i = 0; i < 4; ++i) {
+        for (auto j = 0; j < 4; ++j) {
+            T element = 0;
+            for (auto k = 0; k < 4; ++k)
+                element += left (i,k) * right (k,j);
+            result (i,j) = element;
+        }
+    }
+    return result;
 }
 
 #else // MATRIX4_INCLUDE_FILE

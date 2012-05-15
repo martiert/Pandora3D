@@ -30,6 +30,14 @@ namespace Math
             operator const T* () const;
 
             Matrix4& operator*= (const T& scalar);
+            Matrix4& operator/= (const T& scalar);
+            Matrix4& operator+= (const Matrix4 other);
+            Matrix4& operator-= (const Matrix4 other);
+
+            Matrix4 transpose () const;
+
+            T trace () const;
+            T determinant () const;
         private:
             T data[16];
 
@@ -45,6 +53,19 @@ namespace Math
 
     template<typename T>
     Matrix4<T> operator* (const T& scalar, const Matrix4<T>& matrix);
+
+    template<typename T>
+    Matrix4<T> operator/ (const Matrix4<T>& matrix, const T& scalar);
+
+    template<typename T>
+    Matrix4<T> operator+ (const Matrix4<T>& left, const Matrix4<T>& right);
+
+    template<typename T>
+    Matrix4<T> operator- (const Matrix4<T>& left, const Matrix4<T>& right);
+
+    template<typename T>
+    Matrix4<T> operator* (const Matrix4<T>& left, const Matrix4<T>& right);
+
 
 #define MATRIX4_INCLUDE_FILE
 #include "matrix4-impl.h"
