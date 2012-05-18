@@ -471,15 +471,25 @@ TEST (Matrix4Test, determinant_of_identity_matrix_is_one)
     EXPECT_EQ (1, identity.determinant ());
 }
 
+TEST (Matrix4Test, determinant_of_given_matrix_gives_correct_result)
+{
+    const Math::Matrix4d matrix (4, 3, 1, 7,
+                                 2, 8, 9, 3,
+                                 5, 1, 7, 9,
+                                 8, 3, 1, 5);
+    EXPECT_EQ (-2246, matrix.determinant ());
+}
+
 TEST (Matrix4Test, determinant_of_matrix_follows_mathematical_rules)
 {
-    BEGIN_MULTITEST
+    //BEGIN_MULTITEST
 
     const auto matrix = create_random_matrix4d ();
 
     const double sub1 = matrix (1,1) * (matrix (2,2) * matrix (3,3) - matrix (2,3) * matrix (3,2)) -
                         matrix (1,2) * (matrix (2,1) * matrix (3,3) - matrix (2,3) * matrix (3,1)) +
                         matrix (1,3) * (matrix (2,1) * matrix (3,2) - matrix (3,1) * matrix (2,2));
+
     const double sub2 = matrix (1,0) * (matrix (2,2) * matrix (3,3) - matrix (2,3) * matrix (3,2)) -
                         matrix (1,2) * (matrix (2,0) * matrix (3,3) - matrix (2,3) * matrix (3,0)) +
                         matrix (1,3) * (matrix (2,0) * matrix (3,2) - matrix (2,2) * matrix (3,0));
@@ -488,7 +498,7 @@ TEST (Matrix4Test, determinant_of_matrix_follows_mathematical_rules)
                         matrix (1,1) * (matrix (2,0) * matrix (3,3) - matrix (2,3) * matrix (3,0)) +
                         matrix (1,3) * (matrix (2,0) * matrix (3,1) - matrix (2,1) * matrix (3,0));
 
-    const double sub4 = matrix (1,0) * (matrix (2,1) * matrix (3,2) - matrix (3,2) * matrix (3,1)) -
+    const double sub4 = matrix (1,0) * (matrix (2,1) * matrix (3,2) - matrix (2,2) * matrix (3,1)) -
                         matrix (1,1) * (matrix (2,0) * matrix (3,2) - matrix (2,2) * matrix (3,0)) +
                         matrix (1,2) * (matrix (2,0) * matrix (3,1) - matrix (2,1) * matrix (3,0));
 
@@ -496,7 +506,7 @@ TEST (Matrix4Test, determinant_of_matrix_follows_mathematical_rules)
 
     EXPECT_EQ (determinant, matrix.determinant ());
 
-    END_MULTITEST
+    //END_MULTITEST
 }
 
 TEST (Matrix4Test, multiplying_identity_with_vector_returns_the_same_vector)
@@ -561,6 +571,65 @@ TEST (Matrix4Test, multiplying_vector_with_matrix_multiplies_the_vector_with_eac
     EXPECT_EQ (matrix[3]*vector.x + matrix[7]*vector.y + matrix[11]*vector.z + matrix[15]*vector.w, res.w);
 
     END_MULTITEST
+}
+
+TEST (Matrix4Test, inverse_of_identity_is_identity)
+{
+    const Math::Matrix4d identity;
+    const auto res = identity.inverse ();
+
+    for (auto i = 0; i < 16; ++i)
+        EXPECT_EQ (identity[i], res[i]);
+}
+
+TEST (Matrix4Test, inverse_of_matrix_times_matrix_is_identity)
+{
+    BEGIN_MULTITEST
+
+    const auto matrix = create_random_matrix4d ();
+    const auto inverse = matrix.inverse ();
+    const auto res = inverse * matrix;
+
+    for (auto i = 0; i < 4; ++i) {
+        for (auto j = 0; j < 4; ++j) {
+            if (i == j)
+                EXPECT_NEAR (1, res (i,j), PRECISION);
+            else
+                EXPECT_NEAR (0, res (i,j), PRECISION);
+        }
+    }
+
+    END_MULTITEST
+}
+
+TEST (Matrix4Test, matrix_times_inverse_of_matrix_is_identity)
+{
+    BEGIN_MULTITEST
+
+    const auto matrix = create_random_matrix4d ();
+    const auto inverse = matrix.inverse ();
+    const auto res = matrix * inverse;
+
+    for (auto i = 0; i < 4; ++i) {
+        for (auto j = 0; j < 4; ++j) {
+            if (i == j)
+                EXPECT_NEAR (1, res (i,j), PRECISION);
+            else
+                EXPECT_NEAR (0, res (i,j), PRECISION);
+        }
+    }
+
+    END_MULTITEST
+}
+
+TEST (Matrix4Test, inverse_of_singular_matrix_throws_domain_error)
+{
+    const Math::Matrix4d matrix (2, 4, 1, 7,
+                                 2, 4, 1, 7,
+                                 2, 4, 1, 7,
+                                 2, 4, 1, 7);
+
+    EXPECT_THROW (matrix.inverse (), std::domain_error);
 }
 
 const Math::Matrix4d create_random_matrix4d ()

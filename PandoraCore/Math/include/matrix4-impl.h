@@ -131,6 +131,133 @@ Matrix4<T> Matrix4<T>::transpose () const
     return res;
 }
 
+// Code from the MESA implementation of gluInvertMatrix.
+template<typename T>
+Matrix4<T> Matrix4<T>::inverse () const
+{
+    T det = determinant ();
+
+    if (det == 0)
+        throw std::domain_error ("Singular matrix has no inverse");
+
+    Matrix4<T> res;
+
+    res[0] = data[5]  * data[10] * data[15] -
+             data[5]  * data[11] * data[14] -
+             data[9]  * data[6]  * data[15] +
+             data[9]  * data[7]  * data[14] +
+             data[13] * data[6]  * data[11] -
+             data[13] * data[7]  * data[10];
+
+    res[4] = -data[4]  * data[10] * data[15] +
+              data[4]  * data[11] * data[14] +
+              data[8]  * data[6]  * data[15] -
+              data[8]  * data[7]  * data[14] -
+              data[12] * data[6]  * data[11] +
+              data[12] * data[7]  * data[10];
+
+    res[8] = data[4]  * data[9] * data[15] -
+             data[4]  * data[11] * data[13] -
+             data[8]  * data[5] * data[15] +
+             data[8]  * data[7] * data[13] +
+             data[12] * data[5] * data[11] -
+             data[12] * data[7] * data[9];
+
+    res[12] = -data[4]  * data[9] * data[14] +
+               data[4]  * data[10] * data[13] +
+               data[8]  * data[5] * data[14] -
+               data[8]  * data[6] * data[13] -
+               data[12] * data[5] * data[10] +
+               data[12] * data[6] * data[9];
+
+    res[1] = -data[1]  * data[10] * data[15] +
+              data[1]  * data[11] * data[14] +
+              data[9]  * data[2] * data[15] -
+              data[9]  * data[3] * data[14] -
+              data[13] * data[2] * data[11] +
+              data[13] * data[3] * data[10];
+
+    res[5] = data[0]  * data[10] * data[15] -
+             data[0]  * data[11] * data[14] -
+             data[8]  * data[2] * data[15] +
+             data[8]  * data[3] * data[14] +
+             data[12] * data[2] * data[11] -
+             data[12] * data[3] * data[10];
+
+    res[9] = -data[0]  * data[9] * data[15] +
+              data[0]  * data[11] * data[13] +
+              data[8]  * data[1] * data[15] -
+              data[8]  * data[3] * data[13] -
+              data[12] * data[1] * data[11] +
+              data[12] * data[3] * data[9];
+
+    res[13] = data[0]  * data[9] * data[14] -
+              data[0]  * data[10] * data[13] -
+              data[8]  * data[1] * data[14] +
+              data[8]  * data[2] * data[13] +
+              data[12] * data[1] * data[10] -
+              data[12] * data[2] * data[9];
+
+    res[2] = data[1]  * data[6] * data[15] -
+             data[1]  * data[7] * data[14] -
+             data[5]  * data[2] * data[15] +
+             data[5]  * data[3] * data[14] +
+             data[13] * data[2] * data[7] -
+             data[13] * data[3] * data[6];
+
+    res[6] = -data[0]  * data[6] * data[15] +
+              data[0]  * data[7] * data[14] +
+              data[4]  * data[2] * data[15] -
+              data[4]  * data[3] * data[14] -
+              data[12] * data[2] * data[7] +
+              data[12] * data[3] * data[6];
+
+    res[10] = data[0]  * data[5] * data[15] -
+              data[0]  * data[7] * data[13] -
+              data[4]  * data[1] * data[15] +
+              data[4]  * data[3] * data[13] +
+              data[12] * data[1] * data[7] -
+              data[12] * data[3] * data[5];
+
+    res[14] = -data[0]  * data[5] * data[14] +
+               data[0]  * data[6] * data[13] +
+               data[4]  * data[1] * data[14] -
+               data[4]  * data[2] * data[13] -
+               data[12] * data[1] * data[6] +
+               data[12] * data[2] * data[5];
+
+    res[3] = -data[1] * data[6] * data[11] +
+              data[1] * data[7] * data[10] +
+              data[5] * data[2] * data[11] -
+              data[5] * data[3] * data[10] -
+              data[9] * data[2] * data[7] +
+              data[9] * data[3] * data[6];
+
+    res[7] = data[0] * data[6] * data[11] -
+             data[0] * data[7] * data[10] -
+             data[4] * data[2] * data[11] +
+             data[4] * data[3] * data[10] +
+             data[8] * data[2] * data[7] -
+             data[8] * data[3] * data[6];
+
+    res[11] = -data[0] * data[5] * data[11] +
+               data[0] * data[7] * data[9] +
+               data[4] * data[1] * data[11] -
+               data[4] * data[3] * data[9] -
+               data[8] * data[1] * data[7] +
+               data[8] * data[3] * data[5];
+
+    res[15] = data[0] * data[5] * data[10] -
+              data[0] * data[6] * data[9] -
+              data[4] * data[1] * data[10] +
+              data[4] * data[2] * data[9] +
+              data[8] * data[1] * data[6] -
+              data[8] * data[2] * data[5];
+
+    det = 1.0 / det;
+    return res * det;
+}
+
 template<typename T>
 T Matrix4<T>::trace () const
 {
@@ -140,23 +267,12 @@ T Matrix4<T>::trace () const
 template<typename T>
 T Matrix4<T>::determinant () const
 {
-    const T sub1 = data[5] * (data[10] * data[15] - data[11] * data[14]) -
-                        operator() (1,2) * (operator() (2,1) * operator() (3,3) - operator() (2,3) * operator() (3,1)) +
-                        operator() (1,3) * (operator() (2,1) * operator() (3,2) - operator() (3,1) * operator() (2,2));
+    const T sub1 = calculate_sub_determinant (0,0);
+    const T sub2 = calculate_sub_determinant (0,1);
+    const T sub3 = calculate_sub_determinant (0,2);
+    const T sub4 = calculate_sub_determinant (0,3);
 
-    const T sub2 = operator() (1,0) * (operator() (2,2) * operator() (3,3) - operator() (2,3) * operator() (3,2)) -
-                        operator() (1,2) * (operator() (2,0) * operator() (3,3) - operator() (2,3) * operator() (3,0)) +
-                        operator() (1,3) * (operator() (2,0) * operator() (3,2) - operator() (2,2) * operator() (3,0));
-
-    const T sub3 = operator() (1,0) * (operator() (2,1) * operator() (3,3) - operator() (2,3) * operator() (3,1)) -
-                        operator() (1,1) * (operator() (2,0) * operator() (3,3) - operator() (2,3) * operator() (3,0)) +
-                        operator() (1,3) * (operator() (2,0) * operator() (3,1) - operator() (2,1) * operator() (3,0));
-
-    const T sub4 = operator() (1,0) * (operator() (2,1) * operator() (3,2) - operator() (3,2) * operator() (3,1)) -
-                        operator() (1,1) * (operator() (2,0) * operator() (3,2) - operator() (2,2) * operator() (3,0)) +
-                        operator() (1,2) * (operator() (2,0) * operator() (3,1) - operator() (2,1) * operator() (3,0));
-
-    return operator() (0,0) * sub1 - operator() (0,1) * sub2 + operator() (0,2) * sub3 - operator() (0,3) * sub4;
+    return data[0] * sub1 - data[1] * sub2 + data[2] * sub3 - data[3] * sub4;
 }
 
 template<typename T>
@@ -239,6 +355,23 @@ Matrix4<T> operator* (const Matrix4<T>& left, const Matrix4<T>& right)
         }
     }
     return result;
+}
+
+template<typename T>
+T Matrix4<T>::calculate_sub_determinant (const size_t& row, const size_t& column) const
+{
+    Matrix3<T> matrix;
+    size_t index = 0;
+    for (auto i = 0; i < 4; ++i) {
+        for (auto j = 0; j < 4; ++j) {
+            if (i != row && j != column) {
+                matrix[index] = data[i * 4 + j];
+                ++index;
+            }
+        }
+    }
+
+    return matrix.determinant ();
 }
 
 #else // MATRIX4_INCLUDE_FILE

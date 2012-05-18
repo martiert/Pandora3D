@@ -37,12 +37,14 @@ namespace Math
             Matrix4& operator-= (const Matrix4 other);
 
             Matrix4 transpose () const;
+            Matrix4 inverse () const;
 
             T trace () const;
             T determinant () const;
         private:
             T data[16];
 
+            T calculate_sub_determinant (const size_t& row, const size_t& column) const;
     };
 
     typedef Matrix4<double> Matrix4d;
