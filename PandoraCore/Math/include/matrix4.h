@@ -2,6 +2,8 @@
 #define MATH_MATRIX4_H_INCLUDED
 
 #include "matrix3.h"
+#include "vector4.h"
+
 #include <stdexcept>
 
 namespace Math
@@ -55,6 +57,15 @@ namespace Math
     Matrix4<T> operator* (const T& scalar, const Matrix4<T>& matrix);
 
     template<typename T>
+    Vector4<T> operator* (const Matrix4<T>& matrix, const Vector4<T>& vector);
+
+    template<typename T>
+    Vector4<T> operator* (const Vector4<T>& vector, const Matrix4<T>& matrix);
+
+    template<typename T>
+    Matrix4<T> operator* (const Matrix4<T>& left, const Matrix4<T>& right);
+
+    template<typename T>
     Matrix4<T> operator/ (const Matrix4<T>& matrix, const T& scalar);
 
     template<typename T>
@@ -62,10 +73,6 @@ namespace Math
 
     template<typename T>
     Matrix4<T> operator- (const Matrix4<T>& left, const Matrix4<T>& right);
-
-    template<typename T>
-    Matrix4<T> operator* (const Matrix4<T>& left, const Matrix4<T>& right);
-
 
 #define MATRIX4_INCLUDE_FILE
 #include "matrix4-impl.h"

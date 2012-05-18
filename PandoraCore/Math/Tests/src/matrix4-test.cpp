@@ -1,4 +1,15 @@
+#include <matrix4.h>
+#include <matrix3.h>
+#include <vector4.h>
+
+#include <gtest/gtest.h>
+
 #include "test-helpers.h"
+
+const Math::Matrix4d create_random_matrix4d ();
+const Math::Matrix3d create_random_matrix3d ();
+
+const Math::Vec4d create_random_vector4d ();
 
 TEST (Matrix4Test, default_constructor_creates_identity_matrix)
 {
@@ -458,4 +469,105 @@ TEST (Matrix4Test, determinant_of_identity_matrix_is_one)
     const Math::Matrix4d identity;
 
     EXPECT_EQ (1, identity.determinant ());
+}
+
+TEST (Matrix4Test, determinant_of_matrix_follows_mathematical_rules)
+{
+    BEGIN_MULTITEST
+
+    const auto matrix = create_random_matrix4d ();
+
+    const double sub1 = matrix (1,1) * (matrix (2,2) * matrix (3,3) - matrix (2,3) * matrix (3,2)) -
+                        matrix (1,2) * (matrix (2,1) * matrix (3,3) - matrix (2,3) * matrix (3,1)) +
+                        matrix (1,3) * (matrix (2,1) * matrix (3,2) - matrix (3,1) * matrix (2,2));
+    const double sub2 = matrix (1,0) * (matrix (2,2) * matrix (3,3) - matrix (2,3) * matrix (3,2)) -
+                        matrix (1,2) * (matrix (2,0) * matrix (3,3) - matrix (2,3) * matrix (3,0)) +
+                        matrix (1,3) * (matrix (2,0) * matrix (3,2) - matrix (2,2) * matrix (3,0));
+
+    const double sub3 = matrix (1,0) * (matrix (2,1) * matrix (3,3) - matrix (2,3) * matrix (3,1)) -
+                        matrix (1,1) * (matrix (2,0) * matrix (3,3) - matrix (2,3) * matrix (3,0)) +
+                        matrix (1,3) * (matrix (2,0) * matrix (3,1) - matrix (2,1) * matrix (3,0));
+
+    const double sub4 = matrix (1,0) * (matrix (2,1) * matrix (3,2) - matrix (3,2) * matrix (3,1)) -
+                        matrix (1,1) * (matrix (2,0) * matrix (3,2) - matrix (2,2) * matrix (3,0)) +
+                        matrix (1,2) * (matrix (2,0) * matrix (3,1) - matrix (2,1) * matrix (3,0));
+
+    const double determinant = matrix (0,0) * sub1 - matrix (0,1) * sub2 + matrix (0,2) * sub3 - matrix (0,3) * sub4;
+
+    EXPECT_EQ (determinant, matrix.determinant ());
+
+    END_MULTITEST
+}
+
+TEST (Matrix4Test, multiplying_identity_with_vector_returns_the_same_vector)
+{
+    BEGIN_MULTITEST
+
+    const Math::Matrix4d identity;
+    const auto vector = create_random_vector4d ();
+    const auto res = identity * vector;
+
+    EXPECT_EQ (vector.x, res.x);
+    EXPECT_EQ (vector.y, res.y);
+    EXPECT_EQ (vector.z, res.z);
+    EXPECT_EQ (vector.w, res.w);
+
+    END_MULTITEST
+}
+
+TEST (Matrix4Test, multiplying_matrix_with_vector_multiplies_the_vector_with_each_row)
+{
+    BEGIN_MULTITEST
+
+    const auto matrix = create_random_matrix4d ();
+    const auto vector = create_random_vector4d ();
+    const auto res = matrix * vector;
+
+    EXPECT_EQ (matrix[0]*vector.x  + matrix[1]*vector.y  + matrix[2]*vector.z  + matrix[3]*vector.w,  res.x);
+    EXPECT_EQ (matrix[4]*vector.x  + matrix[5]*vector.y  + matrix[6]*vector.z  + matrix[7]*vector.w,  res.y);
+    EXPECT_EQ (matrix[8]*vector.x  + matrix[9]*vector.y  + matrix[10]*vector.z + matrix[11]*vector.w, res.z);
+    EXPECT_EQ (matrix[12]*vector.x + matrix[13]*vector.y + matrix[14]*vector.z + matrix[15]*vector.w, res.w);
+
+    END_MULTITEST
+}
+
+TEST (Matrix4Test, multiplying_vector_with_identity_returns_the_vector)
+{
+    BEGIN_MULTITEST
+
+    const Math::Matrix4d identity;
+    const auto vector = create_random_vector4d ();
+    const auto res = vector * identity;
+
+    EXPECT_EQ (vector.x, res.x);
+    EXPECT_EQ (vector.y, res.y);
+    EXPECT_EQ (vector.z, res.z);
+    EXPECT_EQ (vector.w, res.w);
+
+    END_MULTITEST
+}
+
+TEST (Matrix4Test, multiplying_vector_with_matrix_multiplies_the_vector_with_each_column)
+{
+    BEGIN_MULTITEST
+
+    const auto matrix = create_random_matrix4d ();
+    const auto vector = create_random_vector4d ();
+    const auto res = vector * matrix;
+
+    EXPECT_EQ (matrix[0]*vector.x + matrix[4]*vector.y + matrix[8]*vector.z  + matrix[12]*vector.w, res.x);
+    EXPECT_EQ (matrix[1]*vector.x + matrix[5]*vector.y + matrix[9]*vector.z  + matrix[13]*vector.w, res.y);
+    EXPECT_EQ (matrix[2]*vector.x + matrix[6]*vector.y + matrix[10]*vector.z + matrix[14]*vector.w, res.z);
+    EXPECT_EQ (matrix[3]*vector.x + matrix[7]*vector.y + matrix[11]*vector.z + matrix[15]*vector.w, res.w);
+
+    END_MULTITEST
+}
+
+const Math::Matrix4d create_random_matrix4d ()
+{
+    auto array = create_double_array_of_size (16);
+    Math::Matrix4d matrix (array);
+
+    delete [] array;
+    return matrix;
 }

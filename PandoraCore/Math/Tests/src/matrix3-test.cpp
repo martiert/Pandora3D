@@ -1,4 +1,9 @@
+#include <matrix3.h>
+#include <gtest/gtest.h>
+
 #include "test-helpers.h"
+
+const Math::Matrix3d create_random_matrix3d ();
 
 TEST (Matrix3Test, empty_constructor_makes_identity_matrix)
 {
@@ -716,4 +721,13 @@ TEST (Matrix3Test, inequality_of_matrix_with_one_different_element_returns_true)
         EXPECT_NE (matrix, other);
     }
     END_MULTITEST
+}
+
+const Math::Matrix3d create_random_matrix3d ()
+{
+    auto array = create_double_array_of_size (9);
+    Math::Matrix3d matrix (array);
+
+    delete [] array;
+    return matrix;
 }

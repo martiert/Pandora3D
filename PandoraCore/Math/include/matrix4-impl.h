@@ -140,7 +140,23 @@ T Matrix4<T>::trace () const
 template<typename T>
 T Matrix4<T>::determinant () const
 {
-    return data[0] * data[5] * data[10] * data[15];
+    const T sub1 = data[5] * (data[10] * data[15] - data[11] * data[14]) -
+                        operator() (1,2) * (operator() (2,1) * operator() (3,3) - operator() (2,3) * operator() (3,1)) +
+                        operator() (1,3) * (operator() (2,1) * operator() (3,2) - operator() (3,1) * operator() (2,2));
+
+    const T sub2 = operator() (1,0) * (operator() (2,2) * operator() (3,3) - operator() (2,3) * operator() (3,2)) -
+                        operator() (1,2) * (operator() (2,0) * operator() (3,3) - operator() (2,3) * operator() (3,0)) +
+                        operator() (1,3) * (operator() (2,0) * operator() (3,2) - operator() (2,2) * operator() (3,0));
+
+    const T sub3 = operator() (1,0) * (operator() (2,1) * operator() (3,3) - operator() (2,3) * operator() (3,1)) -
+                        operator() (1,1) * (operator() (2,0) * operator() (3,3) - operator() (2,3) * operator() (3,0)) +
+                        operator() (1,3) * (operator() (2,0) * operator() (3,1) - operator() (2,1) * operator() (3,0));
+
+    const T sub4 = operator() (1,0) * (operator() (2,1) * operator() (3,2) - operator() (3,2) * operator() (3,1)) -
+                        operator() (1,1) * (operator() (2,0) * operator() (3,2) - operator() (2,2) * operator() (3,0)) +
+                        operator() (1,2) * (operator() (2,0) * operator() (3,1) - operator() (2,1) * operator() (3,0));
+
+    return operator() (0,0) * sub1 - operator() (0,1) * sub2 + operator() (0,2) * sub3 - operator() (0,3) * sub4;
 }
 
 template<typename T>
@@ -156,6 +172,28 @@ template<typename T>
 Matrix4<T> operator* (const T& scalar, const Matrix4<T>& matrix)
 {
     return matrix * scalar;
+}
+
+template<typename T>
+Vector4<T> operator* (const Matrix4<T>& matrix, const Vector4<T>& vector)
+{
+    Vector4<T> res;
+    for (auto i = 0; i < 4; ++i)
+        for (auto j = 0; j < 4; ++j)
+            res[i] += matrix (i,j) * vector[j];
+
+    return res;
+}
+
+template<typename T>
+Vector4<T> operator* (const Vector4<T>& vector, const Matrix4<T>& matrix)
+{
+    Vector4<T> res;
+    for (auto i = 0; i < 4; ++i)
+        for (auto j = 0; j < 4; ++j)
+            res[i] += vector[j] * matrix (j,i);
+
+    return res;
 }
 
 template<typename T>

@@ -1,4 +1,8 @@
+#include <vector3.h>
+#include <gtest/gtest.h>
+
 #include "test-helpers.h"
+const Math::Vec3d create_random_vector3d ();
 
 TEST (Vector3Test, empty_constructor_gives_zero_vector)
 {
@@ -573,4 +577,13 @@ TEST (Vector3Test, orthonormal_basis_gives_dot_products_of_zero)
     EXPECT_NEAR (0, vec2.dot (vec3), PRECISION);
 
     END_MULTITEST
+}
+
+const Math::Vec3d create_random_vector3d ()
+{
+    auto array = create_double_array_of_size (3);
+    Math::Vec3d vector (array);
+
+    delete [] array;
+    return vector;
 }

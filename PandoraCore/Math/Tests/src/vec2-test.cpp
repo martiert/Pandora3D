@@ -1,4 +1,8 @@
+#include <vector2.h>
+#include <gtest/gtest.h>
+
 #include "test-helpers.h"
+const Math::Vec2d create_random_vector2d ();
 
 TEST (Vector2Test, empty_constructor_gives_zero_vector)
 {
@@ -570,4 +574,13 @@ TEST (Vector2Test, orthonormal_basis_creates_perpendicular_vectors_of_length_1)
     }
 
     END_MULTITEST
+}
+
+const Math::Vec2d create_random_vector2d ()
+{
+    auto array = create_double_array_of_size (2);
+    Math::Vec2d vector (array);
+
+    delete [] array;
+    return vector;
 }

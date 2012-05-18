@@ -1,4 +1,9 @@
+#include <matrix2.h>
+#include <gtest/gtest.h>
+
 #include "test-helpers.h"
+
+const Math::Matrix2d create_random_matrix2d ();
 
 TEST (Matrix2Test, empty_constructor_makes_identity_matrix)
 {
@@ -560,4 +565,13 @@ TEST (Matrix2Test, equal_operator_of_different_forth_components_returns_true)
     const Math::Matrix2d matrix1 (3.4, 5.1, 2.1, 7.8);
     const Math::Matrix2d matrix2 (3.4, 5.1, 2.1, 8.8);
     EXPECT_NE (matrix1, matrix2);
+}
+
+const Math::Matrix2d create_random_matrix2d ()
+{
+    auto array = create_double_array_of_size (4);
+    Math::Matrix2d matrix (array);
+
+    delete [] array;
+    return matrix;
 }

@@ -1,4 +1,9 @@
+#include <vector4.h>
+#include <gtest/gtest.h>
+
 #include "test-helpers.h"
+const Math::Vec3d create_random_vector3d ();
+const Math::Vec4d create_random_vector4d ();
 
 TEST (Vector4Test, empty_constructor_creates_zero_vector)
 {
@@ -580,4 +585,13 @@ TEST (Vector4Test, changing_the_casted_pointers_changes_the_vector)
     ++pointer[2];
     EXPECT_EQ (pointer[2], vector.z);
     EXPECT_EQ (static_ptr[2], vector.z);
+}
+
+const Math::Vec4d create_random_vector4d ()
+{
+    auto array = create_double_array_of_size (4);
+    Math::Vec4d vector (array);
+
+    delete [] array;
+    return vector;
 }
