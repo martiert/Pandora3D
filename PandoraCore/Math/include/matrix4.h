@@ -41,6 +41,9 @@ namespace Math
 
             T trace () const;
             T determinant () const;
+
+            const static Matrix4 IDENTITY;
+            const static Matrix4 ZERO;
         private:
             T data[16];
 

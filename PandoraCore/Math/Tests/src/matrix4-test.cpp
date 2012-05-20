@@ -316,8 +316,7 @@ TEST (Matrix4Test, multiplying_matrix_with_identity_from_right_returns_matrix)
     BEGIN_MULTITEST
 
     const auto matrix = create_random_matrix4d ();
-    const Math::Matrix4d identity;
-    auto result = matrix * identity;
+    auto result = matrix * Math::Matrix4d::IDENTITY;
 
     for (auto i = 0; i < 16; ++i)
         EXPECT_EQ (matrix[i], result[i]);
@@ -330,8 +329,7 @@ TEST (Matrix4Test, multiplying_matrix_with_identity_from_left_returns_matrix)
     BEGIN_MULTITEST
 
     const auto matrix = create_random_matrix4d ();
-    const Math::Matrix4d identity;
-    auto result = identity * matrix;
+    auto result = Math::Matrix4d::IDENTITY * matrix;
 
     for (auto i = 0; i < 16; ++i)
         EXPECT_EQ (matrix[i], result[i]);
@@ -344,11 +342,7 @@ TEST (Matrix4Test, multiplying_matrix_with_zero_matrix_from_right_returns_zero_m
     BEGIN_MULTITEST
 
     const auto matrix = create_random_matrix4d ();
-    const Math::Matrix4d zero (0, 0, 0, 0,
-                               0, 0, 0, 0,
-                               0, 0, 0, 0,
-                               0, 0, 0, 0);
-    auto result = matrix * zero;
+    auto result = matrix * Math::Matrix4d::ZERO;
 
     for (auto i = 0; i < 16; ++i)
         EXPECT_EQ (0, result[i]);
@@ -361,11 +355,7 @@ TEST (Matrix4Test, multiplying_matrix_with_zero_matrix_from_left_returns_zero_ma
     BEGIN_MULTITEST
 
     const auto matrix = create_random_matrix4d ();
-    const Math::Matrix4d zero (0, 0, 0, 0,
-                               0, 0, 0, 0,
-                               0, 0, 0, 0,
-                               0, 0, 0, 0);
-    auto result = zero * matrix;
+    auto result = Math::Matrix4d::ZERO * matrix;
 
     for (auto i = 0; i < 16; ++i)
         EXPECT_EQ (0, result[i]);
@@ -395,20 +385,15 @@ TEST (Matrix4Test, matrix_multiplication_follows_mathematical_rules)
 
 TEST (Matrix4Test, transpose_of_identity_is_identity)
 {
-    const Math::Matrix4d identity;
-    const auto trans = identity.transpose ();
+    const auto trans = Math::Matrix4d::IDENTITY.transpose ();
 
     for (auto i = 0; i < 16; ++i)
-        EXPECT_EQ (identity[i], trans[i]);
+        EXPECT_EQ (Math::Matrix4d::IDENTITY[i], trans[i]);
 }
 
 TEST (Matrix4Test, transpose_of_zero_matrix_is_zero_matrix)
 {
-    const Math::Matrix4d zero (0, 0, 0, 0,
-                               0, 0, 0, 0,
-                               0, 0, 0, 0,
-                               0, 0, 0, 0);
-    const auto trans = zero.transpose ();
+    const auto trans = Math::Matrix4d::ZERO.transpose ();
 
     for (auto i = 0; i < 16; ++i)
         EXPECT_EQ (0, trans[i]);
@@ -430,18 +415,12 @@ TEST (Matrix4Test, transpose_of_matrix_switches_rows_and_columns)
 
 TEST (Matrix4Test, trace_of_zero_matrix_is_zero)
 {
-    const Math::Matrix4d zero (0, 0, 0, 0,
-                               0, 0, 0, 0,
-                               0, 0, 0, 0,
-                               0, 0, 0, 0);
-
-    EXPECT_EQ (0, zero.trace ());
+    EXPECT_EQ (0, Math::Matrix4d::ZERO.trace ());
 }
 
 TEST (Matrix4Test, trace_of_identity_is_four)
 {
-    const Math::Matrix4d identity;
-    EXPECT_EQ (4, identity.trace ());
+    EXPECT_EQ (4, Math::Matrix4d::IDENTITY.trace ());
 }
 
 TEST (Matrix4Test, trace_of_matrix_is_sum_of_diagonal)
@@ -457,18 +436,12 @@ TEST (Matrix4Test, trace_of_matrix_is_sum_of_diagonal)
 
 TEST (Matrix4Test, determinant_of_zero_matrix_is_zero)
 {
-     const Math::Matrix4d zero (0, 0, 0, 0,
-                               0, 0, 0, 0,
-                               0, 0, 0, 0,
-                               0, 0, 0, 0);
-     EXPECT_EQ (0, zero.determinant ());
+     EXPECT_EQ (0, Math::Matrix4d::ZERO.determinant ());
 }
 
 TEST (Matrix4Test, determinant_of_identity_matrix_is_one)
 {
-    const Math::Matrix4d identity;
-
-    EXPECT_EQ (1, identity.determinant ());
+    EXPECT_EQ (1, Math::Matrix4d::IDENTITY.determinant ());
 }
 
 TEST (Matrix4Test, determinant_of_given_matrix_gives_correct_result)
@@ -513,9 +486,8 @@ TEST (Matrix4Test, multiplying_identity_with_vector_returns_the_same_vector)
 {
     BEGIN_MULTITEST
 
-    const Math::Matrix4d identity;
     const auto vector = create_random_vector4d ();
-    const auto res = identity * vector;
+    const auto res = Math::Matrix4d::IDENTITY * vector;
 
     EXPECT_EQ (vector.x, res.x);
     EXPECT_EQ (vector.y, res.y);
@@ -545,9 +517,8 @@ TEST (Matrix4Test, multiplying_vector_with_identity_returns_the_vector)
 {
     BEGIN_MULTITEST
 
-    const Math::Matrix4d identity;
     const auto vector = create_random_vector4d ();
-    const auto res = vector * identity;
+    const auto res = vector * Math::Matrix4d::IDENTITY;
 
     EXPECT_EQ (vector.x, res.x);
     EXPECT_EQ (vector.y, res.y);
@@ -575,11 +546,10 @@ TEST (Matrix4Test, multiplying_vector_with_matrix_multiplies_the_vector_with_eac
 
 TEST (Matrix4Test, inverse_of_identity_is_identity)
 {
-    const Math::Matrix4d identity;
-    const auto res = identity.inverse ();
+    const auto res = Math::Matrix4d::IDENTITY.inverse ();
 
     for (auto i = 0; i < 16; ++i)
-        EXPECT_EQ (identity[i], res[i]);
+        EXPECT_EQ (Math::Matrix4d::IDENTITY[i], res[i]);
 }
 
 TEST (Matrix4Test, inverse_of_matrix_times_matrix_is_identity)
@@ -590,14 +560,8 @@ TEST (Matrix4Test, inverse_of_matrix_times_matrix_is_identity)
     const auto inverse = matrix.inverse ();
     const auto res = inverse * matrix;
 
-    for (auto i = 0; i < 4; ++i) {
-        for (auto j = 0; j < 4; ++j) {
-            if (i == j)
-                EXPECT_NEAR (1, res (i,j), PRECISION);
-            else
-                EXPECT_NEAR (0, res (i,j), PRECISION);
-        }
-    }
+    for (auto i = 0; i < 16; ++i)
+        EXPECT_NEAR (Math::Matrix4d::IDENTITY[i], res[i], PRECISION);
 
     END_MULTITEST
 }
@@ -610,14 +574,8 @@ TEST (Matrix4Test, matrix_times_inverse_of_matrix_is_identity)
     const auto inverse = matrix.inverse ();
     const auto res = matrix * inverse;
 
-    for (auto i = 0; i < 4; ++i) {
-        for (auto j = 0; j < 4; ++j) {
-            if (i == j)
-                EXPECT_NEAR (1, res (i,j), PRECISION);
-            else
-                EXPECT_NEAR (0, res (i,j), PRECISION);
-        }
-    }
+    for (auto i = 0; i < 16; ++i)
+        EXPECT_NEAR (Math::Matrix4d::IDENTITY[i], res[i], PRECISION);
 
     END_MULTITEST
 }
