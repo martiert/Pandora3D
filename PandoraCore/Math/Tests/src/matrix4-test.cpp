@@ -15,14 +15,8 @@ TEST (Matrix4Test, default_constructor_creates_identity_matrix)
 {
     const Math::Matrix4d matrix;
 
-    for (auto i = 0; i < 4; ++i) {
-        for (auto j = 0; j < 4; ++j) {
-            if (i == j)
-                EXPECT_EQ (1, matrix (i,j));
-            else
-              EXPECT_EQ (0, matrix (i,j));
-        }
-    }
+    for (auto i = 0; i < 16; ++i)
+        EXPECT_EQ (Math::Matrix4d::IDENTITY[i], matrix[i]);
 }
 
 TEST (Matrix4Test, constructor_with_arguments_populates_matrix)
@@ -371,14 +365,15 @@ TEST (Matrix4Test, matrix_multiplication_follows_mathematical_rules)
     const auto right = create_random_matrix4d ();
     const auto result = left * right;
 
-    for (auto i = 0; i < 4; ++i) {
-        for (auto j = 0; j < 4; ++j) {
-            double element = 0;
+    Math::Matrix4d correct = Math::Matrix4d::ZERO;
+
+    for (auto i = 0; i < 4; ++i)
+        for (auto j = 0; j < 4; ++j)
             for (auto k = 0; k < 4; ++k)
-                element += left (i,k) * right (k,j);
-            EXPECT_EQ (element, result (i,j));
-        }
-    }
+                correct (i,j) += left (i,k) * right (k,j);
+
+    for (auto i = 0; i < 16; ++i)
+        EXPECT_EQ (correct[i], result[i]);
 
     END_MULTITEST
 }
@@ -455,7 +450,7 @@ TEST (Matrix4Test, determinant_of_given_matrix_gives_correct_result)
 
 TEST (Matrix4Test, determinant_of_matrix_follows_mathematical_rules)
 {
-    //BEGIN_MULTITEST
+    BEGIN_MULTITEST
 
     const auto matrix = create_random_matrix4d ();
 
@@ -479,7 +474,7 @@ TEST (Matrix4Test, determinant_of_matrix_follows_mathematical_rules)
 
     EXPECT_EQ (determinant, matrix.determinant ());
 
-    //END_MULTITEST
+    END_MULTITEST
 }
 
 TEST (Matrix4Test, multiplying_identity_with_vector_returns_the_same_vector)
