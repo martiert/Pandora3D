@@ -1,13 +1,13 @@
 INCLUDE_DIRECTORIES (include)
-
-SET (Boost_USE_STATIC_LIBS ON)
-FIND_PACKAGE (Boost COMPONENTS unit_test_framework REQUIRED)
-INCLUDE_DIRECTORIES (${Boost_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES ("${gtest_SOURCE_DIR}/include")
+INCLUDE_DIRECTORIES ("${System_SOURCE_DIR}/include")
 
 SET (src
-  )
+    src/test-runner.cpp
+    src/stack-test.cpp
+    )
 
 ADD_EXECUTABLE (SystemTests ${src})
-TARGET_LINK_LIBRARIES (SystemTests ${Boost_LIBRARIES} PandoraSystem)
+TARGET_LINK_LIBRARIES (SystemTests gtest gtest_main System)
 
 ADD_TEST (SystemTests ${CMAKE_BINARY_DIR}/bin/SystemTests)
