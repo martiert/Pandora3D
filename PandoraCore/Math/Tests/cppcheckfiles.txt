@@ -1,3 +1,0 @@
-src/Vec2-test.cpp
-src/Vec3-test.cpp
-src/Vec4-test.cpp
