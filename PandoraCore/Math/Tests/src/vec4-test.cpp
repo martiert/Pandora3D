@@ -1,4 +1,6 @@
 #include <vector4.h>
+#include <vector3.h>
+
 #include <gtest/gtest.h>
 
 #include "test-helpers.h"

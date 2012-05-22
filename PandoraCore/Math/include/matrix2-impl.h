@@ -194,7 +194,11 @@ Matrix2<T> operator/ (const Matrix2<T>& matrix, const T& scalar)
 template<typename T>
 bool operator== (const Matrix2<T>& lmatrix, const Matrix2<T>& rmatrix)
 {
-    return std::memcmp ((const T*) lmatrix, (const T*) rmatrix, 4 * sizeof (T)) == 0;
+    auto first1 = static_cast<const T*> (lmatrix);
+    auto last = first1 + 4;
+    auto first2 = static_cast<const T*> (rmatrix);
+
+    return std::equal (first1, last, first2);
 }
 
 template<typename T>

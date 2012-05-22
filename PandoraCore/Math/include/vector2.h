@@ -1,6 +1,7 @@
 #ifndef MATH_VECTOR2_H_INCLUDED
 #define MATH_VECTOR2_H_INCLUDED
 
+#include <type_traits>
 #include <stdexcept>
 #include <cmath>
 

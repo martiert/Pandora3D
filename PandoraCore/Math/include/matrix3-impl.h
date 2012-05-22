@@ -219,7 +219,11 @@ Matrix3<T> operator* (const Matrix3<T>& left, const Matrix3<T>& right)
 template<typename T>
 bool operator== (const Matrix3<T>& left, const Matrix3<T>& right)
 {
-    return std::memcmp ((const T*) left, (const T*) right, 9 * sizeof (T)) == 0;
+    const T* first1 = (const T*) left;
+    const T* last = first1 + 9;
+    const T* first2 = (const T*) right;
+
+    return std::equal (first1, last, first2);
 }
 
 template<typename T>

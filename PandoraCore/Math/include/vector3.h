@@ -1,6 +1,7 @@
 #ifndef MATH_VECTOR3_HPP_INCLUDED
 #define MATH_VECTOR3_HPP_INCLUDED
 
+#include <type_traits>
 #include <stdexcept>
 #include <cmath>
 

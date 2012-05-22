@@ -4,6 +4,7 @@
 #include "matrix3.h"
 #include "vector4.h"
 
+#include <type_traits>
 #include <stdexcept>
 
 namespace Math

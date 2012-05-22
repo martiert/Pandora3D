@@ -1,8 +1,9 @@
 #ifndef MATH_MATRIX3_H_INCLUDED
 #define MATH_MATRIX3_H_INCLUDED
 
+#include <type_traits>
 #include <stdexcept>
-#include <cstring>
+#include <algorithm>
 
 namespace Math
 {

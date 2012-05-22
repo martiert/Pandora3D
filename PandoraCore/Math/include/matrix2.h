@@ -3,8 +3,9 @@
 
 #include "vector2.h"
 
+#include <type_traits>
 #include <stdexcept>
-#include <cstring>
+#include <algorithm>
 
 namespace Math
 {

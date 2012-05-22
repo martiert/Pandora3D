@@ -2,7 +2,10 @@
 #define MATH_VECTOR4_HPP_INCLUDED
 
 #include "vector3.h"
+
+#include <type_traits>
 #include <stdexcept>
+#include <cmath>
 
 namespace Math
 {
