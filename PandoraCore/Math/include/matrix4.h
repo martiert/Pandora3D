@@ -8,8 +8,11 @@
 
 namespace Math
 {
+    template<typename T, class Enable = void>
+    class Matrix4;
+
     template<typename T>
-    class Matrix4
+    class Matrix4<T, typename std::enable_if<std::is_arithmetic<T>::value>::type>
     {
         public:
             Matrix4 ();

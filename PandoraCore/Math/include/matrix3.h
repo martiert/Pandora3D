@@ -2,11 +2,15 @@
 #define MATH_MATRIX3_H_INCLUDED
 
 #include <stdexcept>
+#include <cstring>
 
 namespace Math
 {
+    template<typename T, class Enable = void>
+    class Matrix3;
+
     template<typename T>
-    class Matrix3
+    class Matrix3<T, typename std::enable_if<std::is_arithmetic<T>::value>::type>
     {
         public:
             Matrix3 ();

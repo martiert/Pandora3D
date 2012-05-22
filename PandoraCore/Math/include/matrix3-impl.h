@@ -1,27 +1,30 @@
 #ifdef MATRIX3_INCLUDE_FILE
 
 template<typename T>
-Matrix3<T>::Matrix3 ()
-    : data ({1, 0, 0, 0, 1, 0, 0, 0, 1})
+using Matrix3def = Matrix3<T, typename std::enable_if<std::is_arithmetic<T>::value>::type>;
+
+template<typename T>
+Matrix3def<T>::Matrix3 ()
+    : data {1, 0, 0, 0, 1, 0, 0, 0, 1}
 { }
 
 template<typename T>
-Matrix3<T>::Matrix3 (const T& m00, const T& m01, const T& m02,
+Matrix3def<T>::Matrix3 (const T& m00, const T& m01, const T& m02,
                      const T& m10, const T& m11, const T& m12,
                      const T& m20, const T& m21, const T& m22)
-    : data ({m00, m01, m02, m10, m11, m12, m20, m21, m22})
+    : data {m00, m01, m02, m10, m11, m12, m20, m21, m22}
 { }
 
 
 template<typename T>
-Matrix3<T>::Matrix3 (const T array[9])
-    : data ({array[0], array[1], array[2],
+Matrix3def<T>::Matrix3 (const T array[9])
+    : data {array[0], array[1], array[2],
             array[3], array[4], array[5],
-            array[6], array[7], array[8]})
+            array[6], array[7], array[8]}
 { }
 
 template<typename T>
-T& Matrix3<T>::operator () (const size_t& i, const size_t& j)
+T& Matrix3def<T>::operator () (const size_t& i, const size_t& j)
 {
     if (i > 2 || j > 2)
         throw std::out_of_range ("Index operator out of range");
@@ -30,7 +33,7 @@ T& Matrix3<T>::operator () (const size_t& i, const size_t& j)
 }
 
 template<typename T>
-T Matrix3<T>::operator () (const size_t& i, const size_t& j) const
+T Matrix3def<T>::operator () (const size_t& i, const size_t& j) const
 {
     if (i > 2 || j > 2)
         throw std::out_of_range ("Index operator out of range");
@@ -39,7 +42,7 @@ T Matrix3<T>::operator () (const size_t& i, const size_t& j) const
 }
 
 template<typename T>
-T& Matrix3<T>::operator [] (const size_t& i)
+T& Matrix3def<T>::operator [] (const size_t& i)
 {
     if (i > 8)
         throw std::out_of_range ("Index operator out of range");
@@ -48,7 +51,7 @@ T& Matrix3<T>::operator [] (const size_t& i)
 }
 
 template<typename T>
-T Matrix3<T>::operator [] (const size_t& i) const
+T Matrix3def<T>::operator [] (const size_t& i) const
 {
     if (i > 8)
         throw std::out_of_range ("Index operator out of range");
@@ -57,19 +60,19 @@ T Matrix3<T>::operator [] (const size_t& i) const
 }
 
 template<typename T>
-Matrix3<T>::operator T* ()
+Matrix3def<T>::operator T* ()
 {
     return &data[0];
 }
 
 template<typename T>
-Matrix3<T>::operator const T* () const
+Matrix3def<T>::operator const T* () const
 {
     return &data[0];
 }
 
 template<typename T>
-Matrix3<T>& Matrix3<T>::operator*= (const T& scalar)
+Matrix3def<T>& Matrix3def<T>::operator*= (const T& scalar)
 {
     for (auto& i : data)
         i *= scalar;
@@ -78,7 +81,7 @@ Matrix3<T>& Matrix3<T>::operator*= (const T& scalar)
 }
 
 template<typename T>
-Matrix3<T>& Matrix3<T>::operator/= (const T& scalar)
+Matrix3def<T>& Matrix3def<T>::operator/= (const T& scalar)
 {
     if (scalar == 0)
         throw std::invalid_argument ("Cannot divide a matrix by zero");
@@ -90,7 +93,7 @@ Matrix3<T>& Matrix3<T>::operator/= (const T& scalar)
 }
 
 template<typename T>
-Matrix3<T>& Matrix3<T>::operator+= (const Matrix3<T>& other)
+Matrix3def<T>& Matrix3def<T>::operator+= (const Matrix3def<T>& other)
 {
     for (auto i = 0; i < 9; ++i)
         data[i] += other.data[i];
@@ -99,7 +102,7 @@ Matrix3<T>& Matrix3<T>::operator+= (const Matrix3<T>& other)
 }
 
 template<typename T>
-Matrix3<T>& Matrix3<T>::operator-= (const Matrix3<T>& other)
+Matrix3def<T>& Matrix3def<T>::operator-= (const Matrix3def<T>& other)
 {
     for (auto i = 0; i < 9; ++i)
         data[i] -= other.data[i];
@@ -108,7 +111,7 @@ Matrix3<T>& Matrix3<T>::operator-= (const Matrix3<T>& other)
 }
 
 template<typename T>
-T Matrix3<T>::determinant () const
+T Matrix3def<T>::determinant () const
 {
     return  data[0] * (data[4]*data[8] - data[5]*data[7]) -
             data[1] * (data[3]*data[8] - data[5]*data[6]) +
@@ -116,13 +119,13 @@ T Matrix3<T>::determinant () const
 }
 
 template<typename T>
-T Matrix3<T>::trace () const
+T Matrix3def<T>::trace () const
 {
     return data[0] + data[4] + data[8];
 }
 
 template<typename T>
-Matrix3<T> Matrix3<T>::transpose () const
+Matrix3def<T> Matrix3def<T>::transpose () const
 {
   return Matrix3<T> (data[0], data[3], data[6],
                      data[1], data[4], data[7],
@@ -130,7 +133,7 @@ Matrix3<T> Matrix3<T>::transpose () const
 }
 
 template<typename T>
-Matrix3<T> Matrix3<T>::inverse () const
+Matrix3def<T> Matrix3def<T>::inverse () const
 {
     auto det = determinant ();
 
@@ -216,7 +219,7 @@ Matrix3<T> operator* (const Matrix3<T>& left, const Matrix3<T>& right)
 template<typename T>
 bool operator== (const Matrix3<T>& left, const Matrix3<T>& right)
 {
-    return memcmp ((const T*) left, (const T*) right, 9 * sizeof (T)) == 0;
+    return std::memcmp ((const T*) left, (const T*) right, 9 * sizeof (T)) == 0;
 }
 
 template<typename T>

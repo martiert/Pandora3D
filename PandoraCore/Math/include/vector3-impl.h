@@ -1,22 +1,25 @@
 #ifdef VECTOR3_INCLUDE_FILE
 
 template<typename T>
-Vector3<T>::Vector3 ()
+using Vector3def = Vector3<T, typename std::enable_if<std::is_arithmetic<T>::value>::type>;
+
+template<typename T>
+Vector3def<T>::Vector3 ()
     : x (0), y (0), z (0)
 {}
 
 template<typename T>
-Vector3<T>::Vector3 (const T& x, const T& y, const T& z)
+Vector3def<T>::Vector3 (const T& x, const T& y, const T& z)
     : x (x), y (y), z (z)
 {}
 
 template<typename T>
-Vector3<T>::Vector3 (const T data[3])
+Vector3def<T>::Vector3 (const T data[3])
     : x (data[0]), y (data[1]), z (data[2])
 {}
 
 template<typename T>
-T& Vector3<T>::operator[] (const size_t i)
+T& Vector3def<T>::operator[] (const size_t i)
 {
     if (i > 2)
         throw std::out_of_range ("Index out of range for 3D vectors");
@@ -25,7 +28,7 @@ T& Vector3<T>::operator[] (const size_t i)
 }
 
 template<typename T>
-T Vector3<T>::operator[] (const size_t i) const
+T Vector3def<T>::operator[] (const size_t i) const
 {
     if (i > 2)
         throw std::out_of_range ("Index out of range for 3D vectors");
@@ -34,19 +37,19 @@ T Vector3<T>::operator[] (const size_t i) const
 }
 
 template<typename T>
-Vector3<T>::operator T* ()
+Vector3def<T>::operator T* ()
 {
     return &x;
 }
 
 template<typename T>
-Vector3<T>::operator const T* () const
+Vector3def<T>::operator const T* () const
 {
     return &x;
 }
 
 template<typename T>
-Vector3<T>& Vector3<T>::operator+= (const Vector3<T>& vec)
+Vector3def<T>& Vector3def<T>::operator+= (const Vector3def<T>& vec)
 {
     x += vec.x;
     y += vec.y;
@@ -56,7 +59,7 @@ Vector3<T>& Vector3<T>::operator+= (const Vector3<T>& vec)
 }
 
 template<typename T>
-Vector3<T>& Vector3<T>::operator-= (const Vector3<T>& vec)
+Vector3def<T>& Vector3def<T>::operator-= (const Vector3def<T>& vec)
 {
     x -= vec.x;
     y -= vec.y;
@@ -66,7 +69,7 @@ Vector3<T>& Vector3<T>::operator-= (const Vector3<T>& vec)
 }
 
 template<typename T>
-Vector3<T>& Vector3<T>::operator*= (const Vector3<T>& vec)
+Vector3def<T>& Vector3def<T>::operator*= (const Vector3def<T>& vec)
 {
     x *= vec.x;
     y *= vec.y;
@@ -76,7 +79,7 @@ Vector3<T>& Vector3<T>::operator*= (const Vector3<T>& vec)
 }
 
 template<typename T>
-Vector3<T>& Vector3<T>::operator*= (const T& scalar)
+Vector3def<T>& Vector3def<T>::operator*= (const T& scalar)
 {
     x *= scalar;
     y *= scalar;
@@ -86,7 +89,7 @@ Vector3<T>& Vector3<T>::operator*= (const T& scalar)
 }
 
 template<typename T>
-Vector3<T>& Vector3<T>::operator/= (const T& scalar)
+Vector3def<T>& Vector3def<T>::operator/= (const T& scalar)
 {
     if (scalar == 0)
         throw std::invalid_argument ("Can not divide vector by zero");
@@ -99,25 +102,25 @@ Vector3<T>& Vector3<T>::operator/= (const T& scalar)
 }
 
 template<typename T>
-T Vector3<T>::dot (const Vector3<T>& vec) const
+T Vector3def<T>::dot (const Vector3def<T>& vec) const
 {
     return (x * vec.x + y * vec.y + z * vec.z);
 }
 
 template<typename T>
-T Vector3<T>::length () const
+T Vector3def<T>::length () const
 {
     return std::sqrt (lengthSquared ());
 }
 
 template<typename T>
-T Vector3<T>::lengthSquared () const
+T Vector3def<T>::lengthSquared () const
 {
     return dot (*this);
 }
 
 template<typename T>
-void Vector3<T>::normalize ()
+void Vector3def<T>::normalize ()
 {
     float len = length ();
 
@@ -128,7 +131,7 @@ void Vector3<T>::normalize ()
 }
 
 template<typename T>
-Vector3<T> Vector3<T>::cross (const Vector3<T>& other) const
+Vector3def<T> Vector3def<T>::cross (const Vector3def<T>& other) const
 {
     Vector3<T> res;
     res.x = y * other.z - z * other.y;

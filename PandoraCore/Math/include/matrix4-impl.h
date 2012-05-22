@@ -1,42 +1,45 @@
 #ifdef MATRIX4_INCLUDE_FILE
 
 template<typename T>
-Matrix4<T>::Matrix4 ()
-    : data ({1, 0, 0, 0,
+using Matrix4def = Matrix4<T, typename std::enable_if<std::is_arithmetic<T>::value>::type>;
+
+template<typename T>
+Matrix4def<T>::Matrix4 ()
+    : data {1, 0, 0, 0,
              0, 1, 0, 0,
              0, 0, 1, 0,
-             0, 0, 0, 1})
+             0, 0, 0, 1}
 { }
 
 template<typename T>
-Matrix4<T>::Matrix4 (const T& a00, const T& a01, const T& a02, const T& a03,
+Matrix4def<T>::Matrix4 (const T& a00, const T& a01, const T& a02, const T& a03,
                      const T& a10, const T& a11, const T& a12, const T& a13,
                      const T& a20, const T& a21, const T& a22, const T& a23,
                      const T& a30, const T& a31, const T& a32, const T& a33)
-    : data ({a00, a01, a02, a03,
+    : data {a00, a01, a02, a03,
              a10, a11, a12, a13,
              a20, a21, a22, a23,
-             a30, a31, a32, a33})
+             a30, a31, a32, a33}
 { }
 
 template<typename T>
-Matrix4<T>::Matrix4 (const T array[16])
-    : data ({array[0], array[1], array[2], array[3],
-             array[4], array[5], array[6], array[7],
-             array[8], array[9], array[10], array[11],
-             array[12], array[13], array[14], array[15] })
+Matrix4def<T>::Matrix4 (const T array[16])
+    : data {array[0], array[1], array[2], array[3],
+            array[4], array[5], array[6], array[7],
+            array[8], array[9], array[10], array[11],
+            array[12], array[13], array[14], array[15] }
 { }
 
 template<typename T>
-Matrix4<T>::Matrix4 (const Matrix3<T>& matrix)
-    : data ({matrix[0], matrix[1], matrix[2], 0,
+Matrix4def<T>::Matrix4 (const Matrix3<T>& matrix)
+    : data {matrix[0], matrix[1], matrix[2], 0,
              matrix[3], matrix[4], matrix[5], 0,
              matrix[6], matrix[7], matrix[8], 0,
-             0,         0,         0,         1})
+             0,         0,         0,         1}
 { }
 
 template<typename T>
-T& Matrix4<T>::operator () (const size_t& i, const size_t& j)
+T& Matrix4def<T>::operator () (const size_t& i, const size_t& j)
 {
     if (i > 3 || j > 3)
         throw std::out_of_range ("Element outside of matrix boundary");
@@ -45,7 +48,7 @@ T& Matrix4<T>::operator () (const size_t& i, const size_t& j)
 }
 
 template<typename T>
-T Matrix4<T>::operator () (const size_t& i, const size_t& j) const
+T Matrix4def<T>::operator () (const size_t& i, const size_t& j) const
 {
     if (i > 3 || j > 3)
         throw std::out_of_range ("Element outside of matrix boundary");
@@ -54,7 +57,7 @@ T Matrix4<T>::operator () (const size_t& i, const size_t& j) const
 }
 
 template<typename T>
-T& Matrix4<T>::operator[] (const size_t& i)
+T& Matrix4def<T>::operator[] (const size_t& i)
 {
     if (i > 15)
         throw std::out_of_range ("Element outside of matrix boundary");
@@ -63,7 +66,7 @@ T& Matrix4<T>::operator[] (const size_t& i)
 }
 
 template<typename T>
-T Matrix4<T>::operator[] (const size_t& i) const
+T Matrix4def<T>::operator[] (const size_t& i) const
 {
     if (i > 15)
         throw std::out_of_range ("Element outside of matrix boundary");
@@ -72,19 +75,19 @@ T Matrix4<T>::operator[] (const size_t& i) const
 }
 
 template<typename T>
-Matrix4<T>::operator T* ()
+Matrix4def<T>::operator T* ()
 {
     return data;
 }
 
 template<typename T>
-Matrix4<T>::operator const T* () const
+Matrix4def<T>::operator const T* () const
 {
     return data;
 }
 
 template<typename T>
-Matrix4<T>& Matrix4<T>::operator*= (const T& scalar)
+Matrix4def<T>& Matrix4def<T>::operator*= (const T& scalar)
 {
     for (auto i = 0; i < 16; ++i)
         data[i] *= scalar;
@@ -93,7 +96,7 @@ Matrix4<T>& Matrix4<T>::operator*= (const T& scalar)
 }
 
 template<typename T>
-Matrix4<T>& Matrix4<T>::operator/= (const T& scalar)
+Matrix4def<T>& Matrix4def<T>::operator/= (const T& scalar)
 {
     if (scalar == 0)
         throw std::invalid_argument ("Can not divide matrix by zero");
@@ -105,7 +108,7 @@ Matrix4<T>& Matrix4<T>::operator/= (const T& scalar)
 }
 
 template<typename T>
-Matrix4<T>& Matrix4<T>::operator+= (const Matrix4 other)
+Matrix4def<T>& Matrix4def<T>::operator+= (const Matrix4 other)
 {
     for (auto i = 0; i < 16; ++i)
         data[i] += other[i];
@@ -113,7 +116,7 @@ Matrix4<T>& Matrix4<T>::operator+= (const Matrix4 other)
 }
 
 template<typename T>
-Matrix4<T>& Matrix4<T>::operator-= (const Matrix4 other)
+Matrix4def<T>& Matrix4def<T>::operator-= (const Matrix4 other)
 {
     for (auto i = 0; i < 16; ++i)
         data[i] -= other[i];
@@ -121,7 +124,7 @@ Matrix4<T>& Matrix4<T>::operator-= (const Matrix4 other)
 }
 
 template<typename T>
-Matrix4<T> Matrix4<T>::transpose () const
+Matrix4def<T> Matrix4def<T>::transpose () const
 {
     Matrix4<T> res;
     for (auto i = 0; i < 4; ++i)
@@ -133,7 +136,7 @@ Matrix4<T> Matrix4<T>::transpose () const
 
 // Code from the MESA implementation of gluInvertMatrix.
 template<typename T>
-Matrix4<T> Matrix4<T>::inverse () const
+Matrix4def<T> Matrix4def<T>::inverse () const
 {
     T det = determinant ();
 
@@ -259,13 +262,13 @@ Matrix4<T> Matrix4<T>::inverse () const
 }
 
 template<typename T>
-T Matrix4<T>::trace () const
+T Matrix4def<T>::trace () const
 {
     return data[0] + data[5] + data[10] + data[15];
 }
 
 template<typename T>
-T Matrix4<T>::determinant () const
+T Matrix4def<T>::determinant () const
 {
     const T sub1 = calculate_sub_determinant (0,0);
     const T sub2 = calculate_sub_determinant (0,1);

@@ -1,22 +1,25 @@
 #ifdef VECTOR2_INCLUDE_FILE
 
 template<typename T>
-Vector2<T>::Vector2 ()
+using Vector2def = Vector2<T, typename std::enable_if<std::is_arithmetic<T>::value>::type>;
+
+template<typename T>
+Vector2def<T>::Vector2 ()
     : x (0), y (0)
 { }
 
 template<typename T>
-Vector2<T>::Vector2 (const T x, const T y)
+Vector2def<T>::Vector2 (const T x, const T y)
     : x (x), y (y)
 { }
 
 template<typename T>
-Vector2<T>::Vector2 (const T array[2])
+Vector2def<T>::Vector2 (const T array[2])
     : x (array[0]), y (array[1])
 { }
 
 template<typename T>
-T& Vector2<T>::operator[] (const size_t i)
+T& Vector2def<T>::operator[] (const size_t i)
 {
     if (i > 1)
         throw std::out_of_range ("Index out of range for 2D vectors");
@@ -25,7 +28,7 @@ T& Vector2<T>::operator[] (const size_t i)
 }
 
 template<typename T>
-T Vector2<T>::operator[] (const size_t i) const
+T Vector2def<T>::operator[] (const size_t i) const
 {
     if (i > 1)
         throw std::out_of_range ("Index out of range for 2D vectors");
@@ -34,19 +37,19 @@ T Vector2<T>::operator[] (const size_t i) const
 }
 
 template<typename T>
-Vector2<T>::operator T* ()
+Vector2def<T>::operator T* ()
 {
     return &x;
 }
 
 template<typename T>
-Vector2<T>::operator const T* () const
+Vector2def<T>::operator const T* () const
 {
     return &x;
 }
 
 template<typename T>
-Vector2<T>& Vector2<T>::operator+= (const Vector2<T>& other)
+Vector2def<T>& Vector2def<T>::operator+= (const Vector2def<T>& other)
 {
     x += other.x;
     y += other.y;
@@ -55,7 +58,7 @@ Vector2<T>& Vector2<T>::operator+= (const Vector2<T>& other)
 }
 
 template<typename T>
-Vector2<T>& Vector2<T>::operator-= (const Vector2<T>& other)
+Vector2def<T>& Vector2def<T>::operator-= (const Vector2def<T>& other)
 {
     x -= other.x;
     y -= other.y;
@@ -64,7 +67,7 @@ Vector2<T>& Vector2<T>::operator-= (const Vector2<T>& other)
 }
 
 template<typename T>
-Vector2<T>& Vector2<T>::operator*= (const Vector2<T>& other)
+Vector2def<T>& Vector2def<T>::operator*= (const Vector2def<T>& other)
 {
     x *= other.x;
     y *= other.y;
@@ -73,7 +76,7 @@ Vector2<T>& Vector2<T>::operator*= (const Vector2<T>& other)
 }
 
 template<typename T>
-Vector2<T>& Vector2<T>::operator*= (const T& scalar)
+Vector2def<T>& Vector2def<T>::operator*= (const T& scalar)
 {
     x *= scalar;
     y *= scalar;
@@ -82,7 +85,7 @@ Vector2<T>& Vector2<T>::operator*= (const T& scalar)
 }
 
 template<typename T>
-Vector2<T>& Vector2<T>::operator/= (const T& scalar)
+Vector2def<T>& Vector2def<T>::operator/= (const T& scalar)
 {
     if (!scalar)
         throw std::invalid_argument ("Can not divide vector by zero");
@@ -94,31 +97,31 @@ Vector2<T>& Vector2<T>::operator/= (const T& scalar)
 }
 
 template<typename T>
-T Vector2<T>::lengthSquared () const
+T Vector2def<T>::lengthSquared () const
 {
     return dot (*this);
 }
 
 template<typename T>
-T Vector2<T>::length () const
+T Vector2def<T>::length () const
 {
     return std::sqrt (lengthSquared ());
 }
 
 template<typename T>
-T Vector2<T>::dot (const Vector2<T>& other) const
+T Vector2def<T>::dot (const Vector2def<T>& other) const
 {
     return x * other.x + y * other.y;
 }
 
 template<typename T>
-Vector2<T> Vector2<T>::perp () const
+Vector2def<T> Vector2def<T>::perp () const
 {
     return Vector2<T> (y, -x);
 }
 
 template<typename T>
-void Vector2<T>::normalize ()
+void Vector2def<T>::normalize ()
 {
     T len = length ();
 

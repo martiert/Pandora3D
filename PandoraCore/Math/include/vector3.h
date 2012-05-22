@@ -6,8 +6,11 @@
 
 namespace Math
 {
+    template<typename T, class Enable = void>
+    class Vector3;
+
     template<typename T>
-    class Vector3
+    class Vector3<T, typename std::enable_if<std::is_arithmetic<T>::value>::type>
     {
         public:
             T x;
