@@ -35,6 +35,9 @@ namespace Math
             Matrix3 transpose () const;
 
             Matrix3 inverse () const;
+
+            const static Matrix3 IDENTITY;
+            const static Matrix3 ZERO;
         private:
             T data[9];
     };

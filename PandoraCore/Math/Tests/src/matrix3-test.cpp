@@ -380,17 +380,12 @@ TEST (Matrix3Test, subtracting_two_matrices_subtracts_each_element)
 
 TEST (Matrix3Test, determinant_of_zero_matrix_is_zero)
 {
-    const Math::Matrix3d zero (0, 0, 0,
-                               0, 0, 0,
-                               0, 0, 0);
-
-    EXPECT_EQ (0, zero.determinant ());
+    EXPECT_EQ (0, Math::Matrix3d::ZERO.determinant ());
 }
 
 TEST (Matrix3Test, determinant_of_identity_matrix_is_one)
 {
-    const Math::Matrix3d identity;
-    EXPECT_EQ (1, identity.determinant ());
+    EXPECT_EQ (1, Math::Matrix3d::IDENTITY.determinant ());
 }
 
 TEST (Matrix3Test, matrix_determinant_follows_mathematical_rules)
@@ -416,10 +411,7 @@ TEST (Matrix3Test, matrix_multipliplied_with_zero_matrix_from_right_is_zero_matr
     BEGIN_MULTITEST
 
     const auto matrix = create_random_matrix3d ();
-    const Math::Matrix3d zero (0, 0, 0,
-                               0, 0, 0,
-                               0, 0, 0);
-    auto result = matrix * zero;
+    auto result = matrix * Math::Matrix3d::ZERO;
 
     for (size_t i = 0; i < 9; ++i)
         EXPECT_EQ (0, result[i]);
@@ -432,10 +424,7 @@ TEST (Matrix3Test, matrix_multipliplied_with_zero_matrix_from_left_is_zero_matri
     BEGIN_MULTITEST
 
     const auto matrix = create_random_matrix3d ();
-    const Math::Matrix3d zero (0, 0, 0,
-                               0, 0, 0,
-                               0, 0, 0);
-    auto result = zero * matrix;
+    auto result = Math::Matrix3d::ZERO * matrix;
 
     for (size_t i = 0; i < 9; ++i)
         EXPECT_EQ (0, result[i]);
@@ -448,8 +437,7 @@ TEST (Matrix3Test, matrix_multipliplied_with_identity_from_right_is_the_same_mat
     BEGIN_MULTITEST
 
     const auto matrix = create_random_matrix3d ();
-    const Math::Matrix3d identity;
-    auto result = matrix * identity;
+    auto result = matrix * Math::Matrix3d::IDENTITY;
 
     for (size_t i = 0; i < 9; ++i)
         EXPECT_EQ (matrix[i], result[i]);
@@ -462,8 +450,7 @@ TEST (Matrix3Test, matrix_multipliplied_with_identity_from_left_is_the_same_matr
     BEGIN_MULTITEST
 
     const auto matrix = create_random_matrix3d ();
-    const Math::Matrix3d identity;
-    auto result = identity * matrix;
+    auto result = Math::Matrix3d::IDENTITY * matrix;
 
     for (size_t i = 0; i < 9; ++i)
         EXPECT_EQ (matrix[i], result[i]);
@@ -501,16 +488,12 @@ TEST (Matrix3Test, division_by_zero_throws_invalid_argument)
 
 TEST (Matrix3Test, trace_of_zero_matrix_is_zero)
 {
-    const Math::Matrix3d zero (0, 0, 0,
-                               0, 0, 0,
-                               0, 0, 0);
-    EXPECT_EQ (0, zero.trace ());
+    EXPECT_EQ (0, Math::Matrix3d::ZERO.trace ());
 }
 
 TEST (Matrix3Test, trace_of_identity_matrix_is_three)
 {
-    const Math::Matrix3d identity;
-    EXPECT_EQ (3, identity.trace ());
+    EXPECT_EQ (3, Math::Matrix3d::IDENTITY.trace ());
 }
 
 TEST (Matrix3Test, trace_of_random_matrix_is_sum_of_diagonal)
@@ -527,10 +510,7 @@ TEST (Matrix3Test, trace_of_random_matrix_is_sum_of_diagonal)
 
 TEST (Matrix3Test, transpose_of_zero_matrix_is_zero)
 {
-    const Math::Matrix3d zero (0, 0, 0,
-                               0, 0, 0,
-                               0, 0, 0);
-    auto transpose = zero.transpose ();
+    auto transpose = Math::Matrix3d::ZERO.transpose ();
 
     for (size_t i = 0; i < 9; ++i)
         EXPECT_EQ (0, transpose[i]);
@@ -538,11 +518,10 @@ TEST (Matrix3Test, transpose_of_zero_matrix_is_zero)
 
 TEST (Matrix3Test, transpose_of_identity_is_identity)
 {
-    const Math::Matrix3d identity;
-    auto transpose = identity.transpose ();
+    auto transpose = Math::Matrix3d::IDENTITY.transpose ();
 
     for (size_t i = 0; i < 9; ++i)
-        EXPECT_EQ (identity[i], transpose[i]);
+        EXPECT_EQ (Math::Matrix3d::IDENTITY[i], transpose[i]);
 }
 
 TEST (Matrix3Test, transpose_of_matrix_swaps_rows_with_columns)
@@ -561,20 +540,10 @@ TEST (Matrix3Test, transpose_of_matrix_swaps_rows_with_columns)
 
 TEST (Matrix3Test, inverse_of_identity_is_identity)
 {
-    const Math::Matrix3d matrix;
-    auto inverse = matrix.inverse ();
+    auto inverse = Math::Matrix3d::IDENTITY.inverse ();
 
-    EXPECT_EQ (1, inverse (0,0));
-    EXPECT_EQ (0, inverse (0,1));
-    EXPECT_EQ (0, inverse (0,2));
-
-    EXPECT_EQ (0, inverse (1,0));
-    EXPECT_EQ (1, inverse (1,1));
-    EXPECT_EQ (0, inverse (1,2));
-
-    EXPECT_EQ (0, inverse (2,0));
-    EXPECT_EQ (0, inverse (2,1));
-    EXPECT_EQ (1, inverse (2,2));
+    for (auto i = 0; i < 9; ++i)
+        EXPECT_EQ (Math::Matrix3d::IDENTITY[i], inverse[i]);
 }
 
 TEST (Matrix3Test, matrix_multiplied_with_its_inverse_from_right_is_identity)
@@ -602,10 +571,7 @@ TEST (Matrix3Test, matrix_multiplied_with_its_inverse_from_right_is_identity)
 
 TEST (Matrix3Test, inverse_of_zero_matrix_throws_runtime_error)
 {
-    const Math::Matrix3d matrix (0, 0, 0,
-                                 0, 0, 0,
-                                 0, 0, 0);
-    EXPECT_THROW (matrix.inverse (), std::runtime_error);
+    EXPECT_THROW (Math::Matrix3d::ZERO.inverse (), std::runtime_error);
 }
 
 TEST (Matrix3Test, inverse_of_singular_matrix_throws_runtime_error)

@@ -1,6 +1,8 @@
 #ifndef MATH_MATRIX2_H_INCLUDED
 #define MATH_MATRIX2_H_INCLUDED
 
+#include "vector2.h"
+
 #include <stdexcept>
 #include <cstring>
 
@@ -27,6 +29,9 @@ namespace Math
             T determinant () const;
             Matrix2 transpose () const;
             Matrix2 inverse () const;
+
+            const static Matrix2 IDENTITY;
+            const static Matrix2 ZERO;
         private:
             T data[4];
     };
@@ -47,6 +52,12 @@ namespace Math
 
     template<typename T>
     Matrix2<T> operator* (const Matrix2<T>& matrix, const T& scalar);
+
+    template<typename T>
+    Vector2<T> operator* (const Matrix2<T>& matrix, const Vector2<T>& vector);
+
+    template<typename T>
+    Vector2<T> operator* (const Vector2<T>& vector, const Matrix2<T>& matrix);
 
     template<typename T>
     Matrix2<T> operator* (const T& scalar, const Matrix2<T>& matrix);

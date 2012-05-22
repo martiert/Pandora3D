@@ -1,9 +1,11 @@
 #include <matrix2.h>
+#include <vector2.h>
 #include <gtest/gtest.h>
 
 #include "test-helpers.h"
 
 const Math::Matrix2d create_random_matrix2d ();
+const Math::Vec2d create_random_vector2d ();
 
 TEST (Matrix2Test, empty_constructor_makes_identity_matrix)
 {
@@ -214,16 +216,12 @@ TEST (Matrix2Test, subtracting_matrix_from_matrix_subtracts_component_wise)
 
 TEST (Matrix2Test, determinant_of_identity_matrix_is_one)
 {
-    const Math::Matrix2d identity;
-
-    EXPECT_EQ (1.0, identity.determinant ());
+    EXPECT_EQ (1.0, Math::Matrix2d::IDENTITY.determinant ());
 }
 
 TEST (Matrix2Test, determinant_of_zero_matrix_is_zero)
 {
-    const Math::Matrix2d zero (0, 0, 0, 0);
-
-    EXPECT_EQ (0.0, zero.determinant ());
+    EXPECT_EQ (0.0, Math::Matrix2d::ZERO.determinant ());
 }
 
 TEST (Matrix2Test, determinant_of_matrix_follows_mathematical_rules)
@@ -242,8 +240,7 @@ TEST (Matrix2Test, multiplying_matrix_with_identity_from_right_returns_same_matr
     BEGIN_MULTITEST
 
     const auto matrix = create_random_matrix2d ();
-    const Math::Matrix2d identity;
-    auto result = matrix * identity;
+    auto result = matrix * Math::Matrix2d::IDENTITY;
 
     EXPECT_EQ (matrix (0,0), result (0,0));
     EXPECT_EQ (matrix (0,1), result (0,1));
@@ -258,8 +255,7 @@ TEST (Matrix2Test, multiplying_matrix_with_identity_from_left_returns_same_matri
     BEGIN_MULTITEST
 
     const auto matrix = create_random_matrix2d ();
-    const Math::Matrix2d identity;
-    auto result = identity * matrix;
+    auto result = Math::Matrix2d::IDENTITY * matrix;
 
     EXPECT_EQ (matrix (0,0), result (0,0));
     EXPECT_EQ (matrix (0,1), result (0,1));
@@ -274,8 +270,7 @@ TEST (Matrix2Test, multiply_matrix_with_zero_matrix_from_right_gives_zero_matrix
     BEGIN_MULTITEST
 
     const auto matrix = create_random_matrix2d ();
-    const Math::Matrix2d zero (0, 0, 0, 0);
-    auto result = matrix * zero;
+    auto result = matrix * Math::Matrix2d::ZERO;
 
     EXPECT_EQ (0, result (0,0));
     EXPECT_EQ (0, result (0,1));
@@ -290,8 +285,7 @@ TEST (Matrix2Test, multiply_matrix_with_zero_matrix_from_left_gives_zero_matrix)
     BEGIN_MULTITEST
 
     const auto matrix = create_random_matrix2d ();
-    const Math::Matrix2d zero (0, 0, 0, 0);
-    auto result = zero * matrix;
+    auto result = Math::Matrix2d::ZERO * matrix;
 
     EXPECT_EQ (0, result (0,0));
     EXPECT_EQ (0, result (0,1));
@@ -396,12 +390,65 @@ TEST (Matrix2Test, multiplication_with_inverse_from_left_returns_identity)
     END_MULTITEST
 }
 
+TEST (Matrix2Test, multiplying_identity_with_vector_returns_vector)
+{
+    BEGIN_MULTITEST
+
+    const auto vector = create_random_vector2d ();
+    const auto res = Math::Matrix2d::IDENTITY * vector;
+
+    EXPECT_EQ (vector.x, res.x);
+    EXPECT_EQ (vector.y, res.y);
+
+    END_MULTITEST
+}
+
+TEST (Matrix2Test, multiplying_matrix_with_vector_is_mathematically_correct)
+{
+    BEGIN_MULTITEST
+
+    const auto matrix = create_random_matrix2d ();
+    const auto vector = create_random_vector2d ();
+    const auto res = matrix * vector;
+
+    EXPECT_EQ (matrix[0] * vector.x + matrix[1] * vector.y, res.x);
+    EXPECT_EQ (matrix[2] * vector.x + matrix[3] * vector.y, res.y);
+
+    END_MULTITEST
+}
+
+TEST (Matrix2Test, multiplying_vector_with_identity_returns_vector)
+{
+    BEGIN_MULTITEST
+
+    const auto vector = create_random_vector2d ();
+    const auto res = vector * Math::Matrix2d::IDENTITY;
+
+    EXPECT_EQ (vector.x, res.x);
+    EXPECT_EQ (vector.y, res.y);
+
+    END_MULTITEST
+}
+
+TEST (Matrix2Test, multiplying_vector_with_matrix_is_mathematically_correct)
+{
+    BEGIN_MULTITEST
+
+    const auto matrix = create_random_matrix2d ();
+    const auto vector = create_random_vector2d ();
+    const auto res = vector * matrix;
+
+    EXPECT_EQ (matrix[0] * vector.x + matrix[2] * vector.y, res.x);
+    EXPECT_EQ (matrix[1] * vector.x + matrix[3] * vector.y, res.y);
+
+    END_MULTITEST
+}
+
 TEST (Matrix2Test, transpose_of_identity_is_identity)
 {
     BEGIN_MULTITEST
 
-    const Math::Matrix2d identity;
-    auto transpose = identity.transpose ();
+    auto transpose = Math::Matrix2d::IDENTITY.transpose ();
 
     EXPECT_EQ (1, transpose (0,0));
     EXPECT_EQ (0, transpose (0,1));
@@ -566,6 +613,8 @@ TEST (Matrix2Test, equal_operator_of_different_forth_components_returns_true)
     const Math::Matrix2d matrix2 (3.4, 5.1, 2.1, 8.8);
     EXPECT_NE (matrix1, matrix2);
 }
+
+// Helper functions
 
 const Math::Matrix2d create_random_matrix2d ()
 {

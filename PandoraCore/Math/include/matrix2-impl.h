@@ -167,6 +167,20 @@ Matrix2<T> operator* (const T& scalar, const Matrix2<T>& matrix)
 }
 
 template<typename T>
+Vector2<T> operator* (const Matrix2<T>& matrix, const Vector2<T>& vector)
+{
+    return Vector2<T> (matrix[0] * vector.x + matrix[1] * vector.y,
+                       matrix[2] * vector.x + matrix[3] * vector.y);
+}
+
+template<typename T>
+Vector2<T> operator* (const Vector2<T>& vector, const Matrix2<T>& matrix)
+{
+    return Vector2<T> (matrix[0] * vector.x + matrix[2] * vector.y,
+                       matrix[1] * vector.x + matrix[3] * vector.y);
+}
+
+template<typename T>
 Matrix2<T> operator/ (const Matrix2<T>& matrix, const T& scalar)
 {
     auto result = matrix;
