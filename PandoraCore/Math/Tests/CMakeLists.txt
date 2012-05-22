@@ -6,6 +6,7 @@ INCLUDE_DIRECTORIES ("include")
 
 SET (src
     src/test-helpers.cpp
+    src/quaternion-test.cpp
     src/matrix4-test.cpp
     src/matrix3-test.cpp
     src/matrix2-test.cpp
