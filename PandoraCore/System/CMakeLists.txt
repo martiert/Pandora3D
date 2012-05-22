@@ -15,7 +15,6 @@ SET (PANDORA_SYSTEM_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 INCLUDE_DIRECTORIES (include)
 
 SET (System_src
-    src/stack.cpp
   )
 
 ADD_LIBRARY (System SHARED ${System_src})

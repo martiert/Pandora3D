@@ -4,8 +4,6 @@ INCLUDE_DIRECTORIES ("${System_SOURCE_DIR}/include")
 
 SET (src
     src/test-runner.cpp
-    src/stack-test.cpp
-    src/vector-test.cpp
     )
 
 ADD_EXECUTABLE (SystemTests ${src})
