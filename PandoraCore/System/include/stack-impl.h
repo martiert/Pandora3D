@@ -2,10 +2,8 @@
 
 template<typename T>
 System::Stack<T>::Stack (const size_t& size)
-    : elements_on_stack (0), max_elements_on_stack (size)
-{
-    elements = new T[size];
-}
+    : elements_on_stack (0), max_elements_on_stack (size), elements (new T[size])
+{ }
 
 template<typename T>
 System::Stack<T>::~Stack ()
