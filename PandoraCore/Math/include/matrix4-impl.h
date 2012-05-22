@@ -361,7 +361,7 @@ Matrix4<T> operator* (const Matrix4<T>& left, const Matrix4<T>& right)
 }
 
 template<typename T>
-T Matrix4<T>::calculate_sub_determinant (const size_t& row, const size_t& column) const
+T Matrix4def<T>::calculate_sub_determinant (const size_t& row, const size_t& column) const
 {
     Matrix3<T> matrix;
     size_t index = 0;
