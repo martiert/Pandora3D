@@ -24,6 +24,11 @@ Quatdef<T>::Quat (const T& real, const Vector3<T>& imaginary_vector)
 { }
 
 template<typename T>
+Quatdef<T>::Quat (const Matrix4<T>& matrix)
+    : real (1)
+{ }
+
+template<typename T>
 T& Quatdef<T>::w ()
 {
     return real;

@@ -2,6 +2,7 @@
 #define MATH_QUATERNION_H_INCLUDED
 
 #include "vector3.h"
+#include "matrix4.h"
 #include <type_traits>
 
 namespace Math
@@ -21,6 +22,8 @@ namespace Math
             Quat (const T array[4]);
 
             Quat (const T& real, const Vector3<T>& imaginary_vector);
+
+            Quat (const Matrix4<T>& matrix);
 
             T& w ();
             T w () const;

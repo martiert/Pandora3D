@@ -5,6 +5,7 @@
 #include "test-helpers.h"
 
 const Math::Quat4d create_random_quaternion ();
+const Math::Matrix4d create_random_matrix4d ();
 const Math::Vec3d create_random_vector3d ();
 
 TEST (QuaternionTest, default_quaternion_is_unit_quaternion)
@@ -28,7 +29,7 @@ TEST (QuaternionTest, creating_quaternion_with_arguments_populates_quaternion_wi
 
 TEST (QuaternionTest, creating_quaternion_from_array_populates_quaternion)
 {
-    auto array = create_double_array_of_size (4);
+    const auto array = create_double_array_of_size (4);
     const Math::Quat4d quat (array);
 
     EXPECT_EQ (array[0], quat.w ());
@@ -41,13 +42,29 @@ TEST (QuaternionTest, creating_quaternion_from_array_populates_quaternion)
 
 TEST (QuaternionTest, creating_quaternion_with_real_element_and_imaginary_vector_sets_quaternion)
 {
-    auto vector = create_random_vector3d ();
+    const auto vector = create_random_vector3d ();
     Math::Quat4d quat (3.2, vector);
 
     EXPECT_EQ (3.2, quat.w ());
     EXPECT_EQ (vector.x, quat.x ());
     EXPECT_EQ (vector.y, quat.y ());
     EXPECT_EQ (vector.z, quat.z ());
+}
+
+TEST (QuaternionTest, can_create_quaternion_from_4d_matrix)
+{
+    const auto matrix = create_random_matrix4d ();
+    Math::Quat4d quat (matrix);
+}
+
+TEST (QuaternionTest, creating_quaternion_from_identity_matrix_creates_the_unit_quaternion)
+{
+    Math::Quat4d quat (Math::Matrix4d::IDENTITY);
+
+    EXPECT_EQ (1, quat.w ());
+    EXPECT_EQ (0, quat.x());
+    EXPECT_EQ (0, quat.y ());
+    EXPECT_EQ (0, quat.z ());
 }
 
 // Helper function
