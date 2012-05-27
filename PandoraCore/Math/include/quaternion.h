@@ -26,23 +26,49 @@ namespace Math
             Quat (const Matrix4<T>& matrix);
 
             T& w ();
-            T w () const;
-
             T& x ();
-            T x () const;
-
             T& y ();
-            T y () const;
-
             T& z ();
+
+            T w () const;
+            T x () const;
+            T y () const;
             T z () const;
 
-        protected:
+            Quat operator+= (const Quat& other);
+            Quat operator-= (const Quat& other);
+            Quat operator*= (const T& scalar);
+            Quat operator/= (const T& scalar);
+
+            Matrix4<T> create_matrix () const;
+
+            T norm () const;
+
+            Quat conjugate () const;
+
+            Quat inverse () const;
+
+        public:
             T real;
             Vector3<T> imag;
     };
 
     typedef Quat<double> Quat4d;
+
+    template<typename T>
+    Quat<T> operator+ (const Quat<T>& left, const Quat<T>& right);
+
+    template<typename T>
+    Quat<T> operator- (const Quat<T>& left, const Quat<T>& right);
+
+    template<typename T>
+    Quat<T> operator* (const Quat<T>& left, const Quat<T>& right);
+
+    template<typename T>
+    Quat<T> operator* (const Quat<T>& quaternion, const T& scalar);
+
+    template<typename T>
+    Quat<T> operator/ (const Quat<T>& quaternion, const T& scalar);
 
 #define QUATERNION_INCLUDE_FILE
 #include "quaternion-impl.h"

@@ -1,6 +1,10 @@
 #include "test-helpers.h"
 
-bool called = false;
+namespace
+{
+    bool called = false;
+    double scale = 10000.0;
+}
 
 double* create_double_array_of_size (const size_t& size)
 {
@@ -9,7 +13,15 @@ double* create_double_array_of_size (const size_t& size)
     called = true;
     double * array = new double[size];
     for (size_t i = 0; i < size; ++i)
-        array[i] = rand () / 100.0;
+        array[i] = rand () / scale;
 
     return array;
+}
+
+double create_random_scalar ()
+{
+    if (!called)
+        srand (time (NULL));
+    called = true;
+    return rand () / scale;
 }

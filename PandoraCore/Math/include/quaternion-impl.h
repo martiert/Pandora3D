@@ -76,6 +76,103 @@ T Quatdef<T>::z () const
     return imag.z;
 }
 
+template<typename T>
+Quatdef<T> Quatdef<T>::operator+= (const Quat& other)
+{
+    real += other.real;
+    imag += other.imag;
+    return *this;
+}
+
+template<typename T>
+Quatdef<T> Quatdef<T>::operator-= (const Quat& other)
+{
+    real -= other.real;
+    imag -= other.imag;
+    return *this;
+}
+
+template<typename T>
+Quatdef<T> Quatdef<T>::operator*= (const T& scalar)
+{
+    real *= scalar;
+    imag *= scalar;
+    return *this;
+}
+
+template<typename T>
+Quatdef<T> Quatdef<T>::operator/= (const T& scalar)
+{
+    real /= scalar;
+    imag /= scalar;
+    return *this;
+}
+
+template<typename T>
+Matrix4<T> Quatdef<T>::create_matrix () const
+{
+    return Matrix4<T> ();
+}
+
+template<typename T>
+T Quatdef<T>::norm () const
+{
+    return std::sqrt (imag.dot (imag) + real * real);
+}
+
+template<typename T>
+Quatdef<T> Quatdef<T>::conjugate () const
+{
+    return Quatdef<T> (real, -imag);
+}
+
+template<typename T>
+Quatdef<T> Quatdef<T>::inverse () const
+{
+    const auto normsquared = imag.lengthSquared () + (real * real);
+
+    return conjugate () / normsquared;
+}
+
+template<typename T>
+Quat<T> operator+ (const Quat<T>& left, const Quat<T>& right)
+{
+    Quat<T> res = left;
+    res += right;
+    return res;
+}
+
+template<typename T>
+Quat<T> operator- (const Quat<T>& left, const Quat<T>& right)
+{
+    Quat<T> res = left;
+    res -= right;
+    return res;
+}
+
+template<typename T>
+Quat<T> operator* (const Quat<T>& left, const Quat<T>& right)
+{
+    return Quat<T> (left.w () * right.w () - left.imag.dot (right.imag),
+                    left.imag.cross (right.imag) + left.real * right.imag + right.real * left.imag);
+}
+
+template<typename T>
+Quat<T> operator* (const Quat<T>& quaternion, const T& scalar)
+{
+    Quat<T> res = quaternion;
+    res *= scalar;
+    return res;
+}
+
+template<typename T>
+Quat<T> operator/ (const Quat<T>& quaternion, const T& scalar)
+{
+    Quat<T> res = quaternion;
+    res /= scalar;
+    return res;
+}
+
 #else // QUATERNION_INCLUDE_FILE
 #error "Only include this file from quaternion.h"
 #endif // QUATERNION_INCLUDE_FILE
