@@ -7,6 +7,35 @@
 
 namespace Math
 {
+    class can_not_make_orthonormal_2d_vectors_from_equal_vectors_exception : public std::exception
+    { };
+
+    class can_not_make_orthonormal_2d_vectors_with_zero_vector_exception : public std::exception
+    { };
+
+    class can_not_normalize_zero_vector2d_exception : public std::exception
+    { };
+
+    class can_not_divide_vector2d_by_zero_exception : public std::exception
+    { };
+
+    class vector2d_index_out_of_range_exception : public std::exception
+    {
+        public:
+            vector2d_index_out_of_range_exception (const size_t& i)
+                : index (i)
+            {}
+
+            virtual const char* what () const throw ()
+            {
+                std::string error = "Tried to access index: " + index;
+                return error.c_str ();
+            }
+
+        private:
+            size_t index;
+    };
+
     template<typename T, class Enable = void>
     class Vector2;
 

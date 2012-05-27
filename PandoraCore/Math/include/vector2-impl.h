@@ -22,7 +22,7 @@ template<typename T>
 T& Vector2def<T>::operator[] (const size_t i)
 {
     if (i > 1)
-        throw std::out_of_range ("Index out of range for 2D vectors");
+        throw vector2d_index_out_of_range_exception (i);
 
     return (&x)[i];
 }
@@ -31,7 +31,7 @@ template<typename T>
 T Vector2def<T>::operator[] (const size_t i) const
 {
     if (i > 1)
-        throw std::out_of_range ("Index out of range for 2D vectors");
+        throw vector2d_index_out_of_range_exception (i);
 
     return (&x)[i];
 }
@@ -88,7 +88,7 @@ template<typename T>
 Vector2def<T>& Vector2def<T>::operator/= (const T& scalar)
 {
     if (!scalar)
-        throw std::invalid_argument ("Can not divide vector by zero");
+        throw can_not_divide_vector2d_by_zero_exception ();
 
     x /= scalar;
     y /= scalar;
@@ -126,7 +126,7 @@ void Vector2def<T>::normalize ()
     T len = length ();
 
     if (len == 0)
-        throw std::domain_error ("Can not normalize a zero vector");
+        throw can_not_normalize_zero_vector2d_exception ();
 
     *this /= len;
 }
@@ -165,7 +165,7 @@ template<typename T>
 Vector2<T> operator/ (const Vector2<T>& vec, const T real)
 {
     if (!real)
-        throw std::invalid_argument ("Can not divide vector by zero");
+        throw can_not_divide_vector2d_by_zero_exception ();
     return Vector2<T> (vec.x / real, vec.y / real);
 }
 
@@ -190,8 +190,12 @@ bool operator!= (const Vector2<T>& vec1, const Vector2<T>& vec2)
 template<typename T>
 void generateOrthonormalBasis (Vector2<T>& vec1, Vector2<T>& vec2)
 {
+    if ((vec1.x == 0 && vec1.y == 0) || (vec2.x == 0 && vec2.y == 0))
+        throw can_not_make_orthonormal_2d_vectors_with_zero_vector_exception ();
+
     if (vec1 == vec2)
-        throw std::domain_error ("Can not make orthonormal basis of equal vectors");
+        throw can_not_make_orthonormal_2d_vectors_from_equal_vectors_exception () ;
+
     vec1.normalize ();
     vec2 = vec2 - (vec1.dot (vec2)) * vec1;
     vec2.normalize ();
