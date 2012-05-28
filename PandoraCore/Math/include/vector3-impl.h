@@ -22,7 +22,7 @@ template<typename T>
 T& Vector3def<T>::operator[] (const size_t i)
 {
     if (i > 2)
-        throw std::out_of_range ("Index out of range for 3D vectors");
+        throw index_out_of_range_exception (i);
 
     return (&x)[i];
 }
@@ -31,7 +31,7 @@ template<typename T>
 T Vector3def<T>::operator[] (const size_t i) const
 {
     if (i > 2)
-        throw std::out_of_range ("Index out of range for 3D vectors");
+        throw index_out_of_range_exception (i);
 
     return (&x)[i];
 }
@@ -92,7 +92,7 @@ template<typename T>
 Vector3def<T>& Vector3def<T>::operator/= (const T& scalar)
 {
     if (scalar == 0)
-        throw std::invalid_argument ("Can not divide vector by zero");
+        throw division_by_zero_exception ();
 
     x /= scalar;
     y /= scalar;
@@ -125,7 +125,7 @@ void Vector3def<T>::normalize ()
     float len = length ();
 
     if (len == 0)
-        throw std::domain_error ("Can not normalize a zero vector");
+        throw normalizing_zero_vector_exception ();
 
     *this /= len;
 }
@@ -139,6 +139,24 @@ Vector3def<T> Vector3def<T>::cross (const Vector3def<T>& other) const
     res.z = x * other.y - y * other.x;
 
     return res;
+}
+
+template<typename T>
+void Vector3def<T>::generateOrthonormalBasis (Vector3<T>& vec1, Vector3<T>& vec2, Vector3<T>& vec3)
+{
+    if (vec1 == vec2 || vec1 == vec3 || vec2 == vec3)
+        throw can_not_make_orthonormal_basis_with_equal_vectors_exception ();
+
+    const Vector3<T> zero;
+    if (vec1 == zero || vec2 == zero || vec3 == zero)
+        throw can_not_make_orthonormal_basis_with_zero_vector_exception ();
+
+    vec2 = vec1.cross (vec3);
+    vec3 = vec1.cross (vec2);
+
+    vec1.normalize ();
+    vec2.normalize ();
+    vec3.normalize ();
 }
 
 template<typename T>
@@ -203,24 +221,6 @@ template<typename T>
 bool operator!= (const Vector3<T>& vec1, const Vector3<T>& vec2)
 {
     return !(vec1 == vec2);
-}
-
-template<typename T>
-void generateOrthonormalBasis (Vector3<T>& vec1, Vector3<T>& vec2, Vector3<T>& vec3)
-{
-    if (vec1 == vec2 || vec1 == vec3 || vec2 == vec3)
-        throw std::domain_error ("Can not make orthonormal basis of equal vectors");
-
-    const Vector3<T> zero;
-    if (vec1 == zero || vec2 == zero || vec3 == zero)
-        throw std::domain_error ("Can not make othonormal basis of zero vector");
-
-    vec2 = vec1.cross (vec3);
-    vec3 = vec1.cross (vec2);
-
-    vec1.normalize ();
-    vec2.normalize ();
-    vec3.normalize ();
 }
 
 #else // VECTOR3_INCLUDE_FILE

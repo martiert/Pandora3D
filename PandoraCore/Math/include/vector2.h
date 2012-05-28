@@ -2,40 +2,12 @@
 #define MATH_VECTOR2_H_INCLUDED
 
 #include <type_traits>
-#include <stdexcept>
+#include <exception>
 #include <cmath>
+#include <string>
 
 namespace Math
 {
-    class can_not_make_orthonormal_2d_vectors_from_equal_vectors_exception : public std::exception
-    { };
-
-    class can_not_make_orthonormal_2d_vectors_with_zero_vector_exception : public std::exception
-    { };
-
-    class can_not_normalize_zero_vector2d_exception : public std::exception
-    { };
-
-    class can_not_divide_vector2d_by_zero_exception : public std::exception
-    { };
-
-    class vector2d_index_out_of_range_exception : public std::exception
-    {
-        public:
-            vector2d_index_out_of_range_exception (const size_t& i)
-                : index (i)
-            {}
-
-            virtual const char* what () const throw ()
-            {
-                std::string error = "Tried to access index: " + index;
-                return error.c_str ();
-            }
-
-        private:
-            size_t index;
-    };
-
     template<typename T, class Enable = void>
     class Vector2;
 
@@ -69,6 +41,38 @@ namespace Math
             Vector2 perp () const;
 
             void normalize ();
+
+            static void generateOrthonormalBasis (Vector2<T>& vec1, Vector2<T>& vec2);
+
+        public:
+            class can_not_make_orthonormal_basis_from_equal_vectors_exception : public std::exception
+            { };
+
+            class can_not_make_orthonormal_basis_with_zero_vector_exception : public std::exception
+            { };
+
+            class can_not_normalize_zero_vector_exception : public std::exception
+            { };
+
+            class division_by_zero_exception : public std::exception
+            { };
+
+            class index_out_of_range_exception : public std::exception
+            {
+                public:
+                    index_out_of_range_exception (const size_t& i)
+                        : index (i)
+                    {}
+
+                    virtual const char* what () const throw ()
+                    {
+                        std::string error = "Tried to access index: " + index;
+                        return error.c_str ();
+                    }
+
+                private:
+                    size_t index;
+            };
     };
 
     typedef Vector2<float> Vec2f;
@@ -102,9 +106,6 @@ namespace Math
 
     template<typename T>
     bool operator!= (const Vector2<T>& vec1, const Vector2<T>& vec2);
-
-    template<typename T>
-    void generateOrthonormalBasis (Vector2<T>& vec1, Vector2<T>& vec2);
 
 #define VECTOR2_INCLUDE_FILE
 #include "vector2-impl.h"
