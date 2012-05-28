@@ -302,6 +302,27 @@ TEST (QuaternionTest, inverse_of_a_quaternion_is_the_conjugate_divded_by_the_nor
     END_MULTITEST
 }
 
+TEST (QuaternionTest, normalizing_quaternion_gives_a_unit_quaternion)
+{
+    BEGIN_MULTITEST
+
+    auto quat = create_random_quaternion ();
+
+    if (quat.norm () != 0) {
+        quat.normalize ();
+        EXPECT_FLOAT_EQ (1, quat.norm ());
+    }
+
+    END_MULTITEST
+}
+
+TEST (QuaternionTest, normalizing_zero_quaternion_throw_can_not_normalize_zero_quaternion_exception)
+{
+    Math::Quat4d quat;
+    quat.w () = 0;
+    EXPECT_THROW (quat.normalize (), Math::can_not_normalize_zero_quaternion_exception);
+}
+
 // Helper function
 const Math::Quat4d create_random_quaternion ()
 {

@@ -4,12 +4,15 @@
 #include "vector3.h"
 #include "matrix4.h"
 #include <type_traits>
+#include <exception>
 
 namespace Math
 {
+    class can_not_normalize_zero_quaternion_exception : public std::exception
+    { };
+
     template<typename T, class Enable = void>
     class Quat;
-
 
     template<typename T>
     class Quat<T, typename std::enable_if<std::is_arithmetic<T>::value>::type>
@@ -43,9 +46,9 @@ namespace Math
             Matrix4<T> create_matrix () const;
 
             T norm () const;
+            void normalize ();
 
             Quat conjugate () const;
-
             Quat inverse () const;
 
         public:

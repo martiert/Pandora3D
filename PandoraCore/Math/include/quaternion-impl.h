@@ -121,6 +121,18 @@ T Quatdef<T>::norm () const
 }
 
 template<typename T>
+void Quatdef<T>::normalize ()
+{
+    auto scale = norm ();
+
+    if (scale == 0)
+        throw can_not_normalize_zero_quaternion_exception ();
+
+    real /= scale;
+    imag /= scale;
+}
+
+template<typename T>
 Quatdef<T> Quatdef<T>::conjugate () const
 {
     return Quatdef<T> (real, -imag);
