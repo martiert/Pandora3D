@@ -55,6 +55,9 @@ namespace Math
         protected:
             Matrix4<T> create_matrix_with_scale (const T& s) const;
 
+            void create_quaternion_from_matrix_with_largest_u (const Matrix4<T>& matrix);
+            void create_quaternion_from_matrix_with_smallest_u (const Matrix4<T>& matrix);
+
         public:
             class normalizing_zero_quaternion_exception : public std::exception { };
             class can_not_make_matrix_from_zero_quaternion_exception : public std::exception { };

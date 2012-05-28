@@ -8,6 +8,7 @@ const Math::Quat4d create_random_quaternion ();
 const Math::Matrix4d create_random_matrix4d ();
 const Math::Vec3d create_random_vector3d ();
 const Math::Matrix4d make_matrix_from_quaternion (const Math::Quat4d& quat);
+const Math::Quat4d create_quaternion_from_matrix (const Math::Matrix4d& matrix);
 
 TEST (QuaternionTest, default_quaternion_is_identity_quaternion)
 {
@@ -77,6 +78,37 @@ TEST (QuaternionTest, creating_quaternion_from_identity_matrix_creates_the_ident
     EXPECT_EQ (0, quat.x());
     EXPECT_EQ (0, quat.y ());
     EXPECT_EQ (0, quat.z ());
+}
+
+TEST (QuaternionTest, creating_quaternion_from_positive_diagonal_matrix_gives_real_part_as_half_of_the_squared_trace_and_zero_imaginary_part)
+{
+    BEGIN_MULTITEST
+
+    Math::Matrix4d matrix;
+    for (auto i = 0; i < 3; ++i) {
+        const auto scalar = create_random_scalar ();
+        matrix (i,i) = std::abs (scalar);
+    }
+    const Math::Quat4d quat (matrix);
+
+    EXPECT_EQ (0.5 * std::sqrt (matrix.trace ()), quat.w ());
+    EXPECT_EQ (0, quat.x ());
+    EXPECT_EQ (0, quat.y ());
+    EXPECT_EQ (0, quat.x ());
+
+    END_MULTITEST
+}
+
+TEST (QuaternionTest, quaternion_creating_from_matrix_is_correct)
+{
+    const auto matrix = create_random_matrix4d ();
+    const Math::Quat4d quat (matrix);
+    const auto correct_quat = create_quaternion_from_matrix (matrix);
+
+    EXPECT_EQ (correct_quat.w (), quat.w ());
+    EXPECT_EQ (correct_quat.x (), quat.x ());
+    EXPECT_EQ (correct_quat.y (), quat.y ());
+    EXPECT_EQ (correct_quat.z (), quat.z ());
 }
 
 TEST (QuaternionTest, creating_matrix_from_identity_quaternion_gives_identity_matrix)
@@ -382,4 +414,24 @@ const Math::Matrix4d make_matrix_from_quaternion (const Math::Quat4d& quat)
     matrix (2,2) -= s * (quat.x () * quat.x () + quat.y () * quat.y ());
 
     return matrix;
+}
+
+const Math::Quat4d create_quaternion_from_matrix (const Math::Matrix4d& matrix)
+{
+    const auto u = matrix (0,0) + matrix (1,1) + matrix (2,2);
+    Math::Quat4d result;
+
+    result.w () = 0.5 * std::sqrt (matrix.trace ());
+
+    if (u > matrix (0,0) && u > matrix (1,1) && u > matrix (2,2)) {
+        result.x () = 0.25 * (matrix (2,1) - matrix (1,2))/result.w ();
+        result.y () = 0.25 * (matrix (0,2) - matrix (2,0))/result.w ();
+        result.z () = 0.25 * (matrix (1,0) - matrix (0,1))/result.w ();
+    } else {
+        result.x () = 0.5 * std::sqrt (matrix (0,0) - matrix (1,1) - matrix (2,2) + matrix (3,3));
+        result.y () = 0.5 * std::sqrt (-matrix (0,0) + matrix (1,1) - matrix (2,2) + matrix (3,3));
+        result.z () = 0.5 * std::sqrt (-matrix (0,0) - matrix (1,1) + matrix (2,2) + matrix (3,3));
+    }
+
+    return result;
 }

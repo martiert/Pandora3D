@@ -25,8 +25,14 @@ Quatdef<T>::Quat (const T& real, const Vector3<T>& imaginary_vector)
 
 template<typename T>
 Quatdef<T>::Quat (const Matrix4<T>& matrix)
-    : real (1)
-{ }
+    : real (0.5 * std::sqrt (matrix.trace ()))
+{
+    const auto u = matrix.trace () - 1;
+    if (u > matrix (0,0) && u > matrix (1,1) && u > matrix (2,2))
+        create_quaternion_from_matrix_with_largest_u (matrix);
+    else
+        create_quaternion_from_matrix_with_smallest_u (matrix);
+}
 
 template<typename T>
 T& Quatdef<T>::w ()
@@ -212,6 +218,26 @@ Quat<T> operator/ (const Quat<T>& quaternion, const T& scalar)
     Quat<T> res = quaternion;
     res /= scalar;
     return res;
+}
+
+template<typename T>
+void Quatdef<T>::create_quaternion_from_matrix_with_largest_u (const Matrix4<T>& matrix)
+{
+    imag.x = matrix (2,1) - matrix (1,2);
+    imag.y = matrix (0,2) - matrix (2,0);
+    imag.z = matrix (1,0) - matrix (0,1);
+
+    imag /= (4 * real);
+}
+
+template<typename T>
+void Quatdef<T>::create_quaternion_from_matrix_with_smallest_u (const Matrix4<T>& matrix)
+{
+    imag.x = std::sqrt (matrix (0,0) - matrix (1,1) - matrix (2,2) + matrix (3,3));
+    imag.y = std::sqrt (-matrix (0,0) + matrix (1,1) - matrix (2,2) + matrix (3,3));
+    imag.z = std::sqrt (-matrix (0,0) - matrix (1,1) + matrix (2,2) + matrix (3,3));
+
+    imag *= 0.4;
 }
 
 #else // QUATERNION_INCLUDE_FILE
