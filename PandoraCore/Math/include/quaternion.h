@@ -8,9 +8,6 @@
 
 namespace Math
 {
-    class can_not_normalize_zero_quaternion_exception : public std::exception
-    { };
-
     template<typename T, class Enable = void>
     class Quat;
 
@@ -54,6 +51,14 @@ namespace Math
         public:
             T real;
             Vector3<T> imag;
+
+        protected:
+            Matrix4<T> create_matrix_with_scale (const T& s) const;
+
+        public:
+            class normalizing_zero_quaternion_exception : public std::exception { };
+            class can_not_make_matrix_from_zero_quaternion_exception : public std::exception { };
+            class division_by_zero_exception : public std::exception { };
     };
 
     typedef Quat<double> Quat4d;

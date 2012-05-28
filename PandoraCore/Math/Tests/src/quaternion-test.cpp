@@ -7,6 +7,7 @@
 const Math::Quat4d create_random_quaternion ();
 const Math::Matrix4d create_random_matrix4d ();
 const Math::Vec3d create_random_vector3d ();
+const Math::Matrix4d make_matrix_from_quaternion (const Math::Quat4d& quat);
 
 TEST (QuaternionTest, default_quaternion_is_identity_quaternion)
 {
@@ -85,6 +86,28 @@ TEST (QuaternionTest, creating_matrix_from_identity_quaternion_gives_identity_ma
 
     for (auto i = 0; i < 16; ++i)
         EXPECT_EQ (Math::Matrix4d::IDENTITY[i], res[i]);
+}
+
+TEST (QuaternionTest, creating_matrix_from_quaternion_gives_correct_matrix)
+{
+    BEGIN_MULTITEST
+
+    const auto quat = create_random_quaternion ();
+    const auto res = quat.create_matrix ();
+    const auto correct = make_matrix_from_quaternion (quat);
+
+    for (auto i = 0; i < 16; ++i)
+        EXPECT_EQ (correct[i], res[i]);
+
+    END_MULTITEST
+}
+
+TEST (QuaternionTest, creating_matrix_from_zero_quaternion_throws_can_not_make_matrix_from_zero_quaternion_exception)
+{
+    Math::Quat4d quat;
+    quat.w () = 0;
+
+    EXPECT_THROW (quat.create_matrix (), Math::Quat4d::can_not_make_matrix_from_zero_quaternion_exception);
 }
 
 TEST (QuaternionTest, norm_of_identity_quaternion_is_1)
@@ -316,11 +339,19 @@ TEST (QuaternionTest, normalizing_quaternion_gives_a_unit_quaternion)
     END_MULTITEST
 }
 
-TEST (QuaternionTest, normalizing_zero_quaternion_throw_can_not_normalize_zero_quaternion_exception)
+TEST (QuaternionTest, normalizing_zero_quaternion_throw_normalizing_zero_quaternion_exception)
 {
     Math::Quat4d quat;
     quat.w () = 0;
-    EXPECT_THROW (quat.normalize (), Math::can_not_normalize_zero_quaternion_exception);
+    EXPECT_THROW (quat.normalize (), Math::Quat4d::normalizing_zero_quaternion_exception);
+}
+
+TEST (QuaternionTest, dividing_quaternion_by_zero_throws_division_by_zero_exception)
+{
+    Math::Quat4d quat;
+
+    EXPECT_THROW (quat /= 0.0, Math::Quat4d::division_by_zero_exception);
+    EXPECT_THROW (quat / 0.0, Math::Quat4d::division_by_zero_exception);
 }
 
 // Helper function
@@ -331,4 +362,24 @@ const Math::Quat4d create_random_quaternion ()
 
     delete[] array;
     return quat;
+}
+
+const Math::Matrix4d make_matrix_from_quaternion (const Math::Quat4d& quat)
+{
+    Math::Matrix4d matrix;
+    const auto s = 2.0 / quat.norm ();
+
+    matrix (0,0) -= s * (quat.y () * quat.y () + quat.z () * quat.z ());
+    matrix (0,1) += s * (quat.x () * quat.y () - quat.w () * quat.z ());
+    matrix (0,2) += s * (quat.x () * quat.z () + quat.w () * quat.y ());
+
+    matrix (1,0) += s * (quat.x () * quat.y () + quat.w () * quat.z ());
+    matrix (1,1) -= s * (quat.x () * quat.x () + quat.z () * quat.z ());
+    matrix (1,2) += s * (quat.y () * quat.z () - quat.w () * quat.x ());
+
+    matrix (2,0) += s * (quat.x () * quat.z () - quat.w () * quat.y ());
+    matrix (2,1) += s * (quat.y () * quat.z () + quat.w () * quat.x ());
+    matrix (2,2) -= s * (quat.x () * quat.x () + quat.y () * quat.y ());
+
+    return matrix;
 }

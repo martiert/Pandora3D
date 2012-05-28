@@ -103,6 +103,9 @@ Quatdef<T> Quatdef<T>::operator*= (const T& scalar)
 template<typename T>
 Quatdef<T> Quatdef<T>::operator/= (const T& scalar)
 {
+    if (scalar == 0)
+        throw division_by_zero_exception ();
+
     real /= scalar;
     imag /= scalar;
     return *this;
@@ -111,7 +114,33 @@ Quatdef<T> Quatdef<T>::operator/= (const T& scalar)
 template<typename T>
 Matrix4<T> Quatdef<T>::create_matrix () const
 {
-    return Matrix4<T> ();
+    const auto quat_norm = norm ();
+
+    if (quat_norm == 0)
+        throw can_not_make_matrix_from_zero_quaternion_exception ();
+
+    const auto s = 2.0 / quat_norm;
+    return create_matrix_with_scale (s);
+}
+
+template<typename T>
+Matrix4<T> Quatdef<T>::create_matrix_with_scale (const T& s) const
+{
+    Matrix4<T> result;
+
+    result (0,0) -= s * (imag.y * imag.y + imag.z * imag.z);
+    result (0,1) += s * (imag.x * imag.y - real * imag.z);
+    result (0,2) += s * (imag.x * imag.z + real * imag.y);
+
+    result (1,0) += s * (imag.x * imag.y + real * imag.z);
+    result (1,1) -= s * (imag.x * imag.x + imag.z * imag.z);
+    result (1,2) += s * (imag.y * imag.z - real * imag.x);
+
+    result (2,0) += s * (imag.x * imag.z - real * imag.y);
+    result (2,1) += s * (imag.y * imag.z + real * imag.x);
+    result (2,2) -= s * (imag.x * imag.x + imag.y * imag.y);
+
+    return result;
 }
 
 template<typename T>
@@ -126,7 +155,7 @@ void Quatdef<T>::normalize ()
     auto scale = norm ();
 
     if (scale == 0)
-        throw can_not_normalize_zero_quaternion_exception ();
+        throw normalizing_zero_quaternion_exception ();
 
     real /= scale;
     imag /= scale;
