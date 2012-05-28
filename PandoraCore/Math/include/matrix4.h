@@ -5,7 +5,7 @@
 #include "vector4.h"
 
 #include <type_traits>
-#include <stdexcept>
+#include <exception>
 
 namespace Math
 {
@@ -52,6 +52,49 @@ namespace Math
             T data[16];
 
             T calculate_sub_determinant (const size_t& row, const size_t& column) const;
+
+        public:
+            class division_by_zero_exception : public std::exception { };
+
+            class inverse_of_singular_matrix_exception : public std::exception { };
+
+            class index_operator_out_of_range_exception : public std::exception
+            {
+                public:
+                    index_operator_out_of_range_exception (const size_t& i)
+                        : index (i), row (0), col (0)
+                    { };
+
+                    index_operator_out_of_range_exception (const size_t& row, const size_t& col)
+                        : index (0), row (row), col (col)
+                    {}
+
+                    virtual const char* what () const throw ()
+                    {
+                        if (index == 0)
+                            return get_from_row_col_input ();
+                        return get_from_single_input ();
+                    }
+
+                    const char* get_from_single_input () const
+                    {
+                        std::string error = "Tried to access index: " + index;
+                        return error.c_str ();
+                    }
+
+                    const char* get_from_row_col_input () const
+                    {
+                        std::string error = "Tried to access index: (" + row;
+                        error += ", " + col;
+                        error += ")";
+                        return error.c_str ();
+                    }
+                private:
+                    size_t index;
+                    size_t row;
+                    size_t col;
+            };
+
     };
 
     typedef Matrix4<double> Matrix4d;

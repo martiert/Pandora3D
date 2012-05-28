@@ -58,10 +58,10 @@ namespace Math
             class can_not_make_orthonormal_basis_with_equal_vectors_exception : std::exception
             {};
 
-            class index_out_of_range_exception : public std::exception
+            class index_operator_out_of_range_exception : public std::exception
             {
                 public:
-                    index_out_of_range_exception (const size_t& i)
+                    index_operator_out_of_range_exception (const size_t& i)
                         : index (i)
                     {}
 

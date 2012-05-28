@@ -4,7 +4,7 @@
 #include "vector3.h"
 
 #include <type_traits>
-#include <stdexcept>
+#include <exception>
 #include <cmath>
 
 namespace Math
@@ -45,6 +45,28 @@ namespace Math
             T dot (const Vector4& vec) const;
 
             Vector4& normalize ();
+
+        public:
+            class normalizing_zero_vector_exception : public std::exception {};
+
+            class division_by_zero_exception : public std::exception { };
+
+            class index_operator_out_of_range_exception : public std::exception
+            {
+                public:
+                    index_operator_out_of_range_exception (const size_t& i)
+                        : index (i)
+                    {}
+
+                    virtual const char* what () const throw ()
+                    {
+                        std::string error = "Tried to access index: " + index;
+                        return error.c_str ();
+                    }
+
+                private:
+                    size_t index;
+            };
     };
 
     typedef Vector4<float> Vec4f;

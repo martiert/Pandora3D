@@ -20,15 +20,17 @@ TEST (Matrix3Test, empty_constructor_makes_identity_matrix)
     EXPECT_EQ (1.0, matrix (2,2));
 }
 
-TEST (Matrix3Test, index_out_of_range_throws_out_of_range_exception)
+TEST (Matrix3Test, index_out_of_range_throws_index_operator_out_of_range_exception)
 {
     const Math::Matrix3d mat1;
     Math::Matrix3d mat2;
 
-    EXPECT_THROW (mat1 (0,3), std::out_of_range);
-    EXPECT_THROW (mat1 (3,0), std::out_of_range);
-    EXPECT_THROW (mat2 (0,3), std::out_of_range);
-    EXPECT_THROW (mat2 (3,0), std::out_of_range);
+    EXPECT_THROW (mat1 (0,3), Math::Matrix3d::index_operator_out_of_range_exception);
+    EXPECT_THROW (mat1 (3,0), Math::Matrix3d::index_operator_out_of_range_exception);
+    EXPECT_THROW (mat2 (0,3), Math::Matrix3d::index_operator_out_of_range_exception);
+    EXPECT_THROW (mat2 (3,0), Math::Matrix3d::index_operator_out_of_range_exception);
+    EXPECT_THROW (mat1 [9], Math::Matrix3d::index_operator_out_of_range_exception);
+    EXPECT_THROW (mat2 [9], Math::Matrix3d::index_operator_out_of_range_exception);
 }
 
 TEST (Matrix3Test, matrix_can_be_constructed_from_array)
@@ -121,19 +123,6 @@ TEST (Matrix3Test, matrix_can_be_assigned)
     EXPECT_EQ (matrix1 (2,2), copy (2,2));
 
     END_MULTITEST
-}
-
-TEST (Matrix3Test, index_operator_throws_out_of_range_exception_for_invalid_input)
-{
-    const auto mat1 = create_random_matrix3d ();
-    auto mat2 = create_random_matrix3d ();
-
-    EXPECT_THROW (mat1 (0,3), std::out_of_range);
-    EXPECT_THROW (mat1 (3,0), std::out_of_range);
-    EXPECT_THROW (mat2 (0,3), std::out_of_range);
-    EXPECT_THROW (mat2 (3,0), std::out_of_range);
-    EXPECT_THROW (mat1 [9], std::out_of_range);
-    EXPECT_THROW (mat2 [9], std::out_of_range);
 }
 
 TEST (Matrix3Test, can_cast_matrix_to_pointer_c_style)
@@ -478,12 +467,12 @@ TEST (Matrix3Test, matrix_matrix_multiplication_follows_normal_mathematical_rule
     END_MULTITEST
 }
 
-TEST (Matrix3Test, division_by_zero_throws_invalid_argument)
+TEST (Matrix3Test, division_by_zero_throws_division_by_zero_exception)
 {
     auto matrix = create_random_matrix3d ();
 
-    EXPECT_THROW (matrix / 0.0, std::invalid_argument);
-    EXPECT_THROW (matrix /= 0.0, std::invalid_argument);
+    EXPECT_THROW (matrix / 0.0, Math::Matrix3d::division_by_zero_exception);
+    EXPECT_THROW (matrix /= 0.0, Math::Matrix3d::division_by_zero_exception);
 }
 
 TEST (Matrix3Test, trace_of_zero_matrix_is_zero)
@@ -569,18 +558,18 @@ TEST (Matrix3Test, matrix_multiplied_with_its_inverse_from_right_is_identity)
     END_MULTITEST
 }
 
-TEST (Matrix3Test, inverse_of_zero_matrix_throws_runtime_error)
+TEST (Matrix3Test, inverse_of_zero_matrix_throws_inverse_of_singular_matrix_exception)
 {
-    EXPECT_THROW (Math::Matrix3d::ZERO.inverse (), std::runtime_error);
+    EXPECT_THROW (Math::Matrix3d::ZERO.inverse (), Math::Matrix3d::inverse_of_singular_matrix_exception);
 }
 
-TEST (Matrix3Test, inverse_of_singular_matrix_throws_runtime_error)
+TEST (Matrix3Test, inverse_of_singular_matrix_throws_inverse_of_singular_matrix_exception)
 {
     const Math::Matrix3d matrix (3.2, 6.4, 1.6,
                                  2.2, 4.4, 1.1,
                                  6.8, 13.6, 3.4);
 
-    EXPECT_THROW (matrix.inverse (), std::runtime_error);
+    EXPECT_THROW (matrix.inverse (), Math::Matrix3d::inverse_of_singular_matrix_exception);
 }
 
 TEST (Matrix3Test, equality_of_same_matrix_returns_true)

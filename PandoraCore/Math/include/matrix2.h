@@ -4,7 +4,7 @@
 #include "vector2.h"
 
 #include <type_traits>
-#include <stdexcept>
+#include <exception>
 #include <algorithm>
 
 namespace Math
@@ -38,6 +38,32 @@ namespace Math
             const static Matrix2 ZERO;
         private:
             T data[4];
+
+        public:
+            class division_by_zero_exception : public std::exception { };
+
+            class inverse_of_singular_matrix_exception : public std::exception { };
+
+            class index_operator_out_of_range_exception : public std::exception
+            {
+                public:
+                    index_operator_out_of_range_exception (const size_t& row, const size_t& col)
+                        : row (row), col (col)
+                    {}
+
+                    virtual const char* what () const throw ()
+                    {
+                        std::string error ("Tried to access: (");
+                        error += row;
+                        error += ", ";
+                        error += col;
+                        error += ")";
+                        return error.c_str ();
+                    }
+                private:
+                    size_t row;
+                    size_t col;
+            };
     };
 
     typedef Matrix2<double> Matrix2d;

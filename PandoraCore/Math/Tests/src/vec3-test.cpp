@@ -108,11 +108,11 @@ TEST (Vector3Test, index_operator_maps_for_const_vectors)
     END_MULTITEST
 }
 
-TEST (Vector3Test, index_operator_throws_vector3d_index_out_of_range_exception)
+TEST (Vector3Test, index_operator_throws_index_operator_out_of_range_exception)
 {
     const Math::Vec3d vector;
 
-    EXPECT_THROW (vector[3], Math::Vec3d::index_out_of_range_exception);
+    EXPECT_THROW (vector[3], Math::Vec3d::index_operator_out_of_range_exception);
 }
 
 TEST (Vector3Test, length_of_zero_vector_is_zero)

@@ -27,7 +27,7 @@ template<typename T>
 T& Vector4def<T>::operator[] (const size_t i)
 {
     if (i > 3)
-        throw std::out_of_range ("Index out of range for 4D vectors");
+        throw index_operator_out_of_range_exception (i);
 
     return (&x)[i];
 }
@@ -36,7 +36,7 @@ template<typename T>
 T Vector4def<T>::operator[] (const size_t i) const
 {
     if (i > 3)
-        throw std::out_of_range ("Index out of range for 4D vectors");
+        throw index_operator_out_of_range_exception (i);
 
     return (&x)[i];
 }
@@ -101,7 +101,7 @@ template<typename T>
 Vector4def<T>& Vector4def<T>::operator/= (const T& scalar)
 {
     if (scalar == 0)
-        throw std::invalid_argument ("Out of bounds of a 4D vector.");
+        throw division_by_zero_exception ();
 
     x /= scalar;
     y /= scalar;
@@ -135,7 +135,7 @@ Vector4def<T>& Vector4def<T>::normalize ()
     T len = length ();
 
     if (len == 0)
-        throw std::domain_error ("Cannot normalize a zero vector");
+        throw normalizing_zero_vector_exception ();
 
     return *this /= len;
 }

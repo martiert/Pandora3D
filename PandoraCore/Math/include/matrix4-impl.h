@@ -42,7 +42,7 @@ template<typename T>
 T& Matrix4def<T>::operator () (const size_t& i, const size_t& j)
 {
     if (i > 3 || j > 3)
-        throw std::out_of_range ("Element outside of matrix boundary");
+        throw index_operator_out_of_range_exception (i, j);
 
     return data[i*4 + j];
 }
@@ -51,7 +51,7 @@ template<typename T>
 T Matrix4def<T>::operator () (const size_t& i, const size_t& j) const
 {
     if (i > 3 || j > 3)
-        throw std::out_of_range ("Element outside of matrix boundary");
+        throw index_operator_out_of_range_exception (i, j);
 
     return data[i*4 + j];
 }
@@ -60,7 +60,7 @@ template<typename T>
 T& Matrix4def<T>::operator[] (const size_t& i)
 {
     if (i > 15)
-        throw std::out_of_range ("Element outside of matrix boundary");
+        throw index_operator_out_of_range_exception (i);
 
     return data[i];
 }
@@ -69,7 +69,7 @@ template<typename T>
 T Matrix4def<T>::operator[] (const size_t& i) const
 {
     if (i > 15)
-        throw std::out_of_range ("Element outside of matrix boundary");
+        throw index_operator_out_of_range_exception (i);
 
     return data[i];
 }
@@ -99,7 +99,7 @@ template<typename T>
 Matrix4def<T>& Matrix4def<T>::operator/= (const T& scalar)
 {
     if (scalar == 0)
-        throw std::invalid_argument ("Can not divide matrix by zero");
+        throw division_by_zero_exception ();
 
     for (auto i = 0; i < 16; ++i)
         data[i] /= scalar;
@@ -141,7 +141,7 @@ Matrix4def<T> Matrix4def<T>::inverse () const
     T det = determinant ();
 
     if (det == 0)
-        throw std::domain_error ("Singular matrix has no inverse");
+        throw inverse_of_singular_matrix_exception ();
 
     Matrix4<T> res;
 
@@ -318,12 +318,8 @@ Vector4<T> operator* (const Vector4<T>& vector, const Matrix4<T>& matrix)
 template<typename T>
 Matrix4<T> operator/ (const Matrix4<T>& matrix, const T& scalar)
 {
-    if (scalar == 0)
-        throw std::invalid_argument ("Can not divide matrix by zero");
-
-    Matrix4<T> result = matrix;
-    for (auto i = 0; i < 16; ++i)
-        result[i] /= scalar;
+    auto result = matrix;
+    result /= scalar;
     return result;
 }
 

@@ -25,7 +25,7 @@ template<typename T>
 T& Matrix2def<T>::operator () (const size_t& i, const size_t& j)
 {
     if (i > 1 || j > 1)
-        throw std::out_of_range ("matrix index out of range");
+        throw index_operator_out_of_range_exception (i, j);
 
     return data[i*2 + j];
 }
@@ -34,7 +34,7 @@ template<typename T>
 T Matrix2def<T>::operator () (const size_t& i, const size_t& j) const
 {
     if (i > 1 || j > 1)
-        throw std::out_of_range ("matrix index out of range");
+        throw index_operator_out_of_range_exception (i, j);
 
     return data[i*2 + j];
 }
@@ -88,7 +88,7 @@ template<typename T>
 Matrix2def<T>& Matrix2def<T>::operator/= (const T& scalar)
 {
     if (scalar == 0)
-        throw std::invalid_argument ("Cannot divide a matrix by zero");
+        throw division_by_zero_exception ();
 
     data[0] /= scalar;
     data[1] /= scalar;
@@ -117,7 +117,7 @@ Matrix2def<T> Matrix2def<T>::inverse () const
     T det = determinant ();
 
     if (det == 0)
-        throw std::runtime_error ("Inverse of singular matrix don't exist");
+        throw inverse_of_singular_matrix_exception ();
 
     T scale = 1.0/det;
 

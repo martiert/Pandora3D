@@ -22,7 +22,7 @@ template<typename T>
 T& Vector2def<T>::operator[] (const size_t i)
 {
     if (i > 1)
-        throw index_out_of_range_exception (i);
+        throw index_operator_out_of_range_exception (i);
 
     return (&x)[i];
 }
@@ -31,7 +31,7 @@ template<typename T>
 T Vector2def<T>::operator[] (const size_t i) const
 {
     if (i > 1)
-        throw index_out_of_range_exception (i);
+        throw index_operator_out_of_range_exception (i);
 
     return (&x)[i];
 }

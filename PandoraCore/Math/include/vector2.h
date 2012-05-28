@@ -57,10 +57,10 @@ namespace Math
             class division_by_zero_exception : public std::exception
             { };
 
-            class index_out_of_range_exception : public std::exception
+            class index_operator_out_of_range_exception : public std::exception
             {
                 public:
-                    index_out_of_range_exception (const size_t& i)
+                    index_operator_out_of_range_exception (const size_t& i)
                         : index (i)
                     {}
 

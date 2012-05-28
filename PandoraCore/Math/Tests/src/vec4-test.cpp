@@ -154,11 +154,11 @@ TEST (Vector4Test, index_operator_manipulates_data)
     EXPECT_EQ (5.3, vector.z);
 }
 
-TEST (Vector4Test, index_operator_throws_out_of_range_exception_when_out_of_range)
+TEST (Vector4Test, index_operator_throws_index_operator_out_of_range_exception_when_out_of_range)
 {
     const auto vector = create_random_vector4d ();
 
-    EXPECT_THROW (vector[4], std::out_of_range);
+    EXPECT_THROW (vector[4], Math::Vec4d::index_operator_out_of_range_exception);
 }
 
 TEST (Vector4Test, length_of_zero_vector_is_zero)
@@ -206,10 +206,10 @@ TEST (Vector4Test, normalization_of_vector_gives_length_of_1)
     END_MULTITEST
 }
 
-TEST (Vector4Test, normalization_of_zero_vector_throws_domain_error)
+TEST (Vector4Test, normalization_of_zero_vector_throws_normalizing_zero_vector_exception)
 {
     Math::Vec4d zero;
-    EXPECT_THROW (zero.normalize (), std::domain_error);
+    EXPECT_THROW (zero.normalize (), Math::Vec4d::normalizing_zero_vector_exception);
 }
 
 TEST (Vector4Test, negation_of_vector_negates_each_component)
@@ -341,10 +341,10 @@ TEST (Vector4Test, dividing_vector_with_scalar_from_right_divides_each_component
     END_MULTITEST
 }
 
-TEST (Vector4Test, dividing_vector_and_zero_throws_invalid_argument)
+TEST (Vector4Test, dividing_vector_and_zero_throws_division_by_zero_exception)
 {
     const auto vector = create_random_vector4d ();
-    EXPECT_THROW (vector / 0.0, std::invalid_argument);
+    EXPECT_THROW (vector / 0.0, Math::Vec4d::division_by_zero_exception);
 }
 
 TEST (Vector4Test, multiplying_vector_with_scalar_multiplies_each_component_with_scalar)
@@ -352,7 +352,7 @@ TEST (Vector4Test, multiplying_vector_with_scalar_multiplies_each_component_with
     BEGIN_MULTITEST
 
     const auto vector = create_random_vector4d ();
-    auto scalar = rand () / 100.0;
+    auto scalar = create_random_scalar ();
     auto res = vector;
     res *= scalar;
 
@@ -398,10 +398,10 @@ TEST (Vector4Test, multiplying_vector_to_vector_multiplies_each_component)
     END_MULTITEST
 }
 
-TEST (Vector4Test, dividing_vector_with_zero_throws_invalid_argument)
+TEST (Vector4Test, dividing_vector_with_zero_throws_division_by_zero_exception)
 {
     auto vector = create_random_vector4d ();
-    EXPECT_THROW (vector /= 0.0, std::invalid_argument);
+    EXPECT_THROW (vector /= 0.0, Math::Vec4d::division_by_zero_exception);
 }
 
 TEST (Vector4Test, dot_product_of_two_vectors_add_the_product_of_the_vectors)

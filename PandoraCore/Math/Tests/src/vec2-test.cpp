@@ -103,7 +103,7 @@ TEST (Vector2Test, index_operator_maps_to_x_and_y)
 TEST (Vector2Test, index_operator_throws_index_out_of_range_exception_when_out_of_range)
 {
     const Math::Vec2d vector;
-    EXPECT_THROW (vector[2], Math::Vec2d::index_out_of_range_exception);
+    EXPECT_THROW (vector[2], Math::Vec2d::index_operator_out_of_range_exception);
 }
 
 TEST (Vector2Test, vector_can_be_casted_to_array_c_style)

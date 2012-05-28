@@ -27,7 +27,7 @@ template<typename T>
 T& Matrix3def<T>::operator () (const size_t& i, const size_t& j)
 {
     if (i > 2 || j > 2)
-        throw std::out_of_range ("Index operator out of range");
+        throw index_operator_out_of_range_exception (i, j);
 
     return data[i*3 + j];
 }
@@ -36,7 +36,7 @@ template<typename T>
 T Matrix3def<T>::operator () (const size_t& i, const size_t& j) const
 {
     if (i > 2 || j > 2)
-        throw std::out_of_range ("Index operator out of range");
+        throw index_operator_out_of_range_exception (i, j);
 
     return data[i*3 + j];
 }
@@ -45,7 +45,7 @@ template<typename T>
 T& Matrix3def<T>::operator [] (const size_t& i)
 {
     if (i > 8)
-        throw std::out_of_range ("Index operator out of range");
+        throw index_operator_out_of_range_exception (i);
 
     return data[i];
 }
@@ -54,7 +54,7 @@ template<typename T>
 T Matrix3def<T>::operator [] (const size_t& i) const
 {
     if (i > 8)
-        throw std::out_of_range ("Index operator out of range");
+        throw index_operator_out_of_range_exception (i);
 
     return data[i];
 }
@@ -84,7 +84,7 @@ template<typename T>
 Matrix3def<T>& Matrix3def<T>::operator/= (const T& scalar)
 {
     if (scalar == 0)
-        throw std::invalid_argument ("Cannot divide a matrix by zero");
+        throw division_by_zero_exception ();
 
     for (auto& i : data)
         i /= scalar;
@@ -138,7 +138,7 @@ Matrix3def<T> Matrix3def<T>::inverse () const
     auto det = determinant ();
 
     if (det == 0)
-        throw std::runtime_error ("Can not invert singular matrix");
+        throw inverse_of_singular_matrix_exception ();
 
     auto trans = transpose ();
 

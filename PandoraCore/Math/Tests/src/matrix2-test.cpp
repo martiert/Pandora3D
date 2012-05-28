@@ -66,15 +66,15 @@ TEST (Matrix2Test, matrix_copies_matrix)
     END_MULTITEST
 }
 
-TEST (Matrix2Test, index_operator_throws_out_of_range_exception)
+TEST (Matrix2Test, index_operator_throws_index_operator_out_of_range_exception)
 {
     const auto mat1 = create_random_matrix2d ();
     auto mat2 = create_random_matrix2d ();
 
-    EXPECT_THROW (mat1 (0,2), std::out_of_range);
-    EXPECT_THROW (mat1 (2,0), std::out_of_range);
-    EXPECT_THROW (mat2 (0,2), std::out_of_range);
-    EXPECT_THROW (mat2 (2,0), std::out_of_range);
+    EXPECT_THROW (mat1 (0,2), Math::Matrix2d::index_operator_out_of_range_exception);
+    EXPECT_THROW (mat1 (2,0), Math::Matrix2d::index_operator_out_of_range_exception);
+    EXPECT_THROW (mat2 (0,2), Math::Matrix2d::index_operator_out_of_range_exception);
+    EXPECT_THROW (mat2 (2,0), Math::Matrix2d::index_operator_out_of_range_exception);
 }
 
 TEST (Matrix2Test, can_static_cast_matrix_to_pointer)
@@ -344,18 +344,18 @@ TEST (Matrix2Test, dividing_matrix_with_scalar_divides_each_component)
     END_MULTITEST
 }
 
-TEST (Matrix2Test, dividing_matrix_and_zero_throws_invalid_argument)
+TEST (Matrix2Test, dividing_matrix_and_zero_throws_division_by_zero_exception)
 {
     const auto matrix = create_random_matrix2d ();
 
-    EXPECT_THROW (matrix / 0.0, std::invalid_argument);
+    EXPECT_THROW (matrix / 0.0, Math::Matrix2d::division_by_zero_exception);
 }
 
-TEST (Matrix2Test, dividing_matrix_with_zero_throws_invalid_argument)
+TEST (Matrix2Test, dividing_matrix_with_zero_throws_division_by_zero_exception)
 {
     auto matrix = create_random_matrix2d ();
 
-    EXPECT_THROW (matrix /= 0.0, std::invalid_argument);
+    EXPECT_THROW (matrix /= 0.0, Math::Matrix2d::division_by_zero_exception);
 }
 
 TEST (Matrix2Test, multiplication_with_inverse_from_right_returns_identity)
@@ -473,11 +473,11 @@ TEST (Matrix2Test, transpose_of_matrix_switches_rows_and_columns)
     END_MULTITEST
 }
 
-TEST (Matrix2Test, inverse_of_singular_matrix_throws_runtime_error)
+TEST (Matrix2Test, inverse_of_singular_matrix_throws_inverse_of_singular_matrix_exception)
 {
     const Math::Matrix2d matrix (2.6, 4.8, 1.3, 2.4);
 
-    EXPECT_THROW (matrix.inverse (), std::runtime_error);
+    EXPECT_THROW (matrix.inverse (), Math::Matrix2d::inverse_of_singular_matrix_exception);
 }
 
 TEST (Matrix2Test, equal_operator_of_same_matrix_returns_true)
