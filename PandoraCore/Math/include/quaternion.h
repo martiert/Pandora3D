@@ -1,62 +1,60 @@
-#ifndef MATH_QUATERNION_H_INCLUDED
-#define MATH_QUATERNION_H_INCLUDED
+#ifndef MARealH_QUARealERNION_H_INCLUDED
+#define MARealH_QUARealERNION_H_INCLUDED
 
 #include "vector3.h"
 #include "matrix4.h"
-#include <type_traits>
+
 #include <exception>
+
+typedef double Real;
 
 namespace Math
 {
-    template<typename T, class Enable = void>
-    class Quat;
-
-    template<typename T>
-    class Quat<T, typename std::enable_if<std::is_arithmetic<T>::value>::type>
+    class Quaternion
     {
         public:
-            Quat ();
+            Quaternion ();
 
-            Quat (const T& w, const T& x, const T& y, const T& z);
+            Quaternion (const Real& w, const Real& x, const Real& y, const Real& z);
 
-            Quat (const T array[4]);
+            Quaternion (const Real array[4]);
 
-            Quat (const T& real, const Vector3<T>& imaginary_vector);
+            Quaternion (const Real& scalar, const Vector3& imaginary_vector);
 
-            Quat (const Matrix4<T>& matrix);
+            Quaternion (const Matrix4& matrix);
 
-            T& w ();
-            T& x ();
-            T& y ();
-            T& z ();
+            Real& w ();
+            Real& x ();
+            Real& y ();
+            Real& z ();
 
-            T w () const;
-            T x () const;
-            T y () const;
-            T z () const;
+            Real w () const;
+            Real x () const;
+            Real y () const;
+            Real z () const;
 
-            Quat operator+= (const Quat& other);
-            Quat operator-= (const Quat& other);
-            Quat operator*= (const T& scalar);
-            Quat operator/= (const T& scalar);
+            Quaternion operator+= (const Quaternion& other);
+            Quaternion operator-= (const Quaternion& other);
+            Quaternion operator*= (const Real& scalar);
+            Quaternion operator/= (const Real& scalar);
 
-            Matrix4<T> create_matrix () const;
+            Matrix4 create_matrix () const;
 
-            T norm () const;
+            Real norm () const;
             void normalize ();
 
-            Quat conjugate () const;
-            Quat inverse () const;
+            Quaternion conjugate () const;
+            Quaternion inverse () const;
 
         public:
-            T real;
-            Vector3<T> imag;
+            Real real;
+            Vector3 imag;
 
         protected:
-            Matrix4<T> create_matrix_with_scale (const T& s) const;
+            Matrix4 create_matrix_with_scale (const Real& s) const;
 
-            void create_quaternion_from_matrix_with_largest_u (const Matrix4<T>& matrix);
-            void create_quaternion_from_matrix_with_smallest_u (const Matrix4<T>& matrix);
+            void create_quaternion_from_matrix_with_largest_u (const Matrix4& matrix);
+            void create_quaternion_from_matrix_with_smallest_u (const Matrix4& matrix);
 
         public:
             class normalizing_zero_quaternion_exception : public std::exception { };
@@ -64,26 +62,15 @@ namespace Math
             class division_by_zero_exception : public std::exception { };
     };
 
-    typedef Quat<double> Quat4d;
+    Quaternion operator+ (const Quaternion& left, const Quaternion& right);
 
-    template<typename T>
-    Quat<T> operator+ (const Quat<T>& left, const Quat<T>& right);
+    Quaternion operator- (const Quaternion& left, const Quaternion& right);
 
-    template<typename T>
-    Quat<T> operator- (const Quat<T>& left, const Quat<T>& right);
+    Quaternion operator* (const Quaternion& left, const Quaternion& right);
 
-    template<typename T>
-    Quat<T> operator* (const Quat<T>& left, const Quat<T>& right);
+    Quaternion operator* (const Quaternion& quaternion, const Real& scalar);
 
-    template<typename T>
-    Quat<T> operator* (const Quat<T>& quaternion, const T& scalar);
-
-    template<typename T>
-    Quat<T> operator/ (const Quat<T>& quaternion, const T& scalar);
-
-#define QUATERNION_INCLUDE_FILE
-#include "quaternion-impl.h"
-#undef QUATERNION_INCLUDE_FILE
+    Quaternion operator/ (const Quaternion& quaternion, const Real& scalar);
 }
 
-#endif // MATH_QUATERNION_H_INCLUDED
+#endif // MARealH_QUARealERNION_H_INCLUDED

@@ -1,30 +1,22 @@
-#ifdef QUATERNION_INCLUDE_FILE
+#include "quaternion.h"
 
-template<typename T>
-using Quatdef = Quat<T, typename std::enable_if<std::is_arithmetic<T>::value>::type>;
-
-template<typename T>
-Quatdef<T>::Quat ()
+Math::Quaternion::Quaternion ()
     : real (1)
 { }
 
-template<typename T>
-Quatdef<T>::Quat (const T& w, const T& x, const T& y, const T& z)
+Math::Quaternion::Quaternion (const Real& w, const Real& x, const Real& y, const Real& z)
     : real (w), imag (x, y, z)
 { }
 
-template<typename T>
-Quatdef<T>::Quat (const T array[4])
+Math::Quaternion::Quaternion (const Real array[4])
     : real (array[0]), imag (array[1], array[2], array[3])
 { }
 
-template<typename T>
-Quatdef<T>::Quat (const T& real, const Vector3<T>& imaginary_vector)
+Math::Quaternion::Quaternion (const Real& real, const Vector3& imaginary_vector)
     : real (real), imag (imaginary_vector)
 { }
 
-template<typename T>
-Quatdef<T>::Quat (const Matrix4<T>& matrix)
+Math::Quaternion::Quaternion (const Matrix4& matrix)
     : real (0.5 * std::sqrt (matrix.trace ()))
 {
     const auto u = matrix.trace () - 1;
@@ -34,80 +26,68 @@ Quatdef<T>::Quat (const Matrix4<T>& matrix)
         create_quaternion_from_matrix_with_smallest_u (matrix);
 }
 
-template<typename T>
-T& Quatdef<T>::w ()
+Real& Math::Quaternion::w ()
 {
     return real;
 }
 
-template<typename T>
-T Quatdef<T>::w () const
+Real Math::Quaternion::w () const
 {
     return real;
 }
 
-template<typename T>
-T& Quatdef<T>::x ()
+Real& Math::Quaternion::x ()
 {
     return imag.x;
 }
 
-template<typename T>
-T Quatdef<T>::x () const
+Real Math::Quaternion::x () const
 {
     return imag.x;
 }
 
-template<typename T>
-T& Quatdef<T>::y ()
+Real& Math::Quaternion::y ()
 {
     return imag.y;
 }
 
-template<typename T>
-T Quatdef<T>::y () const
+Real Math::Quaternion::y () const
 {
     return imag.y;
 }
 
-template<typename T>
-T& Quatdef<T>::z ()
+Real& Math::Quaternion::z ()
 {
     return imag.z;
 }
 
-template<typename T>
-T Quatdef<T>::z () const
+Real Math::Quaternion::z () const
 {
     return imag.z;
 }
 
-template<typename T>
-Quatdef<T> Quatdef<T>::operator+= (const Quat& other)
+Math::Quaternion Math::Quaternion::operator+= (const Quaternion& other)
 {
     real += other.real;
     imag += other.imag;
     return *this;
 }
 
-template<typename T>
-Quatdef<T> Quatdef<T>::operator-= (const Quat& other)
+Math::Quaternion Math::Quaternion::operator-= (const Quaternion& other)
 {
     real -= other.real;
     imag -= other.imag;
     return *this;
 }
 
-template<typename T>
-Quatdef<T> Quatdef<T>::operator*= (const T& scalar)
+Math::Quaternion Math::Quaternion::operator*= (const Real& scalar)
 {
     real *= scalar;
     imag *= scalar;
     return *this;
 }
 
-template<typename T>
-Quatdef<T> Quatdef<T>::operator/= (const T& scalar)
+Math::Quaternion Math::Quaternion::operator/= (const Real& scalar)
 {
     if (scalar == 0)
         throw division_by_zero_exception ();
@@ -117,8 +97,7 @@ Quatdef<T> Quatdef<T>::operator/= (const T& scalar)
     return *this;
 }
 
-template<typename T>
-Matrix4<T> Quatdef<T>::create_matrix () const
+Math::Matrix4 Math::Quaternion::create_matrix () const
 {
     const auto quat_norm = norm ();
 
@@ -129,10 +108,9 @@ Matrix4<T> Quatdef<T>::create_matrix () const
     return create_matrix_with_scale (s);
 }
 
-template<typename T>
-Matrix4<T> Quatdef<T>::create_matrix_with_scale (const T& s) const
+Math::Matrix4 Math::Quaternion::create_matrix_with_scale (const Real& s) const
 {
-    Matrix4<T> result;
+    Matrix4 result;
 
     result (0,0) -= s * (imag.y * imag.y + imag.z * imag.z);
     result (0,1) += s * (imag.x * imag.y - real * imag.z);
@@ -149,14 +127,12 @@ Matrix4<T> Quatdef<T>::create_matrix_with_scale (const T& s) const
     return result;
 }
 
-template<typename T>
-T Quatdef<T>::norm () const
+Real Math::Quaternion::norm () const
 {
     return std::sqrt (imag.dot (imag) + real * real);
 }
 
-template<typename T>
-void Quatdef<T>::normalize ()
+void Math::Quaternion::normalize ()
 {
     auto scale = norm ();
 
@@ -167,61 +143,53 @@ void Quatdef<T>::normalize ()
     imag /= scale;
 }
 
-template<typename T>
-Quatdef<T> Quatdef<T>::conjugate () const
+Math::Quaternion Math::Quaternion::conjugate () const
 {
-    return Quatdef<T> (real, -imag);
+    return Quaternion (real, -imag);
 }
 
-template<typename T>
-Quatdef<T> Quatdef<T>::inverse () const
+Math::Quaternion Math::Quaternion::inverse () const
 {
     const auto normsquared = imag.lengthSquared () + (real * real);
 
     return conjugate () / normsquared;
 }
 
-template<typename T>
-Quat<T> operator+ (const Quat<T>& left, const Quat<T>& right)
+Math::Quaternion Math::operator+ (const Quaternion& left, const Quaternion& right)
 {
-    Quat<T> res = left;
+    Quaternion res = left;
     res += right;
     return res;
 }
 
-template<typename T>
-Quat<T> operator- (const Quat<T>& left, const Quat<T>& right)
+Math::Quaternion Math::operator- (const Quaternion& left, const Quaternion& right)
 {
-    Quat<T> res = left;
+    Quaternion res = left;
     res -= right;
     return res;
 }
 
-template<typename T>
-Quat<T> operator* (const Quat<T>& left, const Quat<T>& right)
+Math::Quaternion Math::operator* (const Quaternion& left, const Quaternion& right)
 {
-    return Quat<T> (left.w () * right.w () - left.imag.dot (right.imag),
-                    left.imag.cross (right.imag) + left.real * right.imag + right.real * left.imag);
+    return Quaternion (left.w () * right.w () - left.imag.dot (right.imag),
+                       left.imag.cross (right.imag) + left.real * right.imag + right.real * left.imag);
 }
 
-template<typename T>
-Quat<T> operator* (const Quat<T>& quaternion, const T& scalar)
+Math::Quaternion Math::operator* (const Quaternion& quaternion, const Real& scalar)
 {
-    Quat<T> res = quaternion;
+    Quaternion res = quaternion;
     res *= scalar;
     return res;
 }
 
-template<typename T>
-Quat<T> operator/ (const Quat<T>& quaternion, const T& scalar)
+Math::Quaternion Math::operator/ (const Quaternion& quaternion, const Real& scalar)
 {
-    Quat<T> res = quaternion;
+    Quaternion res = quaternion;
     res /= scalar;
     return res;
 }
 
-template<typename T>
-void Quatdef<T>::create_quaternion_from_matrix_with_largest_u (const Matrix4<T>& matrix)
+void Math::Quaternion::create_quaternion_from_matrix_with_largest_u (const Matrix4& matrix)
 {
     imag.x = matrix (2,1) - matrix (1,2);
     imag.y = matrix (0,2) - matrix (2,0);
@@ -230,8 +198,7 @@ void Quatdef<T>::create_quaternion_from_matrix_with_largest_u (const Matrix4<T>&
     imag /= (4 * real);
 }
 
-template<typename T>
-void Quatdef<T>::create_quaternion_from_matrix_with_smallest_u (const Matrix4<T>& matrix)
+void Math::Quaternion::create_quaternion_from_matrix_with_smallest_u (const Matrix4& matrix)
 {
     imag.x = std::sqrt (matrix (0,0) - matrix (1,1) - matrix (2,2) + matrix (3,3));
     imag.y = std::sqrt (-matrix (0,0) + matrix (1,1) - matrix (2,2) + matrix (3,3));
@@ -239,7 +206,3 @@ void Quatdef<T>::create_quaternion_from_matrix_with_smallest_u (const Matrix4<T>
 
     imag *= 0.4;
 }
-
-#else // QUATERNION_INCLUDE_FILE
-#error "Only include this file from quaternion.h"
-#endif // QUATERNION_INCLUDE_FILE

@@ -1,50 +1,46 @@
-#ifndef MATH_VECTOR3_HPP_INCLUDED
-#define MATH_VECTOR3_HPP_INCLUDED
+#ifndef MARealH_VECRealOR3_HPP_INCLUDED
+#define MARealH_VECRealOR3_HPP_INCLUDED
 
-#include <type_traits>
 #include <exception>
-#include <cmath>
 #include <string>
+
+typedef double Real;
 
 namespace Math
 {
-    template<typename T, class Enable = void>
-    class Vector3;
-
-    template<typename T>
-    class Vector3<T, typename std::enable_if<std::is_arithmetic<T>::value>::type>
+    class Vector3
     {
         public:
-            T x;
-            T y;
-            T z;
+            Real x;
+            Real y;
+            Real z;
 
         public:
             Vector3 ();
-            Vector3 (const T& x, const T& y, const T& z);
-            Vector3 (const T data[3]);
+            Vector3 (const Real& x, const Real& y, const Real& z);
+            Vector3 (const Real data[3]);
 
-            T& operator[] (const size_t i);
-            T operator[] (const size_t i) const;
-            operator T* ();
-            operator const T* () const;
+            Real& operator[] (const size_t i);
+            Real operator[] (const size_t i) const;
+            operator Real* ();
+            operator const Real* () const;
 
             Vector3& operator+= (const Vector3& vec);
             Vector3& operator-= (const Vector3& vec);
             Vector3& operator*= (const Vector3& vec);
-            Vector3& operator*= (const T& scalar);
-            Vector3& operator/= (const T& scalar);
+            Vector3& operator*= (const Real& scalar);
+            Vector3& operator/= (const Real& scalar);
 
-            T dot (const Vector3& vec) const;
+            Real dot (const Vector3& vec) const;
 
-            T length () const;
-            T lengthSquared () const;
+            Real length () const;
+            Real lengthSquared () const;
 
             void normalize ();
 
             Vector3 cross (const Vector3& other) const;
 
-            static void generateOrthonormalBasis (Vector3<T>& vec1, Vector3<T>& vec2, Vector3<T>& vec3);
+            static void generateOrthonormalBasis (Vector3& vec1, Vector3& vec2, Vector3& vec3);
         public:
             class normalizing_zero_vector_exception : public std::exception
             {};
@@ -67,7 +63,7 @@ namespace Math
 
                     virtual const char* what () const throw ()
                     {
-                        std::string error = "Tried to access index: " + index;
+                        std::string error = "Realried to access index: " + index;
                         return error.c_str ();
                     }
 
@@ -76,42 +72,23 @@ namespace Math
             };
     };
 
-    typedef Vector3<float> Vec3f;
-    typedef Vector3<double> Vec3d;
-    typedef Vector3<int> Vec3i;
-    typedef Vector3<unsigned int> Vec3u;
+    Vector3 operator- (const Vector3& vec);
 
-    template<typename T>
-    Vector3<T> operator- (const Vector3<T>& vec);
+    Vector3 operator+ (const Vector3& vec1, const Vector3& vec2);
 
-    template<typename T>
-    Vector3<T> operator+ (const Vector3<T>& vec1, const Vector3<T>& vec2);
+    Vector3 operator- (const Vector3& vec1, const Vector3& vec2);
 
-    template<typename T>
-    Vector3<T> operator- (const Vector3<T>& vec1, const Vector3<T>& vec2);
+    Vector3 operator* (const Vector3& vec, const Real& scalar);
 
-    template<typename T>
-    Vector3<T> operator* (const Vector3<T>& vec, const T& scalar);
+    Vector3 operator* (const Real& scalar, const Vector3& vec);
 
-    template<typename T>
-    Vector3<T> operator* (const T& scalar, const Vector3<T>& vec);
+    Vector3 operator* (const Vector3& vec1, const Vector3& vec2);
 
-    template<typename T>
-    Vector3<T> operator* (const Vector3<T>& vec1, const Vector3<T>& vec2);
+    Vector3 operator/ (const Vector3& vec, const Real& scalar);
 
-    template<typename T>
-    Vector3<T> operator/ (const Vector3<T>& vec, const T& scalar);
+    bool operator== (const Vector3& vec1, const Vector3& vec2);
 
-    template<typename T>
-    bool operator== (const Vector3<T>& vec1, const Vector3<T>& vec2);
-
-    template<typename T>
-    bool operator!= (const Vector3<T>& vec1, const Vector3<T>& vec2);
-
-#define VECTOR3_INCLUDE_FILE
-#include "vector3-impl.h"
-#undef VECTOR3_INCLUDE_FILE
-
+    bool operator!= (const Vector3& vec1, const Vector3& vec2);
 }
 
-#endif // MATH_VECTOR3_HPP_INCLUDED
+#endif // MARealH_VECRealOR3_HPP_INCLUDED

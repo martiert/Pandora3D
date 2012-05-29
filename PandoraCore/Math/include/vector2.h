@@ -1,48 +1,44 @@
-#ifndef MATH_VECTOR2_H_INCLUDED
-#define MATH_VECTOR2_H_INCLUDED
+#ifndef MARealH_VECRealOR2_H_INCLUDED
+#define MARealH_VECRealOR2_H_INCLUDED
 
-#include <type_traits>
 #include <exception>
-#include <cmath>
 #include <string>
+
+typedef double Real;
 
 namespace Math
 {
-    template<typename T, class Enable = void>
-    class Vector2;
-
-    template<typename T>
-    class Vector2<T, typename std::enable_if<std::is_arithmetic<T>::value>::type>
+    class Vector2
     {
         public:
-            T x;
-            T y;
+            Real x;
+            Real y;
 
         public:
             Vector2 ();
-            Vector2 (const T x, const T y);
-            Vector2 (const T data[2]);
+            Vector2 (const Real x, const Real y);
+            Vector2 (const Real data[2]);
 
-            T& operator[] (const size_t i);
-            T operator[] (const size_t i) const;
-            operator T* ();
-            operator const T* () const;
+            Real& operator[] (const size_t i);
+            Real operator[] (const size_t i) const;
+            operator Real* ();
+            operator const Real* () const;
 
             Vector2& operator+= (const Vector2& other);
             Vector2& operator-= (const Vector2& other);
             Vector2& operator*= (const Vector2& other);
-            Vector2& operator*= (const T& scalar);
-            Vector2& operator/= (const T& scalar);
+            Vector2& operator*= (const Real& scalar);
+            Vector2& operator/= (const Real& scalar);
 
-            T length () const;
-            T lengthSquared () const;
+            Real length () const;
+            Real lengthSquared () const;
 
-            T dot (const Vector2& other) const;
+            Real dot (const Vector2& other) const;
             Vector2 perp () const;
 
             void normalize ();
 
-            static void generateOrthonormalBasis (Vector2<T>& vec1, Vector2<T>& vec2);
+            static void generateOrthonormalBasis (Vector2& vec1, Vector2& vec2);
 
         public:
             class can_not_make_orthonormal_basis_from_equal_vectors_exception : public std::exception
@@ -66,7 +62,7 @@ namespace Math
 
                     virtual const char* what () const throw ()
                     {
-                        std::string error = "Tried to access index: " + index;
+                        std::string error = "Realried to access index: " + index;
                         return error.c_str ();
                     }
 
@@ -75,41 +71,23 @@ namespace Math
             };
     };
 
-    typedef Vector2<float> Vec2f;
-    typedef Vector2<double> Vec2d;
-    typedef Vector2<int> Vec2i;
-    typedef Vector2<unsigned int> Vec2u;
+    Vector2 operator- (const Vector2& vec);
 
-    template<typename T>
-    Vector2<T> operator- (const Vector2<T>& vec);
+    Vector2 operator+ (const Vector2& vec1, const Vector2& vec2);
 
-    template<typename T>
-    Vector2<T> operator+ (const Vector2<T>& vec1, const Vector2<T>& vec2);
+    Vector2 operator- (const Vector2& vec1, const Vector2& vec2);
 
-    template<typename T>
-    Vector2<T> operator- (const Vector2<T>& vec1, const Vector2<T>& vec2);
+    Vector2 operator* (const Vector2& vec1, const Vector2& vec2);
 
-    template<typename T>
-    Vector2<T> operator* (const Vector2<T>& vec1, const Vector2<T>& vec2);
+    Vector2 operator* (const Vector2& vec, const Real real);
 
-    template<typename T>
-    Vector2<T> operator* (const Vector2<T>& vec, const T real);
+    Vector2 operator* (const Real real, const Vector2& vec);
 
-    template<typename T>
-    Vector2<T> operator* (const T real, const Vector2<T>& vec);
+    Vector2 operator/ (const Vector2& vec, const Real real);
 
-    template<typename T>
-    Vector2<T> operator/ (const Vector2<T>& vec, const T real);
+    bool operator== (const Vector2& vec1, const Vector2& vec2);
 
-    template<typename T>
-    bool operator== (const Vector2<T>& vec1, const Vector2<T>& vec2);
-
-    template<typename T>
-    bool operator!= (const Vector2<T>& vec1, const Vector2<T>& vec2);
-
-#define VECTOR2_INCLUDE_FILE
-#include "vector2-impl.h"
-#undef VECTOR2_INCLUDE_FILE
+    bool operator!= (const Vector2& vec1, const Vector2& vec2);
 }
 
-#endif // MATH_VECTOR2_H_INCLUDED
+#endif // MARealH_VECRealOR2_H_INCLUDED

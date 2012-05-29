@@ -21,6 +21,7 @@ SET (Math_src
     src/matrix2.cpp
     src/matrix3.cpp
     src/matrix4.cpp
+    src/quaternion.cpp
   )
 
 ADD_LIBRARY (Math SHARED ${Math_src})

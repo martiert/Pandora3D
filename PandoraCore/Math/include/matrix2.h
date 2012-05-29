@@ -1,43 +1,40 @@
-#ifndef MATH_MATRIX2_H_INCLUDED
-#define MATH_MATRIX2_H_INCLUDED
+#ifndef MARealH_MARealRIX2_H_INCLUDED
+#define MARealH_MARealRIX2_H_INCLUDED
 
 #include "vector2.h"
 
-#include <type_traits>
 #include <exception>
 #include <algorithm>
 
+typedef double Real;
+
 namespace Math
 {
-    template<typename T, class Enable = void>
-    class Matrix2;
-
-    template<typename T>
-    class Matrix2<T, typename std::enable_if<std::is_arithmetic<T>::value>::type>
+    class Matrix2
     {
         public:
             Matrix2 ();
-            Matrix2 (const T& m00, const T& m01, const T& m10, const T&  m11);
-            Matrix2 (const T array[4]);
+            Matrix2 (const Real& m00, const Real& m01, const Real& m10, const Real&  m11);
+            Matrix2 (const Real array[4]);
 
-            T& operator () (const size_t& i, const size_t& j);
-            T operator () (const size_t& i, const size_t& j) const;
-            operator T* ();
-            operator const T* () const;
+            Real& operator () (const size_t& i, const size_t& j);
+            Real operator () (const size_t& i, const size_t& j) const;
+            operator Real* ();
+            operator const Real* () const;
 
             Matrix2& operator+= (const Matrix2& matrix);
             Matrix2& operator-= (const Matrix2& matrix);
-            Matrix2& operator*= (const T& scalar);
-            Matrix2& operator/= (const T& scalar);
+            Matrix2& operator*= (const Real& scalar);
+            Matrix2& operator/= (const Real& scalar);
 
-            T determinant () const;
+            Real determinant () const;
             Matrix2 transpose () const;
             Matrix2 inverse () const;
 
             const static Matrix2 IDENTITY;
             const static Matrix2 ZERO;
         private:
-            T data[4];
+            Real data[4];
 
         public:
             class division_by_zero_exception : public std::exception { };
@@ -53,7 +50,7 @@ namespace Math
 
                     virtual const char* what () const throw ()
                     {
-                        std::string error ("Tried to access: (");
+                        std::string error ("Realried to access: (");
                         error += row;
                         error += ", ";
                         error += col;
@@ -66,44 +63,25 @@ namespace Math
             };
     };
 
-    typedef Matrix2<double> Matrix2d;
-    typedef Matrix2<float> Matrix2f;
-    typedef Matrix2<int> Matrix2i;
-    typedef Matrix2<unsigned int> Matrix2u;
+    Matrix2 operator+ (const Matrix2& lmatrix, const Matrix2& rmatrix);
 
-    template<typename T>
-    Matrix2<T> operator+ (const Matrix2<T>& lmatrix, const Matrix2<T>& rmatrix);
+    Matrix2 operator- (const Matrix2& lmatrix, const Matrix2& rmatrix);
 
-    template<typename T>
-    Matrix2<T> operator- (const Matrix2<T>& lmatrix, const Matrix2<T>& rmatrix);
+    Matrix2 operator* (const Matrix2& lmatrix, const Matrix2& rmatrix);
 
-    template<typename T>
-    Matrix2<T> operator* (const Matrix2<T>& lmatrix, const Matrix2<T>& rmatrix);
+    Matrix2 operator* (const Matrix2& matrix, const Real& scalar);
 
-    template<typename T>
-    Matrix2<T> operator* (const Matrix2<T>& matrix, const T& scalar);
+    Vector2 operator* (const Matrix2& matrix, const Vector2& vector);
 
-    template<typename T>
-    Vector2<T> operator* (const Matrix2<T>& matrix, const Vector2<T>& vector);
+    Vector2 operator* (const Vector2& vector, const Matrix2& matrix);
 
-    template<typename T>
-    Vector2<T> operator* (const Vector2<T>& vector, const Matrix2<T>& matrix);
+    Matrix2 operator* (const Real& scalar, const Matrix2& matrix);
 
-    template<typename T>
-    Matrix2<T> operator* (const T& scalar, const Matrix2<T>& matrix);
+    Matrix2 operator/ (const Matrix2& matrix, const Real& scalar);
 
-    template<typename T>
-    Matrix2<T> operator/ (const Matrix2<T>& matrix, const T& scalar);
+    bool operator== (const Matrix2& lmatrix, const Matrix2& rmatrix);
 
-    template<typename T>
-    bool operator== (const Matrix2<T>& lmatrix, const Matrix2<T>& rmatrix);
-
-    template<typename T>
-    bool operator!= (const Matrix2<T>& lmatrix, const Matrix2<T>& rmatrix);
-
-#define MATRIX2_INCLUDE_FILE
-#include "matrix2-impl.h"
-#undef MATRIX2_INCLUDE_FILE
+    bool operator!= (const Matrix2& lmatrix, const Matrix2& rmatrix);
 }
 
-#endif // MATH_MATRIX2_H_INCLUDED
+#endif // MARealH_MARealRIX2_H_INCLUDED

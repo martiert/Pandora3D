@@ -1,57 +1,54 @@
-#ifndef MATH_MATRIX4_H_INCLUDED
-#define MATH_MATRIX4_H_INCLUDED
+#ifndef MARealH_MARealRIX4_H_INCLUDED
+#define MARealH_MARealRIX4_H_INCLUDED
 
 #include "matrix3.h"
 #include "vector4.h"
 
-#include <type_traits>
 #include <exception>
+
+typedef double Real;
 
 namespace Math
 {
-    template<typename T, class Enable = void>
-    class Matrix4;
-
-    template<typename T>
-    class Matrix4<T, typename std::enable_if<std::is_arithmetic<T>::value>::type>
+    class Matrix4
     {
         public:
             Matrix4 ();
 
-            Matrix4 (const T& a00, const T& a01, const T& a02, const T& a03,
-                     const T& a10, const T& a11, const T& a12, const T& a13,
-                     const T& a20, const T& a21, const T& a22, const T& a23,
-                     const T& a30, const T& a31, const T& a32, const T& a33);
+            Matrix4 (const Real& a00, const Real& a01, const Real& a02, const Real& a03,
+                     const Real& a10, const Real& a11, const Real& a12, const Real& a13,
+                     const Real& a20, const Real& a21, const Real& a22, const Real& a23,
+                     const Real& a30, const Real& a31, const Real& a32, const Real& a33);
 
-            Matrix4 (const T array[16]);
-            Matrix4 (const Matrix3<T>& matrix);
+            Matrix4 (const Real array[16]);
+            Matrix4 (const Matrix3& matrix);
 
-            T& operator () (const size_t& i, const size_t& j);
-            T operator () (const size_t& i, const size_t& j) const;
+            Real& operator () (const size_t& i, const size_t& j);
+            Real operator () (const size_t& i, const size_t& j) const;
 
-            T& operator[] (const size_t& i);
-            T operator[] (const size_t& i) const;
+            Real& operator[] (const size_t& i);
+            Real operator[] (const size_t& i) const;
 
-            operator T* ();
-            operator const T* () const;
+            operator Real* ();
+            operator const Real* () const;
 
-            Matrix4& operator*= (const T& scalar);
-            Matrix4& operator/= (const T& scalar);
+            Matrix4& operator*= (const Real& scalar);
+            Matrix4& operator/= (const Real& scalar);
             Matrix4& operator+= (const Matrix4 other);
             Matrix4& operator-= (const Matrix4 other);
 
             Matrix4 transpose () const;
             Matrix4 inverse () const;
 
-            T trace () const;
-            T determinant () const;
+            Real trace () const;
+            Real determinant () const;
 
             const static Matrix4 IDENTITY;
             const static Matrix4 ZERO;
         private:
-            T data[16];
+            Real data[16];
 
-            T calculate_sub_determinant (const size_t& row, const size_t& column) const;
+            Real calculate_sub_determinant (const size_t& row, const size_t& column) const;
 
         public:
             class division_by_zero_exception : public std::exception { };
@@ -78,13 +75,13 @@ namespace Math
 
                     const char* get_from_single_input () const
                     {
-                        std::string error = "Tried to access index: " + index;
+                        std::string error = "Realried to access index: " + index;
                         return error.c_str ();
                     }
 
                     const char* get_from_row_col_input () const
                     {
-                        std::string error = "Tried to access index: (" + row;
+                        std::string error = "Realried to access index: (" + row;
                         error += ", " + col;
                         error += ")";
                         return error.c_str ();
@@ -97,37 +94,20 @@ namespace Math
 
     };
 
-    typedef Matrix4<double> Matrix4d;
-    typedef Matrix4<float> Matrix4f;
-    typedef Matrix4<int> Matrix4i;
-    typedef Matrix4<unsigned int> Matrix4u;
+    Matrix4 operator* (const Matrix4& matrix, const Real& scalar);
 
-    template<typename T>
-    Matrix4<T> operator* (const Matrix4<T>& matrix, const T& scalar);
+    Matrix4 operator* (const Real& scalar, const Matrix4& matrix);
 
-    template<typename T>
-    Matrix4<T> operator* (const T& scalar, const Matrix4<T>& matrix);
+    Vector4 operator* (const Matrix4& matrix, const Vector4& vector);
 
-    template<typename T>
-    Vector4<T> operator* (const Matrix4<T>& matrix, const Vector4<T>& vector);
+    Vector4 operator* (const Vector4& vector, const Matrix4& matrix);
 
-    template<typename T>
-    Vector4<T> operator* (const Vector4<T>& vector, const Matrix4<T>& matrix);
+    Matrix4 operator* (const Matrix4& left, const Matrix4& right);
 
-    template<typename T>
-    Matrix4<T> operator* (const Matrix4<T>& left, const Matrix4<T>& right);
+    Matrix4 operator/ (const Matrix4& matrix, const Real& scalar);
 
-    template<typename T>
-    Matrix4<T> operator/ (const Matrix4<T>& matrix, const T& scalar);
+    Matrix4 operator+ (const Matrix4& left, const Matrix4& right);
 
-    template<typename T>
-    Matrix4<T> operator+ (const Matrix4<T>& left, const Matrix4<T>& right);
-
-    template<typename T>
-    Matrix4<T> operator- (const Matrix4<T>& left, const Matrix4<T>& right);
-
-#define MATRIX4_INCLUDE_FILE
-#include "matrix4-impl.h"
-#undef MATRIX4_INCLUDE_FILE
+    Matrix4 operator- (const Matrix4& left, const Matrix4& right);
 }
-#endif // MATH_MATRIX4_H_INCLUDED
+#endif // MARealH_MARealRIX4_H_INCLUDED
