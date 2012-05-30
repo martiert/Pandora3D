@@ -1,7 +1,7 @@
 #ifndef MATH_MATRIX3_H_INCLUDED
 #define MATH_MATRIX3_H_INCLUDED
 
-#include "mathconfig.h"
+#include "config.h"
 
 #include <exception>
 #include <algorithm>

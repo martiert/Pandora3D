@@ -1,7 +1,7 @@
 #ifndef MATH_QUATERNION_H_INCLUDED
 #define MATH_QUATERNION_H_INCLUDED
 
-#include "mathconfig.h"
+#include "config.h"
 #include "vector3.h"
 #include "matrix4.h"
 

@@ -11,8 +11,12 @@ ENDIF (NOT LIBRARY_OUTPUT_PATH)
 
 SET (PANDORA_MATH_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
+INCLUDE (CheckIncludeFiles)
+
+CONFIGURE_FILE("${PANDORA_MATH_DIR}/include/config.h.in" "${CMAKE_CURRENT_BINARY_DIR}/include/config.h")
+
 # include own directories
-INCLUDE_DIRECTORIES (include)
+INCLUDE_DIRECTORIES (include ${CMAKE_CURRENT_BINARY_DIR}/include)
 
 SET (Math_src
     src/vector2.cpp

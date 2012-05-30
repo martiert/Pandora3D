@@ -1,7 +1,7 @@
 #ifndef MATH_MATRIX4_H_INCLUDED
 #define MATH_MATRIX4_H_INCLUDED
 
-#include "mathconfig.h"
+#include "config.h"
 #include "matrix3.h"
 #include "vector4.h"
 
