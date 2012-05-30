@@ -16,6 +16,10 @@ Math::Quaternion::Quaternion (const Real& real, const Vector3& imaginary_vector)
     : real (real), imag (imaginary_vector)
 { }
 
+Math::Quaternion::Quaternion (const Vector3& axis, const Real& angle)
+    : real (std::cos (angle)), imag (axis * std::sin (angle))
+{ }
+
 Math::Quaternion::Quaternion (const Matrix4& matrix)
     : real (0.5 * std::sqrt (matrix.trace ()))
 {
@@ -155,6 +159,14 @@ Math::Quaternion Math::Quaternion::inverse () const
     return conjugate () / normsquared;
 }
 
+Math::Quaternion Math::Quaternion::slerp (const Quaternion& from, const Quaternion& to, const Real& t)
+{
+    const auto angle = std::acos (from.real * to.real + from.imag.dot (to.imag));
+    const auto from_scale = std::sin (angle * (1 - t))/std::sin (angle);
+    const auto to_scale = std::sin (angle * t)/std::sin (angle);
+    return from * from_scale + to * to_scale;
+}
+
 Math::Quaternion Math::operator+ (const Quaternion& left, const Quaternion& right)
 {
     Quaternion res = left;
@@ -204,5 +216,5 @@ void Math::Quaternion::create_quaternion_from_matrix_with_smallest_u (const Matr
     imag.y = std::sqrt (-matrix (0,0) + matrix (1,1) - matrix (2,2) + matrix (3,3));
     imag.z = std::sqrt (-matrix (0,0) - matrix (1,1) + matrix (2,2) + matrix (3,3));
 
-    imag *= 0.4;
+    imag *= 0.5;
 }

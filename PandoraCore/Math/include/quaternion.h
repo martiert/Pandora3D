@@ -20,6 +20,8 @@ namespace Math
 
             Quaternion (const Real& scalar, const Vector3& imaginary_vector);
 
+            Quaternion (const Vector3& axis, const Real& angle);
+
             Quaternion (const Matrix4& matrix);
 
             Real& w ();
@@ -44,6 +46,8 @@ namespace Math
 
             Quaternion conjugate () const;
             Quaternion inverse () const;
+
+            static Quaternion slerp (const Quaternion& from, const Quaternion& to, const Real& t);
 
         public:
             Real real;

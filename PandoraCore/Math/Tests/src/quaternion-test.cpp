@@ -4,12 +4,15 @@
 
 #include "test-helpers.h"
 
-const Math::Quaternion create_random_quaternion ();
-const Math::Matrix4 create_random_matrix4 ();
-const Math::Vector3 create_random_vector3 ();
-const Math::Matrix4 make_matrix_from_quaternion (const Math::Quaternion& quat);
-Math::Quaternion create_quaternion_from_matrix (const Math::Matrix4& matrix);
+Math::Vector3 create_random_vector3 ();
+Math::Matrix4 create_random_matrix4 ();
 Math::Matrix4 create_random_rotation_matrix ();
+Math::Matrix4 create_positive_diagonal_matrix ();
+Math::Quaternion create_random_quaternion ();
+
+Math::Quaternion create_quaternion_from_matrix (const Math::Matrix4& matrix);
+Math::Quaternion slerp (const Math::Quaternion& from, const Math::Quaternion& to, const Real& t);
+Math::Matrix4 make_matrix_from_quaternion (const Math::Quaternion& quat);
 
 TEST (QuaternionTest, default_quaternion_is_identity_quaternion)
 {
@@ -71,6 +74,22 @@ TEST (QuaternionTest, creating_quaternion_with_real_element_and_imaginary_vector
     END_MULTITEST
 }
 
+TEST (QuaternionTest, creating_quaternion_around_axis_with_angle_creates_correct_quaternion)
+{
+    BEGIN_MULTITEST
+
+    const auto axis = create_random_vector3 ();
+    const auto angle = create_random_scalar ();
+    const Math::Quaternion quat (axis, angle);
+
+    EXPECT_EQ (std::cos (angle), quat.w ());
+    EXPECT_EQ (std::sin (angle) * axis.x, quat.x ());
+    EXPECT_EQ (std::sin (angle) * axis.y, quat.y ());
+    EXPECT_EQ (std::sin (angle) * axis.z, quat.z ());
+
+    END_MULTITEST
+}
+
 TEST (QuaternionTest, creating_quaternion_from_identity_matrix_creates_the_identity_quaternion)
 {
     Math::Quaternion quat (Math::Matrix4::IDENTITY);
@@ -85,11 +104,7 @@ TEST (QuaternionTest, creating_quaternion_from_positive_diagonal_matrix_gives_re
 {
     BEGIN_MULTITEST
 
-    Math::Matrix4 matrix;
-    for (auto i = 0; i < 3; ++i) {
-        const auto scalar = create_random_scalar ();
-        matrix (i,i) = std::abs (scalar);
-    }
+    const auto matrix = create_positive_diagonal_matrix ();
     const Math::Quaternion quat (matrix);
 
     EXPECT_EQ (0.5 * std::sqrt (matrix.trace ()), quat.w ());
@@ -385,16 +400,46 @@ TEST (QuaternionTest, inverse_of_a_quaternion_is_the_conjugate_divded_by_the_nor
     END_MULTITEST
 }
 
+TEST (QuaternionTest, inverse_of_quaternion_multiplied_with_the_quaternion_should_be_identity)
+{
+    BEGIN_MULTITEST
+
+    const auto quat = create_random_quaternion ();
+    const auto inverse = quat.inverse ();
+    const auto res = inverse * quat;
+
+    EXPECT_NEAR (1, res.w (), PRECISION);
+    EXPECT_NEAR (0, res.x (), PRECISION);
+    EXPECT_NEAR (0, res.y (), PRECISION);
+    EXPECT_NEAR (0, res.z (), PRECISION);
+
+    END_MULTITEST
+}
+
+TEST (QuaternionTest, quaternion_multiplied_with_its_inverse_should_be_identity)
+{
+    BEGIN_MULTITEST
+
+    const auto quat = create_random_quaternion ();
+    const auto inverse = quat.inverse ();
+    const auto res = quat * inverse;
+
+    EXPECT_NEAR (1, res.w (), PRECISION);
+    EXPECT_NEAR (0, res.x (), PRECISION);
+    EXPECT_NEAR (0, res.y (), PRECISION);
+    EXPECT_NEAR (0, res.z (), PRECISION);
+
+    END_MULTITEST
+}
+
 TEST (QuaternionTest, normalizing_quaternion_gives_a_unit_quaternion)
 {
     BEGIN_MULTITEST
 
     auto quat = create_random_quaternion ();
+    quat.normalize ();
 
-    if (quat.norm () != 0) {
-        quat.normalize ();
-        EXPECT_FLOAT_EQ (1, quat.norm ());
-    }
+    EXPECT_FLOAT_EQ (1, quat.norm ());
 
     END_MULTITEST
 }
@@ -403,6 +448,7 @@ TEST (QuaternionTest, normalizing_zero_quaternion_throw_normalizing_zero_quatern
 {
     Math::Quaternion quat;
     quat.w () = 0;
+
     EXPECT_THROW (quat.normalize (), Math::Quaternion::normalizing_zero_quaternion_exception);
 }
 
@@ -414,8 +460,67 @@ TEST (QuaternionTest, dividing_quaternion_by_zero_throws_division_by_zero_except
     EXPECT_THROW (quat / 0.0, Math::Quaternion::division_by_zero_exception);
 }
 
+TEST (QuaternionTest, spherical_linear_interpolation_between_from_and_to_with_t_equal_zero_returns_from)
+{
+    BEGIN_MULTITEST
+
+    auto from = create_random_quaternion ();
+    auto to = create_random_quaternion ();
+    from.normalize ();
+    to.normalize ();
+
+    const auto res = Math::Quaternion::slerp (from, to, 0);
+
+    EXPECT_EQ (from.w (), res.w ());
+    EXPECT_EQ (from.x (), res.x ());
+    EXPECT_EQ (from.y (), res.y ());
+    EXPECT_EQ (from.z (), res.z ());
+
+    END_MULTITEST
+}
+
+TEST (QuaternionTest, sperical_linear_interpolation_between_from_ant_to_with_t_equal_one_return_to)
+{
+    BEGIN_MULTITEST
+
+    auto from = create_random_quaternion ();
+    auto to = create_random_quaternion ();
+    from.normalize ();
+    to.normalize ();
+
+    const auto res = Math::Quaternion::slerp (from, to, 1);
+
+    EXPECT_EQ (to.w (), res.w ());
+    EXPECT_EQ (to.x (), res.x ());
+    EXPECT_EQ (to.y (), res.y ());
+    EXPECT_EQ (to.z (), res.z ());
+
+    END_MULTITEST
+}
+
+TEST (QuaternionTest, sperical_linear_interpolation_makes_correct_quaternion)
+{
+    BEGIN_MULTITEST
+
+    auto from = create_random_quaternion ();
+    auto to = create_random_quaternion ();
+    from.normalize ();
+    to.normalize ();
+
+    const auto t = (rand () % 400) / 400.0;
+    const auto res = Math::Quaternion::slerp (from, to, t);
+    const auto correct = slerp (from, to, t);
+
+    EXPECT_EQ (correct.w (), res.w ());
+    EXPECT_EQ (correct.x (), res.x ());
+    EXPECT_EQ (correct.y (), res.y ());
+    EXPECT_EQ (correct.z (), res.z ());
+
+    END_MULTITEST
+}
+
 // Helper function
-const Math::Quaternion create_random_quaternion ()
+Math::Quaternion create_random_quaternion ()
 {
     auto array = create_double_array_of_size (4);
     Math::Quaternion quat (array);
@@ -424,7 +529,29 @@ const Math::Quaternion create_random_quaternion ()
     return quat;
 }
 
-const Math::Matrix4 make_matrix_from_quaternion (const Math::Quaternion& quat)
+Math::Matrix4 create_random_rotation_matrix ()
+{
+    Math::Matrix4 result;
+    const auto angle = (rand () % 300) / 200.0;
+    result (0,0) = std::cos (angle);
+    result (0,2) = std::sin (angle);
+    result (2,0) = -result (0,2);
+    result (2,2) = result (0,0);
+
+    return result;
+}
+
+Math::Matrix4 create_positive_diagonal_matrix ()
+{
+    Math::Matrix4 matrix;
+    for (auto i = 0; i < 3; ++i) {
+        const auto scalar = create_random_scalar ();
+        matrix (i,i) = std::abs (scalar);
+    }
+    return matrix;
+}
+
+Math::Matrix4 make_matrix_from_quaternion (const Math::Quaternion& quat)
 {
     Math::Matrix4 matrix;
     const auto s = 2.0 / quat.norm ();
@@ -477,14 +604,11 @@ Math::Quaternion create_quaternion_from_matrix (const Math::Matrix4& matrix)
     return create_quaternion_from_small_real_component (matrix);
 }
 
-Math::Matrix4 create_random_rotation_matrix ()
+Math::Quaternion slerp (const Math::Quaternion& from, const Math::Quaternion& to, const Real& t)
 {
-    Math::Matrix4 result;
-    const auto angle = (rand () % 300) / 200.0;
-    result (0,0) = std::cos (angle);
-    result (0,2) = std::sin (angle);
-    result (2,0) = -result (0,2);
-    result (2,2) = result (0,0);
+    const auto angle = std::acos (from.real * to.real + from.imag.dot (to.imag));
+    const auto from_scale = std::sin (angle * (1 - t))/std::sin (angle);
+    const auto to_scale = std::sin (angle * t)/std::sin (angle);
 
-    return result;
+    return from * from_scale + to * to_scale;
 }
