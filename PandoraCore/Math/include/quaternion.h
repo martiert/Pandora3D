@@ -73,6 +73,8 @@ namespace Math
 
     Quaternion operator* (const Quaternion& quaternion, const Real& scalar);
 
+    Quaternion operator* (const Real& scalar, const Quaternion& quaternion);
+
     Quaternion operator/ (const Quaternion& quaternion, const Real& scalar);
 }
 

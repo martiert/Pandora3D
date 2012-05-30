@@ -164,7 +164,7 @@ Math::Quaternion Math::Quaternion::slerp (const Quaternion& from, const Quaterni
     const auto angle = std::acos (from.real * to.real + from.imag.dot (to.imag));
     const auto from_scale = std::sin (angle * (1 - t))/std::sin (angle);
     const auto to_scale = std::sin (angle * t)/std::sin (angle);
-    return from * from_scale + to * to_scale;
+    return from_scale * from + to_scale * to;
 }
 
 Math::Quaternion Math::operator+ (const Quaternion& left, const Quaternion& right)
@@ -192,6 +192,11 @@ Math::Quaternion Math::operator* (const Quaternion& quaternion, const Real& scal
     Quaternion res = quaternion;
     res *= scalar;
     return res;
+}
+
+Math::Quaternion Math::operator* (const Real& scalar, const Quaternion& quaternion)
+{
+    return quaternion * scalar;
 }
 
 Math::Quaternion Math::operator/ (const Quaternion& quaternion, const Real& scalar)
