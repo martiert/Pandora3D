@@ -1,11 +1,10 @@
-#ifndef MATH_VECTOR4_HPP_INCLUDED
-#define MATH_VECTOR4_HPP_INCLUDED
+#ifndef MATH_VECTOR4_H_INCLUDED
+#define MATH_VECTOR4_H_INCLUDED
 
+#include "mathconfig.h"
 #include "vector3.h"
 
 #include <exception>
-
-typedef double Real;
 
 namespace Math
 {
@@ -84,4 +83,4 @@ namespace Math
     bool operator!= (const Vector4& vec1, const Vector4& vec2);
 }
 
-#endif // MATH_VECTOR4_HPP_INCLUDED
+#endif // MATH_VECTOR4_H_INCLUDED

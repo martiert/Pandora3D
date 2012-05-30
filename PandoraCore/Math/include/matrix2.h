@@ -1,12 +1,11 @@
 #ifndef MATH_MATRIX2_H_INCLUDED
 #define MATH_MATRIX2_H_INCLUDED
 
+#include "mathconfig.h"
 #include "vector2.h"
 
 #include <exception>
 #include <algorithm>
-
-typedef double Real;
 
 namespace Math
 {

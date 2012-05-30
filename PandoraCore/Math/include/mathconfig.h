@@ -1,0 +1,6 @@
+#ifndef MATH_MATHCONFIG_H_INCLUDED
+#define MATH_MATHCONFIG_H_INCLUDED
+
+typedef double Real;
+
+#endif // MATH_MATHCONFIG_H_INCLUDED

@@ -1,10 +1,10 @@
 #ifndef MATH_VECTOR2_H_INCLUDED
 #define MATH_VECTOR2_H_INCLUDED
 
+#include "mathconfig.h"
+
 #include <exception>
 #include <string>
-
-typedef double Real;
 
 namespace Math
 {
