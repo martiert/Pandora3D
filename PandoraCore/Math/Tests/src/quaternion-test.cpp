@@ -8,7 +8,8 @@ const Math::Quaternion create_random_quaternion ();
 const Math::Matrix4 create_random_matrix4 ();
 const Math::Vector3 create_random_vector3 ();
 const Math::Matrix4 make_matrix_from_quaternion (const Math::Quaternion& quat);
-const Math::Quaternion create_quaternion_from_matrix (const Math::Matrix4& matrix);
+Math::Quaternion create_quaternion_from_matrix (const Math::Matrix4& matrix);
+Math::Matrix4 create_random_rotation_matrix ();
 
 TEST (QuaternionTest, default_quaternion_is_identity_quaternion)
 {
@@ -101,6 +102,8 @@ TEST (QuaternionTest, creating_quaternion_from_positive_diagonal_matrix_gives_re
 
 TEST (QuaternionTest, quaternion_creating_from_matrix_is_correct)
 {
+    BEGIN_MULTITEST
+
     const auto matrix = create_random_matrix4 ();
     const Math::Quaternion quat (matrix);
     const auto correct_quat = create_quaternion_from_matrix (matrix);
@@ -109,6 +112,31 @@ TEST (QuaternionTest, quaternion_creating_from_matrix_is_correct)
     EXPECT_EQ (correct_quat.x (), quat.x ());
     EXPECT_EQ (correct_quat.y (), quat.y ());
     EXPECT_EQ (correct_quat.z (), quat.z ());
+
+    END_MULTITEST
+}
+
+TEST (QuaternionTest, creating_quaternion_from_identity_matrix_and_creating_matrix_from_quaternion_returns_identity)
+{
+    const Math::Quaternion quat (Math::Matrix4::IDENTITY);
+    const auto result = quat.create_matrix ();
+
+    for (auto i = 0; i < 16; ++i)
+        EXPECT_EQ (Math::Matrix4::IDENTITY[i], result[i]);
+}
+
+TEST (QuaternionTest, creating_quaternion_from_simple_rotation_matrix_and_getting_the_matrix_from_the_quaternion_gives_the_same_matrix)
+{
+    BEGIN_MULTITEST
+
+    const auto matrix = create_random_rotation_matrix ();
+    const Math::Quaternion quat (matrix);
+    const auto result = quat.create_matrix ();
+
+    for (auto i = 0; i < 16; ++i)
+        EXPECT_FLOAT_EQ (matrix[i], result[i]);
+
+    END_MULTITEST
 }
 
 TEST (QuaternionTest, creating_matrix_from_identity_quaternion_gives_identity_matrix)
@@ -416,22 +444,47 @@ const Math::Matrix4 make_matrix_from_quaternion (const Math::Quaternion& quat)
     return matrix;
 }
 
-const Math::Quaternion create_quaternion_from_matrix (const Math::Matrix4& matrix)
+Math::Quaternion create_quaternion_from_large_real_component (const Math::Matrix4& matrix)
+{
+    Math::Quaternion result;
+    result.w () = 0.5 * std::sqrt (matrix.trace ());
+    result.x () = 0.25 * (matrix (2,1) - matrix (1,2))/result.w ();
+    result.y () = 0.25 * (matrix (0,2) - matrix (2,0))/result.w ();
+    result.z () = 0.25 * (matrix (1,0) - matrix (0,1))/result.w ();
+
+    return result;
+}
+
+
+Math::Quaternion create_quaternion_from_small_real_component (const Math::Matrix4& matrix)
+{
+    Math::Quaternion result;
+    result.w () = 0.5 * std::sqrt (matrix.trace ());
+    result.x () = 0.5 * std::sqrt (matrix (0,0) - matrix (1,1) - matrix (2,2) + matrix (3,3));
+    result.y () = 0.5 * std::sqrt (-matrix (0,0) + matrix (1,1) - matrix (2,2) + matrix (3,3));
+    result.z () = 0.5 * std::sqrt (-matrix (0,0) - matrix (1,1) + matrix (2,2) + matrix (3,3));
+
+    return result;
+}
+
+Math::Quaternion create_quaternion_from_matrix (const Math::Matrix4& matrix)
 {
     const auto u = matrix (0,0) + matrix (1,1) + matrix (2,2);
-    Math::Quaternion result;
 
-    result.w () = 0.5 * std::sqrt (matrix.trace ());
+    if (u > matrix (0,0) && u > matrix (1,1) && u > matrix (2,2))
+        return create_quaternion_from_large_real_component (matrix);
 
-    if (u > matrix (0,0) && u > matrix (1,1) && u > matrix (2,2)) {
-        result.x () = 0.25 * (matrix (2,1) - matrix (1,2))/result.w ();
-        result.y () = 0.25 * (matrix (0,2) - matrix (2,0))/result.w ();
-        result.z () = 0.25 * (matrix (1,0) - matrix (0,1))/result.w ();
-    } else {
-        result.x () = 0.5 * std::sqrt (matrix (0,0) - matrix (1,1) - matrix (2,2) + matrix (3,3));
-        result.y () = 0.5 * std::sqrt (-matrix (0,0) + matrix (1,1) - matrix (2,2) + matrix (3,3));
-        result.z () = 0.5 * std::sqrt (-matrix (0,0) - matrix (1,1) + matrix (2,2) + matrix (3,3));
-    }
+    return create_quaternion_from_small_real_component (matrix);
+}
+
+Math::Matrix4 create_random_rotation_matrix ()
+{
+    Math::Matrix4 result;
+    const auto angle = (rand () % 300) / 200.0;
+    result (0,0) = std::cos (angle);
+    result (0,2) = std::sin (angle);
+    result (2,0) = -result (0,2);
+    result (2,2) = result (0,0);
 
     return result;
 }
