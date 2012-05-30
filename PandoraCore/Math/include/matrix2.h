@@ -1,5 +1,5 @@
-#ifndef MARealH_MARealRIX2_H_INCLUDED
-#define MARealH_MARealRIX2_H_INCLUDED
+#ifndef MATH_MATRIX2_H_INCLUDED
+#define MATH_MATRIX2_H_INCLUDED
 
 #include "vector2.h"
 
@@ -84,4 +84,4 @@ namespace Math
     bool operator!= (const Matrix2& lmatrix, const Matrix2& rmatrix);
 }
 
-#endif // MARealH_MARealRIX2_H_INCLUDED
+#endif // MATH_MATRIX2_H_INCLUDED

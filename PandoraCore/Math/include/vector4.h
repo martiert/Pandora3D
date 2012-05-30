@@ -1,5 +1,5 @@
-#ifndef MARealH_VECRealOR4_HPP_INCLUDED
-#define MARealH_VECRealOR4_HPP_INCLUDED
+#ifndef MATH_VECTOR4_HPP_INCLUDED
+#define MATH_VECTOR4_HPP_INCLUDED
 
 #include "vector3.h"
 
@@ -84,4 +84,4 @@ namespace Math
     bool operator!= (const Vector4& vec1, const Vector4& vec2);
 }
 
-#endif // MARealH_VECRealOR4_HPP_INCLUDED
+#endif // MATH_VECTOR4_HPP_INCLUDED

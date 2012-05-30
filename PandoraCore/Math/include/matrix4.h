@@ -1,5 +1,5 @@
-#ifndef MARealH_MARealRIX4_H_INCLUDED
-#define MARealH_MARealRIX4_H_INCLUDED
+#ifndef MATH_MATRIX4_H_INCLUDED
+#define MATH_MATRIX4_H_INCLUDED
 
 #include "matrix3.h"
 #include "vector4.h"
@@ -110,4 +110,4 @@ namespace Math
 
     Matrix4 operator- (const Matrix4& left, const Matrix4& right);
 }
-#endif // MARealH_MARealRIX4_H_INCLUDED
+#endif // MATH_MATRIX4_H_INCLUDED

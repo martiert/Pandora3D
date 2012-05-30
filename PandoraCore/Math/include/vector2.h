@@ -1,5 +1,5 @@
-#ifndef MARealH_VECRealOR2_H_INCLUDED
-#define MARealH_VECRealOR2_H_INCLUDED
+#ifndef MATH_VECTOR2_H_INCLUDED
+#define MATH_VECTOR2_H_INCLUDED
 
 #include <exception>
 #include <string>
@@ -90,4 +90,4 @@ namespace Math
     bool operator!= (const Vector2& vec1, const Vector2& vec2);
 }
 
-#endif // MARealH_VECRealOR2_H_INCLUDED
+#endif // MATH_VECTOR2_H_INCLUDED

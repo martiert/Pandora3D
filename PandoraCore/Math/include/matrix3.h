@@ -1,5 +1,5 @@
-#ifndef MARealH_MARealRIX3_H_INCLUDED
-#define MARealH_MARealRIX3_H_INCLUDED
+#ifndef MATH_MATRIX3_H_INCLUDED
+#define MATH_MATRIX3_H_INCLUDED
 
 #include <exception>
 #include <algorithm>
@@ -103,4 +103,4 @@ namespace Math
     bool operator!= (const Matrix3& left, const Matrix3& right);
 }
 
-#endif // MARealH_MARealRIX3_H_INCLUDED
+#endif // MATH_MATRIX3_H_INCLUDED

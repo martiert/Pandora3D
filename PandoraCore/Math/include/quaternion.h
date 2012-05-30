@@ -1,5 +1,5 @@
-#ifndef MARealH_QUARealERNION_H_INCLUDED
-#define MARealH_QUARealERNION_H_INCLUDED
+#ifndef MATH_QUATERNION_H_INCLUDED
+#define MATH_QUATERNION_H_INCLUDED
 
 #include "vector3.h"
 #include "matrix4.h"
@@ -73,4 +73,4 @@ namespace Math
     Quaternion operator/ (const Quaternion& quaternion, const Real& scalar);
 }
 
-#endif // MARealH_QUARealERNION_H_INCLUDED
+#endif // MATH_QUATERNION_H_INCLUDED
