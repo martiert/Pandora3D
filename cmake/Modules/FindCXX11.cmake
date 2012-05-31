@@ -26,7 +26,7 @@ class Matrix
 {
 public:
     Matrix(int a, int b, int c, int d)
-        : data ({a, b, c, d})
+        : data {a, b, c, d}
     {}
 
 private:
