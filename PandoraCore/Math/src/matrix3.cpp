@@ -1,6 +1,6 @@
 #include "matrix3.h"
 
-#include <string>
+#include <sstream>
 #include <algorithm>
 
 const Math::Matrix3 Math::Matrix3::IDENTITY (1, 0, 0,
@@ -227,20 +227,20 @@ Math::Matrix3::index_operator_out_of_range_exception::index_operator_out_of_rang
 const char* Math::Matrix3::index_operator_out_of_range_exception::what () const throw ()
 {
     if (index == 0)
-        return get_from_row_col_input ();
-    return get_from_single_input ();
+        return create_message_from_row_col ();
+    return create_message_from_index ();
 }
 
-const char* Math::Matrix3::index_operator_out_of_range_exception::get_from_single_input () const
+const char* Math::Matrix3::index_operator_out_of_range_exception::create_message_from_index () const
 {
-    std::string error = "Tried to access index: " + index;
-    return error.c_str ();
+    std::stringstream out;
+    out << "Tried to access index: " << index;
+    return out.str ().c_str ();
 }
 
-const char* Math::Matrix3::index_operator_out_of_range_exception::get_from_row_col_input () const
+const char* Math::Matrix3::index_operator_out_of_range_exception::create_message_from_row_col () const
 {
-    std::string error = "Tried to access index: (" + row;
-    error += ", " + col;
-    error += ")";
-    return error.c_str ();
+    std::stringstream out;
+    out << "Tried to access: (" << row << ", " << col << ")";
+    return out.str ().c_str ();
 }

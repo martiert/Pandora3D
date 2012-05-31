@@ -343,8 +343,8 @@ TEST (Vector2Test, addition_to_vector_gives_same_as_the_vectors_added)
     auto vec3 = vec1 + vec2;
     vec2 += vec1;
 
-    EXPECT_EQ (vec2.x, vec2.x);
-    EXPECT_EQ (vec2.y, vec2.y);
+    EXPECT_EQ (vec3.x, vec2.x);
+    EXPECT_EQ (vec3.y, vec2.y);
 
     END_MULTITEST
 }
@@ -356,11 +356,11 @@ TEST (Vector2Test, subtraction_from_vector_gives_same_as_vectors_subtracted)
     const auto vec1 = create_random_vector2 ();
     auto vec2 = create_random_vector2 ();
 
-    auto vec3 = vec1 - vec2;
+    auto vec3 = vec2 - vec1;
     vec2 -= vec1;
 
-    EXPECT_EQ (vec2.x, vec2.x);
-    EXPECT_EQ (vec2.y, vec2.y);
+    EXPECT_EQ (vec3.x, vec2.x);
+    EXPECT_EQ (vec3.y, vec2.y);
 
     END_MULTITEST
 }
@@ -563,7 +563,6 @@ TEST (Vector2Test, orthonormal_basis_with_equal_vectors_throws_can_not_make_orth
 
 TEST (Vector2Test, orthonormal_basis_creates_perpendicular_vectors_of_length_1)
 {
-    int i = 0;
     BEGIN_MULTITEST
 
     auto vec1 = create_random_vector2 ();

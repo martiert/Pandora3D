@@ -1,7 +1,7 @@
 #include "matrix2.h"
 
 #include <algorithm>
-#include <string>
+#include <sstream>
 
 const Math::Matrix2 Math::Matrix2::IDENTITY (1, 0, 0, 1);
 
@@ -221,17 +221,14 @@ const char* Math::Matrix2::index_operator_out_of_range_exception::what () const 
 
 const char* Math::Matrix2::index_operator_out_of_range_exception::create_message_from_index () const
 {
-    std::string error ("Tried to access index: ");
-    error += index;
-    return error.c_str ();
+    std::stringstream out;
+    out << "Tried to access index: " << index;
+    return out.str ().c_str ();
 }
 
 const char* Math::Matrix2::index_operator_out_of_range_exception::create_message_from_row_col () const
 {
-    std::string error ("Tried to access: (");
-    error += row;
-    error += ", ";
-    error += col;
-    error += ")";
-    return error.c_str ();
+    std::stringstream out;
+    out << "Tried to access: (" << row << ", " << col << ")";
+    return out.str ().c_str ();
 }

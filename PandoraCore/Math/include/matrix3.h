@@ -56,8 +56,8 @@ namespace Math
                     virtual const char* what () const throw ();
 
                 private:
-                    const char* get_from_single_input () const;
-                    const char* get_from_row_col_input () const;
+                    const char* create_message_from_index () const;
+                    const char* create_message_from_row_col () const;
                 private:
                     size_t index;
                     size_t row;

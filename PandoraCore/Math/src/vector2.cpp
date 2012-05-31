@@ -1,6 +1,6 @@
 #include "vector2.h"
 
-#include <string>
+#include <sstream>
 #include <cmath>
 
 Math::Vector2::Vector2 ()
@@ -181,6 +181,7 @@ Math::Vector2::index_operator_out_of_range_exception::index_operator_out_of_rang
 
 const char* Math::Vector2::index_operator_out_of_range_exception::what () const throw ()
 {
-    std::string error = "Tried to access index: " + index;
-    return error.c_str ();
+    std::stringstream out;
+    out << "Tried to access index: " << index;
+    return out.str ().c_str ();
 }

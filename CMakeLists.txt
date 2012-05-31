@@ -1,5 +1,5 @@
 #Top-Level CmakeLists.txt
-PROJECT (PANDORA3D)
+PROJECT (PANDORA3D CXX)
 
 # Needs at least 2.6.3 for ctest support
 CMAKE_MINIMUM_REQUIRED (VERSION 2.6.3)

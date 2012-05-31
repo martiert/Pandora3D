@@ -1,7 +1,7 @@
 #include "matrix4.h"
 #include "matrix3.h"
 
-#include <string>
+#include <sstream>
 
 const Math::Matrix4 Math::Matrix4::IDENTITY (1, 0, 0, 0,
                                              0, 1, 0, 0,
@@ -344,8 +344,8 @@ Real Math::Matrix4::calculate_sub_determinant (const size_t& row, const size_t& 
 {
     Matrix3 matrix;
     size_t index = 0;
-    for (auto i = 0; i < 4; ++i) {
-        for (auto j = 0; j < 4; ++j) {
+    for (size_t i = 0; i < 4; ++i) {
+        for (size_t j = 0; j < 4; ++j) {
             if (i != row && j != column) {
                 matrix[index] = data[i * 4 + j];
                 ++index;
@@ -367,20 +367,20 @@ Math::Matrix4::index_operator_out_of_range_exception::index_operator_out_of_rang
 const char* Math::Matrix4::index_operator_out_of_range_exception::what () const throw ()
 {
     if (index == 0)
-        return get_from_row_col_input ();
-    return get_from_single_input ();
+        return create_message_from_row_col ();
+    return create_message_from_index ();
 }
 
-const char* Math::Matrix4::index_operator_out_of_range_exception::get_from_single_input () const
+const char* Math::Matrix4::index_operator_out_of_range_exception::create_message_from_index () const
 {
-    std::string error = "Tried to access index: " + index;
-    return error.c_str ();
+    std::stringstream out;
+    out << "Tried to access index: " << index;
+    return out.str ().c_str ();
 }
 
-const char* Math::Matrix4::index_operator_out_of_range_exception::get_from_row_col_input () const
+const char* Math::Matrix4::index_operator_out_of_range_exception::create_message_from_row_col () const
 {
-    std::string error = "Tried to access index: (" + row;
-    error += ", " + col;
-    error += ")";
-    return error.c_str ();
+    std::stringstream out;
+    out << "Tried to access: (" << row << ", " << col << ")";
+    return out.str ().c_str ();
 }
