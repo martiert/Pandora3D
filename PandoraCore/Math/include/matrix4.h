@@ -2,13 +2,14 @@
 #define MATH_MATRIX4_H_INCLUDED
 
 #include "config.h"
-#include "matrix3.h"
 #include "vector4.h"
 
 #include <exception>
 
 namespace Math
 {
+    class Matrix3;
+
     class Matrix4
     {
         public:
@@ -57,34 +58,13 @@ namespace Math
             class index_operator_out_of_range_exception : public std::exception
             {
                 public:
-                    index_operator_out_of_range_exception (const size_t& i)
-                        : index (i), row (0), col (0)
-                    { };
+                    index_operator_out_of_range_exception (const size_t& i);
+                    index_operator_out_of_range_exception (const size_t& row, const size_t& col);
 
-                    index_operator_out_of_range_exception (const size_t& row, const size_t& col)
-                        : index (0), row (row), col (col)
-                    {}
-
-                    virtual const char* what () const throw ()
-                    {
-                        if (index == 0)
-                            return get_from_row_col_input ();
-                        return get_from_single_input ();
-                    }
-
-                    const char* get_from_single_input () const
-                    {
-                        std::string error = "Realried to access index: " + index;
-                        return error.c_str ();
-                    }
-
-                    const char* get_from_row_col_input () const
-                    {
-                        std::string error = "Realried to access index: (" + row;
-                        error += ", " + col;
-                        error += ")";
-                        return error.c_str ();
-                    }
+                    virtual const char* what () const throw ();
+                private:
+                    const char* get_from_single_input () const;
+                    const char* get_from_row_col_input () const;
                 private:
                     size_t index;
                     size_t row;

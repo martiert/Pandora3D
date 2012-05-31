@@ -1,6 +1,7 @@
 #include <quaternion.h>
 #include <vector3.h>
 #include <gtest/gtest.h>
+#include <cmath>
 
 #include "test-helpers.h"
 

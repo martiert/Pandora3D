@@ -1,5 +1,8 @@
 #include "matrix2.h"
 
+#include <algorithm>
+#include <string>
+
 const Math::Matrix2 Math::Matrix2::IDENTITY (1, 0, 0, 1);
 
 const Math::Matrix2 Math::Matrix2::ZERO (0, 0, 0, 0);
@@ -17,6 +20,22 @@ Math::Matrix2::Matrix2 (const Real& m00, const Real& m01, const Real& m10, const
 Math::Matrix2::Matrix2 (const Real array[4])
     : data {array[0], array[1], array[2], array[3]}
 {
+}
+
+Real& Math::Matrix2::operator[] (const size_t& i)
+{
+    if (i > 3)
+        throw index_operator_out_of_range_exception (i);
+
+    return data[i];
+}
+
+Real Math::Matrix2::operator[] (const size_t& i) const
+{
+    if (i > 3)
+        throw index_operator_out_of_range_exception (i);
+
+    return data[i];
 }
 
 Real& Math::Matrix2::operator () (const size_t& i, const size_t& j)
@@ -184,4 +203,35 @@ bool Math::operator!= (const Matrix2& lmatrix, const Matrix2& rmatrix)
     return !(lmatrix == rmatrix);
 }
 
+Math::Matrix2::index_operator_out_of_range_exception::index_operator_out_of_range_exception (const size_t& row, const size_t& col)
+    : index (0), row (row), col (col)
+{ }
 
+Math::Matrix2::index_operator_out_of_range_exception::index_operator_out_of_range_exception (const size_t& index)
+    : index (index), row (0), col (0)
+{ }
+
+
+const char* Math::Matrix2::index_operator_out_of_range_exception::what () const throw ()
+{
+    if (index == 0)
+        return create_message_from_row_col ();
+    return create_message_from_index ();
+}
+
+const char* Math::Matrix2::index_operator_out_of_range_exception::create_message_from_index () const
+{
+    std::string error ("Tried to access index: ");
+    error += index;
+    return error.c_str ();
+}
+
+const char* Math::Matrix2::index_operator_out_of_range_exception::create_message_from_row_col () const
+{
+    std::string error ("Tried to access: (");
+    error += row;
+    error += ", ";
+    error += col;
+    error += ")";
+    return error.c_str ();
+}

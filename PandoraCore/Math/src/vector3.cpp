@@ -1,5 +1,6 @@
 #include "vector3.h"
 
+#include <string>
 #include <cmath>
 
 Math::Vector3::Vector3 ()
@@ -14,7 +15,7 @@ Math::Vector3::Vector3 (const Real data[3])
     : x (data[0]), y (data[1]), z (data[2])
 {}
 
-Real& Math::Vector3::operator[] (const size_t i)
+Real& Math::Vector3::operator[] (const size_t& i)
 {
     if (i > 2)
         throw index_operator_out_of_range_exception (i);
@@ -22,7 +23,7 @@ Real& Math::Vector3::operator[] (const size_t i)
     return (&x)[i];
 }
 
-Real Math::Vector3::operator[] (const size_t i) const
+Real Math::Vector3::operator[] (const size_t& i) const
 {
     if (i > 2)
         throw index_operator_out_of_range_exception (i);
@@ -193,4 +194,15 @@ bool Math::operator== (const Vector3& vec1, const Vector3& vec2)
 bool Math::operator!= (const Vector3& vec1, const Vector3& vec2)
 {
     return !(vec1 == vec2);
+}
+
+Math::Vector3::index_operator_out_of_range_exception::index_operator_out_of_range_exception (const size_t&i)
+    : index (i)
+{ }
+
+
+const char* Math::Vector3::index_operator_out_of_range_exception::what () const throw ()
+{
+      std::string error = "Tried to access index: " + index;
+      return error.c_str ();
 }

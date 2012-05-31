@@ -1,5 +1,7 @@
 #include "vector4.h"
+#include "vector3.h"
 
+#include <string>
 #include <cmath>
 
 Math::Vector4::Vector4 ()
@@ -18,7 +20,7 @@ Math::Vector4::Vector4 (const Vector3& vec)
     : x (vec.x), y (vec.y), z (vec.z), w (1)
 { }
 
-Real& Math::Vector4::operator[] (const size_t i)
+Real& Math::Vector4::operator[] (const size_t& i)
 {
     if (i > 3)
         throw index_operator_out_of_range_exception (i);
@@ -26,7 +28,7 @@ Real& Math::Vector4::operator[] (const size_t i)
     return (&x)[i];
 }
 
-Real Math::Vector4::operator[] (const size_t i) const
+Real Math::Vector4::operator[] (const size_t& i) const
 {
     if (i > 3)
         throw index_operator_out_of_range_exception (i);
@@ -178,4 +180,14 @@ bool Math::operator== (const Vector4& vec1, const Vector4& vec2)
 bool Math::operator!= (const Vector4& vec1, const Vector4& vec2)
 {
     return !(vec1 == vec2);
+}
+
+Math::Vector4::index_operator_out_of_range_exception::index_operator_out_of_range_exception (const size_t& i)
+    : index (i)
+{ }
+
+const char* Math::Vector4::index_operator_out_of_range_exception::what () const throw ()
+{
+    std::string error = "Tried to access index: " + index;
+    return error.c_str ();
 }

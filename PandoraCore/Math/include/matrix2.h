@@ -5,7 +5,6 @@
 #include "vector2.h"
 
 #include <exception>
-#include <algorithm>
 
 namespace Math
 {
@@ -16,8 +15,12 @@ namespace Math
             Matrix2 (const Real& m00, const Real& m01, const Real& m10, const Real&  m11);
             Matrix2 (const Real array[4]);
 
+            Real& operator[] (const size_t& i);
+            Real operator[] (const size_t& i) const;
+
             Real& operator () (const size_t& i, const size_t& j);
             Real operator () (const size_t& i, const size_t& j) const;
+
             operator Real* ();
             operator const Real* () const;
 
@@ -43,20 +46,15 @@ namespace Math
             class index_operator_out_of_range_exception : public std::exception
             {
                 public:
-                    index_operator_out_of_range_exception (const size_t& row, const size_t& col)
-                        : row (row), col (col)
-                    {}
+                    index_operator_out_of_range_exception (const size_t& row, const size_t& col);
+                    index_operator_out_of_range_exception (const size_t& index);
 
-                    virtual const char* what () const throw ()
-                    {
-                        std::string error ("Realried to access: (");
-                        error += row;
-                        error += ", ";
-                        error += col;
-                        error += ")";
-                        return error.c_str ();
-                    }
+                    virtual const char* what () const throw ();
                 private:
+                    const char* create_message_from_index () const;
+                    const char* create_message_from_row_col () const;
+                private:
+                    size_t index;
                     size_t row;
                     size_t col;
             };

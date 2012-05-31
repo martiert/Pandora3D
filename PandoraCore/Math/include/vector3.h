@@ -4,7 +4,6 @@
 #include "config.h"
 
 #include <exception>
-#include <string>
 
 namespace Math
 {
@@ -20,8 +19,8 @@ namespace Math
             Vector3 (const Real& x, const Real& y, const Real& z);
             Vector3 (const Real data[3]);
 
-            Real& operator[] (const size_t i);
-            Real operator[] (const size_t i) const;
+            Real& operator[] (const size_t& i);
+            Real operator[] (const size_t& i) const;
             operator Real* ();
             operator const Real* () const;
 
@@ -57,15 +56,9 @@ namespace Math
             class index_operator_out_of_range_exception : public std::exception
             {
                 public:
-                    index_operator_out_of_range_exception (const size_t& i)
-                        : index (i)
-                    {}
+                    index_operator_out_of_range_exception (const size_t& i);
 
-                    virtual const char* what () const throw ()
-                    {
-                        std::string error = "Realried to access index: " + index;
-                        return error.c_str ();
-                    }
+                    virtual const char* what () const throw ();
 
                 private:
                     size_t index;

@@ -1,5 +1,6 @@
 #include "vector2.h"
 
+#include <string>
 #include <cmath>
 
 Math::Vector2::Vector2 ()
@@ -14,7 +15,7 @@ Math::Vector2::Vector2 (const Real array[2])
     : x (array[0]), y (array[1])
 { }
 
-Real& Math::Vector2::operator[] (const size_t i)
+Real& Math::Vector2::operator[] (const size_t& i)
 {
     if (i > 1)
         throw index_operator_out_of_range_exception (i);
@@ -22,7 +23,7 @@ Real& Math::Vector2::operator[] (const size_t i)
     return (&x)[i];
 }
 
-Real Math::Vector2::operator[] (const size_t i) const
+Real Math::Vector2::operator[] (const size_t& i) const
 {
     if (i > 1)
         throw index_operator_out_of_range_exception (i);
@@ -172,4 +173,14 @@ bool Math::operator== (const Vector2& vec1, const Vector2& vec2)
 bool Math::operator!= (const Vector2& vec1, const Vector2& vec2)
 {
     return !(vec1 == vec2);
+}
+
+Math::Vector2::index_operator_out_of_range_exception::index_operator_out_of_range_exception (const size_t& i)
+    : index (i)
+{};
+
+const char* Math::Vector2::index_operator_out_of_range_exception::what () const throw ()
+{
+    std::string error = "Tried to access index: " + index;
+    return error.c_str ();
 }

@@ -1,5 +1,7 @@
 #include "quaternion.h"
 
+#include <cmath>
+
 Math::Quaternion::Quaternion ()
     : real (1)
 { }

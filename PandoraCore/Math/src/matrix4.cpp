@@ -1,4 +1,7 @@
 #include "matrix4.h"
+#include "matrix3.h"
+
+#include <string>
 
 const Math::Matrix4 Math::Matrix4::IDENTITY (1, 0, 0, 0,
                                              0, 1, 0, 0,
@@ -351,4 +354,33 @@ Real Math::Matrix4::calculate_sub_determinant (const size_t& row, const size_t& 
     }
 
     return matrix.determinant ();
+}
+
+Math::Matrix4::index_operator_out_of_range_exception::index_operator_out_of_range_exception (const size_t& i)
+    : index (i), row (0), col (0)
+{ }
+
+Math::Matrix4::index_operator_out_of_range_exception::index_operator_out_of_range_exception (const size_t& row, const size_t& col)
+    : index (0), row (row), col (col)
+{ }
+
+const char* Math::Matrix4::index_operator_out_of_range_exception::what () const throw ()
+{
+    if (index == 0)
+        return get_from_row_col_input ();
+    return get_from_single_input ();
+}
+
+const char* Math::Matrix4::index_operator_out_of_range_exception::get_from_single_input () const
+{
+    std::string error = "Tried to access index: " + index;
+    return error.c_str ();
+}
+
+const char* Math::Matrix4::index_operator_out_of_range_exception::get_from_row_col_input () const
+{
+    std::string error = "Tried to access index: (" + row;
+    error += ", " + col;
+    error += ")";
+    return error.c_str ();
 }

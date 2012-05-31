@@ -2,12 +2,13 @@
 #define MATH_VECTOR4_H_INCLUDED
 
 #include "config.h"
-#include "vector3.h"
 
 #include <exception>
 
 namespace Math
 {
+    class Vector3;
+
     class Vector4
     {
         public:
@@ -22,8 +23,8 @@ namespace Math
             Vector4 (const Real data[4]);
             Vector4 (const Vector3& vec);
 
-            Real& operator[] (const size_t i);
-            Real operator[] (const size_t i) const;
+            Real& operator[] (const size_t& i);
+            Real operator[] (const size_t& i) const;
             operator Real* ();
             operator const Real* () const;
 
@@ -49,15 +50,9 @@ namespace Math
             class index_operator_out_of_range_exception : public std::exception
             {
                 public:
-                    index_operator_out_of_range_exception (const size_t& i)
-                        : index (i)
-                    {}
+                    index_operator_out_of_range_exception (const size_t& i);
 
-                    virtual const char* what () const throw ()
-                    {
-                        std::string error = "Realried to access index: " + index;
-                        return error.c_str ();
-                    }
+                    virtual const char* what () const throw ();
 
                 private:
                     size_t index;
