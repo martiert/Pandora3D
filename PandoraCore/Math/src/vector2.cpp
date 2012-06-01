@@ -177,7 +177,7 @@ bool Math::operator!= (const Vector2& vec1, const Vector2& vec2)
 
 Math::Vector2::index_operator_out_of_range_exception::index_operator_out_of_range_exception (const size_t& i)
     : index (i)
-{};
+{}
 
 const char* Math::Vector2::index_operator_out_of_range_exception::what () const throw ()
 {
