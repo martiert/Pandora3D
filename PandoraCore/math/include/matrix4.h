@@ -88,5 +88,9 @@ namespace Math
     Matrix4 operator+ (const Matrix4& left, const Matrix4& right);
 
     Matrix4 operator- (const Matrix4& left, const Matrix4& right);
+
+    bool operator== (const Matrix4& left, const Matrix4& right);
+
+    bool operator!= (const Matrix4& left, const Matrix4& right);
 }
 #endif // MATH_MATRIX4_H_INCLUDED

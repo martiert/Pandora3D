@@ -585,6 +585,76 @@ TEST (Matrix4Test, inverse_of_singular_matrix_throws_inverse_of_singular_matrix_
     EXPECT_THROW (matrix.inverse (), Math::Matrix4::inverse_of_singular_matrix_exception);
 }
 
+TEST (Matrix4Test, equality_operator_on_same_matrix_returns_true)
+{
+    BEGIN_MULTITEST
+
+    const auto matrix = create_random_matrix4 ();
+
+    EXPECT_EQ (matrix, matrix);
+
+    END_MULTITEST
+}
+
+TEST (Matrix4Test, equality_operator_on_copy_of_matrix_returns_true)
+{
+    BEGIN_MULTITEST
+
+    const auto matrix = create_random_matrix4 ();
+    const auto copy = matrix;
+
+    EXPECT_EQ (copy, matrix);
+
+    END_MULTITEST
+}
+
+TEST (Matrix4Test, equality_operator_on_different_matrix_returns_false)
+{
+    BEGIN_MULTITEST
+
+    const auto matrix = create_random_matrix4 ();
+    const auto other = create_random_matrix4 ();
+
+    EXPECT_FALSE (other == matrix);
+
+    END_MULTITEST
+}
+
+TEST (Matrix4Test, inequality_of_same_matrix_returns_false)
+{
+    BEGIN_MULTITEST
+
+    const auto matrix = create_random_matrix4 ();
+
+    EXPECT_FALSE (matrix != matrix);
+
+    END_MULTITEST
+}
+
+TEST (Matrix4Test, inequality_of_copies_matrix_returns_false)
+{
+    BEGIN_MULTITEST
+
+    const auto matrix = create_random_matrix4 ();
+    const auto copy = matrix;
+
+    EXPECT_FALSE (copy != matrix);
+
+    END_MULTITEST
+}
+
+TEST (Matrix4Test, inequality_of_different_matrix_returns_true)
+{
+    BEGIN_MULTITEST
+
+    const auto matrix = create_random_matrix4 ();
+    const auto other = create_random_matrix4 ();
+
+    EXPECT_NE (matrix, other);
+
+    END_MULTITEST
+}
+
 const Math::Matrix4 create_random_matrix4 ()
 {
     auto array = create_double_array_of_size (16);

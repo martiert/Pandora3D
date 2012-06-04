@@ -2,6 +2,7 @@
 #include "matrix3.h"
 
 #include <sstream>
+#include <algorithm>
 
 const Math::Matrix4 Math::Matrix4::IDENTITY (1, 0, 0, 0,
                                              0, 1, 0, 0,
@@ -338,6 +339,20 @@ Math::Matrix4 Math::operator* (const Matrix4& left, const Matrix4& right)
         }
     }
     return result;
+}
+
+
+bool Math::operator== (const Matrix4& left, const Matrix4& right)
+{
+    auto left_array = static_cast<const double*> (left);
+    auto right_array = static_cast<const double*> (right);
+
+    return std::equal (left_array, &left_array[15], right_array);
+}
+
+bool Math::operator!= (const Matrix4& left, const Matrix4& right)
+{
+    return !(left == right);
 }
 
 Real Math::Matrix4::calculate_sub_determinant (const size_t& row, const size_t& column) const
