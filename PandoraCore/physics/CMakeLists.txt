@@ -21,4 +21,4 @@ SET (Physics_src
 ADD_LIBRARY (Physics SHARED ${Physics_src})
 TARGET_LINK_LIBRARIES (Physics Math)
 
-ADD_SUBDIRECTORY (Tests)
+ADD_SUBDIRECTORY (tests)

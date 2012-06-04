@@ -19,4 +19,4 @@ SET (System_src
 
 ADD_LIBRARY (System SHARED ${System_src})
 
-ADD_SUBDIRECTORY (Tests)
+ADD_SUBDIRECTORY (tests)
