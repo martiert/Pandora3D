@@ -11,11 +11,16 @@ ENDIF (NOT LIBRARY_OUTPUT_PATH)
 
 SET (PANDORA_PHYSICS_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
+CONFIGURE_FILE("${PANDORA_PHYSICS_DIR}/include/config.h.in" "${CMAKE_CURRENT_BINARY_DIR}/include/config.h")
+
 # include own directories
-INCLUDE_DIRECTORIES (include)
+INCLUDE_DIRECTORIES (include ${CMAKE_CURRENT_BINARY_DIR}/include)
+
+# include math
 INCLUDE_DIRECTORIES ("${Math_SOURCE_DIR}/include")
 
 SET (Physics_src
+    src/particle.cpp
   )
 
 ADD_LIBRARY (Physics SHARED ${Physics_src})

@@ -4,6 +4,8 @@ INCLUDE_DIRECTORIES ("${Math_SOURCE_DIR}/include")
 INCLUDE_DIRECTORIES ("${Physics_SOURCE_DIR}/include")
 
 SET (src
+    src/particle-tests.cpp
+    src/test-helpers.cpp
     )
 
 ADD_EXECUTABLE (PhysicsTests ${src})

@@ -1,0 +1,8 @@
+#ifndef PHYSICS_CONFIG_H_INCLUDED
+#define PHYSICS_CONFIG_H_INCLUDED
+
+#include <cstddef>
+
+typedef double Real;
+
+#endif // PHYSICS_CONFIG_H_INCLUDED
