@@ -3,29 +3,33 @@
 #include <cmath>
 
 Physics::Particle::Particle ()
-    : gravity (9.81), damping (1.0)
+    : damping (1.0),
+      inverse_mass (0)
 {}
 
-Physics::Particle::Particle (const Real& gravity)
-    : gravity (gravity), damping (1.0)
+Physics::Particle::Particle (const Real& mass)
+    : damping (1.0),
+      inverse_mass (1/mass)
 {}
 
-Physics::Particle::Particle (const Real& gravity, const Math::Vector3& position)
-  : gravity (gravity), damping (1.0), position (position)
+Physics::Particle::Particle (const Real& mass, const Math::Vector3& position)
+  : damping (1.0),
+    inverse_mass (1/mass),
+    position (position)
 {}
 
-Physics::Particle::Particle (const Real& gravity, const Math::Vector3& position,
+Physics::Particle::Particle (const Real& mass, const Math::Vector3& position,
     const Math::Vector3& velocity)
-  : gravity (gravity),
-    damping (1.0),
+  : damping (1.0),
+    inverse_mass (1/mass),
     position (position),
     velocity (velocity)
 {}
 
-Physics::Particle::Particle (const Real& gravity, const Math::Vector3& position,
+Physics::Particle::Particle (const Real& mass, const Math::Vector3& position,
     const Math::Vector3& velocity, const Math::Vector3& acceleration)
-  : gravity (gravity),
-    damping (1.0),
+  : damping (1.0),
+    inverse_mass (mass),
     position (position),
     velocity (velocity),
     acceleration (acceleration)
@@ -53,3 +57,24 @@ const Math::Vector3& Physics::Particle::get_acceleration () const
 {
   return acceleration;
 }
+
+void Physics::Particle::set_mass (const Real& mass)
+{
+  inverse_mass = 1/mass;
+}
+
+Real Physics::Particle::get_mass () const
+{
+  return 1/inverse_mass;
+}
+
+void Physics::Particle::set_inverse_mass (const Real& inverse)
+{
+  inverse_mass = inverse;
+}
+
+Real Physics::Particle::get_inverse_mass () const
+{
+  return inverse_mass;
+}
+
