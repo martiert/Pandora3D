@@ -19,3 +19,5 @@ ADD_EXECUTABLE (MathTests ${src})
 TARGET_LINK_LIBRARIES (MathTests gtest gtest_main Math)
 
 ADD_TEST (MathTests ${CMAKE_BINARY_DIR}/bin/MathTests)
+
+INSTALL (TARGETS MathTests DESTINATION bin)

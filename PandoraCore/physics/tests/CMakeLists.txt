@@ -12,3 +12,5 @@ ADD_EXECUTABLE (PhysicsTests ${src})
 TARGET_LINK_LIBRARIES (PhysicsTests gtest gtest_main Physics Math)
 
 ADD_TEST (PhysicsTests ${CMAKE_BINARY_DIR}/bin/PhysicsTests)
+
+INSTALL (TARGETS PhysicsTests DESTINATION bin)

@@ -17,13 +17,21 @@ CONFIGURE_FILE("${PANDORA_PHYSICS_DIR}/include/config.h.in" "${CMAKE_CURRENT_BIN
 INCLUDE_DIRECTORIES (include ${CMAKE_CURRENT_BINARY_DIR}/include)
 
 # include math
-INCLUDE_DIRECTORIES ("${Math_SOURCE_DIR}/include")
+INCLUDE_DIRECTORIES ("${MATH_SOURCE_DIR}/include")
 
 SET (Physics_src
-    src/particle.cpp
+  src/particle.cpp
+  )
+
+SET (Physics_headers
+  include/particle.h
+  ${CMAKE_CURRENT_BINARY_DIR}/include/config.h
   )
 
 ADD_LIBRARY (Physics SHARED ${Physics_src})
 TARGET_LINK_LIBRARIES (Physics Math)
+
+install (TARGETS Physics DESTINATION lib)
+install (FILES ${Physics_headers} DESTINATION include/pandora/physics)
 
 ADD_SUBDIRECTORY (tests)
