@@ -9,73 +9,73 @@
 
 namespace Math
 {
-    class Quaternion
-    {
-        public:
-            Quaternion ();
+  class Quaternion
+  {
+    public:
+      Quaternion ();
 
-            Quaternion (const Real& w, const Real& x, const Real& y, const Real& z);
+      Quaternion (const Real& w, const Real& x, const Real& y, const Real& z);
 
-            Quaternion (const Real array[4]);
+      Quaternion (const Real array[4]);
 
-            Quaternion (const Real& scalar, const Vector3& imaginary_vector);
+      Quaternion (const Real& scalar, const Vector3& imaginary_vector);
 
-            Quaternion (const Vector3& axis, const Real& angle);
+      Quaternion (const Vector3& axis, const Real& angle);
 
-            Quaternion (const Matrix4& matrix);
+      Quaternion (const Matrix4& matrix);
 
-            Real& w ();
-            Real& x ();
-            Real& y ();
-            Real& z ();
+      Real& w ();
+      Real& x ();
+      Real& y ();
+      Real& z ();
 
-            Real w () const;
-            Real x () const;
-            Real y () const;
-            Real z () const;
+      Real w () const;
+      Real x () const;
+      Real y () const;
+      Real z () const;
 
-            Quaternion operator+= (const Quaternion& other);
-            Quaternion operator-= (const Quaternion& other);
-            Quaternion operator*= (const Real& scalar);
-            Quaternion operator/= (const Real& scalar);
+      Quaternion operator+= (const Quaternion& other);
+      Quaternion operator-= (const Quaternion& other);
+      Quaternion operator*= (const Real& scalar);
+      Quaternion operator/= (const Real& scalar);
 
-            Matrix4 create_matrix () const;
+      Matrix4 create_matrix () const;
 
-            Real norm () const;
-            void normalize ();
+      Real norm () const;
+      void normalize ();
 
-            Quaternion conjugate () const;
-            Quaternion inverse () const;
+      Quaternion conjugate () const;
+      Quaternion inverse () const;
 
-            static Quaternion slerp (const Quaternion& from, const Quaternion& to, const Real& t);
+      static Quaternion slerp (const Quaternion& from, const Quaternion& to, const Real& t);
 
-        public:
-            Real real;
-            Vector3 imag;
+    public:
+      Real real;
+      Vector3 imag;
 
-        protected:
-            Matrix4 create_matrix_with_scale (const Real& s) const;
+    protected:
+      Matrix4 create_matrix_with_scale (const Real& s) const;
 
-            void create_quaternion_from_matrix_with_largest_u (const Matrix4& matrix);
-            void create_quaternion_from_matrix_with_smallest_u (const Matrix4& matrix);
+      void create_quaternion_from_matrix_with_largest_u (const Matrix4& matrix);
+      void create_quaternion_from_matrix_with_smallest_u (const Matrix4& matrix);
 
-        public:
-            class normalizing_zero_quaternion_exception : public std::exception { };
-            class can_not_make_matrix_from_zero_quaternion_exception : public std::exception { };
-            class division_by_zero_exception : public std::exception { };
-    };
+    public:
+      class normalizing_zero_quaternion_exception : public std::exception { };
+      class can_not_make_matrix_from_zero_quaternion_exception : public std::exception { };
+      class division_by_zero_exception : public std::exception { };
+  };
 
-    Quaternion operator+ (const Quaternion& left, const Quaternion& right);
+  Quaternion operator+ (const Quaternion& left, const Quaternion& right);
 
-    Quaternion operator- (const Quaternion& left, const Quaternion& right);
+  Quaternion operator- (const Quaternion& left, const Quaternion& right);
 
-    Quaternion operator* (const Quaternion& left, const Quaternion& right);
+  Quaternion operator* (const Quaternion& left, const Quaternion& right);
 
-    Quaternion operator* (const Quaternion& quaternion, const Real& scalar);
+  Quaternion operator* (const Quaternion& quaternion, const Real& scalar);
 
-    Quaternion operator* (const Real& scalar, const Quaternion& quaternion);
+  Quaternion operator* (const Real& scalar, const Quaternion& quaternion);
 
-    Quaternion operator/ (const Quaternion& quaternion, const Real& scalar);
+  Quaternion operator/ (const Quaternion& quaternion, const Real& scalar);
 }
 
 #endif // MATH_QUATERNION_H_INCLUDED

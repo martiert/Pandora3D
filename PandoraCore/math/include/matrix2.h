@@ -8,77 +8,77 @@
 
 namespace Math
 {
-    class Matrix2
-    {
+  class Matrix2
+  {
+    public:
+      Matrix2 ();
+      Matrix2 (const Real& m00, const Real& m01, const Real& m10, const Real&  m11);
+      Matrix2 (const Real array[4]);
+
+      Real& operator[] (const size_t& i);
+      Real operator[] (const size_t& i) const;
+
+      Real& operator () (const size_t& i, const size_t& j);
+      Real operator () (const size_t& i, const size_t& j) const;
+
+      operator Real* ();
+      operator const Real* () const;
+
+      Matrix2& operator+= (const Matrix2& matrix);
+      Matrix2& operator-= (const Matrix2& matrix);
+      Matrix2& operator*= (const Real& scalar);
+      Matrix2& operator/= (const Real& scalar);
+
+      Real determinant () const;
+      Matrix2 transpose () const;
+      Matrix2 inverse () const;
+
+      const static Matrix2 IDENTITY;
+      const static Matrix2 ZERO;
+    private:
+      Real data[4];
+
+    public:
+      class division_by_zero_exception : public std::exception { };
+
+      class inverse_of_singular_matrix_exception : public std::exception { };
+
+      class index_operator_out_of_range_exception : public std::exception
+      {
         public:
-            Matrix2 ();
-            Matrix2 (const Real& m00, const Real& m01, const Real& m10, const Real&  m11);
-            Matrix2 (const Real array[4]);
+          index_operator_out_of_range_exception (const size_t& row, const size_t& col);
+          index_operator_out_of_range_exception (const size_t& index);
 
-            Real& operator[] (const size_t& i);
-            Real operator[] (const size_t& i) const;
-
-            Real& operator () (const size_t& i, const size_t& j);
-            Real operator () (const size_t& i, const size_t& j) const;
-
-            operator Real* ();
-            operator const Real* () const;
-
-            Matrix2& operator+= (const Matrix2& matrix);
-            Matrix2& operator-= (const Matrix2& matrix);
-            Matrix2& operator*= (const Real& scalar);
-            Matrix2& operator/= (const Real& scalar);
-
-            Real determinant () const;
-            Matrix2 transpose () const;
-            Matrix2 inverse () const;
-
-            const static Matrix2 IDENTITY;
-            const static Matrix2 ZERO;
+          virtual const char* what () const throw ();
         private:
-            Real data[4];
+          const char* create_message_from_index () const;
+          const char* create_message_from_row_col () const;
+        private:
+          size_t index;
+          size_t row;
+          size_t col;
+      };
+  };
 
-        public:
-            class division_by_zero_exception : public std::exception { };
+  Matrix2 operator+ (const Matrix2& lmatrix, const Matrix2& rmatrix);
 
-            class inverse_of_singular_matrix_exception : public std::exception { };
+  Matrix2 operator- (const Matrix2& lmatrix, const Matrix2& rmatrix);
 
-            class index_operator_out_of_range_exception : public std::exception
-            {
-                public:
-                    index_operator_out_of_range_exception (const size_t& row, const size_t& col);
-                    index_operator_out_of_range_exception (const size_t& index);
+  Matrix2 operator* (const Matrix2& lmatrix, const Matrix2& rmatrix);
 
-                    virtual const char* what () const throw ();
-                private:
-                    const char* create_message_from_index () const;
-                    const char* create_message_from_row_col () const;
-                private:
-                    size_t index;
-                    size_t row;
-                    size_t col;
-            };
-    };
+  Matrix2 operator* (const Matrix2& matrix, const Real& scalar);
 
-    Matrix2 operator+ (const Matrix2& lmatrix, const Matrix2& rmatrix);
+  Vector2 operator* (const Matrix2& matrix, const Vector2& vector);
 
-    Matrix2 operator- (const Matrix2& lmatrix, const Matrix2& rmatrix);
+  Vector2 operator* (const Vector2& vector, const Matrix2& matrix);
 
-    Matrix2 operator* (const Matrix2& lmatrix, const Matrix2& rmatrix);
+  Matrix2 operator* (const Real& scalar, const Matrix2& matrix);
 
-    Matrix2 operator* (const Matrix2& matrix, const Real& scalar);
+  Matrix2 operator/ (const Matrix2& matrix, const Real& scalar);
 
-    Vector2 operator* (const Matrix2& matrix, const Vector2& vector);
+  bool operator== (const Matrix2& lmatrix, const Matrix2& rmatrix);
 
-    Vector2 operator* (const Vector2& vector, const Matrix2& matrix);
-
-    Matrix2 operator* (const Real& scalar, const Matrix2& matrix);
-
-    Matrix2 operator/ (const Matrix2& matrix, const Real& scalar);
-
-    bool operator== (const Matrix2& lmatrix, const Matrix2& rmatrix);
-
-    bool operator!= (const Matrix2& lmatrix, const Matrix2& rmatrix);
+  bool operator!= (const Matrix2& lmatrix, const Matrix2& rmatrix);
 }
 
 #endif // MATH_MATRIX2_H_INCLUDED
