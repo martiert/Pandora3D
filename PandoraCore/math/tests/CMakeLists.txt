@@ -1,23 +1,23 @@
-INCLUDE_DIRECTORIES (include)
+include_directories (include)
 
-INCLUDE_DIRECTORIES ("${gtest_SOURCE_DIR}/include")
-INCLUDE_DIRECTORIES ("${Math_SOURCE_DIR}/include")
-INCLUDE_DIRECTORIES ("include")
+include_directories ("${gtest_SOURCE_DIR}/include")
+include_directories ("${math_SOURCE_DIR}/include")
+include_directories ("include")
 
-SET (src
-    src/test-helpers.cpp
-    src/quaternion-test.cpp
-    src/matrix4-test.cpp
-    src/matrix3-test.cpp
-    src/matrix2-test.cpp
-    src/vec4-test.cpp
-    src/vec3-test.cpp
-    src/vec2-test.cpp
-    )
+set (src
+  src/test-helpers.cpp
+  src/quaternion-test.cpp
+  src/matrix4-test.cpp
+  src/matrix3-test.cpp
+  src/matrix2-test.cpp
+  src/vec4-test.cpp
+  src/vec3-test.cpp
+  src/vec2-test.cpp
+  )
 
-ADD_EXECUTABLE (MathTests ${src})
-TARGET_LINK_LIBRARIES (MathTests gtest gtest_main Math)
+add_executable (mathtests ${src})
+target_link_libraries (mathtests gtest gtest_main math)
 
-ADD_TEST (MathTests ${CMAKE_BINARY_DIR}/bin/MathTests)
+add_test (mathtests ${CMAKE_BINARY_DIR}/bin/mathtests)
 
-INSTALL (TARGETS MathTests DESTINATION bin)
+install (TARGETS mathtests DESTINATION bin)

@@ -1,24 +1,24 @@
-PROJECT (MATH)
-CMAKE_MINIMUM_REQUIRED (VERSION 2.6.3)
+project (math)
+cmake_minimum_required (VERSION 2.6.3)
 
-IF (NOT EXECUTABLE_OUTPUT_PATH)
-  SET (EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
-ENDIF (NOT EXECUTABLE_OUTPUT_PATH)
+if (NOT EXECUTABLE_OUTPUT_PATH)
+  set (EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
+endif (NOT EXECUTABLE_OUTPUT_PATH)
 
-IF (NOT LIBRARY_OUTPUT_PATH)
-  SET (LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
-ENDIF (NOT LIBRARY_OUTPUT_PATH)
+if (NOT LIBRARY_OUTPUT_PATH)
+  set (LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
+endif (NOT LIBRARY_OUTPUT_PATH)
 
-SET (PANDORA_MATH_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+set (PANDORA_MATH_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-INCLUDE (CheckIncludeFiles)
+include (CheckIncludeFiles)
 
-CONFIGURE_FILE("${PANDORA_MATH_DIR}/include/config.h.in" "${CMAKE_CURRENT_BINARY_DIR}/include/config.h")
+configure_file("${PANDORA_MATH_DIR}/include/config.h.in" "${CMAKE_CURRENT_BINARY_DIR}/include/config.h")
 
 # include own directories
-INCLUDE_DIRECTORIES (include ${CMAKE_CURRENT_BINARY_DIR}/include)
+include_directories (include ${CMAKE_CURRENT_BINARY_DIR}/include)
 
-SET (Math_src
+set (math_src
   src/vector2.cpp
   src/vector3.cpp
   src/vector4.cpp
@@ -28,7 +28,7 @@ SET (Math_src
   src/quaternion.cpp
   )
 
-SET (Math_headers
+set (math_headers
   include/vector2.h
   include/vector3.h
   include/vector4.h
@@ -38,13 +38,13 @@ SET (Math_headers
   include/quaternion.h
   )
 
-ADD_LIBRARY (Math SHARED ${Math_src})
+add_library (math SHARED ${math_src})
 
-IF (NOT WIN32)
-  TARGET_LINK_LIBRARIES (Math m)
-ENDIF (NOT WIN32)
+if (NOT WIN32)
+  target_link_libraries (math m)
+endif (NOT WIN32)
 
-install (TARGETS Math DESTINATION lib)
-install (FILES ${Math_headers} DESTINATION include/pandora/math)
+install (TARGETS math DESTINATION lib)
+install (FILES ${math_headers} DESTINATION include/pandora/math)
 
-ADD_SUBDIRECTORY (tests)
+add_subdirectory (tests)

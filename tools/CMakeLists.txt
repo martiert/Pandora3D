@@ -1,2 +1,2 @@
-ADD_SUBDIRECTORY (gtest)
-ADD_SUBDIRECTORY (gmock)
+add_subdirectory (gtest)
+add_subdirectory (gmock)

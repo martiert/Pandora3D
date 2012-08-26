@@ -1,37 +1,35 @@
-PROJECT (PHYSICS)
-CMAKE_MINIMUM_REQUIRED (VERSION 2.6.3)
+project (physics)
+cmake_minimum_required (VERSION 2.6.3)
 
-IF (NOT EXECUTABLE_OUTPUT_PATH)
-  SET (EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
-ENDIF (NOT EXECUTABLE_OUTPUT_PATH)
+if (NOT EXECUTABLE_OUTPUT_PATH)
+  set (EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
+endif (NOT EXECUTABLE_OUTPUT_PATH)
 
-IF (NOT LIBRARY_OUTPUT_PATH)
-  SET (LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
-ENDIF (NOT LIBRARY_OUTPUT_PATH)
+if (NOT LIBRARY_OUTPUT_PATH)
+  set (LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
+endif (NOT LIBRARY_OUTPUT_PATH)
 
-SET (PANDORA_PHYSICS_DIR ${CMAKE_CURRENT_SOURCE_DIR})
-
-CONFIGURE_FILE("${PANDORA_PHYSICS_DIR}/include/config.h.in" "${CMAKE_CURRENT_BINARY_DIR}/include/config.h")
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in" "${CMAKE_CURRENT_BINARY_DIR}/include/config.h")
 
 # include own directories
-INCLUDE_DIRECTORIES (include ${CMAKE_CURRENT_BINARY_DIR}/include)
+include_directories (include ${CMAKE_CURRENT_BINARY_DIR}/include)
 
 # include math
-INCLUDE_DIRECTORIES ("${MATH_SOURCE_DIR}/include")
+include_directories ("${math_SOURCE_DIR}/include")
 
-SET (Physics_src
+set (physics_src
   src/particle.cpp
   )
 
-SET (Physics_headers
+set (physics_headers
   include/particle.h
   ${CMAKE_CURRENT_BINARY_DIR}/include/config.h
   )
 
-ADD_LIBRARY (Physics SHARED ${Physics_src})
-TARGET_LINK_LIBRARIES (Physics Math)
+add_library (physics SHARED ${physics_src})
+target_link_libraries (physics math)
 
-install (TARGETS Physics DESTINATION lib)
-install (FILES ${Physics_headers} DESTINATION include/pandora/physics)
+install (TARGETS physics DESTINATION lib)
+install (FILES ${physics_headers} DESTINATION include/pandora/physics)
 
-ADD_SUBDIRECTORY (tests)
+add_subdirectory (tests)

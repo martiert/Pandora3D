@@ -1,12 +1,12 @@
-INCLUDE_DIRECTORIES (include)
-INCLUDE_DIRECTORIES ("${gtest_SOURCE_DIR}/include")
-INCLUDE_DIRECTORIES ("${System_SOURCE_DIR}/include")
+include_directories (include)
+include_directories ("${gtest_SOURCE_DIR}/include")
+include_directories ("${system_SOURCE_DIR}/include")
 
-SET (src
-    src/test-runner.cpp
-    )
+set (src
+  src/test-runner.cpp
+  )
 
-ADD_EXECUTABLE (SystemTests ${src})
-TARGET_LINK_LIBRARIES (SystemTests gtest gtest_main System)
+add_executable (systemtests ${src})
+target_link_libraries (systemtests gtest gtest_main system)
 
-ADD_TEST (SystemTests ${CMAKE_BINARY_DIR}/bin/SystemTests)
+add_test (systemtests ${CMAKE_BINARY_DIR}/bin/systemtests)

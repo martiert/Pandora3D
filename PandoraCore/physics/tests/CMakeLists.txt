@@ -1,16 +1,16 @@
-INCLUDE_DIRECTORIES (include)
-INCLUDE_DIRECTORIES ("${gtest_SOURCE_DIR}/include")
-INCLUDE_DIRECTORIES ("${Math_SOURCE_DIR}/include")
-INCLUDE_DIRECTORIES ("${Physics_SOURCE_DIR}/include")
+include_directories (include)
+include_directories ("${gtest_SOURCE_DIR}/include")
+include_directories ("${math_SOURCE_DIR}/include")
+include_directories ("${physics_SOURCE_DIR}/include")
 
-SET (src
-    src/particle-tests.cpp
-    src/test-helpers.cpp
-    )
+set (src
+  src/particle-tests.cpp
+  src/test-helpers.cpp
+  )
 
-ADD_EXECUTABLE (PhysicsTests ${src})
-TARGET_LINK_LIBRARIES (PhysicsTests gtest gtest_main Physics Math)
+add_executable (physicstests ${src})
+target_link_libraries (physicstests gtest gtest_main physics math)
 
-ADD_TEST (PhysicsTests ${CMAKE_BINARY_DIR}/bin/PhysicsTests)
+add_test (physicstests ${CMAKE_BINARY_DIR}/bin/physicstests)
 
-INSTALL (TARGETS PhysicsTests DESTINATION bin)
+install (TARGETS physicstests DESTINATION bin)
