@@ -6,6 +6,8 @@
 
 namespace Physics
 {
+  static const Math::Vector3 default_gravity (0, -9.8, 0);
+
   class Particle
   {
     public:
@@ -24,14 +26,20 @@ namespace Physics
 
       void set_inverse_mass (const Real& inverse);
       Real get_inverse_mass () const;
+
+      void set_gravity (const Real& new_gravity);
+      const Math::Vector3& get_gravity () const;
     public:
       Real damping;
 
-    private:
+    protected:
       Real inverse_mass;
+
       Math::Vector3 position;
       Math::Vector3 velocity;
       Math::Vector3 acceleration;
+
+      Math::Vector3 gravity;
   };
 }
 

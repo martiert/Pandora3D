@@ -4,7 +4,8 @@
 
 Physics::Particle::Particle ()
     : damping (1.0),
-      inverse_mass (0)
+      inverse_mass (0),
+      gravity (default_gravity)
 {}
 
 Physics::Particle::Particle (const Math::Vector3& position)
@@ -17,13 +18,15 @@ Physics::Particle::Particle (const Math::Vector3& position, const Math::Vector3&
   : damping (1.0),
     inverse_mass (0),
     position (position),
-    velocity (velocity)
+    velocity (velocity),
+    gravity (default_gravity)
 {}
 
 void Physics::Particle::update (const Real& dt)
 {
   position += dt * velocity;
 
+  acceleration = inverse_mass * gravity;
   velocity *= std::pow (damping, dt);
   velocity += acceleration * dt;
 }
@@ -63,3 +66,12 @@ Real Physics::Particle::get_inverse_mass () const
   return inverse_mass;
 }
 
+void Physics::Particle::set_gravity (const Real& new_gravity)
+{
+  gravity = Math::Vector3 (0, -new_gravity, 0);
+}
+
+const Math::Vector3& Physics::Particle::get_gravity () const
+{
+  return gravity;
+}

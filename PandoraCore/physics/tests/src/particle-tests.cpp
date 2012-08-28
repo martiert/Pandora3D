@@ -83,6 +83,26 @@ TEST (ParticleTest, damping_is_set_to_1_if_not_specified)
   EXPECT_EQ (1.0, particle.damping);
 }
 
+TEST (ParticleTest, default_gravity_of_particle_is_equal_to_physics_default_gravity)
+{
+  const Physics::Particle particle;
+
+  EXPECT_EQ (particle.get_gravity (), Physics::default_gravity);
+}
+
+TEST (ParticleTest, setting_gravity_on_particle_makes_the_y_part_of_the_gravity_vector_minus_argument_and_rest_zero)
+{
+  BEGIN_MULTITEST
+
+  const auto gravity = create_random_scalar ();
+  Physics::Particle particle;
+  particle.set_gravity (gravity);
+
+  EXPECT_EQ (Math::Vector3 (0, -gravity, 0), particle.get_gravity ());
+
+  END_MULTITEST
+}
+
 TEST (ParticleTest, updating_the_particle_with_timestep_of_one_moves_position_equal_velocity)
 {
   BEGIN_MULTITEST
@@ -113,7 +133,7 @@ TEST (ParticleTest, updating_particle_with_timestep_of_one_half_moves_position_h
   END_MULTITEST
 }
 
-TEST (ParticleTest, updating_particle_with_no_damping_do_not_change_velocity)
+TEST (ParticleTest, updating_particle_with_no_damping_or_forces_applied_do_not_change_velocity)
 {
   BEGIN_MULTITEST
 
@@ -121,6 +141,8 @@ TEST (ParticleTest, updating_particle_with_no_damping_do_not_change_velocity)
   const auto velocity = create_random_vector3 ();
 
   Physics::Particle particle (position, velocity);
+  particle.set_mass (1);
+  particle.set_gravity (0);
   particle.update (0.5);
 
   EXPECT_EQ (velocity, particle.get_velocity ());
@@ -137,6 +159,8 @@ TEST (ParticleTest, updating_particle_with_timestep_of_one_damping_and_no_forces
   const auto damping = create_random_scalar ();
 
   Physics::Particle particle (position, velocity);
+  particle.set_mass (1);
+  particle.set_gravity (0);
   particle.damping = damping;
 
   particle.update (1);
@@ -157,6 +181,8 @@ TEST (ParticleTest, updating_particle_without_forces_changes_velocity_to_damping
   const auto change = std::pow (damping, timestep);
 
   Physics::Particle particle (position, velocity);
+  particle.set_mass (1);
+  particle.set_gravity (0);
   particle.damping = damping;
 
   particle.update (timestep);
@@ -172,9 +198,42 @@ TEST (ParticleTest, particle_with_velocity_no_damping_or_forces_will_not_change_
   const Real timestep = 0.431;
 
   Physics::Particle particle (position, velocity);
+  particle.set_mass (1);
+  particle.set_gravity (0);
 
   for (size_t i = 0; i < 400; ++i) {
     particle.update (timestep);
     EXPECT_EQ (velocity, particle.get_velocity ());
+  }
+}
+
+TEST (ParticleTest, particle_with_zero_inverse_mass_will_never_change_velocity)
+{
+  const auto position = create_random_vector3 ();
+  const auto velocity = create_random_vector3 ();
+  const Real timestep = 0.431;
+
+  Physics::Particle particle (position, velocity);
+
+  for (size_t i = 0; i < 400; ++i) {
+    particle.update (timestep);
+    EXPECT_EQ (velocity, particle.get_velocity ());
+  }
+}
+
+TEST (ParticleTest, y_component_of_velocity_of_particle_with_positive_mass_and_gravity_will_decrease_for_each_update)
+{
+  Physics::Particle particle;
+  particle.set_inverse_mass (3.4);
+  auto velocity = particle.get_velocity ();
+
+  for (size_t i = 0; i < 400; ++i) {
+    particle.update (0.45);
+    const auto new_velocity = particle.get_velocity ();
+
+    EXPECT_EQ (new_velocity.x, velocity.x);
+    EXPECT_LT (new_velocity.y, velocity.y);
+    EXPECT_EQ (new_velocity.z, velocity.z);
+    velocity = new_velocity;
   }
 }
