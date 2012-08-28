@@ -7,32 +7,17 @@ Physics::Particle::Particle ()
       inverse_mass (0)
 {}
 
-Physics::Particle::Particle (const Real& mass)
-    : damping (1.0),
-      inverse_mass (1/mass)
-{}
-
-Physics::Particle::Particle (const Real& mass, const Math::Vector3& position)
+Physics::Particle::Particle (const Math::Vector3& position)
   : damping (1.0),
-    inverse_mass (1/mass),
+    inverse_mass (0),
     position (position)
 {}
 
-Physics::Particle::Particle (const Real& mass, const Math::Vector3& position,
-    const Math::Vector3& velocity)
+Physics::Particle::Particle (const Math::Vector3& position, const Math::Vector3& velocity)
   : damping (1.0),
-    inverse_mass (1/mass),
+    inverse_mass (0),
     position (position),
     velocity (velocity)
-{}
-
-Physics::Particle::Particle (const Real& mass, const Math::Vector3& position,
-    const Math::Vector3& velocity, const Math::Vector3& acceleration)
-  : damping (1.0),
-    inverse_mass (mass),
-    position (position),
-    velocity (velocity),
-    acceleration (acceleration)
 {}
 
 void Physics::Particle::update (const Real& dt)

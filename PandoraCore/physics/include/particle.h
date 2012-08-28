@@ -10,14 +10,10 @@ namespace Physics
   {
     public:
       Particle ();
-      Particle (const Real& mass);
-      Particle (const Real& mass, const Math::Vector3& position);
-      Particle (const Real& mass, const Math::Vector3& position,
-                const Math::Vector3& velocity);
-      Particle (const Real& mass, const Math::Vector3& position,
-                const Math::Vector3& velocity, const Math::Vector3& acceleration);
+      Particle (const Math::Vector3& position);
+      Particle (const Math::Vector3& position, const Math::Vector3& velocity);
 
-      void update (const Real& dt);
+      virtual void update (const Real& dt);
 
       const Math::Vector3& get_position () const;
       const Math::Vector3& get_velocity () const;
