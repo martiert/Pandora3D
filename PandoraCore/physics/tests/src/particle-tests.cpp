@@ -28,7 +28,7 @@ TEST (ParticleTest, creating_particle_without_initial_position_sets_position_to_
   BEGIN_MULTITEST
 
   const Physics::Particle particle;
-  const Math::Vector3 origin;
+  const Math::Vector3<Real> origin;
 
   EXPECT_EQ (origin, particle.get_position ());
 
@@ -50,7 +50,7 @@ TEST (ParticleTest, creating_particle_with_initial_position_sets_position)
 TEST (ParticleTest, creating_particle_without_initial_velocity_gives_zero_velocity)
 {
   const Physics::Particle particle (create_random_vector3 ());
-  const Math::Vector3 zero;
+  const Math::Vector3<Real> zero;
 
   EXPECT_EQ (zero, particle.get_velocity ());
 }
@@ -72,7 +72,7 @@ TEST (ParticleTest, creating_particle_with_initial_velocity_sets_velocity_and_po
 TEST (ParticleTest, initial_acceleration_of_particle_is_the_zero_vector)
 {
   const Physics::Particle particle (create_random_vector3 (), create_random_vector3 ());
-  const Math::Vector3 zero;
+  const Math::Vector3<Real> zero;
 
   EXPECT_EQ (zero, particle.get_acceleration ());
 }
@@ -98,7 +98,7 @@ TEST (ParticleTest, setting_gravity_on_particle_makes_the_y_part_of_the_gravity_
   Physics::Particle particle;
   particle.set_gravity (gravity);
 
-  EXPECT_EQ (Math::Vector3 (0, -gravity, 0), particle.get_gravity ());
+  EXPECT_EQ (Math::Vector3<Real> (0, -gravity, 0), particle.get_gravity ());
 
   END_MULTITEST
 }

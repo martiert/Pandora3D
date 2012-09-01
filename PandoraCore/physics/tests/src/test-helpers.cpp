@@ -18,10 +18,10 @@ double* create_double_array_of_size (const size_t& size)
   return array;
 }
 
-Math::Vector3 create_random_vector3 ()
+Math::Vector3<Real> create_random_vector3 ()
 {
   auto array = create_double_array_of_size (3);
-  Math::Vector3 vector (array);
+  Math::Vector3<Real> vector (array);
   return vector;
 }
 

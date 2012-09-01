@@ -8,13 +8,13 @@ Physics::Particle::Particle ()
       gravity (default_gravity)
 {}
 
-Physics::Particle::Particle (const Math::Vector3& position)
+Physics::Particle::Particle (const Math::Vector3<Real>& position)
   : damping (1.0),
     inverse_mass (0),
     position (position)
 {}
 
-Physics::Particle::Particle (const Math::Vector3& position, const Math::Vector3& velocity)
+Physics::Particle::Particle (const Math::Vector3<Real>& position, const Math::Vector3<Real>& velocity)
   : damping (1.0),
     inverse_mass (0),
     position (position),
@@ -31,17 +31,17 @@ void Physics::Particle::update (const Real& dt)
   velocity += acceleration * dt;
 }
 
-const Math::Vector3& Physics::Particle::get_position () const
+const Math::Vector3<Real>& Physics::Particle::get_position () const
 {
   return position;
 }
 
-const Math::Vector3& Physics::Particle::get_velocity () const
+const Math::Vector3<Real>& Physics::Particle::get_velocity () const
 {
   return velocity;
 }
 
-const Math::Vector3& Physics::Particle::get_acceleration () const
+const Math::Vector3<Real>& Physics::Particle::get_acceleration () const
 {
   return acceleration;
 }
@@ -68,10 +68,10 @@ Real Physics::Particle::get_inverse_mass () const
 
 void Physics::Particle::set_gravity (const Real& new_gravity)
 {
-  gravity = Math::Vector3 (0, -new_gravity, 0);
+  gravity = Math::Vector3<Real> (0, -new_gravity, 0);
 }
 
-const Math::Vector3& Physics::Particle::get_gravity () const
+const Math::Vector3<Real>& Physics::Particle::get_gravity () const
 {
   return gravity;
 }

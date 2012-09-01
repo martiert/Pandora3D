@@ -4,5 +4,6 @@
 #include <cstddef>
 
 typedef double Real;
+typedef unsigned int uint;
 
 #endif // PHYSICS_CONFIG_H_INCLUDED
