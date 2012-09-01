@@ -3,6 +3,6 @@
 
 #include <cstddef>
 
-typedef double Real;
+typedef unsigned int uint;
 
 #endif // MATH_CONFIG_H_INCLUDED

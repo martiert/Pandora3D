@@ -4,9 +4,12 @@
 #include "config.h"
 
 #include <exception>
+#include <sstream>
+#include <algorithm>
 
 namespace Math
 {
+  template<typename Real>
   class Matrix3
   {
     public:
@@ -65,21 +68,292 @@ namespace Math
       };
   };
 
-  Matrix3 operator* (const Matrix3& matrix, const Real& scalar);
+  template<typename Real>
+  Matrix3<Real> operator* (const Matrix3<Real>& matrix, const Real& scalar);
 
-  Matrix3 operator* (const Real& scalar, const Matrix3& matrix);
+  template<typename Real>
+  Matrix3<Real> operator* (const Real& scalar, const Matrix3<Real>& matrix);
 
-  Matrix3 operator/ (const Matrix3& matrix, const Real& scalar);
+  template<typename Real>
+  Matrix3<Real> operator/ (const Matrix3<Real>& matrix, const Real& scalar);
 
-  Matrix3 operator+ (const Matrix3& left, const Matrix3& right);
+  template<typename Real>
+  Matrix3<Real> operator+ (const Matrix3<Real>& left, const Matrix3<Real>& right);
 
-  Matrix3 operator- (const Matrix3& left, const Matrix3& right);
+  template<typename Real>
+  Matrix3<Real> operator- (const Matrix3<Real>& left, const Matrix3<Real>& right);
 
-  Matrix3 operator* (const Matrix3& left, const Matrix3& right);
+  template<typename Real>
+  Matrix3<Real> operator* (const Matrix3<Real>& left, const Matrix3<Real>& right);
 
-  bool operator== (const Matrix3& left, const Matrix3& right);
+  template<typename Real>
+  bool operator== (const Matrix3<Real>& left, const Matrix3<Real>& right);
 
-  bool operator!= (const Matrix3& left, const Matrix3& right);
+  template<typename Real>
+  bool operator!= (const Matrix3<Real>& left, const Matrix3<Real>& right);
+}
+
+// Implementation
+template<typename Real>
+Math::Matrix3<Real>::Matrix3 ()
+  : data {1, 0, 0, 0, 1, 0, 0, 0, 1}
+{ }
+
+template<typename Real>
+Math::Matrix3<Real>::Matrix3 (const Real& m00, const Real& m01, const Real& m02,
+                        const Real& m10, const Real& m11, const Real& m12,
+                        const Real& m20, const Real& m21, const Real& m22)
+  : data {m00, m01, m02, m10, m11, m12, m20, m21, m22}
+{ }
+
+template<typename Real>
+Math::Matrix3<Real>::Matrix3 (const Real array[9])
+  : data {array[0], array[1], array[2],
+          array[3], array[4], array[5],
+          array[6], array[7], array[8]}
+{ }
+
+template<typename Real>
+Real& Math::Matrix3<Real>::operator () (const size_t& i, const size_t& j)
+{
+  if (i > 2 || j > 2)
+    throw index_operator_out_of_range_exception (i, j);
+
+  return data[i*3 + j];
+}
+
+template<typename Real>
+Real Math::Matrix3<Real>::operator () (const size_t& i, const size_t& j) const
+{
+  if (i > 2 || j > 2)
+    throw index_operator_out_of_range_exception (i, j);
+
+  return data[i*3 + j];
+}
+
+template<typename Real>
+Real& Math::Matrix3<Real>::operator [] (const size_t& i)
+{
+  if (i > 8)
+    throw index_operator_out_of_range_exception (i);
+
+  return data[i];
+}
+
+template<typename Real>
+Real Math::Matrix3<Real>::operator [] (const size_t& i) const
+{
+  if (i > 8)
+    throw index_operator_out_of_range_exception (i);
+
+  return data[i];
+}
+
+template<typename Real>
+Math::Matrix3<Real>::operator Real* ()
+{
+  return &data[0];
+}
+
+template<typename Real>
+Math::Matrix3<Real>::operator const Real* () const
+{
+  return &data[0];
+}
+
+template<typename Real>
+Math::Matrix3<Real>& Math::Matrix3<Real>::operator*= (const Real& scalar)
+{
+  for (auto& i : data)
+    i *= scalar;
+
+  return *this;
+}
+
+template<typename Real>
+Math::Matrix3<Real>& Math::Matrix3<Real>::operator/= (const Real& scalar)
+{
+  if (scalar == 0)
+    throw division_by_zero_exception ();
+
+  for (auto& i : data)
+    i /= scalar;
+
+  return *this;
+}
+
+template<typename Real>
+Math::Matrix3<Real>& Math::Matrix3<Real>::operator+= (const Math::Matrix3<Real>& other)
+{
+  for (auto i = 0; i < 9; ++i)
+    data[i] += other.data[i];
+
+  return *this;
+}
+
+template<typename Real>
+Math::Matrix3<Real>& Math::Matrix3<Real>::operator-= (const Math::Matrix3<Real>& other)
+{
+  for (auto i = 0; i < 9; ++i)
+    data[i] -= other.data[i];
+
+  return *this;
+}
+
+template<typename Real>
+Real Math::Matrix3<Real>::determinant () const
+{
+  return  data[0] * (data[4]*data[8] - data[5]*data[7]) -
+    data[1] * (data[3]*data[8] - data[5]*data[6]) +
+    data[2] * (data[3]*data[7] - data[4]*data[6]);
+}
+
+template<typename Real>
+Real Math::Matrix3<Real>::trace () const
+{
+  return data[0] + data[4] + data[8];
+}
+
+template<typename Real>
+Math::Matrix3<Real> Math::Matrix3<Real>::transpose () const
+{
+  return Matrix3<Real> (data[0], data[3], data[6],
+      data[1], data[4], data[7],
+      data[2], data[5], data[8]);
+}
+
+template<typename Real>
+Math::Matrix3<Real> Math::Matrix3<Real>::inverse () const
+{
+  auto det = determinant ();
+
+  if (det == 0)
+    throw inverse_of_singular_matrix_exception ();
+
+  auto trans = transpose ();
+
+  Matrix3<Real> result;
+  result[0] = trans[4] * trans[8] - trans[5] * trans[7];
+  result[1] = - (trans[3] * trans[8] - trans[5] * trans[6]);
+  result[2] = trans[3] * trans[7] - trans[4] * trans[6];
+
+  result[3] = - (trans[1] * trans[8] - trans[2] * trans[7]);
+  result[4] = trans[0] * trans[8] - trans[2] * trans[6];
+  result[5] = - (trans[0] * trans[7] - trans[1] * trans[6]);
+
+  result[6] = trans[1] * trans[5] - trans[2] * trans[4];
+  result[7] = - (trans[0] * trans[5] - trans[2] * trans[3]);
+  result[8] = trans[0] * trans[4] - trans[1] * trans[3];
+
+  return result / det;
+}
+
+template<typename Real>
+Math::Matrix3<Real> Math::operator* (const Matrix3<Real>& matrix, const Real& scalar)
+{
+  auto result (matrix);
+  result *= scalar;
+  return result;
+}
+
+template<typename Real>
+Math::Matrix3<Real> Math::operator* (const Real& scalar, const Matrix3<Real>& matrix)
+{
+  return matrix * scalar;
+}
+
+template<typename Real>
+Math::Matrix3<Real> Math::operator/ (const Matrix3<Real>& matrix, const Real& scalar)
+{
+  auto result = matrix;
+  result /= scalar;
+  return result;
+}
+
+template<typename Real>
+Math::Matrix3<Real> Math::operator+ (const Matrix3<Real>& left, const Matrix3<Real>& right)
+{
+  Matrix3<Real> result (left);
+  result += right;
+  return result;
+}
+
+template<typename Real>
+Math::Matrix3<Real> Math::operator- (const Matrix3<Real>& left, const Matrix3<Real>& right)
+{
+  Matrix3<Real> result (left);
+  result -= right;
+  return result;
+}
+
+template<typename Real>
+Math::Matrix3<Real> Math::operator* (const Matrix3<Real>& left, const Matrix3<Real>& right)
+{
+  Matrix3<Real> result;
+
+  result (0,0) = left (0,0) * right (0,0) + left (0,1) * right (1,0) + left (0,2) * right (2,0);
+  result (0,1) = left (0,0) * right (0,1) + left (0,1) * right (1,1) + left (0,2) * right (2,1);
+  result (0,2) = left (0,0) * right (0,2) + left (0,1) * right (1,2) + left (0,2) * right (2,2);
+
+  result (1,0) = left (1,0) * right (0,0) + left (1,1) * right (1,0) + left (1,2) * right (2,0);
+  result (1,1) = left (1,0) * right (0,1) + left (1,1) * right (1,1) + left (1,2) * right (2,1);
+  result (1,2) = left (1,0) * right (0,2) + left (1,1) * right (1,2) + left (1,2) * right (2,2);
+
+  result (2,0) = left (2,0) * right (0,0) + left (2,1) * right (1,0) + left (2,2) * right (2,0);
+  result (2,1) = left (2,0) * right (0,1) + left (2,1) * right (1,1) + left (2,2) * right (2,1);
+  result (2,2) = left (2,0) * right (0,2) + left (2,1) * right (1,2) + left (2,2) * right (2,2);
+
+  return result;
+}
+
+template<typename Real>
+bool Math::operator== (const Matrix3<Real>& left, const Matrix3<Real>& right)
+{
+  const Real* first1 = (const Real*) left;
+  const Real* last = first1 + 9;
+  const Real* first2 = (const Real*) right;
+
+  return std::equal (first1, last, first2);
+}
+
+template<typename Real>
+bool Math::operator!= (const Matrix3<Real>& left, const Matrix3<Real>& right)
+{
+  return !operator== (left, right);
+}
+
+template<typename Real>
+Math::Matrix3<Real>::index_operator_out_of_range_exception::index_operator_out_of_range_exception (const size_t& i)
+  : index (i), row (0), col (0)
+{ }
+
+template<typename Real>
+Math::Matrix3<Real>::index_operator_out_of_range_exception::index_operator_out_of_range_exception (const size_t& row, const size_t& col)
+  : index (0), row (row), col (col)
+{ }
+
+template<typename Real>
+const char* Math::Matrix3<Real>::index_operator_out_of_range_exception::what () const throw ()
+{
+  if (index == 0)
+    return create_message_from_row_col ();
+  return create_message_from_index ();
+}
+
+template<typename Real>
+const char* Math::Matrix3<Real>::index_operator_out_of_range_exception::create_message_from_index () const
+{
+  std::stringstream out;
+  out << "Tried to access index: " << index;
+  return out.str ().c_str ();
+}
+
+template<typename Real>
+const char* Math::Matrix3<Real>::index_operator_out_of_range_exception::create_message_from_row_col () const
+{
+  std::stringstream out;
+  out << "Tried to access: (" << row << ", " << col << ")";
+  return out.str ().c_str ();
 }
 
 #endif // MATH_MATRIX3_H_INCLUDED
