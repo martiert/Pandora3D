@@ -3,11 +3,11 @@
 
 #include "test-helpers.h"
 
-const Math::Matrix3 create_random_matrix3 ();
+const Math::Matrix3<double> create_random_matrix3 ();
 
 TEST (Matrix3Test, empty_constructor_makes_identity_matrix)
 {
-  const Math::Matrix3 matrix;
+  const Math::Matrix3<double> matrix;
 
   EXPECT_EQ (1.0, matrix (0,0));
   EXPECT_EQ (0.0, matrix (0,1));
@@ -22,15 +22,15 @@ TEST (Matrix3Test, empty_constructor_makes_identity_matrix)
 
 TEST (Matrix3Test, index_out_of_range_throws_index_operator_out_of_range_exception)
 {
-  const Math::Matrix3 mat1;
-  Math::Matrix3 mat2;
+  const Math::Matrix3<double> mat1;
+  Math::Matrix3<double> mat2;
 
-  EXPECT_THROW (mat1 (0,3), Math::Matrix3::index_operator_out_of_range_exception);
-  EXPECT_THROW (mat1 (3,0), Math::Matrix3::index_operator_out_of_range_exception);
-  EXPECT_THROW (mat2 (0,3), Math::Matrix3::index_operator_out_of_range_exception);
-  EXPECT_THROW (mat2 (3,0), Math::Matrix3::index_operator_out_of_range_exception);
-  EXPECT_THROW (mat1 [9], Math::Matrix3::index_operator_out_of_range_exception);
-  EXPECT_THROW (mat2 [9], Math::Matrix3::index_operator_out_of_range_exception);
+  EXPECT_THROW (mat1 (0,3), Math::Matrix3<double>::index_operator_out_of_range_exception);
+  EXPECT_THROW (mat1 (3,0), Math::Matrix3<double>::index_operator_out_of_range_exception);
+  EXPECT_THROW (mat2 (0,3), Math::Matrix3<double>::index_operator_out_of_range_exception);
+  EXPECT_THROW (mat2 (3,0), Math::Matrix3<double>::index_operator_out_of_range_exception);
+  EXPECT_THROW (mat1 [9], Math::Matrix3<double>::index_operator_out_of_range_exception);
+  EXPECT_THROW (mat2 [9], Math::Matrix3<double>::index_operator_out_of_range_exception);
 }
 
 TEST (Matrix3Test, matrix_can_be_constructed_from_array)
@@ -38,7 +38,7 @@ TEST (Matrix3Test, matrix_can_be_constructed_from_array)
   BEGIN_MULTITEST
 
   const auto array = create_double_array_of_size (9);
-  const Math::Matrix3 tmp (array);
+  const Math::Matrix3<double> tmp (array);
 
   EXPECT_EQ (array[0], tmp (0,0));
   EXPECT_EQ (array[1], tmp (0,1));
@@ -62,7 +62,7 @@ TEST (Matrix3Test, matrix_can_be_specified)
   BEGIN_MULTITEST
 
   const auto array = create_double_array_of_size (9);
-  const Math::Matrix3 tmp (array[0], array[1], array[2],
+  const Math::Matrix3<double> tmp (array[0], array[1], array[2],
     array[3], array[4], array[5],
     array[6], array[7], array[8]);
 
@@ -86,7 +86,7 @@ TEST (Matrix3Test, matrix_can_be_copied)
   BEGIN_MULTITEST
 
   const auto matrix1 = create_random_matrix3 ();
-  const Math::Matrix3 copy (matrix1);
+  const Math::Matrix3<double> copy (matrix1);
 
   EXPECT_EQ (matrix1 (0,0), copy (0,0));
   EXPECT_EQ (matrix1 (0,1), copy (0,1));
@@ -108,7 +108,7 @@ TEST (Matrix3Test, matrix_can_be_assigned)
   BEGIN_MULTITEST
 
   const auto matrix1 = create_random_matrix3 ();
-  const Math::Matrix3 copy = matrix1;
+  const Math::Matrix3<double> copy = matrix1;
 
   EXPECT_EQ (matrix1 (0,0), copy (0,0));
   EXPECT_EQ (matrix1 (0,1), copy (0,1));
@@ -287,7 +287,7 @@ TEST (Matrix3Test, adding_matrix_with_matrix_adds_each_element)
 
   const auto matrix1 = create_random_matrix3 ();
   const auto matrix2 = create_random_matrix3 ();
-  Math::Matrix3 result (matrix1);
+  Math::Matrix3<double> result (matrix1);
   result += matrix2;
 
   EXPECT_EQ (matrix1 (0,0) + matrix2 (0,0), result (0,0));
@@ -330,7 +330,7 @@ TEST (Matrix3Test, subtracting_matrix_from_matrix_subtracts_each_element)
 
   const auto matrix1 = create_random_matrix3 ();
   const auto matrix2 = create_random_matrix3 ();
-  Math::Matrix3 result (matrix1);
+  Math::Matrix3<double> result (matrix1);
   result -= matrix2;
 
   EXPECT_EQ (matrix1 (0,0) - matrix2 (0,0), result (0,0));
@@ -369,12 +369,12 @@ TEST (Matrix3Test, subtracting_two_matrices_subtracts_each_element)
 
 TEST (Matrix3Test, determinant_of_zero_matrix_is_zero)
 {
-  EXPECT_EQ (0, Math::Matrix3::ZERO.determinant ());
+  EXPECT_EQ (0, Math::Matrix3<double>::ZERO.determinant ());
 }
 
 TEST (Matrix3Test, determinant_of_identity_matrix_is_one)
 {
-  EXPECT_EQ (1, Math::Matrix3::IDENTITY.determinant ());
+  EXPECT_EQ (1, Math::Matrix3<double>::IDENTITY.determinant ());
 }
 
 TEST (Matrix3Test, matrix_determinant_follows_mathematical_rules)
@@ -400,7 +400,7 @@ TEST (Matrix3Test, matrix_multipliplied_with_zero_matrix_from_right_is_zero_matr
   BEGIN_MULTITEST
 
   const auto matrix = create_random_matrix3 ();
-  auto result = matrix * Math::Matrix3::ZERO;
+  auto result = matrix * Math::Matrix3<double>::ZERO;
 
   for (size_t i = 0; i < 9; ++i)
     EXPECT_EQ (0, result[i]);
@@ -413,7 +413,7 @@ TEST (Matrix3Test, matrix_multipliplied_with_zero_matrix_from_left_is_zero_matri
   BEGIN_MULTITEST
 
   const auto matrix = create_random_matrix3 ();
-  auto result = Math::Matrix3::ZERO * matrix;
+  auto result = Math::Matrix3<double>::ZERO * matrix;
 
   for (size_t i = 0; i < 9; ++i)
     EXPECT_EQ (0, result[i]);
@@ -426,7 +426,7 @@ TEST (Matrix3Test, matrix_multipliplied_with_identity_from_right_is_the_same_mat
   BEGIN_MULTITEST
 
   const auto matrix = create_random_matrix3 ();
-  auto result = matrix * Math::Matrix3::IDENTITY;
+  auto result = matrix * Math::Matrix3<double>::IDENTITY;
 
   for (size_t i = 0; i < 9; ++i)
     EXPECT_EQ (matrix[i], result[i]);
@@ -439,7 +439,7 @@ TEST (Matrix3Test, matrix_multipliplied_with_identity_from_left_is_the_same_matr
   BEGIN_MULTITEST
 
   const auto matrix = create_random_matrix3 ();
-  auto result = Math::Matrix3::IDENTITY * matrix;
+  auto result = Math::Matrix3<double>::IDENTITY * matrix;
 
   for (size_t i = 0; i < 9; ++i)
     EXPECT_EQ (matrix[i], result[i]);
@@ -471,18 +471,18 @@ TEST (Matrix3Test, division_by_zero_throws_division_by_zero_exception)
 {
   auto matrix = create_random_matrix3 ();
 
-  EXPECT_THROW (matrix / 0.0, Math::Matrix3::division_by_zero_exception);
-  EXPECT_THROW (matrix /= 0.0, Math::Matrix3::division_by_zero_exception);
+  EXPECT_THROW (matrix / 0.0, Math::Matrix3<double>::division_by_zero_exception);
+  EXPECT_THROW (matrix /= 0.0, Math::Matrix3<double>::division_by_zero_exception);
 }
 
 TEST (Matrix3Test, trace_of_zero_matrix_is_zero)
 {
-  EXPECT_EQ (0, Math::Matrix3::ZERO.trace ());
+  EXPECT_EQ (0, Math::Matrix3<double>::ZERO.trace ());
 }
 
 TEST (Matrix3Test, trace_of_identity_matrix_is_three)
 {
-  EXPECT_EQ (3, Math::Matrix3::IDENTITY.trace ());
+  EXPECT_EQ (3, Math::Matrix3<double>::IDENTITY.trace ());
 }
 
 TEST (Matrix3Test, trace_of_random_matrix_is_sum_of_diagonal)
@@ -499,7 +499,7 @@ TEST (Matrix3Test, trace_of_random_matrix_is_sum_of_diagonal)
 
 TEST (Matrix3Test, transpose_of_zero_matrix_is_zero)
 {
-  auto transpose = Math::Matrix3::ZERO.transpose ();
+  auto transpose = Math::Matrix3<double>::ZERO.transpose ();
 
   for (size_t i = 0; i < 9; ++i)
     EXPECT_EQ (0, transpose[i]);
@@ -507,10 +507,10 @@ TEST (Matrix3Test, transpose_of_zero_matrix_is_zero)
 
 TEST (Matrix3Test, transpose_of_identity_is_identity)
 {
-  auto transpose = Math::Matrix3::IDENTITY.transpose ();
+  auto transpose = Math::Matrix3<double>::IDENTITY.transpose ();
 
   for (size_t i = 0; i < 9; ++i)
-    EXPECT_EQ (Math::Matrix3::IDENTITY[i], transpose[i]);
+    EXPECT_EQ (Math::Matrix3<double>::IDENTITY[i], transpose[i]);
 }
 
 TEST (Matrix3Test, transpose_of_matrix_swaps_rows_with_columns)
@@ -529,10 +529,10 @@ TEST (Matrix3Test, transpose_of_matrix_swaps_rows_with_columns)
 
 TEST (Matrix3Test, inverse_of_identity_is_identity)
 {
-  auto inverse = Math::Matrix3::IDENTITY.inverse ();
+  auto inverse = Math::Matrix3<double>::IDENTITY.inverse ();
 
   for (auto i = 0; i < 9; ++i)
-    EXPECT_EQ (Math::Matrix3::IDENTITY[i], inverse[i]);
+    EXPECT_EQ (Math::Matrix3<double>::IDENTITY[i], inverse[i]);
 }
 
 TEST (Matrix3Test, matrix_multiplied_with_its_inverse_from_right_is_identity)
@@ -560,16 +560,16 @@ TEST (Matrix3Test, matrix_multiplied_with_its_inverse_from_right_is_identity)
 
 TEST (Matrix3Test, inverse_of_zero_matrix_throws_inverse_of_singular_matrix_exception)
 {
-  EXPECT_THROW (Math::Matrix3::ZERO.inverse (), Math::Matrix3::inverse_of_singular_matrix_exception);
+  EXPECT_THROW (Math::Matrix3<double>::ZERO.inverse (), Math::Matrix3<double>::inverse_of_singular_matrix_exception);
 }
 
 TEST (Matrix3Test, inverse_of_singular_matrix_throws_inverse_of_singular_matrix_exception)
 {
-  const Math::Matrix3 matrix (3.2, 6.4, 1.6,
+  const Math::Matrix3<double> matrix (3.2, 6.4, 1.6,
     2.2, 4.4, 1.1,
     6.8, 13.6, 3.4);
 
-  EXPECT_THROW (matrix.inverse (), Math::Matrix3::inverse_of_singular_matrix_exception);
+  EXPECT_THROW (matrix.inverse (), Math::Matrix3<double>::inverse_of_singular_matrix_exception);
 }
 
 TEST (Matrix3Test, equality_of_same_matrix_returns_true)
@@ -600,8 +600,8 @@ TEST (Matrix3Test, equality_of_equal_matrix_returns_true)
   BEGIN_MULTITEST
 
   auto array = create_double_array_of_size (9);
-  const Math::Matrix3 matrix (array);
-  const Math::Matrix3 equal (array);
+  const Math::Matrix3<double> matrix (array);
+  const Math::Matrix3<double> equal (array);
 
   EXPECT_EQ (matrix, equal);
 
@@ -653,8 +653,8 @@ TEST (Matrix3Test, inequality_of_equal_matrix_returns_false)
   BEGIN_MULTITEST
 
   auto array = create_double_array_of_size (9);
-  const Math::Matrix3 matrix (array);
-  const Math::Matrix3 equal (array);
+  const Math::Matrix3<double> matrix (array);
+  const Math::Matrix3<double> equal (array);
 
   EXPECT_FALSE (matrix != equal);
 
@@ -678,10 +678,10 @@ TEST (Matrix3Test, inequality_of_matrix_with_one_different_element_returns_true)
   END_MULTITEST
 }
 
-const Math::Matrix3 create_random_matrix3 ()
+const Math::Matrix3<double> create_random_matrix3 ()
 {
   auto array = create_double_array_of_size (9);
-  Math::Matrix3 matrix (array);
+  Math::Matrix3<double> matrix (array);
 
   delete [] array;
   return matrix;

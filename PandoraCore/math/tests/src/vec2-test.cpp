@@ -5,11 +5,11 @@
 
 #include <cmath>
 
-const Math::Vector2 create_random_vector2 ();
+const Math::Vec2d create_random_vector2 ();
 
 TEST (Vector2Test, empty_constructor_gives_zero_vector)
 {
-  const Math::Vector2 vector;
+  const Math::Vec2d vector;
   EXPECT_EQ (0.0, vector.x);
   EXPECT_EQ (0.0, vector.y);
 }
@@ -19,7 +19,7 @@ TEST (Vector2Test, constructing_a_vector_with_two_arguments_populates_the_vector
   BEGIN_MULTITEST
 
   auto tmp = create_double_array_of_size (2);
-  const Math::Vector2 vector (tmp[0], tmp[1]);
+  const Math::Vec2d vector (tmp[0], tmp[1]);
 
   EXPECT_EQ (tmp[0], vector.x);
   EXPECT_EQ (tmp[1], vector.y);
@@ -33,7 +33,7 @@ TEST (Vector2Test, constructing_a_vector_with_a_array_of_two_elements_populates_
   BEGIN_MULTITEST
 
   auto array = create_double_array_of_size (2);
-  const Math::Vector2 vector (array);
+  const Math::Vec2d vector (array);
 
   EXPECT_EQ (array[0], vector.x);
   EXPECT_EQ (array[1], vector.y);
@@ -47,7 +47,7 @@ TEST (Vector2Test, assigning_a_vector_to_an_array_populates_vector_with_given_ar
   BEGIN_MULTITEST
 
   auto array = create_double_array_of_size (2);
-  const Math::Vector2 vector = array;
+  const Math::Vec2d vector = array;
 
   EXPECT_EQ (array[0], vector.x);
   EXPECT_EQ (array[1], vector.y);
@@ -105,8 +105,8 @@ TEST (Vector2Test, index_operator_maps_to_x_and_y)
 
 TEST (Vector2Test, index_operator_throws_index_out_of_range_exception_when_out_of_range)
 {
-  const Math::Vector2 vector;
-  EXPECT_THROW (vector[2], Math::Vector2::index_operator_out_of_range_exception);
+  const Math::Vec2d vector;
+  EXPECT_THROW (vector[2], Math::Vec2d::index_operator_out_of_range_exception);
 }
 
 TEST (Vector2Test, vector_can_be_casted_to_array_c_style)
@@ -149,7 +149,7 @@ TEST (Vector2Test, const_vector_can_be_cast_to_const_ptr)
 
 TEST (Vector2Test, zero_vector_gives_zero_length)
 {
-  const Math::Vector2 vector;
+  const Math::Vec2d vector;
   EXPECT_EQ (0.0, vector.length ());
   EXPECT_EQ (0.0, vector.lengthSquared ());
 }
@@ -178,9 +178,9 @@ TEST (Vector2Test, normalize_non_zero_vector_gives_new_length_of_1)
 
 TEST (Vector2Test, normalize_throws_can_not_normalize_zero_exception_when_normalizing_zero_vector)
 {
-  Math::Vector2 vec;
+  Math::Vec2d vec;
 
-  EXPECT_THROW (vec.normalize (), Math::Vector2::can_not_normalize_zero_vector_exception);
+  EXPECT_THROW (vec.normalize (), Math::Vec2d::can_not_normalize_zero_vector_exception);
 }
 
 TEST (Vector2Test, vector_negation_negates_each_component)
@@ -268,7 +268,7 @@ TEST (Vector2Test, multiplying_vector_with_scalar_from_left_multiplies_each_comp
 TEST (Vector2Test, dividing_vector_with_zero_throws_division_by_zero_exception)
 {
   const auto vector = create_random_vector2 ();
-  EXPECT_THROW (vector / 0.0, Math::Vector2::division_by_zero_exception);
+  EXPECT_THROW (vector / 0.0, Math::Vec2d::division_by_zero_exception);
 }
 
 TEST (Vector2Test, multiplying_two_vectors_multiplies_component_wise)
@@ -301,7 +301,7 @@ TEST (Vector2Test, dot_product_of_two_vectors_gives_the_sum_of_the_vectors_multi
 
 TEST (Vector2Test, perp_vector_is_zero_vector_for_zero_vector)
 {
-  const Math::Vector2 vector;
+  const Math::Vec2d vector;
   auto perp = vector.perp ();
 
   EXPECT_EQ (0.0, perp.x);
@@ -417,7 +417,7 @@ TEST (Vector2Test, inplace_division_by_zero_throws_division_by_zero_exception)
 {
   auto vec = create_random_vector2 ();
 
-  EXPECT_THROW (vec /= 0.0, Math::Vector2::division_by_zero_exception);
+  EXPECT_THROW (vec /= 0.0, Math::Vec2d::division_by_zero_exception);
 }
 
 TEST (Vector2Test, inplace_arithmetic_returns_ref_to_self)
@@ -428,7 +428,7 @@ TEST (Vector2Test, inplace_arithmetic_returns_ref_to_self)
   auto vec2 = create_random_vector2 ();
   auto tmp = rand () / 100.0;
 
-  Math::Vector2 *res;
+  Math::Vec2d *res;
 
   res = &(vec1 += vec2);
   EXPECT_EQ (&vec1, res);
@@ -475,8 +475,8 @@ TEST (Vector2Test, equality_operator_gives_true_for_vectors_with_equal_component
   BEGIN_MULTITEST
 
   auto array = create_double_array_of_size (2);
-  const Math::Vector2 vector (array);
-  const Math::Vector2 same (array);
+  const Math::Vec2d vector (array);
+  const Math::Vec2d same (array);
 
   EXPECT_EQ (vector, same);
 
@@ -486,29 +486,29 @@ TEST (Vector2Test, equality_operator_gives_true_for_vectors_with_equal_component
 
 TEST (Vector2Test, equality_operator_gives_false_for_unequal_x)
 {
-  const Math::Vector2 vector (3.2, 1.8);
-  const Math::Vector2 different (3.0, 1.8);
+  const Math::Vec2d vector (3.2, 1.8);
+  const Math::Vec2d different (3.0, 1.8);
   EXPECT_FALSE (vector == different);
 }
 
 TEST (Vector2Test, equality_operator_gives_false_for_unequal_y)
 {
-  const Math::Vector2 vector (3.2, 1.8);
-  const Math::Vector2 different (3.2, 2.8);
+  const Math::Vec2d vector (3.2, 1.8);
+  const Math::Vec2d different (3.2, 2.8);
   EXPECT_FALSE (vector == different);
 }
 
 TEST (Vector2Test, non_equal_operator_gives_true_for_unequal_x)
 {
-  const Math::Vector2 vector (3.2, 1.8);
-  const Math::Vector2 different (3.0, 1.8);
+  const Math::Vec2d vector (3.2, 1.8);
+  const Math::Vec2d different (3.0, 1.8);
   EXPECT_NE (vector, different);
 }
 
 TEST (Vector2Test, non_equal_operator_gives_true_for_unequal_y)
 {
-  const Math::Vector2 vector (3.2, 1.8);
-  const Math::Vector2 different (3.2, 2.8);
+  const Math::Vec2d vector (3.2, 1.8);
+  const Math::Vec2d different (3.2, 2.8);
   EXPECT_NE (vector, different);
 }
 
@@ -538,8 +538,8 @@ TEST (Vector2Test, non_equal_operator_gives_false_for_vectors_with_equal_compone
   BEGIN_MULTITEST
 
   auto array = create_double_array_of_size (2);
-  const Math::Vector2 vector (array);
-  const Math::Vector2 same (array);
+  const Math::Vec2d vector (array);
+  const Math::Vec2d same (array);
   EXPECT_FALSE (vector != same);
 
   delete[] array;
@@ -548,17 +548,17 @@ TEST (Vector2Test, non_equal_operator_gives_false_for_vectors_with_equal_compone
 
 TEST (Vector2Test, orhtonormal_basis_with_zero_vector_throws_can_not_make_orthonormal_basis_with_zero_vector_exception)
 {
-  Math::Vector2 zero;
-  Math::Vector2 vector (4.0, 7.0);
-  EXPECT_THROW (Math::Vector2::generateOrthonormalBasis (zero, vector), Math::Vector2::can_not_make_orthonormal_basis_with_zero_vector_exception);
-  EXPECT_THROW (Math::Vector2::generateOrthonormalBasis (vector, zero), Math::Vector2::can_not_make_orthonormal_basis_with_zero_vector_exception);
+  Math::Vec2d zero;
+  Math::Vec2d vector (4.0, 7.0);
+  EXPECT_THROW (Math::Vec2d::generateOrthonormalBasis (zero, vector), Math::Vec2d::can_not_make_orthonormal_basis_with_zero_vector_exception);
+  EXPECT_THROW (Math::Vec2d::generateOrthonormalBasis (vector, zero), Math::Vec2d::can_not_make_orthonormal_basis_with_zero_vector_exception);
 }
 
 TEST (Vector2Test, orthonormal_basis_with_equal_vectors_throws_can_not_make_orthonormal_basis_from_equal_vectors_exception)
 {
-  Math::Vector2 vector (4.0, 7.0);
+  Math::Vec2d vector (4.0, 7.0);
   auto copy = vector;
-  EXPECT_THROW (Math::Vector2::generateOrthonormalBasis (vector, copy), Math::Vector2::can_not_make_orthonormal_basis_from_equal_vectors_exception);
+  EXPECT_THROW (Math::Vec2d::generateOrthonormalBasis (vector, copy), Math::Vec2d::can_not_make_orthonormal_basis_from_equal_vectors_exception);
 }
 
 TEST (Vector2Test, orthonormal_basis_creates_perpendicular_vectors_of_length_1)
@@ -569,7 +569,7 @@ TEST (Vector2Test, orthonormal_basis_creates_perpendicular_vectors_of_length_1)
   auto vec2 = create_random_vector2 ();
 
   if (vec1 != vec2) {
-    Math::Vector2::generateOrthonormalBasis (vec1, vec2);
+    Math::Vec2d::generateOrthonormalBasis (vec1, vec2);
     EXPECT_NEAR (0.0, vec1.dot (vec2), PRECISION);
     EXPECT_NEAR (1.0, vec1.length (), PRECISION);
     EXPECT_NEAR (1.0, vec2.length (), PRECISION);
@@ -578,10 +578,10 @@ TEST (Vector2Test, orthonormal_basis_creates_perpendicular_vectors_of_length_1)
   END_MULTITEST
 }
 
-const Math::Vector2 create_random_vector2 ()
+const Math::Vec2d create_random_vector2 ()
 {
   auto array = create_double_array_of_size (2);
-  Math::Vector2 vector (array);
+  Math::Vec2d vector (array);
 
   delete [] array;
   return vector;
