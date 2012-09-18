@@ -5,6 +5,7 @@ include_directories ("${physics_SOURCE_DIR}/include")
 
 set (src
   src/particle-tests.cpp
+  src/particleforce-tests.cpp
   src/test-helpers.cpp
   )
 

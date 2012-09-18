@@ -1,8 +1,9 @@
-#ifndef PHYSICS_PARTICLE_H_INCLUDED
-#define PHYSICS_PARTICLE_H_INCLUDED
+#ifndef PARTICLE_PHYSICS_H_INCLUDED
+#define PARTICLE_PHYSICS_H_INCLUDED
 
 #include <config.h>
 #include <vector3.h>
+#include <memory>
 
 namespace Physics
 {
@@ -41,6 +42,8 @@ namespace Physics
 
       Math::Vector3<Real> gravity;
   };
+
+  typedef std::shared_ptr<Particle> ParticlePtr;
 }
 
-#endif // PHYSICS_PARTICLE_H_INCLUDED
+#endif // PARTICLE_PHYSICS_H_INCLUDED

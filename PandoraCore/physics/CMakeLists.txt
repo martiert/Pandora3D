@@ -19,6 +19,7 @@ include_directories ("${math_SOURCE_DIR}/include")
 
 set (physics_src
   src/particle.cpp
+  src/particleforceregistry.cpp
   )
 
 set (physics_headers
