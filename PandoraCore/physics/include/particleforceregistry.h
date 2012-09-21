@@ -2,6 +2,7 @@
 #define PARTICLE_FORCE_REGISTRY_H_INCLUDED
 
 #include "config.h"
+#include <vector>
 #include <memory>
 
 namespace Physics
@@ -21,8 +22,18 @@ namespace Physics
       void update_particles_with_forces (const Real& timestep);
 
     private:
-      std::shared_ptr<ParticleForce> force;
-      std::shared_ptr<Particle> particle;
+      struct ForceParticlePair
+      {
+        public:
+          ForceParticlePair (std::shared_ptr<ParticleForce> force, std::shared_ptr<Particle> particle);
+
+          void update_force (const Real& timestep);
+        private:
+          std::shared_ptr<ParticleForce> force;
+          std::shared_ptr<Particle> particle;
+      };
+
+      std::vector<ForceParticlePair> particleforcepairs;
   };
 }
 
