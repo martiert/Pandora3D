@@ -28,6 +28,8 @@ namespace Physics
           ForceParticlePair (std::shared_ptr<ParticleForce> force, std::shared_ptr<Particle> particle);
 
           void update_force (const Real& timestep);
+
+          bool is_same_force_particle_pair (std::shared_ptr<ParticleForce> force, std::shared_ptr<Particle> particle);
         private:
           std::shared_ptr<ParticleForce> force;
           std::shared_ptr<Particle> particle;
