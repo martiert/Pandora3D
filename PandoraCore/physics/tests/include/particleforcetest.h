@@ -29,6 +29,7 @@ class ParticleForceTest : public ::testing::Test
 {
   protected:
     virtual void SetUp ();
+    void add_both_forces ();
 
     Physics::ParticleForceRegistry registry;
     std::shared_ptr<Physics::Particle> particle;
