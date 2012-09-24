@@ -35,6 +35,10 @@ namespace Physics
           std::shared_ptr<Particle> particle;
       };
 
+      bool element_is_equal_and_erased (std::vector<ForceParticlePair>::iterator& element,
+                                        std::shared_ptr<ParticleForce> force,
+                                        std::shared_ptr<Particle> particle);
+
       std::vector<ForceParticlePair> particleforcepairs;
   };
 }
