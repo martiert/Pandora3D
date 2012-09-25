@@ -35,8 +35,6 @@ TEST (Matrix3Test, index_out_of_range_throws_index_operator_out_of_range_excepti
 
 TEST (Matrix3Test, matrix_can_be_constructed_from_array)
 {
-  BEGIN_MULTITEST
-
   const auto array = create_double_array_of_size (9);
   const Math::Matrix3<double> tmp (array);
 
@@ -53,14 +51,10 @@ TEST (Matrix3Test, matrix_can_be_constructed_from_array)
   EXPECT_EQ (array[8], tmp (2,2));
 
   delete[] array;
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, matrix_can_be_specified)
 {
-  BEGIN_MULTITEST
-
   const auto array = create_double_array_of_size (9);
   const Math::Matrix3<double> tmp (array[0], array[1], array[2],
     array[3], array[4], array[5],
@@ -77,14 +71,10 @@ TEST (Matrix3Test, matrix_can_be_specified)
   EXPECT_EQ (array[8], tmp (2,2));
 
   delete[] array;
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, matrix_can_be_copied)
 {
-  BEGIN_MULTITEST
-
   const auto matrix1 = create_random_matrix3 ();
   const Math::Matrix3<double> copy (matrix1);
 
@@ -99,14 +89,10 @@ TEST (Matrix3Test, matrix_can_be_copied)
   EXPECT_EQ (matrix1 (2,0), copy (2,0));
   EXPECT_EQ (matrix1 (2,1), copy (2,1));
   EXPECT_EQ (matrix1 (2,2), copy (2,2));
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, matrix_can_be_assigned)
 {
-  BEGIN_MULTITEST
-
   const auto matrix1 = create_random_matrix3 ();
   const Math::Matrix3<double> copy = matrix1;
 
@@ -121,8 +107,6 @@ TEST (Matrix3Test, matrix_can_be_assigned)
   EXPECT_EQ (matrix1 (2,0), copy (2,0));
   EXPECT_EQ (matrix1 (2,1), copy (2,1));
   EXPECT_EQ (matrix1 (2,2), copy (2,2));
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, can_cast_matrix_to_pointer_c_style)
@@ -176,8 +160,6 @@ TEST (Matrix3Test, manipulating_the_casted_ptr_manipulates_the_matrix)
 
 TEST (Matrix3Test, multiply_scalar_to_matrix_multiplies_each_component_of_the_matrix)
 {
-  BEGIN_MULTITEST
-
   const auto matrix = create_random_matrix3 ();
   auto scalar = rand () / 100.0;
   auto result (matrix);
@@ -192,14 +174,10 @@ TEST (Matrix3Test, multiply_scalar_to_matrix_multiplies_each_component_of_the_ma
   EXPECT_EQ (matrix (2,0) * scalar, result (2,0));
   EXPECT_EQ (matrix (2,1) * scalar, result (2,1));
   EXPECT_EQ (matrix (2,2) * scalar, result (2,2));
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, multipling_matrix_with_scalar_from_right_multiplies_each_component)
 {
-  BEGIN_MULTITEST
-
   const auto matrix = create_random_matrix3 ();
   auto scalar = rand () / 100.0;
   auto result = matrix * scalar;
@@ -213,14 +191,10 @@ TEST (Matrix3Test, multipling_matrix_with_scalar_from_right_multiplies_each_comp
   EXPECT_EQ (matrix (2,0) * scalar, result (2,0));
   EXPECT_EQ (matrix (2,1) * scalar, result (2,1));
   EXPECT_EQ (matrix (2,2) * scalar, result (2,2));
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, multipling_matrix_with_scalar_from_left_multiplies_each_component)
 {
-  BEGIN_MULTITEST
-
   const auto matrix = create_random_matrix3 ();
   auto scalar = rand () / 100.0;
   auto result = scalar * matrix;
@@ -234,14 +208,10 @@ TEST (Matrix3Test, multipling_matrix_with_scalar_from_left_multiplies_each_compo
   EXPECT_EQ (matrix (2,0) * scalar, result (2,0));
   EXPECT_EQ (matrix (2,1) * scalar, result (2,1));
   EXPECT_EQ (matrix (2,2) * scalar, result (2,2));
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, dividing_scalar_to_matrix_divides_each_component)
 {
-  BEGIN_MULTITEST
-
   const auto matrix = create_random_matrix3 ();
   auto scalar = rand () / 100.0;
   auto result (matrix);
@@ -256,14 +226,10 @@ TEST (Matrix3Test, dividing_scalar_to_matrix_divides_each_component)
   EXPECT_EQ (matrix (2,0) / scalar, result (2,0));
   EXPECT_EQ (matrix (2,1) / scalar, result (2,1));
   EXPECT_EQ (matrix (2,2) / scalar, result (2,2));
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, dividing_matrix_and_scalar_divides_each_component)
 {
-  BEGIN_MULTITEST
-
   const auto matrix = create_random_matrix3 ();
   auto scalar = rand () / 100.0;
   auto result = matrix / scalar;
@@ -277,14 +243,10 @@ TEST (Matrix3Test, dividing_matrix_and_scalar_divides_each_component)
   EXPECT_EQ (matrix (2,0) / scalar, result (2,0));
   EXPECT_EQ (matrix (2,1) / scalar, result (2,1));
   EXPECT_EQ (matrix (2,2) / scalar, result (2,2));
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, adding_matrix_with_matrix_adds_each_element)
 {
-  BEGIN_MULTITEST
-
   const auto matrix1 = create_random_matrix3 ();
   const auto matrix2 = create_random_matrix3 ();
   Math::Matrix3<double> result (matrix1);
@@ -299,14 +261,10 @@ TEST (Matrix3Test, adding_matrix_with_matrix_adds_each_element)
   EXPECT_EQ (matrix1 (2,0) + matrix2 (2,0), result (2,0));
   EXPECT_EQ (matrix1 (2,1) + matrix2 (2,1), result (2,1));
   EXPECT_EQ (matrix1 (2,2) + matrix2 (2,2), result (2,2));
-
-  END_MULTITEST
 }
 
 TEST (Matrix2Test, adding_two_matrices_adds_each_element)
 {
-  BEGIN_MULTITEST
-
   const auto matrix1 = create_random_matrix3 ();
   const auto matrix2 = create_random_matrix3 ();
   auto result = matrix1 + matrix2;
@@ -320,14 +278,10 @@ TEST (Matrix2Test, adding_two_matrices_adds_each_element)
   EXPECT_EQ (matrix1 (2,0) + matrix2 (2,0), result (2,0));
   EXPECT_EQ (matrix1 (2,1) + matrix2 (2,1), result (2,1));
   EXPECT_EQ (matrix1 (2,2) + matrix2 (2,2), result (2,2));
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, subtracting_matrix_from_matrix_subtracts_each_element)
 {
-  BEGIN_MULTITEST
-
   const auto matrix1 = create_random_matrix3 ();
   const auto matrix2 = create_random_matrix3 ();
   Math::Matrix3<double> result (matrix1);
@@ -342,14 +296,10 @@ TEST (Matrix3Test, subtracting_matrix_from_matrix_subtracts_each_element)
   EXPECT_EQ (matrix1 (2,0) - matrix2 (2,0), result (2,0));
   EXPECT_EQ (matrix1 (2,1) - matrix2 (2,1), result (2,1));
   EXPECT_EQ (matrix1 (2,2) - matrix2 (2,2), result (2,2));
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, subtracting_two_matrices_subtracts_each_element)
 {
-  BEGIN_MULTITEST
-
   const auto matrix1 = create_random_matrix3 ();
   const auto matrix2 = create_random_matrix3 ();
   auto result = matrix1 - matrix2;
@@ -363,8 +313,6 @@ TEST (Matrix3Test, subtracting_two_matrices_subtracts_each_element)
   EXPECT_EQ (matrix1 (2,0) - matrix2 (2,0), result (2,0));
   EXPECT_EQ (matrix1 (2,1) - matrix2 (2,1), result (2,1));
   EXPECT_EQ (matrix1 (2,2) - matrix2 (2,2), result (2,2));
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, determinant_of_zero_matrix_is_zero)
@@ -379,8 +327,6 @@ TEST (Matrix3Test, determinant_of_identity_matrix_is_one)
 
 TEST (Matrix3Test, matrix_determinant_follows_mathematical_rules)
 {
-  BEGIN_MULTITEST
-
   const auto matrix = create_random_matrix3 ();
 
   auto det = matrix (0,0) * (matrix (1,1) * matrix (2,2) -
@@ -391,66 +337,46 @@ TEST (Matrix3Test, matrix_determinant_follows_mathematical_rules)
       matrix (2,0) * matrix (1,1));
 
   EXPECT_EQ (det, matrix.determinant ());
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, matrix_multipliplied_with_zero_matrix_from_right_is_zero_matrix)
 {
-  BEGIN_MULTITEST
-
   const auto matrix = create_random_matrix3 ();
   auto result = matrix * Math::Matrix3<double>::ZERO;
 
   for (size_t i = 0; i < 9; ++i)
     EXPECT_EQ (0, result[i]);
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, matrix_multipliplied_with_zero_matrix_from_left_is_zero_matrix)
 {
-  BEGIN_MULTITEST
-
   const auto matrix = create_random_matrix3 ();
   auto result = Math::Matrix3<double>::ZERO * matrix;
 
   for (size_t i = 0; i < 9; ++i)
     EXPECT_EQ (0, result[i]);
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, matrix_multipliplied_with_identity_from_right_is_the_same_matrix_again)
 {
-  BEGIN_MULTITEST
-
   const auto matrix = create_random_matrix3 ();
   auto result = matrix * Math::Matrix3<double>::IDENTITY;
 
   for (size_t i = 0; i < 9; ++i)
     EXPECT_EQ (matrix[i], result[i]);
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, matrix_multipliplied_with_identity_from_left_is_the_same_matrix_again)
 {
-  BEGIN_MULTITEST
-
   const auto matrix = create_random_matrix3 ();
   auto result = Math::Matrix3<double>::IDENTITY * matrix;
 
   for (size_t i = 0; i < 9; ++i)
     EXPECT_EQ (matrix[i], result[i]);
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, matrix_matrix_multiplication_follows_normal_mathematical_rules)
 {
-  BEGIN_MULTITEST
-
   const auto mat1 = create_random_matrix3 ();
   const auto mat2 = create_random_matrix3 ();
   auto result = mat1 * mat2;
@@ -463,8 +389,6 @@ TEST (Matrix3Test, matrix_matrix_multiplication_follows_normal_mathematical_rule
       EXPECT_EQ (res, result (i,j));
     }
   }
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, division_by_zero_throws_division_by_zero_exception)
@@ -487,14 +411,10 @@ TEST (Matrix3Test, trace_of_identity_matrix_is_three)
 
 TEST (Matrix3Test, trace_of_random_matrix_is_sum_of_diagonal)
 {
-  BEGIN_MULTITEST
-
   const auto matrix = create_random_matrix3 ();
   auto trace = matrix (0,0) + matrix (1,1) + matrix (2,2);
 
   EXPECT_EQ (trace, matrix.trace ());
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, transpose_of_zero_matrix_is_zero)
@@ -515,16 +435,12 @@ TEST (Matrix3Test, transpose_of_identity_is_identity)
 
 TEST (Matrix3Test, transpose_of_matrix_swaps_rows_with_columns)
 {
-  BEGIN_MULTITEST
-
   const auto matrix = create_random_matrix3 ();
   auto transpose = matrix.transpose ();
 
   for (size_t i = 0; i < 3; ++i)
     for (size_t j = 0; j < 3; ++j)
       EXPECT_EQ (matrix (i,j), transpose (j,i));
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, inverse_of_identity_is_identity)
@@ -537,8 +453,6 @@ TEST (Matrix3Test, inverse_of_identity_is_identity)
 
 TEST (Matrix3Test, matrix_multiplied_with_its_inverse_from_right_is_identity)
 {
-  BEGIN_MULTITEST
-
   const auto matrix = create_random_matrix3 ();
   auto inverse = matrix.inverse ();
   auto result = matrix * inverse;
@@ -554,8 +468,6 @@ TEST (Matrix3Test, matrix_multiplied_with_its_inverse_from_right_is_identity)
   EXPECT_NEAR (0, result (2,0), PRECISION);
   EXPECT_NEAR (0, result (2,1), PRECISION);
   EXPECT_NEAR (1, result (2,2), PRECISION);
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, inverse_of_zero_matrix_throws_inverse_of_singular_matrix_exception)
@@ -574,31 +486,21 @@ TEST (Matrix3Test, inverse_of_singular_matrix_throws_inverse_of_singular_matrix_
 
 TEST (Matrix3Test, equality_of_same_matrix_returns_true)
 {
-  BEGIN_MULTITEST
-
   const auto matrix = create_random_matrix3 ();
 
   EXPECT_EQ (matrix, matrix);
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, equality_of_copied_matrix_returns_true)
 {
-  BEGIN_MULTITEST
-
   const auto matrix = create_random_matrix3 ();
   auto copy = matrix;
 
   EXPECT_EQ (matrix, copy);
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, equality_of_equal_matrix_returns_true)
 {
-  BEGIN_MULTITEST
-
   auto array = create_double_array_of_size (9);
   const Math::Matrix3<double> matrix (array);
   const Math::Matrix3<double> equal (array);
@@ -606,14 +508,10 @@ TEST (Matrix3Test, equality_of_equal_matrix_returns_true)
   EXPECT_EQ (matrix, equal);
 
   delete[] array;
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, equality_of_matrix_with_one_different_element_returns_false)
 {
-  BEGIN_MULTITEST
-
   const auto matrix = create_random_matrix3 ();
 
   for (int i = 0; i < 9; ++i) {
@@ -622,36 +520,25 @@ TEST (Matrix3Test, equality_of_matrix_with_one_different_element_returns_false)
 
     EXPECT_FALSE (matrix == other);
   }
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, inequality_of_same_matrix_returns_false)
 {
-  BEGIN_MULTITEST
-
   const auto matrix = create_random_matrix3 ();
 
   EXPECT_FALSE (matrix != matrix);
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, inequality_of_copied_matrix_returns_false)
 {
-  BEGIN_MULTITEST
-
   const auto matrix = create_random_matrix3 ();
   auto copy = matrix;
 
   EXPECT_FALSE (matrix != copy);
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, inequality_of_equal_matrix_returns_false)
 {
-  BEGIN_MULTITEST
-
   auto array = create_double_array_of_size (9);
   const Math::Matrix3<double> matrix (array);
   const Math::Matrix3<double> equal (array);
@@ -659,14 +546,10 @@ TEST (Matrix3Test, inequality_of_equal_matrix_returns_false)
   EXPECT_FALSE (matrix != equal);
 
   delete[] array;
-
-  END_MULTITEST
 }
 
 TEST (Matrix3Test, inequality_of_matrix_with_one_different_element_returns_true)
 {
-  BEGIN_MULTITEST
-
   const auto matrix = create_random_matrix3 ();
 
   for (int i = 0; i < 9; ++i) {
@@ -675,7 +558,6 @@ TEST (Matrix3Test, inequality_of_matrix_with_one_different_element_returns_true)
 
     EXPECT_NE (matrix, other);
   }
-  END_MULTITEST
 }
 
 const Math::Matrix3<double> create_random_matrix3 ()

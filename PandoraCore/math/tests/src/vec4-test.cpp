@@ -30,8 +30,6 @@ TEST (Vector4Test, construction_with_arguments_populates_the_vector_with_those_a
 
 TEST (Vector4Test, construction_from_array_populates_vector_with_array)
 {
-  BEGIN_MULTITEST
-
   auto array = create_double_array_of_size (4);
   const Math::Vec4d vector (array);
 
@@ -40,14 +38,10 @@ TEST (Vector4Test, construction_from_array_populates_vector_with_array)
   EXPECT_EQ (array[2], vector.z);
   EXPECT_EQ (array[3], vector.w);
 
-  delete[] array;
-  END_MULTITEST
-}
+  delete[] array;}
 
 TEST (Vector4Test, copy_constructor_copies_each_element)
 {
-  BEGIN_MULTITEST
-
   const auto vector = create_random_vector4 ();
   const Math::Vec4d copy (vector);
 
@@ -55,26 +49,18 @@ TEST (Vector4Test, copy_constructor_copies_each_element)
   EXPECT_EQ (vector.y, copy.y);
   EXPECT_EQ (vector.z, copy.z);
   EXPECT_EQ (vector.w, copy.w);
-
-  END_MULTITEST
 }
 
 TEST (Vector4Test, copy_constructor_makes_hard_copy)
 {
-  BEGIN_MULTITEST
-
   auto vector = create_random_vector4 ();
   const Math::Vec4d copy (vector);
   ++vector.x;
   EXPECT_NE (vector.x, copy.x);
-
-  END_MULTITEST
 }
 
 TEST (Vector4Test, assignment_from_vector_makes_copy)
 {
-  BEGIN_MULTITEST
-
   const auto vector = create_random_vector4 ();
   Math::Vec4d copy;
   copy = vector;
@@ -83,14 +69,10 @@ TEST (Vector4Test, assignment_from_vector_makes_copy)
   EXPECT_EQ (vector.y, copy.y);
   EXPECT_EQ (vector.z, copy.z);
   EXPECT_EQ (vector.w, copy.w);
-
-  END_MULTITEST
 }
 
 TEST (Vector4Test, assignment_from_array_assigns_each_element_to_vector)
 {
-  BEGIN_MULTITEST
-
   auto array = create_double_array_of_size (4);
   Math::Vec4d vector;
   vector = array;
@@ -100,14 +82,10 @@ TEST (Vector4Test, assignment_from_array_assigns_each_element_to_vector)
   EXPECT_EQ (array[2], vector.z);
   EXPECT_EQ (array[3], vector.w);
 
-  delete[] array;
-  END_MULTITEST
-}
+  delete[] array;}
 
 TEST (Vector4Test, copy_from_Vec3d_gives_a_Vec3d_with_1_as_the_w_component)
 {
-  BEGIN_MULTITEST
-
   const auto vector3 = create_random_vector3 ();
   const Math::Vec4d copy (vector3);
 
@@ -115,14 +93,10 @@ TEST (Vector4Test, copy_from_Vec3d_gives_a_Vec3d_with_1_as_the_w_component)
   EXPECT_EQ (vector3.y, copy.y);
   EXPECT_EQ (vector3.z, copy.z);
   EXPECT_EQ (1.0, copy.w);
-
-  END_MULTITEST
 }
 
 TEST (Vector4Test, assigning_from_Vec3d_gives_a_Vec3d_with_1_as_the_w_component)
 {
-  BEGIN_MULTITEST
-
   const auto vector3 = create_random_vector3 ();
   Math::Vec4d copy;
   copy = vector3;
@@ -131,22 +105,16 @@ TEST (Vector4Test, assigning_from_Vec3d_gives_a_Vec3d_with_1_as_the_w_component)
   EXPECT_EQ (vector3.y, copy.y);
   EXPECT_EQ (vector3.z, copy.z);
   EXPECT_EQ (1.0, copy.w);
-
-  END_MULTITEST
 }
 
 TEST (Vector4Test, index_operator_maps_to_x_y_z_w)
 {
-  BEGIN_MULTITEST
-
   const auto vector = create_random_vector4 ();
 
   EXPECT_EQ (vector.x, vector[0]);
   EXPECT_EQ (vector.y, vector[1]);
   EXPECT_EQ (vector.z, vector[2]);
   EXPECT_EQ (vector.w, vector[3]);
-
-  END_MULTITEST
 }
 
 TEST (Vector4Test, index_operator_manipulates_data)
@@ -174,39 +142,27 @@ TEST (Vector4Test, length_of_zero_vector_is_zero)
 
 TEST (Vector4Test, lengthSquared_of_vector_is_the_sum_of_the_squared_components)
 {
-  BEGIN_MULTITEST
-
   const auto vector = create_random_vector4 ();
 
   EXPECT_EQ (vector.x * vector.x +
              vector.y * vector.y +
              vector.z * vector.z +
              vector.w * vector.w, vector.lengthSquared ());
-
-  END_MULTITEST
 }
 
 TEST (Vector4Test, length_of_vector_is_the_square_root_of_the_squared_length)
 {
-  BEGIN_MULTITEST
-
   const auto vector = create_random_vector4 ();
 
   EXPECT_EQ (std::sqrt (vector.lengthSquared ()), vector.length ());
-
-  END_MULTITEST
 }
 
 TEST (Vector4Test, normalization_of_vector_gives_length_of_1)
 {
-  BEGIN_MULTITEST
-
   auto vector = create_random_vector4 ();
   vector.normalize ();
 
   EXPECT_FLOAT_EQ (1.0, vector.length ());
-
-  END_MULTITEST
 }
 
 TEST (Vector4Test, normalization_of_zero_vector_throws_normalizing_zero_vector_exception)
@@ -217,8 +173,6 @@ TEST (Vector4Test, normalization_of_zero_vector_throws_normalizing_zero_vector_e
 
 TEST (Vector4Test, negation_of_vector_negates_each_component)
 {
-  BEGIN_MULTITEST
-
   const auto vector = create_random_vector4 ();
   auto res = -vector;
 
@@ -226,14 +180,10 @@ TEST (Vector4Test, negation_of_vector_negates_each_component)
   EXPECT_EQ (-vector.y, res.y);
   EXPECT_EQ (-vector.z, res.z);
   EXPECT_EQ (-vector.w, res.w);
-
-  END_MULTITEST
 }
 
 TEST (Vector4Test, adding_two_vectors_adds_each_component)
 {
-  BEGIN_MULTITEST
-
   const auto vec_1 = create_random_vector4 ();
   const auto vec_2 = create_random_vector4 ();
   auto res = vec_1 + vec_2;
@@ -242,14 +192,10 @@ TEST (Vector4Test, adding_two_vectors_adds_each_component)
   EXPECT_EQ (vec_1.y + vec_2.y, res.y);
   EXPECT_EQ (vec_1.z + vec_2.z, res.z);
   EXPECT_EQ (vec_1.w + vec_2.w, res.w);
-
-  END_MULTITEST
 }
 
 TEST (Vector4Test, subtracting_two_vectors_subtracts_each_component)
 {
-  BEGIN_MULTITEST
-
   const auto vec_1 = create_random_vector4 ();
   const auto vec_2 = create_random_vector4 ();
   auto res = vec_1 - vec_2;
@@ -258,14 +204,10 @@ TEST (Vector4Test, subtracting_two_vectors_subtracts_each_component)
   EXPECT_EQ (vec_1.y - vec_2.y, res.y);
   EXPECT_EQ (vec_1.z - vec_2.z, res.z);
   EXPECT_EQ (vec_1.w - vec_2.w, res.w);
-
-  END_MULTITEST
 }
 
 TEST (Vector4Test, adding_vector_to_vector_adds_each_component)
 {
-  BEGIN_MULTITEST
-
   const auto vec_1 = create_random_vector4 ();
   const auto vec_2 = create_random_vector4 ();
   auto res = vec_1;
@@ -275,14 +217,10 @@ TEST (Vector4Test, adding_vector_to_vector_adds_each_component)
   EXPECT_EQ (vec_1.y + vec_2.y, res.y);
   EXPECT_EQ (vec_1.z + vec_2.z, res.z);
   EXPECT_EQ (vec_1.w + vec_2.w, res.w);
-
-  END_MULTITEST
 }
 
 TEST (Vector4Test, subtracting_vector_from_vector_subtracts_each_component)
 {
-  BEGIN_MULTITEST
-
   const auto vec_1 = create_random_vector4 ();
   const auto vec_2 = create_random_vector4 ();
   auto res = vec_1;
@@ -292,14 +230,10 @@ TEST (Vector4Test, subtracting_vector_from_vector_subtracts_each_component)
   EXPECT_EQ (vec_1.y - vec_2.y, res.y);
   EXPECT_EQ (vec_1.z - vec_2.z, res.z);
   EXPECT_EQ (vec_1.w - vec_2.w, res.w);
-
-  END_MULTITEST
 }
 
 TEST (Vector4Test, multiplying_vector_with_scalar_from_right_multiplies_each_component_with_scalar)
 {
-  BEGIN_MULTITEST
-
   const auto vector = create_random_vector4 ();
   auto scalar = rand () / 100.0;
   auto res = vector * scalar;
@@ -308,14 +242,10 @@ TEST (Vector4Test, multiplying_vector_with_scalar_from_right_multiplies_each_com
   EXPECT_EQ (vector.y * scalar, res.y);
   EXPECT_EQ (vector.z * scalar, res.z);
   EXPECT_EQ (vector.w * scalar, res.w);
-
-  END_MULTITEST
 }
 
 TEST (Vector4Test, multiplying_vector_with_scalar_from_left_multiplies_each_component_with_scalar)
 {
-  BEGIN_MULTITEST
-
   const auto vector = create_random_vector4 ();
   auto scalar = rand () / 100.0;
   auto res = scalar * vector;
@@ -324,14 +254,10 @@ TEST (Vector4Test, multiplying_vector_with_scalar_from_left_multiplies_each_comp
   EXPECT_EQ (vector.y * scalar, res.y);
   EXPECT_EQ (vector.z * scalar, res.z);
   EXPECT_EQ (vector.w * scalar, res.w);
-
-  END_MULTITEST
 }
 
 TEST (Vector4Test, dividing_vector_with_scalar_from_right_divides_each_component_with_scalar)
 {
-  BEGIN_MULTITEST
-
   const auto vector = create_random_vector4 ();
   auto scalar = rand () / 100.0;
   auto res = vector / scalar;
@@ -340,8 +266,6 @@ TEST (Vector4Test, dividing_vector_with_scalar_from_right_divides_each_component
   EXPECT_EQ (vector.y / scalar, res.y);
   EXPECT_EQ (vector.z / scalar, res.z);
   EXPECT_EQ (vector.w / scalar, res.w);
-
-  END_MULTITEST
 }
 
 TEST (Vector4Test, dividing_vector_and_zero_throws_division_by_zero_exception)
@@ -352,8 +276,6 @@ TEST (Vector4Test, dividing_vector_and_zero_throws_division_by_zero_exception)
 
 TEST (Vector4Test, multiplying_vector_with_scalar_multiplies_each_component_with_scalar)
 {
-  BEGIN_MULTITEST
-
   const auto vector = create_random_vector4 ();
   auto scalar = create_random_scalar ();
   auto res = vector;
@@ -363,14 +285,10 @@ TEST (Vector4Test, multiplying_vector_with_scalar_multiplies_each_component_with
   EXPECT_EQ (vector.y * scalar, res.y);
   EXPECT_EQ (vector.z * scalar, res.z);
   EXPECT_EQ (vector.w * scalar, res.w);
-
-  END_MULTITEST
 }
 
 TEST (Vector4Test, dividing_vector_with_scalar_divides_each_component_with_scalar)
 {
-  BEGIN_MULTITEST
-
   const auto vector = create_random_vector4 ();
   auto scalar = rand () / 100.0;
   auto res = vector;
@@ -380,14 +298,10 @@ TEST (Vector4Test, dividing_vector_with_scalar_divides_each_component_with_scala
   EXPECT_EQ (vector.y / scalar, res.y);
   EXPECT_EQ (vector.z / scalar, res.z);
   EXPECT_EQ (vector.w / scalar, res.w);
-
-  END_MULTITEST
 }
 
 TEST (Vector4Test, multiplying_vector_to_vector_multiplies_each_component)
 {
-  BEGIN_MULTITEST
-
   const auto vector = create_random_vector4 ();
   const auto other = create_random_vector4 ();
   auto res = vector;
@@ -397,8 +311,6 @@ TEST (Vector4Test, multiplying_vector_to_vector_multiplies_each_component)
   EXPECT_EQ (vector.y * other.y, res.y);
   EXPECT_EQ (vector.z * other.z, res.z);
   EXPECT_EQ (vector.w * other.w, res.w);
-
-  END_MULTITEST
 }
 
 TEST (Vector4Test, dividing_vector_with_zero_throws_division_by_zero_exception)
@@ -409,54 +321,38 @@ TEST (Vector4Test, dividing_vector_with_zero_throws_division_by_zero_exception)
 
 TEST (Vector4Test, dot_product_of_two_vectors_add_the_product_of_the_vectors)
 {
-  BEGIN_MULTITEST
-
   const auto vector = create_random_vector4 ();
   const auto other = create_random_vector4 ();
   auto dotprod = vector.dot (other);
   auto multvec = vector * other;
 
   EXPECT_EQ (multvec.x + multvec.y + multvec.z + multvec.w, dotprod);
-
-  END_MULTITEST
 }
 
 TEST (Vector4Test, equality_operator_on_same_object_returns_true)
 {
-  BEGIN_MULTITEST
-
   const auto vector = create_random_vector4 ();
 
   EXPECT_EQ (vector, vector);
-
-  END_MULTITEST
 }
 
 TEST (Vector4Test, equality_operator_on_copy_returns_true)
 {
-  BEGIN_MULTITEST
-
   const auto vector = create_random_vector4 ();
   auto copy (vector);
 
   EXPECT_EQ (vector, copy);
-
-  END_MULTITEST
 }
 
 TEST (Vector4Test, equality_operator_on_similar_vectors_return_true)
 {
-  BEGIN_MULTITEST
-
   auto array = create_double_array_of_size (4);
   const Math::Vec4d vector (array);
   const Math::Vec4d similar (array);
 
   EXPECT_EQ (vector, similar);
 
-  delete[] array;
-  END_MULTITEST
-}
+  delete[] array;}
 
 TEST (Vector4Test, equality_operator_on_different_x_returns_false)
 {
@@ -524,40 +420,28 @@ TEST (Vector4Test, inequality_operator_on_different_w_returns_true)
 
 TEST (Vector4Test, inequality_operator_on_same_object_returns_false)
 {
-  BEGIN_MULTITEST
-
   const auto vector = create_random_vector4 ();
 
   EXPECT_FALSE (vector != vector);
-
-  END_MULTITEST
 }
 
 TEST (Vector4Test, inequality_operator_on_copy_returns_false)
 {
-  BEGIN_MULTITEST
-
   const auto vector = create_random_vector4 ();
   auto copy (vector);
 
   EXPECT_FALSE (vector != copy);
-
-  END_MULTITEST
 }
 
 TEST (Vector4Test, inequality_operator_on_similar_vectors_return_false)
 {
-  BEGIN_MULTITEST
-
   auto array = create_double_array_of_size (4);
   const Math::Vec4d vector (array);
   const Math::Vec4d similar (array);
 
   EXPECT_FALSE (vector != similar);
 
-  delete[] array;
-  END_MULTITEST
-}
+  delete[] array;}
 
 TEST (Vector4Test, vector_can_be_casted_c_style)
 {
