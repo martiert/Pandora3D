@@ -1,39 +1,5 @@
-#include "particletests.h"
-
+#include "particle-test-harness.h"
 #include "test-helpers.h"
-
-ParticleTest::ParticleTest ()
-  : initial_position (create_random_vector3 ()),
-    initial_velocity (create_random_vector3 ()),
-    origin (Math::Vector3<Real>::ZERO),
-    default_particle (),
-    random_position_particle (initial_position),
-    random_particle (initial_position, initial_velocity),
-    timestep ((Real) (rand () % 10000) / 10000),
-    damping (create_random_scalar ()),
-    change (std::pow (damping, timestep))
-{ }
-
-void ParticleTest::set_mass_gravity (const Real& mass, const Real& gravity)
-{
-  default_particle.set_mass (mass);
-  default_particle.set_gravity (gravity);
-
-  random_position_particle.set_mass (mass);
-  random_position_particle.set_gravity (gravity);
-
-  random_particle.set_mass (mass);
-  random_particle.set_gravity (gravity);
-}
-
-void ParticleTest::set_mass_gravity_damping (const Real& mass, const Real& gravity, const Real& damping)
-{
-  set_mass_gravity (mass, gravity);
-
-  default_particle.damping = damping;
-  random_position_particle.damping = damping;
-  random_particle.damping = damping;
-}
 
 TEST_F (ParticleTest, default_create_particle_has_inverse_mass_of_0)
 {
@@ -132,7 +98,6 @@ TEST_F (ParticleTest, updating_particle_without_forces_changes_velocity_to_dampi
 
 TEST_F (ParticleTest, particle_with_velocity_no_damping_or_forces_will_not_change_velocity)
 {
-
   set_mass_gravity (1, 0);
 
   for (size_t i = 0; i < 400; ++i) {
@@ -156,11 +121,7 @@ TEST_F (ParticleTest, y_component_of_velocity_of_particle_with_positive_mass_and
 
   for (size_t i = 0; i < 400; ++i) {
     default_particle.update (0.45);
-    const auto new_velocity = default_particle.get_velocity ();
-
-    EXPECT_EQ (new_velocity.x, velocity.x);
-    EXPECT_LT (new_velocity.y, velocity.y);
-    EXPECT_EQ (new_velocity.z, velocity.z);
-    velocity = new_velocity;
+    EXPECT_TRUE (velocity_have_decreased_in_y_direction_while_x_and_y_have_not_changed (velocity));
+    velocity = default_particle.get_velocity ();
   }
 }

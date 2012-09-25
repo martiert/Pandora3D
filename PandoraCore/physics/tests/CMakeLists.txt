@@ -4,6 +4,7 @@ include_directories ("${math_SOURCE_DIR}/include")
 include_directories ("${physics_SOURCE_DIR}/include")
 
 set (src
+  src/particle-test-harness.cpp
   src/particle-tests.cpp
   src/particleforce-tests.cpp
   src/test-helpers.cpp
