@@ -14,17 +14,17 @@ namespace Math
   class Quaternion
   {
     public:
-      Quaternion ();
+      explicit Quaternion ();
 
-      Quaternion (const Real& w, const Real& x, const Real& y, const Real& z);
+      explicit Quaternion (const Real& w, const Real& x, const Real& y, const Real& z);
 
-      Quaternion (const Real array[4]);
+      explicit Quaternion (const Real array[4]);
 
-      Quaternion (const Real& scalar, const Vector3<Real>& imaginary_vector);
+      explicit Quaternion (const Real& scalar, const Vector3<Real>& imaginary_vector);
 
-      Quaternion (const Vector3<Real>& axis, const Real& angle);
+      explicit Quaternion (const Vector3<Real>& axis, const Real& angle);
 
-      Quaternion (const Matrix4<Real>& matrix);
+      explicit Quaternion (const Matrix4<Real>& matrix);
 
       Real& w ();
       Real& x ();

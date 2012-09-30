@@ -20,10 +20,13 @@ namespace Math
       Real w;
 
     public:
-      Vector4 ();
-      Vector4 (const Real& x, const Real& y, const Real& z, const Real& w);
-      Vector4 (const Real data[4]);
-      Vector4 (const Vector3<Real>& vec);
+      explicit Vector4 ();
+      explicit Vector4 (const Real& x, const Real& y, const Real& z, const Real& w);
+      explicit Vector4 (const Real data[4]);
+      explicit Vector4 (const Vector3<Real>& vec);
+
+      Vector4& operator= (const Real data[4]);
+      Vector4& operator= (const Vector3<Real>& vec);
 
       Real& operator[] (const size_t& i);
       Real operator[] (const size_t& i) const;
@@ -121,6 +124,28 @@ template<typename Real>
 Math::Vector4<Real>::Vector4 (const Vector3<Real>& vec)
   : x (vec.x), y (vec.y), z (vec.z), w (1)
 { }
+
+template<typename Real>
+Math::Vector4<Real>& Math::Vector4<Real>::operator= (const Real data[4])
+{
+  x = data[0];
+  y = data[1];
+  z = data[2];
+  w = data[3];
+
+  return *this;
+}
+
+template<typename Real>
+Math::Vector4<Real>& Math::Vector4<Real>::operator= (const Vector3<Real>& vec)
+{
+  x = vec.x;
+  y = vec.y;
+  z = vec.z;
+  w = 1;
+
+  return *this;
+}
 
 template<typename Real>
 Real& Math::Vector4<Real>::operator[] (const size_t& i)

@@ -37,7 +37,8 @@ TEST (Vector3Test, constructing_a_vector_with_an_array_of_three_elements_populat
 TEST (Vector3Test, assigning_a_vector_to_an_array_populates_vector_with_given_array)
 {
   auto tmp = create_double_array_of_size (3);
-  const Math::Vec3d vector = tmp;
+  Math::Vec3d vector;
+  vector = tmp;
 
   EXPECT_EQ (tmp[0], vector.x);
   EXPECT_EQ (tmp[1], vector.y);

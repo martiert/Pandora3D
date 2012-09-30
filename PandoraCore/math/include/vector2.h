@@ -17,9 +17,11 @@ namespace Math
       Real y;
 
     public:
-      Vector2 ();
-      Vector2 (const Real x, const Real y);
-      Vector2 (const Real data[2]);
+      explicit Vector2 ();
+      explicit Vector2 (const Real x, const Real y);
+      explicit Vector2 (const Real data[2]);
+
+      Vector2& operator= (const Real data[2]);
 
       Real& operator[] (const size_t& i);
       Real operator[] (const size_t& i) const;
@@ -118,6 +120,15 @@ template<typename Real>
 Math::Vector2<Real>::Vector2 (const Real array[2])
   : x (array[0]), y (array[1])
 { }
+
+template<typename Real>
+Math::Vector2<Real>& Math::Vector2<Real>::operator= (const Real data[2])
+{
+  x = data[0];
+  y = data[1];
+
+  return *this;
+}
 
 template<typename Real>
 Real& Math::Vector2<Real>::operator[] (const size_t& i)

@@ -13,11 +13,11 @@ namespace Math
   class Matrix3
   {
     public:
-      Matrix3 ();
-      Matrix3 (const Real& m00, const Real& m01, const Real& m02,
-          const Real& m10, const Real& m11, const Real& m12,
-          const Real& m20, const Real& m21, const Real& m22);
-      Matrix3 (const Real array[9]);
+      explicit Matrix3 ();
+      explicit Matrix3 (const Real& m00, const Real& m01, const Real& m02,
+                        const Real& m10, const Real& m11, const Real& m12,
+                        const Real& m20, const Real& m21, const Real& m22);
+      explicit Matrix3 (const Real array[9]);
 
       Real& operator () (const size_t& i, const size_t& j);
       Real operator () (const size_t& i, const size_t& j) const;

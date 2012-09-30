@@ -14,9 +14,9 @@ namespace Math
   class Matrix2
   {
     public:
-      Matrix2 ();
-      Matrix2 (const Real& m00, const Real& m01, const Real& m10, const Real&  m11);
-      Matrix2 (const Real array[4]);
+      explicit Matrix2 ();
+      explicit Matrix2 (const Real& m00, const Real& m01, const Real& m10, const Real&  m11);
+      explicit Matrix2 (const Real array[4]);
 
       Real& operator[] (const size_t& i);
       Real operator[] (const size_t& i) const;

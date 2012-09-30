@@ -5,6 +5,7 @@
 #include "vector4.h"
 #include "matrix3.h"
 
+#include <cstring>
 #include <exception>
 #include <sstream>
 #include <algorithm>
@@ -15,15 +16,18 @@ namespace Math
   class Matrix4
   {
     public:
-      Matrix4 ();
+      explicit Matrix4 ();
 
-      Matrix4 (const Real& a00, const Real& a01, const Real& a02, const Real& a03,
-          const Real& a10, const Real& a11, const Real& a12, const Real& a13,
-          const Real& a20, const Real& a21, const Real& a22, const Real& a23,
-          const Real& a30, const Real& a31, const Real& a32, const Real& a33);
+      explicit Matrix4 (const Real& a00, const Real& a01, const Real& a02, const Real& a03,
+                        const Real& a10, const Real& a11, const Real& a12, const Real& a13,
+                        const Real& a20, const Real& a21, const Real& a22, const Real& a23,
+                        const Real& a30, const Real& a31, const Real& a32, const Real& a33);
 
-      Matrix4 (const Real array[16]);
-      Matrix4 (const Matrix3<Real>& matrix);
+      explicit Matrix4 (const Real array[16]);
+      explicit Matrix4 (const Matrix3<Real>& matrix);
+
+      Matrix4& operator= (const Real array[16]);
+      Matrix4& operator= (const Matrix3<Real>& matrix);
 
       Real& operator () (const size_t& i, const size_t& j);
       Real operator () (const size_t& i, const size_t& j) const;
@@ -140,6 +144,32 @@ Math::Matrix4<Real>::Matrix4 (const Matrix3<Real>& matrix)
           matrix[6], matrix[7], matrix[8], 0,
           0,         0,         0,         1}
 { }
+
+template<typename Real>
+Math::Matrix4<Real>& Math::Matrix4<Real>::operator= (const Real array[16])
+{
+  std::memcpy (data, array, 16*sizeof (Real));
+
+  return *this;
+}
+
+template<typename Real>
+Math::Matrix4<Real>& Math::Matrix4<Real>::operator= (const Matrix3<Real>& matrix)
+{
+  data[0] = matrix[0];
+  data[1] = matrix[1];
+  data[2] = matrix[2];
+  data[4] = matrix[3];
+  data[5] = matrix[4];
+  data[6] = matrix[5];
+  data[8] = matrix[6];
+  data[9] = matrix[7];
+  data[10] = matrix[8];
+  data[3] = data[7] = data[11] = data[12] = data[13] = data[14] = 0;
+  data[15] = 1;
+
+  return *this;
+}
 
 template<typename Real>
 Real& Math::Matrix4<Real>::operator () (const size_t& i, const size_t& j)

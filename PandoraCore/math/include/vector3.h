@@ -18,9 +18,11 @@ namespace Math
       Real z;
 
     public:
-      Vector3 ();
-      Vector3 (const Real& x, const Real& y, const Real& z);
-      Vector3 (const Real data[3]);
+      explicit Vector3 ();
+      explicit Vector3 (const Real& x, const Real& y, const Real& z);
+      explicit Vector3 (const Real data[3]);
+
+      Vector3& operator= (const Real data[3]);
 
       Real& operator[] (const size_t& i);
       Real operator[] (const size_t& i) const;
@@ -121,6 +123,15 @@ template<typename Real>
 Math::Vector3<Real>::Vector3 (const Real data[3])
   : x (data[0]), y (data[1]), z (data[2])
 {}
+
+template<typename Real>
+Math::Vector3<Real>& Math::Vector3<Real>::operator= (const Real data[3])
+{
+  x = data[0];
+  y = data[1];
+  z = data[2];
+  return *this;
+}
 
 template<typename Real>
 Real& Math::Vector3<Real>::operator[] (const size_t& i)

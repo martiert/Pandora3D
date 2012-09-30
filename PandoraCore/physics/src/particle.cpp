@@ -6,22 +6,22 @@ namespace Physics
 {
   Particle::Particle ()
     : damping (1.0),
-    inverse_mass (0),
-    gravity (default_gravity)
+      inverse_mass (0),
+      gravity (default_gravity)
   {}
 
   Particle::Particle (const Math::Vector3<Real>& position)
     : damping (1.0),
-    inverse_mass (0),
-    position (position)
+      inverse_mass (0),
+      position (position)
   {}
 
   Particle::Particle (const Math::Vector3<Real>& position, const Math::Vector3<Real>& velocity)
     : damping (1.0),
-    inverse_mass (0),
-    position (position),
-    velocity (velocity),
-    gravity (default_gravity)
+      inverse_mass (0),
+      position (position),
+      velocity (velocity),
+      gravity (default_gravity)
   {}
 
   void Particle::update (const Real& dt)

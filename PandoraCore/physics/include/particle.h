@@ -12,9 +12,9 @@ namespace Physics
   class Particle
   {
     public:
-      Particle ();
-      Particle (const Math::Vector3<Real>& position);
-      Particle (const Math::Vector3<Real>& position, const Math::Vector3<Real>& velocity);
+      explicit Particle ();
+      explicit Particle (const Math::Vector3<Real>& position);
+      explicit Particle (const Math::Vector3<Real>& position, const Math::Vector3<Real>& velocity);
 
       virtual void update (const Real& dt);
 
