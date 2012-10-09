@@ -3,8 +3,7 @@
 
 #include "config.h"
 
-#include <exception>
-#include <sstream>
+#include <cassert>
 #include <cmath>
 
 namespace Math
@@ -50,29 +49,6 @@ namespace Math
       static const Vector3 E1;
       static const Vector3 E2;
       static const Vector3 E3;
-    public:
-      class normalizing_zero_vector_exception : public std::exception
-      {};
-
-      class division_by_zero_exception : public std::exception
-      {};
-
-      class can_not_make_orthonormal_basis_with_zero_vector_exception : std::exception
-      {};
-
-      class can_not_make_orthonormal_basis_with_equal_vectors_exception : std::exception
-      {};
-
-      class index_operator_out_of_range_exception : public std::exception
-      {
-        public:
-          index_operator_out_of_range_exception (const size_t& i);
-
-          virtual const char* what () const throw ();
-
-        private:
-          size_t index;
-      };
   };
 
   typedef Vector3<float>  Vec3f;
@@ -136,8 +112,7 @@ Math::Vector3<Real>& Math::Vector3<Real>::operator= (const Real data[3])
 template<typename Real>
 Real& Math::Vector3<Real>::operator[] (const size_t& i)
 {
-  if (i > 2)
-    throw index_operator_out_of_range_exception (i);
+  assert (i < 3 && "Index operator out of range");
 
   return (&x)[i];
 }
@@ -145,8 +120,7 @@ Real& Math::Vector3<Real>::operator[] (const size_t& i)
 template<typename Real>
 Real Math::Vector3<Real>::operator[] (const size_t& i) const
 {
-  if (i > 2)
-    throw index_operator_out_of_range_exception (i);
+  assert (i < 3 && "Index operator out of range");
 
   return (&x)[i];
 }
@@ -206,8 +180,7 @@ Math::Vector3<Real>& Math::Vector3<Real>::operator*= (const Real& scalar)
 template<typename Real>
 Math::Vector3<Real>& Math::Vector3<Real>::operator/= (const Real& scalar)
 {
-  if (scalar == 0)
-    throw division_by_zero_exception ();
+  assert (scalar != 0 && "Can not divide vector by 0");
 
   x /= scalar;
   y /= scalar;
@@ -239,8 +212,7 @@ void Math::Vector3<Real>::normalize ()
 {
   float len = length ();
 
-  if (len == 0)
-    throw normalizing_zero_vector_exception ();
+  assert (len != 0 && "Can not normalize zero vector");
 
   *this /= len;
 }
@@ -259,12 +231,8 @@ Math::Vector3<Real> Math::Vector3<Real>::cross (const Math::Vector3<Real>& other
 template<typename Real>
 void Math::Vector3<Real>::generateOrthonormalBasis (Vector3<Real>& vec1, Vector3<Real>& vec2, Vector3<Real>& vec3)
 {
-  if (vec1 == vec2 || vec1 == vec3 || vec2 == vec3)
-    throw can_not_make_orthonormal_basis_with_equal_vectors_exception ();
-
-  const Vector3<Real> zero;
-  if (vec1 == zero || vec2 == zero || vec3 == zero)
-    throw can_not_make_orthonormal_basis_with_zero_vector_exception ();
+  assert (vec1 != ZERO && vec2 != ZERO && vec3 != ZERO && "Can not make orthonormal basis with zero vectors");
+  assert (vec1 != vec2 && vec1 != vec3 && vec2 != vec3 && "Can not make orthonormal basis with equal vectors");
 
   vec2 = vec1.cross (vec3);
   vec3 = vec1.cross (vec2);
@@ -336,19 +304,6 @@ template<typename Real>
 bool Math::operator!= (const Vector3<Real>& vec1, const Vector3<Real>& vec2)
 {
   return !(vec1 == vec2);
-}
-
-template<typename Real>
-Math::Vector3<Real>::index_operator_out_of_range_exception::index_operator_out_of_range_exception (const size_t&i)
-  : index (i)
-{ }
-
-template<typename Real>
-const char* Math::Vector3<Real>::index_operator_out_of_range_exception::what () const throw ()
-{
-  std::stringstream out;
-  out << "Tried to access index: " << index;
-  return out.str ().c_str ();
 }
 
 #endif // MATH_VECTOR3_H_INCLUDED

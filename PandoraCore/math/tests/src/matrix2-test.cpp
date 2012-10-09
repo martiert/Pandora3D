@@ -59,17 +59,6 @@ TEST (Matrix2Test, matrix_copies_matrix)
   EXPECT_NE (mat1 (0,1), mat2 (0,1));
 }
 
-TEST (Matrix2Test, index_operator_throws_index_operator_out_of_range_exception)
-{
-  const auto mat1 = create_random_matrix2 ();
-  auto mat2 = create_random_matrix2 ();
-
-  EXPECT_THROW (mat1 (0,2), Math::Matrix2<double>::index_operator_out_of_range_exception);
-  EXPECT_THROW (mat1 (2,0), Math::Matrix2<double>::index_operator_out_of_range_exception);
-  EXPECT_THROW (mat2 (0,2), Math::Matrix2<double>::index_operator_out_of_range_exception);
-  EXPECT_THROW (mat2 (2,0), Math::Matrix2<double>::index_operator_out_of_range_exception);
-}
-
 TEST (Matrix2Test, matrix_multiplication_with_scalar_from_right_multiplies_each_component_with_scalar)
 {
   const auto matrix = create_random_matrix2 ();
@@ -255,20 +244,6 @@ TEST (Matrix2Test, dividing_matrix_with_scalar_divides_each_component)
   EXPECT_EQ (matrix (1,1) / scalar, result (1,1));
 }
 
-TEST (Matrix2Test, dividing_matrix_and_zero_throws_division_by_zero_exception)
-{
-  const auto matrix = create_random_matrix2 ();
-
-  EXPECT_THROW (matrix / 0.0, Math::Matrix2<double>::division_by_zero_exception);
-}
-
-TEST (Matrix2Test, dividing_matrix_with_zero_throws_division_by_zero_exception)
-{
-  auto matrix = create_random_matrix2 ();
-
-  EXPECT_THROW (matrix /= 0.0, Math::Matrix2<double>::division_by_zero_exception);
-}
-
 TEST (Matrix2Test, multiplication_with_inverse_from_right_returns_identity)
 {
   const auto matrix = create_random_matrix2 ();
@@ -350,13 +325,6 @@ TEST (Matrix2Test, transpose_of_matrix_switches_rows_and_columns)
   EXPECT_EQ (matrix (1,0), transpose (0,1));
   EXPECT_EQ (matrix (0,1), transpose (1,0));
   EXPECT_EQ (matrix (1,1), transpose (1,1));
-}
-
-TEST (Matrix2Test, inverse_of_singular_matrix_throws_inverse_of_singular_matrix_exception)
-{
-  const Math::Matrix2<double> matrix (2.6, 4.8, 1.3, 2.4);
-
-  EXPECT_THROW (matrix.inverse (), Math::Matrix2<double>::inverse_of_singular_matrix_exception);
 }
 
 TEST (Matrix2Test, equal_operator_of_same_matrix_returns_true)

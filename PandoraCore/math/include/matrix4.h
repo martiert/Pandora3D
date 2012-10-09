@@ -6,9 +6,7 @@
 #include "matrix3.h"
 
 #include <array>
-#include <cstring>
-#include <exception>
-#include <sstream>
+#include <cassert>
 #include <algorithm>
 
 namespace Math
@@ -56,27 +54,6 @@ namespace Math
       std::array<Real, 16> data;
 
       Real calculate_sub_determinant (const size_t& row, const size_t& column) const;
-
-    public:
-      class division_by_zero_exception : public std::exception { };
-
-      class inverse_of_singular_matrix_exception : public std::exception { };
-
-      class index_operator_out_of_range_exception : public std::exception
-      {
-        public:
-          index_operator_out_of_range_exception (const size_t& i);
-          index_operator_out_of_range_exception (const size_t& row, const size_t& col);
-
-          virtual const char* what () const throw ();
-        private:
-          const char* create_message_from_index () const;
-          const char* create_message_from_row_col () const;
-        private:
-          size_t index;
-          size_t row;
-          size_t col;
-      };
   };
 
   template<typename Real>
@@ -172,8 +149,7 @@ Math::Matrix4<Real>& Math::Matrix4<Real>::operator= (const Matrix3<Real>& matrix
 template<typename Real>
 Real& Math::Matrix4<Real>::operator () (const size_t& i, const size_t& j)
 {
-  if (i > 3 || j > 3)
-    throw index_operator_out_of_range_exception (i, j);
+  assert (i < 4 && j < 4 && "Index operator out of range");
 
   return data[i*4 + j];
 }
@@ -181,8 +157,7 @@ Real& Math::Matrix4<Real>::operator () (const size_t& i, const size_t& j)
 template<typename Real>
 Real Math::Matrix4<Real>::operator () (const size_t& i, const size_t& j) const
 {
-  if (i > 3 || j > 3)
-    throw index_operator_out_of_range_exception (i, j);
+  assert (i < 4 && j < 4 && "Index operator out of range");
 
   return data[i*4 + j];
 }
@@ -190,8 +165,7 @@ Real Math::Matrix4<Real>::operator () (const size_t& i, const size_t& j) const
 template<typename Real>
 Real& Math::Matrix4<Real>::operator[] (const size_t& i)
 {
-  if (i > 15)
-    throw index_operator_out_of_range_exception (i);
+  assert (i < 16 && "Index operator out of range");
 
   return data[i];
 }
@@ -199,8 +173,7 @@ Real& Math::Matrix4<Real>::operator[] (const size_t& i)
 template<typename Real>
 Real Math::Matrix4<Real>::operator[] (const size_t& i) const
 {
-  if (i > 15)
-    throw index_operator_out_of_range_exception (i);
+  assert (i < 16 && "Index operator out of range");
 
   return data[i];
 }
@@ -229,8 +202,7 @@ Math::Matrix4<Real>& Math::Matrix4<Real>::operator*= (const Real& scalar)
 template<typename Real>
 Math::Matrix4<Real>& Math::Matrix4<Real>::operator/= (const Real& scalar)
 {
-  if (scalar == 0)
-    throw division_by_zero_exception ();
+  assert (scalar != 0 && "Can not divide matrix by zero");
 
   for (auto i = 0; i < 16; ++i)
     data[i] /= scalar;
@@ -271,8 +243,7 @@ Math::Matrix4<Real> Math::Matrix4<Real>::inverse () const
 {
   Real det = determinant ();
 
-  if (det == 0)
-    throw inverse_of_singular_matrix_exception ();
+  assert (det != 0 && "Can not find inverse of singular matrix");
 
   Matrix4<Real> res;
 
@@ -516,37 +487,4 @@ Real Math::Matrix4<Real>::calculate_sub_determinant (const size_t& row, const si
   return matrix.determinant ();
 }
 
-template<typename Real>
-Math::Matrix4<Real>::index_operator_out_of_range_exception::index_operator_out_of_range_exception (const size_t& i)
-  : index (i), row (0), col (0)
-{ }
-
-template<typename Real>
-Math::Matrix4<Real>::index_operator_out_of_range_exception::index_operator_out_of_range_exception (const size_t& row, const size_t& col)
-  : index (0), row (row), col (col)
-{ }
-
-template<typename Real>
-const char* Math::Matrix4<Real>::index_operator_out_of_range_exception::what () const throw ()
-{
-  if (index == 0)
-    return create_message_from_row_col ();
-  return create_message_from_index ();
-}
-
-template<typename Real>
-const char* Math::Matrix4<Real>::index_operator_out_of_range_exception::create_message_from_index () const
-{
-  std::stringstream out;
-  out << "Tried to access index: " << index;
-  return out.str ().c_str ();
-}
-
-template<typename Real>
-const char* Math::Matrix4<Real>::index_operator_out_of_range_exception::create_message_from_row_col () const
-{
-  std::stringstream out;
-  out << "Tried to access: (" << row << ", " << col << ")";
-  return out.str ().c_str ();
-}
 #endif // MATH_MATRIX4_H_INCLUDED

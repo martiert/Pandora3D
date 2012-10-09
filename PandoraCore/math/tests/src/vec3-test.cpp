@@ -88,13 +88,6 @@ TEST (Vector3Test, index_operator_maps_for_const_vectors)
   EXPECT_EQ (vector.z, vector[2]);
 }
 
-TEST (Vector3Test, index_operator_throws_index_operator_out_of_range_exception)
-{
-  const Math::Vec3d vector;
-
-  EXPECT_THROW (vector[3], Math::Vec3d::index_operator_out_of_range_exception);
-}
-
 TEST (Vector3Test, length_of_zero_vector_is_zero)
 {
   const Math::Vec3d vector;
@@ -114,12 +107,6 @@ TEST (Vector3Test, normalize_vector_gives_length_of_1)
   auto vector = create_random_vector3 ();
   vector.normalize ();
   EXPECT_FLOAT_EQ (1.0, vector.length ());
-}
-
-TEST (Vector3Test, normalize_zero_vector_throws_normalizing_zero_vector_exception)
-{
-  Math::Vec3d vector;
-  EXPECT_THROW (vector.normalize (), Math::Vec3d::normalizing_zero_vector_exception);
 }
 
 TEST (Vector3Test, negating_a_vector_returns_the_negation_of_each_element)
@@ -224,12 +211,6 @@ TEST (Vector3Test, multiplying_two_vectors_multiplies_component_wise)
   EXPECT_EQ (left.z * right.z, res.z);
 }
 
-TEST (Vector3Test, dividing_a_vector_with_zero_throws_division_by_zero_exception)
-{
-  const auto vector = create_random_vector3 ();
-  EXPECT_THROW (vector / 0.0, Math::Vec3d::division_by_zero_exception);
-}
-
 TEST (Vector3Test, cross_product_of_two_vector_follows_mathematical_rules)
 {
   const auto vector_1 = create_random_vector3 ();
@@ -295,12 +276,6 @@ TEST (Vector3Test, multiplying_vector_with_a_vector_multiplies_component_wise)
   EXPECT_EQ (vector.x * other.x, res.x);
   EXPECT_EQ (vector.y * other.y, res.y);
   EXPECT_EQ (vector.z * other.z, res.z);
-}
-
-TEST (Vector3Test, dividing_vector_with_zero_throws_division_by_zero_exception)
-{
-  auto vector = create_random_vector3 ();
-  EXPECT_THROW (vector /= 0.0, Math::Vec3d::division_by_zero_exception);
 }
 
 TEST (Vector3Test, equality_operator_returns_true_for_the_same_object)
@@ -415,26 +390,6 @@ TEST (Vector3Test, casted_vector_manipulates_the_object)
   EXPECT_EQ (vector.x, pointer[0]);
   EXPECT_EQ (vector.y, pointer[1]);
   EXPECT_EQ (vector.z, pointer[2]);
-}
-
-TEST (Vector3Test, othonormal_basis_with_zero_vector_throws_can_not_make_orthonormal_basis_with_zero_vector_exception)
-{
-  Math::Vec3d vec1 (3.0, 5.0, 7.0);
-  Math::Vec3d vec2 (7.0, 9.0, 17.0);
-  Math::Vec3d zero (0.0, 0.0, 0.0);
-
-  EXPECT_THROW (Math::Vec3d::generateOrthonormalBasis (zero, vec2, vec1), Math::Vec3d::can_not_make_orthonormal_basis_with_zero_vector_exception);
-  EXPECT_THROW (Math::Vec3d::generateOrthonormalBasis (vec1, zero, vec2), Math::Vec3d::can_not_make_orthonormal_basis_with_zero_vector_exception);
-  EXPECT_THROW (Math::Vec3d::generateOrthonormalBasis (vec1, vec2, zero), Math::Vec3d::can_not_make_orthonormal_basis_with_zero_vector_exception);
-}
-
-TEST (Vector3Test, orthonormal_basis_with_equal_vectors_throws_can_not_make_orthonormal_basis_with_equal_vectors_exception)
-{
-  Math::Vec3d vec1 (3.0, 5.0, 7.0);
-  Math::Vec3d vec2 (7.0, 9.0, 17.0);
-  EXPECT_THROW (Math::Vec3d::generateOrthonormalBasis (vec1, vec2, vec1), Math::Vec3d::can_not_make_orthonormal_basis_with_equal_vectors_exception);
-  EXPECT_THROW (Math::Vec3d::generateOrthonormalBasis (vec1, vec2, vec2), Math::Vec3d::can_not_make_orthonormal_basis_with_equal_vectors_exception);
-  EXPECT_THROW (Math::Vec3d::generateOrthonormalBasis (vec1, vec1, vec2), Math::Vec3d::can_not_make_orthonormal_basis_with_equal_vectors_exception);
 }
 
 TEST (Vector3Test, orthonormal_basis_gives_vectors_of_length_1)

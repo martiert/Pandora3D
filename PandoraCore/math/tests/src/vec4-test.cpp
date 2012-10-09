@@ -125,13 +125,6 @@ TEST (Vector4Test, index_operator_manipulates_data)
   EXPECT_EQ (5.3, vector.z);
 }
 
-TEST (Vector4Test, index_operator_throws_index_operator_out_of_range_exception_when_out_of_range)
-{
-  const auto vector = create_random_vector4 ();
-
-  EXPECT_THROW (vector[4], Math::Vec4d::index_operator_out_of_range_exception);
-}
-
 TEST (Vector4Test, length_of_zero_vector_is_zero)
 {
   const Math::Vec4d zero;
@@ -163,12 +156,6 @@ TEST (Vector4Test, normalization_of_vector_gives_length_of_1)
   vector.normalize ();
 
   EXPECT_FLOAT_EQ (1.0, vector.length ());
-}
-
-TEST (Vector4Test, normalization_of_zero_vector_throws_normalizing_zero_vector_exception)
-{
-  Math::Vec4d zero;
-  EXPECT_THROW (zero.normalize (), Math::Vec4d::normalizing_zero_vector_exception);
 }
 
 TEST (Vector4Test, negation_of_vector_negates_each_component)
@@ -268,12 +255,6 @@ TEST (Vector4Test, dividing_vector_with_scalar_from_right_divides_each_component
   EXPECT_EQ (vector.w / scalar, res.w);
 }
 
-TEST (Vector4Test, dividing_vector_and_zero_throws_division_by_zero_exception)
-{
-  const auto vector = create_random_vector4 ();
-  EXPECT_THROW (vector / 0.0, Math::Vec4d::division_by_zero_exception);
-}
-
 TEST (Vector4Test, multiplying_vector_with_scalar_multiplies_each_component_with_scalar)
 {
   const auto vector = create_random_vector4 ();
@@ -311,12 +292,6 @@ TEST (Vector4Test, multiplying_vector_to_vector_multiplies_each_component)
   EXPECT_EQ (vector.y * other.y, res.y);
   EXPECT_EQ (vector.z * other.z, res.z);
   EXPECT_EQ (vector.w * other.w, res.w);
-}
-
-TEST (Vector4Test, dividing_vector_with_zero_throws_division_by_zero_exception)
-{
-  auto vector = create_random_vector4 ();
-  EXPECT_THROW (vector /= 0.0, Math::Vec4d::division_by_zero_exception);
 }
 
 TEST (Vector4Test, dot_product_of_two_vectors_add_the_product_of_the_vectors)

@@ -3,8 +3,7 @@
 
 #include "config.h"
 
-#include <exception>
-#include <sstream>
+#include <cassert>
 #include <cmath>
 
 namespace Math
@@ -47,29 +46,6 @@ namespace Math
       static const Vector2 ZERO;
       static const Vector2 E1;
       static const Vector2 E2;
-
-    public:
-      class can_not_make_orthonormal_basis_from_equal_vectors_exception : public std::exception
-      { };
-
-      class can_not_make_orthonormal_basis_with_zero_vector_exception : public std::exception
-      { };
-
-      class can_not_normalize_zero_vector_exception : public std::exception
-      { };
-
-      class division_by_zero_exception : public std::exception
-      { };
-
-      class index_operator_out_of_range_exception : public std::exception
-      {
-        public:
-          index_operator_out_of_range_exception (const size_t& i);
-
-          virtual const char* what () const throw ();
-        private:
-          size_t index;
-      };
   };
 
   typedef Vector2<float>    Vec2f;
@@ -133,8 +109,7 @@ Math::Vector2<Real>& Math::Vector2<Real>::operator= (const Real data[2])
 template<typename Real>
 Real& Math::Vector2<Real>::operator[] (const size_t& i)
 {
-  if (i > 1)
-    throw index_operator_out_of_range_exception (i);
+  assert (i < 2 && "Index operator is out of range");
 
   return (&x)[i];
 }
@@ -142,8 +117,7 @@ Real& Math::Vector2<Real>::operator[] (const size_t& i)
 template<typename Real>
 Real Math::Vector2<Real>::operator[] (const size_t& i) const
 {
-  if (i > 1)
-    throw index_operator_out_of_range_exception (i);
+  assert (i < 2 && "Index operator is out of range");
 
   return (&x)[i];
 }
@@ -199,8 +173,7 @@ Math::Vector2<Real>& Math::Vector2<Real>::operator*= (const Real& scalar)
 template<typename Real>
 Math::Vector2<Real>& Math::Vector2<Real>::operator/= (const Real& scalar)
 {
-  if (!scalar)
-    throw division_by_zero_exception ();
+  assert (scalar != 0 && "Can not divide vector by zero");
 
   x /= scalar;
   y /= scalar;
@@ -237,8 +210,7 @@ void Math::Vector2<Real>::normalize ()
 {
   Real len = length ();
 
-  if (len == 0)
-    throw can_not_normalize_zero_vector_exception ();
+  assert (len != 0 && "Can not normalize zero vector");
 
   *this /= len;
 }
@@ -246,11 +218,8 @@ void Math::Vector2<Real>::normalize ()
 template<typename Real>
 void Math::Vector2<Real>::generateOrthonormalBasis (Vector2<Real>& vec1, Vector2<Real>& vec2)
 {
-  if ((vec1.x == 0 && vec1.y == 0) || (vec2.x == 0 && vec2.y == 0))
-    throw can_not_make_orthonormal_basis_with_zero_vector_exception ();
-
-  if (vec1 == vec2)
-    throw can_not_make_orthonormal_basis_from_equal_vectors_exception () ;
+  assert (vec1 != ZERO && vec2 != ZERO && "Can not make orthonormal basis from a zero vector");
+  assert (vec1 != vec2 && "Can not make orthonormal basis from equal vector");
 
   vec1.normalize ();
   vec2 = vec2 - (vec1.dot (vec2)) * vec1;
@@ -311,19 +280,6 @@ template<typename Real>
 bool Math::operator!= (const Vector2<Real>& vec1, const Vector2<Real>& vec2)
 {
   return !(vec1 == vec2);
-}
-
-template<typename Real>
-Math::Vector2<Real>::index_operator_out_of_range_exception::index_operator_out_of_range_exception (const size_t& i)
-  : index (i)
-{}
-
-template<typename Real>
-const char* Math::Vector2<Real>::index_operator_out_of_range_exception::what () const throw ()
-{
-  std::stringstream out;
-  out << "Tried to access index: " << index;
-  return out.str ().c_str ();
 }
 
 #endif // MATH_VECTOR2_H_INCLUDED

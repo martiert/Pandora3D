@@ -108,19 +108,6 @@ TEST (Matrix4Test, matrix_assigned_from_array_populates_matrix)
   delete [] c_array;
 }
 
-TEST (Matrix4Test, index_operator_throws_index_operator_out_of_range_exception_for_invalid_input)
-{
-  const auto matrix1 = create_random_matrix4 ();
-  auto matrix2 = create_random_matrix4 ();
-
-  EXPECT_THROW (matrix1 (0,4), Math::Matrix4<double>::index_operator_out_of_range_exception);
-  EXPECT_THROW (matrix1 (4,0), Math::Matrix4<double>::index_operator_out_of_range_exception);
-  EXPECT_THROW (matrix2 (0,4), Math::Matrix4<double>::index_operator_out_of_range_exception);
-  EXPECT_THROW (matrix2 (4,0), Math::Matrix4<double>::index_operator_out_of_range_exception);
-  EXPECT_THROW (matrix1[16], Math::Matrix4<double>::index_operator_out_of_range_exception);
-  EXPECT_THROW (matrix2[16], Math::Matrix4<double>::index_operator_out_of_range_exception);
-}
-
 TEST (Matrix4Test, multiplying_matrix_with_scalar_from_right_multiplies_each_element_with_scalar)
 {
   const auto matrix = create_random_matrix4 ();
@@ -177,13 +164,6 @@ TEST (Matrix4Test, dividing_scalar_to_matrix_divides_each_element_with_scalar)
   for (auto i = 0; i < 16; ++i)
     EXPECT_EQ (matrix[i] / scalar, result[i]);
   }
-}
-
-TEST (Matrix4Test, dividing_matrix_with_zero_throws_division_by_zero_exception)
-{
-  auto matrix = create_random_matrix4 ();
-  EXPECT_THROW (matrix / 0.0, Math::Matrix4<double>::division_by_zero_exception);
-  EXPECT_THROW (matrix /= 0.0, Math::Matrix4<double>::division_by_zero_exception);
 }
 
 TEST (Matrix4Test, adding_two_matrices_adds_each_component)
@@ -440,16 +420,6 @@ TEST (Matrix4Test, matrix_times_inverse_of_matrix_is_identity)
 
   for (auto i = 0; i < 16; ++i)
     EXPECT_NEAR (Math::Matrix4<double>::IDENTITY[i], res[i], PRECISION);
-}
-
-TEST (Matrix4Test, inverse_of_singular_matrix_throws_inverse_of_singular_matrix_exception)
-{
-  const Math::Matrix4<double> matrix (2, 4, 1, 7,
-    2, 4, 1, 7,
-    2, 4, 1, 7,
-    2, 4, 1, 7);
-
-  EXPECT_THROW (matrix.inverse (), Math::Matrix4<double>::inverse_of_singular_matrix_exception);
 }
 
 TEST (Matrix4Test, equality_operator_on_same_matrix_returns_true)

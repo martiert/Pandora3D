@@ -5,7 +5,7 @@
 #include "vector3.h"
 #include "matrix4.h"
 
-#include <exception>
+#include <cassert>
 #include <cmath>
 
 namespace Math
@@ -60,11 +60,6 @@ namespace Math
 
       void create_quaternion_from_matrix_with_largest_u (const Matrix4<Real>& matrix);
       void create_quaternion_from_matrix_with_smallest_u (const Matrix4<Real>& matrix);
-
-    public:
-      class normalizing_zero_quaternion_exception : public std::exception { };
-      class can_not_make_matrix_from_zero_quaternion_exception : public std::exception { };
-      class division_by_zero_exception : public std::exception { };
   };
 
   template<typename Real>
@@ -198,8 +193,7 @@ Math::Quaternion<Real> Math::Quaternion<Real>::operator*= (const Real& scalar)
 template<typename Real>
 Math::Quaternion<Real> Math::Quaternion<Real>::operator/= (const Real& scalar)
 {
-  if (scalar == 0)
-    throw division_by_zero_exception ();
+  assert (scalar != 0 && "Ca not divide quaternion by zero");
 
   real /= scalar;
   imag /= scalar;
@@ -211,8 +205,7 @@ Math::Matrix4<Real> Math::Quaternion<Real>::create_matrix () const
 {
   const auto quat_norm = norm ();
 
-  if (quat_norm == 0)
-    throw can_not_make_matrix_from_zero_quaternion_exception ();
+  assert (quat_norm != 0 && "Can not make matrix from zero quaternion");
 
   const auto s = 2.0 / quat_norm;
   return create_matrix_with_scale (s);
@@ -249,8 +242,7 @@ void Math::Quaternion<Real>::normalize ()
 {
   auto scale = norm ();
 
-  if (scale == 0)
-    throw normalizing_zero_quaternion_exception ();
+  assert (scale != 0 && "Can not normalize zero quaternion");
 
   real /= scale;
   imag /= scale;

@@ -85,12 +85,6 @@ TEST_F (Vector2Test, index_operator_maps_to_x_and_y)
   EXPECT_EQ (random_vector.x, random_vector[0]);
 }
 
-TEST_F (Vector2Test, index_operator_throws_index_out_of_range_exception_when_out_of_range)
-{
-  const Math::Vec2d vector;
-  EXPECT_THROW (vector[2], Math::Vec2d::index_operator_out_of_range_exception);
-}
-
 TEST_F (Vector2Test, vector_can_be_casted_to_array_c_style)
 {
   auto pointer = (double *) random_vector;
@@ -143,11 +137,6 @@ TEST_F (Vector2Test, normalize_non_zero_vector_gives_new_length_of_1)
 {
   random_vector.normalize ();
   EXPECT_FLOAT_EQ (1.0, random_vector.length ());
-}
-
-TEST_F (Vector2Test, normalize_throws_can_not_normalize_zero_exception_when_normalizing_zero_vector)
-{
-  EXPECT_THROW (empty_vector.normalize (), Math::Vec2d::can_not_normalize_zero_vector_exception);
 }
 
 TEST_F (Vector2Test, vector_negation_negates_each_component)
@@ -205,12 +194,6 @@ TEST_F (Vector2Test, multiplying_vector_with_scalar_from_left_multiplies_each_co
 
   EXPECT_EQ (vector.x * scalar, res.x);
   EXPECT_EQ (vector.y * scalar, res.y);
-}
-
-TEST_F (Vector2Test, dividing_vector_with_zero_throws_division_by_zero_exception)
-{
-  const auto vector = create_random_vector2 ();
-  EXPECT_THROW (vector / 0.0, Math::Vec2d::division_by_zero_exception);
 }
 
 TEST_F (Vector2Test, multiplying_two_vectors_multiplies_component_wise)
@@ -319,13 +302,6 @@ TEST_F (Vector2Test, division_inplace_with_with_scalar_gives_same_as_vector_divi
   EXPECT_EQ (vec1.y, vec2.y);
 }
 
-TEST_F (Vector2Test, inplace_division_by_zero_throws_division_by_zero_exception)
-{
-  auto vec = create_random_vector2 ();
-
-  EXPECT_THROW (vec /= 0.0, Math::Vec2d::division_by_zero_exception);
-}
-
 TEST_F (Vector2Test, inplace_arithmetic_returns_ref_to_self)
 {
   auto vec1 = create_random_vector2 ();
@@ -424,21 +400,6 @@ TEST_F (Vector2Test, non_equal_operator_gives_false_for_vectors_with_equal_compo
   EXPECT_FALSE (vector != same);
 
   delete[] array;
-}
-
-TEST_F (Vector2Test, orhtonormal_basis_with_zero_vector_throws_can_not_make_orthonormal_basis_with_zero_vector_exception)
-{
-  Math::Vec2d zero;
-  Math::Vec2d vector (4.0, 7.0);
-  EXPECT_THROW (Math::Vec2d::generateOrthonormalBasis (zero, vector), Math::Vec2d::can_not_make_orthonormal_basis_with_zero_vector_exception);
-  EXPECT_THROW (Math::Vec2d::generateOrthonormalBasis (vector, zero), Math::Vec2d::can_not_make_orthonormal_basis_with_zero_vector_exception);
-}
-
-TEST_F (Vector2Test, orthonormal_basis_with_equal_vectors_throws_can_not_make_orthonormal_basis_from_equal_vectors_exception)
-{
-  Math::Vec2d vector (4.0, 7.0);
-  auto copy = vector;
-  EXPECT_THROW (Math::Vec2d::generateOrthonormalBasis (vector, copy), Math::Vec2d::can_not_make_orthonormal_basis_from_equal_vectors_exception);
 }
 
 TEST_F (Vector2Test, orthonormal_basis_creates_perpendicular_vectors_of_length_1)

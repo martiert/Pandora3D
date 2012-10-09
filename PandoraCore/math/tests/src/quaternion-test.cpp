@@ -146,14 +146,6 @@ TEST (QuaternionTest, creating_matrix_from_quaternion_gives_correct_matrix)
     EXPECT_EQ (correct[i], res[i]);
 }
 
-TEST (QuaternionTest, creating_matrix_from_zero_quaternion_throws_can_not_make_matrix_from_zero_quaternion_exception)
-{
-  Math::Quaternion<double> quat;
-  quat.w () = 0;
-
-  EXPECT_THROW (quat.create_matrix (), Math::Quaternion<double>::can_not_make_matrix_from_zero_quaternion_exception);
-}
-
 TEST (QuaternionTest, norm_of_identity_quaternion_is_1)
 {
   const Math::Quaternion<double> quat;
@@ -351,22 +343,6 @@ TEST (QuaternionTest, normalizing_quaternion_gives_a_unit_quaternion)
   quat.normalize ();
 
   EXPECT_FLOAT_EQ (1, quat.norm ());
-}
-
-TEST (QuaternionTest, normalizing_zero_quaternion_throw_normalizing_zero_quaternion_exception)
-{
-  Math::Quaternion<double> quat;
-  quat.w () = 0;
-
-  EXPECT_THROW (quat.normalize (), Math::Quaternion<double>::normalizing_zero_quaternion_exception);
-}
-
-TEST (QuaternionTest, dividing_quaternion_by_zero_throws_division_by_zero_exception)
-{
-  Math::Quaternion<double> quat;
-
-  EXPECT_THROW (quat /= 0.0, Math::Quaternion<double>::division_by_zero_exception);
-  EXPECT_THROW (quat / 0.0, Math::Quaternion<double>::division_by_zero_exception);
 }
 
 TEST (QuaternionTest, spherical_linear_interpolation_between_from_and_to_with_t_equal_zero_returns_from)

@@ -20,19 +20,6 @@ TEST (Matrix3Test, empty_constructor_makes_identity_matrix)
   EXPECT_EQ (1.0, matrix (2,2));
 }
 
-TEST (Matrix3Test, index_out_of_range_throws_index_operator_out_of_range_exception)
-{
-  const Math::Matrix3<double> mat1;
-  Math::Matrix3<double> mat2;
-
-  EXPECT_THROW (mat1 (0,3), Math::Matrix3<double>::index_operator_out_of_range_exception);
-  EXPECT_THROW (mat1 (3,0), Math::Matrix3<double>::index_operator_out_of_range_exception);
-  EXPECT_THROW (mat2 (0,3), Math::Matrix3<double>::index_operator_out_of_range_exception);
-  EXPECT_THROW (mat2 (3,0), Math::Matrix3<double>::index_operator_out_of_range_exception);
-  EXPECT_THROW (mat1 [9], Math::Matrix3<double>::index_operator_out_of_range_exception);
-  EXPECT_THROW (mat2 [9], Math::Matrix3<double>::index_operator_out_of_range_exception);
-}
-
 TEST (Matrix3Test, matrix_can_be_constructed_from_array)
 {
   const auto c_array = create_double_array_of_size (9);
@@ -345,14 +332,6 @@ TEST (Matrix3Test, matrix_matrix_multiplication_follows_normal_mathematical_rule
   }
 }
 
-TEST (Matrix3Test, division_by_zero_throws_division_by_zero_exception)
-{
-  auto matrix = create_random_matrix3 ();
-
-  EXPECT_THROW (matrix / 0.0, Math::Matrix3<double>::division_by_zero_exception);
-  EXPECT_THROW (matrix /= 0.0, Math::Matrix3<double>::division_by_zero_exception);
-}
-
 TEST (Matrix3Test, trace_of_zero_matrix_is_zero)
 {
   EXPECT_EQ (0, Math::Matrix3<double>::ZERO.trace ());
@@ -422,20 +401,6 @@ TEST (Matrix3Test, matrix_multiplied_with_its_inverse_from_right_is_identity)
   EXPECT_NEAR (0, result (2,0), PRECISION);
   EXPECT_NEAR (0, result (2,1), PRECISION);
   EXPECT_NEAR (1, result (2,2), PRECISION);
-}
-
-TEST (Matrix3Test, inverse_of_zero_matrix_throws_inverse_of_singular_matrix_exception)
-{
-  EXPECT_THROW (Math::Matrix3<double>::ZERO.inverse (), Math::Matrix3<double>::inverse_of_singular_matrix_exception);
-}
-
-TEST (Matrix3Test, inverse_of_singular_matrix_throws_inverse_of_singular_matrix_exception)
-{
-  const Math::Matrix3<double> matrix (3.2, 6.4, 1.6,
-    2.2, 4.4, 1.1,
-    6.8, 13.6, 3.4);
-
-  EXPECT_THROW (matrix.inverse (), Math::Matrix3<double>::inverse_of_singular_matrix_exception);
 }
 
 TEST (Matrix3Test, equality_of_same_matrix_returns_true)

@@ -4,8 +4,7 @@
 #include "config.h"
 #include "vector3.h"
 
-#include <exception>
-#include <sstream>
+#include <cassert>
 #include <cmath>
 
 namespace Math
@@ -52,22 +51,6 @@ namespace Math
       static const Vector4 E2;
       static const Vector4 E3;
       static const Vector4 E4;
-
-    public:
-      class normalizing_zero_vector_exception : public std::exception {};
-
-      class division_by_zero_exception : public std::exception { };
-
-      class index_operator_out_of_range_exception : public std::exception
-    {
-      public:
-        index_operator_out_of_range_exception (const size_t& i);
-
-        virtual const char* what () const throw ();
-
-      private:
-        size_t index;
-    };
   };
 
   typedef Vector4<float>  Vec4f;
@@ -150,8 +133,7 @@ Math::Vector4<Real>& Math::Vector4<Real>::operator= (const Vector3<Real>& vec)
 template<typename Real>
 Real& Math::Vector4<Real>::operator[] (const size_t& i)
 {
-  if (i > 3)
-    throw index_operator_out_of_range_exception (i);
+  assert (i < 4 && "Index operator out of range");
 
   return (&x)[i];
 }
@@ -159,8 +141,7 @@ Real& Math::Vector4<Real>::operator[] (const size_t& i)
 template<typename Real>
 Real Math::Vector4<Real>::operator[] (const size_t& i) const
 {
-  if (i > 3)
-    throw index_operator_out_of_range_exception (i);
+  assert (i < 4 && "Index operator out of range");
 
   return (&x)[i];
 }
@@ -224,8 +205,7 @@ Math::Vector4<Real>& Math::Vector4<Real>::operator*= (const Real& scalar)
 template<typename Real>
 Math::Vector4<Real>& Math::Vector4<Real>::operator/= (const Real& scalar)
 {
-  if (scalar == 0)
-    throw division_by_zero_exception ();
+  assert (scalar != 0 && "Can not divide vector by zero");
 
   x /= scalar;
   y /= scalar;
@@ -258,8 +238,7 @@ Math::Vector4<Real>& Math::Vector4<Real>::normalize ()
 {
   Real len = length ();
 
-  if (len == 0)
-    throw normalizing_zero_vector_exception ();
+  assert (len != 0 && "Can not normalize zero vector");
 
   return *this /= len;
 }
@@ -331,16 +310,4 @@ bool Math::operator!= (const Vector4<Real>& vec1, const Vector4<Real>& vec2)
   return !(vec1 == vec2);
 }
 
-template<typename Real>
-Math::Vector4<Real>::index_operator_out_of_range_exception::index_operator_out_of_range_exception (const size_t& i)
-  : index (i)
-{ }
-
-template<typename Real>
-const char* Math::Vector4<Real>::index_operator_out_of_range_exception::what () const throw ()
-{
-  std::stringstream out;
-  out << "Tried to access index: " << index;
-  return out.str ().c_str ();
-}
 #endif // MATH_VECTOR4_H_INCLUDED
