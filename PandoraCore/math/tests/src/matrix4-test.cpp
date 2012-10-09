@@ -23,24 +23,30 @@ TEST (Matrix4Test, constructor_with_arguments_populates_matrix)
 {
   const auto array = create_double_array_of_size (16);
   const Math::Matrix4<double> matrix (array[0], array[1], array[2], array[3],
-                              array[4], array[5], array[6], array[7],
-                              array[8], array[9], array[10], array[11],
-                              array[12], array[13], array[14], array[15]);
+                                      array[4], array[5], array[6], array[7],
+                                      array[8], array[9], array[10], array[11],
+                                      array[12], array[13], array[14], array[15]);
 
   for (auto i = 0; i < 16; ++i)
     EXPECT_EQ (array[i], matrix[i]);
 
-  delete [] array;}
+  delete [] array;
+}
 
 TEST (Matrix4Test, matrix_constructed_from_array_populates_matrix_with_array_values)
 {
-  auto array = create_double_array_of_size (16);
+  auto c_array = create_double_array_of_size (16);
+  std::array<double, 16> array {{c_array[0], c_array[1], c_array[2], c_array[3],
+                                 c_array[4], c_array[5], c_array[6], c_array[7],
+                                 c_array[8], c_array[9], c_array[10], c_array[11],
+                                 c_array[12], c_array[13], c_array[14], c_array[15]}};
   const Math::Matrix4<double> matrix (array);
 
   for (auto i = 0; i < 16; ++i)
     EXPECT_EQ (array[i], matrix[i]);
 
-  delete [] array;}
+  delete [] c_array;
+}
 
 TEST (Matrix4Test, matrix_created_from_3d_matrix_is_zero_padded_with_one_at_3_3)
 {
@@ -88,14 +94,19 @@ TEST (Matrix4Test, matrix_assigned_from_3d_matrix_populates_matrix)
 
 TEST (Matrix4Test, matrix_assigned_from_array_populates_matrix)
 {
-  auto array = create_double_array_of_size (16);
+  auto c_array = create_double_array_of_size (16);
+  std::array<double, 16> array {{c_array[0],  c_array[1],  c_array[2],  c_array[3],
+                                 c_array[4],  c_array[5],  c_array[6],  c_array[7],
+                                 c_array[8],  c_array[9],  c_array[10], c_array[11],
+                                 c_array[12], c_array[13], c_array[14], c_array[15]}};
   Math::Matrix4<double> matrix;
   matrix = array;
 
   for (auto i = 0; i < 16; ++i)
     EXPECT_EQ (array[i], matrix[i]);
 
-  delete [] array;}
+  delete [] c_array;
+}
 
 TEST (Matrix4Test, index_operator_throws_index_operator_out_of_range_exception_for_invalid_input)
 {
@@ -108,34 +119,6 @@ TEST (Matrix4Test, index_operator_throws_index_operator_out_of_range_exception_f
   EXPECT_THROW (matrix2 (4,0), Math::Matrix4<double>::index_operator_out_of_range_exception);
   EXPECT_THROW (matrix1[16], Math::Matrix4<double>::index_operator_out_of_range_exception);
   EXPECT_THROW (matrix2[16], Math::Matrix4<double>::index_operator_out_of_range_exception);
-}
-
-TEST (Matrix4Test, can_cast_matrix_to_pointer_c_style)
-{
-  const auto matrix = create_random_matrix4 ();
-  auto ptr = (const double*) matrix;
-
-  for (auto i = 0; i < 16; ++i)
-    EXPECT_EQ (matrix[i], ptr[i]);
-}
-
-TEST (Matrix4Test, can_static_cast_matrix_to_pointer)
-{
-  const auto matrix = create_random_matrix4 ();
-  auto ptr = static_cast<const double*> (matrix);
-
-  for (auto i = 0; i < 16; ++i)
-    EXPECT_EQ (matrix[i], ptr[i]);
-}
-
-TEST (Matrix4Test, manipulating_the_casted_ptr_manipulates_the_matrix)
-{
-  auto matrix = create_random_matrix4 ();
-  auto ptr = static_cast<double*> (matrix);
-  ++ptr[5];
-
-  for (auto i = 0; i < 16; ++i)
-    EXPECT_EQ (matrix[i], ptr[i]);
 }
 
 TEST (Matrix4Test, multiplying_matrix_with_scalar_from_right_multiplies_each_element_with_scalar)
@@ -517,9 +500,13 @@ TEST (Matrix4Test, inequality_of_different_matrix_returns_true)
 
 const Math::Matrix4<double> create_random_matrix4 ()
 {
-  auto array = create_double_array_of_size (16);
+  auto c_array = create_double_array_of_size (16);
+  std::array<double, 16> array {{c_array[0],  c_array[1],  c_array[2],  c_array[3],
+                                 c_array[4],  c_array[5],  c_array[6],  c_array[7],
+                                 c_array[8],  c_array[9],  c_array[10], c_array[11],
+                                 c_array[12], c_array[13], c_array[14], c_array[15]}};
   Math::Matrix4<double> matrix (array);
 
-  delete [] array;
+  delete [] c_array;
   return matrix;
 }

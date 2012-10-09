@@ -3,6 +3,7 @@
 
 #include "config.h"
 
+#include <array>
 #include <exception>
 #include <sstream>
 #include <algorithm>
@@ -17,7 +18,7 @@ namespace Math
       explicit Matrix3 (const Real& m00, const Real& m01, const Real& m02,
                         const Real& m10, const Real& m11, const Real& m12,
                         const Real& m20, const Real& m21, const Real& m22);
-      explicit Matrix3 (const Real array[9]);
+      explicit Matrix3 (const std::array<Real, 9> array);
 
       Real& operator () (const size_t& i, const size_t& j);
       Real operator () (const size_t& i, const size_t& j) const;
@@ -25,8 +26,8 @@ namespace Math
       Real& operator [] (const size_t& i);
       Real operator [] (const size_t& i) const;
 
-      operator Real* ();
-      operator const Real* () const;
+      std::array<Real, 9>& get_data ();
+      std::array<Real, 9> get_data () const;
 
       Matrix3& operator*= (const Real& scalar);
       Matrix3& operator/= (const Real& scalar);
@@ -43,7 +44,7 @@ namespace Math
       const static Matrix3 IDENTITY;
       const static Matrix3 ZERO;
     private:
-      Real data[9];
+      std::array<Real, 9> data;
 
     public:
       class division_by_zero_exception : public std::exception { };
@@ -96,21 +97,19 @@ namespace Math
 // Implementation
 template<typename Real>
 Math::Matrix3<Real>::Matrix3 ()
-  : data {1, 0, 0, 0, 1, 0, 0, 0, 1}
+  : data {{1, 0, 0, 0, 1, 0, 0, 0, 1}}
 { }
 
 template<typename Real>
 Math::Matrix3<Real>::Matrix3 (const Real& m00, const Real& m01, const Real& m02,
                         const Real& m10, const Real& m11, const Real& m12,
                         const Real& m20, const Real& m21, const Real& m22)
-  : data {m00, m01, m02, m10, m11, m12, m20, m21, m22}
+  : data {{m00, m01, m02, m10, m11, m12, m20, m21, m22}}
 { }
 
 template<typename Real>
-Math::Matrix3<Real>::Matrix3 (const Real array[9])
-  : data {array[0], array[1], array[2],
-          array[3], array[4], array[5],
-          array[6], array[7], array[8]}
+Math::Matrix3<Real>::Matrix3 (const std::array<Real, 9> array)
+  : data (array)
 { }
 
 template<typename Real>
@@ -150,15 +149,15 @@ Real Math::Matrix3<Real>::operator [] (const size_t& i) const
 }
 
 template<typename Real>
-Math::Matrix3<Real>::operator Real* ()
+std::array<Real, 9>& Math::Matrix3<Real>::get_data ()
 {
-  return &data[0];
+  return data;
 }
 
 template<typename Real>
-Math::Matrix3<Real>::operator const Real* () const
+std::array<Real, 9> Math::Matrix3<Real>::get_data () const
 {
-  return &data[0];
+  return data;
 }
 
 template<typename Real>
@@ -309,11 +308,7 @@ Math::Matrix3<Real> Math::operator* (const Matrix3<Real>& left, const Matrix3<Re
 template<typename Real>
 bool Math::operator== (const Matrix3<Real>& left, const Matrix3<Real>& right)
 {
-  const Real* first1 = (const Real*) left;
-  const Real* last = first1 + 9;
-  const Real* first2 = (const Real*) right;
-
-  return std::equal (first1, last, first2);
+  return left.get_data () == right.get_data ();
 }
 
 template<typename Real>

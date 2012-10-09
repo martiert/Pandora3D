@@ -35,7 +35,10 @@ TEST (Matrix3Test, index_out_of_range_throws_index_operator_out_of_range_excepti
 
 TEST (Matrix3Test, matrix_can_be_constructed_from_array)
 {
-  const auto array = create_double_array_of_size (9);
+  const auto c_array = create_double_array_of_size (9);
+  const std::array<double, 9> array {{c_array[0], c_array[1], c_array[2],
+                                      c_array[3], c_array[4], c_array[5],
+                                      c_array[6], c_array[7], c_array[8]}};
   const Math::Matrix3<double> tmp (array);
 
   EXPECT_EQ (array[0], tmp (0,0));
@@ -50,7 +53,7 @@ TEST (Matrix3Test, matrix_can_be_constructed_from_array)
   EXPECT_EQ (array[7], tmp (2,1));
   EXPECT_EQ (array[8], tmp (2,2));
 
-  delete[] array;
+  delete[] c_array;
 }
 
 TEST (Matrix3Test, matrix_can_be_specified)
@@ -107,55 +110,6 @@ TEST (Matrix3Test, matrix_can_be_assigned)
   EXPECT_EQ (matrix1 (2,0), copy (2,0));
   EXPECT_EQ (matrix1 (2,1), copy (2,1));
   EXPECT_EQ (matrix1 (2,2), copy (2,2));
-}
-
-TEST (Matrix3Test, can_cast_matrix_to_pointer_c_style)
-{
-  const auto matrix = create_random_matrix3 ();
-  auto ptr = (const double *) matrix;
-
-  EXPECT_EQ (matrix (0,0), ptr[0]);
-  EXPECT_EQ (matrix (0,1), ptr[1]);
-  EXPECT_EQ (matrix (0,2), ptr[2]);
-  EXPECT_EQ (matrix (1,0), ptr[3]);
-  EXPECT_EQ (matrix (1,1), ptr[4]);
-  EXPECT_EQ (matrix (1,2), ptr[5]);
-  EXPECT_EQ (matrix (2,0), ptr[6]);
-  EXPECT_EQ (matrix (2,1), ptr[7]);
-  EXPECT_EQ (matrix (2,2), ptr[8]);
-}
-
-TEST (Matrix3Test, can_static_cast_matrix_to_pointer)
-{
-  const auto matrix = create_random_matrix3 ();
-  auto ptr = static_cast<const double*> (matrix);
-
-  EXPECT_EQ (matrix (0,0), ptr[0]);
-  EXPECT_EQ (matrix (0,1), ptr[1]);
-  EXPECT_EQ (matrix (0,2), ptr[2]);
-  EXPECT_EQ (matrix (1,0), ptr[3]);
-  EXPECT_EQ (matrix (1,1), ptr[4]);
-  EXPECT_EQ (matrix (1,2), ptr[5]);
-  EXPECT_EQ (matrix (2,0), ptr[6]);
-  EXPECT_EQ (matrix (2,1), ptr[7]);
-  EXPECT_EQ (matrix (2,2), ptr[8]);
-}
-
-TEST (Matrix3Test, manipulating_the_casted_ptr_manipulates_the_matrix)
-{
-  auto matrix = create_random_matrix3 ();
-  auto ptr = static_cast<double*> (matrix);
-  ++ptr[3];
-
-  EXPECT_EQ (matrix (0,0), ptr[0]);
-  EXPECT_EQ (matrix (0,1), ptr[1]);
-  EXPECT_EQ (matrix (0,2), ptr[2]);
-  EXPECT_EQ (matrix (1,0), ptr[3]);
-  EXPECT_EQ (matrix (1,1), ptr[4]);
-  EXPECT_EQ (matrix (1,2), ptr[5]);
-  EXPECT_EQ (matrix (2,0), ptr[6]);
-  EXPECT_EQ (matrix (2,1), ptr[7]);
-  EXPECT_EQ (matrix (2,2), ptr[8]);
 }
 
 TEST (Matrix3Test, multiply_scalar_to_matrix_multiplies_each_component_of_the_matrix)
@@ -501,13 +455,16 @@ TEST (Matrix3Test, equality_of_copied_matrix_returns_true)
 
 TEST (Matrix3Test, equality_of_equal_matrix_returns_true)
 {
-  auto array = create_double_array_of_size (9);
+  const auto c_array = create_double_array_of_size (9);
+  const std::array<double, 9> array {{c_array[0], c_array[1], c_array[2],
+                                      c_array[3], c_array[4], c_array[5],
+                                      c_array[6], c_array[7], c_array[8]}};
   const Math::Matrix3<double> matrix (array);
   const Math::Matrix3<double> equal (array);
 
   EXPECT_EQ (matrix, equal);
 
-  delete[] array;
+  delete[] c_array;
 }
 
 TEST (Matrix3Test, equality_of_matrix_with_one_different_element_returns_false)
@@ -539,13 +496,16 @@ TEST (Matrix3Test, inequality_of_copied_matrix_returns_false)
 
 TEST (Matrix3Test, inequality_of_equal_matrix_returns_false)
 {
-  auto array = create_double_array_of_size (9);
+  const auto c_array = create_double_array_of_size (9);
+  const std::array<double, 9> array {{c_array[0], c_array[1], c_array[2],
+                                      c_array[3], c_array[4], c_array[5],
+                                      c_array[6], c_array[7], c_array[8]}};
   const Math::Matrix3<double> matrix (array);
   const Math::Matrix3<double> equal (array);
 
   EXPECT_FALSE (matrix != equal);
 
-  delete[] array;
+  delete[] c_array;
 }
 
 TEST (Matrix3Test, inequality_of_matrix_with_one_different_element_returns_true)
@@ -562,9 +522,12 @@ TEST (Matrix3Test, inequality_of_matrix_with_one_different_element_returns_true)
 
 const Math::Matrix3<double> create_random_matrix3 ()
 {
-  auto array = create_double_array_of_size (9);
+  const auto c_array = create_double_array_of_size (9);
+  const std::array<double, 9> array {{c_array[0], c_array[1], c_array[2],
+                                      c_array[3], c_array[4], c_array[5],
+                                      c_array[6], c_array[7], c_array[8]}};
   Math::Matrix3<double> matrix (array);
 
-  delete [] array;
+  delete [] c_array;
   return matrix;
 }

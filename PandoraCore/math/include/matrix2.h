@@ -4,6 +4,7 @@
 #include "config.h"
 #include "vector2.h"
 
+#include <array>
 #include <exception>
 #include <algorithm>
 #include <sstream>
@@ -16,7 +17,7 @@ namespace Math
     public:
       explicit Matrix2 ();
       explicit Matrix2 (const Real& m00, const Real& m01, const Real& m10, const Real&  m11);
-      explicit Matrix2 (const Real array[4]);
+      explicit Matrix2 (const std::array<Real, 4> data);
 
       Real& operator[] (const size_t& i);
       Real operator[] (const size_t& i) const;
@@ -24,8 +25,8 @@ namespace Math
       Real& operator () (const size_t& i, const size_t& j);
       Real operator () (const size_t& i, const size_t& j) const;
 
-      operator Real* ();
-      operator const Real* () const;
+      std::array<Real, 4>& get_data ();
+      std::array<Real, 4> get_data () const;
 
       Matrix2& operator+= (const Matrix2& matrix);
       Matrix2& operator-= (const Matrix2& matrix);
@@ -39,7 +40,7 @@ namespace Math
       const static Matrix2 IDENTITY;
       const static Matrix2 ZERO;
     private:
-      Real data[4];
+      std::array<Real, 4> data;
 
     public:
       class division_by_zero_exception : public std::exception { };
@@ -97,18 +98,18 @@ namespace Math
 // Implementation
 template<typename Real>
 Math::Matrix2<Real>::Matrix2 ()
-  : data {1,0,0,1}
+  : data {{1,0,0,1}}
 { }
 
 template<typename Real>
 Math::Matrix2<Real>::Matrix2 (const Real& m00, const Real& m01,
                               const Real& m10, const Real&  m11)
-  : data {m00, m01, m10, m11}
+  : data {{m00, m01, m10, m11}}
 { }
 
 template<typename Real>
-Math::Matrix2<Real>::Matrix2 (const Real array[4])
-  : data {array[0], array[1], array[2], array[3]}
+Math::Matrix2<Real>::Matrix2 (const std::array<Real, 4> data)
+  : data (data)
 { }
 
 template<typename Real>
@@ -148,13 +149,13 @@ Real Math::Matrix2<Real>::operator () (const size_t& i, const size_t& j) const
 }
 
 template<typename Real>
-Math::Matrix2<Real>::operator Real* ()
+std::array<Real, 4>& Math::Matrix2<Real>::get_data ()
 {
   return data;
 }
 
 template<typename Real>
-Math::Matrix2<Real>::operator const Real* () const
+std::array<Real, 4> Math::Matrix2<Real>::get_data () const
 {
   return data;
 }
@@ -301,11 +302,7 @@ Math::Matrix2<Real> Math::operator/ (const Matrix2<Real>& matrix, const Real& sc
 template<typename Real>
 bool Math::operator== (const Matrix2<Real>& lmatrix, const Matrix2<Real>& rmatrix)
 {
-  auto first1 = static_cast<const Real*> (lmatrix);
-  auto last = first1 + 4;
-  auto first2 = static_cast<const Real*> (rmatrix);
-
-  return std::equal (first1, last, first2);
+  return lmatrix.get_data () == rmatrix.get_data ();
 }
 
 template<typename Real>

@@ -18,7 +18,8 @@ TEST (Matrix2Test, empty_constructor_makes_identity_matrix)
 
 TEST (Matrix2Test, matrix_copies_array)
 {
-  auto tmp = create_double_array_of_size (4);
+  auto array = create_double_array_of_size (4);
+  std::array<double, 4> tmp {{array[0], array[1], array[2], array[3]}};
   const Math::Matrix2<double> mat1 (tmp);
 
   EXPECT_EQ (tmp[0], mat1 (0,0));
@@ -29,7 +30,7 @@ TEST (Matrix2Test, matrix_copies_array)
   tmp[0] = 4.5;
   EXPECT_NE (tmp[0], mat1 (0,0));
 
-  delete[] tmp;
+  delete array;
 }
 
 TEST (Matrix2Test, matrix_can_be_specified)
@@ -67,28 +68,6 @@ TEST (Matrix2Test, index_operator_throws_index_operator_out_of_range_exception)
   EXPECT_THROW (mat1 (2,0), Math::Matrix2<double>::index_operator_out_of_range_exception);
   EXPECT_THROW (mat2 (0,2), Math::Matrix2<double>::index_operator_out_of_range_exception);
   EXPECT_THROW (mat2 (2,0), Math::Matrix2<double>::index_operator_out_of_range_exception);
-}
-
-TEST (Matrix2Test, can_static_cast_matrix_to_pointer)
-{
-  const auto matrix = create_random_matrix2 ();
-  auto ptr = static_cast<const double*> (matrix);
-
-  EXPECT_EQ (ptr[0], matrix (0,0));
-  EXPECT_EQ (ptr[1], matrix (0,1));
-  EXPECT_EQ (ptr[2], matrix (1,0));
-  EXPECT_EQ (ptr[3], matrix (1,1));
-}
-
-TEST (Matrix2Test, can_cast_matrix_to_pointer_c_style)
-{
-  const auto matrix = create_random_matrix2 ();
-  auto ptr = (const double *) matrix;
-
-  EXPECT_EQ (ptr[0], matrix (0,0));
-  EXPECT_EQ (ptr[1], matrix (0,1));
-  EXPECT_EQ (ptr[2], matrix (1,0));
-  EXPECT_EQ (ptr[3], matrix (1,1));
 }
 
 TEST (Matrix2Test, matrix_multiplication_with_scalar_from_right_multiplies_each_component_with_scalar)
@@ -398,12 +377,14 @@ TEST (Matrix2Test, equal_operator_of_copies_returns_true)
 TEST (Matrix2Test, equal_operator_of_similar_matrices_returns_true)
 {
   auto array = create_double_array_of_size (4);
-  const Math::Matrix2<double> matrix1 (array);
-  const Math::Matrix2<double> matrix2 (array);
+  std::array<double, 4> tmp {{array[0], array[1], array[2], array[3]}};
+  const Math::Matrix2<double> matrix1 (tmp);
+  const Math::Matrix2<double> matrix2 (tmp);
 
   EXPECT_EQ (matrix1, matrix2);
 
-  delete[] array;}
+  delete[] array;
+}
 
 TEST (Matrix2Test, equal_operator_of_different_first_components_returns_false)
 {
@@ -455,8 +436,9 @@ TEST (Matrix2Test, unequal_operator_of_copies_returns_false)
 TEST (Matrix2Test, unequal_operator_of_similar_matrices_returns_false)
 {
   auto array = create_double_array_of_size (4);
-  const Math::Matrix2<double> matrix1 (array);
-  const Math::Matrix2<double> matrix2 (array);
+  std::array<double, 4> tmp {{array[0], array[1], array[2], array[3]}};
+  const Math::Matrix2<double> matrix1 (tmp);
+  const Math::Matrix2<double> matrix2 (tmp);
 
   EXPECT_FALSE (matrix1 != matrix2);
 
@@ -495,9 +477,10 @@ TEST (Matrix2Test, equal_operator_of_different_forth_components_returns_true)
 
 const Math::Matrix2<double> create_random_matrix2 ()
 {
-  auto array = create_double_array_of_size (4);
+  auto tmp = create_double_array_of_size (4);
+  std::array<double, 4> array {{tmp[0], tmp[1], tmp[2], tmp[3]}};
   Math::Matrix2<double> matrix (array);
 
-  delete [] array;
+  delete [] tmp;
   return matrix;
 }
