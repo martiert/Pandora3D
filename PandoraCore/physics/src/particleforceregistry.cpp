@@ -9,26 +9,13 @@ namespace Physics
   void ParticleForceRegistry::add (Physics::ParticleForcePtr force, Physics::ParticlePtr particle)
   {
     ForceParticlePair pair {force, particle};
-    particleforcepairs.push_back (pair);
+    particleforcepairs.push_front (pair);
   }
 
   void ParticleForceRegistry::remove (Physics::ParticleForcePtr force, Physics::ParticlePtr particle)
   {
-    for (auto element = particleforcepairs.begin (); element != particleforcepairs.end (); ++element)
-      if (element_is_equal_and_erased (element, force, particle))
-        break;
-  }
-
-  bool ParticleForceRegistry::element_is_equal_and_erased (std::vector<ForceParticlePair>::iterator& element,
-                                                           Physics::ParticleForcePtr force,
-                                                           Physics::ParticlePtr particle)
-  {
-      if (element->is_same_force_particle_pair (force, particle)) {
-        particleforcepairs.erase (element);
-        return true;
-      }
-
-      return false;
+    ForceParticlePair pair {force, particle};
+    particleforcepairs.remove (pair);
   }
 
   void ParticleForceRegistry::clear ()
@@ -55,9 +42,8 @@ namespace Physics
     force->update_force (particle, timestep);
   }
 
-  bool ParticleForceRegistry::ForceParticlePair::is_same_force_particle_pair (std::shared_ptr<ParticleForce> force,
-                                                                              std::shared_ptr<Particle> particle)
+  bool ParticleForceRegistry::ForceParticlePair::operator== (const ParticleForceRegistry::ForceParticlePair& other)
   {
-    return (this->force == force && this->particle == particle);
+    return (this->force == other.force && this->particle == other.particle);
   }
 }

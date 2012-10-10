@@ -2,7 +2,7 @@
 #define PARTICLE_FORCE_REGISTRY_H_INCLUDED
 
 #include "config.h"
-#include <vector>
+#include <list>
 #include <memory>
 
 namespace Physics
@@ -29,17 +29,14 @@ namespace Physics
 
           void update_force (const Real& timestep);
 
-          bool is_same_force_particle_pair (std::shared_ptr<ParticleForce> force, std::shared_ptr<Particle> particle);
+          bool operator== (const ForceParticlePair& other);
+
         private:
           std::shared_ptr<ParticleForce> force;
           std::shared_ptr<Particle> particle;
       };
 
-      bool element_is_equal_and_erased (std::vector<ForceParticlePair>::iterator& element,
-                                        std::shared_ptr<ParticleForce> force,
-                                        std::shared_ptr<Particle> particle);
-
-      std::vector<ForceParticlePair> particleforcepairs;
+      std::list<ForceParticlePair> particleforcepairs;
   };
 }
 
