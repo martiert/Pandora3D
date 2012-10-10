@@ -99,3 +99,15 @@ TEST_F (ParticleForceTest, trying_to_remove_force_particle_pair_will_not_remove_
 
   EXPECT_TRUE (force1->called);
 }
+
+TEST_F (ParticleForceTest, adding_the_same_force_pair_twice_and_removing_it_removes_both_occurences)
+{
+  registry.add (force1, particle);
+  registry.add (force1, particle);
+  registry.add (force2, particle);
+  registry.remove (force1, particle);
+  registry.update_particles_with_forces (timestep);
+
+  EXPECT_FALSE (force1->called);
+  EXPECT_TRUE (force2->called);
+}

@@ -2,7 +2,7 @@
 #define PARTICLE_FORCE_REGISTRY_H_INCLUDED
 
 #include "config.h"
-#include <list>
+#include <forward_list>
 #include <memory>
 
 namespace Physics
@@ -36,7 +36,7 @@ namespace Physics
           std::shared_ptr<Particle> particle;
       };
 
-      std::list<ForceParticlePair> particleforcepairs;
+      std::forward_list<ForceParticlePair> particleforcepairs;
   };
 }
 
