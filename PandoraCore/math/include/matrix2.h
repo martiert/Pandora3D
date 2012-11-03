@@ -42,6 +42,11 @@ namespace Math
       std::array<Real, 4> data;
   };
 
+  typedef Matrix2<float>          Matrix2f;
+  typedef Matrix2<double>         Matrix2d;
+  typedef Matrix2<int>            Matrix2i;
+  typedef Matrix2<unsigned int>   Matrix2u;
+
   template<typename Real>
   Matrix2<Real> operator+ (const Matrix2<Real>& lmatrix, const Matrix2<Real>& rmatrix);
 

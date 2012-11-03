@@ -56,6 +56,11 @@ namespace Math
       Real calculate_sub_determinant (const size_t& row, const size_t& column) const;
   };
 
+  typedef Matrix4<float>        Matrix4f;
+  typedef Matrix4<double>       Matrix4d;
+  typedef Matrix4<int>          Matrix4i;
+  typedef Matrix4<unsigned int> Matrix4u;
+
   template<typename Real>
   Matrix4<Real> operator* (const Matrix4<Real>& matrix, const Real& scalar);
 

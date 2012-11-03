@@ -46,6 +46,11 @@ namespace Math
       std::array<Real, 9> data;
   };
 
+  typedef Matrix3<float>        Matrix3f;
+  typedef Matrix3<double>       Matrix3d;
+  typedef Matrix3<int>          Matrix3i;
+  typedef Matrix3<unsigned int> Matrix3u;
+
   template<typename Real>
   Matrix3<Real> operator* (const Matrix3<Real>& matrix, const Real& scalar);
 

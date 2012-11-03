@@ -109,7 +109,7 @@ Math::Vector2<Real>& Math::Vector2<Real>::operator= (const Real data[2])
 template<typename Real>
 Real& Math::Vector2<Real>::operator[] (const size_t& i)
 {
-  assert (i < 2 && "Index operator is out of range");
+  assert (i < 2 && "Index operator out of range");
 
   return (&x)[i];
 }
@@ -117,7 +117,7 @@ Real& Math::Vector2<Real>::operator[] (const size_t& i)
 template<typename Real>
 Real Math::Vector2<Real>::operator[] (const size_t& i) const
 {
-  assert (i < 2 && "Index operator is out of range");
+  assert (i < 2 && "Index operator out of range");
 
   return (&x)[i];
 }
@@ -219,7 +219,7 @@ template<typename Real>
 void Math::Vector2<Real>::generateOrthonormalBasis (Vector2<Real>& vec1, Vector2<Real>& vec2)
 {
   assert (vec1 != ZERO && vec2 != ZERO && "Can not make orthonormal basis from a zero vector");
-  assert (vec1 != vec2 && "Can not make orthonormal basis from equal vector");
+  assert (vec1 != vec2 && "Can not make orthonormal basis from equal vectors");
 
   vec1.normalize ();
   vec2 = vec2 - (vec1.dot (vec2)) * vec1;
