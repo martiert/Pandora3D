@@ -20,10 +20,14 @@ include_directories("${math_SOURCE_DIR}/include")
 set(physics_src
     src/particle.cpp
     src/particleforceregistry.cpp
+    src/particlespring.cpp
     )
 
 set(physics_headers
     include/particle.h
+    include/particleforce.h
+    include/particlespring.h
+    include/particleforceregistry.h
     ${CMAKE_CURRENT_BINARY_DIR}/include/config.h
     )
 

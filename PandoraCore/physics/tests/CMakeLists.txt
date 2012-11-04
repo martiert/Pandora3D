@@ -7,6 +7,7 @@ set(src
     src/particle-test-harness.cpp
     src/particle-tests.cpp
     src/particleforce-tests.cpp
+    src/particlespring-tests.cpp
     src/test-helpers.cpp
     )
 
