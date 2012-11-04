@@ -6,23 +6,41 @@
 
 #include "test-helpers.h"
 
-const Math::Matrix4<double> create_random_matrix4 ();
+const Math::Matrix4d create_random_matrix4 ();
 const Math::Matrix3<double> create_random_matrix3 ();
-
 const Math::Vec4d create_random_vector4 ();
 
-TEST (Matrix4Test, default_constructor_creates_identity_matrix)
+class Matrix4Test : public ::testing::Test
 {
-  const Math::Matrix4<double> matrix;
+  protected:
+    void SetUp ();
 
-  for (auto i = 0; i < 16; ++i)
-    EXPECT_EQ (Math::Matrix4<double>::IDENTITY[i], matrix[i]);
+    Math::Matrix4d random_matrix;
+    Math::Matrix4d random_matrix2;
+    Math::Vec4d random_vector;
+    double scalar;
+};
+
+void Matrix4Test::SetUp ()
+{
+  random_matrix = create_random_matrix4 ();
+  random_matrix2 = create_random_matrix4 ();
+  random_vector = create_random_vector4 ();
+  scalar = rand () / 100.0;
 }
 
-TEST (Matrix4Test, constructor_with_arguments_populates_matrix)
+TEST_F (Matrix4Test, default_constructor_creates_identity_matrix)
+{
+  const Math::Matrix4d matrix;
+
+  for (auto i = 0; i < 16; ++i)
+    EXPECT_EQ (Math::Matrix4d::IDENTITY[i], matrix[i]);
+}
+
+TEST_F (Matrix4Test, constructor_with_arguments_populates_matrix)
 {
   const auto array = create_double_array_of_size (16);
-  const Math::Matrix4<double> matrix (array[0], array[1], array[2], array[3],
+  const Math::Matrix4d matrix (array[0], array[1], array[2], array[3],
                                       array[4], array[5], array[6], array[7],
                                       array[8], array[9], array[10], array[11],
                                       array[12], array[13], array[14], array[15]);
@@ -33,14 +51,14 @@ TEST (Matrix4Test, constructor_with_arguments_populates_matrix)
   delete [] array;
 }
 
-TEST (Matrix4Test, matrix_constructed_from_array_populates_matrix_with_array_values)
+TEST_F (Matrix4Test, matrix_constructed_from_array_populates_matrix_with_array_values)
 {
   auto c_array = create_double_array_of_size (16);
   std::array<double, 16> array {{c_array[0], c_array[1], c_array[2], c_array[3],
                                  c_array[4], c_array[5], c_array[6], c_array[7],
                                  c_array[8], c_array[9], c_array[10], c_array[11],
                                  c_array[12], c_array[13], c_array[14], c_array[15]}};
-  const Math::Matrix4<double> matrix (array);
+  const Math::Matrix4d matrix (array);
 
   for (auto i = 0; i < 16; ++i)
     EXPECT_EQ (array[i], matrix[i]);
@@ -48,10 +66,10 @@ TEST (Matrix4Test, matrix_constructed_from_array_populates_matrix_with_array_val
   delete [] c_array;
 }
 
-TEST (Matrix4Test, matrix_created_from_3d_matrix_is_zero_padded_with_one_at_3_3)
+TEST_F (Matrix4Test, matrix_created_from_3d_matrix_is_zero_padded_with_one_at_3_3)
 {
   const auto matrix3 = create_random_matrix3 ();
-  const Math::Matrix4<double> matrix (matrix3);
+  const Math::Matrix4d matrix (matrix3);
 
   for (auto i = 0; i < 3; ++i)
     for (auto j = 0; j < 3; ++j)
@@ -65,19 +83,19 @@ TEST (Matrix4Test, matrix_created_from_3d_matrix_is_zero_padded_with_one_at_3_3)
   EXPECT_EQ (1, matrix (3,3));
 }
 
-TEST (Matrix4Test, copied_matrix_copies_the_elements_from_the_other_matrix)
+TEST_F (Matrix4Test, copied_matrix_copies_the_elements_from_the_other_matrix)
 {
   const auto matrix = create_random_matrix4 ();
-  const Math::Matrix4<double> copy (matrix);
+  const Math::Matrix4d copy (matrix);
 
   for (auto j = 0; j < 16; ++j)
     EXPECT_EQ (matrix[j], copy[j]);
 }
 
-TEST (Matrix4Test, matrix_assigned_from_3d_matrix_populates_matrix)
+TEST_F (Matrix4Test, matrix_assigned_from_3d_matrix_populates_matrix)
 {
   const auto matrix3 = create_random_matrix3 ();
-  Math::Matrix4<double> matrix;
+  Math::Matrix4d matrix;
   matrix = matrix3;
 
   for (auto i = 0; i < 3; ++i)
@@ -92,14 +110,14 @@ TEST (Matrix4Test, matrix_assigned_from_3d_matrix_populates_matrix)
   EXPECT_EQ (1, matrix (3,3));
 }
 
-TEST (Matrix4Test, matrix_assigned_from_array_populates_matrix)
+TEST_F (Matrix4Test, matrix_assigned_from_array_populates_matrix)
 {
   auto c_array = create_double_array_of_size (16);
   std::array<double, 16> array {{c_array[0],  c_array[1],  c_array[2],  c_array[3],
                                  c_array[4],  c_array[5],  c_array[6],  c_array[7],
                                  c_array[8],  c_array[9],  c_array[10], c_array[11],
                                  c_array[12], c_array[13], c_array[14], c_array[15]}};
-  Math::Matrix4<double> matrix;
+  Math::Matrix4d matrix;
   matrix = array;
 
   for (auto i = 0; i < 16; ++i)
@@ -108,336 +126,293 @@ TEST (Matrix4Test, matrix_assigned_from_array_populates_matrix)
   delete [] c_array;
 }
 
-TEST (Matrix4Test, multiplying_matrix_with_scalar_from_right_multiplies_each_element_with_scalar)
+TEST_F (Matrix4Test, multiplying_matrix_with_scalar_from_right_multiplies_each_element_with_scalar)
 {
-  const auto matrix = create_random_matrix4 ();
-  const auto scalar = rand () / 100.0;
-  const auto result = matrix * scalar;
+  const auto result = random_matrix * scalar;
 
   for (auto i = 0; i < 16; ++i)
-    EXPECT_EQ (matrix[i] * scalar, result[i]);
+    EXPECT_EQ (random_matrix[i] * scalar, result[i]);
 }
 
-TEST (Matrix4Test, multiplying_matrix_with_scalar_from_left_multiplies_each_element_with_scalar)
+TEST_F (Matrix4Test, multiplying_matrix_with_scalar_from_left_multiplies_each_element_with_scalar)
 {
-  const auto matrix = create_random_matrix4 ();
-  const auto scalar = rand () / 100.0;
-  const auto result = scalar * matrix;
+  const auto result = scalar * random_matrix;
 
   for (auto i = 0; i < 16; ++i)
-    EXPECT_EQ (matrix[i] * scalar, result[i]);
+    EXPECT_EQ (random_matrix[i] * scalar, result[i]);
 }
 
-TEST (Matrix4Test, multiplying_scalar_to_matrix_multiplies_each_component_with_scalar)
+TEST_F (Matrix4Test, multiplying_scalar_to_matrix_multiplies_each_component_with_scalar)
 {
-  const auto matrix = create_random_matrix4 ();
-  const auto scalar = rand () / 100.0;
-  auto result (matrix);
+  auto result (random_matrix);
   result *= scalar;
 
   for (auto i = 0; i < 16; ++i)
-    EXPECT_EQ (matrix[i] * scalar, result[i]);
+    EXPECT_EQ (random_matrix[i] * scalar, result[i]);
 }
 
-TEST (Matrix4Test, dividing_matrix_with_scalar_from_right_divides_each_element_with_scalar)
+TEST_F (Matrix4Test, dividing_matrix_with_scalar_from_right_divides_each_element_with_scalar)
 {
-  const auto matrix = create_random_matrix4 ();
-  const auto scalar = rand () / 100.0;
-
-  if (scalar != 0) {
-    const auto result = matrix / scalar;
+  const auto result = random_matrix / scalar;
 
   for (auto i = 0; i < 16; ++i)
-    EXPECT_EQ (matrix[i] / scalar, result[i]);
-  }
+    EXPECT_EQ (random_matrix[i] / scalar, result[i]);
 }
 
-TEST (Matrix4Test, dividing_scalar_to_matrix_divides_each_element_with_scalar)
+TEST_F (Matrix4Test, dividing_scalar_to_matrix_divides_each_element_with_scalar)
 {
-  const auto matrix = create_random_matrix4 ();
-  const auto scalar = rand () / 100.0;
-  auto result (matrix);
+  auto result (random_matrix);
 
-  if (scalar != 0) {
-    result /= scalar;
+  result /= scalar;
 
   for (auto i = 0; i < 16; ++i)
-    EXPECT_EQ (matrix[i] / scalar, result[i]);
-  }
+    EXPECT_EQ (random_matrix[i] / scalar, result[i]);
 }
 
-TEST (Matrix4Test, adding_two_matrices_adds_each_component)
+TEST_F (Matrix4Test, adding_two_matrices_adds_each_component)
 {
-  const auto matrix1 = create_random_matrix4 ();
-  const auto matrix2 = create_random_matrix4 ();
-  auto result = matrix1 + matrix2;
+  auto result = random_matrix + random_matrix2;
 
   for (auto i = 0; i < 16; ++i)
-    EXPECT_EQ (matrix1[i] + matrix2[i], result[i]);
+    EXPECT_EQ (random_matrix[i] + random_matrix2[i], result[i]);
 }
 
-TEST (Matrix4Test, adding_matrix_to_matrix_adds_each_component)
+TEST_F (Matrix4Test, adding_matrix_to_matrix_adds_each_component)
 {
-  const auto matrix1 = create_random_matrix4 ();
-  const auto matrix2 = create_random_matrix4 ();
-  auto result = matrix1;
-  result += matrix2;
+  auto result = random_matrix;
+  result += random_matrix2;
 
   for (auto i = 0; i < 16; ++i)
-    EXPECT_EQ (matrix1[i] + matrix2[i], result[i]);
+    EXPECT_EQ (random_matrix[i] + random_matrix2[i], result[i]);
 }
 
-TEST (Matrix4Test, subtracting_two_matrices_subtracts_each_component)
+TEST_F (Matrix4Test, subtracting_two_matrices_subtracts_each_component)
 {
-  const auto matrix1 = create_random_matrix4 ();
-  const auto matrix2 = create_random_matrix4 ();
-  auto result = matrix1 - matrix2;
+  const auto random_matrix = create_random_matrix4 ();
+  const auto random_matrix2 = create_random_matrix4 ();
+  auto result = random_matrix - random_matrix2;
 
   for (auto i = 0; i < 16; ++i)
-    EXPECT_EQ (matrix1[i] - matrix2[i], result[i]);
+    EXPECT_EQ (random_matrix[i] - random_matrix2[i], result[i]);
 }
 
-TEST (Matrix4Test, subtracting_matrix_from_matrix_subtracts_each_component)
+TEST_F (Matrix4Test, subtracting_matrix_from_matrix_subtracts_each_component)
 {
-  const auto matrix1 = create_random_matrix4 ();
-  const auto matrix2 = create_random_matrix4 ();
-  auto result = matrix1;
-  result -= matrix2;
+  auto result = random_matrix;
+  result -= random_matrix2;
 
   for (auto i = 0; i < 16; ++i)
-    EXPECT_EQ (matrix1[i] - matrix2[i], result[i]);
+    EXPECT_EQ (random_matrix[i] - random_matrix2[i], result[i]);
 }
 
-TEST (Matrix4Test, multiplying_matrix_with_identity_from_right_returns_matrix)
+TEST_F (Matrix4Test, multiplying_matrix_with_identity_from_right_returns_matrix)
 {
-  const auto matrix = create_random_matrix4 ();
-  auto result = matrix * Math::Matrix4<double>::IDENTITY;
+  auto result = random_matrix * Math::Matrix4d::IDENTITY;
 
   for (auto i = 0; i < 16; ++i)
-    EXPECT_EQ (matrix[i], result[i]);
+    EXPECT_EQ (random_matrix[i], result[i]);
 }
 
-TEST (Matrix4Test, multiplying_matrix_with_identity_from_left_returns_matrix)
+TEST_F (Matrix4Test, multiplying_random_matrix_with_identity_from_left_returns_random_matrix)
 {
-  const auto matrix = create_random_matrix4 ();
-  auto result = Math::Matrix4<double>::IDENTITY * matrix;
+  auto result = Math::Matrix4d::IDENTITY * random_matrix;
 
   for (auto i = 0; i < 16; ++i)
-    EXPECT_EQ (matrix[i], result[i]);
+    EXPECT_EQ (random_matrix[i], result[i]);
 }
 
-TEST (Matrix4Test, multiplying_matrix_with_zero_matrix_from_right_returns_zero_matrix)
+TEST_F (Matrix4Test, multiplying_random_matrix_with_zero_random_matrix_from_right_returns_zero_random_matrix)
 {
-  const auto matrix = create_random_matrix4 ();
-  auto result = matrix * Math::Matrix4<double>::ZERO;
+  auto result = random_matrix * Math::Matrix4d::ZERO;
 
   for (auto i = 0; i < 16; ++i)
     EXPECT_EQ (0, result[i]);
 }
 
-TEST (Matrix4Test, multiplying_matrix_with_zero_matrix_from_left_returns_zero_matrix)
+TEST_F (Matrix4Test, multiplying_random_matrix_with_zero_random_matrix_from_left_returns_zero_random_matrix)
 {
-  const auto matrix = create_random_matrix4 ();
-  auto result = Math::Matrix4<double>::ZERO * matrix;
+  auto result = Math::Matrix4d::ZERO * random_matrix;
 
   for (auto i = 0; i < 16; ++i)
     EXPECT_EQ (0, result[i]);
 }
 
-TEST (Matrix4Test, matrix_multiplication_follows_mathematical_rules)
+TEST_F (Matrix4Test, matrix_multiplication_follows_mathematical_rules)
 {
-  const auto left = create_random_matrix4 ();
-  const auto right = create_random_matrix4 ();
-  const auto result = left * right;
+  const auto result = random_matrix * random_matrix2;
 
-  Math::Matrix4<double> correct = Math::Matrix4<double>::ZERO;
+  Math::Matrix4d correct = Math::Matrix4d::ZERO;
 
   for (auto i = 0; i < 4; ++i)
     for (auto j = 0; j < 4; ++j)
       for (auto k = 0; k < 4; ++k)
-        correct (i,j) += left (i,k) * right (k,j);
+        correct (i,j) += random_matrix (i,k) * random_matrix2 (k,j);
 
   for (auto i = 0; i < 16; ++i)
     EXPECT_EQ (correct[i], result[i]);
 }
 
-TEST (Matrix4Test, transpose_of_identity_is_identity)
+TEST_F (Matrix4Test, transpose_of_identity_is_identity)
 {
-  const auto trans = Math::Matrix4<double>::IDENTITY.transpose ();
+  const auto trans = Math::Matrix4d::IDENTITY.transpose ();
 
   for (auto i = 0; i < 16; ++i)
-    EXPECT_EQ (Math::Matrix4<double>::IDENTITY[i], trans[i]);
+    EXPECT_EQ (Math::Matrix4d::IDENTITY[i], trans[i]);
 }
 
-TEST (Matrix4Test, transpose_of_zero_matrix_is_zero_matrix)
+TEST_F (Matrix4Test, transpose_of_zero_matrix_is_zero_matrix)
 {
-  const auto trans = Math::Matrix4<double>::ZERO.transpose ();
+  const auto trans = Math::Matrix4d::ZERO.transpose ();
 
   for (auto i = 0; i < 16; ++i)
     EXPECT_EQ (0, trans[i]);
 }
 
-TEST (Matrix4Test, transpose_of_matrix_switches_rows_and_columns)
+TEST_F (Matrix4Test, transpose_of_matrix_switches_rows_and_columns)
 {
-  const auto matrix = create_random_matrix4 ();
-  const auto result = matrix.transpose ();
+  const auto result = random_matrix.transpose ();
 
   for (auto i = 0; i < 4; ++i)
     for (auto j = 0; j < 4; ++j)
-      EXPECT_EQ (matrix (j,i), result (i,j));
+      EXPECT_EQ (random_matrix (j,i), result (i,j));
 }
 
-TEST (Matrix4Test, trace_of_zero_matrix_is_zero)
+TEST_F (Matrix4Test, trace_of_zero_matrix_is_zero)
 {
-  EXPECT_EQ (0, Math::Matrix4<double>::ZERO.trace ());
+  EXPECT_EQ (0, Math::Matrix4d::ZERO.trace ());
 }
 
-TEST (Matrix4Test, trace_of_identity_is_four)
+TEST_F (Matrix4Test, trace_of_identity_is_four)
 {
-  EXPECT_EQ (4, Math::Matrix4<double>::IDENTITY.trace ());
+  EXPECT_EQ (4, Math::Matrix4d::IDENTITY.trace ());
 }
 
-TEST (Matrix4Test, trace_of_matrix_is_sum_of_diagonal)
+TEST_F (Matrix4Test, trace_of_matrix_is_sum_of_diagonal)
 {
-  const auto matrix = create_random_matrix4 ();
-
-  EXPECT_EQ (matrix (0,0) + matrix (1,1) + matrix (2,2) + matrix (3,3), matrix.trace ());
+  EXPECT_EQ (random_matrix (0,0) + random_matrix (1,1) + random_matrix (2,2) + random_matrix (3,3), random_matrix.trace ());
 }
 
-TEST (Matrix4Test, determinant_of_zero_matrix_is_zero)
+TEST_F (Matrix4Test, determinant_of_zero_matrix_is_zero)
 {
-  EXPECT_EQ (0, Math::Matrix4<double>::ZERO.determinant ());
+  EXPECT_EQ (0, Math::Matrix4d::ZERO.determinant ());
 }
 
-TEST (Matrix4Test, determinant_of_identity_matrix_is_one)
+TEST_F (Matrix4Test, determinant_of_identity_matrix_is_one)
 {
-  EXPECT_EQ (1, Math::Matrix4<double>::IDENTITY.determinant ());
+  EXPECT_EQ (1, Math::Matrix4d::IDENTITY.determinant ());
 }
 
-TEST (Matrix4Test, determinant_of_given_matrix_gives_correct_result)
+TEST_F (Matrix4Test, determinant_of_given_matrix_gives_correct_result)
 {
-  const Math::Matrix4<double> matrix (4, 3, 1, 7,
+  const Math::Matrix4d matrix (4, 3, 1, 7,
     2, 8, 9, 3,
     5, 1, 7, 9,
     8, 3, 1, 5);
   EXPECT_EQ (-2246, matrix.determinant ());
 }
 
-TEST (Matrix4Test, determinant_of_matrix_follows_mathematical_rules)
+TEST_F (Matrix4Test, determinant_of_matrix_follows_mathematical_rules)
 {
-  const auto matrix = create_random_matrix4 ();
+  const double sub1 = random_matrix (1,1) * (random_matrix (2,2) * random_matrix (3,3) - random_matrix (2,3) * random_matrix (3,2)) -
+  random_matrix (1,2) * (random_matrix (2,1) * random_matrix (3,3) - random_matrix (2,3) * random_matrix (3,1)) +
+  random_matrix (1,3) * (random_matrix (2,1) * random_matrix (3,2) - random_matrix (3,1) * random_matrix (2,2));
 
-  const double sub1 = matrix (1,1) * (matrix (2,2) * matrix (3,3) - matrix (2,3) * matrix (3,2)) -
-  matrix (1,2) * (matrix (2,1) * matrix (3,3) - matrix (2,3) * matrix (3,1)) +
-  matrix (1,3) * (matrix (2,1) * matrix (3,2) - matrix (3,1) * matrix (2,2));
+  const double sub2 = random_matrix (1,0) * (random_matrix (2,2) * random_matrix (3,3) - random_matrix (2,3) * random_matrix (3,2)) -
+  random_matrix (1,2) * (random_matrix (2,0) * random_matrix (3,3) - random_matrix (2,3) * random_matrix (3,0)) +
+  random_matrix (1,3) * (random_matrix (2,0) * random_matrix (3,2) - random_matrix (2,2) * random_matrix (3,0));
 
-  const double sub2 = matrix (1,0) * (matrix (2,2) * matrix (3,3) - matrix (2,3) * matrix (3,2)) -
-  matrix (1,2) * (matrix (2,0) * matrix (3,3) - matrix (2,3) * matrix (3,0)) +
-  matrix (1,3) * (matrix (2,0) * matrix (3,2) - matrix (2,2) * matrix (3,0));
+  const double sub3 = random_matrix (1,0) * (random_matrix (2,1) * random_matrix (3,3) - random_matrix (2,3) * random_matrix (3,1)) -
+  random_matrix (1,1) * (random_matrix (2,0) * random_matrix (3,3) - random_matrix (2,3) * random_matrix (3,0)) +
+  random_matrix (1,3) * (random_matrix (2,0) * random_matrix (3,1) - random_matrix (2,1) * random_matrix (3,0));
 
-  const double sub3 = matrix (1,0) * (matrix (2,1) * matrix (3,3) - matrix (2,3) * matrix (3,1)) -
-  matrix (1,1) * (matrix (2,0) * matrix (3,3) - matrix (2,3) * matrix (3,0)) +
-  matrix (1,3) * (matrix (2,0) * matrix (3,1) - matrix (2,1) * matrix (3,0));
+  const double sub4 = random_matrix (1,0) * (random_matrix (2,1) * random_matrix (3,2) - random_matrix (2,2) * random_matrix (3,1)) -
+  random_matrix (1,1) * (random_matrix (2,0) * random_matrix (3,2) - random_matrix (2,2) * random_matrix (3,0)) +
+  random_matrix (1,2) * (random_matrix (2,0) * random_matrix (3,1) - random_matrix (2,1) * random_matrix (3,0));
 
-  const double sub4 = matrix (1,0) * (matrix (2,1) * matrix (3,2) - matrix (2,2) * matrix (3,1)) -
-  matrix (1,1) * (matrix (2,0) * matrix (3,2) - matrix (2,2) * matrix (3,0)) +
-  matrix (1,2) * (matrix (2,0) * matrix (3,1) - matrix (2,1) * matrix (3,0));
+  const double determinant = random_matrix (0,0) * sub1 - random_matrix (0,1) * sub2 + random_matrix (0,2) * sub3 - random_matrix (0,3) * sub4;
 
-  const double determinant = matrix (0,0) * sub1 - matrix (0,1) * sub2 + matrix (0,2) * sub3 - matrix (0,3) * sub4;
-
-  EXPECT_EQ (determinant, matrix.determinant ());
+  EXPECT_EQ (determinant, random_matrix.determinant ());
 }
 
-TEST (Matrix4Test, multiplying_identity_with_vector_returns_the_same_vector)
+TEST_F (Matrix4Test, multiplying_identity_with_vector_returns_the_same_vector)
 {
-  const auto vector = create_random_vector4 ();
-  const auto res = Math::Matrix4<double>::IDENTITY * vector;
+  const auto res = Math::Matrix4d::IDENTITY * random_vector;
 
-  EXPECT_EQ (vector.x, res.x);
-  EXPECT_EQ (vector.y, res.y);
-  EXPECT_EQ (vector.z, res.z);
-  EXPECT_EQ (vector.w, res.w);
+  EXPECT_EQ (random_vector.x, res.x);
+  EXPECT_EQ (random_vector.y, res.y);
+  EXPECT_EQ (random_vector.z, res.z);
+  EXPECT_EQ (random_vector.w, res.w);
 }
 
-TEST (Matrix4Test, multiplying_matrix_with_vector_multiplies_the_vector_with_each_row)
+TEST_F (Matrix4Test, multiplying_matrix_with_random_vector_multiplies_the_random_vector_with_each_row)
 {
-  const auto matrix = create_random_matrix4 ();
-  const auto vector = create_random_vector4 ();
-  const auto res = matrix * vector;
+  const auto res = random_matrix * random_vector;
 
-  EXPECT_EQ (matrix[0]*vector.x  + matrix[1]*vector.y  + matrix[2]*vector.z  + matrix[3]*vector.w,  res.x);
-  EXPECT_EQ (matrix[4]*vector.x  + matrix[5]*vector.y  + matrix[6]*vector.z  + matrix[7]*vector.w,  res.y);
-  EXPECT_EQ (matrix[8]*vector.x  + matrix[9]*vector.y  + matrix[10]*vector.z + matrix[11]*vector.w, res.z);
-  EXPECT_EQ (matrix[12]*vector.x + matrix[13]*vector.y + matrix[14]*vector.z + matrix[15]*vector.w, res.w);
+  EXPECT_EQ (random_matrix[0]*random_vector.x  + random_matrix[1]*random_vector.y  + random_matrix[2]*random_vector.z  + random_matrix[3]*random_vector.w,  res.x);
+  EXPECT_EQ (random_matrix[4]*random_vector.x  + random_matrix[5]*random_vector.y  + random_matrix[6]*random_vector.z  + random_matrix[7]*random_vector.w,  res.y);
+  EXPECT_EQ (random_matrix[8]*random_vector.x  + random_matrix[9]*random_vector.y  + random_matrix[10]*random_vector.z + random_matrix[11]*random_vector.w, res.z);
+  EXPECT_EQ (random_matrix[12]*random_vector.x + random_matrix[13]*random_vector.y + random_matrix[14]*random_vector.z + random_matrix[15]*random_vector.w, res.w);
 }
 
-TEST (Matrix4Test, multiplying_vector_with_identity_returns_the_vector)
+TEST_F (Matrix4Test, multiplying_random_vector_with_identity_returns_the_random_vector)
 {
-  const auto vector = create_random_vector4 ();
-  const auto res = vector * Math::Matrix4<double>::IDENTITY;
+  const auto res = random_vector * Math::Matrix4d::IDENTITY;
 
-  EXPECT_EQ (vector.x, res.x);
-  EXPECT_EQ (vector.y, res.y);
-  EXPECT_EQ (vector.z, res.z);
-  EXPECT_EQ (vector.w, res.w);
+  EXPECT_EQ (random_vector.x, res.x);
+  EXPECT_EQ (random_vector.y, res.y);
+  EXPECT_EQ (random_vector.z, res.z);
+  EXPECT_EQ (random_vector.w, res.w);
 }
 
-TEST (Matrix4Test, multiplying_vector_with_matrix_multiplies_the_vector_with_each_column)
+TEST_F (Matrix4Test, multiplying_random_vector_with_matrix_multiplies_the_random_vector_with_each_column)
 {
-  const auto matrix = create_random_matrix4 ();
-  const auto vector = create_random_vector4 ();
-  const auto res = vector * matrix;
+  const auto res = random_vector * random_matrix;
 
-  EXPECT_EQ (matrix[0]*vector.x + matrix[4]*vector.y + matrix[8]*vector.z  + matrix[12]*vector.w, res.x);
-  EXPECT_EQ (matrix[1]*vector.x + matrix[5]*vector.y + matrix[9]*vector.z  + matrix[13]*vector.w, res.y);
-  EXPECT_EQ (matrix[2]*vector.x + matrix[6]*vector.y + matrix[10]*vector.z + matrix[14]*vector.w, res.z);
-  EXPECT_EQ (matrix[3]*vector.x + matrix[7]*vector.y + matrix[11]*vector.z + matrix[15]*vector.w, res.w);
+  EXPECT_EQ (random_matrix[0]*random_vector.x + random_matrix[4]*random_vector.y + random_matrix[8]*random_vector.z  + random_matrix[12]*random_vector.w, res.x);
+  EXPECT_EQ (random_matrix[1]*random_vector.x + random_matrix[5]*random_vector.y + random_matrix[9]*random_vector.z  + random_matrix[13]*random_vector.w, res.y);
+  EXPECT_EQ (random_matrix[2]*random_vector.x + random_matrix[6]*random_vector.y + random_matrix[10]*random_vector.z + random_matrix[14]*random_vector.w, res.z);
+  EXPECT_EQ (random_matrix[3]*random_vector.x + random_matrix[7]*random_vector.y + random_matrix[11]*random_vector.z + random_matrix[15]*random_vector.w, res.w);
 }
 
-TEST (Matrix4Test, inverse_of_identity_is_identity)
+TEST_F (Matrix4Test, inverse_of_identity_is_identity)
 {
-  const auto res = Math::Matrix4<double>::IDENTITY.inverse ();
+  const auto res = Math::Matrix4d::IDENTITY.inverse ();
 
   for (auto i = 0; i < 16; ++i)
-    EXPECT_EQ (Math::Matrix4<double>::IDENTITY[i], res[i]);
+    EXPECT_EQ (Math::Matrix4d::IDENTITY[i], res[i]);
 }
 
-TEST (Matrix4Test, inverse_of_matrix_times_matrix_is_identity)
+TEST_F (Matrix4Test, inverse_of_matrix_times_matrix_is_identity)
 {
-  const auto matrix = create_random_matrix4 ();
-  const auto inverse = matrix.inverse ();
-  const auto res = inverse * matrix;
+  const auto inverse = random_matrix.inverse ();
+  const auto res = inverse * random_matrix;
 
   for (auto i = 0; i < 16; ++i)
-    EXPECT_NEAR (Math::Matrix4<double>::IDENTITY[i], res[i], PRECISION);
+    EXPECT_NEAR (Math::Matrix4d::IDENTITY[i], res[i], PRECISION);
 }
 
-TEST (Matrix4Test, matrix_times_inverse_of_matrix_is_identity)
+TEST_F (Matrix4Test, matrix_times_inverse_of_matrix_is_identity)
 {
-  const auto matrix = create_random_matrix4 ();
-  const auto inverse = matrix.inverse ();
-  const auto res = matrix * inverse;
+  const auto inverse = random_matrix.inverse ();
+  const auto res = random_matrix * inverse;
 
   for (auto i = 0; i < 16; ++i)
-    EXPECT_NEAR (Math::Matrix4<double>::IDENTITY[i], res[i], PRECISION);
+    EXPECT_NEAR (Math::Matrix4d::IDENTITY[i], res[i], PRECISION);
 }
 
-TEST (Matrix4Test, equality_operator_on_same_matrix_returns_true)
+TEST_F (Matrix4Test, equality_operator_on_same_matrix_returns_true)
 {
-  const auto matrix = create_random_matrix4 ();
-
-  EXPECT_EQ (matrix, matrix);
+  EXPECT_EQ (random_matrix, random_matrix);
 }
 
-TEST (Matrix4Test, equality_operator_on_copy_of_matrix_returns_true)
+TEST_F (Matrix4Test, equality_operator_on_copy_of_matrix_returns_true)
 {
-  const auto matrix = create_random_matrix4 ();
-  const auto copy = matrix;
+  const auto copy = random_matrix;
 
-  EXPECT_EQ (copy, matrix);
+  EXPECT_EQ (copy, random_matrix);
 }
 
-TEST (Matrix4Test, equality_operator_on_different_matrix_returns_false)
+TEST_F (Matrix4Test, equality_operator_on_different_matrix_returns_false)
 {
   const auto matrix = create_random_matrix4 ();
   const auto other = create_random_matrix4 ();
@@ -445,14 +420,14 @@ TEST (Matrix4Test, equality_operator_on_different_matrix_returns_false)
   EXPECT_FALSE (other == matrix);
 }
 
-TEST (Matrix4Test, inequality_of_same_matrix_returns_false)
+TEST_F (Matrix4Test, inequality_of_same_matrix_returns_false)
 {
   const auto matrix = create_random_matrix4 ();
 
   EXPECT_FALSE (matrix != matrix);
 }
 
-TEST (Matrix4Test, inequality_of_copies_matrix_returns_false)
+TEST_F (Matrix4Test, inequality_of_copies_matrix_returns_false)
 {
   const auto matrix = create_random_matrix4 ();
   const auto copy = matrix;
@@ -460,7 +435,7 @@ TEST (Matrix4Test, inequality_of_copies_matrix_returns_false)
   EXPECT_FALSE (copy != matrix);
 }
 
-TEST (Matrix4Test, inequality_of_different_matrix_returns_true)
+TEST_F (Matrix4Test, inequality_of_different_matrix_returns_true)
 {
   const auto matrix = create_random_matrix4 ();
   const auto other = create_random_matrix4 ();
@@ -468,14 +443,14 @@ TEST (Matrix4Test, inequality_of_different_matrix_returns_true)
   EXPECT_NE (matrix, other);
 }
 
-const Math::Matrix4<double> create_random_matrix4 ()
+const Math::Matrix4d create_random_matrix4 ()
 {
   auto c_array = create_double_array_of_size (16);
   std::array<double, 16> array {{c_array[0],  c_array[1],  c_array[2],  c_array[3],
                                  c_array[4],  c_array[5],  c_array[6],  c_array[7],
                                  c_array[8],  c_array[9],  c_array[10], c_array[11],
                                  c_array[12], c_array[13], c_array[14], c_array[15]}};
-  Math::Matrix4<double> matrix (array);
+  Math::Matrix4d matrix (array);
 
   delete [] c_array;
   return matrix;

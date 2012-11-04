@@ -133,6 +133,22 @@ TEST_F (Vector2Test, length_of_vector_follows_mathematical_rules)
   EXPECT_EQ (std::sqrt (lengthSquared), random_vector.length ());
 }
 
+TEST_F (Vector2Test, accessing_element_outside_vector_kills_program)
+{
+  EXPECT_DEATH (random_vector[2], "Index operator out of range");
+}
+
+TEST_F (Vector2Test, accessing_element_outside_const_vector_kills_program)
+{
+  const Math::Vec2d vector;
+  EXPECT_DEATH (vector[2], "Index operator out of range");
+}
+
+TEST_F (Vector2Test, trying_to_normalize_zero_vector_kills_program)
+{
+  EXPECT_DEATH (empty_vector.normalize (), "Can not normalize zero vector");
+}
+
 TEST_F (Vector2Test, normalize_non_zero_vector_gives_new_length_of_1)
 {
   random_vector.normalize ();
@@ -290,6 +306,11 @@ TEST_F (Vector2Test, multiplication_inplace_with_vector_gives_same_as_vector_tim
   EXPECT_EQ (vec3.y, vec2.y);
 }
 
+TEST_F (Vector2Test, division_with_zero_kills_program)
+{
+  EXPECT_DEATH (random_vector /= 0, "Can not divide vector by zero");
+}
+
 TEST_F (Vector2Test, division_inplace_with_with_scalar_gives_same_as_vector_divided_by_scalar)
 {
   auto vec1 = create_random_vector2 ();
@@ -400,6 +421,17 @@ TEST_F (Vector2Test, non_equal_operator_gives_false_for_vectors_with_equal_compo
   EXPECT_FALSE (vector != same);
 
   delete[] array;
+}
+
+TEST_F (Vector2Test, creating_orthonormal_basis_with_zero_vector_kills_program)
+{
+  EXPECT_DEATH (Math::Vec2d::generateOrthonormalBasis (random_vector, empty_vector), "Can not make orthonormal basis from a zero vector");
+  EXPECT_DEATH (Math::Vec2d::generateOrthonormalBasis (empty_vector, random_vector), "Can not make orthonormal basis from a zero vector");
+}
+
+TEST_F (Vector2Test, creating_orthonormal_basis_with_same_vector_kills_program)
+{
+  EXPECT_DEATH (Math::Vec2d::generateOrthonormalBasis (random_vector, random_vector), "Can not make orthonormal basis from equal vectors");
 }
 
 TEST_F (Vector2Test, orthonormal_basis_creates_perpendicular_vectors_of_length_1)

@@ -113,6 +113,17 @@ TEST_F (Vector3Test, index_operator_maps_for_const_vectors)
   EXPECT_EQ (random_vector.z, random_vector[2]);
 }
 
+TEST_F (Vector3Test, using_an_out_of_range_index_asserts)
+{
+  EXPECT_DEATH (random_vector[4], "Index operator out of range");
+}
+
+TEST_F (Vector3Test, using_an_out_of_range_index_on_const_vector_asserts)
+{
+  const Math::Vec3d const_vector;
+  EXPECT_DEATH (const_vector[4], "Index operator out of range");
+}
+
 TEST_F (Vector3Test, length_of_zero_vector_is_zero)
 {
   EXPECT_EQ (0.0, Math::Vec3d::ZERO.length ());
@@ -129,6 +140,11 @@ TEST_F (Vector3Test, normalize_vector_gives_length_of_1)
 {
   random_vector.normalize ();
   EXPECT_FLOAT_EQ (1.0, random_vector.length ());
+}
+
+TEST_F (Vector3Test, normalizing_a_zero_vector_asserts)
+{
+  EXPECT_DEATH (empty_vector.normalize (), "Can not normalize zero vector");
 }
 
 TEST_F (Vector3Test, negating_a_vector_returns_the_negation_of_each_element)
@@ -192,6 +208,11 @@ TEST_F (Vector3Test, multiplying_vector_with_scalar_from_left_multiplies_each_el
   EXPECT_EQ (random_vector.x * scalar, res.x);
   EXPECT_EQ (random_vector.y * scalar, res.y);
   EXPECT_EQ (random_vector.z * scalar, res.z);
+}
+
+TEST_F (Vector3Test, dividing_vector_with_0_asserts)
+{
+  EXPECT_DEATH (random_vector /= 0, "Can not divide vector by 0");
 }
 
 TEST_F (Vector3Test, dividing_vector_with_scalar_from_right_divides_each_element_by_the_scalar)
@@ -370,6 +391,21 @@ TEST_F (Vector3Test, orthonormal_basis_gives_vectors_of_length_1)
   EXPECT_FLOAT_EQ (1, random_vector.length ());
   EXPECT_FLOAT_EQ (1, random_vector2.length ());
   EXPECT_FLOAT_EQ (1, random_vector3.length ());
+}
+
+TEST_F (Vector3Test, orthonormalizing_with_zero_vector_asserts)
+{
+  EXPECT_DEATH (Math::Vec3d::generateOrthonormalBasis (empty_vector, random_vector, random_vector2), "Can not make orthonormal basis with zero vectors");
+  EXPECT_DEATH (Math::Vec3d::generateOrthonormalBasis (random_vector, empty_vector, random_vector2), "Can not make orthonormal basis with zero vectors");
+  EXPECT_DEATH (Math::Vec3d::generateOrthonormalBasis (random_vector, random_vector2, empty_vector), "Can not make orthonormal basis with zero vectors");
+}
+
+TEST_F (Vector3Test, ortonormalizing_with_equal_vectors_asserts)
+{
+  EXPECT_DEATH (Math::Vec3d::generateOrthonormalBasis (random_vector, random_vector, random_vector), "Can not make orthonormal basis with equal vectors");
+  EXPECT_DEATH (Math::Vec3d::generateOrthonormalBasis (random_vector2, random_vector, random_vector), "Can not make orthonormal basis with equal vectors");
+  EXPECT_DEATH (Math::Vec3d::generateOrthonormalBasis (random_vector, random_vector2, random_vector), "Can not make orthonormal basis with equal vectors");
+  EXPECT_DEATH (Math::Vec3d::generateOrthonormalBasis (random_vector, random_vector, random_vector2), "Can not make orthonormal basis with equal vectors");
 }
 
 TEST_F (Vector3Test, orthonormal_basis_gives_dot_products_of_zero)

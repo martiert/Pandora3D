@@ -15,7 +15,11 @@ Math::Quaternion<double> create_quaternion_from_matrix (const Math::Matrix4<doub
 Math::Quaternion<double> slerp (const Math::Quaternion<double>& from, const Math::Quaternion<double>& to, const double& t);
 Math::Matrix4<double> make_matrix_from_quaternion (const Math::Quaternion<double>& quat);
 
-TEST (QuaternionTest, default_quaternion_is_identity_quaternion)
+class QuaternionTest : public ::testing::Test
+{
+};
+
+TEST_F (QuaternionTest, default_quaternion_is_identity_quaternion)
 {
   const Math::Quaternion<double> quat;
 
@@ -25,7 +29,7 @@ TEST (QuaternionTest, default_quaternion_is_identity_quaternion)
   EXPECT_EQ (0, quat.z ());
 }
 
-TEST (QuaternionTest, creating_quaternion_with_arguments_populates_quaternion_with_arguments)
+TEST_F (QuaternionTest, creating_quaternion_with_arguments_populates_quaternion_with_arguments)
 {
   const auto array = create_double_array_of_size (4);
   const Math::Quaternion<double> quat (array[0], array[1], array[2], array[3]);
@@ -38,7 +42,7 @@ TEST (QuaternionTest, creating_quaternion_with_arguments_populates_quaternion_wi
   delete[] array;
 }
 
-TEST (QuaternionTest, creating_quaternion_from_array_populates_quaternion)
+TEST_F (QuaternionTest, creating_quaternion_from_array_populates_quaternion)
 {
   const auto array = create_double_array_of_size (4);
   const Math::Quaternion<double> quat (array);
@@ -51,7 +55,7 @@ TEST (QuaternionTest, creating_quaternion_from_array_populates_quaternion)
   delete[] array;
 }
 
-TEST (QuaternionTest, creating_quaternion_with_real_element_and_imaginary_vector_sets_quaternion)
+TEST_F (QuaternionTest, creating_quaternion_with_real_element_and_imaginary_vector_sets_quaternion)
 {
   const auto vector = create_random_vector3 ();
   const auto real = create_random_scalar ();
@@ -63,7 +67,7 @@ TEST (QuaternionTest, creating_quaternion_with_real_element_and_imaginary_vector
   EXPECT_EQ (vector.z, quat.z ());
 }
 
-TEST (QuaternionTest, creating_quaternion_around_axis_with_angle_creates_correct_quaternion)
+TEST_F (QuaternionTest, creating_quaternion_around_axis_with_angle_creates_correct_quaternion)
 {
   const auto axis = create_random_vector3 ();
   const auto angle = create_random_scalar ();
@@ -75,7 +79,7 @@ TEST (QuaternionTest, creating_quaternion_around_axis_with_angle_creates_correct
   EXPECT_EQ (std::sin (angle) * axis.z, quat.z ());
 }
 
-TEST (QuaternionTest, creating_quaternion_from_identity_matrix_creates_the_identity_quaternion)
+TEST_F (QuaternionTest, creating_quaternion_from_identity_matrix_creates_the_identity_quaternion)
 {
   Math::Quaternion<double> quat (Math::Matrix4<double>::IDENTITY);
 
@@ -85,7 +89,7 @@ TEST (QuaternionTest, creating_quaternion_from_identity_matrix_creates_the_ident
   EXPECT_EQ (0, quat.z ());
 }
 
-TEST (QuaternionTest, creating_quaternion_from_positive_diagonal_matrix_gives_real_part_as_half_of_the_squared_trace_and_zero_imaginary_part)
+TEST_F (QuaternionTest, creating_quaternion_from_positive_diagonal_matrix_gives_real_part_as_half_of_the_squared_trace_and_zero_imaginary_part)
 {
   const auto matrix = create_positive_diagonal_matrix ();
   const Math::Quaternion<double> quat (matrix);
@@ -96,7 +100,7 @@ TEST (QuaternionTest, creating_quaternion_from_positive_diagonal_matrix_gives_re
   EXPECT_EQ (0, quat.x ());
 }
 
-TEST (QuaternionTest, quaternion_creating_from_matrix_is_correct)
+TEST_F (QuaternionTest, quaternion_creating_from_matrix_is_correct)
 {
   const auto matrix = create_random_matrix4 ();
   const Math::Quaternion<double> quat (matrix);
@@ -108,7 +112,7 @@ TEST (QuaternionTest, quaternion_creating_from_matrix_is_correct)
   EXPECT_EQ (correct_quat.z (), quat.z ());
 }
 
-TEST (QuaternionTest, creating_quaternion_from_identity_matrix_and_creating_matrix_from_quaternion_returns_identity)
+TEST_F (QuaternionTest, creating_quaternion_from_identity_matrix_and_creating_matrix_from_quaternion_returns_identity)
 {
   const Math::Quaternion<double> quat (Math::Matrix4<double>::IDENTITY);
   const auto result = quat.create_matrix ();
@@ -117,7 +121,7 @@ TEST (QuaternionTest, creating_quaternion_from_identity_matrix_and_creating_matr
     EXPECT_EQ (Math::Matrix4<double>::IDENTITY[i], result[i]);
 }
 
-TEST (QuaternionTest, creating_quaternion_from_simple_rotation_matrix_and_getting_the_matrix_from_the_quaternion_gives_the_same_matrix)
+TEST_F (QuaternionTest, creating_quaternion_from_simple_rotation_matrix_and_getting_the_matrix_from_the_quaternion_gives_the_same_matrix)
 {
   const auto matrix = create_random_rotation_matrix ();
   const Math::Quaternion<double> quat (matrix);
@@ -127,7 +131,7 @@ TEST (QuaternionTest, creating_quaternion_from_simple_rotation_matrix_and_gettin
     EXPECT_FLOAT_EQ (matrix[i], result[i]);
 }
 
-TEST (QuaternionTest, creating_matrix_from_identity_quaternion_gives_identity_matrix)
+TEST_F (QuaternionTest, creating_matrix_from_identity_quaternion_gives_identity_matrix)
 {
   const Math::Quaternion<double> quat;
   const auto res = quat.create_matrix ();
@@ -136,7 +140,7 @@ TEST (QuaternionTest, creating_matrix_from_identity_quaternion_gives_identity_ma
     EXPECT_EQ (Math::Matrix4<double>::IDENTITY[i], res[i]);
 }
 
-TEST (QuaternionTest, creating_matrix_from_quaternion_gives_correct_matrix)
+TEST_F (QuaternionTest, creating_matrix_from_quaternion_gives_correct_matrix)
 {
   const auto quat = create_random_quaternion ();
   const auto res = quat.create_matrix ();
@@ -146,13 +150,13 @@ TEST (QuaternionTest, creating_matrix_from_quaternion_gives_correct_matrix)
     EXPECT_EQ (correct[i], res[i]);
 }
 
-TEST (QuaternionTest, norm_of_identity_quaternion_is_1)
+TEST_F (QuaternionTest, norm_of_identity_quaternion_is_1)
 {
   const Math::Quaternion<double> quat;
   EXPECT_EQ (1, quat.norm ());
 }
 
-TEST (QuaternionTest, norm_of_quaternion_with_only_real_element_set_is_the_real_element)
+TEST_F (QuaternionTest, norm_of_quaternion_with_only_real_element_set_is_the_real_element)
 {
   auto quat = create_random_quaternion ();
   quat.x () = 0;
@@ -162,7 +166,7 @@ TEST (QuaternionTest, norm_of_quaternion_with_only_real_element_set_is_the_real_
   EXPECT_EQ (quat.w (), quat.norm ());
 }
 
-TEST (QuaternionTest, norm_of_quaternion_with_only_imaginary_part_is_the_length_of_the_imaginary_vector)
+TEST_F (QuaternionTest, norm_of_quaternion_with_only_imaginary_part_is_the_length_of_the_imaginary_vector)
 {
   auto quat = create_random_quaternion ();
   quat.w () = 0;
@@ -170,7 +174,7 @@ TEST (QuaternionTest, norm_of_quaternion_with_only_imaginary_part_is_the_length_
   EXPECT_EQ (std::sqrt (quat.x () * quat.x () + quat.y () * quat.y () + quat.z () * quat.z ()), quat.norm ());
 }
 
-TEST (QuaternionTest, norm_of_quaternion_is_the_square_root_of_the_sum_of_the_squared_elements)
+TEST_F (QuaternionTest, norm_of_quaternion_is_the_square_root_of_the_sum_of_the_squared_elements)
 {
   const auto quat = create_random_quaternion ();
   auto res = std::sqrt (quat.w () * quat.w () +
@@ -181,7 +185,7 @@ TEST (QuaternionTest, norm_of_quaternion_is_the_square_root_of_the_sum_of_the_sq
   EXPECT_FLOAT_EQ (res, quat.norm ());
 }
 
-TEST (QuaternionTest, conjugate_of_identity_quaternion_is_identity_quaternion)
+TEST_F (QuaternionTest, conjugate_of_identity_quaternion_is_identity_quaternion)
 {
   const Math::Quaternion<double> quaternion;
   const auto conjugate = quaternion.conjugate ();
@@ -192,7 +196,7 @@ TEST (QuaternionTest, conjugate_of_identity_quaternion_is_identity_quaternion)
   EXPECT_EQ (0, conjugate.z ());
 }
 
-TEST (QuaternionTest, conjugate_of_quaternion_switches_the_sign_of_the_imaginary_part)
+TEST_F (QuaternionTest, conjugate_of_quaternion_switches_the_sign_of_the_imaginary_part)
 {
   const auto quaternion = create_random_quaternion ();
   const auto res = quaternion.conjugate ();
@@ -203,7 +207,7 @@ TEST (QuaternionTest, conjugate_of_quaternion_switches_the_sign_of_the_imaginary
   EXPECT_EQ (-quaternion.z (), res.z ());
 }
 
-TEST (QuaternionTest, adding_two_quaternions_adds_the_real_parts_and_the_imaginary_parts_into_a_new_quaternion)
+TEST_F (QuaternionTest, adding_two_quaternions_adds_the_real_parts_and_the_imaginary_parts_into_a_new_quaternion)
 {
   const auto left = create_random_quaternion ();
   const auto right = create_random_quaternion ();
@@ -215,7 +219,7 @@ TEST (QuaternionTest, adding_two_quaternions_adds_the_real_parts_and_the_imagina
   EXPECT_EQ (left.z () + right.z (), res.z ());
 }
 
-TEST (QuaternionTest, subtracting_two_quaternions_subtracts_the_real_parts_and_the_imaginary_parts_into_a_new_quaternion)
+TEST_F (QuaternionTest, subtracting_two_quaternions_subtracts_the_real_parts_and_the_imaginary_parts_into_a_new_quaternion)
 {
   const auto left = create_random_quaternion ();
   const auto right = create_random_quaternion ();
@@ -227,7 +231,7 @@ TEST (QuaternionTest, subtracting_two_quaternions_subtracts_the_real_parts_and_t
   EXPECT_EQ (left.z () - right.z (), res.z ());
 }
 
-TEST (QuaternionTest, multiplying_quaternion_and_scalar_multiplies_each_component_of_the_quaternion)
+TEST_F (QuaternionTest, multiplying_quaternion_and_scalar_multiplies_each_component_of_the_quaternion)
 {
   const auto quat = create_random_quaternion ();
   const auto scalar = create_random_scalar ();
@@ -239,7 +243,7 @@ TEST (QuaternionTest, multiplying_quaternion_and_scalar_multiplies_each_componen
   EXPECT_EQ (quat.z () * scalar, res.z ());
 }
 
-TEST (QuaternionTest, dividing_quaternion_with_scalar_divides_each_component_of_the_quaternion)
+TEST_F (QuaternionTest, dividing_quaternion_with_scalar_divides_each_component_of_the_quaternion)
 {
   const auto quat = create_random_quaternion ();
   const auto scalar = create_random_scalar ();
@@ -251,7 +255,7 @@ TEST (QuaternionTest, dividing_quaternion_with_scalar_divides_each_component_of_
   EXPECT_EQ (quat.z () / scalar, res.z ());
 }
 
-TEST (QuaternionTest, multiplying_quaternions_with_only_real_part_gives_a_quaternion_with_only_the_real_parts_multiplied_and_no_imaginary_part)
+TEST_F (QuaternionTest, multiplying_quaternions_with_only_real_part_gives_a_quaternion_with_only_the_real_parts_multiplied_and_no_imaginary_part)
 {
   Math::Quaternion<double> left;
   Math::Quaternion<double> right;
@@ -267,7 +271,7 @@ TEST (QuaternionTest, multiplying_quaternions_with_only_real_part_gives_a_quater
   EXPECT_EQ (0, res.z ());
 }
 
-TEST (QuaternionTest, multiplying_quaternions_with_only_imaginary_parts_gives_the_cross_product_of_the_imaginary_as_the_imaginary_part_and_the_negative_dot_product_as_the_real)
+TEST_F (QuaternionTest, multiplying_quaternions_with_only_imaginary_parts_gives_the_cross_product_of_the_imaginary_as_the_imaginary_part_and_the_negative_dot_product_as_the_real)
 {
   auto left = create_random_quaternion ();
   auto right = create_random_quaternion ();
@@ -284,7 +288,7 @@ TEST (QuaternionTest, multiplying_quaternions_with_only_imaginary_parts_gives_th
   EXPECT_EQ (-left.imag.dot (right.imag), res.w ());
 }
 
-TEST (QuaternionTest, multiplying_two_quaternions_follows_normal_rules)
+TEST_F (QuaternionTest, multiplying_two_quaternions_follows_normal_rules)
 {
   auto left = create_random_quaternion ();
   auto right = create_random_quaternion ();
@@ -299,7 +303,7 @@ TEST (QuaternionTest, multiplying_two_quaternions_follows_normal_rules)
   EXPECT_EQ (real, res.w ());
 }
 
-TEST (QuaternionTest, inverse_of_a_quaternion_is_the_conjugate_divded_by_the_norm_squared)
+TEST_F (QuaternionTest, inverse_of_a_quaternion_is_the_conjugate_divded_by_the_norm_squared)
 {
   const auto quat = create_random_quaternion ();
   const auto res = quat.inverse ();
@@ -313,7 +317,7 @@ TEST (QuaternionTest, inverse_of_a_quaternion_is_the_conjugate_divded_by_the_nor
   EXPECT_FLOAT_EQ (inverse.z (), res.z ());
 }
 
-TEST (QuaternionTest, inverse_of_quaternion_multiplied_with_the_quaternion_should_be_identity)
+TEST_F (QuaternionTest, inverse_of_quaternion_multiplied_with_the_quaternion_should_be_identity)
 {
   const auto quat = create_random_quaternion ();
   const auto inverse = quat.inverse ();
@@ -325,7 +329,7 @@ TEST (QuaternionTest, inverse_of_quaternion_multiplied_with_the_quaternion_shoul
   EXPECT_NEAR (0, res.z (), PRECISION);
 }
 
-TEST (QuaternionTest, quaternion_multiplied_with_its_inverse_should_be_identity)
+TEST_F (QuaternionTest, quaternion_multiplied_with_its_inverse_should_be_identity)
 {
   const auto quat = create_random_quaternion ();
   const auto inverse = quat.inverse ();
@@ -337,7 +341,7 @@ TEST (QuaternionTest, quaternion_multiplied_with_its_inverse_should_be_identity)
   EXPECT_NEAR (0, res.z (), PRECISION);
 }
 
-TEST (QuaternionTest, normalizing_quaternion_gives_a_unit_quaternion)
+TEST_F (QuaternionTest, normalizing_quaternion_gives_a_unit_quaternion)
 {
   auto quat = create_random_quaternion ();
   quat.normalize ();
@@ -345,7 +349,7 @@ TEST (QuaternionTest, normalizing_quaternion_gives_a_unit_quaternion)
   EXPECT_FLOAT_EQ (1, quat.norm ());
 }
 
-TEST (QuaternionTest, spherical_linear_interpolation_between_from_and_to_with_t_equal_zero_returns_from)
+TEST_F (QuaternionTest, spherical_linear_interpolation_between_from_and_to_with_t_equal_zero_returns_from)
 {
   auto from = create_random_quaternion ();
   auto to = create_random_quaternion ();
@@ -360,7 +364,7 @@ TEST (QuaternionTest, spherical_linear_interpolation_between_from_and_to_with_t_
   EXPECT_EQ (from.z (), res.z ());
 }
 
-TEST (QuaternionTest, sperical_linear_interpolation_between_from_ant_to_with_t_equal_one_return_to)
+TEST_F (QuaternionTest, sperical_linear_interpolation_between_from_ant_to_with_t_equal_one_return_to)
 {
   auto from = create_random_quaternion ();
   auto to = create_random_quaternion ();
@@ -375,7 +379,7 @@ TEST (QuaternionTest, sperical_linear_interpolation_between_from_ant_to_with_t_e
   EXPECT_EQ (to.z (), res.z ());
 }
 
-TEST (QuaternionTest, sperical_linear_interpolation_makes_correct_quaternion)
+TEST_F (QuaternionTest, sperical_linear_interpolation_makes_correct_quaternion)
 {
   auto from = create_random_quaternion ();
   auto to = create_random_quaternion ();
