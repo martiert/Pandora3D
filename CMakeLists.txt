@@ -10,7 +10,7 @@ cmake_minimum_required (VERSION 2.6.3)
 set (CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/Modules" CACHE STRING "Path to cmake modules")
 
 if (NOT CMAKE_BUILD_TYPE)
-  set (CMAKE_BUILD_TYPE "Release" CACHE STRING "What kind of build this is" FORCE)
+  set (CMAKE_BUILD_TYPE "RelWithDebInfo" CACHE STRING "What kind of build this is" FORCE)
 endif (NOT CMAKE_BUILD_TYPE)
 
 if (NOT LIBRARY_OUTPUT_PATH)
