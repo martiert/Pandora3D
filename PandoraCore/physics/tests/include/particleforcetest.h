@@ -9,11 +9,11 @@
 class SimpleForce : public Physics::ParticleForce
 {
   public:
-    SimpleForce ()
-      : called (false), step_recieved (0)
+    SimpleForce()
+      : called(false), step_recieved(0)
     {}
 
-    virtual void update_force (std::shared_ptr<Physics::Particle> /* particle */, Real duration)
+    virtual void update_force(std::shared_ptr<Physics::Particle> /* particle */, Real duration)
     {
       called = true;
       step_recieved = duration;
@@ -28,8 +28,8 @@ typedef std::shared_ptr<SimpleForce> SimpleForcePtr;
 class ParticleForceTest : public ::testing::Test
 {
   protected:
-    virtual void SetUp ();
-    void add_both_forces ();
+    virtual void SetUp();
+    void add_both_forces();
 
     Physics::ParticleForceRegistry registry;
     std::shared_ptr<Physics::Particle> particle;
