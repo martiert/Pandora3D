@@ -15,45 +15,45 @@ namespace Math
   class Matrix4
   {
     public:
-      explicit Matrix4 ();
+      explicit Matrix4();
 
-      explicit Matrix4 (const Real& a00, const Real& a01, const Real& a02, const Real& a03,
+      explicit Matrix4(const Real& a00, const Real& a01, const Real& a02, const Real& a03,
                         const Real& a10, const Real& a11, const Real& a12, const Real& a13,
                         const Real& a20, const Real& a21, const Real& a22, const Real& a23,
                         const Real& a30, const Real& a31, const Real& a32, const Real& a33);
 
-      explicit Matrix4 (const std::array<Real, 16>& array);
-      explicit Matrix4 (const Matrix3<Real>& matrix);
+      explicit Matrix4(const std::array<Real, 16>& array);
+      explicit Matrix4(const Matrix3<Real>& matrix);
 
-      Matrix4& operator= (const std::array<Real, 16>& array);
-      Matrix4& operator= (const Matrix3<Real>& matrix);
+      Matrix4& operator=(const std::array<Real, 16>& array);
+      Matrix4& operator=(const Matrix3<Real>& matrix);
 
-      Real& operator () (const size_t& i, const size_t& j);
-      Real operator () (const size_t& i, const size_t& j) const;
+      Real& operator()(const size_t& i, const size_t& j);
+      Real operator()(const size_t& i, const size_t& j) const;
 
-      Real& operator[] (const size_t& i);
-      Real operator[] (const size_t& i) const;
+      Real& operator[](const size_t& i);
+      Real operator[](const size_t& i) const;
 
-      std::array<Real, 16>& get_data ();
-      std::array<Real, 16> get_data () const;
+      std::array<Real, 16>& get_data();
+      std::array<Real, 16> get_data() const;
 
-      Matrix4& operator*= (const Real& scalar);
-      Matrix4& operator/= (const Real& scalar);
-      Matrix4& operator+= (const Matrix4 other);
-      Matrix4& operator-= (const Matrix4 other);
+      Matrix4& operator*=(const Real& scalar);
+      Matrix4& operator/=(const Real& scalar);
+      Matrix4& operator+=(const Matrix4 other);
+      Matrix4& operator-=(const Matrix4 other);
 
-      Matrix4 transpose () const;
-      Matrix4 inverse () const;
+      Matrix4 transpose() const;
+      Matrix4 inverse() const;
 
-      Real trace () const;
-      Real determinant () const;
+      Real trace() const;
+      Real determinant() const;
 
       const static Matrix4 IDENTITY;
       const static Matrix4 ZERO;
     private:
       std::array<Real, 16> data;
 
-      Real calculate_sub_determinant (const size_t& row, const size_t& column) const;
+      Real calculate_sub_determinant(const size_t& row, const size_t& column) const;
   };
 
   typedef Matrix4<float>        Matrix4f;
@@ -62,39 +62,39 @@ namespace Math
   typedef Matrix4<unsigned int> Matrix4u;
 
   template<typename Real>
-  Matrix4<Real> operator* (const Matrix4<Real>& matrix, const Real& scalar);
+  Matrix4<Real> operator*(const Matrix4<Real>& matrix, const Real& scalar);
 
   template<typename Real>
-  Matrix4<Real> operator* (const Real& scalar, const Matrix4<Real>& matrix);
+  Matrix4<Real> operator*(const Real& scalar, const Matrix4<Real>& matrix);
 
   template<typename Real>
-  Vector4<Real> operator* (const Matrix4<Real>& matrix, const Vector4<Real>& vector);
+  Vector4<Real> operator*(const Matrix4<Real>& matrix, const Vector4<Real>& vector);
 
   template<typename Real>
-  Vector4<Real> operator* (const Vector4<Real>& vector, const Matrix4<Real>& matrix);
+  Vector4<Real> operator*(const Vector4<Real>& vector, const Matrix4<Real>& matrix);
 
   template<typename Real>
-  Matrix4<Real> operator* (const Matrix4<Real>& left, const Matrix4<Real>& right);
+  Matrix4<Real> operator*(const Matrix4<Real>& left, const Matrix4<Real>& right);
 
   template<typename Real>
-  Matrix4<Real> operator/ (const Matrix4<Real>& matrix, const Real& scalar);
+  Matrix4<Real> operator/(const Matrix4<Real>& matrix, const Real& scalar);
 
   template<typename Real>
-  Matrix4<Real> operator+ (const Matrix4<Real>& left, const Matrix4<Real>& right);
+  Matrix4<Real> operator+(const Matrix4<Real>& left, const Matrix4<Real>& right);
 
   template<typename Real>
-  Matrix4<Real> operator- (const Matrix4<Real>& left, const Matrix4<Real>& right);
+  Matrix4<Real> operator-(const Matrix4<Real>& left, const Matrix4<Real>& right);
 
   template<typename Real>
-  bool operator== (const Matrix4<Real>& left, const Matrix4<Real>& right);
+  bool operator==(const Matrix4<Real>& left, const Matrix4<Real>& right);
 
   template<typename Real>
-  bool operator!= (const Matrix4<Real>& left, const Matrix4<Real>& right);
+  bool operator!=(const Matrix4<Real>& left, const Matrix4<Real>& right);
 }
 
 // Implementation
 template<typename Real>
-Math::Matrix4<Real>::Matrix4 ()
+Math::Matrix4<Real>::Matrix4()
   : data {{1, 0, 0, 0,
            0, 1, 0, 0,
            0, 0, 1, 0,
@@ -102,7 +102,7 @@ Math::Matrix4<Real>::Matrix4 ()
 { }
 
 template<typename Real>
-Math::Matrix4<Real>::Matrix4 (const Real& a00, const Real& a01, const Real& a02, const Real& a03,
+Math::Matrix4<Real>::Matrix4(const Real& a00, const Real& a01, const Real& a02, const Real& a03,
                               const Real& a10, const Real& a11, const Real& a12, const Real& a13,
                               const Real& a20, const Real& a21, const Real& a22, const Real& a23,
                               const Real& a30, const Real& a31, const Real& a32, const Real& a33)
@@ -113,12 +113,12 @@ Math::Matrix4<Real>::Matrix4 (const Real& a00, const Real& a01, const Real& a02,
 { }
 
 template<typename Real>
-Math::Matrix4<Real>::Matrix4 (const std::array<Real,16>& array)
-  : data (array)
+Math::Matrix4<Real>::Matrix4(const std::array<Real,16>& array)
+  : data(array)
 { }
 
 template<typename Real>
-Math::Matrix4<Real>::Matrix4 (const Matrix3<Real>& matrix)
+Math::Matrix4<Real>::Matrix4(const Matrix3<Real>& matrix)
   : data {{matrix[0], matrix[1], matrix[2], 0,
            matrix[3], matrix[4], matrix[5], 0,
            matrix[6], matrix[7], matrix[8], 0,
@@ -126,7 +126,7 @@ Math::Matrix4<Real>::Matrix4 (const Matrix3<Real>& matrix)
 { }
 
 template<typename Real>
-Math::Matrix4<Real>& Math::Matrix4<Real>::operator= (const std::array<Real, 16>& array)
+Math::Matrix4<Real>& Math::Matrix4<Real>::operator=(const std::array<Real, 16>& array)
 {
   data = array;
 
@@ -134,7 +134,7 @@ Math::Matrix4<Real>& Math::Matrix4<Real>::operator= (const std::array<Real, 16>&
 }
 
 template<typename Real>
-Math::Matrix4<Real>& Math::Matrix4<Real>::operator= (const Matrix3<Real>& matrix)
+Math::Matrix4<Real>& Math::Matrix4<Real>::operator=(const Matrix3<Real>& matrix)
 {
   data[0] = matrix[0];
   data[1] = matrix[1];
@@ -152,51 +152,51 @@ Math::Matrix4<Real>& Math::Matrix4<Real>::operator= (const Matrix3<Real>& matrix
 }
 
 template<typename Real>
-Real& Math::Matrix4<Real>::operator () (const size_t& i, const size_t& j)
+Real& Math::Matrix4<Real>::operator()(const size_t& i, const size_t& j)
 {
-  assert (i < 4 && j < 4 && "Index operator out of range");
+  assert(i < 4 && j < 4 && "Index operator out of range");
 
   return data[i*4 + j];
 }
 
 template<typename Real>
-Real Math::Matrix4<Real>::operator () (const size_t& i, const size_t& j) const
+Real Math::Matrix4<Real>::operator()(const size_t& i, const size_t& j) const
 {
-  assert (i < 4 && j < 4 && "Index operator out of range");
+  assert(i < 4 && j < 4 && "Index operator out of range");
 
   return data[i*4 + j];
 }
 
 template<typename Real>
-Real& Math::Matrix4<Real>::operator[] (const size_t& i)
+Real& Math::Matrix4<Real>::operator[](const size_t& i)
 {
-  assert (i < 16 && "Index operator out of range");
+  assert(i < 16 && "Index operator out of range");
 
   return data[i];
 }
 
 template<typename Real>
-Real Math::Matrix4<Real>::operator[] (const size_t& i) const
+Real Math::Matrix4<Real>::operator[](const size_t& i) const
 {
-  assert (i < 16 && "Index operator out of range");
+  assert(i < 16 && "Index operator out of range");
 
   return data[i];
 }
 
 template<typename Real>
-std::array<Real, 16>& Math::Matrix4<Real>::get_data ()
+std::array<Real, 16>& Math::Matrix4<Real>::get_data()
 {
   return data;
 }
 
 template<typename Real>
-std::array<Real, 16> Math::Matrix4<Real>::get_data () const
+std::array<Real, 16> Math::Matrix4<Real>::get_data() const
 {
   return data;
 }
 
 template<typename Real>
-Math::Matrix4<Real>& Math::Matrix4<Real>::operator*= (const Real& scalar)
+Math::Matrix4<Real>& Math::Matrix4<Real>::operator*=(const Real& scalar)
 {
   for (auto i = 0; i < 16; ++i)
     data[i] *= scalar;
@@ -205,9 +205,9 @@ Math::Matrix4<Real>& Math::Matrix4<Real>::operator*= (const Real& scalar)
 }
 
 template<typename Real>
-Math::Matrix4<Real>& Math::Matrix4<Real>::operator/= (const Real& scalar)
+Math::Matrix4<Real>& Math::Matrix4<Real>::operator/=(const Real& scalar)
 {
-  assert (scalar != 0 && "Can not divide matrix by zero");
+  assert(scalar != 0 && "Can not divide matrix by zero");
 
   for (auto i = 0; i < 16; ++i)
     data[i] /= scalar;
@@ -216,7 +216,7 @@ Math::Matrix4<Real>& Math::Matrix4<Real>::operator/= (const Real& scalar)
 }
 
 template<typename Real>
-Math::Matrix4<Real>& Math::Matrix4<Real>::operator+= (const Matrix4<Real> other)
+Math::Matrix4<Real>& Math::Matrix4<Real>::operator+=(const Matrix4<Real> other)
 {
   for (auto i = 0; i < 16; ++i)
     data[i] += other[i];
@@ -224,7 +224,7 @@ Math::Matrix4<Real>& Math::Matrix4<Real>::operator+= (const Matrix4<Real> other)
 }
 
 template<typename Real>
-Math::Matrix4<Real>& Math::Matrix4<Real>::operator-= (const Matrix4<Real> other)
+Math::Matrix4<Real>& Math::Matrix4<Real>::operator-=(const Matrix4<Real> other)
 {
   for (auto i = 0; i < 16; ++i)
     data[i] -= other[i];
@@ -232,23 +232,23 @@ Math::Matrix4<Real>& Math::Matrix4<Real>::operator-= (const Matrix4<Real> other)
 }
 
 template<typename Real>
-Math::Matrix4<Real> Math::Matrix4<Real>::transpose () const
+Math::Matrix4<Real> Math::Matrix4<Real>::transpose() const
 {
   Matrix4<Real> res;
   for (auto i = 0; i < 4; ++i)
     for (auto j = 0; j < 4; ++j)
-      res (j,i) = data[i*4 + j];
+      res(j,i) = data[i*4 + j];
 
   return res;
 }
 
 // Code from the MESA implementation of gluInvertMatrix.
 template<typename Real>
-Math::Matrix4<Real> Math::Matrix4<Real>::inverse () const
+Math::Matrix4<Real> Math::Matrix4<Real>::inverse() const
 {
-  Real det = determinant ();
+  Real det = determinant();
 
-  assert (det != 0 && "Can not find inverse of singular matrix");
+  assert(det != 0 && "Can not find inverse of singular matrix");
 
   Matrix4<Real> res;
 
@@ -369,24 +369,24 @@ Math::Matrix4<Real> Math::Matrix4<Real>::inverse () const
 }
 
 template<typename Real>
-Real Math::Matrix4<Real>::trace () const
+Real Math::Matrix4<Real>::trace() const
 {
   return data[0] + data[5] + data[10] + data[15];
 }
 
 template<typename Real>
-Real Math::Matrix4<Real>::determinant () const
+Real Math::Matrix4<Real>::determinant() const
 {
-  const Real sub1 = calculate_sub_determinant (0,0);
-  const Real sub2 = calculate_sub_determinant (0,1);
-  const Real sub3 = calculate_sub_determinant (0,2);
-  const Real sub4 = calculate_sub_determinant (0,3);
+  const Real sub1 = calculate_sub_determinant(0,0);
+  const Real sub2 = calculate_sub_determinant(0,1);
+  const Real sub3 = calculate_sub_determinant(0,2);
+  const Real sub4 = calculate_sub_determinant(0,3);
 
   return data[0] * sub1 - data[1] * sub2 + data[2] * sub3 - data[3] * sub4;
 }
 
 template<typename Real>
-Math::Matrix4<Real> Math::operator* (const Matrix4<Real>& matrix, const Real& scalar)
+Math::Matrix4<Real> Math::operator*(const Matrix4<Real>& matrix, const Real& scalar)
 {
   Matrix4<Real> result = matrix;
   for (auto i = 0; i < 16; ++i)
@@ -395,35 +395,35 @@ Math::Matrix4<Real> Math::operator* (const Matrix4<Real>& matrix, const Real& sc
 }
 
 template<typename Real>
-Math::Matrix4<Real> Math::operator* (const Real& scalar, const Matrix4<Real>& matrix)
+Math::Matrix4<Real> Math::operator*(const Real& scalar, const Matrix4<Real>& matrix)
 {
   return matrix * scalar;
 }
 
 template<typename Real>
-Math::Vector4<Real> Math::operator* (const Matrix4<Real>& matrix, const Vector4<Real>& vector)
+Math::Vector4<Real> Math::operator*(const Matrix4<Real>& matrix, const Vector4<Real>& vector)
 {
   Vector4<Real> res;
   for (auto i = 0; i < 4; ++i)
     for (auto j = 0; j < 4; ++j)
-      res[i] += matrix (i,j) * vector[j];
+      res[i] += matrix(i,j) * vector[j];
 
   return res;
 }
 
 template<typename Real>
-Math::Vector4<Real> Math::operator* (const Vector4<Real>& vector, const Matrix4<Real>& matrix)
+Math::Vector4<Real> Math::operator*(const Vector4<Real>& vector, const Matrix4<Real>& matrix)
 {
   Vector4<Real> res;
   for (auto i = 0; i < 4; ++i)
     for (auto j = 0; j < 4; ++j)
-      res[i] += vector[j] * matrix (j,i);
+      res[i] += vector[j] * matrix(j,i);
 
   return res;
 }
 
 template<typename Real>
-Math::Matrix4<Real> Math::operator/ (const Matrix4<Real>& matrix, const Real& scalar)
+Math::Matrix4<Real> Math::operator/(const Matrix4<Real>& matrix, const Real& scalar)
 {
   auto result = matrix;
   result /= scalar;
@@ -431,7 +431,7 @@ Math::Matrix4<Real> Math::operator/ (const Matrix4<Real>& matrix, const Real& sc
 }
 
 template<typename Real>
-Math::Matrix4<Real> Math::operator+ (const Matrix4<Real>& left, const Matrix4<Real>& right)
+Math::Matrix4<Real> Math::operator+(const Matrix4<Real>& left, const Matrix4<Real>& right)
 {
   Matrix4<Real> result;
   for (auto i = 0; i < 16; ++i)
@@ -440,7 +440,7 @@ Math::Matrix4<Real> Math::operator+ (const Matrix4<Real>& left, const Matrix4<Re
 }
 
 template<typename Real>
-Math::Matrix4<Real> Math::operator- (const Matrix4<Real>& left, const Matrix4<Real>& right)
+Math::Matrix4<Real> Math::operator-(const Matrix4<Real>& left, const Matrix4<Real>& right)
 {
   Matrix4<Real> result;
   for (auto i = 0; i < 16; ++i)
@@ -449,34 +449,34 @@ Math::Matrix4<Real> Math::operator- (const Matrix4<Real>& left, const Matrix4<Re
 }
 
 template<typename Real>
-Math::Matrix4<Real> Math::operator* (const Matrix4<Real>& left, const Matrix4<Real>& right)
+Math::Matrix4<Real> Math::operator*(const Matrix4<Real>& left, const Matrix4<Real>& right)
 {
   Matrix4<Real> result;
   for (auto i = 0; i < 4; ++i) {
     for (auto j = 0; j < 4; ++j) {
       Real element = 0;
       for (auto k = 0; k < 4; ++k)
-        element += left (i,k) * right (k,j);
-      result (i,j) = element;
+        element += left(i,k) * right(k,j);
+      result(i,j) = element;
     }
   }
   return result;
 }
 
 template<typename Real>
-bool Math::operator== (const Matrix4<Real>& left, const Matrix4<Real>& right)
+bool Math::operator==(const Matrix4<Real>& left, const Matrix4<Real>& right)
 {
-  return left.get_data () == right.get_data ();
+  return left.get_data() == right.get_data();
 }
 
 template<typename Real>
-bool Math::operator!= (const Matrix4<Real>& left, const Matrix4<Real>& right)
+bool Math::operator!=(const Matrix4<Real>& left, const Matrix4<Real>& right)
 {
   return !(left == right);
 }
 
 template<typename Real>
-Real Math::Matrix4<Real>::calculate_sub_determinant (const size_t& row, const size_t& column) const
+Real Math::Matrix4<Real>::calculate_sub_determinant(const size_t& row, const size_t& column) const
 {
   Matrix3<Real> matrix;
   size_t index = 0;
@@ -489,7 +489,7 @@ Real Math::Matrix4<Real>::calculate_sub_determinant (const size_t& row, const si
     }
   }
 
-  return matrix.determinant ();
+  return matrix.determinant();
 }
 
 #endif // MATH_MATRIX4_H_INCLUDED
