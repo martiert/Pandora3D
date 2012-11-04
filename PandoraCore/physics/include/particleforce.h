@@ -11,7 +11,7 @@ namespace Physics
   class ParticleForce
   {
     public:
-      virtual void update_force (std::shared_ptr<Particle> particle, Real duration) = 0;
+      virtual void update_force(std::shared_ptr<Particle> particle, Real duration) = 0;
   };
 
   typedef std::shared_ptr<ParticleForce> ParticleForcePtr;

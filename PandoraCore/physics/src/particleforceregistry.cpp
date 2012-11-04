@@ -6,44 +6,44 @@
 
 namespace Physics
 {
-  void ParticleForceRegistry::add (Physics::ParticleForcePtr force, Physics::ParticlePtr particle)
+  void ParticleForceRegistry::add(Physics::ParticleForcePtr force, Physics::ParticlePtr particle)
   {
-    ForceParticlePair pair {force, particle};
-    particleforcepairs.push_front (pair);
+    ForceParticlePair pair{force, particle};
+    particleforcepairs.push_front(pair);
   }
 
-  void ParticleForceRegistry::remove (Physics::ParticleForcePtr force, Physics::ParticlePtr particle)
+  void ParticleForceRegistry::remove(Physics::ParticleForcePtr force, Physics::ParticlePtr particle)
   {
-    ForceParticlePair pair {force, particle};
-    particleforcepairs.remove (pair);
+    ForceParticlePair pair{force, particle};
+    particleforcepairs.remove(pair);
   }
 
-  void ParticleForceRegistry::clear ()
+  void ParticleForceRegistry::clear()
   {
-    particleforcepairs.clear ();
+    particleforcepairs.clear();
   }
 
-  void ParticleForceRegistry::update_particles_with_forces (const Real& timestep)
+  void ParticleForceRegistry::update_particles_with_forces(const Real& timestep)
   {
     if (timestep == 0)
       return;
 
-    auto update_force = [&timestep] (ForceParticlePair& pair) { pair.update_force (timestep); };
-    std::for_each (particleforcepairs.begin (), particleforcepairs.end (), update_force);
+    auto update_force = [&timestep](ForceParticlePair& pair) { pair.update_force(timestep); };
+    std::for_each(particleforcepairs.begin(), particleforcepairs.end(), update_force);
   }
 
-  ParticleForceRegistry::ForceParticlePair::ForceParticlePair (std::shared_ptr<ParticleForce> force,
+  ParticleForceRegistry::ForceParticlePair::ForceParticlePair(std::shared_ptr<ParticleForce> force,
                                                                std::shared_ptr<Particle> particle)
-    : force (force), particle (particle)
+    : force(force), particle(particle)
   {}
 
-  void ParticleForceRegistry::ForceParticlePair::update_force (const Real& timestep)
+  void ParticleForceRegistry::ForceParticlePair::update_force(const Real& timestep)
   {
-    force->update_force (particle, timestep);
+    force->update_force(particle, timestep);
   }
 
-  bool ParticleForceRegistry::ForceParticlePair::operator== (const ParticleForceRegistry::ForceParticlePair& other)
+  bool ParticleForceRegistry::ForceParticlePair::operator==(const ParticleForceRegistry::ForceParticlePair& other)
   {
-    return (this->force == other.force && this->particle == other.particle);
+    return(this->force == other.force && this->particle == other.particle);
   }
 }

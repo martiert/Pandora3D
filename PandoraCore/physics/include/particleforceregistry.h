@@ -13,23 +13,23 @@ namespace Physics
   class ParticleForceRegistry
   {
     public:
-      void add (std::shared_ptr<ParticleForce> force, std::shared_ptr<Particle> particle);
+      void add(std::shared_ptr<ParticleForce> force, std::shared_ptr<Particle> particle);
 
-      void remove (std::shared_ptr<ParticleForce> force, std::shared_ptr<Particle> particle);
+      void remove(std::shared_ptr<ParticleForce> force, std::shared_ptr<Particle> particle);
 
-      void clear ();
+      void clear();
 
-      void update_particles_with_forces (const Real& timestep);
+      void update_particles_with_forces(const Real& timestep);
 
     private:
       struct ForceParticlePair
       {
         public:
-          ForceParticlePair (std::shared_ptr<ParticleForce> force, std::shared_ptr<Particle> particle);
+          ForceParticlePair(std::shared_ptr<ParticleForce> force, std::shared_ptr<Particle> particle);
 
-          void update_force (const Real& timestep);
+          void update_force(const Real& timestep);
 
-          bool operator== (const ForceParticlePair& other);
+          bool operator==(const ForceParticlePair& other);
 
         private:
           std::shared_ptr<ParticleForce> force;
