@@ -7,13 +7,13 @@
 
 # BUILD_SHARED_LIBS is a standard CMake variable, but we declare it here to
 # make it prominent in the GUI.
-option(BUILD_SHARED_LIBS "Build shared libraries (DLLs)." OFF)
+option(BUILD_SHARED_LIBS "Build shared libraries(DLLs)." OFF)
 
 # When other libraries are using a shared version of runtime libraries,
 # Google Test also has to use one.
 option(
   gtest_force_shared_crt
-  "Use shared (DLL) run-time lib even when Google Test is built as static lib."
+  "Use shared(DLL) run-time lib even when Google Test is built as static lib."
   OFF)
 
 option(gtest_build_tests "Build all of gtest's own tests." OFF)
@@ -27,7 +27,7 @@ include(cmake/hermetic_build.cmake OPTIONAL)
 
 if (COMMAND pre_project_set_up_hermetic_build)
   pre_project_set_up_hermetic_build()
-endif()
+endif ()
 
 ########################################################################
 #
@@ -44,7 +44,7 @@ cmake_minimum_required(VERSION 2.6.2)
 
 if (COMMAND set_up_hermetic_build)
   set_up_hermetic_build()
-endif()
+endif ()
 
 # Define helper functions and macros used by Google Test.
 include(cmake/internal_utils.cmake)
@@ -90,7 +90,7 @@ if (gtest_build_samples)
   cxx_executable(sample8_unittest samples gtest_main)
   cxx_executable(sample9_unittest samples gtest)
   cxx_executable(sample10_unittest samples gtest)
-endif()
+endif ()
 
 ########################################################################
 #
@@ -181,7 +181,7 @@ if (gtest_build_tests)
     cxx_test_with_flags(gtest_use_own_tuple_test "${cxx_use_own_tuple}"
       gtest_main_use_own_tuple
       test/gtest-param-test_test.cc test/gtest-param-test2_test.cc)
-  endif()
+  endif ()
 
   ############################################################
   # Python tests.
@@ -237,4 +237,4 @@ if (gtest_build_tests)
 
   cxx_executable(gtest_xml_output_unittest_ test gtest)
   py_test(gtest_xml_output_unittest)
-endif()
+endif ()
