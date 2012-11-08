@@ -54,49 +54,49 @@ void Vector4Test::TearDown()
 
 TEST_F(Vector4Test, empty_constructor_creates_zero_vector)
 {
-  EXPECT_EQ(0.0, empty_vector.x);
-  EXPECT_EQ(0.0, empty_vector.y);
-  EXPECT_EQ(0.0, empty_vector.z);
-  EXPECT_EQ(0.0, empty_vector.w);
+  EXPECT_EQ(0.0, empty_vector[0]);
+  EXPECT_EQ(0.0, empty_vector[1]);
+  EXPECT_EQ(0.0, empty_vector[2]);
+  EXPECT_EQ(0.0, empty_vector[3]);
 }
 
 TEST_F(Vector4Test, construction_with_arguments_populates_the_vector_with_those_arguments)
 {
   const Math::Vec4d vector(0.1, 7.8, 4.3, 2.3);
-  EXPECT_EQ(0.1, vector.x);
-  EXPECT_EQ(7.8, vector.y);
-  EXPECT_EQ(4.3, vector.z);
-  EXPECT_EQ(2.3, vector.w);
+  EXPECT_EQ(0.1, vector[0]);
+  EXPECT_EQ(7.8, vector[1]);
+  EXPECT_EQ(4.3, vector[2]);
+  EXPECT_EQ(2.3, vector[3]);
 }
 
 TEST_F(Vector4Test, construction_from_array_populates_vector_with_array)
 {
-  EXPECT_EQ(array[0], random_vector.x);
-  EXPECT_EQ(array[1], random_vector.y);
-  EXPECT_EQ(array[2], random_vector.z);
-  EXPECT_EQ(array[3], random_vector.w);
+  EXPECT_EQ(array[0], random_vector[0]);
+  EXPECT_EQ(array[1], random_vector[1]);
+  EXPECT_EQ(array[2], random_vector[2]);
+  EXPECT_EQ(array[3], random_vector[3]);
 }
 
 TEST_F(Vector4Test, copy_constructor_copies_each_element)
 {
-  EXPECT_EQ(random_vector.x, random_vector_copy.x);
-  EXPECT_EQ(random_vector.y, random_vector_copy.y);
-  EXPECT_EQ(random_vector.z, random_vector_copy.z);
-  EXPECT_EQ(random_vector.w, random_vector_copy.w);
+  EXPECT_EQ(random_vector[0], random_vector_copy[0]);
+  EXPECT_EQ(random_vector[1], random_vector_copy[1]);
+  EXPECT_EQ(random_vector[2], random_vector_copy[2]);
+  EXPECT_EQ(random_vector[3], random_vector_copy[3]);
 }
 
 TEST_F(Vector4Test, copy_constructor_makes_hard_copy)
 {
-  ++random_vector.x;
-  EXPECT_NE(random_vector.x, random_vector_copy.x);
+  ++random_vector[0];
+  EXPECT_NE(random_vector[0], random_vector_copy[0]);
 }
 
 TEST_F(Vector4Test, assignment_from_vector_makes_copy)
 {
-  EXPECT_EQ(random_vector.x, random_vector_copy.x);
-  EXPECT_EQ(random_vector.y, random_vector_copy.y);
-  EXPECT_EQ(random_vector.z, random_vector_copy.z);
-  EXPECT_EQ(random_vector.w, random_vector_copy.w);
+  EXPECT_EQ(random_vector[0], random_vector_copy[0]);
+  EXPECT_EQ(random_vector[1], random_vector_copy[1]);
+  EXPECT_EQ(random_vector[2], random_vector_copy[2]);
+  EXPECT_EQ(random_vector[3], random_vector_copy[3]);
 }
 
 TEST_F(Vector4Test, copy_from_Vec3d_gives_a_Vec3d_with_1_as_the_w_component)
@@ -104,10 +104,10 @@ TEST_F(Vector4Test, copy_from_Vec3d_gives_a_Vec3d_with_1_as_the_w_component)
   const auto vector3 = create_random_vector3();
   const Math::Vec4d copy(vector3);
 
-  EXPECT_EQ(vector3.x, copy.x);
-  EXPECT_EQ(vector3.y, copy.y);
-  EXPECT_EQ(vector3.z, copy.z);
-  EXPECT_EQ(1.0, copy.w);
+  EXPECT_EQ(vector3[0], copy[0]);
+  EXPECT_EQ(vector3[1], copy[1]);
+  EXPECT_EQ(vector3[2], copy[2]);
+  EXPECT_EQ(1.0, copy[3]);
 }
 
 TEST_F(Vector4Test, assigning_from_Vec3d_gives_a_Vec3d_with_1_as_the_w_component)
@@ -116,25 +116,25 @@ TEST_F(Vector4Test, assigning_from_Vec3d_gives_a_Vec3d_with_1_as_the_w_component
   Math::Vec4d copy;
   copy = vector3;
 
-  EXPECT_EQ(vector3.x, copy.x);
-  EXPECT_EQ(vector3.y, copy.y);
-  EXPECT_EQ(vector3.z, copy.z);
-  EXPECT_EQ(1.0, copy.w);
+  EXPECT_EQ(vector3[0], copy[0]);
+  EXPECT_EQ(vector3[1], copy[1]);
+  EXPECT_EQ(vector3[2], copy[2]);
+  EXPECT_EQ(1.0,        copy[3]);
 }
 
 TEST_F(Vector4Test, index_operator_maps_to_x_y_z_w)
 {
-  EXPECT_EQ(random_vector.x, random_vector[0]);
-  EXPECT_EQ(random_vector.y, random_vector[1]);
-  EXPECT_EQ(random_vector.z, random_vector[2]);
-  EXPECT_EQ(random_vector.w, random_vector[3]);
+  EXPECT_EQ(random_vector[0], random_vector[0]);
+  EXPECT_EQ(random_vector[1], random_vector[1]);
+  EXPECT_EQ(random_vector[2], random_vector[2]);
+  EXPECT_EQ(random_vector[3], random_vector[3]);
 }
 
 TEST_F(Vector4Test, index_operator_manipulates_data)
 {
   random_vector[2] = 5.3;
 
-  EXPECT_EQ(5.3, random_vector.z);
+  EXPECT_EQ(5.3, random_vector[2]);
 }
 
 TEST_F(Vector4Test, length_of_zero_vector_is_zero)
@@ -145,10 +145,10 @@ TEST_F(Vector4Test, length_of_zero_vector_is_zero)
 
 TEST_F(Vector4Test, lengthSquared_of_vector_is_the_sum_of_the_squared_components)
 {
-  EXPECT_EQ(random_vector.x * random_vector.x +
-             random_vector.y * random_vector.y +
-             random_vector.z * random_vector.z +
-             random_vector.w * random_vector.w, random_vector.lengthSquared());
+  EXPECT_EQ(random_vector[0] * random_vector[0] +
+             random_vector[1] * random_vector[1] +
+             random_vector[2] * random_vector[2] +
+             random_vector[3] * random_vector[3], random_vector.lengthSquared());
 }
 
 TEST_F(Vector4Test, length_of_vector_is_the_square_root_of_the_squared_length)
@@ -167,30 +167,30 @@ TEST_F(Vector4Test, negation_of_vector_negates_each_component)
 {
   auto res = -random_vector;
 
-  EXPECT_EQ(-random_vector.x, res.x);
-  EXPECT_EQ(-random_vector.y, res.y);
-  EXPECT_EQ(-random_vector.z, res.z);
-  EXPECT_EQ(-random_vector.w, res.w);
+  EXPECT_EQ(-random_vector[0], res[0]);
+  EXPECT_EQ(-random_vector[1], res[1]);
+  EXPECT_EQ(-random_vector[2], res[2]);
+  EXPECT_EQ(-random_vector[3], res[3]);
 }
 
 TEST_F(Vector4Test, adding_two_vectors_adds_each_component)
 {
   auto res = random_vector + random_vector2;
 
-  EXPECT_EQ(random_vector.x + random_vector2.x, res.x);
-  EXPECT_EQ(random_vector.y + random_vector2.y, res.y);
-  EXPECT_EQ(random_vector.z + random_vector2.z, res.z);
-  EXPECT_EQ(random_vector.w + random_vector2.w, res.w);
+  EXPECT_EQ(random_vector[0] + random_vector2[0], res[0]);
+  EXPECT_EQ(random_vector[1] + random_vector2[1], res[1]);
+  EXPECT_EQ(random_vector[2] + random_vector2[2], res[2]);
+  EXPECT_EQ(random_vector[3] + random_vector2[3], res[3]);
 }
 
 TEST_F(Vector4Test, subtracting_two_vectors_subtracts_each_component)
 {
   auto res = random_vector - random_vector2;
 
-  EXPECT_EQ(random_vector.x - random_vector2.x, res.x);
-  EXPECT_EQ(random_vector.y - random_vector2.y, res.y);
-  EXPECT_EQ(random_vector.z - random_vector2.z, res.z);
-  EXPECT_EQ(random_vector.w - random_vector2.w, res.w);
+  EXPECT_EQ(random_vector[0] - random_vector2[0], res[0]);
+  EXPECT_EQ(random_vector[1] - random_vector2[1], res[1]);
+  EXPECT_EQ(random_vector[2] - random_vector2[2], res[2]);
+  EXPECT_EQ(random_vector[3] - random_vector2[3], res[3]);
 }
 
 TEST_F(Vector4Test, adding_vector_to_vector_adds_each_component)
@@ -198,10 +198,10 @@ TEST_F(Vector4Test, adding_vector_to_vector_adds_each_component)
   auto res = random_vector;
   res += random_vector2;
 
-  EXPECT_EQ(random_vector.x + random_vector2.x, res.x);
-  EXPECT_EQ(random_vector.y + random_vector2.y, res.y);
-  EXPECT_EQ(random_vector.z + random_vector2.z, res.z);
-  EXPECT_EQ(random_vector.w + random_vector2.w, res.w);
+  EXPECT_EQ(random_vector[0] + random_vector2[0], res[0]);
+  EXPECT_EQ(random_vector[1] + random_vector2[1], res[1]);
+  EXPECT_EQ(random_vector[2] + random_vector2[2], res[2]);
+  EXPECT_EQ(random_vector[3] + random_vector2[3], res[3]);
 }
 
 TEST_F(Vector4Test, subtracting_vector_from_vector_subtracts_each_component)
@@ -209,40 +209,40 @@ TEST_F(Vector4Test, subtracting_vector_from_vector_subtracts_each_component)
   auto res = random_vector;
   res -= random_vector2;
 
-  EXPECT_EQ(random_vector.x - random_vector2.x, res.x);
-  EXPECT_EQ(random_vector.y - random_vector2.y, res.y);
-  EXPECT_EQ(random_vector.z - random_vector2.z, res.z);
-  EXPECT_EQ(random_vector.w - random_vector2.w, res.w);
+  EXPECT_EQ(random_vector[0] - random_vector2[0], res[0]);
+  EXPECT_EQ(random_vector[1] - random_vector2[1], res[1]);
+  EXPECT_EQ(random_vector[2] - random_vector2[2], res[2]);
+  EXPECT_EQ(random_vector[3] - random_vector2[3], res[3]);
 }
 
 TEST_F(Vector4Test, multiplying_vector_with_scalar_from_right_multiplies_each_component_with_scalar)
 {
   auto res = random_vector * scalar;
 
-  EXPECT_EQ(random_vector.x * scalar, res.x);
-  EXPECT_EQ(random_vector.y * scalar, res.y);
-  EXPECT_EQ(random_vector.z * scalar, res.z);
-  EXPECT_EQ(random_vector.w * scalar, res.w);
+  EXPECT_EQ(random_vector[0] * scalar, res[0]);
+  EXPECT_EQ(random_vector[1] * scalar, res[1]);
+  EXPECT_EQ(random_vector[2] * scalar, res[2]);
+  EXPECT_EQ(random_vector[3] * scalar, res[3]);
 }
 
 TEST_F(Vector4Test, multiplying_vector_with_scalar_from_left_multiplies_each_component_with_scalar)
 {
   auto res = scalar * random_vector;
 
-  EXPECT_EQ(random_vector.x * scalar, res.x);
-  EXPECT_EQ(random_vector.y * scalar, res.y);
-  EXPECT_EQ(random_vector.z * scalar, res.z);
-  EXPECT_EQ(random_vector.w * scalar, res.w);
+  EXPECT_EQ(random_vector[0] * scalar, res[0]);
+  EXPECT_EQ(random_vector[1] * scalar, res[1]);
+  EXPECT_EQ(random_vector[2] * scalar, res[2]);
+  EXPECT_EQ(random_vector[3] * scalar, res[3]);
 }
 
 TEST_F(Vector4Test, dividing_vector_with_scalar_from_right_divides_each_component_with_scalar)
 {
   auto res = random_vector / scalar;
 
-  EXPECT_EQ(random_vector.x / scalar, res.x);
-  EXPECT_EQ(random_vector.y / scalar, res.y);
-  EXPECT_EQ(random_vector.z / scalar, res.z);
-  EXPECT_EQ(random_vector.w / scalar, res.w);
+  EXPECT_EQ(random_vector[0] / scalar, res[0]);
+  EXPECT_EQ(random_vector[1] / scalar, res[1]);
+  EXPECT_EQ(random_vector[2] / scalar, res[2]);
+  EXPECT_EQ(random_vector[3] / scalar, res[3]);
 }
 
 TEST_F(Vector4Test, multiplying_vector_with_scalar_multiplies_each_component_with_scalar)
@@ -250,10 +250,10 @@ TEST_F(Vector4Test, multiplying_vector_with_scalar_multiplies_each_component_wit
   auto res = random_vector;
   res *= scalar;
 
-  EXPECT_EQ(random_vector.x * scalar, res.x);
-  EXPECT_EQ(random_vector.y * scalar, res.y);
-  EXPECT_EQ(random_vector.z * scalar, res.z);
-  EXPECT_EQ(random_vector.w * scalar, res.w);
+  EXPECT_EQ(random_vector[0] * scalar, res[0]);
+  EXPECT_EQ(random_vector[1] * scalar, res[1]);
+  EXPECT_EQ(random_vector[2] * scalar, res[2]);
+  EXPECT_EQ(random_vector[3] * scalar, res[3]);
 }
 
 TEST_F(Vector4Test, dividing_vector_with_scalar_divides_each_component_with_scalar)
@@ -261,10 +261,10 @@ TEST_F(Vector4Test, dividing_vector_with_scalar_divides_each_component_with_scal
   auto res = random_vector;
   res /= scalar;
 
-  EXPECT_EQ(random_vector.x / scalar, res.x);
-  EXPECT_EQ(random_vector.y / scalar, res.y);
-  EXPECT_EQ(random_vector.z / scalar, res.z);
-  EXPECT_EQ(random_vector.w / scalar, res.w);
+  EXPECT_EQ(random_vector[0] / scalar, res[0]);
+  EXPECT_EQ(random_vector[1] / scalar, res[1]);
+  EXPECT_EQ(random_vector[2] / scalar, res[2]);
+  EXPECT_EQ(random_vector[3] / scalar, res[3]);
 }
 
 TEST_F(Vector4Test, multiplying_vector_to_vector_multiplies_each_component)
@@ -272,10 +272,10 @@ TEST_F(Vector4Test, multiplying_vector_to_vector_multiplies_each_component)
   auto res = random_vector;
   res *= random_vector2;
 
-  EXPECT_EQ(random_vector.x * random_vector2.x, res.x);
-  EXPECT_EQ(random_vector.y * random_vector2.y, res.y);
-  EXPECT_EQ(random_vector.z * random_vector2.z, res.z);
-  EXPECT_EQ(random_vector.w * random_vector2.w, res.w);
+  EXPECT_EQ(random_vector[0] * random_vector2[0], res[0]);
+  EXPECT_EQ(random_vector[1] * random_vector2[1], res[1]);
+  EXPECT_EQ(random_vector[2] * random_vector2[2], res[2]);
+  EXPECT_EQ(random_vector[3] * random_vector2[3], res[3]);
 }
 
 TEST_F(Vector4Test, dot_product_of_two_vectors_add_the_product_of_the_vectors)
@@ -283,7 +283,7 @@ TEST_F(Vector4Test, dot_product_of_two_vectors_add_the_product_of_the_vectors)
   auto dotprod = random_vector.dot(random_vector2);
   auto multvec = random_vector * random_vector2;
 
-  EXPECT_EQ(multvec.x + multvec.y + multvec.z + multvec.w, dotprod);
+  EXPECT_EQ(multvec[0] + multvec[1] + multvec[2] + multvec[3], dotprod);
 }
 
 TEST_F(Vector4Test, equality_operator_on_same_object_returns_true)
@@ -385,20 +385,20 @@ TEST_F(Vector4Test, vector_can_be_casted_c_style)
 {
   auto pointer =(const double *) random_vector;
 
-  EXPECT_EQ(pointer[0], random_vector.x);
-  EXPECT_EQ(pointer[1], random_vector.y);
-  EXPECT_EQ(pointer[2], random_vector.z);
-  EXPECT_EQ(pointer[3], random_vector.w);
+  EXPECT_EQ(pointer[0], random_vector[0]);
+  EXPECT_EQ(pointer[1], random_vector[1]);
+  EXPECT_EQ(pointer[2], random_vector[2]);
+  EXPECT_EQ(pointer[3], random_vector[3]);
 }
 
 TEST_F(Vector4Test, vector_can_be_statically_casted)
 {
   auto pointer = static_cast<const double *>(random_vector);
 
-  EXPECT_EQ(pointer[0], random_vector.x);
-  EXPECT_EQ(pointer[1], random_vector.y);
-  EXPECT_EQ(pointer[2], random_vector.z);
-  EXPECT_EQ(pointer[3], random_vector.w);
+  EXPECT_EQ(pointer[0], random_vector[0]);
+  EXPECT_EQ(pointer[1], random_vector[1]);
+  EXPECT_EQ(pointer[2], random_vector[2]);
+  EXPECT_EQ(pointer[3], random_vector[3]);
 }
 
 TEST_F(Vector4Test, changing_the_casted_pointers_changes_the_vector)
@@ -407,8 +407,8 @@ TEST_F(Vector4Test, changing_the_casted_pointers_changes_the_vector)
   auto static_ptr = static_cast<double *>(random_vector);
 
   ++pointer[2];
-  EXPECT_EQ(pointer[2], random_vector.z);
-  EXPECT_EQ(static_ptr[2], random_vector.z);
+  EXPECT_EQ(pointer[2], random_vector[2]);
+  EXPECT_EQ(static_ptr[2], random_vector[2]);
 }
 
 const Math::Vec4d create_random_vector4()

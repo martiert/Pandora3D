@@ -3,13 +3,11 @@
 namespace Physics
 {
 
-Math::Vector3<Real> ParticleSpring::get_center() const
+ParticleSpring::ParticleSpring(std::shared_ptr<Particle> ancor, Real spring_constant, Real rest_length)
+{}
+
+void ParticleSpring::update_force(std::shared_ptr<Particle> particle, Real duration)
 {
-  return Math::Vector3<Real>::ZERO;
 }
 
-Real ParticleSpring::get_rest_length() const
-{
-  return 0;
-}
 }

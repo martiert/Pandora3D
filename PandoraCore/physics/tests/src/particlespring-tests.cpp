@@ -1,15 +1,20 @@
 #include <particlespring.h>
-#include <vector3.h>
+#include <particle.h>
+#include <particleforceregistry.h>
+
 #include <gtest/gtest.h>
 
-TEST(ParticleSpringTests, initial_ancor_if_at_zero)
+TEST(ParticleSpringTests, particlespring_can_be_added_to_particleforceregistry)
 {
-  Physics::ParticleSpring spring;
-  EXPECT_EQ(Math::Vec3d::ZERO, spring.get_center());
+  Physics::ParticleForceRegistry registry;
+  std::shared_ptr<Physics::ParticleSpring> spring;
+  std::shared_ptr<Physics::Particle> particle;
+
+  registry.add(spring, particle);
 }
 
-TEST(ParticleSpringTests, initial_rest_length_is_zero)
+TEST(ParticleSpringTests, particlespring_constructor_takes_particle_constant_and_restlength)
 {
-  Physics::ParticleSpring spring;
-  EXPECT_EQ(0, spring.get_rest_length());
+  std::shared_ptr<Physics::Particle> particle;
+  Physics::ParticleSpring spring(particle, 1, 1);
 }

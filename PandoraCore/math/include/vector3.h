@@ -9,14 +9,8 @@
 namespace Math
 {
   template<typename Real>
-  class Vector3
+  struct Vector3
   {
-    public:
-      Real x;
-      Real y;
-      Real z;
-
-    public:
       explicit Vector3();
       explicit Vector3(const Real& x, const Real& y, const Real& z);
       explicit Vector3(const Real data[3]);
@@ -25,30 +19,14 @@ namespace Math
 
       Real& operator[](const size_t& i);
       Real operator[](const size_t& i) const;
-      operator Real*();
-      operator const Real*() const;
-
-      Vector3& operator+=(const Vector3& vec);
-      Vector3& operator-=(const Vector3& vec);
-      Vector3& operator*=(const Vector3& vec);
-      Vector3& operator*=(const Real& scalar);
-      Vector3& operator/=(const Real& scalar);
-
-      Real dot(const Vector3& vec) const;
-
-      Real length() const;
-      Real lengthSquared() const;
-
-      void normalize();
-
-      Vector3 cross(const Vector3& other) const;
-
-      static void generateOrthonormalBasis(Vector3& vec1, Vector3& vec2, Vector3& vec3);
 
       static const Vector3 ZERO;
       static const Vector3 E1;
       static const Vector3 E2;
       static const Vector3 E3;
+
+    private:
+      Real data[3];
   };
 
   typedef Vector3<float>  Vec3f;
@@ -56,200 +34,192 @@ namespace Math
   typedef Vector3<int>    Vec3i;
   typedef Vector3<uint>   Vec3u;
 
-  template<typename Real>
-  Vector3<Real> operator-(const Vector3<Real>& vec);
+  template<typename Real>   Real dot(const Vector3<Real>& left, const Vector3<Real>& right);
+  template<typename Real>   Real length(const Vector3<Real>& vector);
+  template<typename Real>   Real lengthSquared(const Vector3<Real>& vector);
+  template<typename Real>   void normalize(Vector3<Real>& vector);
+  template<typename Real>   Vector3<Real> cross(const Vector3<Real>& left, const Vector3<Real>& right);
+  template<typename Real>   void generateOrthonormalBasis(Vector3<Real>& vec1, Vector3<Real>& vec2, Vector3<Real>& vec3);
 
-  template<typename Real>
-  Vector3<Real> operator+(const Vector3<Real>& vec1, const Vector3<Real>& vec2);
+  template<typename Real>   Vector3<Real>& operator+=(Vector3<Real>& to, const Vector3<Real>& from);
+  template<typename Real>   Vector3<Real>& operator-=(Vector3<Real>& to, const Vector3<Real>& from);
+  template<typename Real>   Vector3<Real>& operator*=(Vector3<Real>& to, const Vector3<Real>& from);
+  template<typename Real>   Vector3<Real>& operator*=(Vector3<Real>& to, const Real& scalar);
+  template<typename Real>   Vector3<Real>& operator/=(Vector3<Real>& to, const Real& scalar);
 
-  template<typename Real>
-  Vector3<Real> operator-(const Vector3<Real>& vec1, const Vector3<Real>& vec2);
+  template<typename Real>   Vector3<Real> operator-(const Vector3<Real>& vec);
+  template<typename Real>   Vector3<Real> operator+(const Vector3<Real>& vec1, const Vector3<Real>& vec2);
+  template<typename Real>   Vector3<Real> operator-(const Vector3<Real>& vec1, const Vector3<Real>& vec2);
+  template<typename Real>   Vector3<Real> operator*(const Vector3<Real>& vec, const Real& scalar);
+  template<typename Real>   Vector3<Real> operator*(const Real& scalar, const Vector3<Real>& vec);
+  template<typename Real>   Vector3<Real> operator*(const Vector3<Real>& vec1, const Vector3<Real>& vec2);
+  template<typename Real>   Vector3<Real> operator/(const Vector3<Real>& vec, const Real& scalar);
 
-  template<typename Real>
-  Vector3<Real> operator*(const Vector3<Real>& vec, const Real& scalar);
-
-  template<typename Real>
-  Vector3<Real> operator*(const Real& scalar, const Vector3<Real>& vec);
-
-  template<typename Real>
-  Vector3<Real> operator*(const Vector3<Real>& vec1, const Vector3<Real>& vec2);
-
-  template<typename Real>
-  Vector3<Real> operator/(const Vector3<Real>& vec, const Real& scalar);
-
-  template<typename Real>
-  bool operator==(const Vector3<Real>& vec1, const Vector3<Real>& vec2);
-
-  template<typename Real>
-  bool operator!=(const Vector3<Real>& vec1, const Vector3<Real>& vec2);
+  template<typename Real>   bool operator==(const Vector3<Real>& vec1, const Vector3<Real>& vec2);
+  template<typename Real>   bool operator!=(const Vector3<Real>& vec1, const Vector3<Real>& vec2);
 }
+
+namespace Math
+{
 
 // Implementation
 template<typename Real>
-Math::Vector3<Real>::Vector3()
-  : x(0), y(0), z(0)
+Vector3<Real>::Vector3()
+  : data {0, 0, 0}
 {}
 
 template<typename Real>
-Math::Vector3<Real>::Vector3(const Real& x, const Real& y, const Real& z)
-  : x(x), y(y), z(z)
+Vector3<Real>::Vector3(const Real& x, const Real& y, const Real& z)
+  : data {x, y, z}
 {}
 
 template<typename Real>
-Math::Vector3<Real>::Vector3(const Real data[3])
-  : x(data[0]), y(data[1]), z(data[2])
+Vector3<Real>::Vector3(const Real data[3])
+  : data {data[0], data[1], data[2]}
 {}
 
 template<typename Real>
-Math::Vector3<Real>& Math::Vector3<Real>::operator=(const Real data[3])
+Vector3<Real>& Vector3<Real>::operator=(const Real vector[3])
 {
-  x = data[0];
-  y = data[1];
-  z = data[2];
+  data[0] = vector[0];
+  data[1] = vector[1];
+  data[2] = vector[2];
+
   return *this;
 }
 
 template<typename Real>
-Real& Math::Vector3<Real>::operator[](const size_t& i)
+Real& Vector3<Real>::operator[](const size_t& i)
 {
   assert(i < 3 && "Index operator out of range");
 
-  return(&x)[i];
+  return data[i];
 }
 
 template<typename Real>
-Real Math::Vector3<Real>::operator[](const size_t& i) const
+Real Vector3<Real>::operator[](const size_t& i) const
 {
   assert(i < 3 && "Index operator out of range");
 
-  return(&x)[i];
+  return data[i];
 }
 
 template<typename Real>
-Math::Vector3<Real>::operator Real*()
+Real dot(const Vector3<Real>& left, const Vector3<Real>& right)
 {
-  return &x;
+  return (left[0] * right[0] + left[1] * right[1] + left[2] * right[2]);
 }
 
 template<typename Real>
-Math::Vector3<Real>::operator const Real*() const
+Real length(const Vector3<Real>& vector)
 {
-  return &x;
+  return std::sqrt(lengthSquared(vector));
 }
 
 template<typename Real>
-Math::Vector3<Real>& Math::Vector3<Real>::operator+=(const Math::Vector3<Real>& vec)
+Real lengthSquared(const Vector3<Real>& vector)
 {
-  x += vec.x;
-  y += vec.y;
-  z += vec.z;
-
-  return *this;
+  return dot(vector, vector);
 }
 
 template<typename Real>
-Math::Vector3<Real>& Math::Vector3<Real>::operator-=(const Math::Vector3<Real>& vec)
+void normalize(Vector3<Real>& vector)
 {
-  x -= vec.x;
-  y -= vec.y;
-  z -= vec.z;
-
-  return *this;
-}
-
-template<typename Real>
-Math::Vector3<Real>& Math::Vector3<Real>::operator*=(const Math::Vector3<Real>& vec)
-{
-  x *= vec.x;
-  y *= vec.y;
-  z *= vec.z;
-
-  return *this;
-}
-
-template<typename Real>
-Math::Vector3<Real>& Math::Vector3<Real>::operator*=(const Real& scalar)
-{
-  x *= scalar;
-  y *= scalar;
-  z *= scalar;
-
-  return *this;
-}
-
-template<typename Real>
-Math::Vector3<Real>& Math::Vector3<Real>::operator/=(const Real& scalar)
-{
-  assert(scalar != 0 && "Can not divide vector by 0");
-
-  x /= scalar;
-  y /= scalar;
-  z /= scalar;
-
-  return *this;
-}
-
-template<typename Real>
-Real Math::Vector3<Real>::dot(const Math::Vector3<Real>& vec) const
-{
-  return(x * vec.x + y * vec.y + z * vec.z);
-}
-
-template<typename Real>
-Real Math::Vector3<Real>::length() const
-{
-  return std::sqrt(lengthSquared());
-}
-
-template<typename Real>
-Real Math::Vector3<Real>::lengthSquared() const
-{
-  return dot(*this);
-}
-
-template<typename Real>
-void Math::Vector3<Real>::normalize()
-{
-  float len = length();
+  Real len = length(vector);
 
   assert(len != 0 && "Can not normalize zero vector");
 
-  *this /= len;
+  vector /= len;
 }
 
 template<typename Real>
-Math::Vector3<Real> Math::Vector3<Real>::cross(const Math::Vector3<Real>& other) const
+Vector3<Real> cross(const Vector3<Real>& left, const Vector3<Real>& right)
 {
   Vector3<Real> res;
-  res.x = y * other.z - z * other.y;
-  res.y = z * other.x - x * other.z;
-  res.z = x * other.y - y * other.x;
+  res[0] = left[1] * right[2] - left[2] * right[1];
+  res[1] = left[2] * right[0] - left[0] * right[2];
+  res[2] = left[0] * right[1] - left[1] * right[0];
 
   return res;
 }
 
 template<typename Real>
-void Math::Vector3<Real>::generateOrthonormalBasis(Vector3<Real>& vec1, Vector3<Real>& vec2, Vector3<Real>& vec3)
+void generateOrthonormalBasis(Vector3<Real>& vec1, Vector3<Real>& vec2, Vector3<Real>& vec3)
 {
-  assert(vec1 != ZERO && vec2 != ZERO && vec3 != ZERO && "Can not make orthonormal basis with zero vectors");
-  assert(vec1 != vec2 && vec1 != vec3 && vec2 != vec3 && "Can not make orthonormal basis with equal vectors");
+  assert(vec1 != Math::Vector3<Real>::ZERO &&
+         vec2 != Math::Vector3<Real>::ZERO &&
+         vec3 != Math::Vector3<Real>::ZERO &&
+         "Can not make orthonormal basis with zero vectors");
+  assert(vec1 != vec2 &&
+         vec1 != vec3 &&
+         vec2 != vec3 &&
+         "Can not make orthonormal basis with equal vectors");
 
-  vec2 = vec1.cross(vec3);
-  vec3 = vec1.cross(vec2);
+  vec2 = cross(vec1, vec3);
+  vec3 = cross(vec1, vec2);
 
-  vec1.normalize();
-  vec2.normalize();
-  vec3.normalize();
+  normalize(vec1);
+  normalize(vec2);
+  normalize(vec3);
 }
 
 template<typename Real>
-Math::Vector3<Real> Math::operator-(const Vector3<Real>& vec)
+Vector3<Real>& operator+=(Vector3<Real>& to, const Vector3<Real>& from)
 {
-  return Vector3<Real>(-vec.x, -vec.y, -vec.z);
+  for (auto i = 0; i < 3; ++i)
+    to[i] += from[i];
+
+  return to;
 }
 
 template<typename Real>
-Math::Vector3<Real> Math::operator+(const Vector3<Real>& vec1, const Vector3<Real>& vec2)
+Vector3<Real>& operator-=(Vector3<Real>& to, const Vector3<Real>& from)
+{
+  for (auto i = 0; i < 3; ++i)
+    to[i] -= from[i];
+
+  return to;
+}
+
+template<typename Real>
+Vector3<Real>& operator*=(Vector3<Real>& to, const Vector3<Real>& from)
+{
+  for (auto i = 0; i < 3; ++i)
+    to[i] *= from[i];
+
+  return to;
+}
+
+template<typename Real>
+Vector3<Real>& operator*=(Vector3<Real>& to, const Real& scalar)
+{
+  for (auto i = 0; i < 3; ++i)
+    to[i] *= scalar;
+
+  return to;
+}
+
+template<typename Real>
+Vector3<Real>& operator/=(Vector3<Real>& to, const Real& scalar)
+{
+  assert(scalar != 0 && "Can not divide vector by 0");
+
+  for (auto i = 0; i < 3; ++i)
+    to[i] /= scalar;
+
+  return to;
+}
+
+
+
+template<typename Real>
+Vector3<Real> operator-(const Vector3<Real>& vec)
+{
+  return Vector3<Real>(-vec[0], -vec[1], -vec[2]);
+}
+
+template<typename Real>
+Vector3<Real> operator+(const Vector3<Real>& vec1, const Vector3<Real>& vec2)
 {
   auto tmp = vec1;
   tmp += vec2;
@@ -257,7 +227,7 @@ Math::Vector3<Real> Math::operator+(const Vector3<Real>& vec1, const Vector3<Rea
 }
 
 template<typename Real>
-Math::Vector3<Real> Math::operator-(const Vector3<Real>& vec1, const Vector3<Real>& vec2)
+Vector3<Real> operator-(const Vector3<Real>& vec1, const Vector3<Real>& vec2)
 {
   auto tmp = vec1;
   tmp -= vec2;
@@ -265,7 +235,7 @@ Math::Vector3<Real> Math::operator-(const Vector3<Real>& vec1, const Vector3<Rea
 }
 
 template<typename Real>
-Math::Vector3<Real> Math::operator*(const Vector3<Real>& vec, const Real& scalar)
+Vector3<Real> operator*(const Vector3<Real>& vec, const Real& scalar)
 {
   auto tmp = vec;
   tmp *= scalar;
@@ -273,13 +243,13 @@ Math::Vector3<Real> Math::operator*(const Vector3<Real>& vec, const Real& scalar
 }
 
 template<typename Real>
-Math::Vector3<Real> Math::operator*(const Real& scalar, const Vector3<Real>& vec)
+Vector3<Real> operator*(const Real& scalar, const Vector3<Real>& vec)
 {
   return vec * scalar;
 }
 
 template<typename Real>
-Math::Vector3<Real> Math::operator*(const Vector3<Real>& vec1, const Vector3<Real>& vec2)
+Vector3<Real> operator*(const Vector3<Real>& vec1, const Vector3<Real>& vec2)
 {
   auto tmp = vec1;
   tmp *= vec2;
@@ -287,7 +257,7 @@ Math::Vector3<Real> Math::operator*(const Vector3<Real>& vec1, const Vector3<Rea
 }
 
 template<typename Real>
-Math::Vector3<Real> Math::operator/(const Vector3<Real>& vec, const Real& scalar)
+Vector3<Real> operator/(const Vector3<Real>& vec, const Real& scalar)
 {
   auto tmp = vec;
   tmp /= scalar;
@@ -295,15 +265,15 @@ Math::Vector3<Real> Math::operator/(const Vector3<Real>& vec, const Real& scalar
 }
 
 template<typename Real>
-bool Math::operator==(const Vector3<Real>& vec1, const Vector3<Real>& vec2)
+bool operator==(const Vector3<Real>& vec1, const Vector3<Real>& vec2)
 {
-  return(vec1.x == vec2.x && vec1.y == vec2.y && vec1.z == vec2.z);
+  return (vec1[0] == vec2[0] && vec1[1] == vec2[1] && vec1[2] == vec2[2]);
 }
 
 template<typename Real>
-bool Math::operator!=(const Vector3<Real>& vec1, const Vector3<Real>& vec2)
+bool operator!=(const Vector3<Real>& vec1, const Vector3<Real>& vec2)
 {
   return !(vec1 == vec2);
 }
-
+}
 #endif // MATH_VECTOR3_H_INCLUDED

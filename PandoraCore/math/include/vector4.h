@@ -105,7 +105,7 @@ Math::Vector4<Real>::Vector4(const Real data[4])
 
 template<typename Real>
 Math::Vector4<Real>::Vector4(const Vector3<Real>& vec)
-  : x(vec.x), y(vec.y), z(vec.z), w(1)
+  : x(vec[0]), y(vec[1]), z(vec[2]), w(1)
 { }
 
 template<typename Real>
@@ -122,9 +122,9 @@ Math::Vector4<Real>& Math::Vector4<Real>::operator=(const Real data[4])
 template<typename Real>
 Math::Vector4<Real>& Math::Vector4<Real>::operator=(const Vector3<Real>& vec)
 {
-  x = vec.x;
-  y = vec.y;
-  z = vec.z;
+  x = vec[0];
+  y = vec[1];
+  z = vec[2];
   w = 1;
 
   return *this;

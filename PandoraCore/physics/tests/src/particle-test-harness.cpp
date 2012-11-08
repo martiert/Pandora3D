@@ -37,7 +37,7 @@ void ParticleTest::set_mass_gravity_damping(const Real& mass, const Real& gravit
 bool ParticleTest::velocity_have_decreased_in_y_direction_while_x_and_y_have_not_changed(const Math::Vector3<Real>& velocity)
 {
   auto new_velocity = default_particle.get_velocity();
-  return(new_velocity.y < velocity.y &&
-          new_velocity.x == velocity.x &&
-          new_velocity.z == velocity.z);
+  return (new_velocity[1] < velocity[1] &&
+          new_velocity[0] == velocity[0] &&
+          new_velocity[2] == velocity[2]);
 }

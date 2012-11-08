@@ -62,9 +62,9 @@ TEST_F(QuaternionTest, creating_quaternion_with_real_element_and_imaginary_vecto
   Math::Quaternion<double> quat(real, vector);
 
   EXPECT_EQ(real, quat.w());
-  EXPECT_EQ(vector.x, quat.x());
-  EXPECT_EQ(vector.y, quat.y());
-  EXPECT_EQ(vector.z, quat.z());
+  EXPECT_EQ(vector[0], quat.x());
+  EXPECT_EQ(vector[1], quat.y());
+  EXPECT_EQ(vector[2], quat.z());
 }
 
 TEST_F(QuaternionTest, creating_quaternion_around_axis_with_angle_creates_correct_quaternion)
@@ -74,9 +74,9 @@ TEST_F(QuaternionTest, creating_quaternion_around_axis_with_angle_creates_correc
   const Math::Quaternion<double> quat(axis, angle);
 
   EXPECT_EQ(std::cos(angle), quat.w());
-  EXPECT_EQ(std::sin(angle) * axis.x, quat.x());
-  EXPECT_EQ(std::sin(angle) * axis.y, quat.y());
-  EXPECT_EQ(std::sin(angle) * axis.z, quat.z());
+  EXPECT_EQ(std::sin(angle) * axis[0], quat.x());
+  EXPECT_EQ(std::sin(angle) * axis[1], quat.y());
+  EXPECT_EQ(std::sin(angle) * axis[2], quat.z());
 }
 
 TEST_F(QuaternionTest, creating_quaternion_from_identity_matrix_creates_the_identity_quaternion)
@@ -280,12 +280,12 @@ TEST_F(QuaternionTest, multiplying_quaternions_with_only_imaginary_parts_gives_t
 
   auto res = left * right;
 
-  auto crossprod = left.imag.cross(right.imag);
+  auto crossprod = cross(left.imag, right.imag);
 
-  EXPECT_EQ(crossprod.x, res.x());
-  EXPECT_EQ(crossprod.y, res.y());
-  EXPECT_EQ(crossprod.z, res.z());
-  EXPECT_EQ(-left.imag.dot(right.imag), res.w());
+  EXPECT_EQ(crossprod[0], res.x());
+  EXPECT_EQ(crossprod[1], res.y());
+  EXPECT_EQ(crossprod[2], res.z());
+  EXPECT_EQ(-dot(left.imag, right.imag), res.w());
 }
 
 TEST_F(QuaternionTest, multiplying_two_quaternions_follows_normal_rules)
@@ -294,12 +294,12 @@ TEST_F(QuaternionTest, multiplying_two_quaternions_follows_normal_rules)
   auto right = create_random_quaternion();
   auto res = left * right;
 
-  auto imag = left.imag.cross(right.imag) + left.real * right.imag + right.real * left.imag;
-  auto real = left.real * right.real - left.imag.dot(right.imag);
+  auto imag = cross(left.imag, right.imag) + left.real * right.imag + right.real * left.imag;
+  auto real = left.real * right.real - dot(left.imag, right.imag);
 
-  EXPECT_EQ(imag.x, res.x());
-  EXPECT_EQ(imag.y, res.y());
-  EXPECT_EQ(imag.z, res.z());
+  EXPECT_EQ(imag[0], res.x());
+  EXPECT_EQ(imag[1], res.y());
+  EXPECT_EQ(imag[2], res.z());
   EXPECT_EQ(real, res.w());
 }
 
@@ -483,7 +483,7 @@ Math::Quaternion<double> create_quaternion_from_matrix(const Math::Matrix4<doubl
 
 Math::Quaternion<double> slerp(const Math::Quaternion<double>& from, const Math::Quaternion<double>& to, const double& t)
 {
-  const auto angle = std::acos(from.real * to.real + from.imag.dot(to.imag));
+  const auto angle = std::acos(from.real * to.real + dot(from.imag, to.imag));
   const auto from_scale = std::sin(angle *(1 - t))/std::sin(angle);
   const auto to_scale = std::sin(angle * t)/std::sin(angle);
 

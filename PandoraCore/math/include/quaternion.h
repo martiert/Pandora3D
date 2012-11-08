@@ -133,37 +133,37 @@ Real Math::Quaternion<Real>::w() const
 template<typename Real>
 Real& Math::Quaternion<Real>::x()
 {
-  return imag.x;
+  return imag[0];
 }
 
 template<typename Real>
 Real Math::Quaternion<Real>::x() const
 {
-  return imag.x;
+  return imag[0];
 }
 
 template<typename Real>
 Real& Math::Quaternion<Real>::y()
 {
-  return imag.y;
+  return imag[1];
 }
 
 template<typename Real>
 Real Math::Quaternion<Real>::y() const
 {
-  return imag.y;
+  return imag[1];
 }
 
 template<typename Real>
 Real& Math::Quaternion<Real>::z()
 {
-  return imag.z;
+  return imag[2];
 }
 
 template<typename Real>
 Real Math::Quaternion<Real>::z() const
 {
-  return imag.z;
+  return imag[2];
 }
 
 template<typename Real>
@@ -216,17 +216,17 @@ Math::Matrix4<Real> Math::Quaternion<Real>::create_matrix_with_scale(const Real&
 {
   Matrix4<Real> result;
 
-  result(0,0) -= s *(imag.y * imag.y + imag.z * imag.z);
-  result(0,1) += s *(imag.x * imag.y - real * imag.z);
-  result(0,2) += s *(imag.x * imag.z + real * imag.y);
+  result(0,0) -= s *(imag[1] * imag[1] + imag[2] * imag[2]);
+  result(0,1) += s *(imag[0] * imag[1] - real * imag[2]);
+  result(0,2) += s *(imag[0] * imag[2] + real * imag[1]);
 
-  result(1,0) += s *(imag.x * imag.y + real * imag.z);
-  result(1,1) -= s *(imag.x * imag.x + imag.z * imag.z);
-  result(1,2) += s *(imag.y * imag.z - real * imag.x);
+  result(1,0) += s *(imag[0] * imag[1] + real * imag[2]);
+  result(1,1) -= s *(imag[0] * imag[0] + imag[2] * imag[2]);
+  result(1,2) += s *(imag[1] * imag[2] - real * imag[0]);
 
-  result(2,0) += s *(imag.x * imag.z - real * imag.y);
-  result(2,1) += s *(imag.y * imag.z + real * imag.x);
-  result(2,2) -= s *(imag.x * imag.x + imag.y * imag.y);
+  result(2,0) += s *(imag[0] * imag[2] - real * imag[1]);
+  result(2,1) += s *(imag[1] * imag[2] + real * imag[0]);
+  result(2,2) -= s *(imag[0] * imag[0] + imag[1] * imag[1]);
 
   return result;
 }
@@ -234,7 +234,7 @@ Math::Matrix4<Real> Math::Quaternion<Real>::create_matrix_with_scale(const Real&
 template<typename Real>
 Real Math::Quaternion<Real>::norm() const
 {
-  return std::sqrt(imag.dot(imag) + real * real);
+  return std::sqrt(dot(imag, imag) + real * real);
 }
 
 template<typename Real>
@@ -257,7 +257,7 @@ Math::Quaternion<Real> Math::Quaternion<Real>::conjugate() const
 template<typename Real>
 Math::Quaternion<Real> Math::Quaternion<Real>::inverse() const
 {
-  const auto normsquared = imag.lengthSquared() +(real * real);
+  const auto normsquared = lengthSquared(imag) +(real * real);
 
   return conjugate() / normsquared;
 }
@@ -265,7 +265,7 @@ Math::Quaternion<Real> Math::Quaternion<Real>::inverse() const
 template<typename Real>
 Math::Quaternion<Real> Math::Quaternion<Real>::slerp(const Quaternion<Real>& from, const Quaternion<Real>& to, const Real& t)
 {
-  const auto angle = std::acos(from.real * to.real + from.imag.dot(to.imag));
+  const auto angle = std::acos(from.real * to.real + dot(from.imag, to.imag));
   const auto from_scale = std::sin(angle *(1 - t))/std::sin(angle);
   const auto to_scale = std::sin(angle * t)/std::sin(angle);
   return from_scale * from + to_scale * to;
@@ -290,8 +290,8 @@ Math::Quaternion<Real> Math::operator-(const Quaternion<Real>& left, const Quate
 template<typename Real>
 Math::Quaternion<Real> Math::operator*(const Quaternion<Real>& left, const Quaternion<Real>& right)
 {
-  return Quaternion<Real>(left.w() * right.w() - left.imag.dot(right.imag),
-      left.imag.cross(right.imag) + left.real * right.imag + right.real * left.imag);
+  return Quaternion<Real>(left.w() * right.w() - dot(left.imag, right.imag),
+      cross(left.imag, right.imag) + left.real * right.imag + right.real * left.imag);
 }
 
 template<typename Real>
@@ -319,9 +319,9 @@ Math::Quaternion<Real> Math::operator/(const Quaternion<Real>& quaternion, const
 template<typename Real>
 void Math::Quaternion<Real>::create_quaternion_from_matrix_with_largest_u(const Matrix4<Real>& matrix)
 {
-  imag.x = matrix(2,1) - matrix(1,2);
-  imag.y = matrix(0,2) - matrix(2,0);
-  imag.z = matrix(1,0) - matrix(0,1);
+  imag[0] = matrix(2,1) - matrix(1,2);
+  imag[1] = matrix(0,2) - matrix(2,0);
+  imag[2] = matrix(1,0) - matrix(0,1);
 
   imag /=(4 * real);
 }
@@ -329,9 +329,9 @@ void Math::Quaternion<Real>::create_quaternion_from_matrix_with_largest_u(const 
 template<typename Real>
 void Math::Quaternion<Real>::create_quaternion_from_matrix_with_smallest_u(const Matrix4<Real>& matrix)
 {
-  imag.x = std::sqrt(matrix(0,0) - matrix(1,1) - matrix(2,2) + matrix(3,3));
-  imag.y = std::sqrt(-matrix(0,0) + matrix(1,1) - matrix(2,2) + matrix(3,3));
-  imag.z = std::sqrt(-matrix(0,0) - matrix(1,1) + matrix(2,2) + matrix(3,3));
+  imag[0] = std::sqrt(matrix(0,0) - matrix(1,1) - matrix(2,2) + matrix(3,3));
+  imag[1] = std::sqrt(-matrix(0,0) + matrix(1,1) - matrix(2,2) + matrix(3,3));
+  imag[2] = std::sqrt(-matrix(0,0) - matrix(1,1) + matrix(2,2) + matrix(3,3));
 
   imag *= 0.5;
 }
