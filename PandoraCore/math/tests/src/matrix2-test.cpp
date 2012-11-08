@@ -263,32 +263,32 @@ TEST_F(Matrix2Test, multiplying_identity_with_vector_returns_vector)
 {
   const auto res = Math::Matrix2<double>::IDENTITY * random_vector;
 
-  EXPECT_EQ(random_vector.x, res.x);
-  EXPECT_EQ(random_vector.y, res.y);
+  EXPECT_EQ(random_vector[0], res[0]);
+  EXPECT_EQ(random_vector[1], res[1]);
 }
 
 TEST_F(Matrix2Test, multiplying_matrix_with_vector_is_mathematically_correct)
 {
   const auto res = random_matrix * random_vector;
 
-  EXPECT_EQ(random_matrix[0] * random_vector.x + random_matrix[1] * random_vector.y, res.x);
-  EXPECT_EQ(random_matrix[2] * random_vector.x + random_matrix[3] * random_vector.y, res.y);
+  EXPECT_EQ(random_matrix[0] * random_vector[0] + random_matrix[1] * random_vector[1], res[0]);
+  EXPECT_EQ(random_matrix[2] * random_vector[0] + random_matrix[3] * random_vector[1], res[1]);
 }
 
 TEST_F(Matrix2Test, multiplying_vector_with_identity_returns_vector)
 {
   const auto res = random_vector * Math::Matrix2<double>::IDENTITY;
 
-  EXPECT_EQ(random_vector.x, res.x);
-  EXPECT_EQ(random_vector.y, res.y);
+  EXPECT_EQ(random_vector[0], res[0]);
+  EXPECT_EQ(random_vector[1], res[1]);
 }
 
 TEST_F(Matrix2Test, multiplying_vector_with_matrix_is_mathematically_correct)
 {
   const auto res = random_vector * random_matrix;
 
-  EXPECT_EQ(random_matrix[0] * random_vector.x + random_matrix[2] * random_vector.y, res.x);
-  EXPECT_EQ(random_matrix[1] * random_vector.x + random_matrix[3] * random_vector.y, res.y);
+  EXPECT_EQ(random_matrix[0] * random_vector[0] + random_matrix[2] * random_vector[1], res[0]);
+  EXPECT_EQ(random_matrix[1] * random_vector[0] + random_matrix[3] * random_vector[1], res[1]);
 }
 
 TEST_F(Matrix2Test, transpose_of_identity_is_identity)

@@ -257,15 +257,15 @@ Math::Matrix2<Real> Math::operator*(const Real& scalar, const Matrix2<Real>& mat
 template<typename Real>
 Math::Vector2<Real> Math::operator*(const Matrix2<Real>& matrix, const Vector2<Real>& vector)
 {
-  return Vector2<Real>(matrix[0] * vector.x + matrix[1] * vector.y,
-                       matrix[2] * vector.x + matrix[3] * vector.y);
+  return Vector2<Real>(matrix[0] * vector[0] + matrix[1] * vector[1],
+                       matrix[2] * vector[0] + matrix[3] * vector[1]);
 }
 
 template<typename Real>
 Math::Vector2<Real> Math::operator*(const Vector2<Real>& vector, const Matrix2<Real>& matrix)
 {
-  return Vector2<Real>(matrix[0] * vector.x + matrix[2] * vector.y,
-      matrix[1] * vector.x + matrix[3] * vector.y);
+  return Vector2<Real>(matrix[0] * vector[0] + matrix[2] * vector[1],
+      matrix[1] * vector[0] + matrix[3] * vector[1]);
 }
 
 template<typename Real>

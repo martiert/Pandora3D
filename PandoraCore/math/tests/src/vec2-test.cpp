@@ -36,101 +36,66 @@ const Math::Vec2d create_random_vector2();
 
 TEST_F(Vector2Test, empty_constructor_gives_zero_vector)
 {
-  EXPECT_EQ(0.0, empty_vector.x);
-  EXPECT_EQ(0.0, empty_vector.y);
+  EXPECT_EQ(0.0, empty_vector[0]);
+  EXPECT_EQ(0.0, empty_vector[1]);
 }
 
 TEST_F(Vector2Test, constructing_a_vector_with_two_arguments_populates_the_vector_with_those_arguments)
 {
-  EXPECT_EQ(array[0], argument_made_vector.x);
-  EXPECT_EQ(array[1], argument_made_vector.y);
+  EXPECT_EQ(array[0], argument_made_vector[0]);
+  EXPECT_EQ(array[1], argument_made_vector[1]);
 }
 
 TEST_F(Vector2Test, constructing_a_vector_with_a_array_of_two_elements_populates_vector_with_the_array)
 {
-  EXPECT_EQ(array[0], random_vector.x);
-  EXPECT_EQ(array[1], random_vector.y);
+  EXPECT_EQ(array[0], random_vector[0]);
+  EXPECT_EQ(array[1], random_vector[1]);
 }
 
 TEST_F(Vector2Test, assigning_a_vector_to_an_array_populates_vector_with_given_array)
 {
-  EXPECT_EQ(array[0], array_assigned_vector.x);
-  EXPECT_EQ(array[1], array_assigned_vector.y);
+  EXPECT_EQ(array[0], array_assigned_vector[0]);
+  EXPECT_EQ(array[1], array_assigned_vector[1]);
 }
 
 TEST_F(Vector2Test, assigning_a_vector_to_another_vector_populates_the_vector)
 {
   auto copy = random_vector;
 
-  EXPECT_EQ(random_vector.x, copy.x);
-  EXPECT_EQ(random_vector.y, copy.y);
+  EXPECT_EQ(random_vector[0], copy[0]);
+  EXPECT_EQ(random_vector[1], copy[1]);
 }
 
 TEST_F(Vector2Test, copy_constructor_makes_a_hard_copy)
 {
   auto copy(random_vector);
 
-  EXPECT_EQ(random_vector.x, copy.x);
-  EXPECT_EQ(random_vector.y, copy.y);
-  ++copy.x;
-  EXPECT_NE(random_vector.x, copy.x);
+  EXPECT_EQ(random_vector[0], copy[0]);
+  EXPECT_EQ(random_vector[1], copy[1]);
+  ++copy[0];
+  EXPECT_NE(random_vector[0], copy[0]);
 }
 
 TEST_F(Vector2Test, index_operator_maps_to_x_and_y)
 {
-  EXPECT_EQ(random_vector.x, random_vector[0]);
-  EXPECT_EQ(random_vector.y, random_vector[1]);
+  EXPECT_EQ(random_vector[0], random_vector[0]);
+  EXPECT_EQ(random_vector[1], random_vector[1]);
 
   random_vector[0] += 4.2;
-  EXPECT_EQ(random_vector.x, random_vector[0]);
-}
-
-TEST_F(Vector2Test, vector_can_be_casted_to_array_c_style)
-{
-  auto pointer =(double *) random_vector;
-
-  EXPECT_EQ(pointer[0], random_vector.x);
-  EXPECT_EQ(pointer[1], random_vector.y);
-}
-
-TEST_F(Vector2Test, vector_can_be_static_casted_to_array)
-{
-  auto pointer = static_cast<double*>(random_vector);
-
-  EXPECT_EQ(pointer[0], random_vector.x);
-  EXPECT_EQ(pointer[1], random_vector.y);
-}
-
-TEST_F(Vector2Test, changing_the_array_we_cast_to_changes_the_vector)
-{
-  auto pointer = static_cast<double*>(random_vector);
-  auto tmp = pointer[0];
-
-  ++pointer[0];
-  EXPECT_EQ(pointer[0], tmp + 1);
-  EXPECT_EQ(random_vector.x, pointer[0]);
-}
-
-TEST_F(Vector2Test, const_vector_can_be_cast_to_const_ptr)
-{
-  const auto vector = create_random_vector2();
-  auto const_ptr =(const double*) vector;
-
-  EXPECT_EQ(const_ptr[0], vector.x);
-  EXPECT_EQ(const_ptr[1], vector.y);
+  EXPECT_EQ(random_vector[0], random_vector[0]);
 }
 
 TEST_F(Vector2Test, zero_vector_gives_zero_length)
 {
-  EXPECT_EQ(0.0, empty_vector.length());
-  EXPECT_EQ(0.0, empty_vector.lengthSquared());
+  EXPECT_EQ(0.0, length(empty_vector));
+  EXPECT_EQ(0.0, lengthSquared(empty_vector));
 }
 
 TEST_F(Vector2Test, length_of_vector_follows_mathematical_rules)
 {
-  auto lengthSquared = random_vector.x * random_vector.x + random_vector.y * random_vector.y;
-  EXPECT_EQ(lengthSquared, random_vector.lengthSquared());
-  EXPECT_EQ(std::sqrt(lengthSquared), random_vector.length());
+  auto squaredLength = random_vector[0] * random_vector[0] + random_vector[1] * random_vector[1];
+  EXPECT_EQ(squaredLength, lengthSquared(random_vector));
+  EXPECT_EQ(std::sqrt(squaredLength), length(random_vector));
 }
 
 TEST_F(Vector2Test, accessing_element_outside_vector_kills_program)
@@ -146,21 +111,21 @@ TEST_F(Vector2Test, accessing_element_outside_const_vector_kills_program)
 
 TEST_F(Vector2Test, trying_to_normalize_zero_vector_kills_program)
 {
-  EXPECT_DEATH(empty_vector.normalize(), "Can not normalize zero vector");
+  EXPECT_DEATH(normalize(empty_vector), "Can not normalize zero vector");
 }
 
 TEST_F(Vector2Test, normalize_non_zero_vector_gives_new_length_of_1)
 {
-  random_vector.normalize();
-  EXPECT_FLOAT_EQ(1.0, random_vector.length());
+  normalize(random_vector);
+  EXPECT_FLOAT_EQ(1.0, length(random_vector));
 }
 
 TEST_F(Vector2Test, vector_negation_negates_each_component)
 {
   auto neg = -random_vector;
 
-  EXPECT_EQ(-random_vector.x, neg.x);
-  EXPECT_EQ(-random_vector.y, neg.y);
+  EXPECT_EQ(-random_vector[0], neg[0]);
+  EXPECT_EQ(-random_vector[1], neg[1]);
 }
 
 TEST_F(Vector2Test, adding_two_vectors_adds_each_component)
@@ -169,8 +134,8 @@ TEST_F(Vector2Test, adding_two_vectors_adds_each_component)
   const auto vector_2 = create_random_vector2();
   auto res = vector_1 + vector_2;
 
-  EXPECT_EQ(vector_1.x + vector_2.x, res.x);
-  EXPECT_EQ(vector_1.y + vector_2.y, res.y);
+  EXPECT_EQ(vector_1[0] + vector_2[0], res[0]);
+  EXPECT_EQ(vector_1[1] + vector_2[1], res[1]);
 }
 
 TEST_F(Vector2Test, subtracting_two_vectors_subtracts_each_component)
@@ -179,8 +144,8 @@ TEST_F(Vector2Test, subtracting_two_vectors_subtracts_each_component)
   const auto vector_2 = create_random_vector2();
   auto res = vector_1 - vector_2;
 
-  EXPECT_EQ(vector_1.x - vector_2.x, res.x);
-  EXPECT_EQ(vector_1.y - vector_2.y, res.y);
+  EXPECT_EQ(vector_1[0] - vector_2[0], res[0]);
+  EXPECT_EQ(vector_1[1] - vector_2[1], res[1]);
 }
 
 TEST_F(Vector2Test, multiplying_vector_with_scalar_from_right_multiplies_each_component)
@@ -188,8 +153,8 @@ TEST_F(Vector2Test, multiplying_vector_with_scalar_from_right_multiplies_each_co
   const auto vector = create_random_vector2();
   auto res = vector * 2.3;
 
-  EXPECT_EQ(vector.x * 2.3, res.x);
-  EXPECT_EQ(vector.y * 2.3, res.y);
+  EXPECT_EQ(vector[0] * 2.3, res[0]);
+  EXPECT_EQ(vector[1] * 2.3, res[1]);
 }
 
 TEST_F(Vector2Test, dividing_vector_with_scalar_divides_each_component)
@@ -198,8 +163,8 @@ TEST_F(Vector2Test, dividing_vector_with_scalar_divides_each_component)
   double scalar = rand() / 100.0;
   auto res = vector / scalar;
 
-  EXPECT_EQ(vector.x / scalar, res.x);
-  EXPECT_EQ(vector.y / scalar, res.y);
+  EXPECT_EQ(vector[0] / scalar, res[0]);
+  EXPECT_EQ(vector[1] / scalar, res[1]);
 }
 
 TEST_F(Vector2Test, multiplying_vector_with_scalar_from_left_multiplies_each_component)
@@ -208,8 +173,8 @@ TEST_F(Vector2Test, multiplying_vector_with_scalar_from_left_multiplies_each_com
   auto scalar = rand() / 100.0;
   auto res = scalar * vector;
 
-  EXPECT_EQ(vector.x * scalar, res.x);
-  EXPECT_EQ(vector.y * scalar, res.y);
+  EXPECT_EQ(vector[0] * scalar, res[0]);
+  EXPECT_EQ(vector[1] * scalar, res[1]);
 }
 
 TEST_F(Vector2Test, multiplying_two_vectors_multiplies_component_wise)
@@ -218,8 +183,8 @@ TEST_F(Vector2Test, multiplying_two_vectors_multiplies_component_wise)
   const auto vec2 = create_random_vector2();
   auto res = vec1 * vec2;
 
-  EXPECT_EQ(vec1.x * vec2.x, res.x);
-  EXPECT_EQ(vec1.y * vec2.y, res.y);
+  EXPECT_EQ(vec1[0] * vec2[0], res[0]);
+  EXPECT_EQ(vec1[1] * vec2[1], res[1]);
 }
 
 TEST_F(Vector2Test, dot_product_of_two_vectors_gives_the_sum_of_the_vectors_multiplied)
@@ -227,35 +192,35 @@ TEST_F(Vector2Test, dot_product_of_two_vectors_gives_the_sum_of_the_vectors_mult
   const auto vec1 = create_random_vector2();
   const auto vec2 = create_random_vector2();
 
-  auto dot = vec1.dot(vec2);
+  auto dotProd = dot(vec1, vec2);
   auto mult = vec1 * vec2;
-  EXPECT_EQ(mult.x + mult.y, dot);
+  EXPECT_EQ(mult[0] + mult[1], dotProd);
 }
 
 TEST_F(Vector2Test, perp_vector_is_zero_vector_for_zero_vector)
 {
   const Math::Vec2d vector;
-  auto perp = vector.perp();
+  auto perp_vec = perp(vector);
 
-  EXPECT_EQ(0.0, perp.x);
-  EXPECT_EQ(0.0, perp.y);
+  EXPECT_EQ(0.0, perp_vec[0]);
+  EXPECT_EQ(0.0, perp_vec[1]);
 }
 
 TEST_F(Vector2Test, perpendicular_vector_of_non_zero_vector_is_non_zero)
 {
   const auto vector = create_random_vector2();
-  auto perp = vector.perp();
+  auto perp_vec = perp(vector);
 
-  EXPECT_TRUE(perp.x != 0.0 || perp.y != 0.0);
+  EXPECT_TRUE(perp_vec[0] != 0.0 || perp_vec[1] != 0.0);
 }
 
 TEST_F(Vector2Test, dot_product_with_perp_vector_is_zero)
 {
   const auto vector = create_random_vector2();
-  auto perp = vector.perp();
+  auto perp_vec = perp(vector);
 
-  EXPECT_EQ(0.0, vector.dot(perp));
-  EXPECT_EQ(0.0, perp.dot(vector));
+  EXPECT_EQ(0.0, dot(vector, perp_vec));
+  EXPECT_EQ(0.0, dot(perp_vec, vector));
 }
 
 TEST_F(Vector2Test, addition_to_vector_gives_same_as_the_vectors_added)
@@ -266,8 +231,8 @@ TEST_F(Vector2Test, addition_to_vector_gives_same_as_the_vectors_added)
   auto vec3 = vec1 + vec2;
   vec2 += vec1;
 
-  EXPECT_EQ(vec3.x, vec2.x);
-  EXPECT_EQ(vec3.y, vec2.y);
+  EXPECT_EQ(vec3[0], vec2[0]);
+  EXPECT_EQ(vec3[1], vec2[1]);
 }
 
 TEST_F(Vector2Test, subtraction_from_vector_gives_same_as_vectors_subtracted)
@@ -278,8 +243,8 @@ TEST_F(Vector2Test, subtraction_from_vector_gives_same_as_vectors_subtracted)
   auto vec3 = vec2 - vec1;
   vec2 -= vec1;
 
-  EXPECT_EQ(vec3.x, vec2.x);
-  EXPECT_EQ(vec3.y, vec2.y);
+  EXPECT_EQ(vec3[0], vec2[0]);
+  EXPECT_EQ(vec3[1], vec2[1]);
 }
 
 TEST_F(Vector2Test, multiplication_inplace_with_scalar_gives_same_as_vector_times_scalar)
@@ -290,8 +255,8 @@ TEST_F(Vector2Test, multiplication_inplace_with_scalar_gives_same_as_vector_time
   auto vec2 = vec1 * scalar;
   vec1 *= scalar;
 
-  EXPECT_EQ(vec1.x, vec2.x);
-  EXPECT_EQ(vec1.y, vec2.y);
+  EXPECT_EQ(vec1[0], vec2[0]);
+  EXPECT_EQ(vec1[1], vec2[1]);
 }
 
 TEST_F(Vector2Test, multiplication_inplace_with_vector_gives_same_as_vector_times_vector)
@@ -302,13 +267,13 @@ TEST_F(Vector2Test, multiplication_inplace_with_vector_gives_same_as_vector_time
   auto vec3 = vec1 * vec2;
   vec2 *= vec1;
 
-  EXPECT_EQ(vec3.x, vec2.x);
-  EXPECT_EQ(vec3.y, vec2.y);
+  EXPECT_EQ(vec3[0], vec2[0]);
+  EXPECT_EQ(vec3[1], vec2[1]);
 }
 
 TEST_F(Vector2Test, division_with_zero_kills_program)
 {
-  EXPECT_DEATH(random_vector /= 0, "Can not divide vector by zero");
+  EXPECT_DEATH(random_vector /= 0.0, "Can not divide vector by zero");
 }
 
 TEST_F(Vector2Test, division_inplace_with_with_scalar_gives_same_as_vector_divided_by_scalar)
@@ -319,8 +284,8 @@ TEST_F(Vector2Test, division_inplace_with_with_scalar_gives_same_as_vector_divid
   auto vec2 = vec1 / scalar;
   vec1 /= scalar;
 
-  EXPECT_EQ(vec1.x, vec2.x);
-  EXPECT_EQ(vec1.y, vec2.y);
+  EXPECT_EQ(vec1[0], vec2[0]);
+  EXPECT_EQ(vec1[1], vec2[1]);
 }
 
 TEST_F(Vector2Test, inplace_arithmetic_returns_ref_to_self)
@@ -425,13 +390,16 @@ TEST_F(Vector2Test, non_equal_operator_gives_false_for_vectors_with_equal_compon
 
 TEST_F(Vector2Test, creating_orthonormal_basis_with_zero_vector_kills_program)
 {
-  EXPECT_DEATH(Math::Vec2d::generateOrthonormalBasis(random_vector, empty_vector), "Can not make orthonormal basis from a zero vector");
-  EXPECT_DEATH(Math::Vec2d::generateOrthonormalBasis(empty_vector, random_vector), "Can not make orthonormal basis from a zero vector");
+  EXPECT_DEATH(generateOrthonormalBasis(random_vector, empty_vector),
+               "Can not make orthonormal basis from a zero vector");
+  EXPECT_DEATH(generateOrthonormalBasis(empty_vector, random_vector),
+               "Can not make orthonormal basis from a zero vector");
 }
 
 TEST_F(Vector2Test, creating_orthonormal_basis_with_same_vector_kills_program)
 {
-  EXPECT_DEATH(Math::Vec2d::generateOrthonormalBasis(random_vector, random_vector), "Can not make orthonormal basis from equal vectors");
+  EXPECT_DEATH(generateOrthonormalBasis(random_vector, random_vector),
+               "Can not make orthonormal basis from equal vectors");
 }
 
 TEST_F(Vector2Test, orthonormal_basis_creates_perpendicular_vectors_of_length_1)
@@ -440,10 +408,10 @@ TEST_F(Vector2Test, orthonormal_basis_creates_perpendicular_vectors_of_length_1)
   auto vec2 = create_random_vector2();
 
   if (vec1 != vec2) {
-    Math::Vec2d::generateOrthonormalBasis(vec1, vec2);
-    EXPECT_NEAR(0.0, vec1.dot(vec2), PRECISION);
-    EXPECT_NEAR(1.0, vec1.length(), PRECISION);
-    EXPECT_NEAR(1.0, vec2.length(), PRECISION);
+    generateOrthonormalBasis(vec1, vec2);
+    EXPECT_NEAR(0.0, dot(vec1, vec2), PRECISION);
+    EXPECT_NEAR(1.0, length(vec1), PRECISION);
+    EXPECT_NEAR(1.0, length(vec2), PRECISION);
   }
 }
 
