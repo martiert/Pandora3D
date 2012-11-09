@@ -32,7 +32,7 @@ namespace Math
   typedef Vector3<float>  Vec3f;
   typedef Vector3<double> Vec3d;
   typedef Vector3<int>    Vec3i;
-  typedef Vector3<uint>   Vec3u;
+  typedef Vector3<uint32_t>   Vec3u;
 
   template<typename Real>   Real dot(const Vector3<Real>& left, const Vector3<Real>& right);
   template<typename Real>   Real length(const Vector3<Real>& vector);

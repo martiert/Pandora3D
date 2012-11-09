@@ -2,7 +2,6 @@
 #define MATH_CONFIG_H_INCLUDED
 
 #include <cstddef>
-
-typedef unsigned int uint;
+#include <cstdint>
 
 #endif // MATH_CONFIG_H_INCLUDED

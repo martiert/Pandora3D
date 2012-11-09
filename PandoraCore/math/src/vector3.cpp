@@ -28,10 +28,10 @@ template<>
 const Math::Vector3<int> Math::Vector3<int>::E3(0, 0, 1);
 
 template<>
-const Math::Vector3<uint> Math::Vector3<uint>::ZERO(0, 0, 0);
+const Math::Vector3<uint32_t> Math::Vector3<uint32_t>::ZERO(0, 0, 0);
 template<>
-const Math::Vector3<uint> Math::Vector3<uint>::E1(1, 0, 0);
+const Math::Vector3<uint32_t> Math::Vector3<uint32_t>::E1(1, 0, 0);
 template<>
-const Math::Vector3<uint> Math::Vector3<uint>::E2(0, 1, 0);
+const Math::Vector3<uint32_t> Math::Vector3<uint32_t>::E2(0, 1, 0);
 template<>
-const Math::Vector3<uint> Math::Vector3<uint>::E3(0, 0, 1);
+const Math::Vector3<uint32_t> Math::Vector3<uint32_t>::E3(0, 0, 1);

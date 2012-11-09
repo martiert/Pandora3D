@@ -34,7 +34,7 @@ namespace Math
   typedef Vector4<float>  Vec4f;
   typedef Vector4<double> Vec4d;
   typedef Vector4<int>    Vec4i;
-  typedef Vector4<uint>   Vec4u;
+  typedef Vector4<uint32_t>   Vec4u;
 
   template<typename Real>   Real length(const Vector4<Real>& vector);
   template<typename Real>   Real lengthSquared(const Vector4<Real>& vector);

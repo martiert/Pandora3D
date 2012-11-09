@@ -22,8 +22,8 @@ template<>
 const Math::Vector2<int> Math::Vector2<int>::E2(0, 1);
 
 template<>
-const Math::Vector2<unsigned int> Math::Vector2<unsigned int>::ZERO(0, 0);
+const Math::Vector2<uint32_t> Math::Vector2<uint32_t>::ZERO(0, 0);
 template<>
-const Math::Vector2<unsigned int> Math::Vector2<uint>::E1(1, 0);
+const Math::Vector2<uint32_t> Math::Vector2<uint32_t>::E1(1, 0);
 template<>
-const Math::Vector2<unsigned int> Math::Vector2<uint>::E2(0, 1);
+const Math::Vector2<uint32_t> Math::Vector2<uint32_t>::E2(0, 1);

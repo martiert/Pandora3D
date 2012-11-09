@@ -29,7 +29,7 @@ namespace Math
   typedef Vector2<float>    Vec2f;
   typedef Vector2<double>   Vec2d;
   typedef Vector2<int>      Vec2i;
-  typedef Vector2<uint>     Vec2u;
+  typedef Vector2<uint32_t>     Vec2u;
 
   template<typename Real>   Real length(const Vector2<Real>& vector);
   template<typename Real>   Real lengthSquared(const Vector2<Real>& vector);
