@@ -194,8 +194,6 @@ Vector2<Real>& operator/=(Vector2<Real>& to, const Real& scalar)
   return to;
 }
 
-
-
 template<typename Real>
 Vector2<Real> operator-(const Vector2<Real>& vec)
 {
@@ -251,7 +249,7 @@ Vector2<Real> operator*(const Real scalar, const Vector2<Real>& vec)
 template<typename Real>
 bool operator==(const Vector2<Real>& vec1, const Vector2<Real>& vec2)
 {
-  return(vec1[0] == vec2[0] && vec1[1] == vec2[1]);
+  return (vec1[0] == vec2[0] && vec1[1] == vec2[1]);
 }
 
 template<typename Real>
