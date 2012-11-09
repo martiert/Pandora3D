@@ -338,40 +338,40 @@ TEST_F(Matrix4Test, multiplying_identity_with_vector_returns_the_same_vector)
 {
   const auto res = Math::Matrix4d::IDENTITY * random_vector;
 
-  EXPECT_EQ(random_vector.x, res.x);
-  EXPECT_EQ(random_vector.y, res.y);
-  EXPECT_EQ(random_vector.z, res.z);
-  EXPECT_EQ(random_vector.w, res.w);
+  EXPECT_EQ(random_vector[0], res[0]);
+  EXPECT_EQ(random_vector[1], res[1]);
+  EXPECT_EQ(random_vector[2], res[2]);
+  EXPECT_EQ(random_vector[3], res[3]);
 }
 
 TEST_F(Matrix4Test, multiplying_matrix_with_random_vector_multiplies_the_random_vector_with_each_row)
 {
   const auto res = random_matrix * random_vector;
 
-  EXPECT_EQ(random_matrix[0]*random_vector.x  + random_matrix[1]*random_vector.y  + random_matrix[2]*random_vector.z  + random_matrix[3]*random_vector.w,  res.x);
-  EXPECT_EQ(random_matrix[4]*random_vector.x  + random_matrix[5]*random_vector.y  + random_matrix[6]*random_vector.z  + random_matrix[7]*random_vector.w,  res.y);
-  EXPECT_EQ(random_matrix[8]*random_vector.x  + random_matrix[9]*random_vector.y  + random_matrix[10]*random_vector.z + random_matrix[11]*random_vector.w, res.z);
-  EXPECT_EQ(random_matrix[12]*random_vector.x + random_matrix[13]*random_vector.y + random_matrix[14]*random_vector.z + random_matrix[15]*random_vector.w, res.w);
+  EXPECT_EQ(random_matrix[0]*random_vector[0]  + random_matrix[1]*random_vector[1]  + random_matrix[2]*random_vector[2]  + random_matrix[3]*random_vector[3],  res[0]);
+  EXPECT_EQ(random_matrix[4]*random_vector[0]  + random_matrix[5]*random_vector[1]  + random_matrix[6]*random_vector[2]  + random_matrix[7]*random_vector[3],  res[1]);
+  EXPECT_EQ(random_matrix[8]*random_vector[0]  + random_matrix[9]*random_vector[1]  + random_matrix[10]*random_vector[2] + random_matrix[11]*random_vector[3], res[2]);
+  EXPECT_EQ(random_matrix[12]*random_vector[0] + random_matrix[13]*random_vector[1] + random_matrix[14]*random_vector[2] + random_matrix[15]*random_vector[3], res[3]);
 }
 
 TEST_F(Matrix4Test, multiplying_random_vector_with_identity_returns_the_random_vector)
 {
   const auto res = random_vector * Math::Matrix4d::IDENTITY;
 
-  EXPECT_EQ(random_vector.x, res.x);
-  EXPECT_EQ(random_vector.y, res.y);
-  EXPECT_EQ(random_vector.z, res.z);
-  EXPECT_EQ(random_vector.w, res.w);
+  EXPECT_EQ(random_vector[0], res[0]);
+  EXPECT_EQ(random_vector[1], res[1]);
+  EXPECT_EQ(random_vector[2], res[2]);
+  EXPECT_EQ(random_vector[3], res[3]);
 }
 
 TEST_F(Matrix4Test, multiplying_random_vector_with_matrix_multiplies_the_random_vector_with_each_column)
 {
   const auto res = random_vector * random_matrix;
 
-  EXPECT_EQ(random_matrix[0]*random_vector.x + random_matrix[4]*random_vector.y + random_matrix[8]*random_vector.z  + random_matrix[12]*random_vector.w, res.x);
-  EXPECT_EQ(random_matrix[1]*random_vector.x + random_matrix[5]*random_vector.y + random_matrix[9]*random_vector.z  + random_matrix[13]*random_vector.w, res.y);
-  EXPECT_EQ(random_matrix[2]*random_vector.x + random_matrix[6]*random_vector.y + random_matrix[10]*random_vector.z + random_matrix[14]*random_vector.w, res.z);
-  EXPECT_EQ(random_matrix[3]*random_vector.x + random_matrix[7]*random_vector.y + random_matrix[11]*random_vector.z + random_matrix[15]*random_vector.w, res.w);
+  EXPECT_EQ(random_matrix[0]*random_vector[0] + random_matrix[4]*random_vector[1] + random_matrix[8]*random_vector[2]  + random_matrix[12]*random_vector[3], res[0]);
+  EXPECT_EQ(random_matrix[1]*random_vector[0] + random_matrix[5]*random_vector[1] + random_matrix[9]*random_vector[2]  + random_matrix[13]*random_vector[3], res[1]);
+  EXPECT_EQ(random_matrix[2]*random_vector[0] + random_matrix[6]*random_vector[1] + random_matrix[10]*random_vector[2] + random_matrix[14]*random_vector[3], res[2]);
+  EXPECT_EQ(random_matrix[3]*random_vector[0] + random_matrix[7]*random_vector[1] + random_matrix[11]*random_vector[2] + random_matrix[15]*random_vector[3], res[3]);
 }
 
 TEST_F(Matrix4Test, inverse_of_identity_is_identity)

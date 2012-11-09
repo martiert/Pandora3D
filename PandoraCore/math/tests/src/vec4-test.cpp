@@ -1,13 +1,10 @@
 #include "test-helpers.h"
 
 #include <vector4.h>
-#include <vector3.h>
+#include <cmath>
 
 #include <gtest/gtest.h>
 
-#include <cmath>
-
-const Math::Vec3d create_random_vector3();
 const Math::Vec4d create_random_vector4();
 
 class Vector4Test : public ::testing::Test
@@ -99,37 +96,6 @@ TEST_F(Vector4Test, assignment_from_vector_makes_copy)
   EXPECT_EQ(random_vector[3], random_vector_copy[3]);
 }
 
-TEST_F(Vector4Test, copy_from_Vec3d_gives_a_Vec3d_with_1_as_the_w_component)
-{
-  const auto vector3 = create_random_vector3();
-  const Math::Vec4d copy(vector3);
-
-  EXPECT_EQ(vector3[0], copy[0]);
-  EXPECT_EQ(vector3[1], copy[1]);
-  EXPECT_EQ(vector3[2], copy[2]);
-  EXPECT_EQ(1.0, copy[3]);
-}
-
-TEST_F(Vector4Test, assigning_from_Vec3d_gives_a_Vec3d_with_1_as_the_w_component)
-{
-  const auto vector3 = create_random_vector3();
-  Math::Vec4d copy;
-  copy = vector3;
-
-  EXPECT_EQ(vector3[0], copy[0]);
-  EXPECT_EQ(vector3[1], copy[1]);
-  EXPECT_EQ(vector3[2], copy[2]);
-  EXPECT_EQ(1.0,        copy[3]);
-}
-
-TEST_F(Vector4Test, index_operator_maps_to_x_y_z_w)
-{
-  EXPECT_EQ(random_vector[0], random_vector[0]);
-  EXPECT_EQ(random_vector[1], random_vector[1]);
-  EXPECT_EQ(random_vector[2], random_vector[2]);
-  EXPECT_EQ(random_vector[3], random_vector[3]);
-}
-
 TEST_F(Vector4Test, index_operator_manipulates_data)
 {
   random_vector[2] = 5.3;
@@ -139,8 +105,8 @@ TEST_F(Vector4Test, index_operator_manipulates_data)
 
 TEST_F(Vector4Test, length_of_zero_vector_is_zero)
 {
-  EXPECT_EQ(0.0, Math::Vec4d::ZERO.length());
-  EXPECT_EQ(0.0, Math::Vec4d::ZERO.lengthSquared());
+  EXPECT_EQ(0.0, length(Math::Vec4d::ZERO));
+  EXPECT_EQ(0.0, lengthSquared(Math::Vec4d::ZERO));
 }
 
 TEST_F(Vector4Test, lengthSquared_of_vector_is_the_sum_of_the_squared_components)
@@ -148,19 +114,19 @@ TEST_F(Vector4Test, lengthSquared_of_vector_is_the_sum_of_the_squared_components
   EXPECT_EQ(random_vector[0] * random_vector[0] +
              random_vector[1] * random_vector[1] +
              random_vector[2] * random_vector[2] +
-             random_vector[3] * random_vector[3], random_vector.lengthSquared());
+             random_vector[3] * random_vector[3], lengthSquared(random_vector));
 }
 
 TEST_F(Vector4Test, length_of_vector_is_the_square_root_of_the_squared_length)
 {
-  EXPECT_EQ(std::sqrt(random_vector.lengthSquared()), random_vector.length());
+  EXPECT_EQ(std::sqrt(lengthSquared(random_vector)), length(random_vector));
 }
 
 TEST_F(Vector4Test, normalization_of_vector_gives_length_of_1)
 {
-  random_vector.normalize();
+  normalize(random_vector);
 
-  EXPECT_FLOAT_EQ(1.0, random_vector.length());
+  EXPECT_FLOAT_EQ(1.0, length(random_vector));
 }
 
 TEST_F(Vector4Test, negation_of_vector_negates_each_component)
@@ -280,7 +246,7 @@ TEST_F(Vector4Test, multiplying_vector_to_vector_multiplies_each_component)
 
 TEST_F(Vector4Test, dot_product_of_two_vectors_add_the_product_of_the_vectors)
 {
-  auto dotprod = random_vector.dot(random_vector2);
+  auto dotprod = dot(random_vector, random_vector2);
   auto multvec = random_vector * random_vector2;
 
   EXPECT_EQ(multvec[0] + multvec[1] + multvec[2] + multvec[3], dotprod);
@@ -379,36 +345,6 @@ TEST_F(Vector4Test, inequality_operator_on_similar_vectors_return_false)
   EXPECT_FALSE(vector != similar);
 
   delete[] array;
-}
-
-TEST_F(Vector4Test, vector_can_be_casted_c_style)
-{
-  auto pointer =(const double *) random_vector;
-
-  EXPECT_EQ(pointer[0], random_vector[0]);
-  EXPECT_EQ(pointer[1], random_vector[1]);
-  EXPECT_EQ(pointer[2], random_vector[2]);
-  EXPECT_EQ(pointer[3], random_vector[3]);
-}
-
-TEST_F(Vector4Test, vector_can_be_statically_casted)
-{
-  auto pointer = static_cast<const double *>(random_vector);
-
-  EXPECT_EQ(pointer[0], random_vector[0]);
-  EXPECT_EQ(pointer[1], random_vector[1]);
-  EXPECT_EQ(pointer[2], random_vector[2]);
-  EXPECT_EQ(pointer[3], random_vector[3]);
-}
-
-TEST_F(Vector4Test, changing_the_casted_pointers_changes_the_vector)
-{
-  auto pointer =(double *) random_vector;
-  auto static_ptr = static_cast<double *>(random_vector);
-
-  ++pointer[2];
-  EXPECT_EQ(pointer[2], random_vector[2]);
-  EXPECT_EQ(static_ptr[2], random_vector[2]);
 }
 
 const Math::Vec4d create_random_vector4()
