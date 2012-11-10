@@ -60,10 +60,10 @@ namespace Math
   Matrix2<Real> operator*(const Matrix2<Real>& matrix, const Real& scalar);
 
   template<typename Real>
-  Vector2<Real> operator*(const Matrix2<Real>& matrix, const Vector2<Real>& vector);
+  Vector<Real, 2> operator*(const Matrix2<Real>& matrix, const Vector<Real, 2>& vector);
 
   template<typename Real>
-  Vector2<Real> operator*(const Vector2<Real>& vector, const Matrix2<Real>& matrix);
+  Vector<Real, 2> operator*(const Vector<Real, 2>& vector, const Matrix2<Real>& matrix);
 
   template<typename Real>
   Matrix2<Real> operator*(const Real& scalar, const Matrix2<Real>& matrix);
@@ -255,17 +255,17 @@ Math::Matrix2<Real> Math::operator*(const Real& scalar, const Matrix2<Real>& mat
 }
 
 template<typename Real>
-Math::Vector2<Real> Math::operator*(const Matrix2<Real>& matrix, const Vector2<Real>& vector)
+Math::Vector<Real, 2> Math::operator*(const Matrix2<Real>& matrix, const Vector<Real, 2>& vector)
 {
-  return Vector2<Real>(matrix[0] * vector[0] + matrix[1] * vector[1],
-                       matrix[2] * vector[0] + matrix[3] * vector[1]);
+  return Vector<Real, 2>({matrix[0] * vector[0] + matrix[1] * vector[1],
+                       matrix[2] * vector[0] + matrix[3] * vector[1]});
 }
 
 template<typename Real>
-Math::Vector2<Real> Math::operator*(const Vector2<Real>& vector, const Matrix2<Real>& matrix)
+Math::Vector<Real, 2> Math::operator*(const Vector<Real, 2>& vector, const Matrix2<Real>& matrix)
 {
-  return Vector2<Real>(matrix[0] * vector[0] + matrix[2] * vector[1],
-      matrix[1] * vector[0] + matrix[3] * vector[1]);
+  return Vector<Real, 2>({matrix[0] * vector[0] + matrix[2] * vector[1],
+      matrix[1] * vector[0] + matrix[3] * vector[1]});
 }
 
 template<typename Real>

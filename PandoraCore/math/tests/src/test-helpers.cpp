@@ -3,7 +3,7 @@
 namespace
 {
   bool called = false;
-  double scale = 10000.0;
+  double scale = 10000000.0;
 }
 
 double* create_double_array_of_size(const size_t& size)
