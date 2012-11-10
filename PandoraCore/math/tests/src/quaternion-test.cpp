@@ -5,7 +5,7 @@
 
 #include "test-helpers.h"
 
-Math::Vec3d create_random_vector3();
+const Math::Vec3d create_random_vector3();
 Math::Matrix4<double> create_random_matrix4();
 Math::Matrix4<double> create_random_rotation_matrix();
 Math::Matrix4<double> create_positive_diagonal_matrix();
@@ -280,12 +280,12 @@ TEST_F(QuaternionTest, multiplying_quaternions_with_only_imaginary_parts_gives_t
 
   auto res = left * right;
 
-  auto crossprod = cross(left.imag, right.imag);
+  auto crossprod = cross_product(left.imag, right.imag);
 
   EXPECT_EQ(crossprod[0], res.x());
   EXPECT_EQ(crossprod[1], res.y());
   EXPECT_EQ(crossprod[2], res.z());
-  EXPECT_EQ(-dot(left.imag, right.imag), res.w());
+  EXPECT_EQ(-dot_product(left.imag, right.imag), res.w());
 }
 
 TEST_F(QuaternionTest, multiplying_two_quaternions_follows_normal_rules)
@@ -294,8 +294,8 @@ TEST_F(QuaternionTest, multiplying_two_quaternions_follows_normal_rules)
   auto right = create_random_quaternion();
   auto res = left * right;
 
-  auto imag = cross(left.imag, right.imag) + left.real * right.imag + right.real * left.imag;
-  auto real = left.real * right.real - dot(left.imag, right.imag);
+  auto imag = cross_product(left.imag, right.imag) + left.real * right.imag + right.real * left.imag;
+  auto real = left.real * right.real - dot_product(left.imag, right.imag);
 
   EXPECT_EQ(imag[0], res.x());
   EXPECT_EQ(imag[1], res.y());
@@ -483,9 +483,17 @@ Math::Quaternion<double> create_quaternion_from_matrix(const Math::Matrix4<doubl
 
 Math::Quaternion<double> slerp(const Math::Quaternion<double>& from, const Math::Quaternion<double>& to, const double& t)
 {
-  const auto angle = std::acos(from.real * to.real + dot(from.imag, to.imag));
+  const auto angle = std::acos(from.real * to.real + dot_product(from.imag, to.imag));
   const auto from_scale = std::sin(angle *(1 - t))/std::sin(angle);
   const auto to_scale = std::sin(angle * t)/std::sin(angle);
 
   return from * from_scale + to * to_scale;
+}
+
+const Math::Vec3d create_random_vector3()
+{
+  auto c_array = create_double_array_of_size(3);
+  Math::Vec3d vector(c_array);
+  delete[] c_array;
+  return vector;
 }

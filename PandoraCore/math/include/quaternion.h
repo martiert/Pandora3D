@@ -20,9 +20,9 @@ namespace Math
 
       explicit Quaternion(const Real array[4]);
 
-      explicit Quaternion(const Real& scalar, const Vector3<Real>& imaginary_vector);
+      explicit Quaternion(const Real& scalar, const Vector<Real, 3>& imaginary_vector);
 
-      explicit Quaternion(const Vector3<Real>& axis, const Real& angle);
+      explicit Quaternion(const Vector<Real, 3>& axis, const Real& angle);
 
       explicit Quaternion(const Matrix4<Real>& matrix);
 
@@ -53,7 +53,7 @@ namespace Math
 
     public:
       Real real;
-      Vector3<Real> imag;
+      Vector<Real, 3> imag;
 
     protected:
       Matrix4<Real> create_matrix_with_scale(const Real& s) const;
@@ -89,21 +89,21 @@ Math::Quaternion<Real>::Quaternion()
 
 template<typename Real>
 Math::Quaternion<Real>::Quaternion(const Real& w, const Real& x, const Real& y, const Real& z)
-  : real(w), imag(x, y, z)
+  : real(w), imag({x, y, z})
 { }
 
 template<typename Real>
 Math::Quaternion<Real>::Quaternion(const Real array[4])
-  : real(array[0]), imag(array[1], array[2], array[3])
+  : real(array[0]), imag({array[1], array[2], array[3]})
 { }
 
 template<typename Real>
-Math::Quaternion<Real>::Quaternion(const Real& real, const Vector3<Real>& imaginary_vector)
+Math::Quaternion<Real>::Quaternion(const Real& real, const Vector<Real, 3>& imaginary_vector)
   : real(real), imag(imaginary_vector)
 { }
 
 template<typename Real>
-Math::Quaternion<Real>::Quaternion(const Vector3<Real>& axis, const Real& angle)
+Math::Quaternion<Real>::Quaternion(const Vector<Real, 3>& axis, const Real& angle)
   : real(std::cos(angle)), imag(axis * std::sin(angle))
 { }
 
@@ -234,7 +234,7 @@ Math::Matrix4<Real> Math::Quaternion<Real>::create_matrix_with_scale(const Real&
 template<typename Real>
 Real Math::Quaternion<Real>::norm() const
 {
-  return std::sqrt(dot(imag, imag) + real * real);
+  return std::sqrt(dot_product(imag, imag) + real * real);
 }
 
 template<typename Real>
@@ -257,7 +257,7 @@ Math::Quaternion<Real> Math::Quaternion<Real>::conjugate() const
 template<typename Real>
 Math::Quaternion<Real> Math::Quaternion<Real>::inverse() const
 {
-  const auto normsquared = lengthSquared(imag) +(real * real);
+  const auto normsquared = vector_length_squared(imag) +(real * real);
 
   return conjugate() / normsquared;
 }
@@ -265,7 +265,7 @@ Math::Quaternion<Real> Math::Quaternion<Real>::inverse() const
 template<typename Real>
 Math::Quaternion<Real> Math::Quaternion<Real>::slerp(const Quaternion<Real>& from, const Quaternion<Real>& to, const Real& t)
 {
-  const auto angle = std::acos(from.real * to.real + dot(from.imag, to.imag));
+  const auto angle = std::acos(from.real * to.real + dot_product(from.imag, to.imag));
   const auto from_scale = std::sin(angle *(1 - t))/std::sin(angle);
   const auto to_scale = std::sin(angle * t)/std::sin(angle);
   return from_scale * from + to_scale * to;
@@ -290,8 +290,8 @@ Math::Quaternion<Real> Math::operator-(const Quaternion<Real>& left, const Quate
 template<typename Real>
 Math::Quaternion<Real> Math::operator*(const Quaternion<Real>& left, const Quaternion<Real>& right)
 {
-  return Quaternion<Real>(left.w() * right.w() - dot(left.imag, right.imag),
-      cross(left.imag, right.imag) + left.real * right.imag + right.real * left.imag);
+  return Quaternion<Real>(left.w() * right.w() - dot_product(left.imag, right.imag),
+      cross_product(left.imag, right.imag) + left.real * right.imag + right.real * left.imag);
 }
 
 template<typename Real>
