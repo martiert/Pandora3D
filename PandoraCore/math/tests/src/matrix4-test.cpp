@@ -455,3 +455,11 @@ const Math::Matrix4d create_random_matrix4()
   delete [] c_array;
   return matrix;
 }
+
+const Math::Vec4d create_random_vector4()
+{
+  auto c_array = create_double_array_of_size(4);
+  Math::Vec4d vector(c_array);
+  delete[] c_array;
+  return vector;
+}

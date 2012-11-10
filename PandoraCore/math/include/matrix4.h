@@ -68,10 +68,10 @@ namespace Math
   Matrix4<Real> operator*(const Real& scalar, const Matrix4<Real>& matrix);
 
   template<typename Real>
-  Vector4<Real> operator*(const Matrix4<Real>& matrix, const Vector4<Real>& vector);
+  Vector<Real, 4> operator*(const Matrix4<Real>& matrix, const Vector<Real, 4>& vector);
 
   template<typename Real>
-  Vector4<Real> operator*(const Vector4<Real>& vector, const Matrix4<Real>& matrix);
+  Vector<Real, 4> operator*(const Vector<Real, 4>& vector, const Matrix4<Real>& matrix);
 
   template<typename Real>
   Matrix4<Real> operator*(const Matrix4<Real>& left, const Matrix4<Real>& right);
@@ -401,9 +401,9 @@ Math::Matrix4<Real> Math::operator*(const Real& scalar, const Matrix4<Real>& mat
 }
 
 template<typename Real>
-Math::Vector4<Real> Math::operator*(const Matrix4<Real>& matrix, const Vector4<Real>& vector)
+Math::Vector<Real, 4> Math::operator*(const Matrix4<Real>& matrix, const Vector<Real, 4>& vector)
 {
-  Vector4<Real> res;
+  Vector<Real, 4> res;
   for (auto i = 0; i < 4; ++i)
     for (auto j = 0; j < 4; ++j)
       res[i] += matrix(i,j) * vector[j];
@@ -412,9 +412,9 @@ Math::Vector4<Real> Math::operator*(const Matrix4<Real>& matrix, const Vector4<R
 }
 
 template<typename Real>
-Math::Vector4<Real> Math::operator*(const Vector4<Real>& vector, const Matrix4<Real>& matrix)
+Math::Vector<Real, 4> Math::operator*(const Vector<Real, 4>& vector, const Matrix4<Real>& matrix)
 {
-  Vector4<Real> res;
+  Vector<Real, 4> res;
   for (auto i = 0; i < 4; ++i)
     for (auto j = 0; j < 4; ++j)
       res[i] += vector[j] * matrix(j,i);
