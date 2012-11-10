@@ -29,6 +29,7 @@ set(math_src
     )
 
 set(math_headers
+    include/vector.h
     include/vector2.h
     include/vector3.h
     include/vector4.h
