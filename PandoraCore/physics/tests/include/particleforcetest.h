@@ -13,14 +13,14 @@ class SimpleForce : public Physics::ParticleForce
       : called(false), step_recieved(0)
     {}
 
-    virtual void update_force(std::shared_ptr<Physics::Particle> /* particle */, Real duration)
+    virtual void update_force(std::shared_ptr<Physics::Particle> /* particle */, real duration)
     {
       called = true;
       step_recieved = duration;
     }
 
     bool called;
-    Real step_recieved;
+    real step_recieved;
 };
 
 typedef std::shared_ptr<SimpleForce> SimpleForcePtr;
@@ -35,7 +35,7 @@ class ParticleForceTest : public ::testing::Test
     std::shared_ptr<Physics::Particle> particle;
     SimpleForcePtr force1;
     SimpleForcePtr force2;
-    Real timestep;
+    real timestep;
 };
 
 #endif // PARTICLEFORCETEST_H_INCLUDED

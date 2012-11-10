@@ -26,7 +26,7 @@ TEST_F(ParticleTest, creating_particle_with_initial_position_sets_position)
 
 TEST_F(ParticleTest, creating_particle_without_initial_velocity_gives_zero_velocity)
 {
-  EXPECT_EQ(Math::Vector3<Real>::ZERO, random_position_particle.get_velocity());
+  EXPECT_EQ(zero_vector, random_position_particle.get_velocity());
 }
 
 TEST_F(ParticleTest, creating_particle_with_initial_velocity_sets_velocity_and_position)
@@ -37,7 +37,7 @@ TEST_F(ParticleTest, creating_particle_with_initial_velocity_sets_velocity_and_p
 
 TEST_F(ParticleTest, initial_acceleration_of_particle_is_the_zero_vector)
 {
-  EXPECT_EQ(Math::Vector3<Real>::ZERO, random_particle.get_acceleration());
+  EXPECT_EQ(zero_vector, random_particle.get_acceleration());
 }
 
 TEST_F(ParticleTest, damping_is_set_to_1_if_not_specified)
@@ -55,7 +55,7 @@ TEST_F(ParticleTest, setting_gravity_on_particle_makes_the_y_part_of_the_gravity
   const auto gravity = create_random_scalar();
   random_particle.set_gravity(gravity);
 
-  EXPECT_EQ(Math::Vector3<Real>(0, -gravity, 0), random_particle.get_gravity());
+  EXPECT_EQ(Physics::Vector3({0, -gravity, 0}), random_particle.get_gravity());
 }
 
 TEST_F(ParticleTest, updating_the_particle_with_timestep_of_one_moves_position_equal_velocity)

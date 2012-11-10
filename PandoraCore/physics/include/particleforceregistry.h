@@ -19,7 +19,7 @@ namespace Physics
 
       void clear();
 
-      void update_particles_with_forces(const Real& timestep);
+      void update_particles_with_forces(const real& timestep);
 
     private:
       struct ForceParticlePair
@@ -27,7 +27,7 @@ namespace Physics
         public:
           ForceParticlePair(std::shared_ptr<ParticleForce> force, std::shared_ptr<Particle> particle);
 
-          void update_force(const Real& timestep);
+          void update_force(const real& timestep);
 
           bool operator==(const ForceParticlePair& other);
 

@@ -23,7 +23,7 @@ namespace Physics
     particleforcepairs.clear();
   }
 
-  void ParticleForceRegistry::update_particles_with_forces(const Real& timestep)
+  void ParticleForceRegistry::update_particles_with_forces(const real& timestep)
   {
     if (timestep == 0)
       return;
@@ -37,7 +37,7 @@ namespace Physics
     : force(force), particle(particle)
   {}
 
-  void ParticleForceRegistry::ForceParticlePair::update_force(const Real& timestep)
+  void ParticleForceRegistry::ForceParticlePair::update_force(const real& timestep)
   {
     force->update_force(particle, timestep);
   }

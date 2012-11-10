@@ -13,8 +13,8 @@ TEST(ParticleSpringTests, particlespring_can_be_added_to_particleforceregistry)
   registry.add(spring, particle);
 }
 
-TEST(ParticleSpringTests, particlespring_constructor_takes_particle_constant_and_restlength)
-{
-  std::shared_ptr<Physics::Particle> particle;
-  Physics::ParticleSpring spring(particle, 1, 1);
-}
+// TEST(ParticleSpringTests, particlespring_constructor_takes_particle_constant_and_restlength)
+// {
+//   std::shared_ptr<Physics::Particle> particle;
+//   Physics::ParticleSpring spring(particle, 1, 1);
+// }

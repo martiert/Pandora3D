@@ -3,10 +3,10 @@
 namespace Physics
 {
 
-ParticleSpring::ParticleSpring(std::shared_ptr<Particle> ancor, Real spring_constant, Real rest_length)
+ParticleSpring::ParticleSpring(std::shared_ptr<Particle> ancor, real spring_constant, real rest_length)
 {}
 
-void ParticleSpring::update_force(std::shared_ptr<Particle> particle, Real duration)
+void ParticleSpring::update_force(std::shared_ptr<Particle> particle, real duration)
 {
 }
 

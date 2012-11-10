@@ -7,40 +7,40 @@
 
 namespace Physics
 {
-  static const Math::Vector3<Real> default_gravity(0, -9.8, 0);
+  static const Vector3 default_gravity({0, -9.8, 0});
 
   class Particle
   {
     public:
       explicit Particle();
-      explicit Particle(const Math::Vector3<Real>& position);
-      explicit Particle(const Math::Vector3<Real>& position, const Math::Vector3<Real>& velocity);
+      explicit Particle(const Vector3& position);
+      explicit Particle(const Vector3& position, const Vector3& velocity);
 
-      virtual void update(const Real& dt);
+      virtual void update(const real& dt);
 
-      const Math::Vector3<Real>& get_position() const;
-      const Math::Vector3<Real>& get_velocity() const;
-      const Math::Vector3<Real>& get_acceleration() const;
+      const Vector3& get_position() const;
+      const Vector3& get_velocity() const;
+      const Vector3& get_acceleration() const;
 
-      void set_mass(const Real& mass);
-      Real get_mass() const;
+      void set_mass(const real& mass);
+      real get_mass() const;
 
-      void set_inverse_mass(const Real& inverse);
-      Real get_inverse_mass() const;
+      void set_inverse_mass(const real& inverse);
+      real get_inverse_mass() const;
 
-      void set_gravity(const Real& new_gravity);
-      const Math::Vector3<Real>& get_gravity() const;
+      void set_gravity(const real& new_gravity);
+      const Vector3& get_gravity() const;
     public:
-      Real damping;
+      real damping;
 
     protected:
-      Real inverse_mass;
+      real inverse_mass;
 
-      Math::Vector3<Real> position;
-      Math::Vector3<Real> velocity;
-      Math::Vector3<Real> acceleration;
+      Vector3 position;
+      Vector3 velocity;
+      Vector3 acceleration;
 
-      Math::Vector3<Real> gravity;
+      Vector3 gravity;
   };
 
   typedef std::shared_ptr<Particle> ParticlePtr;

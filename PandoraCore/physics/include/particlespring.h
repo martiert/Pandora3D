@@ -8,9 +8,9 @@ namespace Physics
   class ParticleSpring : public ParticleForce
   {
     public:
-      ParticleSpring(std::shared_ptr<Particle> ancor, Real spring_constant, Real rest_length);
+      ParticleSpring(std::shared_ptr<Particle> ancor, real spring_constant, real rest_length);
 
-      virtual void update_force(std::shared_ptr<Particle> particle, Real duration);
+      virtual void update_force(std::shared_ptr<Particle> particle, real duration);
   };
 }
 
