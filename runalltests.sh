@@ -16,7 +16,7 @@ then
   export CXX=clang++
 fi
 
-mkdir _build_/test-reports -p
+mkdir -p _build_/test-reports
 cd _build_
 cmake ..
 check_return_value $?
