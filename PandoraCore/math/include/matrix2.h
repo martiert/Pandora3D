@@ -11,12 +11,6 @@ namespace Math
   typedef Matrix<uint32_t,  2> Matrix2u;
 
   template<typename Real>
-  Real matrix_determinant(const Matrix<Real, 2>& matrix)
-  {
-    return matrix(0,0) * matrix(1,1) - matrix(0,1) * matrix(1,0);
-  }
-
-  template<typename Real>
   Matrix<Real, 2> matrix_adjugate(const Matrix<Real, 2>& matrix)
   {
     return Matrix<Real, 2>({matrix[3], -matrix[1],

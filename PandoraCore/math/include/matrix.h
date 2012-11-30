@@ -96,6 +96,10 @@ namespace Math
   // Implementations.
   //=================================
   template<typename Real, size_t dim>
+  static Matrix<Real, dim-1> create_submatrix(const Matrix<Real, dim>& matrix, const size_t row, const size_t col);
+
+
+  template<typename Real, size_t dim>
   Matrix<Real, dim>::Matrix()
     : data {{0,}}
   {
@@ -143,12 +147,22 @@ namespace Math
     return data[i*dim + j];
   }
 
+  template<typename Real>
+  Real matrix_determinant(const Matrix<Real, 2>& matrix)
+  {
+    return matrix(0,0) * matrix(1,1) - matrix(0,1) * matrix(1,0);
+  }
+
   template<typename Real, size_t dim>
   Real matrix_determinant(const Matrix<Real, dim>& matrix)
   {
-    Real result = 1;
-    for (size_t i = 0; i < dim; ++i)
-      result *= matrix(i,i);
+    Real result = 0;
+    int sign = 1;
+    for (size_t i = 0; i < dim; ++i) {
+      result += sign * matrix(0, i) * matrix_determinant(create_submatrix(matrix, 0, i));
+      sign *= -1;
+    }
+
     return result;
   }
 
@@ -172,9 +186,21 @@ namespace Math
   }
 
   template<typename Real, size_t dim>
+  Real sub_determinant(const Matrix<Real, dim>& matrix, const size_t& row, const size_t& col)
+  {
+    auto submatrix = create_submatrix(matrix, row, col);
+    return matrix_determinant(submatrix);
+  }
+
+  template<typename Real, size_t dim>
   Matrix<Real, dim> matrix_adjugate(const Matrix<Real, dim>& matrix)
   {
-    return matrix;
+    Matrix<Real, dim> adjugate;
+    for (size_t i = 0; i < dim; i++)
+      for (size_t j = 0; j < dim; j++)
+        adjugate(i,j) = pow(-1,i+j) * sub_determinant(matrix, i, j);
+
+    return matrix_transpose(adjugate);
   }
 
   template<typename Real, size_t dim>
@@ -306,5 +332,20 @@ namespace Math
       element += left(i,k) * right(k,j);
     return element;
   }
+
+  template<typename Real, size_t dim>
+  static Matrix<Real, dim-1> create_submatrix(const Matrix<Real, dim>& matrix, const size_t row, const size_t col)
+  {
+    Matrix<Real, dim-1> result;
+    size_t index = 0;
+
+    for (size_t i = 0; i < dim; ++i)
+      for (size_t j = 0; j < dim; ++j)
+        if (i != row && j != col)
+          result[index++] = matrix(i, j);
+
+    return result;
+  }
+
 }
 #endif
