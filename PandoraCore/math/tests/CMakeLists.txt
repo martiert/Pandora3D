@@ -6,8 +6,8 @@ include_directories("include")
 
 set(src
     src/test-helpers.cpp
-    src/quaternion-test.cpp
-    src/matrix4-test.cpp
+    #src/quaternion-test.cpp
+    #src/matrix4-test.cpp
     src/matrix3-test.cpp
     src/matrix2-test.cpp
     src/vec4-test.cpp
