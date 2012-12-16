@@ -24,7 +24,7 @@ namespace Math
 
       explicit Quaternion(const Vector<Real, 3>& axis, const Real& angle);
 
-      explicit Quaternion(const Matrix4<Real>& matrix);
+      explicit Quaternion(const Matrix<Real, 4>& matrix);
 
       Real& w();
       Real& x();
@@ -41,7 +41,7 @@ namespace Math
       Quaternion operator*=(const Real& scalar);
       Quaternion operator/=(const Real& scalar);
 
-      Matrix4<Real> create_matrix() const;
+      Matrix<Real, 4> create_matrix() const;
 
       Real norm() const;
       void normalize();
@@ -56,10 +56,10 @@ namespace Math
       Vector<Real, 3> imag;
 
     protected:
-      Matrix4<Real> create_matrix_with_scale(const Real& s) const;
+      Matrix<Real, 4> create_matrix_with_scale(const Real& s) const;
 
-      void create_quaternion_from_matrix_with_largest_u(const Matrix4<Real>& matrix);
-      void create_quaternion_from_matrix_with_smallest_u(const Matrix4<Real>& matrix);
+      void create_quaternion_from_matrix_with_largest_u(const Matrix<Real, 4>& matrix);
+      void create_quaternion_from_matrix_with_smallest_u(const Matrix<Real, 4>& matrix);
   };
 
   template<typename Real>
@@ -108,10 +108,10 @@ Math::Quaternion<Real>::Quaternion(const Vector<Real, 3>& axis, const Real& angl
 { }
 
 template<typename Real>
-Math::Quaternion<Real>::Quaternion(const Matrix4<Real>& matrix)
-  : real(0.5 * std::sqrt(matrix.trace()))
+Math::Quaternion<Real>::Quaternion(const Matrix<Real, 4>& matrix)
+  : real(0.5 * std::sqrt(matrix_trace(matrix)))
 {
-  const auto u = matrix.trace() - 1;
+  const auto u = matrix_trace(matrix) - 1;
   if (u > matrix(0,0) && u > matrix(1,1) && u > matrix(2,2))
     create_quaternion_from_matrix_with_largest_u(matrix);
   else
@@ -201,7 +201,7 @@ Math::Quaternion<Real> Math::Quaternion<Real>::operator/=(const Real& scalar)
 }
 
 template<typename Real>
-Math::Matrix4<Real> Math::Quaternion<Real>::create_matrix() const
+Math::Matrix<Real, 4> Math::Quaternion<Real>::create_matrix() const
 {
   const auto quat_norm = norm();
 
@@ -212,9 +212,9 @@ Math::Matrix4<Real> Math::Quaternion<Real>::create_matrix() const
 }
 
 template<typename Real>
-Math::Matrix4<Real> Math::Quaternion<Real>::create_matrix_with_scale(const Real& s) const
+Math::Matrix<Real, 4> Math::Quaternion<Real>::create_matrix_with_scale(const Real& s) const
 {
-  Matrix4<Real> result;
+  Matrix<Real, 4> result;
 
   result(0,0) -= s *(imag[1] * imag[1] + imag[2] * imag[2]);
   result(0,1) += s *(imag[0] * imag[1] - real * imag[2]);
@@ -317,7 +317,7 @@ Math::Quaternion<Real> Math::operator/(const Quaternion<Real>& quaternion, const
 }
 
 template<typename Real>
-void Math::Quaternion<Real>::create_quaternion_from_matrix_with_largest_u(const Matrix4<Real>& matrix)
+void Math::Quaternion<Real>::create_quaternion_from_matrix_with_largest_u(const Matrix<Real, 4>& matrix)
 {
   imag[0] = matrix(2,1) - matrix(1,2);
   imag[1] = matrix(0,2) - matrix(2,0);
@@ -327,7 +327,7 @@ void Math::Quaternion<Real>::create_quaternion_from_matrix_with_largest_u(const 
 }
 
 template<typename Real>
-void Math::Quaternion<Real>::create_quaternion_from_matrix_with_smallest_u(const Matrix4<Real>& matrix)
+void Math::Quaternion<Real>::create_quaternion_from_matrix_with_smallest_u(const Matrix<Real, 4>& matrix)
 {
   imag[0] = std::sqrt(matrix(0,0) - matrix(1,1) - matrix(2,2) + matrix(3,3));
   imag[1] = std::sqrt(-matrix(0,0) + matrix(1,1) - matrix(2,2) + matrix(3,3));

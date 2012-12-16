@@ -6,14 +6,14 @@
 #include "test-helpers.h"
 
 const Math::Vec3d create_random_vector3();
-Math::Matrix4<double> create_random_matrix4();
-Math::Matrix4<double> create_random_rotation_matrix();
-Math::Matrix4<double> create_positive_diagonal_matrix();
+Math::Matrix4d create_random_matrix4();
+Math::Matrix4d create_random_rotation_matrix();
+Math::Matrix4d create_positive_diagonal_matrix();
 Math::Quaternion<double> create_random_quaternion();
 
-Math::Quaternion<double> create_quaternion_from_matrix(const Math::Matrix4<double>& matrix);
+Math::Quaternion<double> create_quaternion_from_matrix(const Math::Matrix4d& matrix);
 Math::Quaternion<double> slerp(const Math::Quaternion<double>& from, const Math::Quaternion<double>& to, const double& t);
-Math::Matrix4<double> make_matrix_from_quaternion(const Math::Quaternion<double>& quat);
+Math::Matrix4d make_matrix_from_quaternion(const Math::Quaternion<double>& quat);
 
 class QuaternionTest : public ::testing::Test
 {
@@ -81,7 +81,8 @@ TEST_F(QuaternionTest, creating_quaternion_around_axis_with_angle_creates_correc
 
 TEST_F(QuaternionTest, creating_quaternion_from_identity_matrix_creates_the_identity_quaternion)
 {
-  Math::Quaternion<double> quat(Math::Matrix4<double>::IDENTITY);
+  Math::Matrix4d identity;
+  Math::Quaternion<double> quat(identity);
 
   EXPECT_EQ(1, quat.w());
   EXPECT_EQ(0, quat.x());
@@ -94,7 +95,7 @@ TEST_F(QuaternionTest, creating_quaternion_from_positive_diagonal_matrix_gives_r
   const auto matrix = create_positive_diagonal_matrix();
   const Math::Quaternion<double> quat(matrix);
 
-  EXPECT_EQ(0.5 * std::sqrt(matrix.trace()), quat.w());
+  EXPECT_EQ(0.5 * std::sqrt(matrix_trace(matrix)), quat.w());
   EXPECT_EQ(0, quat.x());
   EXPECT_EQ(0, quat.y());
   EXPECT_EQ(0, quat.x());
@@ -114,11 +115,12 @@ TEST_F(QuaternionTest, quaternion_creating_from_matrix_is_correct)
 
 TEST_F(QuaternionTest, creating_quaternion_from_identity_matrix_and_creating_matrix_from_quaternion_returns_identity)
 {
-  const Math::Quaternion<double> quat(Math::Matrix4<double>::IDENTITY);
+  const Math::Matrix4d identity;
+  const Math::Quaternion<double> quat(identity);
   const auto result = quat.create_matrix();
 
   for (auto i = 0; i < 16; ++i)
-    EXPECT_EQ(Math::Matrix4<double>::IDENTITY[i], result[i]);
+    EXPECT_EQ(identity[i], result[i]);
 }
 
 TEST_F(QuaternionTest, creating_quaternion_from_simple_rotation_matrix_and_getting_the_matrix_from_the_quaternion_gives_the_same_matrix)
@@ -133,11 +135,12 @@ TEST_F(QuaternionTest, creating_quaternion_from_simple_rotation_matrix_and_getti
 
 TEST_F(QuaternionTest, creating_matrix_from_identity_quaternion_gives_identity_matrix)
 {
+  const Math::Matrix4d identity;
   const Math::Quaternion<double> quat;
   const auto res = quat.create_matrix();
 
   for (auto i = 0; i < 16; ++i)
-    EXPECT_EQ(Math::Matrix4<double>::IDENTITY[i], res[i]);
+    EXPECT_EQ(identity[i], res[i]);
 }
 
 TEST_F(QuaternionTest, creating_matrix_from_quaternion_gives_correct_matrix)
@@ -406,9 +409,9 @@ Math::Quaternion<double> create_random_quaternion()
   return quat;
 }
 
-Math::Matrix4<double> create_random_rotation_matrix()
+Math::Matrix4d create_random_rotation_matrix()
 {
-  Math::Matrix4<double> result;
+  Math::Matrix4d result;
   const auto angle =(rand() % 300) / 200.0;
   result(0,0) = std::cos(angle);
   result(0,2) = std::sin(angle);
@@ -418,9 +421,9 @@ Math::Matrix4<double> create_random_rotation_matrix()
   return result;
 }
 
-Math::Matrix4<double> create_positive_diagonal_matrix()
+Math::Matrix4d create_positive_diagonal_matrix()
 {
-  Math::Matrix4<double> matrix;
+  Math::Matrix4d matrix;
   for (auto i = 0; i < 3; ++i) {
     const auto scalar = create_random_scalar();
     matrix(i,i) = std::abs(scalar);
@@ -428,9 +431,9 @@ Math::Matrix4<double> create_positive_diagonal_matrix()
   return matrix;
 }
 
-Math::Matrix4<double> make_matrix_from_quaternion(const Math::Quaternion<double>& quat)
+Math::Matrix4d make_matrix_from_quaternion(const Math::Quaternion<double>& quat)
 {
-  Math::Matrix4<double> matrix;
+  Math::Matrix4d matrix;
   const auto s = 2.0 / quat.norm();
 
   matrix(0,0) -= s *(quat.y() * quat.y() + quat.z() * quat.z());
@@ -448,10 +451,10 @@ Math::Matrix4<double> make_matrix_from_quaternion(const Math::Quaternion<double>
   return matrix;
 }
 
-Math::Quaternion<double> create_quaternion_from_large_real_component(const Math::Matrix4<double>& matrix)
+Math::Quaternion<double> create_quaternion_from_large_real_component(const Math::Matrix4d& matrix)
 {
   Math::Quaternion<double> result;
-  result.w() = 0.5 * std::sqrt(matrix.trace());
+  result.w() = 0.5 * std::sqrt(matrix_trace(matrix));
   result.x() = 0.25 *(matrix(2,1) - matrix(1,2))/result.w();
   result.y() = 0.25 *(matrix(0,2) - matrix(2,0))/result.w();
   result.z() = 0.25 *(matrix(1,0) - matrix(0,1))/result.w();
@@ -460,10 +463,10 @@ Math::Quaternion<double> create_quaternion_from_large_real_component(const Math:
 }
 
 
-Math::Quaternion<double> create_quaternion_from_small_real_component(const Math::Matrix4<double>& matrix)
+Math::Quaternion<double> create_quaternion_from_small_real_component(const Math::Matrix4d& matrix)
 {
   Math::Quaternion<double> result;
-  result.w() = 0.5 * std::sqrt(matrix.trace());
+  result.w() = 0.5 * std::sqrt(matrix_trace(matrix));
   result.x() = 0.5 * std::sqrt(matrix(0,0) - matrix(1,1) - matrix(2,2) + matrix(3,3));
   result.y() = 0.5 * std::sqrt(-matrix(0,0) + matrix(1,1) - matrix(2,2) + matrix(3,3));
   result.z() = 0.5 * std::sqrt(-matrix(0,0) - matrix(1,1) + matrix(2,2) + matrix(3,3));
@@ -471,7 +474,7 @@ Math::Quaternion<double> create_quaternion_from_small_real_component(const Math:
   return result;
 }
 
-Math::Quaternion<double> create_quaternion_from_matrix(const Math::Matrix4<double>& matrix)
+Math::Quaternion<double> create_quaternion_from_matrix(const Math::Matrix4d& matrix)
 {
   const auto u = matrix(0,0) + matrix(1,1) + matrix(2,2);
 
@@ -492,8 +495,8 @@ Math::Quaternion<double> slerp(const Math::Quaternion<double>& from, const Math:
 
 const Math::Vec3d create_random_vector3()
 {
-  auto c_array = create_double_array_of_size(3);
-  Math::Vec3d vector(c_array);
-  delete[] c_array;
+  auto array = create_double_array_of_size(3);
+  Math::Vec3d vector(array);
+  delete[] array;
   return vector;
 }

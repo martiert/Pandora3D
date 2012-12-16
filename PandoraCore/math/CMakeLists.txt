@@ -24,8 +24,8 @@ set(math_src
     src/vector4.cpp
     src/matrix2.cpp
     src/matrix3.cpp
-    #src/matrix4.cpp
-    #src/quaternion.cpp
+    src/matrix4.cpp
+    src/quaternion.cpp
     )
 
 set(math_headers
