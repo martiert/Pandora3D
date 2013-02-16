@@ -9,11 +9,11 @@ const Physics::Vector3 zero_vector;
 
 class ParticleTest : public ::testing::Test
 {
-  protected:
+protected:
     ParticleTest();
-    void set_mass_gravity(const real& mass, const real& gravity);
-    void set_mass_gravity_damping(const real& mass, const real& gravity, const real& damping);
-    bool velocity_have_decreased_in_y_direction_while_x_and_y_have_not_changed(const Physics::Vector3& velocity);
+    void set_mass_gravity(const real & mass, const real & gravity);
+    void set_mass_gravity_damping(const real & mass, const real & gravity, const real & damping);
+    bool velocity_have_decreased_in_y_direction_while_x_and_y_have_not_changed(const Physics::Vector3 & velocity);
 
     Physics::Vector3 initial_position;
     Physics::Vector3 initial_velocity;

@@ -8,9 +8,9 @@
 
 class SimpleForce : public Physics::ParticleForce
 {
-  public:
+public:
     SimpleForce()
-      : called(false), step_recieved(0)
+        : called(false), step_recieved(0)
     {}
 
     virtual void update_force(std::shared_ptr<Physics::Particle> /* particle */, real duration)
@@ -27,7 +27,7 @@ typedef std::shared_ptr<SimpleForce> SimpleForcePtr;
 
 class ParticleForceTest : public ::testing::Test
 {
-  protected:
+protected:
     virtual void SetUp();
     void add_both_forces();
 

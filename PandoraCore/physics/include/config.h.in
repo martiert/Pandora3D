@@ -11,9 +11,11 @@
 typedef double real;
 namespace Physics
 {
-  typedef Math::Vector<real,2> Vector2;
-  typedef Math::Vector<real,3> Vector3;
-  typedef Math::Vector<real,4> Vector4;
+
+typedef Math::Vector<real,2> Vector2;
+typedef Math::Vector<real,3> Vector3;
+typedef Math::Vector<real,4> Vector4;
+
 }
 
 #endif // PHYSICS_CONFIG_H_INCLUDED
